@@ -1,6 +1,6 @@
 {
   "name": "@react-last-field/flowbite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
   "homepage": "https://github.com/MiroslavPetrik/react-last-field#readme",
   "repository": "github:MiroslavPetrik/react-last-field",
@@ -56,6 +56,7 @@
     "zod": "3.20.2"
   },
   "scripts": {
+    "publish": "yarn npm publish --access public",
     "build": "tsc --build ./tsconfig.build.json",
     "sb": "yarn watch:storybook",
     "storybook": "concurrently \"yarn:watch:*\"",
