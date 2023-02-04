@@ -9,7 +9,7 @@ Declarative & headless form fields build on top of [`jotai & form-atoms`](https:
 yarn add @react-last-field/field
 ```
 
-### Whats in the box?
+### What's in the box?
 
 The `form-atoms` library provides atomic form primitives capable of tracking input value, touch state, validation status and more.
 
@@ -25,5 +25,7 @@ Most UI libraries provide styled primitive input components, form labels and for
 
 `react-last-field` comes with `<LastFields />` pre-wired to popular UI libraries.
 
-- [Flowbite](./packages/flowbite/README.md)
-- [ChakraUI](./packages/chakra-ui/README.md)
+| Package                            | Storybook                                                               | Oficial Docs                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Flowbite](./packages/flowbite/)   | [🎨 last-field/flowbite](https://react-last-form-flowbite.netlify.app/) | [flowbite-react](https://flowbite-react.com/forms)              |
+| [Chakra UI](./packages/chakra-ui/) | 🚧 WIP                                                                  | [chakra-ui](https://chakra-ui.com/docs/components/form-control) |
