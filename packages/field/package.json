@@ -1,0 +1,43 @@
+{
+  "name": "@react-last-field/field",
+  "version": "0.0.1",
+  "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
+  "homepage": "https://github.com/MiroslavPetrik/react-last-field#readme",
+  "repository": "github:MiroslavPetrik/react-last-field",
+  "bugs": "https://github.com/MiroslavPetrik/react-last-field/issues",
+  "license": "MIT",
+  "keywords": [
+    "react last field",
+    "react atom field",
+    "react field",
+    "react input",
+    "form atoms",
+    "form atom fields",
+    "jotai",
+    "jotai form",
+    "jotai form fields",
+    "react",
+    "react form",
+    "react hook field"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --build ./tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "storybook": "^6.5.16",
+    "typescript": "4.9.4"
+  },
+  "dependencies": {
+    "form-atoms": "2.0.0",
+    "jotai": "2.0.0",
+    "object-path-immutable": "4.1.2",
+    "react": "18.2.0",
+    "react-render-prop-type": "0.1.0"
+  }
+}

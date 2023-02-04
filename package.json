@@ -1,0 +1,10 @@
+{
+  "name": "react-last-field",
+  "packageManager": "yarn@3.4.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "storybook": "^6.5.16"
+  }
+}
