@@ -1,6 +1,6 @@
 {
   "name": "@react-last-field/flowbite",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
   "homepage": "https://github.com/MiroslavPetrik/react-last-field#readme",
   "repository": "github:MiroslavPetrik/react-last-field",
@@ -19,6 +19,11 @@
     "react",
     "react form",
     "react hook"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
   ],
   "devDependencies": {
     "@babel/core": "^7.20.12",
