@@ -38,6 +38,7 @@
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
+    "@storybook/theming": "^6.5.16",
     "@types/babel__core": "^7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -64,11 +65,7 @@
     "publish": "yarn npm publish --access public",
     "build": "tsc --build ./tsconfig.build.json",
     "sb": "yarn watch:storybook",
-    "storybook": "concurrently \"yarn:watch:*\"",
-    "build-storybook": "concurrently \"yarn:build:*\"",
-    "build:css": "npx tailwindcss -i ./src/styles/globals.css -o ./public/tailwind.css",
     "build:storybook": "build-storybook",
-    "watch:css": "npx tailwindcss -i ./src/styles/globals.css -o ./public/tailwind.css --watch",
     "watch:storybook": "start-storybook -p 6006"
   }
 }
