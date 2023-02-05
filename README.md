@@ -9,6 +9,16 @@ Declarative & headless form fields build on top of [`jotai & form-atoms`](https:
 yarn add @react-last-field/field
 ```
 
+### Motivation
+
+`react-last-field` is the 'last-mile' of your app's form stack. It has layered, bottom-up architecture with clear separation of concerns.
+We provide you with stable pre-fabricated UI fields, while you still can go one level down and take the advantage of form primitives to develop anything you need.
+
+To contrast it with formik or react-hook-form, our form state thanks to `jotai` lives outside of the react tree, so you never lose it when the component unmounts.
+Moreover, jotai's external state unlike redux-form has compact API with 'atom-local reducer' and automatic dependency tracking leading to unmatched rendering performance.
+
+![architecture](./architecture.png)
+
 ### What's in the box?
 
 The `form-atoms` library provides atomic form primitives capable of tracking input value, touch state, validation status and more.
