@@ -29,6 +29,7 @@ CreateProfile.args = {
         field={profileFields.country}
         label="Country"
         options={countryOptions}
+        placeholder="Pick a country"
         getValue={({ code }) => code}
         getLabel={({ name }) => name}
       />

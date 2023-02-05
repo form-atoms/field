@@ -1,7 +1,8 @@
 import React from "react";
 import { SelectField } from "./SelectField";
-import { fieldAtom, formAtom, useForm } from "form-atoms";
+import { formAtom } from "form-atoms";
 import { Template } from "../stories";
+import { selectFieldAtom } from "@react-last-field/field";
 
 export default {
   title: "SelectField",
@@ -15,9 +16,7 @@ const options = [
 
 const getValue = (opt: { code: string; name: string }) => opt.code;
 
-const country = fieldAtom({
-  value: "SK",
-});
+const country = selectFieldAtom<string>({ name: "country" });
 
 export const Primary = Template.bind({});
 Primary.args = {

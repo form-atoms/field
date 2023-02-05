@@ -10,16 +10,19 @@ export const SelectField = <Option,>({
   getValue,
   getLabel,
   label,
+  placeholder,
+  helperText,
   ...uiProps
 }: SelectFieldProps<Option>) => {
   const props = useInputFieldProps(field);
 
-  const { renderOptions } = useSelectOptions(field, {
+  const { renderOptions, placeholderOption } = useSelectOptions(field, {
     getValue,
     getLabel,
     options,
+    placeholder,
   });
-  const { color } = useFieldError(field);
+  const { color, error } = useFieldError(field);
 
   return (
     <Field>
@@ -28,7 +31,13 @@ export const SelectField = <Option,>({
           {label}
         </Label>
       )}
-      <Select {...uiProps} {...props}>
+      <Select
+        {...uiProps}
+        {...props}
+        color={color}
+        helperText={error ?? helperText}
+      >
+        {placeholderOption}
         {renderOptions.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}
