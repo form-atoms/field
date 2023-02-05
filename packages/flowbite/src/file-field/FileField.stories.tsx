@@ -1,6 +1,6 @@
-import React from "react";
+import React  from "react";
 import { FileField } from "./FileField";
-import { formAtom } from "form-atoms";
+import { formAtom,  } from "form-atoms";
 import { Template } from "../stories";
 import { fileFieldAtom } from "@react-last-field/field";
 
