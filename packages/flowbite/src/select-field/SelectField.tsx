@@ -11,7 +11,7 @@ export const SelectField = <Option,>({
   label,
   ...uiProps
 }: SelectFieldProps<Option>) => {
-  const inputProps = useInputFieldProps(field);
+  const props = useInputFieldProps(field);
 
   const { renderOptions } = useSelectOptions(field, {
     getValue,
@@ -22,8 +22,12 @@ export const SelectField = <Option,>({
 
   return (
     <div className="flex flex-col gap-4">
-      {label && <Label color={color}>{label}</Label>}
-      <Select {...uiProps} {...inputProps}>
+      {label && (
+        <Label color={color} htmlFor={props.name}>
+          {label}
+        </Label>
+      )}
+      <Select {...uiProps} {...props}>
         {renderOptions.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}

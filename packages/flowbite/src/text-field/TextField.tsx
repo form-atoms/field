@@ -19,10 +19,13 @@ export const TextField = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <Label color={color}>{label}</Label>
+      <Label color={color} htmlFor={props.name}>
+        {label}
+      </Label>
       <div>
         <TextInput
           color={color}
+          id={props.name}
           {...props}
           helperText={error ?? helperText}
           {...uiProps}

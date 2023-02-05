@@ -14,7 +14,11 @@ export const NumberField = ({
 
   return (
     <div className="flex flex-col gap-4">
-      {label && <Label color={color}>{label}</Label>}
+      {label && (
+        <Label color={color} htmlFor={props.name}>
+          {label}
+        </Label>
+      )}
       <div>
         <TextInput
           type="number"

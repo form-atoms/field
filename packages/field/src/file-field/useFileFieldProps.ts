@@ -24,5 +24,5 @@ const emptyFileList = () => {
   return input.files!;
 };
 
-export const fileFieldAtom = (config?: FieldAtomConfig<FileList>) =>
+export const fileFieldAtom = (config?: Partial<FieldAtomConfig<FileList>>) =>
   fieldAtom({ ...config, value: emptyFileList() });

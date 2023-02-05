@@ -10,7 +10,7 @@ export const RadioField = <Option,>({
   getLabel,
   label,
 }: SelectFieldProps<Option>) => {
-  const inputProps = useInputFieldProps(field);
+  const props = useInputFieldProps(field);
   const { renderOptions } = useSelectOptions(field, {
     getValue,
     getLabel,
@@ -20,16 +20,14 @@ export const RadioField = <Option,>({
 
   return (
     <div className="flex flex-col gap-4">
-      {label && <Label color={color}>{label}</Label>}
+      {label && (
+        <Label color={color} htmlFor={props.name}>
+          {label}
+        </Label>
+      )}
       {renderOptions.map(({ value, label, isActive }) => (
         <div className="flex items-center gap-2" key={value}>
-          <Radio
-            {...inputProps}
-            name={inputProps.name}
-            id={value}
-            value={value}
-            checked={isActive}
-          />
+          <Radio {...props} id={value} value={value} checked={isActive} />
           <Label htmlFor={value}>{label}</Label>
         </div>
       ))}
