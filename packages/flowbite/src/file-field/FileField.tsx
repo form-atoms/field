@@ -1,5 +1,4 @@
 import { Label, FileInput, FileInputProps } from "flowbite-react";
-import { useInputField } from "form-atoms";
 import { useFieldError } from "../hooks";
 import { FileFieldProps, useFileFieldProps } from "@react-last-field/field";
 import { InputColors } from "../hooks";
