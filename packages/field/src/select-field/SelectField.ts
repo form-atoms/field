@@ -2,20 +2,20 @@ import { FieldAtom, useFieldState } from "form-atoms";
 import { ReactNode, useMemo } from "react";
 import { LastFieldProps } from "../last-field";
 
-export type SelectFieldAtom = FieldAtom<string>;
+export type SelectFieldProps<Option, Value = string> = LastFieldProps<
+  FieldAtom<Value>
+> &
+  SelectConfig<Option, Value>;
 
-export type SelectFieldProps<Option> = LastFieldProps<SelectFieldAtom> &
-  SelectConfig<Option>;
-
-export type SelectConfig<Option> = {
-  getValue: (option: Option) => string;
+export type SelectConfig<Option, Value = string> = {
+  getValue: (option: Option) => Value;
   getLabel: (option: Option) => ReactNode; // maybe drop from the core
   options: readonly Option[];
 };
 
-export function useSelectOptions<Option>(
-  fieldAtom: SelectFieldAtom,
-  { getValue, getLabel, options }: SelectConfig<Option>
+export function useSelectOptions<Option, Value = string>(
+  fieldAtom: FieldAtom<Value>,
+  { getValue, getLabel, options }: SelectConfig<Option, Value>
 ) {
   const { value } = useFieldState(fieldAtom);
 

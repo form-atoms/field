@@ -11,6 +11,7 @@ import { SelectField } from "../select-field";
 import { TextareaField } from "../textarea-field";
 import { FileField } from "../file-field";
 import { CheckboxField } from "../checkbox-field";
+import { RatingField } from "../rating-field";
 
 export default {
   title: "Scenarios",
@@ -35,6 +36,10 @@ CreateProfile.args = {
       <CheckboxField
         field={profileFields.newsletter}
         label="Subscribe to newsletter"
+      />
+      <RatingField
+        field={profileFields.rating}
+        label="How much do you like this?"
       />
     </>
   ),

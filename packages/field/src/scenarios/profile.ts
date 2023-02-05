@@ -34,4 +34,7 @@ export const profileFields = {
     value: false,
     validate: zodValidate(z.boolean()),
   }),
+  rating: fieldAtom({
+    value: 0,
+  }),
 };

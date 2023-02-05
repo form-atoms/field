@@ -1,6 +1,6 @@
 import React from "react";
 import { RadioField } from "./RadioField";
-import { fieldAtom, formAtom, useForm } from "form-atoms";
+import { fieldAtom, formAtom } from "form-atoms";
 import { Template } from "../stories";
 
 export default {
