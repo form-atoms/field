@@ -1,5 +1,6 @@
 export * from "./array-field";
 export * from "./checkbox-field";
+export * from "./file-field";
 export * from "./hooks";
 export * from "./number-field";
 export * from "./radio-field";
