@@ -1,7 +1,7 @@
 import { TextInput, Label, TextInputProps } from "flowbite-react";
-import { useInputField } from "form-atoms";
 import { useFieldError } from "../hooks";
 import { NumberFieldProps } from "@react-last-field/field";
+import { useNumberFieldProps } from "@react-last-field/field";
 
 export const NumberField = ({
   label,
@@ -9,7 +9,7 @@ export const NumberField = ({
   helperText,
   ...inputProps
 }: NumberFieldProps & TextInputProps) => {
-  const { props, actions } = useInputField(field);
+  const props = useNumberFieldProps(field);
   const { color, error } = useFieldError(field);
 
   return (
@@ -19,12 +19,9 @@ export const NumberField = ({
         <TextInput
           type="number"
           color={color}
-          {...props}
           helperText={color ? error : helperText}
           {...inputProps}
-          onChange={(event) => {
-            actions.setValue(parseFloat(event.target.value));
-          }}
+          {...props}
         />
       </div>
     </div>

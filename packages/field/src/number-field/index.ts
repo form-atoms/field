@@ -1,1 +1,1 @@
-export * from "./useNumberField";
+export * from "./useNumberFieldProps";
