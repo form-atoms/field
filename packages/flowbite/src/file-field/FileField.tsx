@@ -25,7 +25,6 @@ export const FileField = ({
       <div>
         <FileInput
           color={color}
-          multiple
           {...props}
           helperText={error ?? helperText}
           {...uiProps}
