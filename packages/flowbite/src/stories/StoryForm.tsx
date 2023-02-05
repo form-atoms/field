@@ -1,7 +1,8 @@
 import { action } from "@storybook/addon-actions";
+import { Story } from "@storybook/react";
 import { Button } from "flowbite-react";
-import { FormFields, UseForm } from "form-atoms";
-import { PropsWithChildren } from "react";
+import { FormAtom, FormFields, useForm, UseForm } from "form-atoms";
+import { ComponentProps, PropsWithChildren } from "react";
 
 export const StoryForm = <T extends FormFields>({
   submit,
@@ -19,3 +20,15 @@ export const StoryForm = <T extends FormFields>({
     </div>
   </form>
 );
+
+const ControlledForm = ({
+  form,
+  children,
+}: PropsWithChildren<{ form: FormAtom<any> }>) => {
+  const { submit } = useForm(form);
+
+  return <StoryForm submit={submit}>{children}</StoryForm>;
+};
+
+export const Template: Story<ComponentProps<typeof ControlledForm>> =
+  ControlledForm;

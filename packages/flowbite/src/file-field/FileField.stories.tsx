@@ -1,28 +1,12 @@
-import React, { ComponentProps, PropsWithChildren } from "react";
+import React from "react";
 import { FileField } from "./FileField";
-import { FormAtom, formAtom, useForm } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import { z } from "zod";
-import { StoryForm } from "../stories";
-import { Story } from "@storybook/react";
+import { formAtom } from "form-atoms";
+import { Template } from "../stories";
 import { fileFieldAtom } from "@react-last-field/field";
 
 export default {
   title: "FileField",
   component: FileField,
-};
-
-const ControlledForm = ({
-  form,
-  children,
-}: PropsWithChildren<{ form: FormAtom<any> }>) => {
-  const { submit } = useForm(form);
-
-  return <StoryForm submit={submit}>{children}</StoryForm>;
-};
-
-const Template: Story<ComponentProps<typeof ControlledForm>> = (args) => {
-  return <ControlledForm {...args} />;
 };
 
 const profilePicture = fileFieldAtom();
