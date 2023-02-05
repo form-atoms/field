@@ -3,6 +3,7 @@ import { useInputField } from "form-atoms";
 import { useFieldError } from "../hooks";
 import { TextFieldProps } from "@react-last-field/field";
 import { InputColors } from "../hooks";
+import { Field } from "../field";
 
 type FlowbiteTextFieldProps = TextFieldProps &
   TextInputProps & { colors?: InputColors };
@@ -18,7 +19,7 @@ export const TextField = ({
   const { color, error } = useFieldError(field, colors);
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       <Label color={color} htmlFor={props.name}>
         {label}
       </Label>
@@ -31,6 +32,6 @@ export const TextField = ({
           {...uiProps}
         />
       </div>
-    </div>
+    </Field>
   );
 };

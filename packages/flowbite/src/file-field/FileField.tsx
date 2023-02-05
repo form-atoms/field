@@ -2,6 +2,7 @@ import { Label, FileInput, FileInputProps } from "flowbite-react";
 import { useFieldError } from "../hooks";
 import { FileFieldProps, useFileFieldProps } from "@react-last-field/field";
 import { InputColors } from "../hooks";
+import { Field } from "../field";
 
 type FlowbiteFileFieldProps = FileFieldProps &
   FileInputProps & { colors?: InputColors };
@@ -17,7 +18,7 @@ export const FileField = ({
   const { color, error } = useFieldError(field, colors);
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       <Label color={color} htmlFor={props.name}>
         {label}
       </Label>
@@ -30,6 +31,6 @@ export const FileField = ({
           {...uiProps}
         />
       </div>
-    </div>
+    </Field>
   );
 };

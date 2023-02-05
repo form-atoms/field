@@ -2,6 +2,7 @@ import { Label, Radio } from "flowbite-react";
 import { SelectFieldProps, useSelectOptions } from "@react-last-field/field";
 import { useFieldError } from "../hooks";
 import { useInputFieldProps } from "form-atoms";
+import { Field } from "../field";
 
 export const RadioField = <Option,>({
   field,
@@ -19,7 +20,7 @@ export const RadioField = <Option,>({
   const { color } = useFieldError(field);
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       {label && (
         <Label color={color} htmlFor={props.name}>
           {label}
@@ -31,6 +32,6 @@ export const RadioField = <Option,>({
           <Label htmlFor={value}>{label}</Label>
         </div>
       ))}
-    </div>
+    </Field>
   );
 };

@@ -5,6 +5,7 @@ import {
   useSelectOptions,
 } from "@react-last-field/field";
 import { FieldAtom, useFieldActions } from "form-atoms";
+import { Field } from "../field";
 
 const options = [1, 2, 3, 4, 5];
 
@@ -23,7 +24,7 @@ export const RatingField = ({
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       {label && <Label htmlFor={props.name}>{label}</Label>}
       <Rating size={size} {...uiProps}>
         {renderOptions.map(({ value }) => (
@@ -32,6 +33,6 @@ export const RatingField = ({
           </div>
         ))}
       </Rating>
-    </div>
+    </Field>
   );
 };

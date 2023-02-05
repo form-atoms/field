@@ -2,6 +2,7 @@ import { Label, Select } from "flowbite-react";
 import { SelectFieldProps, useSelectOptions } from "@react-last-field/field";
 import { useFieldError } from "../hooks";
 import { useInputFieldProps } from "form-atoms";
+import { Field } from "../field";
 
 export const SelectField = <Option,>({
   field,
@@ -21,7 +22,7 @@ export const SelectField = <Option,>({
   const { color } = useFieldError(field);
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       {label && (
         <Label color={color} htmlFor={props.name}>
           {label}
@@ -34,6 +35,6 @@ export const SelectField = <Option,>({
           </option>
         ))}
       </Select>
-    </div>
+    </Field>
   );
 };

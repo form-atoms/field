@@ -2,6 +2,7 @@ import { TextInput, Label, TextInputProps } from "flowbite-react";
 import { useFieldError } from "../hooks";
 import { NumberFieldProps } from "@react-last-field/field";
 import { useNumberFieldProps } from "@react-last-field/field";
+import { Field } from "../field";
 
 export const NumberField = ({
   label,
@@ -13,7 +14,7 @@ export const NumberField = ({
   const { color, error } = useFieldError(field);
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       {label && (
         <Label color={color} htmlFor={props.name}>
           {label}
@@ -28,6 +29,6 @@ export const NumberField = ({
           {...props}
         />
       </div>
-    </div>
+    </Field>
   );
 };

@@ -1,6 +1,7 @@
 import { RangeSlider, RangeSliderProps, Label } from "flowbite-react";
 import { useFieldError } from "../hooks";
 import { NumberFieldProps, useNumberFieldProps } from "@react-last-field/field";
+import { Field } from "../field";
 
 export const RangeField = ({
   label,
@@ -12,7 +13,7 @@ export const RangeField = ({
   const { color, error } = useFieldError(field);
 
   return (
-    <div className="flex flex-col gap-4">
+    <Field>
       {label && (
         <Label color={color} htmlFor={props.name}>
           {label}
@@ -21,6 +22,6 @@ export const RangeField = ({
       <div>
         <RangeSlider color={color} {...props} {...inputProps} />
       </div>
-    </div>
+    </Field>
   );
 };
