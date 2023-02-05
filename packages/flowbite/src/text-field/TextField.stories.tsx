@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField } from "./TextField";
-import { fieldAtom, FormAtom, formAtom } from "form-atoms";
+import { fieldAtom, formAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 
@@ -48,50 +48,5 @@ Email.args = {
         </>
       }
     />
-  ),
-};
-
-const passwordInitial = fieldAtom({
-  value: "",
-  validate: zodValidate(z.string().min(6), { on: "change" }),
-});
-
-const password = fieldAtom({
-  value: "",
-  validate: zodValidate(
-    (get) => {
-      const initialPassword = get(get(passwordInitial).value);
-
-      return z.string().min(6).and(z.literal(initialPassword));
-    },
-    {
-      on: "change",
-      formatError: ({ issues }) => {
-        return issues.map(({ code, message }) =>
-          code === "invalid_literal" ? "Passwords must match" : message
-        );
-      },
-    }
-  ),
-});
-
-export const Password = Template.bind({});
-Password.args = {
-  form: formAtom({ password }),
-  children: (
-    <>
-      <TextField
-        type="password"
-        field={passwordInitial}
-        label="New password"
-        helperText="Your password must be at least 6 characters long"
-      />
-      <TextField
-        type="password"
-        field={password}
-        label="Confirm password"
-        colors={["success", "failure"]}
-      />
-    </>
   ),
 };
