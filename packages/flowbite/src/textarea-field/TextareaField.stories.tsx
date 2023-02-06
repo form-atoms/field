@@ -1,4 +1,3 @@
-import React from "react";
 import { TextareaField } from "./TextareaField";
 import { fieldAtom, formAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
@@ -13,6 +12,7 @@ export default {
 
 const bio = fieldAtom({
   value: "",
+  name: "bio",
   validate: zodValidate(z.string()),
 });
 

@@ -23,15 +23,14 @@ export const TextareaField = ({
       <Label color={color} htmlFor={props.name}>
         {label}
       </Label>
-      <div>
-        <Textarea
-          color={color}
-          id={props.name}
-          {...props}
-          helperText={error ?? helperText}
-          {...uiProps}
-        />
-      </div>
+      <Textarea
+        role="textbox"
+        color={color}
+        id={props.name}
+        {...props}
+        helperText={error ?? helperText}
+        {...uiProps}
+      />
     </Field>
   );
 };
