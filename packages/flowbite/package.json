@@ -39,16 +39,23 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.16",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "13.4.0",
+    "@testing-library/react-hooks": "8.0.1",
+    "@testing-library/user-event": "14.4.3",
     "@types/babel__core": "^7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/testing-library__jest-dom": "^5",
     "autoprefixer": "10.4.13",
     "babel-loader": "^8.3.0",
     "concurrently": "^7.6.0",
+    "happy-dom": "^8.2.6",
     "postcss": "8.4.21",
     "prettier-plugin-tailwindcss": "0.2.2",
     "storybook": "^6.5.16",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "vitest": "0.28.4"
   },
   "dependencies": {
     "@react-last-field/field": "workspace:*",
@@ -62,6 +69,7 @@
     "zod": "3.20.2"
   },
   "scripts": {
+    "test": "vitest",
     "publish": "yarn npm publish --access public",
     "build": "tsc --build ./tsconfig.build.json",
     "sb": "yarn watch:storybook",

@@ -32,6 +32,8 @@ export const SelectField = <Option,>({
         </Label>
       )}
       <Select
+        id={props.name}
+        role="combobox"
         {...uiProps}
         {...props}
         color={color}

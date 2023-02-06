@@ -2,21 +2,12 @@ import React from "react";
 import { SelectField } from "./SelectField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";
-import { selectFieldAtom } from "@react-last-field/field";
+import { country, options, getLabel, getValue } from "./country";
 
 export default {
   title: "SelectField",
   component: SelectField,
 };
-
-const options = [
-  { code: "SK", name: "Slovak Republic" },
-  { code: "CZ", name: "Czech Republic" },
-] as const;
-
-const getValue = (opt: { code: string; name: string }) => opt.code;
-
-const country = selectFieldAtom({ name: "country" });
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -27,7 +18,7 @@ Primary.args = {
       label="Country of Origin"
       options={options}
       getValue={getValue}
-      getLabel={(opt) => opt?.name}
+      getLabel={getLabel}
     />
   ),
 };
