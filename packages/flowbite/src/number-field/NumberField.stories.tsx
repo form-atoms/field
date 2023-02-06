@@ -1,4 +1,3 @@
-import React from "react";
 import { NumberField } from "./NumberField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";
@@ -10,11 +9,11 @@ export default {
 };
 
 const formFields = {
-  quantity: numberField(),
+  amount: numberField({ name: "amount" }),
 };
 
 export const Primary = Template.bind({});
 Primary.args = {
   form: formAtom(formFields),
-  children: <NumberField field={formFields.quantity} label="Qty." />,
+  children: <NumberField field={formFields.amount} label="Amount" />,
 };

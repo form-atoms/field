@@ -20,15 +20,15 @@ export const NumberField = ({
           {label}
         </Label>
       )}
-      <div>
-        <TextInput
-          type="number"
-          color={color}
-          helperText={color ? error : helperText}
-          {...inputProps}
-          {...props}
-        />
-      </div>
+      <TextInput
+        id={props.name}
+        role="spinbutton"
+        type="number"
+        color={color}
+        helperText={color ? error : helperText}
+        {...inputProps}
+        {...props}
+      />
     </Field>
   );
 };
