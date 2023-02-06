@@ -1,4 +1,3 @@
-import React from "react";
 import { TextField } from "./TextField";
 import { fieldAtom, formAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
@@ -13,6 +12,7 @@ export default {
 
 const username = fieldAtom({
   value: "",
+  name: "username",
   validate: zodValidate(z.string().min(4), { on: "change" }),
 });
 
@@ -24,6 +24,7 @@ Primary.args = {
 
 const email = fieldAtom({
   value: "",
+  name: "email",
   validate: zodValidate(z.string().email(), { on: "change" }),
 });
 

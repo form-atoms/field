@@ -23,15 +23,15 @@ export const TextField = ({
       <Label color={color} htmlFor={props.name}>
         {label}
       </Label>
-      <div>
-        <TextInput
-          color={color}
-          id={props.name}
-          {...props}
-          helperText={error ?? helperText}
-          {...uiProps}
-        />
-      </div>
+      <TextInput
+        role="textbox"
+        type="text"
+        id={props.name}
+        color={color}
+        {...props}
+        helperText={error ?? helperText}
+        {...uiProps}
+      />
     </Field>
   );
 };
