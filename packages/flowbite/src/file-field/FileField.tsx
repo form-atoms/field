@@ -22,14 +22,14 @@ export const FileField = ({
       <Label color={color} htmlFor={props.name}>
         {label}
       </Label>
-      <div>
-        <FileInput
-          color={color}
-          {...props}
-          helperText={error ?? helperText}
-          {...uiProps}
-        />
-      </div>
+      <FileInput
+        role="dialog"
+        id={props.name}
+        color={color}
+        {...props}
+        helperText={error ?? helperText}
+        {...uiProps}
+      />
     </Field>
   );
 };

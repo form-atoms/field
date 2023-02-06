@@ -1,6 +1,5 @@
-import React  from "react";
 import { FileField } from "./FileField";
-import { formAtom,  } from "form-atoms";
+import { formAtom } from "form-atoms";
 import { Template } from "../stories";
 import { fileFieldAtom } from "@react-last-field/field";
 
@@ -9,7 +8,7 @@ export default {
   component: FileField,
 };
 
-const profilePicture = fileFieldAtom();
+const profilePicture = fileFieldAtom({ name: "profilePic" });
 
 export const Primary = Template.bind({});
 Primary.args = {
