@@ -2,6 +2,7 @@ import { fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 import { fileFieldAtom } from "../file-field";
+import { numberField } from "../number-field";
 import { selectFieldAtom } from "../select-field";
 
 export const countryOptions = [
@@ -15,11 +16,10 @@ export const profileFields = {
     value: "",
     validate: zodValidate(z.string().min(4), { on: "change" }),
   }),
-  age: fieldAtom({
+  age: numberField(({ zodValidate, z }) => ({
     name: "age",
-    value: 0,
-    validate: zodValidate(z.number().min(17), { on: "change" }),
-  }),
+    validate: zodValidate(z.number().min(17).max(30), { on: "change" }),
+  })),
   country: selectFieldAtom({ name: "country" }),
   profilePicture: fileFieldAtom({ name: "profile" }),
   bio: fieldAtom({
@@ -32,7 +32,5 @@ export const profileFields = {
     value: false,
     validate: zodValidate(z.boolean()),
   }),
-  rating: fieldAtom({
-    value: 0,
-  }),
+  rating: numberField(),
 };

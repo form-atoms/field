@@ -1,9 +1,8 @@
 import React from "react";
 import { NumberField } from "./NumberField";
-import { fieldAtom, formAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import { z } from "zod";
+import { formAtom } from "form-atoms";
 import { Template } from "../stories";
+import { numberField } from "@react-last-field/field";
 
 export default {
   title: "NumberField",
@@ -11,10 +10,7 @@ export default {
 };
 
 const formFields = {
-  quantity: fieldAtom({
-    value: 0,
-    validate: zodValidate(z.number().min(1).max(5), { on: "change" }),
-  }),
+  quantity: numberField(),
 };
 
 export const Primary = Template.bind({});
