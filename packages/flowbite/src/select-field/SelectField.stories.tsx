@@ -16,7 +16,7 @@ const options = [
 
 const getValue = (opt: { code: string; name: string }) => opt.code;
 
-const country = selectFieldAtom<string>({ name: "country" });
+const country = selectFieldAtom({ name: "country" });
 
 export const Primary = Template.bind({});
 Primary.args = {

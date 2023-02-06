@@ -23,14 +23,15 @@ export type SelectConfig<Option, Value = string> = {
 
 const emptyValue = "" as const;
 
-export const selectFieldAtom = <Value,>(
+export function selectFieldAtom<Value = string>(
   config: Partial<FieldAtomConfig<Value | typeof emptyValue>>
-) =>
-  fieldAtom({
+) {
+  return fieldAtom({
     value: emptyValue,
     validate: zodValidate(z.string().min(1), { on: "change" }), // required by default
     ...config,
   });
+}
 
 export function useSelectOptions<Option, Value = string>(
   fieldAtom: FieldAtom<Value>,

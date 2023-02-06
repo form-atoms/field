@@ -1,4 +1,4 @@
-import { Label, Radio } from "flowbite-react";
+import { HelperText, Label, Radio } from "flowbite-react";
 import { SelectFieldProps, useSelectOptions } from "@react-last-field/field";
 import { useFieldError } from "../hooks";
 import { useInputFieldProps } from "form-atoms";
@@ -10,6 +10,7 @@ export const RadioField = <Option,>({
   getValue,
   getLabel,
   label,
+  helperText,
 }: SelectFieldProps<Option>) => {
   const props = useInputFieldProps(field);
   const { renderOptions } = useSelectOptions(field, {
@@ -17,7 +18,9 @@ export const RadioField = <Option,>({
     getLabel,
     options,
   });
-  const { color } = useFieldError(field);
+  const { color, error } = useFieldError(field);
+
+  const helpText = error ?? helperText;
 
   return (
     <Field>
@@ -32,6 +35,7 @@ export const RadioField = <Option,>({
           <Label htmlFor={value}>{label}</Label>
         </div>
       ))}
+      {helpText && <HelperText color={color}>{helpText}</HelperText>}
     </Field>
   );
 };

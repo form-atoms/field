@@ -1,7 +1,8 @@
 import React from "react";
 import { RadioField } from "./RadioField";
-import { fieldAtom, formAtom } from "form-atoms";
+import { formAtom } from "form-atoms";
 import { Template } from "../stories";
+import { selectFieldAtom } from "@react-last-field/field";
 
 export default {
   title: "RadioField",
@@ -13,9 +14,7 @@ const options = [
   { code: "CZ", name: "Czech Republic" },
 ] as const;
 
-const country = fieldAtom({
-  value: "SK",
-});
+const country = selectFieldAtom({ name: "foo" });
 
 const getValue = (opt: { code: string; name: string }) => opt.code;
 
