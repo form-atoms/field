@@ -1,8 +1,12 @@
 import { HelperText, Label, Radio } from "flowbite-react";
-import { SelectFieldProps, useSelectOptions } from "@react-last-field/field";
+import {
+  SelectFieldProps,
+  useSelectFieldProps,
+  useSelectOptions,
+} from "@react-last-field/field";
 import { useFieldError } from "../hooks";
-import { useInputFieldProps } from "form-atoms";
 import { Field } from "../field";
+import { useInputFieldProps } from "form-atoms";
 
 export const RadioField = <Option,>({
   field,
@@ -24,14 +28,17 @@ export const RadioField = <Option,>({
 
   return (
     <Field>
-      {label && (
-        <Label color={color} htmlFor={props.name}>
-          {label}
-        </Label>
-      )}
+      {label && <Label color={color}>{label}</Label>}
       {renderOptions.map(({ value, label, isActive }) => (
         <div className="flex items-center gap-2" key={value}>
-          <Radio {...props} id={value} value={value} checked={isActive} />
+          <Radio
+            {...props}
+            aria-checked={isActive}
+            role="radio"
+            id={value}
+            value={value}
+            checked={isActive}
+          />
           <Label htmlFor={value}>{label}</Label>
         </div>
       ))}
