@@ -23,7 +23,6 @@ type FileConfigBuilder = (zod: {
 
 export const fileField = (config?: FileConfig | FileConfigBuilder) =>
   fieldAtom({
-    ...config,
     value: undefined,
     // TODO: change message Input not instance of FileList
     validate: zodValidate(z.instanceof(FileList), { on: "change" }),

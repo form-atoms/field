@@ -19,15 +19,9 @@ describe("<CheckboxField />", () => {
   });
 
   it("should focus input when clicked on label", async () => {
-    const tos = checkboxField({ name: "tos" });
+    const tos = checkboxField({});
 
-    render(
-      <CheckboxField
-        field={tos}
-        label="terms"
-        onChange={(event) => console.log("wat", event)}
-      />
-    );
+    render(<CheckboxField field={tos} label="terms" />);
 
     const checkbox = screen.getByRole("checkbox");
 
@@ -39,7 +33,7 @@ describe("<CheckboxField />", () => {
   });
 
   it("should render error message when submitting unchecked & required checkbox", async () => {
-    const tos = checkboxField({ name: "tos", required: true });
+    const tos = checkboxField({ required: true });
     const form = formAtom({ tos });
     const { result } = renderHook(() => useFormSubmit(form));
 
@@ -50,22 +44,19 @@ describe("<CheckboxField />", () => {
       result.current(handleSubmit)();
     });
 
-    expect(screen.getByRole("checkbox")).toHaveAttribute(
-      "aria-invalid",
-      "true"
-    );
-    expect(screen.getByRole("checkbox")).not.toBeChecked();
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).toHaveAttribute("aria-invalid", "true");
+    expect(checkbox).not.toBeChecked();
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(handleSubmit).not.toBeCalled();
   });
 
   it("should submit when checked & required", async () => {
-    const tos = checkboxField({ name: "tos", value: true, required: true });
+    const tos = checkboxField({ value: true, required: true });
     const form = formAtom({ tos });
     const { result } = renderHook(() => useFormSubmit(form));
 
     render(<CheckboxField field={tos} label="terms" />);
-    const checkbox = screen.getByRole("checkbox");
 
     const handleSubmit = vi.fn();
     await domAct(async () => {
