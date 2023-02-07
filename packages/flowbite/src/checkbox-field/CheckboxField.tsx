@@ -20,10 +20,10 @@ export const CheckboxField = ({
     <div className="flex gap-2">
       {/** height must match line-height of the label */}
       <div className="flex h-5 items-center">
-        <Checkbox id={props.name} {...props} {...uiProps} />
+        <Checkbox {...props} {...uiProps} />
       </div>
       <div className="flex flex-col">
-        <Label color={color} htmlFor={props.name}>
+        <Label color={color} htmlFor={props.id}>
           {label}
         </Label>
         {help && (

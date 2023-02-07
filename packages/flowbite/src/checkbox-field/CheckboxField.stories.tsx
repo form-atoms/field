@@ -8,12 +8,11 @@ export default {
   component: CheckboxField,
 };
 
-const termsOfService = checkboxField({ name: "tos", required: true });
+const termsOfService = checkboxField({ required: true });
 
 export const Primary = Template.bind({});
 Primary.args = {
   form: formAtom({ termsOfService }),
-
   children: (
     <CheckboxField
       field={termsOfService}

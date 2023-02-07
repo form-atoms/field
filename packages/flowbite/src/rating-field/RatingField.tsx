@@ -33,7 +33,7 @@ export const RatingField = ({
   return (
     <Field>
       {label && (
-        <Label color={color} htmlFor={props.name}>
+        <Label color={color} htmlFor={props.id}>
           {label}
         </Label>
       )}

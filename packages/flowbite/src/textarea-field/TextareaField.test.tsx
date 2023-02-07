@@ -4,7 +4,7 @@ import { fieldAtom } from "form-atoms";
 import { describe, expect, it } from "vitest";
 import { TextareaField } from ".";
 
-const bio = fieldAtom({ name: "bio", value: "" });
+const bio = fieldAtom({ value: "" });
 
 describe("<TextareaField />", () => {
   // Error: Element TEXTAREA does not implement "select".

@@ -8,10 +8,8 @@ export type CheckboxFieldAtom = FieldAtom<CheckboxValue>;
 
 export type CheckboxFieldProps = LastFieldProps<CheckboxFieldAtom>;
 
-const getChecked = (event: ChangeEvent<HTMLInputElement>) => {
-  console.log("check", event.target.checked);
-  return event.target.checked;
-};
+const getChecked = (event: ChangeEvent<HTMLInputElement>) =>
+  event.target.checked;
 
 export function useCheckboxFieldProps(field: CheckboxFieldAtom) {
   const { value: checked, ...props } = useLastFieldProps(field, getChecked);

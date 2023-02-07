@@ -15,13 +15,11 @@ export const RangeField = ({
   return (
     <Field>
       {label && (
-        <Label color={color} htmlFor={props.name}>
+        <Label color={color} htmlFor={props.id}>
           {label}
         </Label>
       )}
-      <div>
-        <RangeSlider color={color} {...props} {...inputProps} />
-      </div>
+      <RangeSlider color={color} {...props} {...inputProps} />
     </Field>
   );
 };

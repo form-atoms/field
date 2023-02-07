@@ -4,7 +4,7 @@ import { fieldAtom } from "form-atoms";
 import { describe, expect, it } from "vitest";
 import { TextField } from ".";
 
-const lastName = fieldAtom({ name: "lastName", value: "" });
+const lastName = fieldAtom({ value: "" });
 
 describe("<TextField />", () => {
   it("should focus input when clicked on label", async () => {

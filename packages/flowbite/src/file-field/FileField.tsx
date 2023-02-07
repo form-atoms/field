@@ -19,12 +19,11 @@ export const FileField = ({
 
   return (
     <Field>
-      <Label color={color} htmlFor={props.name}>
+      <Label color={color} htmlFor={props.id}>
         {label}
       </Label>
       <FileInput
         role="dialog"
-        id={props.name}
         color={color}
         {...props}
         helperText={error ?? helperText}

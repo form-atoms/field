@@ -10,9 +10,8 @@ export default {
   component: TextareaField,
 };
 
-const bio = fieldAtom({
+const bio = fieldAtom<string>({
   value: "",
-  name: "bio",
   validate: zodValidate(z.string()),
 });
 

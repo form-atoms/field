@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { NumberField } from ".";
 import { numberField } from "@react-last-field/field";
 
-const amount = numberField({ name: "amount" });
+const amount = numberField();
 
 describe("<NumberField />", () => {
   it("should focus input when clicked on label", async () => {

@@ -9,7 +9,7 @@ export default {
 };
 
 const formFields = {
-  amount: numberField({ name: "amount" }),
+  amount: numberField(),
 };
 
 export const Primary = Template.bind({});
