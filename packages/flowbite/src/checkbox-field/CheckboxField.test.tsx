@@ -1,5 +1,4 @@
 import { checkboxField } from "@react-last-field/field";
-import "@testing-library/jest-dom/extend-expect";
 import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
