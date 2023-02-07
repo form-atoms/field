@@ -1,1 +1,1 @@
-export * from "./LastField";
+export * from "./useLastFieldProps";
