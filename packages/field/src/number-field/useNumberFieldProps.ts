@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo } from "react";
+import { ChangeEvent } from "react";
 import { LastFieldProps, useLastFieldProps } from "../last-field";
 import { NumberFieldAtom } from "./numberField";
 

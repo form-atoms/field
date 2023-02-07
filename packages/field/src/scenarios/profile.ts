@@ -1,7 +1,7 @@
 import { fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
-import { fileFieldAtom } from "../file-field";
+import { fileField } from "../file-field";
 import { numberField } from "../number-field";
 import { selectFieldAtom } from "../select-field";
 
@@ -21,7 +21,7 @@ export const profileFields = {
     validate: zodValidate(z.number().min(17).max(30), { on: "change" }),
   })),
   country: selectFieldAtom({ name: "country" }),
-  profilePicture: fileFieldAtom({ name: "profile" }),
+  profilePicture: fileField({ name: "profile" }),
   bio: fieldAtom({
     name: "bio",
     value: "",
