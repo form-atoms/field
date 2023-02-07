@@ -1,7 +1,5 @@
 import { CheckboxField } from "./CheckboxField";
-import { fieldAtom, formAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import { z } from "zod";
+import { formAtom } from "form-atoms";
 import { Template } from "../stories";
 import { checkboxField } from "@react-last-field/field";
 
