@@ -1,43 +1,36 @@
-import { FieldAtom, useField } from "form-atoms";
-import { useAtomValue, useSetAtom } from "jotai";
-import { ChangeEvent, useMemo, useTransition } from "react";
-import { LastFieldProps } from "../last-field";
+import { fieldAtom, FieldAtomConfig } from "form-atoms";
+import { zodValidate } from "form-atoms/zod";
+import { z } from "zod";
+import { CheckboxValue } from "./useCheckboxFieldProps";
 
-export type CheckboxValue = boolean;
+type CheckboxConfig = Partial<
+  FieldAtomConfig<CheckboxValue> & { required: boolean }
+>;
 
-export type CheckboxFieldAtom = FieldAtom<CheckboxValue>;
+type CheckboxConfigBuilder = (zod: {
+  zodValidate: typeof zodValidate;
+  z: typeof z;
+}) => CheckboxConfig;
 
-export type CheckboxFieldProps = LastFieldProps<CheckboxFieldAtom>;
+export const checkboxField = (
+  config: CheckboxConfig | CheckboxConfigBuilder = {}
+) => {
+  const { required, ...cfg } =
+    typeof config === "function" ? config({ zodValidate, z }) : config;
 
-export function useCheckboxFieldProps(fieldAtom: CheckboxFieldAtom) {
-  const { actions, state } = useField(fieldAtom);
-  const field = useAtomValue(fieldAtom);
-  const name = useAtomValue(field.name);
-  const validate = useSetAtom(field.validate);
-  const ref = useSetAtom(field.ref);
-  const [, startTransition] = useTransition();
-
-  return useMemo(
-    () => ({
-      name,
-      checked: state.value,
-      "aria-invalid": state.validateStatus === "invalid",
-      ref,
-      onBlur() {
-        actions.setTouched(true);
-
-        startTransition(() => {
-          validate("blur");
-        });
-      },
-      onChange(event: ChangeEvent<HTMLInputElement>) {
-        actions.setValue(event.target.checked);
-
-        startTransition(() => {
-          validate("change");
-        });
-      },
-    }),
-    [state, actions, name, ref, validate]
-  );
-}
+  return fieldAtom({
+    value: false,
+    validate: required
+      ? zodValidate(
+          z.literal(true, {
+            errorMap: (issue) =>
+              issue.code === "invalid_literal"
+                ? { message: "This field is required" }
+                : { message: "invalid" },
+          }),
+          { on: "change" }
+        )
+      : undefined,
+    ...cfg,
+  });
+};

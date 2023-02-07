@@ -25,10 +25,6 @@ export const numberField = (config?: NumberConfig | NumberConfigBuilder) =>
     ...(typeof config === "function" ? config({ zodValidate, z }) : config),
   });
 
-const age = numberField(({ zodValidate, z }) => ({
-  validate: zodValidate(z.number().min(1).max(10)),
-}));
-
 export type NumberFieldProps = LastFieldProps<NumberFieldAtom>;
 
 const getNumber = (event: ChangeEvent<HTMLInputElement>) =>

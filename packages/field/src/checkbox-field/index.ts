@@ -1,1 +1,2 @@
-export * from "./CheckboxField";
+export * from "./useCheckboxFieldProps";
+export * from "./checkboxField";

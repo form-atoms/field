@@ -10,10 +10,11 @@ export const CheckboxField = ({
   label,
   helperText,
 }: CheckboxFieldProps) => {
-  const { "aria-invalid": ariaInvalid, ...props } =
-    useCheckboxFieldProps(field);
+  const props = useCheckboxFieldProps(field);
 
   const { color, error } = useFieldError(field);
+
+  const help = error ?? helperText;
 
   return (
     <div className="flex items-center gap-2">
@@ -22,9 +23,9 @@ export const CheckboxField = ({
         <Label color={color} htmlFor={props.name}>
           {label}
         </Label>
-        {helperText && (
+        {help && (
           <HelperText className="text-xs" color={color}>
-            {error ?? helperText}
+            {help}
           </HelperText>
         )}
       </div>

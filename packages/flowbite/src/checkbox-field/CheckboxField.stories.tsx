@@ -1,20 +1,16 @@
-import React from "react";
 import { CheckboxField } from "./CheckboxField";
 import { fieldAtom, formAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 import { Template } from "../stories";
+import { checkboxField } from "@react-last-field/field";
 
 export default {
   title: "CheckboxField",
   component: CheckboxField,
 };
 
-const termsOfService = fieldAtom({
-  name: "tos",
-  value: false,
-  validate: zodValidate(z.literal(true), { on: "change" }),
-});
+const termsOfService = checkboxField({ name: "tos", required: true });
 
 export const Primary = Template.bind({});
 Primary.args = {

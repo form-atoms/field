@@ -35,7 +35,7 @@ export function useLastFieldProps<Value>(
       onChange(event: ChangeEvent<HTMLInputElement>) {
         const maybeValue = getEventValue(event);
 
-        if (maybeValue) {
+        if (maybeValue !== undefined) {
           actions.setValue(maybeValue);
         }
 
