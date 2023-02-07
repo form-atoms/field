@@ -1,9 +1,5 @@
 import { HelperText, Label, Radio } from "flowbite-react";
-import {
-  SelectFieldProps,
-  useSelectFieldProps,
-  useSelectOptions,
-} from "@form-atoms/field";
+import { SelectFieldProps, useSelectOptions } from "@form-atoms/field";
 import { useFieldError } from "../hooks";
 import { Field } from "../field";
 import { useInputFieldProps } from "form-atoms";
@@ -16,6 +12,7 @@ export const RadioField = <Option,>({
   label,
   helperText,
 }: SelectFieldProps<Option>) => {
+  // @ts-ignore
   const props = useInputFieldProps(field);
   const { renderOptions } = useSelectOptions(field, {
     getValue,
