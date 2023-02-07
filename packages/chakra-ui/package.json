@@ -1,10 +1,10 @@
 {
-  "name": "@react-last-field/chakra-ui",
+  "name": "@form-atoms/chakra-ui",
   "version": "0.0.1",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
-  "homepage": "https://github.com/MiroslavPetrik/react-last-field#readme",
-  "repository": "github:MiroslavPetrik/react-last-field",
-  "bugs": "https://github.com/MiroslavPetrik/react-last-field/issues",
+  "homepage": "https://github.com/MiroslavPetrik/form-atoms-field#readme",
+  "repository": "github:MiroslavPetrik/form-atoms-field",
+  "bugs": "https://github.com/MiroslavPetrik/form-atoms-field/issues",
   "license": "MIT",
   "keywords": [
     "react last form",
@@ -44,7 +44,7 @@
     "@chakra-ui/react": "2.4.9",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
-    "@react-last-field/field": "workspace:*",
+    "@form-atoms/field": "workspace:*",
     "form-atoms": "2.0.0",
     "framer-motion": "8.5.4",
     "jotai": "2.0.0",

@@ -1,4 +1,4 @@
-import { selectField } from "@react-last-field/field";
+import { selectField } from "@form-atoms/field";
 
 export const options = [
   { code: "SK", name: "Slovak Republic" },

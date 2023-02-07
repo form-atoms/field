@@ -1,5 +1,5 @@
 import { Button, Card, Label } from "flowbite-react";
-import { ArrayField as HeadlessArrayField } from "@react-last-field/field";
+import { ArrayField as HeadlessArrayField } from "@form-atoms/field";
 
 export const ArrayField: typeof HeadlessArrayField = ({
   label,

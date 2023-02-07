@@ -4,7 +4,7 @@ import {
   NumberFieldAtom,
   useNumberFieldProps,
   useSelectOptions,
-} from "@react-last-field/field";
+} from "@form-atoms/field";
 import { useFieldActions } from "form-atoms";
 import { Field } from "../field";
 import { useFieldError } from "../hooks";

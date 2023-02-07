@@ -4,7 +4,7 @@ import {
   FormHelperText,
   FormLabel,
 } from "@chakra-ui/react";
-import { FieldProps } from "@react-last-field/field";
+import { FieldProps } from "@form-atoms/field";
 import { FieldAtom, useFieldState } from "form-atoms";
 import type { PropsWithChildren, ReactNode } from "react";
 

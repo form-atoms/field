@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { NumberField } from ".";
-import { numberField } from "@react-last-field/field";
+import { numberField } from "@form-atoms/field";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { renderHook, act as domAct } from "@testing-library/react-hooks/dom";
 

@@ -1,6 +1,6 @@
 import { TextInput, Label, TextInputProps } from "flowbite-react";
 import { useFieldError } from "../hooks";
-import { TextFieldProps, useTextFieldProps } from "@react-last-field/field";
+import { TextFieldProps, useTextFieldProps } from "@form-atoms/field";
 import { InputColors } from "../hooks";
 import { Field } from "../field";
 

@@ -1,7 +1,4 @@
-import {
-  CheckboxFieldProps,
-  useCheckboxFieldProps,
-} from "@react-last-field/field";
+import { CheckboxFieldProps, useCheckboxFieldProps } from "@form-atoms/field";
 import { Label, Checkbox, HelperText, CheckboxProps } from "flowbite-react";
 import { useFieldError } from "../hooks";
 

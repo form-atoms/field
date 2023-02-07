@@ -1,7 +1,7 @@
 import { CheckboxField } from "./CheckboxField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";
-import { checkboxField } from "@react-last-field/field";
+import { checkboxField } from "@form-atoms/field";
 
 export default {
   title: "CheckboxField",

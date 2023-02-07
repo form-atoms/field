@@ -1,4 +1,4 @@
-import { SelectFieldProps, useSelectOptions } from "@react-last-field/field";
+import { SelectFieldProps, useSelectOptions } from "@form-atoms/field";
 import { useFieldActions, useInputFieldProps } from "form-atoms";
 import { ChakraField, ChakraFieldProps } from "../chakra-field";
 import { RadioGroup, Radio, Stack } from "@chakra-ui/react";

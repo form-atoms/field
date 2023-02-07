@@ -5,7 +5,7 @@ import { z } from "zod";
 import { StoryForm } from "../stories";
 import { FileField } from "./FileField";
 import { Story } from "@storybook/react";
-import { fileFieldAtom } from "@react-last-field/field";
+import { fileFieldAtom } from "@form-atoms/field";
 
 export default {
   title: "FileField",

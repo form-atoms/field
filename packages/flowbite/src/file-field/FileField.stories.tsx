@@ -1,7 +1,7 @@
 import { FileField } from "./FileField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";
-import { fileField } from "@react-last-field/field";
+import { fileField } from "@form-atoms/field";
 
 export default {
   title: "FileField",

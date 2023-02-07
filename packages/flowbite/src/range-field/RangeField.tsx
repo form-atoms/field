@@ -1,6 +1,6 @@
 import { RangeSlider, RangeSliderProps, Label } from "flowbite-react";
 import { useFieldError } from "../hooks";
-import { NumberFieldProps, useNumberFieldProps } from "@react-last-field/field";
+import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
 import { Field } from "../field";
 
 export const RangeField = ({

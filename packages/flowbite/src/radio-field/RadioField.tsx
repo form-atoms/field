@@ -3,7 +3,7 @@ import {
   SelectFieldProps,
   useSelectFieldProps,
   useSelectOptions,
-} from "@react-last-field/field";
+} from "@form-atoms/field";
 import { useFieldError } from "../hooks";
 import { Field } from "../field";
 import { useInputFieldProps } from "form-atoms";

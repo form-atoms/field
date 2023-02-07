@@ -3,7 +3,7 @@ import { formAtom } from "form-atoms";
 import {
   countryOptions,
   profileFields,
-} from "@react-last-field/field/dist/scenarios/profile";
+} from "@form-atoms/field/dist/scenarios/profile";
 import { Template } from ".";
 import { TextField } from "../text-field";
 import { NumberField } from "../number-field";

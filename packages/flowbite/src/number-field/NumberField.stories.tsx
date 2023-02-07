@@ -1,7 +1,7 @@
 import { NumberField } from "./NumberField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";
-import { numberField } from "@react-last-field/field";
+import { numberField } from "@form-atoms/field";
 
 export default {
   title: "NumberField",

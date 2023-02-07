@@ -3,7 +3,7 @@ import { fieldAtom, formAtom, useForm } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 import { StoryForm } from "../stories";
-import { arrayFieldAtoms } from "@react-last-field/field";
+import { arrayFieldAtoms } from "@form-atoms/field";
 import { ArrayField } from "./ArrayField";
 import { TextField } from "../text-field";
 import { ImageField } from "../image-field";

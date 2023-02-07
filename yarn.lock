@@ -3629,9 +3629,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-last-field/chakra-ui@workspace:packages/chakra-ui":
+"@form-atoms/chakra-ui@workspace:packages/chakra-ui":
   version: 0.0.0-use.local
-  resolution: "@react-last-field/chakra-ui@workspace:packages/chakra-ui"
+  resolution: "@form-atoms/chakra-ui@workspace:packages/chakra-ui"
   dependencies:
     "@babel/core": ^7.20.12
     "@chakra-ui/react": 2.4.9
@@ -3639,7 +3639,7 @@ __metadata:
     "@emotion/react": 11.10.5
     "@emotion/styled": 11.10.5
     "@mdx-js/react": ^1.6.22
-    "@react-last-field/field": "workspace:*"
+    "@form-atoms/field": "workspace:*"
     "@storybook/addon-actions": ^6.5.16
     "@storybook/addon-docs": ^6.5.16
     "@storybook/addon-essentials": ^6.5.16
@@ -3664,9 +3664,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@react-last-field/field@workspace:*, @react-last-field/field@workspace:packages/field":
+"@form-atoms/field@workspace:*, @form-atoms/field@workspace:packages/field":
   version: 0.0.0-use.local
-  resolution: "@react-last-field/field@workspace:packages/field"
+  resolution: "@form-atoms/field@workspace:packages/field"
   dependencies:
     "@types/react": ^18
     form-atoms: 2.0.0
@@ -3679,13 +3679,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@react-last-field/flowbite@workspace:packages/flowbite":
+"@form-atoms/flowbite@workspace:packages/flowbite":
   version: 0.0.0-use.local
-  resolution: "@react-last-field/flowbite@workspace:packages/flowbite"
+  resolution: "@form-atoms/flowbite@workspace:packages/flowbite"
   dependencies:
     "@babel/core": ^7.20.12
     "@mdx-js/react": ^1.6.22
-    "@react-last-field/field": "workspace:*"
+    "@form-atoms/field": "workspace:*"
     "@storybook/addon-actions": ^6.5.16
     "@storybook/addon-docs": ^6.5.16
     "@storybook/addon-essentials": ^6.5.16
@@ -14890,9 +14890,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-last-field@workspace:.":
+"form-atoms@workspace:.":
   version: 0.0.0-use.local
-  resolution: "react-last-field@workspace:."
+  resolution: "form-atoms@workspace:."
   dependencies:
     storybook: ^6.5.16
   languageName: unknown

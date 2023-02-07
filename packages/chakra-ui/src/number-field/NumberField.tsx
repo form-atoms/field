@@ -1,5 +1,5 @@
 import { useFieldActions } from "form-atoms";
-import { NumberFieldProps, useNumberField } from "@react-last-field/field";
+import { NumberFieldProps, useNumberField } from "@form-atoms/field";
 import {
   NumberInput,
   NumberInputField,

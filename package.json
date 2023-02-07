@@ -1,5 +1,5 @@
 {
-  "name": "react-last-field",
+  "name": "form-atoms-field",
   "packageManager": "yarn@3.4.1",
   "workspaces": [
     "packages/*"

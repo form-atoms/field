@@ -1,4 +1,4 @@
-import { checkboxField } from "@react-last-field/field";
+import { checkboxField } from "@form-atoms/field";
 import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

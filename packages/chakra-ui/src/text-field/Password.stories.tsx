@@ -4,7 +4,7 @@ import { formAtom } from "form-atoms";
 import {
   password,
   passwordInitial,
-} from "@react-last-field/field/dist/scenarios/password";
+} from "@form-atoms/field/dist/scenarios/password";
 import { Template } from "../stories";
 
 export default {
