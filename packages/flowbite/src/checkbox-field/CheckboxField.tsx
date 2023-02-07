@@ -17,14 +17,17 @@ export const CheckboxField = ({
   const help = error ?? helperText;
 
   return (
-    <div className="flex items-center gap-2">
-      <Checkbox id={props.name} {...props} {...uiProps} />
+    <div className="flex gap-2">
+      {/** height must match line-height of the label */}
+      <div className="flex h-5 items-center">
+        <Checkbox id={props.name} {...props} {...uiProps} />
+      </div>
       <div className="flex flex-col">
         <Label color={color} htmlFor={props.name}>
           {label}
         </Label>
         {help && (
-          <HelperText className="text-xs" color={color}>
+          <HelperText className="mt-0 text-xs" color={color}>
             {help}
           </HelperText>
         )}
