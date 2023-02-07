@@ -3,7 +3,7 @@ import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 import { fileField } from "../file-field";
 import { numberField } from "../number-field";
-import { selectFieldAtom } from "../select-field";
+import { selectField } from "../select-field";
 
 export const countryOptions = [
   { code: "SK", name: "Slovak Republic" },
@@ -20,7 +20,7 @@ export const profileFields = {
     name: "age",
     validate: zodValidate(z.number().min(17).max(30), { on: "change" }),
   })),
-  country: selectFieldAtom({ name: "country" }),
+  country: selectField({ name: "country" }),
   profilePicture: fileField({ name: "profile" }),
   bio: fieldAtom({
     name: "bio",

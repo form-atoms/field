@@ -1,7 +1,10 @@
 import { Label, Select } from "flowbite-react";
-import { SelectFieldProps, useSelectOptions } from "@react-last-field/field";
+import {
+  SelectFieldProps,
+  useSelectFieldProps,
+  useSelectOptions,
+} from "@react-last-field/field";
 import { useFieldError } from "../hooks";
-import { useInputFieldProps } from "form-atoms";
 import { Field } from "../field";
 
 export const SelectField = <Option,>({
@@ -14,8 +17,7 @@ export const SelectField = <Option,>({
   helperText,
   ...uiProps
 }: SelectFieldProps<Option>) => {
-  const props = useInputFieldProps(field);
-
+  const props = useSelectFieldProps(field);
   const { renderOptions, placeholderOption } = useSelectOptions(field, {
     getValue,
     getLabel,
@@ -27,12 +29,11 @@ export const SelectField = <Option,>({
   return (
     <Field>
       {label && (
-        <Label color={color} htmlFor={props.name}>
+        <Label color={color} htmlFor={props.id}>
           {label}
         </Label>
       )}
       <Select
-        id={props.name}
         role="combobox"
         {...uiProps}
         {...props}

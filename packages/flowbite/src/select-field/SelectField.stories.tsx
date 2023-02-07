@@ -1,4 +1,3 @@
-import React from "react";
 import { SelectField } from "./SelectField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";

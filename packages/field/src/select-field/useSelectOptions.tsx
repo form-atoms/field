@@ -1,48 +1,30 @@
-import {
-  fieldAtom,
-  FieldAtom,
-  FieldAtomConfig,
-  useFieldState,
-} from "form-atoms";
+import { useFieldState } from "form-atoms";
 import { ReactNode, useMemo } from "react";
 import { LastFieldProps } from "../last-field";
-import { z } from "zod";
-import { zodValidate } from "form-atoms/zod";
+import { SelectFieldAtom } from "./selectField";
 
 export type SelectFieldProps<Option, Value = string> = LastFieldProps<
-  FieldAtom<Value>
+  SelectFieldAtom<Value>
 > &
-  SelectConfig<Option, Value>;
+  SelectProps<Option, Value>;
 
-export type SelectConfig<Option, Value = string> = {
+export type SelectProps<Option, Value = string> = {
   getValue: (option: Option) => Value;
-  getLabel: (option: Option) => ReactNode; // maybe drop from the core
+  getLabel: (option: Option) => ReactNode;
   options: readonly Option[];
   placeholder?: string;
 };
 
-const emptyValue = "" as const;
-
-export function selectFieldAtom<Value = string>(
-  config: Partial<FieldAtomConfig<Value | typeof emptyValue>>
-) {
-  return fieldAtom({
-    value: emptyValue,
-    validate: zodValidate(z.string().min(1), { on: "change" }), // required by default
-    ...config,
-  });
-}
-
 export function useSelectOptions<Option, Value = string>(
-  fieldAtom: FieldAtom<Value>,
+  field: SelectFieldAtom<Value>,
   {
     getValue,
     getLabel,
     options,
     placeholder = "Please select an option",
-  }: SelectConfig<Option, Value>
+  }: SelectProps<Option, Value>
 ) {
-  const { value } = useFieldState(fieldAtom);
+  const { value } = useFieldState(field);
 
   const renderOptions = useMemo(
     () =>
@@ -63,7 +45,7 @@ export function useSelectOptions<Option, Value = string>(
     () => ({
       renderOptions,
       placeholderOption: (
-        <option value={emptyValue} disabled selected>
+        <option value="" disabled selected>
           {placeholder}
         </option>
       ),

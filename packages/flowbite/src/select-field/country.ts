@@ -1,4 +1,4 @@
-import { selectFieldAtom } from "@react-last-field/field";
+import { selectField } from "@react-last-field/field";
 
 export const options = [
   { code: "SK", name: "Slovak Republic" },
@@ -10,4 +10,4 @@ type Country = { code: string; name: string };
 export const getValue = (opt: Country) => opt.code;
 export const getLabel = (opt: Country) => opt.name;
 
-export const country = selectFieldAtom({ name: "country" });
+export const country = selectField();
