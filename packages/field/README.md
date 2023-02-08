@@ -8,7 +8,7 @@ Set of headless components composing form-atoms in common patterns:
 ### [ArrayField](./src/array-field/)
 
 The array field enables you to capture list of items with the same attributes.
-It offers `add` and `remove` callbacks to append new item or create existing one.
+It offers `add` and `remove` callbacks to append new item or drop existing one.
 
 #### Common use cases
 
@@ -50,6 +50,54 @@ const Hobbies = () => (
 | AddItemButton    | `(props: {add: () => void}) => JSX.Element`                     | No        | A render prop accepting `add` prop to instantiate new array items                                        |
 | DeleteItemButton | `(props: {remove: () => void}) => JSX.Element`                  | No        | A render prop accepting `remove` prop to delete current item                                             |
 
-```
+#### Advanced example
 
+ArrayField supports nested array fields.
+For example to capture multiple people with multiple banking accounts:
+
+```tsx
+const peopleForm = formAtom({
+  // level 0
+  people: [
+    {
+      name: fieldAtom({ value: "Jerry" }),
+      // level 1 (nested)
+      accounts: [{ iban: fieldAtom({ value: "DE10 ..." }) }],
+    },
+  ],
+});
+
+// Note that for nested component we stil provide the root form instance
+// the path prop to array also starts from the root
+const AdvancedNestedExample = () => {
+  return (
+    <ArrayField
+      form={peopleForm}
+      path={["people"]}
+      builder={() => ({
+        name: fieldAtom({ value: "" }),
+        accounts: [],
+      })}
+    >
+      {({ fieldAtoms, index, add, DeleteItemButton }) => (
+        <>
+          <label>Person #{index}</label> <DeleteItemButton />
+          <TextField field={fieldAtoms.name} label="Name" />
+          <ArrayField
+            form={peopleForm}
+            path={["people", index, "accounts"]}
+            builder={() => ({ iban: fieldAtom({ value: "" }) })}
+          >
+            {({ fieldAtoms, index, DeleteItemButton }) => (
+              <>
+                <label>Account #{index}</label> <DeleteItemButton />
+                <TextField field={fieldAtoms.iban} label="IBAN" />
+              </>
+            )}
+          </ArrayField>
+        </>
+      )}
+    </ArrayField>
+  );
+};
 ```
