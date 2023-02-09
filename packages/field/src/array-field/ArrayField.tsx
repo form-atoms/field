@@ -66,6 +66,8 @@ export type AddItemButtonProp = Partial<
   RenderProp<{ add: () => void }, "AddItemButton">
 >;
 
+export type EmptyMessageProp = Partial<RenderProp<{}, "EmptyMessage">>;
+
 export type ArrayItemRenderProps<Fields extends any = any> = RenderProp<
   {
     index: number;
@@ -91,7 +93,8 @@ export function ArrayField<
     Fields[P1][P2][P3] extends (infer ItemFields)[] ? ItemFields : never
   > &
     DeleteItemButtonProp &
-    AddItemButtonProp
+    AddItemButtonProp &
+    EmptyMessageProp
 ): JSX.Element;
 export function ArrayField<
   Fields extends FormFields,
@@ -106,7 +109,8 @@ export function ArrayField<
     Fields[P1][P2] extends (infer ItemFields)[] ? ItemFields : never
   > &
     DeleteItemButtonProp &
-    AddItemButtonProp
+    AddItemButtonProp &
+    EmptyMessageProp
 ): JSX.Element;
 export function ArrayField<Fields extends FormFields, P1 extends keyof Fields>(
   props: {
@@ -121,7 +125,8 @@ export function ArrayField<Fields extends FormFields, P1 extends keyof Fields>(
     Fields[P1] extends (infer ItemFields)[] ? ItemFields : never
   > &
     DeleteItemButtonProp &
-    AddItemButtonProp
+    AddItemButtonProp &
+    EmptyMessageProp
 ): JSX.Element;
 export function ArrayField<F extends FormFields>({
   path,
@@ -130,13 +135,15 @@ export function ArrayField<F extends FormFields>({
   children,
   DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
+  EmptyMessage,
 }: {
   path: string[];
   form: FormAtom<F>;
   builder: () => any; // Why cant we have FormFields here? Hmm
 } & ArrayItemRenderProps &
   DeleteItemButtonProp &
-  AddItemButtonProp) {
+  AddItemButtonProp &
+  EmptyMessageProp) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
@@ -152,6 +159,7 @@ export function ArrayField<F extends FormFields>({
 
   return (
     <>
+      {array.length === 0 && EmptyMessage ? <EmptyMessage /> : undefined}
       {array.map((fieldAtoms, index) =>
         children({
           add,
