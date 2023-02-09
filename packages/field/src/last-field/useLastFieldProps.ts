@@ -15,7 +15,7 @@ export function useLastFieldProps<
   fieldAtom: FieldAtom<Value>,
   // support element to be union via distributive conditional types
   getEventValue: Element extends unknown
-    ? (event: ChangeEvent<Element>) => Value | undefined
+    ? (event: ChangeEvent<Element>, value: Value) => Value | undefined
     : never
 ) {
   const { actions, state } = useField(fieldAtom);
@@ -41,7 +41,7 @@ export function useLastFieldProps<
         });
       },
       onChange(event: ChangeEvent<Element>) {
-        const maybeValue = getEventValue(event);
+        const maybeValue = getEventValue(event, state.value);
 
         if (maybeValue !== undefined) {
           actions.setValue(maybeValue);
