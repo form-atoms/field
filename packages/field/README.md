@@ -28,9 +28,9 @@ const Hobbies = () => (
     path={["hobbies"]}
     builder={() => ({ name: fieldAtom({ value: "" }) })}
   >
-    {({ fieldAtoms, index, DeleteItemButton }) => (
+    {({ fields, index, DeleteItemButton }) => (
       <>
-        <TextField field={fieldAtoms.name} label={`Hobby ${index}`} />
+        <TextField field={fields.name} label={`Hobby ${index}`} />
         {/* calls remove(index) when clicked*/}
         <DeleteItemButton />
       </>
@@ -41,14 +41,14 @@ const Hobbies = () => (
 
 #### Props
 
-| Name             | Type                                                            | Required? | Description                                                                                              |
-| ---------------- | --------------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
-| form             | `FormAtom<Fields>`                                              | Yes       | A form atom                                                                                              |
-| path             | `K1 = [keyof Fields] \| [K1, K2 = keyof Field[K1]] \| ...`      | Yes       | A keypath to an array in form fields                                                                     |
-| builder          | `() => FormFields[...path]`                                     | Yes       | A function returning item fields as existing on keypath in the form                                      |
-| children         | `(props: {fieldAtoms, index, DeleteItemButton}) => JSX.Element` | Yes       | A render prop accepting item fields and `DeleteButton` component for current array field item at `index` |
-| AddItemButton    | `(props: {add: () => void}) => JSX.Element`                     | No        | A render prop accepting `add` prop to instantiate new array items                                        |
-| DeleteItemButton | `(props: {remove: () => void}) => JSX.Element`                  | No        | A render prop accepting `remove` prop to delete current item                                             |
+| Name             | Type                                                        | Required? | Description                                                                                              |
+| ---------------- | ----------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| form             | `FormAtom<Fields>`                                          | Yes       | A form atom                                                                                              |
+| path             | `K1 = [keyof Fields] \| [K1, K2 = keyof Field[K1]] \| ...`  | Yes       | A keypath to an array in form fields                                                                     |
+| builder          | `() => FormFields[...path]`                                 | Yes       | A function returning item fields as existing on keypath in the form                                      |
+| children         | `(props: {fields, index, DeleteItemButton}) => JSX.Element` | Yes       | A render prop accepting item fields and `DeleteButton` component for current array field item at `index` |
+| AddItemButton    | `(props: {add: () => void}) => JSX.Element`                 | No        | A render prop accepting `add` prop to instantiate new array items                                        |
+| DeleteItemButton | `(props: {remove: () => void}) => JSX.Element`              | No        | A render prop accepting `remove` prop to delete current item                                             |
 
 #### Advanced example
 
@@ -79,19 +79,19 @@ const AdvancedNestedExample = () => {
         accounts: [],
       })}
     >
-      {({ fieldAtoms, index, add, DeleteItemButton }) => (
+      {({ fields, index, add, DeleteItemButton }) => (
         <>
           <label>Person #{index}</label> <DeleteItemButton />
-          <TextField field={fieldAtoms.name} label="Name" />
+          <TextField field={fields.name} label="Name" />
           <ArrayField
             form={peopleForm}
             path={["people", index, "accounts"]}
             builder={() => ({ iban: fieldAtom({ value: "" }) })}
           >
-            {({ fieldAtoms, index, DeleteItemButton }) => (
+            {({ fields, index, DeleteItemButton }) => (
               <>
                 <label>Account #{index}</label> <DeleteItemButton />
-                <TextField field={fieldAtoms.iban} label="IBAN" />
+                <TextField field={fields.iban} label="IBAN" />
               </>
             )}
           </ArrayField>

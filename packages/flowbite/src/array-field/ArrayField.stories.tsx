@@ -1,4 +1,3 @@
-import React from "react";
 import { fieldAtom, formAtom, useForm } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
@@ -94,10 +93,10 @@ export function AddressesArrayField() {
   return (
     <StoryForm submit={submit}>
       <ArrayField path={["addresses"]} form={form} builder={addressBuilder}>
-        {({ fieldAtoms }) => (
+        {({ fields }) => (
           <div className="grid grid-flow-col grid-cols-2 gap-4">
-            <TextField label="City" field={fieldAtoms.city} />
-            <TextField label="Street" field={fieldAtoms.street} />
+            <TextField label="City" field={fields.city} />
+            <TextField label="Street" field={fields.street} />
           </div>
         )}
       </ArrayField>
@@ -176,11 +175,11 @@ export function AddressesWithPeopleArrayField() {
           </Button>
         )}
       >
-        {({ fieldAtoms, index }) => (
+        {({ fields, index }) => (
           <>
             <div className="grid grid-flow-col grid-cols-2 gap-4">
-              <TextField label="City" field={fieldAtoms.city} />
-              <TextField label="Street" field={fieldAtoms.street} />
+              <TextField label="City" field={fields.city} />
+              <TextField label="Street" field={fields.street} />
             </div>
             <ArrayField
               path={["addresses", index, "people"]}
@@ -192,10 +191,10 @@ export function AddressesWithPeopleArrayField() {
                 </Button>
               )}
             >
-              {({ fieldAtoms }) => (
+              {({ fields }) => (
                 <div className="grid grid-flow-col grid-cols-2 gap-4">
-                  <TextField label="Name" field={fieldAtoms.name} />
-                  <NumberField label="Age" field={fieldAtoms.age} />
+                  <TextField label="Name" field={fields.name} />
+                  <NumberField label="Age" field={fields.age} />
                 </div>
               )}
             </ArrayField>
@@ -254,9 +253,9 @@ export function ImageUploadArrayField() {
   return (
     <StoryForm submit={submit}>
       <ArrayField path={["images"]} form={imageForm} builder={imageBuilder}>
-        {({ fieldAtoms }) => (
+        {({ fields }) => (
           <>
-            <ImageField field={fieldAtoms} />
+            <ImageField field={fields} />
           </>
         )}
       </ArrayField>

@@ -71,7 +71,7 @@ export type EmptyMessageProp = Partial<RenderProp<{}, "EmptyMessage">>;
 export type ArrayItemRenderProps<Fields extends any = any> = RenderProp<
   {
     index: number;
-    fieldAtoms: Fields;
+    fields: Fields;
     add: () => void;
     remove: (index: number) => void;
   } & RenderProp<{}, "DeleteItemButton">
@@ -160,11 +160,11 @@ export function ArrayField<F extends FormFields>({
   return (
     <>
       {array.length === 0 && EmptyMessage ? <EmptyMessage /> : undefined}
-      {array.map((fieldAtoms, index) =>
+      {array.map((fields, index) =>
         children({
           add,
           remove,
-          fieldAtoms,
+          fields,
           index,
           DeleteItemButton: () => (
             <DeleteItemButton remove={() => remove(index)} />
@@ -185,7 +185,7 @@ const TestFlat = () => {
         houses: [{ streetNumber: fieldAtom({ value: "" }) }],
       })}
     >
-      {({ fieldAtoms, index }) => <>item {index}</>}
+      {({ fields, index }) => <>item {index}</>}
     </ArrayField>
   );
 };
@@ -201,7 +201,7 @@ const TestTransientPath = () => {
         },
       })}
     >
-      {({ fieldAtoms, add, remove, index }) => <>item {index}</>}
+      {({ fields, add, remove, index }) => <>item {index}</>}
     </ArrayField>
   );
 };
@@ -222,7 +222,7 @@ const TestNestedArrayField = () => {
         accounts: [{ iban: fieldAtom({ value: "SK98..." }) }],
       })}
     >
-      {({ fieldAtoms, index, add, remove }) => <>item {index}</>}
+      {({ fields, index, add, remove }) => <>item {index}</>}
     </ArrayField>
   );
 };
