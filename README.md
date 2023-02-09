@@ -39,7 +39,7 @@ Most UI libraries provide styled primitive `<Input>` components, form `<Label>` 
 
 `@form-atoms/field` comes with `<Fields />` pre-wired to popular UI libraries.
 
-| Package                            | Storybook                                                               | Oficial Docs                                                    |
-| ---------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [Flowbite](./packages/flowbite/)   | [🎨 last-field/flowbite](https://react-last-form-flowbite.netlify.app/) | [flowbite-react](https://flowbite-react.com/forms)              |
-| [Chakra UI](./packages/chakra-ui/) | 🚧 WIP                                                                  | [chakra-ui](https://chakra-ui.com/docs/components/form-control) |
+| 📦Package Docs                     | 🎨 Storybook                                             | 📃Official Docs                                                 | About                                          |
+| ---------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
+| [flowbite](./packages/flowbite/)   | [Flowbite Fields](https://form-atoms-field.netlify.app/) | [flowbite-react](https://flowbite-react.com/forms)              | Bindigs to Tailwind component library Flowbite |
+| [chakra-ui](./packages/chakra-ui/) | 🚧 WIP                                                   | [chakra-ui](https://chakra-ui.com/docs/components/form-control) | Bindings to CSS-in-JS library Chakra UI        |
