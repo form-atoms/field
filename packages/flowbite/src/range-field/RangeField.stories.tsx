@@ -15,8 +15,11 @@ const rating = fieldAtom({
   validate: zodValidate(z.number().min(1).max(20)),
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ rating }),
-  children: <RangeField min={1} max={20} field={rating} label="Rating" />,
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ rating }),
+    children: <RangeField min={1} max={20} field={rating} label="Rating" />,
+  },
 };

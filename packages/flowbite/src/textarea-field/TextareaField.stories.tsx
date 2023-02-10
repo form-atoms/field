@@ -15,8 +15,11 @@ const bio = fieldAtom<string>({
   validate: zodValidate(z.string()),
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ bio }),
-  children: <TextareaField field={bio} label="Biography" />,
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ bio }),
+    children: <TextareaField field={bio} label="Biography" />,
+  },
 };

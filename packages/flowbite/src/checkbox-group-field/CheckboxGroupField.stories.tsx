@@ -11,16 +11,19 @@ export default {
 
 const visitedCountries = multiSelectField();
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ visitedCountries }),
-  children: (
-    <CheckboxGroupField
-      field={visitedCountries}
-      label="Please check countries you've visited"
-      options={options}
-      getValue={getValue}
-      getLabel={getLabel}
-    />
-  ),
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ visitedCountries }),
+    children: (
+      <CheckboxGroupField
+        field={visitedCountries}
+        label="Please check countries you've visited"
+        options={options}
+        getValue={getValue}
+        getLabel={getLabel}
+      />
+    ),
+  },
 };

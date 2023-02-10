@@ -17,31 +17,37 @@ export default {
   title: "Scenarios",
 };
 
-export const CreateProfile = Template.bind({});
-CreateProfile.args = {
-  form: formAtom(profileFields),
-  children: (
-    <>
-      <TextField field={profileFields.username} label="Username" />
-      <FileField field={profileFields.profilePicture} label="Profile Picture" />
-      <NumberField field={profileFields.age} label="Age" />
-      <SelectField<{ code: string; name: string }>
-        field={profileFields.country}
-        label="Country"
-        options={countryOptions}
-        placeholder="Pick a country"
-        getValue={({ code }) => code}
-        getLabel={({ name }) => name}
-      />
-      <TextareaField field={profileFields.bio} label="Bio" />
-      <CheckboxField
-        field={profileFields.newsletter}
-        label="Subscribe to newsletter"
-      />
-      <RatingField
-        field={profileFields.rating}
-        label="How much do you like this?"
-      />
-    </>
-  ),
+export const CreateProfile = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom(profileFields),
+    children: (
+      <>
+        <TextField field={profileFields.username} label="Username" />
+        <FileField
+          field={profileFields.profilePicture}
+          label="Profile Picture"
+        />
+        <NumberField field={profileFields.age} label="Age" />
+        <SelectField<{ code: string; name: string }>
+          field={profileFields.country}
+          label="Country"
+          options={countryOptions}
+          placeholder="Pick a country"
+          getValue={({ code }) => code}
+          getLabel={({ name }) => name}
+        />
+        <TextareaField field={profileFields.bio} label="Bio" />
+        <CheckboxField
+          field={profileFields.newsletter}
+          label="Subscribe to newsletter"
+        />
+        <RatingField
+          field={profileFields.rating}
+          label="How much do you like this?"
+        />
+      </>
+    ),
+  },
 };

@@ -11,21 +11,24 @@ export default {
 const termsOfService = checkboxField();
 const subscribeToNewsletter = checkboxField({ optional: true });
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ termsOfService }),
-  children: (
-    <>
-      <CheckboxField
-        field={termsOfService}
-        label="Terms of Service"
-        helperText="Better read those"
-      />
-      <CheckboxField
-        field={subscribeToNewsletter}
-        label="Subscribe to the newsletter"
-        helperText="Get the latest news 👍"
-      />
-    </>
-  ),
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ termsOfService }),
+    children: (
+      <>
+        <CheckboxField
+          field={termsOfService}
+          label="Terms of Service"
+          helperText="Better read those"
+        />
+        <CheckboxField
+          field={subscribeToNewsletter}
+          label="Subscribe to the newsletter"
+          helperText="Get the latest news 👍"
+        />
+      </>
+    ),
+  },
 };

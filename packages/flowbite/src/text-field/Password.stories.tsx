@@ -11,23 +11,26 @@ export default {
   component: TextField,
 };
 
-export const Password = Template.bind({});
-Password.args = {
-  form: formAtom({ password }),
-  children: (
-    <>
-      <TextField
-        type="password"
-        field={passwordInitial}
-        label="New password"
-        helperText="Your password must be at least 6 characters long"
-      />
-      <TextField
-        type="password"
-        field={password}
-        label="Confirm password"
-        colors={["success", "failure"]}
-      />
-    </>
-  ),
+export const Password = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ password }),
+    children: (
+      <>
+        <TextField
+          type="password"
+          field={passwordInitial}
+          label="New password"
+          helperText="Your password must be at least 6 characters long"
+        />
+        <TextField
+          type="password"
+          field={password}
+          label="Confirm password"
+          colors={["success", "failure"]}
+        />
+      </>
+    ),
+  },
 };

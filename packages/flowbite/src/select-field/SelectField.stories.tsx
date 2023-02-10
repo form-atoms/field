@@ -8,16 +8,19 @@ export default {
   component: SelectField,
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ country }),
-  children: (
-    <SelectField
-      field={country}
-      label="Country of Origin"
-      options={options}
-      getValue={getValue}
-      getLabel={getLabel}
-    />
-  ),
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ country }),
+    children: (
+      <SelectField
+        field={country}
+        label="Country of Origin"
+        options={options}
+        getValue={getValue}
+        getLabel={getLabel}
+      />
+    ),
+  },
 };

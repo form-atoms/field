@@ -14,10 +14,13 @@ const formFields = {
   }),
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom(formFields),
-  children: (
-    <RatingField field={formFields.rating} label="Rate your experience" />
-  ),
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom(formFields),
+    children: (
+      <RatingField field={formFields.rating} label="Rate your experience" />
+    ),
+  },
 };

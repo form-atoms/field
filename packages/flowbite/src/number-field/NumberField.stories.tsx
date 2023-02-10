@@ -15,20 +15,29 @@ const optional = numberField({
   optional: true,
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ amount }),
-  children: <NumberField field={amount} label="Amount" />,
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ amount }),
+    children: <NumberField field={amount} label="Amount" />,
+  },
 };
 
-export const Required = Template.bind({});
-Required.args = {
-  form: formAtom({ required }),
-  children: <ValidatedNumberField field={required} label="Amount" />,
+export const Required = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ required }),
+    children: <ValidatedNumberField field={required} label="Amount" />,
+  },
 };
 
-export const Optional = Template.bind({});
-Optional.args = {
-  form: formAtom({ optional }),
-  children: <ValidatedNumberField field={optional} label="Amount" />,
+export const Optional = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ optional }),
+    children: <ValidatedNumberField field={optional} label="Amount" />,
+  },
 };

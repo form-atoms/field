@@ -10,8 +10,11 @@ export default {
 
 const profilePicture = fileField();
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ profilePicture }),
-  children: <FileField field={profilePicture} label="Profile Picture" />,
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ profilePicture }),
+    children: <FileField field={profilePicture} label="Profile Picture" />,
+  },
 };

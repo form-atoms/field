@@ -15,10 +15,13 @@ const username = fieldAtom({
   validate: zodValidate(z.string().min(4), { on: "change" }),
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ username }),
-  children: <TextField field={username} label="User Name" />,
+export const Primary = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ username }),
+    children: <TextField field={username} label="User Name" />,
+  },
 };
 
 const email = fieldAtom({
@@ -26,26 +29,29 @@ const email = fieldAtom({
   validate: zodValidate(z.string().email(), { on: "change" }),
 });
 
-export const Email = Template.bind({});
-Email.args = {
-  form: formAtom({ email }),
-  children: (
-    <TextField
-      field={email}
-      label="Email address"
-      placeholder="example@email.com"
-      helperText={
-        <>
-          We’ll never share your details. Read our{" "}
-          <a
-            href="/forms"
-            className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-          >
-            Privacy Policy
-          </a>
-          .
-        </>
-      }
-    />
-  ),
+export const Email = {
+  render: Template.bind({}),
+
+  args: {
+    form: formAtom({ email }),
+    children: (
+      <TextField
+        field={email}
+        label="Email address"
+        placeholder="example@email.com"
+        helperText={
+          <>
+            We’ll never share your details. Read our{" "}
+            <a
+              href="/forms"
+              className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+            >
+              Privacy Policy
+            </a>
+            .
+          </>
+        }
+      />
+    ),
+  },
 };
