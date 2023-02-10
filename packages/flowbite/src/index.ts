@@ -5,4 +5,5 @@ export * from "./hooks";
 export * from "./number-field";
 export * from "./radio-field";
 export * from "./select-field";
+export * from "./slider-field";
 export * from "./text-field";

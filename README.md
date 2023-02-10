@@ -51,12 +51,12 @@ const age = numberField({ schema: z.number().min(18) }); // override default sch
 const numOfKids = numberField({ optional: true }); // make field optional
 ```
 
-| Field atom                                             | Default 'required' validation | Use with                |
-| ------------------------------------------------------ | ----------------------------- | ----------------------- |
-| `checkboxField(config?): FieldAtom<boolean>`           | `z.literal(true)`             | CheckboxField           |
-| `numberField(config?): FieldAtom<number \| undefined>` | `z.number()`                  | NumberField, RangeField |
-| `selectField(config?): FieldAtom<string \| undefined>` | `z.string()`                  | RadioField, SelectField |
-| `fileField(config?): FieldAtom<FileList \| undefined>` | `z.instanceof(FileList)`      | FileField               |
+| Field atom                                             | Default 'required' validation | Use with                 |
+| ------------------------------------------------------ | ----------------------------- | ------------------------ |
+| `checkboxField(config?): FieldAtom<boolean>`           | `z.literal(true)`             | CheckboxField            |
+| `numberField(config?): FieldAtom<number \| undefined>` | `z.number()`                  | NumberField, SliderField |
+| `selectField(config?): FieldAtom<string \| undefined>` | `z.string()`                  | RadioField, SelectField  |
+| `fileField(config?): FieldAtom<FileList \| undefined>` | `z.instanceof(FileList)`      | FileField                |
 
 ### Integrations
 
