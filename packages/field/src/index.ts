@@ -1,5 +1,6 @@
 export * from "./array-field";
 export * from "./checkbox-field";
+export * from "./field-atom-with-validation";
 export * from "./file-field";
 export * from "./last-field";
 export * from "./number-field";
