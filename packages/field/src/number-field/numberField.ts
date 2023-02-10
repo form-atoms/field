@@ -1,24 +1,19 @@
-import { fieldAtom, FieldAtom, FieldAtomConfig } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
+import { FieldAtom } from "form-atoms";
 import { z } from "zod";
+import {
+  fieldAtomWithValidation,
+  FieldAtomWithValidationConfig,
+} from "../field-atom-with-validation";
 
 type NumberValue = number | undefined;
 
 export type NumberFieldAtom = FieldAtom<NumberValue>;
 
-type NumberConfig = Partial<FieldAtomConfig<NumberValue>>;
-
-type NumberConfigBuilder = (zod: {
-  zodValidate: typeof zodValidate;
-  z: typeof z;
-}) => NumberConfig;
-
-export const numberField = (config?: NumberConfig | NumberConfigBuilder) =>
-  fieldAtom({
+export const numberField = (
+  config: Partial<FieldAtomWithValidationConfig<NumberValue>> = {}
+) =>
+  fieldAtomWithValidation({
     value: undefined,
-    validate: zodValidate(
-      z.number({ required_error: "This field is required" }),
-      { on: "change" }
-    ),
-    ...(typeof config === "function" ? config({ zodValidate, z }) : config),
+    schema: z.number({ required_error: "This field is required" }),
+    ...config,
   });

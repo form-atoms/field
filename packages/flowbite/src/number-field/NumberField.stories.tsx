@@ -3,7 +3,6 @@ import { ValidatedNumberField } from "./ValidatedNumberField";
 import { formAtom } from "form-atoms";
 import { Template } from "../stories";
 import { numberField, fieldAtomWithValidation } from "@form-atoms/field";
-import { z } from "zod";
 
 export default {
   title: "NumberField",
@@ -11,10 +10,8 @@ export default {
 };
 
 const amount = numberField();
-const required = fieldAtomWithValidation({ value: null, schema: z.number() });
-const optional = fieldAtomWithValidation({
-  value: null,
-  schema: z.number(),
+const required = numberField();
+const optional = numberField({
   optional: true,
 });
 

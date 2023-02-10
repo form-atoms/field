@@ -16,10 +16,10 @@ export const profileFields = {
     value: "",
     validate: zodValidate(z.string().min(4), { on: "change" }),
   }),
-  age: numberField(({ zodValidate, z }) => ({
+  age: numberField({
     name: "age",
-    validate: zodValidate(z.number().min(17).max(30), { on: "change" }),
-  })),
+    schema: z.number().min(17).max(30),
+  }),
   country: selectField({ name: "country" }),
   profilePicture: fileField({ name: "profile" }),
   bio: fieldAtom({

@@ -1,11 +1,17 @@
 import { FieldAtom, fieldAtom, FieldAtomConfig } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Atom, atom, useAtomValue, WritableAtom } from "jotai";
+import { Atom, atom, useAtomValue, WritableAtom, Getter } from "jotai";
 import { atomWithReset, RESET } from "jotai/utils";
 import { useMemo } from "react";
 import { z } from "zod";
 
-type ValidationConfig = { optional?: boolean; schema: z.Schema };
+type ValidationConfig = {
+  optional?: boolean;
+  schema: z.Schema | ((get: Getter) => z.Schema);
+};
+
+export type FieldAtomWithValidationConfig<Value> = FieldAtomConfig<Value> &
+  ValidationConfig;
 
 type FieldAtomWithValidation<Value> = FieldAtom<Value> extends Atom<infer R>
   ? Atom<
@@ -18,27 +24,26 @@ type FieldAtomWithValidation<Value> = FieldAtom<Value> extends Atom<infer R>
       }
     >
   : never;
-
 export const fieldAtomWithValidation = <Value>({
   optional = false, // all fields required similarly as zod is required by default
   schema,
-  ...config
-}: FieldAtomConfig<Value> &
-  ValidationConfig): FieldAtomWithValidation<Value> => {
+  ...atomConfig
+}: FieldAtomWithValidationConfig<Value>): FieldAtomWithValidation<Value> => {
   const requiredAtom = atomWithReset(!optional);
 
   const baseFieldAtom = fieldAtom({
     validate: zodValidate(
       (get) => {
         const required = get(requiredAtom);
+        const schemaObj = typeof schema === "function" ? schema(get) : schema;
 
-        return required ? schema : schema.optional();
+        return required ? schemaObj : schemaObj.optional();
       },
       {
         on: "change",
       }
     ),
-    ...config,
+    ...atomConfig,
   });
 
   return atom((get) => {
