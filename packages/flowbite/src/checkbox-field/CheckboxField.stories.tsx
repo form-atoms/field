@@ -1,21 +1,18 @@
 import { CheckboxField } from "./CheckboxField";
-import { formAtom } from "form-atoms";
-import { Template } from "../stories";
+import { StoryForm, FormStory } from "../stories";
 import { checkboxField } from "@form-atoms/field";
 
 export default {
   title: "CheckboxField",
-  component: CheckboxField,
+  component: StoryForm,
 };
 
 const termsOfService = checkboxField();
 const subscribeToNewsletter = checkboxField({ optional: true });
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Default: FormStory = {
   args: {
-    form: formAtom({ termsOfService }),
+    fields: { termsOfService },
     children: (
       <>
         <CheckboxField

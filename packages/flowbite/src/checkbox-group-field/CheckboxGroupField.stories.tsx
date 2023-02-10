@@ -1,21 +1,18 @@
 import { multiSelectField } from "@form-atoms/field";
 import { CheckboxGroupField } from "./CheckboxGroupField";
-import { formAtom } from "form-atoms";
-import { Template } from "../stories";
+import { FormStory, StoryForm } from "../stories";
 import { options, getLabel, getValue } from "./languages";
 
 export default {
   title: "CheckboxGroupField",
-  component: CheckboxGroupField,
+  component: StoryForm,
 };
 
 const proficientLanguages = multiSelectField();
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom({ proficientLanguages }),
+    fields: { proficientLanguages },
     children: (
       <CheckboxGroupField
         field={proficientLanguages}

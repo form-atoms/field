@@ -1,18 +1,15 @@
 import { RadioField } from "./RadioField";
-import { formAtom } from "form-atoms";
-import { Template } from "../stories";
+import { StoryForm, FormStory } from "../stories";
 import { country, getValue, getLabel, options } from "../select-field/country";
 
 export default {
   title: "RadioField",
-  component: RadioField,
+  component: StoryForm,
 };
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom({ country }),
+    fields: { country },
     children: (
       <RadioField
         field={country}

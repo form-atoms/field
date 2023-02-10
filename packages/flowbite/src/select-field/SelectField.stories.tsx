@@ -1,18 +1,15 @@
 import { SelectField } from "./SelectField";
-import { formAtom } from "form-atoms";
-import { Template } from "../stories";
+import { FormStory, StoryForm } from "../stories";
 import { country, options, getLabel, getValue } from "./country";
 
 export default {
   title: "SelectField",
-  component: SelectField,
+  component: StoryForm,
 };
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom({ country }),
+    fields: { country },
     children: (
       <SelectField
         field={country}

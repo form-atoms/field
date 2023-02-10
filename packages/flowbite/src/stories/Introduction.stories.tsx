@@ -1,10 +1,8 @@
-import React from "react";
-import { formAtom } from "form-atoms";
 import {
   countryOptions,
   profileFields,
 } from "@form-atoms/field/dist/scenarios/profile";
-import { Template } from ".";
+import { StoryForm, FormStory } from ".";
 import { TextField } from "../text-field";
 import { NumberField } from "../number-field";
 import { SelectField } from "../select-field";
@@ -15,13 +13,12 @@ import { RatingField } from "../rating-field";
 
 export default {
   title: "Scenarios",
+  component: StoryForm,
 };
 
-export const CreateProfile = {
-  render: Template.bind({}),
-
+export const CreateProfile: FormStory = {
   args: {
-    form: formAtom(profileFields),
+    fields: profileFields,
     children: (
       <>
         <TextField field={profileFields.username} label="Username" />

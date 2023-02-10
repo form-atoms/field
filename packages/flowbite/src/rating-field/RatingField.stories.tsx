@@ -1,24 +1,21 @@
 import { RatingField } from "./RatingField";
-import { fieldAtom, formAtom } from "form-atoms";
-import { Template } from "../stories";
+import { StoryForm, FormStory } from "../stories";
 import { numberField } from "@form-atoms/field";
 
 export default {
   title: "RatingField",
-  component: RatingField,
+  component: StoryForm,
 };
 
-const formFields = {
+const fields = {
   rating: numberField(),
 };
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom(formFields),
+    fields,
     children: (
-      <RatingField field={formFields.rating} label="Rate your experience" />
+      <RatingField field={fields.rating} label="Rate your experience" />
     ),
   },
 };

@@ -1,12 +1,11 @@
 import { NumberField } from "./NumberField";
 import { ValidatedNumberField } from "./ValidatedNumberField";
-import { formAtom } from "form-atoms";
-import { Template } from "../stories";
-import { numberField, fieldAtomWithValidation } from "@form-atoms/field";
+import { FormStory, StoryForm } from "../stories";
+import { numberField } from "@form-atoms/field";
 
 export default {
   title: "NumberField",
-  component: NumberField,
+  component: StoryForm,
 };
 
 const amount = numberField();
@@ -15,29 +14,23 @@ const optional = numberField({
   optional: true,
 });
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom({ amount }),
+    fields: { amount },
     children: <NumberField field={amount} label="Amount" />,
   },
 };
 
-export const Required = {
-  render: Template.bind({}),
-
+export const Required: FormStory = {
   args: {
-    form: formAtom({ required }),
+    fields: { required },
     children: <ValidatedNumberField field={required} label="Amount" />,
   },
 };
 
-export const Optional = {
-  render: Template.bind({}),
-
+export const Optional: FormStory = {
   args: {
-    form: formAtom({ optional }),
+    fields: { optional },
     children: <ValidatedNumberField field={optional} label="Amount" />,
   },
 };

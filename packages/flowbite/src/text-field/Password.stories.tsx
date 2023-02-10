@@ -12,8 +12,6 @@ export default {
 };
 
 export const Password = {
-  render: Template.bind({}),
-
   args: {
     form: formAtom({ password }),
     children: (

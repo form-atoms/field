@@ -1,13 +1,12 @@
 import { TextareaField } from "./TextareaField";
-import { fieldAtom, formAtom } from "form-atoms";
+import { fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
-
-import { Template } from "../stories";
+import { StoryForm, FormStory } from "../stories";
 
 export default {
   title: "TextareaField",
-  component: TextareaField,
+  component: StoryForm,
 };
 
 const bio = fieldAtom<string>({
@@ -15,11 +14,9 @@ const bio = fieldAtom<string>({
   validate: zodValidate(z.string()),
 });
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom({ bio }),
+    fields: { bio },
     children: <TextareaField field={bio} label="Biography" />,
   },
 };

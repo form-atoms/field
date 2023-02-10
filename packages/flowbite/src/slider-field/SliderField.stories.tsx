@@ -1,12 +1,11 @@
 import { SliderField } from "./SliderField";
-import { formAtom } from "form-atoms";
 import { z } from "zod";
-import { Template } from "../stories";
+import { FormStory, StoryForm } from "../stories";
 import { numberField } from "@form-atoms/field";
 
 export default {
   title: "SliderField",
-  component: SliderField,
+  component: StoryForm,
 };
 
 const rating = numberField({
@@ -16,11 +15,9 @@ const rating = numberField({
     .max(100),
 });
 
-export const Primary = {
-  render: Template.bind({}),
-
+export const Primary: FormStory = {
   args: {
-    form: formAtom({ rating }),
+    fields: { rating },
     children: (
       <SliderField min={0} max={100} field={rating} label="Confidence" />
     ),
