@@ -1,7 +1,7 @@
-import React from "react";
 import { RatingField } from "./RatingField";
 import { fieldAtom, formAtom } from "form-atoms";
 import { Template } from "../stories";
+import { numberField } from "@form-atoms/field";
 
 export default {
   title: "RatingField",
@@ -9,9 +9,7 @@ export default {
 };
 
 const formFields = {
-  rating: fieldAtom({
-    value: 0,
-  }),
+  rating: numberField(),
 };
 
 export const Primary = {
