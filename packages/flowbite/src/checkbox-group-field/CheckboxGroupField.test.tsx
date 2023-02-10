@@ -5,14 +5,14 @@ import userEvent from "@testing-library/user-event";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it } from "vitest";
 import { CheckboxGroupField } from ".";
-import { options, getLabel, getValue } from "./country";
+import { options, getLabel, getValue } from "./languages";
 
 describe("<CheckboxGroupField />", () => {
   const props = {
     options,
     getLabel,
     getValue,
-    label: "country",
+    label: "lang",
   };
 
   it("should focus first checkbox when clicked on first label", async () => {
