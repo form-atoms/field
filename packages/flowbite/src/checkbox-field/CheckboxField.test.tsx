@@ -33,7 +33,7 @@ describe("<CheckboxField />", () => {
   });
 
   it("should render error message when submitting unchecked & required checkbox", async () => {
-    const tos = checkboxField({ required: true });
+    const tos = checkboxField();
     const form = formAtom({ tos });
     const { result } = renderHook(() => useFormSubmit(form));
 
@@ -52,7 +52,7 @@ describe("<CheckboxField />", () => {
   });
 
   it("should submit when checked & required", async () => {
-    const tos = checkboxField({ value: true, required: true });
+    const tos = checkboxField({ value: true });
     const form = formAtom({ tos });
     const { result } = renderHook(() => useFormSubmit(form));
 

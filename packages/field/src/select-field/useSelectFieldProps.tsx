@@ -3,7 +3,7 @@ import { useLastFieldProps } from "../last-field";
 import { SelectFieldAtom } from "./selectField";
 
 const getEventValue = (event: ChangeEvent<HTMLSelectElement>) =>
-  event.target.value;
+  event.target.value || undefined;
 
 export const useSelectFieldProps = (field: SelectFieldAtom) =>
   useLastFieldProps<string | undefined, HTMLSelectElement>(

@@ -1,8 +1,7 @@
 import { FieldAtom } from "form-atoms";
 import { ChangeEvent, useMemo } from "react";
 import { LastFieldProps, useLastFieldProps } from "../last-field";
-
-export type CheckboxValue = boolean;
+import { CheckboxValue } from "./checkboxField";
 
 export type CheckboxFieldAtom = FieldAtom<CheckboxValue>;
 

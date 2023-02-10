@@ -24,6 +24,7 @@ type FieldAtomWithValidation<Value> = FieldAtom<Value> extends Atom<infer R>
       }
     >
   : never;
+
 export const fieldAtomWithValidation = <Value>({
   optional = false, // all fields required similarly as zod is required by default
   schema,

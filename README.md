@@ -9,7 +9,7 @@ Declarative & headless form fields build on top of [`jotai & form-atoms`](https:
 yarn add jotai form-atoms @form-atoms/field
 ```
 
-### Motivation
+## Motivation
 
 `form-atoms` is the 'last-mile' of your app's form stack. It has layered, bottom-up architecture with clear separation of concerns.
 We provide you with stable pre-fabricated UI fields, while you still can go one level down and take the advantage of form primitives to develop anything you need.
@@ -34,6 +34,29 @@ Most UI libraries provide styled primitive `<Input>` components, form `<Label>` 
 ```
 <Field> = <Control> + <Input> + <Label> + <HelpText> + <Error>
 ```
+
+## Fields
+
+For well-known field types we export data type specific `fieldAtom` constructors. These come with
+pre-defined empty value of `undefined` and a specific zod validation schema.
+Similarly to `zod` schema fields, by default all the fieldAtoms are required.
+
+### Usage
+
+```ts
+import { numberField } from "@form-atoms/field";
+
+const height = numberField();
+const age = numberField({ schema: z.number().min(18) }); // override default schema
+const numOfKids = numberField({ optional: true }); // make field optional
+```
+
+| Field atom                                             | Default 'required' validation | Use with                |
+| ------------------------------------------------------ | ----------------------------- | ----------------------- |
+| `checkboxField(config?): FieldAtom<boolean>`           | `z.literal(true)`             | CheckboxField           |
+| `numberField(config?): FieldAtom<number \| undefined>` | `z.number()`                  | NumberField, RangeField |
+| `selectField(config?): FieldAtom<string \| undefined>` | `z.string()`                  | RadioField, SelectField |
+| `fileField(config?): FieldAtom<FileList \| undefined>` | `z.instanceof(FileList)`      | FileField               |
 
 ### Integrations
 

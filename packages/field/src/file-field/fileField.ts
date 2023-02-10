@@ -1,30 +1,19 @@
-import { fieldAtom, FieldAtom, FieldAtomConfig } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
+import { FieldAtom } from "form-atoms";
 import { z } from "zod";
+import {
+  fieldAtomWithValidation,
+  FieldAtomWithValidationConfig,
+} from "../field-atom-with-validation";
 
 type FileValue = FileList | undefined;
 
 export type FileFieldAtom = FieldAtom<FileValue>;
 
-const emptyFileList = () => {
-  const input = document.createElement("input");
-  input.type = "file";
-
-  // will be problem with SSR
-  return input.files!;
-};
-
-type FileConfig = Partial<FieldAtomConfig<FileValue>>;
-
-type FileConfigBuilder = (zod: {
-  zodValidate: typeof zodValidate;
-  z: typeof z;
-}) => FileConfig;
-
-export const fileField = (config?: FileConfig | FileConfigBuilder) =>
-  fieldAtom({
+export const fileField = (
+  config: Partial<FieldAtomWithValidationConfig<FileValue>> = {}
+) =>
+  fieldAtomWithValidation({
     value: undefined,
-    // TODO: change message Input not instance of FileList
-    validate: zodValidate(z.instanceof(FileList), { on: "change" }),
-    ...(typeof config === "function" ? config({ zodValidate, z }) : config),
+    schema: z.instanceof(FileList, "This field is required"),
+    ...config,
   });
