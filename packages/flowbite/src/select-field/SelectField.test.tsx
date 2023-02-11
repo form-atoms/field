@@ -41,7 +41,7 @@ describe("<SelectField />", () => {
     // TODO: should be separate test and have different behavior
     // expect(select).toHaveAttribute("required", "true");
 
-    expect(select).toHaveAttribute("aria-invalid", "true");
+    expect(select).toBeInvalid();
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });

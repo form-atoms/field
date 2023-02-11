@@ -29,10 +29,7 @@ describe("<NumberField />", () => {
       result.current(onSubmit)();
     });
 
-    expect(screen.getByRole("spinbutton")).toHaveAttribute(
-      "aria-invalid",
-      "true"
-    );
+    expect(screen.getByRole("spinbutton")).toBeInvalid();
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });

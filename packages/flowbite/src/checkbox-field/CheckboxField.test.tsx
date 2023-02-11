@@ -45,7 +45,7 @@ describe("<CheckboxField />", () => {
     });
 
     const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).toHaveAttribute("aria-invalid", "true");
+    expect(checkbox).toBeInvalid();
     expect(checkbox).not.toBeChecked();
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(handleSubmit).not.toBeCalled();

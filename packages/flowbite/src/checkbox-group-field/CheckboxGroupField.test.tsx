@@ -41,7 +41,7 @@ describe("<CheckboxGroupField />", () => {
 
     const [firstCheckbox] = screen.getAllByRole("checkbox");
 
-    expect(firstCheckbox).toHaveAttribute("aria-invalid", "true");
+    expect(firstCheckbox).toBeInvalid();
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });

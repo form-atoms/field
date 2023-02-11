@@ -30,7 +30,7 @@ describe("<FileField />", () => {
     });
 
     // TODO: event does not cause re-render
-    expect(screen.getByRole("dialog")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.getByRole("dialog")).toBeInvalid();
     expect(
       screen.getByText("Input not instance of FileList")
     ).toBeInTheDocument();
