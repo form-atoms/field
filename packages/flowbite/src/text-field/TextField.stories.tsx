@@ -1,12 +1,12 @@
 import { TextField } from "./TextField";
 import { z } from "zod";
 
-import { StoryForm, FormStory } from "../stories";
+import { meta, FormStory } from "../stories";
 import { textField } from "@form-atoms/field";
 
 export default {
   title: "TextField",
-  component: StoryForm,
+  ...meta,
 };
 
 const username = textField({
@@ -16,7 +16,9 @@ const username = textField({
 export const Primary: FormStory = {
   args: {
     fields: { username },
-    children: <TextField field={username} label="User Name" />,
+    children: (args) => (
+      <TextField field={username} label="User Name" {...args} />
+    ),
   },
 };
 
@@ -27,7 +29,7 @@ const email = textField({
 export const Email: FormStory = {
   args: {
     fields: { email },
-    children: (
+    children: (args) => (
       <TextField
         field={email}
         label="Email address"
@@ -44,6 +46,7 @@ export const Email: FormStory = {
             .
           </>
         }
+        {...args}
       />
     ),
   },

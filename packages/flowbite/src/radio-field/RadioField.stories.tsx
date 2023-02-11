@@ -1,16 +1,16 @@
 import { RadioField } from "./RadioField";
-import { StoryForm, FormStory } from "../stories";
+import { meta, FormStory } from "../stories";
 import { country, getValue, getLabel, options } from "../select-field/country";
 
 export default {
   title: "RadioField",
-  component: StoryForm,
+  ...meta,
 };
 
 export const Primary: FormStory = {
   args: {
     fields: { country },
-    children: (
+    children: () => (
       <RadioField
         field={country}
         label="Country of Origin"

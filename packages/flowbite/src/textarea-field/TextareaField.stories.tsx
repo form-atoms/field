@@ -1,10 +1,10 @@
 import { TextareaField } from "./TextareaField";
-import { StoryForm, FormStory } from "../stories";
+import { FormStory, meta } from "../stories";
 import { textField } from "@form-atoms/field";
 
 export default {
   title: "TextareaField",
-  component: StoryForm,
+  ...meta,
 };
 
 const bio = textField();
@@ -12,6 +12,8 @@ const bio = textField();
 export const Primary: FormStory = {
   args: {
     fields: { bio },
-    children: <TextareaField field={bio} label="Biography" />,
+    children: (args) => (
+      <TextareaField field={bio} label="Biography" {...args} />
+    ),
   },
 };

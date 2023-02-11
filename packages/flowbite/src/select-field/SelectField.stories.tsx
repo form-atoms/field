@@ -1,16 +1,16 @@
 import { SelectField } from "./SelectField";
-import { FormStory, StoryForm } from "../stories";
+import { FormStory, meta } from "../stories";
 import { country, options, getLabel, getValue } from "./country";
 
 export default {
   title: "SelectField",
-  component: StoryForm,
+  ...meta,
 };
 
 export const Primary: FormStory = {
   args: {
     fields: { country },
-    children: (
+    children: (args) => (
       <SelectField
         field={country}
         label="Country of Origin"
@@ -18,6 +18,7 @@ export const Primary: FormStory = {
         options={options}
         getValue={getValue}
         getLabel={getLabel}
+        {...args}
       />
     ),
   },

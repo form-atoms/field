@@ -13,7 +13,7 @@ const proficientLanguages = multiSelectField();
 export const Primary: FormStory = {
   args: {
     fields: { proficientLanguages },
-    children: (
+    children: () => (
       <CheckboxGroupField
         field={proficientLanguages}
         label="What programming languages are you proficient?"

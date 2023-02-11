@@ -13,7 +13,7 @@ export default {
 export const Password: FormStory = {
   args: {
     fields: { password, passwordInitial },
-    children: (
+    children: () => (
       <>
         <TextField
           type="password"

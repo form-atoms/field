@@ -19,7 +19,7 @@ export default {
 export const CreateProfile: FormStory = {
   args: {
     fields: profileFields,
-    children: (
+    children: () => (
       <>
         <TextField field={profileFields.username} label="Username" />
         <FileField

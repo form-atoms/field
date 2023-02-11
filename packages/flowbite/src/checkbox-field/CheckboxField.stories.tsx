@@ -1,10 +1,10 @@
 import { CheckboxField } from "./CheckboxField";
-import { StoryForm, FormStory } from "../stories";
+import { meta, FormStory } from "../stories";
 import { checkboxField } from "@form-atoms/field";
 
 export default {
   title: "CheckboxField",
-  component: StoryForm,
+  ...meta,
 };
 
 const termsOfService = checkboxField();
@@ -13,12 +13,13 @@ const subscribeToNewsletter = checkboxField({ optional: true });
 export const Default: FormStory = {
   args: {
     fields: { termsOfService, subscribeToNewsletter },
-    children: (
+    children: (args) => (
       <>
         <CheckboxField
           field={termsOfService}
           label="Terms of Service"
           helperText="Better read those"
+          {...args}
         />
         <CheckboxField
           field={subscribeToNewsletter}

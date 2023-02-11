@@ -1,11 +1,11 @@
 import { SliderField } from "./SliderField";
 import { z } from "zod";
-import { FormStory, StoryForm } from "../stories";
+import { FormStory, meta } from "../stories";
 import { numberField } from "@form-atoms/field";
 
 export default {
   title: "SliderField",
-  component: StoryForm,
+  ...meta,
 };
 
 const rating = numberField({
@@ -18,8 +18,14 @@ const rating = numberField({
 export const Primary: FormStory = {
   args: {
     fields: { rating },
-    children: (
-      <SliderField min={0} max={100} field={rating} label="Confidence" />
+    children: (args) => (
+      <SliderField
+        min={0}
+        max={100}
+        field={rating}
+        label="Confidence"
+        {...args}
+      />
     ),
   },
 };
