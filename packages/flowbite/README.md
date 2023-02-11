@@ -10,3 +10,11 @@
 ```
 yarn add @form-atoms/flowbite
 ```
+
+## Components
+
+### SelectField
+
+| prop                  | Default                     | Description                                      |
+| --------------------- | --------------------------- | ------------------------------------------------ |
+| `placeholder: string` | `"Please select an option"` | Sets label on fake placeholder = disabled option |

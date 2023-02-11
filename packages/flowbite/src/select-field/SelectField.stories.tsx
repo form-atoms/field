@@ -14,6 +14,7 @@ export const Primary: FormStory = {
       <SelectField
         field={country}
         label="Country of Origin"
+        placeholder="Click to pick a country"
         options={options}
         getValue={getValue}
         getLabel={getLabel}

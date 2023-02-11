@@ -42,4 +42,14 @@ describe("<SelectField />", () => {
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });
+
+  it("should use the placeholder prop", () => {
+    const field = selectField();
+
+    render(
+      <SelectField field={field} {...props} placeholder="Pick a country" />
+    );
+
+    expect(screen.getByText("Pick a country")).toBeInTheDocument();
+  });
 });
