@@ -27,6 +27,7 @@ export const NumberField = ({
         helperText={color ? error : helperText}
         {...inputProps}
         {...props}
+        value={props.value ?? ""}
       />
     </Field>
   );

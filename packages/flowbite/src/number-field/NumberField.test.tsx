@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { NumberField } from ".";
@@ -7,30 +7,59 @@ import { formAtom, useFormSubmit } from "form-atoms";
 import { renderHook, act as domAct } from "@testing-library/react-hooks/dom";
 
 describe("<NumberField />", () => {
-  it("should focus input when clicked on label", async () => {
+  it("focuses input when clicked on label", async () => {
     const amount = numberField();
 
     render(<NumberField field={amount} label="amount" />);
 
-    await userEvent.click(screen.getByLabelText("amount"));
+    await userEvent.click(screen.getByLabelText("amount", { exact: false }));
 
     expect(screen.getByRole("spinbutton")).toHaveFocus();
   });
 
-  it("should render error message when submitting empty & required", async () => {
-    const price = numberField();
-    const form = formAtom({ price });
-    const { result } = renderHook(() => useFormSubmit(form));
+  describe("with required numberField", () => {
+    it("renders error message when submitting empty", async () => {
+      const price = numberField();
+      const form = formAtom({ price });
+      const { result } = renderHook(() => useFormSubmit(form));
 
-    render(<NumberField field={price} label="price" />);
+      render(<NumberField field={price} label="price" />);
 
-    const onSubmit = vi.fn();
-    await domAct(async () => {
-      result.current(onSubmit)();
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(screen.getByRole("spinbutton")).toBeInvalid();
+      expect(screen.getByText("This field is required")).toBeInTheDocument();
+      expect(onSubmit).not.toBeCalled();
     });
 
-    expect(screen.getByRole("spinbutton")).toBeInvalid();
-    expect(screen.getByText("This field is required")).toBeInTheDocument();
-    expect(onSubmit).not.toBeCalled();
+    it("clears error message when entered valid numeric value", async () => {
+      const price = numberField();
+      const form = formAtom({ price });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<NumberField field={price} />);
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      const input = screen.getByRole("spinbutton");
+      expect(input).toBeInvalid();
+      expect(screen.getByText("This field is required")).toBeInTheDocument();
+
+      await fireEvent.change(input, { target: { value: 10 } });
+
+      expect(input).toBeValid();
+
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ price: 10 });
+    });
   });
 });
