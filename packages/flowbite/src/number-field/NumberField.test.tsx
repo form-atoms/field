@@ -51,7 +51,8 @@ describe("<NumberField />", () => {
       expect(input).toBeInvalid();
       expect(screen.getByText("This field is required")).toBeInTheDocument();
 
-      await fireEvent.change(input, { target: { value: 10 } });
+      // value must be string! https://github.com/capricorn86/happy-dom/issues/729
+      await fireEvent.change(input, { target: { value: "0" } });
 
       expect(input).toBeValid();
 
@@ -59,7 +60,7 @@ describe("<NumberField />", () => {
         result.current(onSubmit)();
       });
 
-      expect(onSubmit).toHaveBeenCalledWith({ price: 10 });
+      expect(onSubmit).toHaveBeenCalledWith({ price: 0 });
     });
   });
 });
