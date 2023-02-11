@@ -35,10 +35,13 @@ describe("<SelectField />", () => {
       result.current(onSubmit)();
     });
 
-    expect(screen.getByRole("combobox")).toHaveAttribute(
-      "aria-invalid",
-      "true"
-    );
+    const select = screen.getByRole("combobox");
+
+    expect(select).toHaveAttribute("aria-required", "true");
+    // TODO: should be separate test and have different behavior
+    // expect(select).toHaveAttribute("required", "true");
+
+    expect(select).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });
