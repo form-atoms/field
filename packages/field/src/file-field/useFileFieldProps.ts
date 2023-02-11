@@ -1,12 +1,12 @@
 import { ChangeEvent } from "react";
-import { LastFieldProps } from "../last-field";
-import { useLastFieldProps } from "../last-field";
+import { FieldProps } from "../field";
+import { useFieldProps } from "../field";
 import { FileFieldAtom } from "./fileField";
 
-export type FileFieldProps = LastFieldProps<FileFieldAtom>;
+export type FileFieldProps = FieldProps<FileFieldAtom>;
 
 const getFiles = (event: ChangeEvent<HTMLInputElement>) =>
   event.target.files ?? undefined;
 
 export const useFileFieldProps = (field: FileFieldAtom) =>
-  useLastFieldProps(field, getFiles);
+  useFieldProps(field, getFiles);

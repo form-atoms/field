@@ -1,18 +1,20 @@
-import { FieldAtom, useField } from "form-atoms";
+import { useField } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChangeEvent, ReactNode, useId, useMemo, useTransition } from "react";
+import { ValidatedFieldAtom } from "./field";
 
-export type LastFieldProps<Field extends FieldAtom<any>> = {
+export type FieldProps<Field extends ValidatedFieldAtom<any>> = {
   field: Field;
   label?: ReactNode;
   helperText?: ReactNode;
+  required?: boolean;
 };
 
-export function useLastFieldProps<
+export function useFieldProps<
   Value,
   Element extends HTMLElement = HTMLInputElement
 >(
-  fieldAtom: FieldAtom<Value>,
+  fieldAtom: ValidatedFieldAtom<Value>,
   // support element to be union via distributive conditional types
   getEventValue: Element extends unknown
     ? (event: ChangeEvent<Element>, value: Value) => Value
@@ -21,6 +23,7 @@ export function useLastFieldProps<
   const { actions, state } = useField(fieldAtom);
   const field = useAtomValue(fieldAtom);
   const name = useAtomValue(field.name);
+  const required = useAtomValue(field.required);
   const validate = useSetAtom(field.validate);
   const ref = useSetAtom(field.ref);
   const [, startTransition] = useTransition();
@@ -31,6 +34,8 @@ export function useLastFieldProps<
       id,
       name,
       value: state.value,
+      required,
+      "aria-required": required,
       "aria-invalid": state.validateStatus === "invalid",
       ref,
       onBlur() {
@@ -50,6 +55,6 @@ export function useLastFieldProps<
         });
       },
     }),
-    [state, actions, name, ref, validate]
+    [state, actions, name, required, ref, validate]
   );
 }

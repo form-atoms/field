@@ -1,17 +1,16 @@
-import { FieldAtom } from "form-atoms";
 import { ChangeEvent, useMemo } from "react";
-import { LastFieldProps, useLastFieldProps } from "../last-field";
+import { FieldProps, useFieldProps, ValidatedFieldAtom } from "../field";
 import { CheckboxValue } from "./checkboxField";
 
-export type CheckboxFieldAtom = FieldAtom<CheckboxValue>;
+export type CheckboxFieldAtom = ValidatedFieldAtom<CheckboxValue>;
 
-export type CheckboxFieldProps = LastFieldProps<CheckboxFieldAtom>;
+export type CheckboxFieldProps = FieldProps<CheckboxFieldAtom>;
 
 const getChecked = (event: ChangeEvent<HTMLInputElement>) =>
   event.target.checked;
 
 export function useCheckboxFieldProps(field: CheckboxFieldAtom) {
-  const { value: checked, ...props } = useLastFieldProps(field, getChecked);
+  const { value: checked, ...props } = useFieldProps(field, getChecked);
 
   return useMemo(
     () => ({

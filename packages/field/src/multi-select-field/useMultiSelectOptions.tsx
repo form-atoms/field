@@ -1,10 +1,10 @@
 import { useFieldState } from "form-atoms";
 import { useMemo } from "react";
-import { LastFieldProps } from "../last-field";
+import { FieldProps } from "../field";
 import { MultiSelectFieldAtom } from "./multiSelectField";
 import { SelectProps } from "../select-field";
 
-export type MultiSelectFieldProps<Option, Value = string> = LastFieldProps<
+export type MultiSelectFieldProps<Option, Value = string> = FieldProps<
   MultiSelectFieldAtom<Value>
 > &
   SelectProps<Option, Value>;

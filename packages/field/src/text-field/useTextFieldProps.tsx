@@ -1,15 +1,15 @@
 import { ChangeEvent } from "react";
-import { LastFieldProps, useLastFieldProps } from "../last-field";
+import { FieldProps, useFieldProps } from "../field";
 import { TextFieldAtom, TextValue } from "./textField";
 
-export type TextFieldProps = LastFieldProps<TextFieldAtom>;
+export type TextFieldProps = FieldProps<TextFieldAtom>;
 
 const getEventValue = (
   event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
 ) => event.target.value;
 
 export const useTextFieldProps = <F extends TextFieldAtom>(field: F) =>
-  useLastFieldProps<TextValue, HTMLInputElement | HTMLTextAreaElement>(
+  useFieldProps<TextValue, HTMLInputElement | HTMLTextAreaElement>(
     field,
     getEventValue
   );

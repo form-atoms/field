@@ -1,15 +1,12 @@
 import { z } from "zod";
-import {
-  fieldAtomWithValidation,
-  FieldAtomWithValidationConfig,
-} from "../field-atom-with-validation";
+import { validatedFieldAtom, ValidatedFieldAtomConfig } from "../field";
 
 export type CheckboxValue = boolean;
 
 export const checkboxField = (
-  config: Partial<FieldAtomWithValidationConfig<CheckboxValue>> = {}
+  config: Partial<ValidatedFieldAtomConfig<CheckboxValue>> = {}
 ) =>
-  fieldAtomWithValidation({
+  validatedFieldAtom({
     value: false,
     schema: z.literal(true, {
       errorMap: (issue) =>

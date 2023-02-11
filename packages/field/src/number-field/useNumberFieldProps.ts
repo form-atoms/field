@@ -1,11 +1,11 @@
 import { ChangeEvent } from "react";
-import { LastFieldProps, useLastFieldProps } from "../last-field";
+import { FieldProps, useFieldProps } from "../field";
 import { NumberFieldAtom } from "./numberField";
 
-export type NumberFieldProps = LastFieldProps<NumberFieldAtom>;
+export type NumberFieldProps = FieldProps<NumberFieldAtom>;
 
 const getNumber = (event: ChangeEvent<HTMLInputElement>) =>
   event.target.valueAsNumber || undefined;
 
 export const useNumberFieldProps = (field: NumberFieldAtom) =>
-  useLastFieldProps(field, getNumber);
+  useFieldProps(field, getNumber);
