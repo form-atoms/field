@@ -26,6 +26,7 @@ export const TextareaField = ({
         role="textbox"
         color={color}
         {...props}
+        value={props.value ?? ""}
         helperText={error ?? helperText}
         {...uiProps}
       />

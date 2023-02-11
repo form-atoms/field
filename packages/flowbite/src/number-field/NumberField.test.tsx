@@ -35,7 +35,7 @@ describe("<NumberField />", () => {
       expect(onSubmit).not.toBeCalled();
     });
 
-    it("clears error message when entered valid numeric value", async () => {
+    it("submits form without error  when entered valid numeric value", async () => {
       const price = numberField();
       const form = formAtom({ price });
       const { result } = renderHook(() => useFormSubmit(form));
