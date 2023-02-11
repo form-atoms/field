@@ -1,7 +1,6 @@
 import { HelperText, Label, Rating, RatingProps } from "flowbite-react";
 import {
-  LastFieldProps,
-  NumberFieldAtom,
+  NumberFieldProps,
   useNumberFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
@@ -16,7 +15,7 @@ export const RatingField = ({
   size = "md",
   label,
   ...uiProps
-}: RatingProps & LastFieldProps<NumberFieldAtom>) => {
+}: RatingProps & NumberFieldProps) => {
   const props = useNumberFieldProps(field);
   const actions = useFieldActions(field);
   const { renderOptions } = useSelectOptions<number, number | undefined>(
@@ -27,7 +26,6 @@ export const RatingField = ({
       options,
     }
   );
-
   const { error, color } = useFieldError(field);
 
   return (

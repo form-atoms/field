@@ -1,19 +1,18 @@
 import { TextField } from "./TextField";
-import { formAtom } from "form-atoms";
 import {
   password,
   passwordInitial,
 } from "@form-atoms/field/dist/scenarios/password";
-import { Template } from "../stories";
+import { FormStory, StoryForm } from "../stories";
 
 export default {
   title: "TextField",
-  component: TextField,
+  component: StoryForm,
 };
 
-export const Password = {
+export const Password: FormStory = {
   args: {
-    form: formAtom({ password }),
+    fields: { password, passwordInitial },
     children: (
       <>
         <TextField

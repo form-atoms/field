@@ -1,18 +1,16 @@
 import { TextField } from "./TextField";
-import { fieldAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 
 import { StoryForm, FormStory } from "../stories";
+import { textField } from "@form-atoms/field";
 
 export default {
   title: "TextField",
   component: StoryForm,
 };
 
-const username = fieldAtom({
-  value: "",
-  validate: zodValidate(z.string().min(4), { on: "change" }),
+const username = textField({
+  schema: z.string().min(4),
 });
 
 export const Primary: FormStory = {
@@ -22,9 +20,8 @@ export const Primary: FormStory = {
   },
 };
 
-const email = fieldAtom({
-  value: "",
-  validate: zodValidate(z.string().email(), { on: "change" }),
+const email = textField({
+  schema: z.string().email(),
 });
 
 export const Email: FormStory = {

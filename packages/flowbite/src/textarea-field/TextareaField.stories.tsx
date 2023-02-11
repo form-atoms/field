@@ -1,18 +1,13 @@
 import { TextareaField } from "./TextareaField";
-import { fieldAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import { z } from "zod";
 import { StoryForm, FormStory } from "../stories";
+import { textField } from "@form-atoms/field";
 
 export default {
   title: "TextareaField",
   component: StoryForm,
 };
 
-const bio = fieldAtom<string>({
-  value: "",
-  validate: zodValidate(z.string()),
-});
+const bio = textField();
 
 export const Primary: FormStory = {
   args: {

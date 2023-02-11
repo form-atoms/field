@@ -17,7 +17,7 @@ export const NumberField = ({
     <Field>
       {label && (
         <Label color={color} htmlFor={props.id}>
-          {label}
+          {label} {props.required ? "(required)" : ""}
         </Label>
       )}
       <TextInput

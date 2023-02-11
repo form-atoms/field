@@ -1,7 +1,6 @@
 import { Label, Select, SelectProps } from "flowbite-react";
 import {
   SelectFieldProps,
-  useFieldRequiredProps,
   useSelectFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
@@ -27,11 +26,6 @@ export const SelectField = <Option,>({
   });
   const { color, error } = useFieldError(field);
 
-  // @ts-ignore
-  const requiredProps = useFieldRequiredProps(field);
-
-  console.log(requiredProps);
-
   return (
     <Field>
       {label && (
@@ -41,9 +35,8 @@ export const SelectField = <Option,>({
       )}
       <Select
         role="combobox"
-        {...requiredProps}
-        {...uiProps}
         {...props}
+        {...uiProps}
         color={color}
         helperText={error ?? helperText}
       >
