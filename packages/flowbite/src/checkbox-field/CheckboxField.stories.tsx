@@ -12,7 +12,7 @@ const subscribeToNewsletter = checkboxField({ optional: true });
 
 export const Default: FormStory = {
   args: {
-    fields: { termsOfService },
+    fields: { termsOfService, subscribeToNewsletter },
     children: (
       <>
         <CheckboxField

@@ -10,7 +10,7 @@ export const StoryForm = ({
 }: PropsWithChildren<{ fields: FormFields }>) => {
   const form = useMemo(() => formAtom(fields), [] )
 
-  const { submit } = useForm(form);
+  const { submit, reset } = useForm(form);
 
   return (
     <form
@@ -20,8 +20,9 @@ export const StoryForm = ({
       className="flex flex-col gap-4"
     >
       {children}
-      <div>
+      <div className="flex gap-2">
         <Button type="submit">Submit</Button>
+        <Button color="gray" onClick={reset}>Reset</Button>
       </div>
     </form>
   );
