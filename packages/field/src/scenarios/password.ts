@@ -1,10 +1,10 @@
 import { fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
+import { textField } from "../text-field/textField";
 
-export const passwordInitial = fieldAtom({
-  value: "",
-  validate: zodValidate(z.string().min(6), { on: "change" }),
+export const passwordInitial = textField({
+  schema: z.string().min(6),
 });
 
 export const password = fieldAtom({

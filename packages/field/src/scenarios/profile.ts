@@ -4,6 +4,7 @@ import { z } from "zod";
 import { fileField } from "../file-field";
 import { numberField } from "../number-field";
 import { selectField } from "../select-field";
+import { textField } from "../text-field";
 
 export const countryOptions = [
   { code: "SK", name: "Slovak Republic" },
@@ -11,10 +12,9 @@ export const countryOptions = [
 ] as const;
 
 export const profileFields = {
-  username: fieldAtom({
+  username: textField({
     name: "username",
-    value: "",
-    validate: zodValidate(z.string().min(4), { on: "change" }),
+    schema: z.string().min(4),
   }),
   age: numberField({
     name: "age",
@@ -22,10 +22,8 @@ export const profileFields = {
   }),
   country: selectField({ name: "country" }),
   profilePicture: fileField({ name: "profile" }),
-  bio: fieldAtom({
+  bio: textField({
     name: "bio",
-    value: "",
-    validate: zodValidate(z.string()),
   }),
   newsletter: fieldAtom({
     name: "newsletter",

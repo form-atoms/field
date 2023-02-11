@@ -13,7 +13,9 @@ type ValidationConfig = {
 export type FieldAtomWithValidationConfig<Value> = FieldAtomConfig<Value> &
   ValidationConfig;
 
-type FieldAtomWithValidation<Value> = FieldAtom<Value> extends Atom<infer R>
+export type FieldAtomWithValidation<Value> = FieldAtom<Value> extends Atom<
+  infer R
+>
   ? Atom<
       R & {
         required: WritableAtom<
@@ -53,6 +55,9 @@ export const fieldAtomWithValidation = <Value>({
     return { ...baseField, required: requiredAtom };
   });
 };
+
+export type ValidatedFieldAtomProps
+
 
 export const useFieldRequiredProps = <Value>(
   fieldAtom: FieldAtomWithValidation<Value>
