@@ -35,6 +35,12 @@ export const StoryForm = ({ fields, children, required = true }: Props) => {
   );
 };
 
+export const optionalField = {
+  argTypes: {
+    required: { table: { disable: true } },
+  },
+};
+
 export const meta = {
   component: StoryForm,
   args: { required: true },

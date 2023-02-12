@@ -1,7 +1,7 @@
 import { checkboxField } from "@form-atoms/field";
 
 import { CheckboxField } from "./CheckboxField";
-import { FormStory, meta } from "../stories";
+import { FormStory, meta, optionalField } from "../stories";
 
 export default {
   title: "CheckboxField",
@@ -9,25 +9,33 @@ export default {
 };
 
 const termsOfService = checkboxField();
+
+export const Required: FormStory = {
+  args: {
+    fields: { termsOfService },
+    children: (args) => (
+      <CheckboxField
+        field={termsOfService}
+        label="Terms of Service"
+        helperText="Better read those"
+        {...args}
+      />
+    ),
+  },
+};
+
 const subscribeToNewsletter = checkboxField({ optional: true });
 
-export const Default: FormStory = {
+export const Optional: FormStory = {
+  ...optionalField,
   args: {
-    fields: { termsOfService, subscribeToNewsletter },
-    children: (args) => (
-      <>
-        <CheckboxField
-          field={termsOfService}
-          label="Terms of Service"
-          helperText="Better read those"
-          {...args}
-        />
-        <CheckboxField
-          field={subscribeToNewsletter}
-          label="Subscribe to the newsletter"
-          helperText="Get the latest news 👍"
-        />
-      </>
+    fields: { subscribeToNewsletter },
+    children: () => (
+      <CheckboxField
+        field={subscribeToNewsletter}
+        label="Subscribe to the newsletter"
+        helperText="Get the latest news 👍"
+      />
     ),
   },
 };
