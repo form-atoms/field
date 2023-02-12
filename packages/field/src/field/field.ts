@@ -1,7 +1,7 @@
-import { FieldAtom, fieldAtom, FieldAtomConfig } from "form-atoms";
+import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Atom, atom, WritableAtom, Getter } from "jotai";
-import { atomWithReset, RESET } from "jotai/utils";
+import { Atom, Getter, WritableAtom, atom } from "jotai";
+import { RESET, atomWithReset } from "jotai/utils";
 import { z } from "zod";
 
 type ValidationConfig = {

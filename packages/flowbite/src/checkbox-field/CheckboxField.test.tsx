@@ -14,7 +14,7 @@ describe("<CheckboxField />", () => {
     render(<CheckboxField field={tos} label="terms" />);
     const checkbox = screen.getByRole("checkbox");
 
-    expect(checkbox).toHaveAttribute("aria-invalid", "false");
+    expect(checkbox).toBeValid();
     expect(checkbox).toHaveAttribute("aria-checked", "true");
     expect(checkbox).toBeChecked();
   });
@@ -33,37 +33,41 @@ describe("<CheckboxField />", () => {
     expect(checkbox).toHaveFocus();
   });
 
-  it("should render error message when submitting unchecked & required checkbox", async () => {
-    const tos = checkboxField();
-    const form = formAtom({ tos });
-    const { result } = renderHook(() => useFormSubmit(form));
+  describe("with required checkboxField()", () => {
+    it("renders error message when submitting unchecked", async () => {
+      const tos = checkboxField();
+      const form = formAtom({ tos });
+      const { result } = renderHook(() => useFormSubmit(form));
 
-    render(<CheckboxField field={tos} label="terms" />);
+      render(<CheckboxField field={tos} label="terms" />);
 
-    const handleSubmit = vi.fn();
-    await domAct(async () => {
-      result.current(handleSubmit)();
+      const handleSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(handleSubmit)();
+      });
+
+      const checkbox = screen.getByRole("checkbox");
+      expect(checkbox).toBeInvalid();
+      expect(checkbox).not.toBeChecked();
+      expect(screen.getByText("This field is required")).toBeInTheDocument();
+      expect(handleSubmit).not.toBeCalled();
     });
-
-    const checkbox = screen.getByRole("checkbox");
-    expect(checkbox).toBeInvalid();
-    expect(checkbox).not.toBeChecked();
-    expect(screen.getByText("This field is required")).toBeInTheDocument();
-    expect(handleSubmit).not.toBeCalled();
   });
 
-  it("should submit when checked & required", async () => {
-    const tos = checkboxField({ value: true });
-    const form = formAtom({ tos });
-    const { result } = renderHook(() => useFormSubmit(form));
+  describe("optional checkboxField()", () => {
+    it("submits when unchecked", async () => {
+      const newsletter = checkboxField({ optional: true });
+      const form = formAtom({ newsletter });
+      const { result } = renderHook(() => useFormSubmit(form));
 
-    render(<CheckboxField field={tos} label="terms" />);
+      render(<CheckboxField field={newsletter} />);
 
-    const handleSubmit = vi.fn();
-    await domAct(async () => {
-      result.current(handleSubmit)();
+      const handleSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(handleSubmit)();
+      });
+
+      expect(handleSubmit).toHaveBeenCalledWith({ newsletter: false });
     });
-
-    expect(handleSubmit).toHaveBeenCalledWith({ tos: true });
   });
 });
