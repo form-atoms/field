@@ -1,11 +1,12 @@
-import { Label, Select, SelectProps } from "flowbite-react";
 import {
   SelectFieldProps,
   useSelectFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
-import { useFieldError } from "../hooks";
+import { Label, Select, SelectProps } from "flowbite-react";
+
 import { Field } from "../field";
+import { useFieldError } from "../hooks";
 
 export const SelectField = <Option,>({
   field,

@@ -5,8 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "eslint --ext .tsx ./packages/**/src",
-    "lint:fix": "yarn run lint -- --fix"
+    "lint": "eslint --ext .tsx ./packages",
+    "lint:fix": "yarn run lint --fix"
   },
   "devDependencies": {
     "@types/eslint": "^8",

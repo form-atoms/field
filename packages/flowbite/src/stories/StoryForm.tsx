@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "flowbite-react";
-import { formAtom, FormFields, useForm } from "form-atoms";
+import { FormFields, formAtom, useForm } from "form-atoms";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 

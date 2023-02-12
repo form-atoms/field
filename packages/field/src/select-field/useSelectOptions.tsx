@@ -1,7 +1,8 @@
 import { useFieldState } from "form-atoms";
 import { ReactNode, useMemo } from "react";
-import { FieldProps } from "../field";
+
 import { SelectFieldAtom } from "./selectField";
+import { FieldProps } from "../field";
 
 export type SelectFieldProps<Option, Value = string> = FieldProps<
   SelectFieldAtom<Value>

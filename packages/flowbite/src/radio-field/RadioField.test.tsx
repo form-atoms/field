@@ -1,10 +1,12 @@
 import { selectField } from "@form-atoms/field";
 import { render, screen } from "@testing-library/react";
-import { renderHook, act as domAct } from "@testing-library/react-hooks/dom";
+import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it } from "vitest";
+
+import { getLabel, getValue, options } from "../select-field/country";
+
 import { RadioField } from ".";
-import { options, getLabel, getValue } from "../select-field/country";
 
 describe("<RadioField />", () => {
   const props = {

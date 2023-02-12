@@ -1,12 +1,13 @@
+import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
 import {
+  HelperText,
+  Label,
   RangeSlider,
   RangeSliderProps,
-  Label,
-  HelperText,
 } from "flowbite-react";
-import { useFieldError } from "../hooks";
-import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
+
 import { Field } from "../field";
+import { useFieldError } from "../hooks";
 
 export const SliderField = ({
   label,

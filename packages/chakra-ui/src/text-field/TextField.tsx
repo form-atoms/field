@@ -1,8 +1,8 @@
 import { Input, InputProps } from "@chakra-ui/react";
 import { useInputField } from "form-atoms";
 import type { FieldAtom } from "form-atoms";
-import { ChakraFieldProps } from "../chakra-field";
-import { ChakraField } from "../chakra-field";
+
+import { ChakraField, ChakraFieldProps } from "../chakra-field";
 
 export const TextField = ({
   field,

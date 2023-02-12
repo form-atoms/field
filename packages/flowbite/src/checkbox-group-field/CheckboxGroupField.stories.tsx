@@ -1,7 +1,8 @@
 import { multiSelectField } from "@form-atoms/field";
+
 import { CheckboxGroupField } from "./CheckboxGroupField";
+import { getLabel, getValue, options } from "./languages";
 import { FormStory, StoryForm } from "../stories";
-import { options, getLabel, getValue } from "./languages";
 
 export default {
   title: "CheckboxGroupField",

@@ -1,8 +1,9 @@
-import { TextField } from "./TextField";
 import {
   password,
   passwordInitial,
 } from "@form-atoms/field/dist/scenarios/password";
+
+import { TextField } from "./TextField";
 import { FormStory, StoryForm } from "../stories";
 
 export default {

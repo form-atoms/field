@@ -1,11 +1,13 @@
 import { selectField } from "@form-atoms/field";
 import { render, screen } from "@testing-library/react";
-import { renderHook, act as domAct } from "@testing-library/react-hooks/dom";
+import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
 import userEvent from "@testing-library/user-event";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it } from "vitest";
+
+import { country, getLabel, getValue, options } from "./country";
+
 import { SelectField } from "./";
-import { country, options, getLabel, getValue } from "./country";
 
 describe("<SelectField />", () => {
   const props = {

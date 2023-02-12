@@ -1,10 +1,11 @@
-import { HelperText, Label, Rating, RatingProps } from "flowbite-react";
 import {
   NumberFieldProps,
   useNumberFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
+import { HelperText, Label, Rating, RatingProps } from "flowbite-react";
 import { useFieldActions } from "form-atoms";
+
 import { Field } from "../field";
 import { useFieldError } from "../hooks";
 

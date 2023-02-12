@@ -2,14 +2,16 @@ import {
   countryOptions,
   profileFields,
 } from "@form-atoms/field/dist/scenarios/profile";
-import { StoryForm, FormStory } from ".";
-import { TextField } from "../text-field";
-import { NumberField } from "../number-field";
-import { SelectField } from "../select-field";
-import { TextareaField } from "../textarea-field";
-import { FileField } from "../file-field";
+
 import { CheckboxField } from "../checkbox-field";
+import { FileField } from "../file-field";
+import { NumberField } from "../number-field";
 import { RatingField } from "../rating-field";
+import { SelectField } from "../select-field";
+import { TextField } from "../text-field";
+import { TextareaField } from "../textarea-field";
+
+import { FormStory, StoryForm } from ".";
 
 export default {
   title: "Scenarios",

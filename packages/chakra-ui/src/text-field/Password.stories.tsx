@@ -1,10 +1,11 @@
-import React from "react";
-import { TextField } from "./TextField";
-import { formAtom } from "form-atoms";
 import {
   password,
   passwordInitial,
 } from "@form-atoms/field/dist/scenarios/password";
+import { formAtom } from "form-atoms";
+import React from "react";
+
+import { TextField } from "./TextField";
 import { Template } from "../stories";
 
 export default {

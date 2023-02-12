@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
-import { NumberField } from ".";
 import { numberField } from "@form-atoms/field";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
+import userEvent from "@testing-library/user-event";
 import { formAtom, useFormSubmit } from "form-atoms";
-import { renderHook, act as domAct } from "@testing-library/react-hooks/dom";
+import { describe, expect, it } from "vitest";
+
+import { NumberField } from ".";
 
 describe("<NumberField />", () => {
   it("focuses input when clicked on label", async () => {

@@ -1,6 +1,7 @@
-import { RatingField } from "./RatingField";
-import { meta, FormStory } from "../stories";
 import { numberField } from "@form-atoms/field";
+
+import { RatingField } from "./RatingField";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "RatingField",

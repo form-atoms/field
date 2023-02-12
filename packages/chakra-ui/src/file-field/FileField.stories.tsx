@@ -1,11 +1,12 @@
-import React, { ComponentProps, PropsWithChildren } from "react";
-import { fieldAtom, FormAtom, formAtom, useForm } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import { z } from "zod";
-import { StoryForm } from "../stories";
-import { FileField } from "./FileField";
-import { Story } from "@storybook/react";
 import { fileFieldAtom } from "@form-atoms/field";
+import { Story } from "@storybook/react";
+import { FormAtom, fieldAtom, formAtom, useForm } from "form-atoms";
+import { zodValidate } from "form-atoms/zod";
+import React, { ComponentProps, PropsWithChildren } from "react";
+import { z } from "zod";
+
+import { FileField } from "./FileField";
+import { StoryForm } from "../stories";
 
 export default {
   title: "FileField",

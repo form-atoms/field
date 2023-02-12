@@ -1,6 +1,7 @@
 import { Input, InputProps } from "@chakra-ui/react";
-import { ChakraField } from "../chakra-field";
 import { FileFieldProps, useFileFieldProps } from "@form-atoms/field";
+
+import { ChakraField } from "../chakra-field";
 
 export const FileField = ({
   field,

@@ -1,13 +1,14 @@
+import { arrayFieldAtoms } from "@form-atoms/field";
+import { Button } from "flowbite-react";
 import { fieldAtom, formAtom, useForm } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
-import { StoryForm } from "../stories";
-import { arrayFieldAtoms } from "@form-atoms/field";
+
 import { ArrayField } from "./ArrayField";
-import { TextField } from "../text-field";
 import { ImageField } from "../image-field";
 import { NumberField } from "../number-field";
-import { Button } from "flowbite-react";
+import { StoryForm } from "../stories";
+import { TextField } from "../text-field";
 
 export default {
   title: "ArrayField",

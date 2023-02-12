@@ -1,7 +1,8 @@
+import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { SelectFieldProps, useSelectOptions } from "@form-atoms/field";
 import { useFieldActions, useInputFieldProps } from "form-atoms";
+
 import { ChakraField, ChakraFieldProps } from "../chakra-field";
-import { RadioGroup, Radio, Stack } from "@chakra-ui/react";
 
 export const RadioField = <Option,>({
   field,

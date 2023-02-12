@@ -1,6 +1,6 @@
+import { country, getLabel, getValue, options } from "./country";
 import { SelectField } from "./SelectField";
 import { FormStory, meta } from "../stories";
-import { country, options, getLabel, getValue } from "./country";
 
 export default {
   title: "SelectField",

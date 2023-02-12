@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
-import { RadioField } from "./RadioField";
 import { fieldAtom, formAtom, useForm } from "form-atoms";
+import React, { useCallback } from "react";
+
+import { RadioField } from "./RadioField";
 import { StoryForm } from "../stories";
 
 export default {

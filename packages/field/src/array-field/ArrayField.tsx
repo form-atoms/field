@@ -1,17 +1,16 @@
-import React from "react";
 import {
   FieldAtom,
   FormAtom,
-  FormFields,
   FormFieldValues,
-  formAtom,
+  FormFields,
   fieldAtom,
+  formAtom,
   useForm,
   useFormActions,
 } from "form-atoms";
-import { useCallback, useMemo } from "react";
+import { del, push } from "object-path-immutable";
+import React, { useCallback, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
-import { push, del } from "object-path-immutable";
 
 // TODO: array field should have possible validation attached e.g.  min(n).max(m) to have array of <n, m> items.
 // TODO: array field could possibly be fieldAtom, or formAtom.

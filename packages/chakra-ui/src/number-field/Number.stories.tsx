@@ -1,8 +1,9 @@
-import React from "react";
-import { NumberField } from "./NumberField";
 import { fieldAtom, formAtom, useForm } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
+import React from "react";
 import { z } from "zod";
+
+import { NumberField } from "./NumberField";
 import { StoryForm } from "../stories";
 
 export default {

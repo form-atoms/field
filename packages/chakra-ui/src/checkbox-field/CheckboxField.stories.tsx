@@ -1,8 +1,9 @@
-import React from "react";
-import { CheckboxField } from "./CheckboxField";
 import { fieldAtom, formAtom, useForm } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
+import React from "react";
 import { z } from "zod";
+
+import { CheckboxField } from "./CheckboxField";
 import { StoryForm } from "../stories";
 
 export default {

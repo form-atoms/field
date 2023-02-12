@@ -1,4 +1,3 @@
-import { CheckboxFieldProps, useCheckboxFieldProps } from "@form-atoms/field";
 import {
   Checkbox,
   CheckboxProps,
@@ -6,6 +5,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
+import { CheckboxFieldProps, useCheckboxFieldProps } from "@form-atoms/field";
 
 export const CheckboxField = ({
   field,

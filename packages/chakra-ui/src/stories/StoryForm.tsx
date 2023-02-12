@@ -1,7 +1,7 @@
-import { Stack, Button } from "@chakra-ui/react";
+import { Button, Stack } from "@chakra-ui/react";
 import { action } from "@storybook/addon-actions";
 import { Story } from "@storybook/react";
-import { FormAtom, FormFields, useForm, UseForm } from "form-atoms";
+import { FormAtom, FormFields, UseForm, useForm } from "form-atoms";
 import { ComponentProps, PropsWithChildren } from "react";
 
 export const StoryForm = <T extends FormFields>({

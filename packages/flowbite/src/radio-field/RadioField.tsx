@@ -1,11 +1,12 @@
-import { HelperText, Label, Radio } from "flowbite-react";
 import {
   SelectFieldProps,
   useSelectFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
-import { useFieldError } from "../hooks";
+import { HelperText, Label, Radio } from "flowbite-react";
+
 import { Field } from "../field";
+import { useFieldError } from "../hooks";
 
 export const RadioField = <Option,>({
   field,

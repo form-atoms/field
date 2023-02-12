@@ -1,6 +1,6 @@
 import { RadioField } from "./RadioField";
-import { meta, FormStory } from "../stories";
-import { country, getValue, getLabel, options } from "../select-field/country";
+import { country, getLabel, getValue, options } from "../select-field/country";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "RadioField",

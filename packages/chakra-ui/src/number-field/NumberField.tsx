@@ -1,13 +1,14 @@
-import { useFieldActions } from "form-atoms";
-import { NumberFieldProps, useNumberField } from "@form-atoms/field";
 import {
+  NumberDecrementStepper,
+  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  NumberInputStepper,
   NumberInputProps,
+  NumberInputStepper,
 } from "@chakra-ui/react";
+import { NumberFieldProps, useNumberField } from "@form-atoms/field";
+import { useFieldActions } from "form-atoms";
+
 import { ChakraField, ChakraFieldProps } from "../chakra-field";
 
 export const NumberField = ({

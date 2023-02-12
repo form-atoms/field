@@ -1,11 +1,12 @@
-import { Label, Checkbox, HelperText } from "flowbite-react";
 import {
   MultiSelectFieldProps,
   useMultiSelectFieldProps,
   useMultiSelectOptions,
 } from "@form-atoms/field";
-import { useFieldError } from "../hooks";
+import { Checkbox, HelperText, Label } from "flowbite-react";
+
 import { Field } from "../field";
+import { useFieldError } from "../hooks";
 
 export const CheckboxGroupField = <Option,>({
   field,

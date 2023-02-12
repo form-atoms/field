@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
-import { FieldProps, useFieldProps } from "../field";
+
 import { TextFieldAtom, TextValue } from "./textField";
+import { FieldProps, useFieldProps } from "../field";
 
 export type TextFieldProps = FieldProps<TextFieldAtom>;
 

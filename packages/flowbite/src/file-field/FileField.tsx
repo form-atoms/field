@@ -1,8 +1,8 @@
-import { Label, FileInput, FileInputProps } from "flowbite-react";
-import { useFieldError } from "../hooks";
 import { FileFieldProps, useFileFieldProps } from "@form-atoms/field";
-import { InputColors } from "../hooks";
+import { FileInput, FileInputProps, Label } from "flowbite-react";
+
 import { Field } from "../field";
+import { InputColors, useFieldError } from "../hooks";
 
 type FlowbiteFileFieldProps = FileFieldProps &
   FileInputProps & { colors?: InputColors };

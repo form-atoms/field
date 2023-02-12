@@ -1,8 +1,8 @@
-import { TextInput, Label, TextInputProps } from "flowbite-react";
-import { useFieldError } from "../hooks";
-import { NumberFieldProps } from "@form-atoms/field";
-import { useNumberFieldProps } from "@form-atoms/field";
+import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
+import { Label, TextInput, TextInputProps } from "flowbite-react";
+
 import { Field } from "../field";
+import { useFieldError } from "../hooks";
 
 export const NumberField = ({
   label,

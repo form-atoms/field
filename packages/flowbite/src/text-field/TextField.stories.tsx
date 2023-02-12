@@ -1,8 +1,8 @@
-import { TextField } from "./TextField";
+import { textField } from "@form-atoms/field";
 import { z } from "zod";
 
-import { meta, FormStory } from "../stories";
-import { textField } from "@form-atoms/field";
+import { TextField } from "./TextField";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "TextField",

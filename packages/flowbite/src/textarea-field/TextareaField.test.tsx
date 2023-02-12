@@ -1,10 +1,11 @@
 import { textField } from "@form-atoms/field";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
 import userEvent from "@testing-library/user-event";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it } from "vitest";
+
 import { TextareaField } from ".";
-import { renderHook, act as domAct } from "@testing-library/react-hooks/dom";
 
 describe("<TextareaField />", () => {
   // Error: Element TEXTAREA does not implement "select".
