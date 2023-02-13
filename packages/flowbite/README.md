@@ -27,6 +27,18 @@ the UI will display error message.
 Note that the prop controls only the UI/input required behavior. The actual data/field requirement is controlled by the
 fieldAtom config. This means that `aria-required` will be `true` when the fieldAtom is not optional.
 
+The table sums it up:
+
+| field config `optional` flag | JSX `required` prop | UI Behavior when submitting empty form               |
+| ---------------------------- | ------------------- | ---------------------------------------------------- |
+| `optional: false`            | `required: true`    | Displays native 'field required' browser popup       |
+| `optional: false`            | `required: false`   | Disables native browser popup, renders error message |
+| `optional: true`             | `required: true`    | The JSX prop is ignored (invalid state)              |
+| `optional: true`             | `required: false`   | Default behavior, no need for the prop               |
+
+Note, that this is reflected in our storybook examples. The `required` prop is enabled as story control only for `Required` stories.
+For the `Optional` stories, you won't see the `required prop` control, as it would have no effect.
+
 ### SelectField
 
 | prop                  | Default                     | Description                                      |
