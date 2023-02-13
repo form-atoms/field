@@ -25,7 +25,7 @@ export const RangeField = ({
     <ChakraField field={field} label={label}>
       <Slider
         name={props.name}
-        value={props.value || 0}
+        value={props.value}
         onChange={actions.setValue}
         {...sliderProps}
       >
