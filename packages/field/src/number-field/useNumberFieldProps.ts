@@ -1,6 +1,7 @@
 import { ChangeEvent } from "react";
-import { FieldProps, useFieldProps } from "../field";
+
 import { NumberFieldAtom } from "./numberField";
+import { FieldProps, useFieldProps } from "../field";
 
 export type NumberFieldProps = FieldProps<NumberFieldAtom>;
 

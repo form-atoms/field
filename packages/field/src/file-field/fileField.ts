@@ -1,8 +1,9 @@
 import { z } from "zod";
+
 import {
-  validatedFieldAtom,
   ValidatedFieldAtom,
   ValidatedFieldAtomConfig,
+  validatedFieldAtom,
 } from "../field";
 
 type FileValue = FileList | undefined;
