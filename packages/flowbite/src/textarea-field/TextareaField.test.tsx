@@ -57,4 +57,25 @@ describe("<TextareaField />", () => {
       expect(onSubmit).toHaveBeenCalledWith({ cowsay: "memento mori" });
     });
   });
+
+  describe("with optional textField()", () => {
+    it("submits form with undefined empty value", async () => {
+      const message = textField({ optional: true });
+      const form = formAtom({ message });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<TextareaField field={message} />);
+
+      const textarea = screen.getByRole("textbox");
+
+      expect(textarea).toBeValid();
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ message: undefined });
+    });
+  });
 });

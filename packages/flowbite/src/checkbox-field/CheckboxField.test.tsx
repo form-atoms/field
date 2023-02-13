@@ -62,12 +62,12 @@ describe("<CheckboxField />", () => {
 
       render(<CheckboxField field={newsletter} />);
 
-      const handleSubmit = vi.fn();
+      const onSubmit = vi.fn();
       await domAct(async () => {
-        result.current(handleSubmit)();
+        result.current(onSubmit)();
       });
 
-      expect(handleSubmit).toHaveBeenCalledWith({ newsletter: false });
+      expect(onSubmit).toHaveBeenCalledWith({ newsletter: false });
     });
   });
 });

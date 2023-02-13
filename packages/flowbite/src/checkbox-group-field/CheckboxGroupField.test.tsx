@@ -47,4 +47,21 @@ describe("<CheckboxGroupField />", () => {
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });
+
+  describe("with optional multiSelectField()", () => {
+    it("submits form with empty array value", async () => {
+      const value = multiSelectField({ optional: true });
+      const form = formAtom({ value });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<CheckboxGroupField field={value} {...props} />);
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ value: [] });
+    });
+  });
 });

@@ -1,6 +1,7 @@
 import { useField } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChangeEvent, ReactNode, useId, useMemo, useTransition } from "react";
+
 import { ValidatedFieldAtom } from "./field";
 
 export type FieldProps<Field extends ValidatedFieldAtom<any>> = {

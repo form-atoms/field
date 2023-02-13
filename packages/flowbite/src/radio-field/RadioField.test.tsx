@@ -34,4 +34,25 @@ describe("<RadioField />", () => {
     expect(screen.getByText("This field is required")).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });
+
+  describe("with optional selectField()", () => {
+    it("submits form with undefined empty value", async () => {
+      const option = selectField({ optional: true });
+      const form = formAtom({ option });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<RadioField field={option} {...props} />);
+
+      const [firstRadio] = screen.getAllByRole("radio");
+
+      expect(firstRadio).toBeValid();
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ option: undefined });
+    });
+  });
 });

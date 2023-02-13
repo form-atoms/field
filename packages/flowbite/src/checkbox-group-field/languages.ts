@@ -3,6 +3,7 @@ export const options = [
   { code: "java", name: "Java" },
   { code: "ts", name: "Typescript" },
   { code: "html", name: "HTML" },
+  { code: "en", name: "English" },
   { code: "css", name: "CSS" },
   { code: "tf", name: "Tensorflow" },
   { code: "react", name: "React" },

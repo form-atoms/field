@@ -64,4 +64,25 @@ describe("<NumberField />", () => {
       expect(onSubmit).toHaveBeenCalledWith({ price: 0 });
     });
   });
+
+  describe("with optional numberField()", () => {
+    it("submits form with undefined empty value", async () => {
+      const value = numberField({ optional: true });
+      const form = formAtom({ value });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<NumberField field={value} />);
+
+      const input = screen.getByRole("spinbutton");
+
+      expect(input).toBeValid();
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ value: undefined });
+    });
+  });
 });

@@ -37,4 +37,25 @@ describe("<FileField />", () => {
     ).toBeInTheDocument();
     expect(onSubmit).not.toBeCalled();
   });
+
+  describe("with optional numberField()", () => {
+    it("submits form with undefined empty value", async () => {
+      const value = fileField({ optional: true });
+      const form = formAtom({ value });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<FileField field={value} />);
+
+      const input = screen.getByRole("dialog");
+
+      expect(input).toBeValid();
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ value: undefined });
+    });
+  });
 });

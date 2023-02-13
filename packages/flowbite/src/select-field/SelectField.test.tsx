@@ -57,4 +57,26 @@ describe("<SelectField />", () => {
 
     expect(screen.getByText("Pick a country")).toBeInTheDocument();
   });
+
+  describe("with optional selectField()", () => {
+    it("submits with undefined", async () => {
+      const option = selectField({ optional: true });
+      const form = formAtom({ option });
+      const { result } = renderHook(() => useFormSubmit(form));
+
+      render(<SelectField field={option} {...props} />);
+
+      // const select = screen.getByRole("combobox");
+      // HappyDOM BUG:
+      // TypeError: element.checkValidity is not a function
+      // expect(select).toBeValid();
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ option: undefined });
+    });
+  });
 });

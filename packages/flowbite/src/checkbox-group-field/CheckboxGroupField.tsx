@@ -41,6 +41,7 @@ export const CheckboxGroupField = <Option,>({
           <Checkbox
             role="checkbox"
             {...props}
+            {...uiProps}
             id={value}
             checked={isActive}
             value={value}

@@ -1,8 +1,9 @@
 import { z } from "zod";
+
 import {
-  validatedFieldAtom,
   ValidatedFieldAtom,
   ValidatedFieldAtomConfig,
+  validatedFieldAtom,
 } from "../field";
 
 export type MultiSelectFieldAtom<Value = string> = ValidatedFieldAtom<Value[]>;
@@ -13,7 +14,9 @@ export function multiSelectField<Value = string>(
 ) {
   return validatedFieldAtom({
     value: [],
-    schema: z.array(z.string()).nonempty("This field is required"),
+    schema: config.optional
+      ? z.array(z.string()) // TODO: this is static, and should change when required atom is flipped
+      : z.array(z.string()).nonempty("This field is required"),
     ...config,
   });
 }
