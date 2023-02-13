@@ -27,6 +27,11 @@ export const CheckboxGroupField = <Option,>({
   });
   const { color, error } = useFieldError(field);
 
+  // when data-required, prefer the uiProp
+  const isRequired = props.required && (uiProps.required ?? true);
+
+  const required = props.value.length === 0 ? isRequired : false;
+
   const helpText = helperText ?? error;
 
   return (
@@ -42,6 +47,8 @@ export const CheckboxGroupField = <Option,>({
             role="checkbox"
             {...props}
             {...uiProps}
+            required={required}
+            aria-required={required}
             id={value}
             checked={isActive}
             value={value}
