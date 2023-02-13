@@ -3,8 +3,6 @@ import {
   FormAtom,
   FormFieldValues,
   FormFields,
-  fieldAtom,
-  formAtom,
   useForm,
   useFormActions,
 } from "form-atoms";
@@ -13,7 +11,6 @@ import React, { useCallback, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 // TODO: array field should have possible validation attached e.g.  min(n).max(m) to have array of <n, m> items.
-// TODO: array field could possibly be fieldAtom, or formAtom.
 export const useArrayFieldActions = <Fields extends FormFields>(
   form: FormAtom<Fields>,
   builder: () => Fields,
@@ -57,23 +54,29 @@ export function arrayFieldAtoms<Fields extends FormFields>(
   return values.map(builder);
 }
 
-export type DeleteItemButtonProp = Partial<
-  RenderProp<{ remove: () => void }, "DeleteItemButton">
+export type DeleteItemButtonProp = RenderProp<
+  { remove: () => void },
+  "DeleteItemButton"
 >;
 
-export type AddItemButtonProp = Partial<
-  RenderProp<{ add: () => void }, "AddItemButton">
+export type AddItemButtonProp = RenderProp<
+  { add: () => void },
+  "AddItemButton"
 >;
 
-export type EmptyMessageProp = Partial<RenderProp<{}, "EmptyMessage">>;
+export type EmptyMessageProp = RenderProp<unknown, "EmptyMessage">;
 
-export type ArrayItemRenderProps<Fields extends any = any> = RenderProp<
+type RenderProps = Partial<
+  DeleteItemButtonProp & AddItemButtonProp & EmptyMessageProp
+>;
+
+export type ArrayItemRenderProps<Fields> = RenderProp<
   {
     index: number;
     fields: Fields;
     add: () => void;
     remove: (index: number) => void;
-  } & RenderProp<{}, "DeleteItemButton">
+  } & RenderProp<never, "DeleteItemButton">
 >;
 
 export function ArrayField<
@@ -91,9 +94,7 @@ export function ArrayField<
   } & ArrayItemRenderProps<
     Fields[P1][P2][P3] extends (infer ItemFields)[] ? ItemFields : never
   > &
-    DeleteItemButtonProp &
-    AddItemButtonProp &
-    EmptyMessageProp
+    RenderProps
 ): JSX.Element;
 export function ArrayField<
   Fields extends FormFields,
@@ -107,27 +108,23 @@ export function ArrayField<
   } & ArrayItemRenderProps<
     Fields[P1][P2] extends (infer ItemFields)[] ? ItemFields : never
   > &
-    DeleteItemButtonProp &
-    AddItemButtonProp &
-    EmptyMessageProp
+    RenderProps
 ): JSX.Element;
 export function ArrayField<Fields extends FormFields, P1 extends keyof Fields>(
   props: {
     path: [P1];
     form: Fields[P1] extends FormFields[]
       ? FormAtom<Fields>
-      : Fields[P1] extends FieldAtom<any>[]
+      : Fields[P1] extends FieldAtom<unknown>[]
       ? FormAtom<Fields>
       : never;
     builder: () => Fields[P1] extends (infer ItemType)[] ? ItemType : never;
   } & ArrayItemRenderProps<
     Fields[P1] extends (infer ItemFields)[] ? ItemFields : never
   > &
-    DeleteItemButtonProp &
-    AddItemButtonProp &
-    EmptyMessageProp
+    RenderProps
 ): JSX.Element;
-export function ArrayField<F extends FormFields>({
+export function ArrayField<Fields extends FormFields>({
   path,
   form,
   builder,
@@ -137,19 +134,19 @@ export function ArrayField<F extends FormFields>({
   EmptyMessage,
 }: {
   path: string[];
-  form: FormAtom<F>;
-  builder: () => any; // Why cant we have FormFields here? Hmm
-} & ArrayItemRenderProps &
-  DeleteItemButtonProp &
-  AddItemButtonProp &
-  EmptyMessageProp) {
+  form: FormAtom<Fields>;
+  builder: () => Fields;
+} & ArrayItemRenderProps<unknown> &
+  RenderProps) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
 
   const array: FormFields[] = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return path.reduce(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       (fields, key) => fields[key],
       fieldAtoms
@@ -174,54 +171,3 @@ export function ArrayField<F extends FormFields>({
     </>
   );
 }
-
-const TestFlat = () => {
-  return (
-    <ArrayField
-      builder={() => ({ streetNumber: fieldAtom({ value: "" }) })}
-      path={["houses"]}
-      form={formAtom({
-        houses: [{ streetNumber: fieldAtom({ value: "" }) }],
-      })}
-    >
-      {({ fields, index }) => <>item {index}</>}
-    </ArrayField>
-  );
-};
-
-const TestTransientPath = () => {
-  return (
-    <ArrayField
-      builder={() => ({ streetNumber: fieldAtom({ value: "" }) })}
-      path={["transient", "houses"]}
-      form={formAtom({
-        transient: {
-          houses: [{ streetNumber: fieldAtom({ value: "" }) }],
-        },
-      })}
-    >
-      {({ fields, add, remove, index }) => <>item {index}</>}
-    </ArrayField>
-  );
-};
-
-const TestNestedArrayField = () => {
-  return (
-    <ArrayField
-      builder={() => ({ streetNumber: fieldAtom({ value: "" }) })}
-      path={["addresses", 0, "houses"]}
-      form={formAtom({
-        fail: fieldAtom({ value: "lol" }),
-        addresses: [
-          {
-            city: fieldAtom({ value: "Kosice" }),
-            houses: [{ streetNumber: fieldAtom({ value: "" }) }],
-          },
-        ],
-        accounts: [{ iban: fieldAtom({ value: "SK98..." }) }],
-      })}
-    >
-      {({ fields, index, add, remove }) => <>item {index}</>}
-    </ArrayField>
-  );
-};
