@@ -16,8 +16,8 @@ const username = textField({
 export const Required: FormStory = {
   args: {
     fields: { username },
-    children: (args) => (
-      <TextField field={username} label="User Name" {...args} />
+    children: ({ required }) => (
+      <TextField field={username} label="User Name" required={required} />
     ),
   },
 };
@@ -42,7 +42,7 @@ const email = textField({
 export const Email: FormStory = {
   args: {
     fields: { email },
-    children: (args) => (
+    children: ({ required }) => (
       <TextField
         field={email}
         label="Email address"
@@ -59,7 +59,7 @@ export const Email: FormStory = {
             .
           </>
         }
-        {...args}
+        required={required}
       />
     ),
   },

@@ -9,7 +9,7 @@ export default {
   ...meta,
 };
 
-const rating = numberField({
+const confidence = numberField({
   schema: z
     .number({ required_error: "Please adjust your confidence" })
     .min(0)
@@ -18,14 +18,14 @@ const rating = numberField({
 
 export const Required: FormStory = {
   args: {
-    fields: { rating },
-    children: (args) => (
+    fields: { confidence },
+    children: ({ required }) => (
       <SliderField
         min={0}
         max={100}
-        field={rating}
+        field={confidence}
         label="Confidence"
-        {...args}
+        required={required}
       />
     ),
   },
@@ -38,10 +38,11 @@ const optional = numberField({
     .min(0)
     .max(100),
 });
+
 export const Optional: FormStory = {
   ...optionalField,
   args: {
-    fields: { rating: optional },
+    fields: { confidence: optional },
     children: () => (
       <SliderField min={0} max={100} field={optional} label="Confidence" />
     ),

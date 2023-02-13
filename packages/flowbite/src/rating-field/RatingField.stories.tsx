@@ -15,11 +15,11 @@ const fields = {
 export const Required: FormStory = {
   args: {
     fields,
-    children: (args) => (
+    children: ({ required }) => (
       <RatingField
         field={fields.rating}
         label="Rate your experience"
-        {...args}
+        required={required}
       />
     ),
   },

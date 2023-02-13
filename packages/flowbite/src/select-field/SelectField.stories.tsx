@@ -12,7 +12,7 @@ export default {
 export const Required: FormStory = {
   args: {
     fields: { country },
-    children: (args) => (
+    children: ({ required }) => (
       <SelectField
         field={country}
         label="Country of Origin"
@@ -20,7 +20,7 @@ export const Required: FormStory = {
         options={options}
         getValue={getValue}
         getLabel={getLabel}
-        {...args}
+        required={required}
       />
     ),
   },

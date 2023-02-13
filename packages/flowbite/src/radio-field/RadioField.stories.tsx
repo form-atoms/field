@@ -12,14 +12,14 @@ export default {
 export const Required: FormStory = {
   args: {
     fields: { country },
-    children: (args) => (
+    children: ({ required }) => (
       <RadioField
-        {...args}
         field={country}
         label="Country of Origin"
         options={options}
         getValue={getValue}
         getLabel={getLabel}
+        required={required}
       />
     ),
   },

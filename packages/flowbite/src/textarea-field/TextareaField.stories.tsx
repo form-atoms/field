@@ -13,8 +13,8 @@ const bio = textField();
 export const Required: FormStory = {
   args: {
     fields: { bio },
-    children: (args) => (
-      <TextareaField field={bio} label="Biography" {...args} />
+    children: ({ required }) => (
+      <TextareaField field={bio} label="Biography" required={required} />
     ),
   },
 };

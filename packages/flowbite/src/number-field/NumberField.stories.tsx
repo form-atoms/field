@@ -8,13 +8,13 @@ export default {
   ...meta,
 };
 
-const required = numberField();
+const amount = numberField();
 
 export const Required: FormStory = {
   args: {
-    fields: { required },
-    children: (args) => (
-      <NumberField field={required} label="Amount" {...args} />
+    fields: { amount },
+    children: ({ required }) => (
+      <NumberField field={amount} label="Amount" required={required} />
     ),
   },
 };

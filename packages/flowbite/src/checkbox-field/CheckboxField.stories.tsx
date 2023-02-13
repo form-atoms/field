@@ -13,12 +13,12 @@ const termsOfService = checkboxField();
 export const Required: FormStory = {
   args: {
     fields: { termsOfService },
-    children: (args) => (
+    children: ({ required }) => (
       <CheckboxField
         field={termsOfService}
         label="Terms of Service"
         helperText="Better read those"
-        {...args}
+        required={required}
       />
     ),
   },
