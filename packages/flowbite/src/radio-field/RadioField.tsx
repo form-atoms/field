@@ -34,6 +34,7 @@ export const RadioField = <Option,>({
         <div className="flex items-center gap-2" key={value}>
           <Radio
             {...props}
+            name={props.name ?? props.id}
             aria-checked={isActive}
             role="radio"
             id={value}
