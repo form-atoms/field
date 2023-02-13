@@ -1,27 +1,31 @@
-import { NumberFieldProps, useNumberFieldProps } from "@react-last-field/field";
-import { useFieldActions } from "form-atoms";
-import { ChakraField } from "../chakra-field";
 import {
   Slider,
-  SliderTrack,
   SliderFilledTrack,
-  SliderThumb,
   SliderProps,
+  SliderThumb,
+  SliderTrack,
 } from "@chakra-ui/react";
+import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
+import { useFieldActions, useFieldInitialValue } from "form-atoms";
+
+import { ChakraField } from "../chakra-field";
 
 export const RangeField = ({
   field,
   label,
+  defaultValue,
   ...sliderProps
 }: NumberFieldProps & SliderProps) => {
   const props = useNumberFieldProps(field);
   const actions = useFieldActions(field);
 
+  useFieldInitialValue(field, defaultValue);
+
   return (
     <ChakraField field={field} label={label}>
       <Slider
         name={props.name}
-        value={props.value}
+        value={props.value || 0}
         onChange={actions.setValue}
         {...sliderProps}
       >

@@ -1,10 +1,11 @@
-import React, { useCallback } from "react";
-import { RangeField } from "./RangeField";
-import { fieldAtom, formAtom, useForm } from "form-atoms";
-import { StoryForm } from "../stories";
+import { numberField } from "@form-atoms/field";
+import { formAtom, useForm } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
+import React from "react";
 import { z } from "zod";
-import { NumberFieldAtom } from "@react-last-field/field/src";
+
+import { RangeField } from "./RangeField";
+import { StoryForm } from "../stories";
 
 export default {
   title: "RangeField",
@@ -12,10 +13,10 @@ export default {
 };
 
 const form = formAtom({
-  rating: fieldAtom({
+  rating: numberField({
     value: undefined,
     validate: zodValidate(z.number().min(0).max(20)),
-  }) as NumberFieldAtom, // TODO: Improve typing
+  }),
 });
 
 const Template = () => {
@@ -25,7 +26,7 @@ const Template = () => {
     <StoryForm submit={submit}>
       <RangeField
         field={fieldAtoms.rating}
-        defaultValue={3} // TODO: Field atom value should be set to defaultValue when defined
+        defaultValue={3}
         min={0}
         max={20}
         label="Rating"
