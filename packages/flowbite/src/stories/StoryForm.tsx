@@ -35,6 +35,9 @@ export const StoryForm = ({ fields, children, required = true }: Props) => {
   );
 };
 
+/**
+ * Spread into story object, to disable the `required` control to prevent misleading parameter.
+ */
 export const optionalField = {
   argTypes: {
     required: { table: { disable: true } },

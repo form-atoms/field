@@ -15,6 +15,7 @@ export const RadioField = <Option,>({
   getLabel,
   label,
   helperText,
+  ...uiProps
 }: SelectFieldProps<Option>) => {
   const props = useSelectFieldProps(field);
   const { renderOptions } = useSelectOptions(field, {
@@ -38,6 +39,7 @@ export const RadioField = <Option,>({
             id={value}
             value={value}
             checked={isActive}
+            {...uiProps}
           />
           <Label htmlFor={value}>{label}</Label>
         </div>

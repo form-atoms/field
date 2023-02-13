@@ -1,13 +1,15 @@
+import { selectField } from "@form-atoms/field";
+
 import { country, getLabel, getValue, options } from "./country";
 import { SelectField } from "./SelectField";
-import { FormStory, meta } from "../stories";
+import { FormStory, meta, optionalField } from "../stories";
 
 export default {
   title: "SelectField",
   ...meta,
 };
 
-export const Primary: FormStory = {
+export const Required: FormStory = {
   args: {
     fields: { country },
     children: (args) => (
@@ -19,6 +21,25 @@ export const Primary: FormStory = {
         getValue={getValue}
         getLabel={getLabel}
         {...args}
+      />
+    ),
+  },
+};
+
+const optional = selectField({ optional: true });
+
+export const Optional: FormStory = {
+  ...optionalField,
+  args: {
+    fields: { country: optional },
+    children: () => (
+      <SelectField
+        field={optional}
+        label="Country of Origin"
+        placeholder="Click to pick a country"
+        options={options}
+        getValue={getValue}
+        getLabel={getLabel}
       />
     ),
   },

@@ -1,8 +1,9 @@
 import { z } from "zod";
+
 import {
-  validatedFieldAtom,
   ValidatedFieldAtom,
   ValidatedFieldAtomConfig,
+  validatedFieldAtom,
 } from "../field";
 
 export type SelectFieldAtom<Value = string> = ValidatedFieldAtom<

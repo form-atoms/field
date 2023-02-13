@@ -2,7 +2,7 @@ import { textField } from "@form-atoms/field";
 import { z } from "zod";
 
 import { TextField } from "./TextField";
-import { FormStory, meta } from "../stories";
+import { FormStory, meta, optionalField } from "../stories";
 
 export default {
   title: "TextField",
@@ -13,12 +13,25 @@ const username = textField({
   schema: z.string().min(4),
 });
 
-export const Primary: FormStory = {
+export const Required: FormStory = {
   args: {
     fields: { username },
     children: (args) => (
       <TextField field={username} label="User Name" {...args} />
     ),
+  },
+};
+
+const nickname = textField({
+  optional: true,
+  schema: z.string().min(4),
+});
+
+export const Optional: FormStory = {
+  ...optionalField,
+  args: {
+    fields: { nickname },
+    children: () => <TextField field={nickname} label="Nick Name" />,
   },
 };
 

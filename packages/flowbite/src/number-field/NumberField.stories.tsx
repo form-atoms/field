@@ -1,7 +1,7 @@
 import { numberField } from "@form-atoms/field";
 
 import { NumberField } from "./NumberField";
-import { FormStory, meta } from "../stories";
+import { FormStory, meta, optionalField } from "../stories";
 
 export default {
   title: "NumberField",
@@ -9,9 +9,6 @@ export default {
 };
 
 const required = numberField();
-const optional = numberField({
-  optional: true,
-});
 
 export const Required: FormStory = {
   args: {
@@ -22,11 +19,13 @@ export const Required: FormStory = {
   },
 };
 
+const optional = numberField({
+  optional: true,
+});
 export const Optional: FormStory = {
+  ...optionalField,
   args: {
     fields: { optional },
-    children: (args) => (
-      <NumberField field={optional} label="Amount" {...args} />
-    ),
+    children: () => <NumberField field={optional} label="Amount" />,
   },
 };
