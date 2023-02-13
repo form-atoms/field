@@ -19,6 +19,18 @@ Moreover, jotai's external state unlike redux-form has compact API with 'atom-lo
 
 ![architecture](./architecture.png)
 
+### Key differences to other form libraries
+
+#### No 'dotted keypath' access
+
+Some libraries use `path.to.field` approach with field-dependent validation or when reading field at other place. We don't need such paths, as fields can be moved arround in regular JavaScript variables, as they are jotai atoms in reality.
+
+#### Persistent form state by default
+
+With others libraries you often lose form state when your component or page unmounts. Thats because the rendered form hook maintains the store. If the library provides a contextual API, you can opt-in into the persistence, so form state lives even when you unmount the form.
+
+`form-atoms` on the other hand keeps the form state until you clear it, because it lives in jotai atoms. This way, you don't have to warn users about data loss if they navigate out of filled & unsubmitted form. Instead you can display 'continue where you left off' message when they return to the form.
+
 ### What's in the box?
 
 The `form-atoms` library provides atomic form primitives capable of tracking input value, touch state, validation status and more.
