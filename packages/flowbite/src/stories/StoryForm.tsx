@@ -1,18 +1,25 @@
 import { action } from "@storybook/addon-actions";
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "flowbite-react";
-import { FormFields, formAtom, useForm } from "form-atoms";
+import { FormAtom, FormFields, formAtom, useForm } from "form-atoms";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-type Props = {
-  fields: FormFields;
-  required?: boolean;
-} & RenderProp<{
+export type VariantProps<Fields extends FormFields> = {
   required: boolean;
-}>;
+  form: FormAtom<Fields>;
+};
 
-export const StoryForm = ({ fields, children, required = true }: Props) => {
+type StoryFormProps<Fields extends FormFields> = {
+  fields: Fields;
+  required?: boolean;
+} & RenderProp<VariantProps<Fields>>;
+
+export const StoryForm = <Fields extends FormFields>({
+  fields,
+  children,
+  required = true,
+}: StoryFormProps<Fields>) => {
   const form = useMemo(() => formAtom(fields), []);
 
   const { submit, reset } = useForm(form);
@@ -24,7 +31,7 @@ export const StoryForm = ({ fields, children, required = true }: Props) => {
       })}
       className="flex flex-col gap-4"
     >
-      {children({ required })}
+      {children({ required, form })}
       <div className="flex gap-2">
         <Button type="submit">Submit</Button>
         <Button color="gray" onClick={reset}>
