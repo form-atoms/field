@@ -14,7 +14,6 @@ export default {
 
 const form = formAtom({
   rating: numberField({
-    value: undefined,
     validate: zodValidate(z.number().min(0).max(20)),
   }),
 });
