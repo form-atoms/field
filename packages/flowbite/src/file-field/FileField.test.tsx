@@ -1,8 +1,8 @@
 import { fileField } from "@form-atoms/field";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { act as domAct, renderHook } from "@testing-library/react-hooks/dom";
 import userEvent from "@testing-library/user-event";
-import { formAtom, useFormSubmit } from "form-atoms";
+import { formAtom, useForm, useFormSubmit } from "form-atoms";
 import { describe, expect, it } from "vitest";
 
 import { FileField } from ".";
@@ -56,6 +56,45 @@ describe("<FileField />", () => {
       });
 
       expect(onSubmit).toHaveBeenCalledWith({ value: undefined });
+    });
+
+    it("has pristine input after form reset", async () => {
+      const logo = fileField({ optional: true });
+      const form = formAtom({ logo });
+      const { result } = renderHook(() => useForm(form));
+
+      render(<FileField field={logo} />);
+
+      const fileInput = screen.getByRole("dialog") as HTMLInputElement;
+
+      const files = [new File(["logo"], "logo.jpeg", { type: "image/jpeg" })];
+
+      await fireEvent.change(fileInput, {
+        target: { files },
+      });
+
+      expect(fileInput.files).toBe(files);
+      expect(fileInput).toHaveValue("/fake/path/logo.jpeg");
+
+      // WORKARROUND: should not be here, happy-dom should clear files state when input value set to ""
+      await fireEvent.change(fileInput, {
+        target: { files: [], value: "" },
+      });
+      // must be after workarround, so zod validator gets undefined input instead of empty array
+      await domAct(async () => {
+        result.current.reset();
+      });
+
+      expect(fileInput).toBeValid();
+      expect(fileInput).toHaveValue("");
+
+      const onSubmit = vi.fn();
+      await domAct(async () => {
+        result.current.submit(onSubmit)();
+      });
+
+      expect(fileInput).toBeValid();
+      expect(onSubmit).toHaveBeenCalledWith({ logo: undefined });
     });
   });
 });
