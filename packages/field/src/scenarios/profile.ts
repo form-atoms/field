@@ -1,7 +1,6 @@
-import { fieldAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 
+import { checkboxField } from "../checkbox-field";
 import { fileField } from "../file-field";
 import { numberField } from "../number-field";
 import { selectField } from "../select-field";
@@ -19,17 +18,15 @@ export const profileFields = {
   }),
   age: numberField({
     name: "age",
-    schema: z.number().min(17).max(30),
+    schema: z.number().min(17).max(65),
   }),
   country: selectField({ name: "country" }),
-  profilePicture: fileField({ name: "profile" }),
+  profilePicture: fileField({ name: "profilePicture" }),
   bio: textField({
     name: "bio",
   }),
-  newsletter: fieldAtom({
+  newsletter: checkboxField({
     name: "newsletter",
-    value: false,
-    validate: zodValidate(z.boolean()),
   }),
   rating: numberField(),
 };
