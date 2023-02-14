@@ -1,45 +1,27 @@
-import { fieldAtom, formAtom, useForm } from "form-atoms";
-import React, { useCallback } from "react";
-
+import { country, getLabel, getValue, options } from "./country";
 import { RadioField } from "./RadioField";
-import { StoryForm } from "../stories";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "RadioField",
-  component: RadioField,
+  ...meta,
 };
 
-const options = [
-  { code: "SK", name: "Slovak Republic" },
-  { code: "CZ", name: "Czech Republic" },
-] as const;
+// const country = selectField({
+//   value: options[0]?.code,
+// });
 
-const form = formAtom({
-  country: fieldAtom({
-    value: options[0]?.code,
-  }),
-});
-
-const Template = (args: any[]) => {
-  const { fieldAtoms, submit } = useForm(form);
-
-  const getValue = useCallback(
-    (opt: { code: string; name: string } | undefined) => opt?.code || "empty",
-    []
-  );
-
-  return (
-    <StoryForm submit={submit}>
+export const Required: FormStory = {
+  args: {
+    fields: { country },
+    children: () => (
       <RadioField
-        field={fieldAtoms.country}
+        field={country}
         label="Country of Origin"
         options={options}
         getValue={getValue}
-        getLabel={(opt) => opt?.name}
-        {...args}
+        getLabel={getLabel}
       />
-    </StoryForm>
-  );
+    ),
+  },
 };
-
-export const Primary = Template.bind({});

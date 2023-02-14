@@ -1,35 +1,20 @@
-import { fieldAtom, formAtom, useForm } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import React from "react";
-import { z } from "zod";
+import { numberField } from "@form-atoms/field";
 
 import { NumberField } from "./NumberField";
-import { StoryForm } from "../stories";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "NumberField",
-  component: NumberField,
+  ...meta,
 };
 
-const Template = () => <SingleAtomForm />;
+const quantity = numberField({
+  value: 0,
+});
 
-export const Primary = Template.bind({});
-
-const formFields = {
-  quantity: fieldAtom({
-    value: 0,
-    validate: zodValidate(z.number().min(1).max(5), { on: "change" }),
-  }),
+export const Required: FormStory = {
+  args: {
+    fields: { quantity },
+    children: () => <NumberField field={quantity} label="Qty." />,
+  },
 };
-
-const form = formAtom(formFields);
-
-function SingleAtomForm() {
-  const { fieldAtoms, submit } = useForm(form);
-
-  return (
-    <StoryForm submit={submit}>
-      <NumberField field={fieldAtoms.quantity} label="Qty." />
-    </StoryForm>
-  );
-}

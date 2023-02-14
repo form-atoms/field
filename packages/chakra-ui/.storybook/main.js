@@ -1,14 +1,20 @@
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions", "@chakra-ui/storybook-addon"],
+  staticDirs: ["../public"],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@chakra-ui/storybook-addon",
+  ],
   features: {
-    emotionAlias: false
+    emotionAlias: false,
   },
   framework: {
     name: "@storybook/react-webpack5",
-    options: {}
+    options: {},
   },
   core: {
-    disableTelemetry: true
-  }
+    disableTelemetry: true,
+  },
 };

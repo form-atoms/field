@@ -1,37 +1,29 @@
 import { numberField } from "@form-atoms/field";
-import { formAtom, useForm } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import React from "react";
 import { z } from "zod";
 
 import { RangeField } from "./RangeField";
-import { StoryForm } from "../stories";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "RangeField",
-  component: RangeField,
+  ...meta,
 };
 
-const form = formAtom({
-  rating: numberField({
-    schema: z.number().min(0).max(20),
-  }),
+const rating = numberField({
+  schema: z.number().min(0).max(20),
 });
 
-const Template = () => {
-  const { fieldAtoms, submit } = useForm(form);
-
-  return (
-    <StoryForm submit={submit}>
+export const Required: FormStory = {
+  args: {
+    fields: { rating },
+    children: () => (
       <RangeField
-        field={fieldAtoms.rating}
+        field={rating}
         defaultValue={3}
         min={0}
         max={20}
         label="Rating"
       />
-    </StoryForm>
-  );
+    ),
+  },
 };
-
-export const Default = Template.bind({});

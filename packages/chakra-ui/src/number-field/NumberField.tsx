@@ -6,7 +6,7 @@ import {
   NumberInputProps,
   NumberInputStepper,
 } from "@chakra-ui/react";
-import { NumberFieldProps, useNumberField } from "@form-atoms/field";
+import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
 import { useFieldActions } from "form-atoms";
 
 import { ChakraField, ChakraFieldProps } from "../chakra-field";
@@ -17,7 +17,7 @@ export const NumberField = ({
   helperText,
   ...numberInputProps
 }: NumberFieldProps & NumberInputProps & ChakraFieldProps) => {
-  const { value, name, onChange } = useNumberField(field);
+  const { value, name, onChange } = useNumberFieldProps(field);
 
   const actions = useFieldActions(field);
 

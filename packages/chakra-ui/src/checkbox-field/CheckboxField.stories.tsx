@@ -1,43 +1,21 @@
-import { fieldAtom, formAtom, useForm } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
+import { checkboxField } from "@form-atoms/field";
 import React from "react";
-import { z } from "zod";
 
 import { CheckboxField } from "./CheckboxField";
-import { StoryForm } from "../stories";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "CheckboxField",
-  component: CheckboxField,
+  ...meta,
 };
 
-// TODO: buggy validation
-// const atom = fieldAtom({
-//   value: false,
-//   validate: zodValidate(z.literal(true)),
-// });
+const termsOfService = checkboxField();
 
-const Template = () => <SingleAtomForm />;
-
-export const Primary = Template.bind({});
-
-const form = formAtom({
-  termsOfService: fieldAtom({
-    value: false,
-    validate({ value }) {
-      return value ? [] : ["Please accept"];
-    },
-  }),
-});
-
-function SingleAtomForm() {
-  const { fieldAtoms, submit } = useForm(form);
-
-  return (
-    <StoryForm submit={submit}>
-      <CheckboxField field={fieldAtoms.termsOfService}>
-        Terms and conditions
-      </CheckboxField>
-    </StoryForm>
-  );
-}
+export const Required: FormStory = {
+  args: {
+    fields: { termsOfService },
+    children: () => (
+      <CheckboxField field={termsOfService}>Terms and conditions</CheckboxField>
+    ),
+  },
+};

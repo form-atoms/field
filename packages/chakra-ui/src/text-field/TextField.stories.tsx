@@ -1,52 +1,45 @@
-import { fieldAtom, formAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import React from "react";
-import { z } from "zod";
+import { textField } from "@form-atoms/field";
 
 import { TextField } from "./TextField";
-import { Template } from "../stories";
+import { FormStory, meta } from "../stories";
 
 export default {
   title: "TextField",
-  component: TextField,
+  ...meta,
 };
 
-const username = fieldAtom({
-  value: "",
-  validate: zodValidate(z.string().min(4), { on: "change" }),
-});
+const username = textField();
 
-export const Primary = Template.bind({});
-Primary.args = {
-  form: formAtom({ username }),
-  children: <TextField field={username} label="User Name" />,
+export const Primary: FormStory = {
+  args: {
+    fields: { username },
+    children: () => <TextField field={username} label="User Name" />,
+  },
 };
 
-const email = fieldAtom({
-  value: "",
-  validate: zodValidate(z.string().email(), { on: "change" }),
-});
+const email = textField();
 
-export const Email = Template.bind({});
-Email.args = {
-  form: formAtom({ email }),
-  children: (
-    <TextField
-      field={email}
-      label="Email address"
-      placeholder="example@email.com"
-      helperText={
-        <>
-          We’ll never share your details. Read our{" "}
-          <a
-            href="/forms"
-            className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-          >
-            Privacy Policy
-          </a>
-          .
-        </>
-      }
-    />
-  ),
+export const Email: FormStory = {
+  args: {
+    fields: { email },
+    children: () => (
+      <TextField
+        field={email}
+        label="Email address"
+        placeholder="example@email.com"
+        helperText={
+          <>
+            We’ll never share your details. Read our{" "}
+            <a
+              href="/forms"
+              className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+            >
+              Privacy Policy
+            </a>
+            .
+          </>
+        }
+      />
+    ),
+  },
 };
