@@ -53,7 +53,7 @@ describe("<NumberField />", () => {
       expect(screen.getByText("This field is required")).toBeInTheDocument();
 
       // value must be string! https://github.com/capricorn86/happy-dom/issues/729
-      await fireEvent.change(input, { target: { value: 0 } });
+      await fireEvent.change(input, { target: { value: "0" } });
 
       expect(input).toBeValid();
 

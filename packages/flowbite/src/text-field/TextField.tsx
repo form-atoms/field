@@ -27,6 +27,7 @@ export const TextField = ({
         type="text"
         color={color}
         {...props}
+        value={props.value ?? ""}
         helperText={error ?? helperText}
         {...uiProps}
       />
