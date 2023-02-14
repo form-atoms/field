@@ -1,4 +1,6 @@
 import { numberField } from "@form-atoms/field";
+import { expect } from "@storybook/jest";
+import { userEvent, within } from "@storybook/testing-library";
 
 import { NumberField } from "./NumberField";
 import { FormStory, meta, optionalField } from "../stories";
@@ -16,6 +18,17 @@ export const Required: FormStory = {
     children: ({ required }) => (
       <NumberField field={amount} label="Amount" required={required} />
     ),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getByRole("spinbutton");
+
+    await userEvent.type(input, "420", {
+      delay: 300,
+    });
+
+    await userEvent.clear(input);
   },
 };
 

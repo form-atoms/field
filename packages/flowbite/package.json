@@ -38,6 +38,7 @@
     "@storybook/addon-interactions": "^7.0.0-beta.46",
     "@storybook/addon-links": "^7.0.0-beta.46",
     "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/jest": "^0.0.10",
     "@storybook/react": "^7.0.0-beta.46",
     "@storybook/react-webpack5": "7.0.0-beta.46",
     "@storybook/testing-library": "^0.0.14-next.1",
