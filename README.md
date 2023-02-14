@@ -61,7 +61,6 @@ import { fromAtom } from "form-atoms";
 import { z } from "zod";
 import { NumberField } from "@form-atoms/flowbite"; // or /chakra-ui
 
-
 const height = numberField();
 const age = numberField({ schema: z.number().min(18) }); // override default schema
 const numOfKids = numberField({ optional: true }); // make field optional
@@ -88,7 +87,13 @@ export const Form = () => {
 | `selectField(config?): FieldAtom<string \| undefined>` | `z.string()`                  | RadioField, SelectField  |
 | `fileField(config?): FieldAtom<FileList \| undefined>` | `z.instanceof(FileList)`      | FileField                |
 
-### Integrations
+## Hooks
+
+### useClearFileFieldEffect(fileField)
+
+Since the [file input is uncontrolled react component](https://reactjs.org/docs/forms.html#the-file-input-tag), this hook will control & reset the input when the form having the fileField is reset.
+
+## Integrations
 
 `@form-atoms/field` comes with `<Fields />` pre-wired to popular UI libraries.
 
