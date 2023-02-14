@@ -22,22 +22,25 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@chakra-ui/storybook-addon": "4.0.16",
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-docs": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/manager-webpack5": "^6.5.16",
-    "@storybook/react": "^6.5.16",
-    "@storybook/testing-library": "^0.0.13",
+    "@storybook/addon-actions": "^7.0.0-beta.47",
+    "@storybook/addon-docs": "^7.0.0-beta.47",
+    "@storybook/addon-essentials": "^7.0.0-beta.47",
+    "@storybook/addon-interactions": "^7.0.0-beta.47",
+    "@storybook/addon-links": "^7.0.0-beta.47",
+    "@storybook/react": "^7.0.0-beta.47",
+    "@storybook/react-webpack5": "7.0.0-beta.47",
+    "@storybook/testing-library": "^0.0.14-next.1",
     "@types/babel__core": "^7",
+    "@types/babel__preset-env": "^7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "babel-loader": "^8.3.0",
-    "storybook": "^6.5.16",
+    "storybook": "^7.0.0-beta.47",
     "typescript": "4.9.5"
   },
   "dependencies": {
@@ -53,8 +56,8 @@
     "zod": "3.20.2"
   },
   "scripts": {
-    "storybook": "start-storybook -p 6007",
+    "storybook": "storybook dev -p 6007",
     "sb": "yarn storybook",
-    "build-storybook": "build-storybook"
+    "build-storybook": "storybook build"
   }
 }
