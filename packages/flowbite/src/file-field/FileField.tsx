@@ -3,10 +3,10 @@ import {
   useClearFileFieldEffect,
   useFileFieldProps,
 } from "@form-atoms/field";
-import { FileInput, FileInputProps, Label } from "flowbite-react";
+import { FileInput, FileInputProps } from "flowbite-react";
 
-import { Field } from "../field";
-import { InputColors, useFieldError } from "../hooks";
+import { FBField } from "../field";
+import { InputColors } from "../hooks";
 
 type FlowbiteFileFieldProps = FileFieldProps &
   FileInputProps & { colors?: InputColors };
@@ -16,24 +16,22 @@ export const FileField = ({
   field,
   helperText,
   colors,
+  required,
   ...uiProps
 }: FlowbiteFileFieldProps) => {
   const { value, ...props } = useFileFieldProps(field);
-  const { color, error } = useFieldError(field, colors);
   useClearFileFieldEffect(field);
 
   return (
-    <Field>
-      <Label color={color} htmlFor={props.id}>
-        {label}
-      </Label>
-      <FileInput
-        role="dialog"
-        color={color}
-        {...props}
-        helperText={error ?? helperText}
-        {...uiProps}
-      />
-    </Field>
+    <FBField
+      field={field}
+      required={required}
+      helperText={helperText}
+      label={label}
+    >
+      {(fieldProps) => (
+        <FileInput role="dialog" {...props} {...uiProps} {...fieldProps} />
+      )}
+    </FBField>
   );
 };

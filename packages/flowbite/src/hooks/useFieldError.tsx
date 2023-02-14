@@ -3,6 +3,8 @@ import { FieldAtom, useFieldState } from "form-atoms";
 
 export type InputColors = (keyof FlowbiteStateColors)[];
 
+export type FlowbiteStateColor = keyof FlowbiteStateColors;
+
 export const useFieldError = <Value,>(
   field: FieldAtom<Value>,
   colors: InputColors = ["failure"]
@@ -19,7 +21,7 @@ export const useFieldError = <Value,>(
     color:
       color && touched
         ? colors.includes(color)
-          ? color
+          ? (color as FlowbiteStateColor)
           : undefined
         : undefined,
     error: errors[0],

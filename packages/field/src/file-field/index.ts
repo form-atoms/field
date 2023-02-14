@@ -1,3 +1,3 @@
 export * from "./fileField";
 export * from "./useFileFieldProps";
-export * from "./useClearFileFieldEffect";
+export * from "./useClearFileInput";

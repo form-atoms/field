@@ -3,10 +3,9 @@ import {
   useSelectFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
-import { Label, Select, SelectProps } from "flowbite-react";
+import { Select, SelectProps } from "flowbite-react";
 
-import { Field } from "../field";
-import { useFieldError } from "../hooks";
+import { FBField } from "../field";
 
 export const SelectField = <Option,>({
   field,
@@ -16,6 +15,7 @@ export const SelectField = <Option,>({
   label,
   placeholder,
   helperText,
+  required,
   ...uiProps
 }: SelectFieldProps<Option> & SelectProps) => {
   const props = useSelectFieldProps(field);
@@ -25,29 +25,24 @@ export const SelectField = <Option,>({
     options,
     placeholder,
   });
-  const { color, error } = useFieldError(field);
 
   return (
-    <Field>
-      {label && (
-        <Label color={color} htmlFor={props.id}>
-          {label}
-        </Label>
+    <FBField
+      field={field}
+      label={label}
+      required={required}
+      helperText={helperText}
+    >
+      {(fieldProps) => (
+        <Select role="combobox" {...uiProps} {...props} {...fieldProps}>
+          {placeholderOption}
+          {renderOptions.map(({ value, label }) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </Select>
       )}
-      <Select
-        role="combobox"
-        {...props}
-        {...uiProps}
-        color={color}
-        helperText={error ?? helperText}
-      >
-        {placeholderOption}
-        {renderOptions.map(({ value, label }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </Select>
-    </Field>
+    </FBField>
   );
 };
