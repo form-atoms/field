@@ -10,6 +10,8 @@ export const RadioField = <Option,>({
   getValue,
   getLabel,
   label,
+  required,
+  helperText,
 }: SelectFieldProps<Option> & ChakraFieldProps) => {
   const inputProps = useInputFieldProps(field);
   const { renderOptions } = useSelectOptions(field, {
@@ -20,22 +22,29 @@ export const RadioField = <Option,>({
   const actions = useFieldActions(field);
 
   return (
-    <ChakraField field={field} label={label}>
-      <RadioGroup
-        name={inputProps.name}
-        value={inputProps.value}
-        onChange={actions.setValue}
-        // @ts-ignore
-        onBlur={() => inputProps.onBlur()}
-      >
-        <Stack>
-          {renderOptions.map(({ value, label }) => (
-            <Radio key={value} value={value}>
-              {label}
-            </Radio>
-          ))}
-        </Stack>
-      </RadioGroup>
+    <ChakraField
+      field={field}
+      label={label}
+      required={required}
+      helperText={helperText}
+    >
+      {() => (
+        <RadioGroup
+          name={inputProps.name}
+          value={inputProps.value}
+          onChange={actions.setValue}
+          // @ts-ignore
+          onBlur={() => inputProps.onBlur()}
+        >
+          <Stack>
+            {renderOptions.map(({ value, label }) => (
+              <Radio key={value} value={value}>
+                {label}
+              </Radio>
+            ))}
+          </Stack>
+        </RadioGroup>
+      )}
     </ChakraField>
   );
 };

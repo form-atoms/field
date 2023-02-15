@@ -8,13 +8,13 @@ export default {
   ...meta,
 };
 
-const quantity = numberField({
-  value: 0,
-});
+const quantity = numberField();
 
 export const Required: FormStory = {
   args: {
     fields: { quantity },
-    children: () => <NumberField field={quantity} label="Qty." />,
+    children: ({ required }) => (
+      <NumberField field={quantity} label="Qty." required={required} />
+    ),
   },
 };

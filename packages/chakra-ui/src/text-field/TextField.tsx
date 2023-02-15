@@ -5,6 +5,7 @@ import { ChakraField, ChakraFieldProps } from "../chakra-field";
 
 export const TextField = ({
   field,
+  required,
   label,
   helperText,
   ...uiProps
@@ -12,8 +13,13 @@ export const TextField = ({
   const props = useTextFieldProps(field);
 
   return (
-    <ChakraField field={field} label={label} helperText={helperText}>
-      <Input {...props} {...uiProps} />
+    <ChakraField
+      field={field}
+      required={required}
+      label={label}
+      helperText={helperText}
+    >
+      {(fieldProps) => <Input {...props} {...uiProps} {...fieldProps} />}
     </ChakraField>
   );
 };

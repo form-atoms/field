@@ -13,8 +13,12 @@ const profilePicture = fileField();
 export const Required: FormStory = {
   args: {
     fields: { profilePicture },
-    children: () => (
-      <FileField field={profilePicture} label="Profile Picture" />
+    children: ({ required }) => (
+      <FileField
+        field={profilePicture}
+        label="Profile Picture"
+        required={required}
+      />
     ),
   },
 };

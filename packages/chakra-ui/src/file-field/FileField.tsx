@@ -5,6 +5,7 @@ import { ChakraField } from "../chakra-field";
 
 export const FileField = ({
   field,
+  required,
   label,
   helperText,
   ...uiProps
@@ -12,8 +13,15 @@ export const FileField = ({
   const { value, ...props } = useFileFieldProps(field);
 
   return (
-    <ChakraField field={field} label={label} helperText={helperText}>
-      <Input type="file" {...props} {...uiProps} />
+    <ChakraField
+      field={field}
+      required={required}
+      label={label}
+      helperText={helperText}
+    >
+      {(fieldProps) => (
+        <Input type="file" {...props} {...uiProps} {...fieldProps} />
+      )}
     </ChakraField>
   );
 };

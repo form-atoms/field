@@ -13,6 +13,8 @@ import { ChakraField } from "../chakra-field";
 export const RangeField = ({
   field,
   label,
+  required,
+  helperText,
   defaultValue,
   ...sliderProps
 }: NumberFieldProps & SliderProps) => {
@@ -22,18 +24,26 @@ export const RangeField = ({
   useFieldInitialValue(field, defaultValue);
 
   return (
-    <ChakraField field={field} label={label}>
-      <Slider
-        name={props.name}
-        value={props.value}
-        onChange={actions.setValue}
-        {...sliderProps}
-      >
-        <SliderTrack>
-          <SliderFilledTrack />
-        </SliderTrack>
-        <SliderThumb />
-      </Slider>
+    <ChakraField
+      field={field}
+      label={label}
+      required={required}
+      helperText={helperText}
+    >
+      {({ id }) => (
+        <Slider
+          name={props.name}
+          value={props.value}
+          onChange={actions.setValue}
+          {...sliderProps}
+          id={id}
+        >
+          <SliderTrack>
+            <SliderFilledTrack />
+          </SliderTrack>
+          <SliderThumb />
+        </Slider>
+      )}
     </ChakraField>
   );
 };

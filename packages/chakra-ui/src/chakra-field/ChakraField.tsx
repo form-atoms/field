@@ -4,32 +4,45 @@ import {
   FormHelperText,
   FormLabel,
 } from "@chakra-ui/react";
-import { FieldProps } from "@form-atoms/field";
-import { FieldAtom, useFieldState } from "form-atoms";
-import type { PropsWithChildren, ReactNode } from "react";
+import {
+  FieldProps,
+  RequiredProps,
+  ValidatedFieldAtom,
+  useRequiredProps,
+} from "@form-atoms/field";
+import { ReactNode, useId } from "react";
+import { RenderProp } from "react-render-prop-type";
+
+import { useFieldError } from "../hooks";
 
 export type ChakraFieldProps = {
   label?: ReactNode;
   helperText?: ReactNode;
 };
 
-export const ChakraField = <Field extends FieldAtom<any>>({
+type Children = RenderProp<
+  Omit<RequiredProps, "isFieldRequired"> & {
+    id: string;
+    helperText: ReactNode;
+  }
+>;
+
+export const ChakraField = <Field extends ValidatedFieldAtom<any>>({
   field,
   label,
   helperText,
+  required,
   children,
-}: PropsWithChildren<FieldProps<Field> & ChakraFieldProps>) => {
-  // TODO: Improve typing
-  const { validateStatus, errors } = useFieldState(field);
+}: FieldProps<Field> & ChakraFieldProps & Children) => {
+  const id = useId();
+  const { error, isInvalid } = useFieldError(field);
+  const { isFieldRequired, ...props } = useRequiredProps(field, required);
 
-  const isInvalid = validateStatus === "invalid";
-
-  // TODO: Label should have type string
   return (
-    <FormControl label={label} isInvalid={isInvalid}>
-      {label && <FormLabel>{label}</FormLabel>}
-      {children}
-      <FormErrorMessage>{errors[0]}</FormErrorMessage>
+    <FormControl isInvalid={isInvalid} isRequired={isFieldRequired}>
+      {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
+      {children({ ...props, id, helperText })}
+      <FormErrorMessage>{error}</FormErrorMessage>
       {!isInvalid && helperText && (
         <FormHelperText>{helperText}</FormHelperText>
       )}

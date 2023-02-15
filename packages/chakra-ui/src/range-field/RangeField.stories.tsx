@@ -16,13 +16,14 @@ const rating = numberField({
 export const Required: FormStory = {
   args: {
     fields: { rating },
-    children: () => (
+    children: ({ required }) => (
       <RangeField
         field={rating}
         defaultValue={3}
         min={0}
         max={20}
         label="Rating"
+        required={required}
       />
     ),
   },
