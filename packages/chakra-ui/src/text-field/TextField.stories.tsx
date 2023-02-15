@@ -10,10 +10,12 @@ export default {
 
 const username = textField();
 
-export const Primary: FormStory = {
+export const Required: FormStory = {
   args: {
     fields: { username },
-    children: () => <TextField field={username} label="User Name" />,
+    children: ({ required }) => (
+      <TextField field={username} label="User Name" required={required} />
+    ),
   },
 };
 
@@ -22,9 +24,10 @@ const email = textField();
 export const Email: FormStory = {
   args: {
     fields: { email },
-    children: () => (
+    children: ({ required }) => (
       <TextField
         field={email}
+        required={required}
         label="Email address"
         placeholder="example@email.com"
         helperText={

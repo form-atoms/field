@@ -15,15 +15,21 @@ export default {
 export const Password: FormStory = {
   args: {
     fields: { password, passwordInitial },
-    children: () => (
+    children: ({ required }) => (
       <>
         <TextField
           type="password"
+          required={required}
           field={passwordInitial}
           label="New password"
           helperText="Your password must be at least 6 characters long"
         />
-        <TextField type="password" field={password} label="Confirm password" />
+        <TextField
+          type="password"
+          required={required}
+          field={password}
+          label="Confirm password"
+        />
       </>
     ),
   },

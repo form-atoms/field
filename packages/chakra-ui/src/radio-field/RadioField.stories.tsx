@@ -7,16 +7,13 @@ export default {
   ...meta,
 };
 
-// const country = selectField({
-//   value: options[0]?.code,
-// });
-
 export const Required: FormStory = {
   args: {
     fields: { country },
-    children: () => (
+    children: ({ required }) => (
       <RadioField
         field={country}
+        required={required}
         label="Country of Origin"
         options={options}
         getValue={getValue}
