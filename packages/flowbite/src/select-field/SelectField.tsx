@@ -5,7 +5,7 @@ import {
 } from "@form-atoms/field";
 import { Select, SelectProps } from "flowbite-react";
 
-import { FBField } from "../field";
+import { FlowbiteField } from "../field";
 
 export const SelectField = <Option,>({
   field,
@@ -27,7 +27,7 @@ export const SelectField = <Option,>({
   });
 
   return (
-    <FBField
+    <FlowbiteField
       field={field}
       label={label}
       required={required}
@@ -43,6 +43,6 @@ export const SelectField = <Option,>({
           ))}
         </Select>
       )}
-    </FBField>
+    </FlowbiteField>
   );
 };

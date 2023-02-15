@@ -3,11 +3,10 @@ import {
   useNumberFieldProps,
   useSelectOptions,
 } from "@form-atoms/field";
-import { HelperText, Label, Rating, RatingProps } from "flowbite-react";
+import { HelperText, Rating, RatingProps } from "flowbite-react";
 import { useFieldActions } from "form-atoms";
 
-import { Field } from "../field";
-import { useFieldError } from "../hooks";
+import { FlowbiteField } from "../field";
 
 const options = [1, 2, 3, 4, 5];
 
@@ -15,6 +14,8 @@ export const RatingField = ({
   field,
   size = "md",
   label,
+  helperText,
+  required,
   ...uiProps
 }: RatingProps & NumberFieldProps) => {
   const props = useNumberFieldProps(field);
@@ -27,25 +28,28 @@ export const RatingField = ({
       options,
     }
   );
-  const { error, color } = useFieldError(field);
 
   return (
-    <Field>
-      {label && (
-        <Label color={color} htmlFor={props.id}>
-          {label}
-        </Label>
+    <FlowbiteField
+      field={field}
+      required={required}
+      label={label}
+      helperText={helperText}
+    >
+      {({ color, helperText, ...fieldProps }) => (
+        <>
+          <Rating size={size} {...uiProps} {...fieldProps}>
+            {renderOptions.map(({ value }) => (
+              <div key={value} onClick={() => actions.setValue(value)}>
+                <Rating.Star
+                  filled={props.value && value ? value <= props.value : false}
+                />
+              </div>
+            ))}
+          </Rating>
+          {helperText && <HelperText color={color}>{helperText}</HelperText>}
+        </>
       )}
-      <Rating size={size} {...uiProps}>
-        {renderOptions.map(({ value }) => (
-          <div key={value} onClick={() => actions.setValue(value)}>
-            <Rating.Star
-              filled={props.value && value ? value <= props.value : false}
-            />
-          </div>
-        ))}
-      </Rating>
-      {error && <HelperText color={color}>{error}</HelperText>}
-    </Field>
+    </FlowbiteField>
   );
 };

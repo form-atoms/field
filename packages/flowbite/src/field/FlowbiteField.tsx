@@ -4,7 +4,7 @@ import {
   ValidatedFieldAtom,
   useRequiredProps,
 } from "@form-atoms/field";
-import { HelperText, Label } from "flowbite-react";
+import { Label } from "flowbite-react";
 import { ReactNode, useId } from "react";
 import { RenderProp } from "react-render-prop-type";
 
@@ -21,7 +21,7 @@ type Children = RenderProp<
 type FlowbiteFieldProps<Field extends ValidatedFieldAtom<any>> =
   FieldProps<Field> & Children;
 
-export const FBField = <Field extends ValidatedFieldAtom<any>>({
+export const FlowbiteField = <Field extends ValidatedFieldAtom<any>>({
   field,
   required,
   label,
@@ -45,4 +45,3 @@ export const FBField = <Field extends ValidatedFieldAtom<any>>({
     </div>
   );
 };
-// {helperText && <HelperText color={color}>{helperText}</HelperText>}

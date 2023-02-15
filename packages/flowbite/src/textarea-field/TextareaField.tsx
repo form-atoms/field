@@ -1,8 +1,8 @@
 import { TextFieldProps, useTextFieldProps } from "@form-atoms/field";
-import { Label, Textarea, TextareaProps } from "flowbite-react";
+import { Textarea, TextareaProps } from "flowbite-react";
 
-import { Field } from "../field";
-import { InputColors, useFieldError } from "../hooks";
+import { FlowbiteField } from "../field";
+import { InputColors } from "../hooks";
 
 type FlowbiteTextFieldProps = TextFieldProps &
   TextareaProps & { colors?: InputColors };
@@ -12,24 +12,27 @@ export const TextareaField = ({
   field,
   helperText,
   colors,
+  required,
   ...uiProps
 }: FlowbiteTextFieldProps) => {
   const props = useTextFieldProps(field);
-  const { color, error } = useFieldError(field, colors);
 
   return (
-    <Field>
-      <Label color={color} htmlFor={props.id}>
-        {label}
-      </Label>
-      <Textarea
-        role="textbox"
-        color={color}
-        {...props}
-        value={props.value ?? ""}
-        helperText={error ?? helperText}
-        {...uiProps}
-      />
-    </Field>
+    <FlowbiteField
+      field={field}
+      required={required}
+      label={label}
+      helperText={helperText}
+    >
+      {(fieldProps) => (
+        <Textarea
+          role="textbox"
+          {...props}
+          value={props.value ?? ""}
+          {...uiProps}
+          {...fieldProps}
+        />
+      )}
+    </FlowbiteField>
   );
 };

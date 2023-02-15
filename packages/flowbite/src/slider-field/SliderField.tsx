@@ -1,34 +1,34 @@
 import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
-import {
-  HelperText,
-  Label,
-  RangeSlider,
-  RangeSliderProps,
-} from "flowbite-react";
+import { HelperText, RangeSlider, RangeSliderProps } from "flowbite-react";
 
-import { Field } from "../field";
-import { useFieldError } from "../hooks";
+import { FlowbiteField } from "../field";
 
 export const SliderField = ({
-  label,
   field,
+  label,
+  required,
   helperText,
   ...inputProps
 }: NumberFieldProps & RangeSliderProps) => {
   const props = useNumberFieldProps(field);
-  const { color, error } = useFieldError(field);
-
-  const help = error ?? helperText;
 
   return (
-    <Field>
-      {label && (
-        <Label color={color} htmlFor={props.id}>
-          {label}
-        </Label>
+    <FlowbiteField
+      field={field}
+      required={required}
+      label={label}
+      helperText={helperText}
+    >
+      {(fieldProps) => (
+        <>
+          <RangeSlider {...props} {...inputProps} {...fieldProps} />
+          {fieldProps.helperText && (
+            <HelperText color={fieldProps.color}>
+              {fieldProps.helperText}
+            </HelperText>
+          )}
+        </>
       )}
-      <RangeSlider color={color} {...props} {...inputProps} />
-      {help && <HelperText color={color}>{help}</HelperText>}
-    </Field>
+    </FlowbiteField>
   );
 };

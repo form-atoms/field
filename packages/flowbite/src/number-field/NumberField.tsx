@@ -1,34 +1,34 @@
 import { NumberFieldProps, useNumberFieldProps } from "@form-atoms/field";
-import { Label, TextInput, TextInputProps } from "flowbite-react";
+import { TextInput, TextInputProps } from "flowbite-react";
 
-import { Field } from "../field";
-import { useFieldError } from "../hooks";
+import { FlowbiteField } from "../field";
 
 export const NumberField = ({
   label,
   field,
   helperText,
+  required,
   ...inputProps
 }: NumberFieldProps & TextInputProps) => {
   const props = useNumberFieldProps(field);
-  const { color, error } = useFieldError(field);
 
   return (
-    <Field>
-      {label && (
-        <Label color={color} htmlFor={props.id}>
-          {label} {props.required ? "(required)" : ""}
-        </Label>
+    <FlowbiteField
+      field={field}
+      label={label}
+      required={required}
+      helperText={helperText}
+    >
+      {(fieldProps) => (
+        <TextInput
+          role="spinbutton"
+          type="number"
+          {...inputProps}
+          {...props}
+          value={props.value ?? ""}
+          {...fieldProps}
+        />
       )}
-      <TextInput
-        role="spinbutton"
-        type="number"
-        color={color}
-        helperText={color ? error : helperText}
-        {...inputProps}
-        {...props}
-        value={props.value ?? ""}
-      />
-    </Field>
+    </FlowbiteField>
   );
 };

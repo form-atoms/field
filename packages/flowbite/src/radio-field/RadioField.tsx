@@ -5,8 +5,7 @@ import {
 } from "@form-atoms/field";
 import { HelperText, Label, Radio } from "flowbite-react";
 
-import { Field } from "../field";
-import { useFieldError } from "../hooks";
+import { FlowbiteField } from "../field";
 
 export const RadioField = <Option,>({
   field,
@@ -15,6 +14,7 @@ export const RadioField = <Option,>({
   getLabel,
   label,
   helperText,
+  required,
   ...uiProps
 }: SelectFieldProps<Option>) => {
   const props = useSelectFieldProps(field);
@@ -23,29 +23,35 @@ export const RadioField = <Option,>({
     getLabel,
     options,
   });
-  const { color, error } = useFieldError(field);
-
-  const helpText = error ?? helperText;
 
   return (
-    <Field>
-      {label && <Label color={color}>{label}</Label>}
-      {renderOptions.map(({ value, label, isActive }) => (
-        <div className="flex items-center gap-2" key={value}>
-          <Radio
-            {...props}
-            name={props.name ?? props.id}
-            aria-checked={isActive}
-            role="radio"
-            id={value}
-            value={value}
-            checked={isActive}
-            {...uiProps}
-          />
-          <Label htmlFor={value}>{label}</Label>
-        </div>
-      ))}
-      {helpText && <HelperText color={color}>{helpText}</HelperText>}
-    </Field>
+    <FlowbiteField
+      field={field}
+      required={required}
+      label={label}
+      helperText={helperText}
+    >
+      {({ color, helperText, id: _, ...fieldProps }) => (
+        <>
+          {renderOptions.map(({ value, label, isActive }) => (
+            <div className="flex items-center gap-2" key={value}>
+              <Radio
+                {...props}
+                role="radio"
+                id={value}
+                value={value}
+                name={props.name ?? props.id}
+                checked={isActive}
+                aria-checked={isActive}
+                {...uiProps}
+                {...fieldProps}
+              />
+              <Label htmlFor={value}>{label}</Label>
+            </div>
+          ))}
+          {helperText && <HelperText color={color}>{helperText}</HelperText>}
+        </>
+      )}
+    </FlowbiteField>
   );
 };
