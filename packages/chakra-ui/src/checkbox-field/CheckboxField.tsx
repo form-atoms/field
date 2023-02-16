@@ -19,10 +19,9 @@ export const CheckboxField = ({
   helperText,
   ...uiProps
 }: CheckboxFieldProps & CheckboxProps) => {
-  // BUG: ref causes infinite renders
   const {
-    "aria-invalid": _,
-    ref,
+    "aria-invalid": _, // ERR: chakra does not accept false value for this prop
+    ref, // BUG: ref causes infinite renders
     checked,
     ...props
   } = useCheckboxFieldProps(field);
