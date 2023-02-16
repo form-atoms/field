@@ -5,30 +5,43 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
-import { CheckboxFieldProps, useCheckboxFieldProps } from "@form-atoms/field";
+import {
+  CheckboxFieldProps,
+  useCheckboxFieldProps,
+  useRequiredProps,
+} from "@form-atoms/field";
+
+import { useFieldError } from "../hooks";
 
 export const CheckboxField = ({
   field,
+  required,
+  helperText,
   ...uiProps
 }: CheckboxFieldProps & CheckboxProps) => {
-  const { "aria-invalid": ariaInvalid, ...props } =
-    useCheckboxFieldProps(field);
+  // BUG: ref causes infinite renders
+  const {
+    "aria-invalid": _,
+    ref,
+    checked,
+    ...props
+  } = useCheckboxFieldProps(field);
+  const { isInvalid, error } = useFieldError(field);
+  const { isFieldRequired, ...requiredProps } = useRequiredProps(
+    field,
+    required
+  );
 
   return (
-    <FormControl isInvalid={ariaInvalid}>
+    <FormControl isInvalid={isInvalid} isRequired={isFieldRequired}>
       <Checkbox
-        isInvalid={ariaInvalid}
         {...uiProps}
-        checked={props.checked}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
+        {...props}
+        {...requiredProps}
+        isChecked={checked}
       />
-      <FormErrorMessage>Email is required.</FormErrorMessage>
-      {!ariaInvalid && (
-        <FormHelperText>
-          Enter the email you'd like to receive the newsletter on.
-        </FormHelperText>
-      )}
+      <FormErrorMessage>{error}</FormErrorMessage>
+      {!isInvalid && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };
