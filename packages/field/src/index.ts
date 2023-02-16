@@ -3,6 +3,7 @@ export * from "./checkbox-field";
 export * from "./field";
 export * from "./file-field";
 export * from "./number-field";
+export * from "./radio";
 export * from "./select-field";
 export * from "./text-field";
 export * from "./multi-select-field";
