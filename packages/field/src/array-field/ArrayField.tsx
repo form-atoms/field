@@ -3,11 +3,12 @@ import {
   FormAtom,
   FormFieldValues,
   FormFields,
+  fieldAtom,
   useForm,
   useFormActions,
 } from "form-atoms";
 import { del, push } from "object-path-immutable";
-import React, { useCallback, useMemo } from "react";
+import React, { Fragment, useCallback, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 // TODO: array field should have possible validation attached e.g.  min(n).max(m) to have array of <n, m> items.
@@ -22,7 +23,6 @@ export const useArrayFieldActions = <Fields extends FormFields>(
     (index: number) => {
       return updateFields((current) => {
         console.log(current, [...path, index], del(current, [...path, index]));
-
         return del(current, [...path, index]);
       });
     },
@@ -76,55 +76,76 @@ export type ArrayItemRenderProps<Fields> = RenderProp<
     fields: Fields;
     add: () => void;
     remove: (index: number) => void;
-  } & RenderProp<never, "DeleteItemButton">
+  } & RenderProp<unknown, "DeleteItemButton">
 >;
+
+export type ArrayFieldProps<
+  Fields extends FormFields,
+  Path extends (string | number)[],
+  RPath extends (string | number)[] = [],
+  RootFields extends FormFields = Fields
+> = Path extends [
+  infer P extends keyof Fields,
+  ...infer R extends (string | number)[]
+]
+  ? Fields[P] extends FormFields
+    ? ArrayFieldProps<Fields[P], R, [...RPath, Exclude<P, symbol>], RootFields>
+    : Fields[P] extends FormFields[]
+    ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      ArrayFieldProps<Fields[P], R, [...RPath, Exclude<P, symbol>], RootFields>
+    : Fields[P] extends (infer Item)[]
+    ? {
+        path: [...RPath, P];
+        form: FormAtom<RootFields>;
+        builder: () => Item;
+      } & ArrayItemRenderProps<Item> &
+        RenderProps
+    : never
+  : Fields extends (infer Item)[]
+  ? {
+      path: [...RPath];
+      form: FormAtom<RootFields>;
+      builder: () => Item;
+    } & ArrayItemRenderProps<Item> &
+      RenderProps
+  : never;
+
+const fields = {
+  envs: [{ varName: fieldAtom({ value: 0 }) }],
+  z: fieldAtom({ value: 2 }),
+};
+
+type One = ArrayFieldProps<typeof fields, ["envs"]>;
+
+const flat = {
+  envs: [fieldAtom({ value: 0 })],
+};
+type Flat = ArrayFieldProps<typeof flat, ["envs"]>;
+
+const envs = [fieldAtom({ value: 0 })];
+const deep = {
+  foo: {
+    envs: [fieldAtom({ value: 0 })],
+  },
+};
+
+type T = typeof envs extends FormFields ? true : false;
+
+type Deep = ArrayFieldProps<typeof deep, ["foo", "envs"]>;
+
+const d3 = { deep };
+
+type Deep3 = ArrayFieldProps<typeof d3, ["deep", "foo", "envs"]>;
+
+const nested = { addresses: [{ people: [{ age: fieldAtom({ value: 0 }) }] }] };
+
+type Nested = ArrayFieldProps<typeof nested, ["addresses", 0, "people"]>;
 
 export function ArrayField<
   Fields extends FormFields,
-  P1 extends keyof Fields,
-  P2 extends Extract<keyof Fields[P1], number>,
-  P3 extends keyof Fields[P1][P2]
->(
-  props: {
-    path: [P1, P2, P3];
-    form: Fields[P1][P2][P3] extends FormFields[] ? FormAtom<Fields> : never;
-    builder: () => Fields[P1][P2][P3] extends (infer ItemFields)[]
-      ? ItemFields
-      : never;
-  } & ArrayItemRenderProps<
-    Fields[P1][P2][P3] extends (infer ItemFields)[] ? ItemFields : never
-  > &
-    RenderProps
-): JSX.Element;
-export function ArrayField<
-  Fields extends FormFields,
-  P1 extends keyof Fields,
-  P2 extends keyof Fields[P1]
->(
-  props: {
-    path: [P1, P2];
-    form: FormAtom<Fields>;
-    builder: () => Fields[P1][P2] extends (infer ItemType)[] ? ItemType : never;
-  } & ArrayItemRenderProps<
-    Fields[P1][P2] extends (infer ItemFields)[] ? ItemFields : never
-  > &
-    RenderProps
-): JSX.Element;
-export function ArrayField<Fields extends FormFields, P1 extends keyof Fields>(
-  props: {
-    path: [P1];
-    form: Fields[P1] extends FormFields[]
-      ? FormAtom<Fields>
-      : Fields[P1] extends FieldAtom<unknown>[]
-      ? FormAtom<Fields>
-      : never;
-    builder: () => Fields[P1] extends (infer ItemType)[] ? ItemType : never;
-  } & ArrayItemRenderProps<
-    Fields[P1] extends (infer ItemFields)[] ? ItemFields : never
-  > &
-    RenderProps
-): JSX.Element;
-export function ArrayField<Fields extends FormFields>({
+  Path extends (string | number)[]
+>({
   path,
   form,
   builder,
@@ -132,14 +153,11 @@ export function ArrayField<Fields extends FormFields>({
   DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
-}: {
-  path: string[];
-  form: FormAtom<Fields>;
-  builder: () => Fields;
-} & ArrayItemRenderProps<unknown> &
-  RenderProps) {
+}: ArrayFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { add, remove } = useArrayFieldActions(form, builder, path);
 
   const array: FormFields[] = useMemo(() => {
@@ -156,17 +174,19 @@ export function ArrayField<Fields extends FormFields>({
   return (
     <>
       {array.length === 0 && EmptyMessage ? <EmptyMessage /> : undefined}
-      {array.map((fields, index) =>
-        children({
-          add,
-          remove,
-          fields,
-          index,
-          DeleteItemButton: () => (
-            <DeleteItemButton remove={() => remove(index)} />
-          ),
-        })
-      )}
+      {array.map((fields, index) => (
+        <Fragment key={index}>
+          {children({
+            add,
+            remove,
+            fields,
+            index,
+            DeleteItemButton: () => (
+              <DeleteItemButton remove={() => remove(index)} />
+            ),
+          })}
+        </Fragment>
+      ))}
       <AddItemButton add={add} />
     </>
   );
