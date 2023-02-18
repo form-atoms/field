@@ -33,8 +33,19 @@ type Nested = ArrayFieldProps<typeof nested, ["addresses", 0, "people"]>;
 const Simple = () => (
   <ArrayField
     path={["envs"]}
+    keyFrom="varName"
     form={formAtom(fields)}
     builder={() => ({ varName: fieldAtom({ value: 0 }) })}
+  >
+    {({ fields }) => <></>}
+  </ArrayField>
+);
+
+const FlatArray = () => (
+  <ArrayField
+    path={["envs"]}
+    form={formAtom(flat)}
+    builder={() => fieldAtom({ value: 0 })}
   >
     {({ fields }) => <></>}
   </ArrayField>

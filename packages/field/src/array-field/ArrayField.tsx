@@ -101,31 +101,32 @@ type ArrayFieldPropsRecurr<
         | FormFields)[]
         ? Item
         : never;
-    } & ArrayItemRenderProps<
-      Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
-        ? Item
-        : never
-    >;
+    } & (Fields extends (infer F extends FormFields)[]
+      ? { keyFrom: keyof F }
+      : // key not needed for FieldAtom<any>[], atom itself will be key
+        { keyFrom?: never }) &
+      ArrayItemRenderProps<
+        Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
+          ? Item
+          : never
+      >;
 
 export type ArrayFieldProps<
   Fields extends FormFields,
   Path extends (string | number)[]
-> = Path extends [
-  infer P extends keyof Fields,
-  ...infer Rest extends (string | number)[]
-]
-  ? Fields[P] extends RecurrFormFields
-    ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
-        Fields[P],
-        Rest
-      >
-    : never
-  : never;
+> = RenderProps &
+  (Path extends [
+    infer P extends keyof Fields,
+    ...infer Rest extends (string | number)[]
+  ]
+    ? Fields[P] extends RecurrFormFields
+      ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
+          Fields[P],
+          Rest
+        >
+      : never
+    : never);
 
-// export function ArrayField<
-//   Fields extends FormFields,
-//   Path extends (string | number)[]
-// >(props: RenderProps & ArrayFieldProps<Fields, Path>): JSX.Element;
 export function ArrayField<
   Fields extends FormFields,
   Path extends (string | number)[]
@@ -133,11 +134,12 @@ export function ArrayField<
   path,
   form,
   builder,
+  keyFrom,
   children,
   DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
-}: RenderProps & ArrayFieldProps<Fields, Path>) {
+}: ArrayFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
@@ -153,11 +155,17 @@ export function ArrayField<
     ) as ArrayFields;
   }, [path, fieldAtoms]);
 
+  const keyFn = (fields: FieldAtom<any> | FormFields) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return typeof keyFrom === "string" ? `${fields[keyFrom]}` : `${fields}`;
+  };
+
   return (
     <>
       {array.length === 0 && EmptyMessage ? <EmptyMessage /> : undefined}
       {array.map((fields, index) => (
-        <Fragment key={index}>
+        <Fragment key={keyFn(fields)}>
           {children({
             add,
             remove,

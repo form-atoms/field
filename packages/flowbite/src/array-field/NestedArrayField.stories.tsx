@@ -76,6 +76,7 @@ export const AddressesWithPeopleArrayField: FormStory = {
     fields,
     children: ({ form }: VariantProps<typeof fields>) => (
       <ArrayField
+        keyFrom="street"
         path={["addresses"]}
         form={form}
         builder={addressWithPeopleBuilder}
@@ -92,6 +93,7 @@ export const AddressesWithPeopleArrayField: FormStory = {
               <TextField label="Street" field={fields.street} />
             </div>
             <ArrayField
+              keyFrom="name"
               path={["addresses", index, "people"]}
               builder={personBuilder}
               form={form}

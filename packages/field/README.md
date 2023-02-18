@@ -5,7 +5,7 @@
 
 Set of headless components composing form-atoms in common patterns:
 
-### [ArrayField](./src/array-field/)
+### [<ArrayField />](./src/array-field/)
 
 The array field enables you to capture list of items with the same attributes.
 It offers `add` and `remove` callbacks to append new item or drop existing one.
@@ -15,7 +15,7 @@ It offers `add` and `remove` callbacks to append new item or drop existing one.
 - capture list of user addresses `{street: string, city: string, state: string}[]`
 - capture list of env variables `{name: string, value: string}[]`
 
-#### Example - [codesandbox](https://codesandbox.io/s/form-atoms-field-arrayfield-example-8wdwo4?file=/src/App.tsx)
+#### Example - [CodeSandbox](https://codesandbox.io/s/form-atoms-field-arrayfield-example-8wdwo4?file=/src/App.tsx)
 
 ```tsx
 const hobbiesForm = formAtom({
@@ -31,7 +31,7 @@ const Hobbies = () => (
     {({ fields, index, DeleteItemButton }) => (
       <>
         <TextField field={fields.name} label={`Hobby ${index}`} />
-        {/* calls remove(index) when clicked*/}
+        {/* calls remove(index) when clicked */}
         <DeleteItemButton />
       </>
     )}
@@ -49,6 +49,34 @@ const Hobbies = () => (
 | children         | `(props: {fields, index, DeleteItemButton}) => JSX.Element` | Yes       | A render prop accepting item fields and `DeleteButton` component for current array field item at `index` |
 | AddItemButton    | `(props: {add: () => void}) => JSX.Element`                 | No        | A render prop accepting `add` prop to instantiate new array items                                        |
 | DeleteItemButton | `(props: {remove: () => void}) => JSX.Element`              | No        | A render prop accepting `remove` prop to delete current item                                             |
+
+#### Flat example
+
+Traditionally the field array produces list of objects matching interface `FormFields[]`.
+For some cases, you might want to capture list of primitives e.g. `FieldAtom<string>[]`:
+
+```tsx
+const phonesForm = formAtom({
+  phones: [fieldAtom({ value: "" })], // NOTE: array of fieldAtoms
+});
+
+const Phones = () => (
+  <ArrayField
+    form={phonesForm}
+    path={["phones"]}
+    builder={() => fieldAtom({ value: "" })}
+  >
+    {({ fields, index, DeleteItemButton }) => (
+      <>
+        {/* NOTE: the item is itself field! */}
+        <TextField field={fields} label={`Phone ${index}`} />
+        {/* calls remove(index) when clicked */}
+        <DeleteItemButton />
+      </>
+    )}
+  </ArrayField>
+);
+```
 
 #### Advanced example
 

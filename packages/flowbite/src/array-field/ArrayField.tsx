@@ -10,12 +10,17 @@ export const ArrayField = <
   Fields extends FormFields,
   Path extends (string | number)[]
 >({
+  label,
+  children,
   ...arrayProps
-}: ArrayFieldProps<Fields, Path> & { label: ReactNode }) => {
+}: ArrayFieldProps<Fields, Path> & Partial<{ label: ReactNode }>) => {
   return (
     <>
-      {arrayProps.label && <Label>{arrayProps.label}</Label>}
-      <HeadlessArrayField<Fields, Path>
+      {label && <Label>{label}</Label>}
+      {/**
+       *  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+       *  @ts-ignore */}
+      <HeadlessArrayField
         {...arrayProps}
         DeleteItemButton={({ remove }) => (
           <Button color="failure" onClick={remove}>
@@ -29,15 +34,13 @@ export const ArrayField = <
         )}
       >
         {(props) => (
-          <>
-            <Card>
-              <div className="flex justify-between">
-                {props.index}
-                <props.DeleteItemButton />
-              </div>
-              {arrayProps.children(props)}
-            </Card>
-          </>
+          <Card>
+            <div className="flex justify-between">
+              {props.index}
+              <props.DeleteItemButton />
+            </div>
+            {children(props)}
+          </Card>
         )}
       </HeadlessArrayField>
     </>
