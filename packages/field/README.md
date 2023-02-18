@@ -23,9 +23,9 @@ It offers `add` and `remove` callbacks to append new item or drop existing one.
 | path             | `(string \| number)[]`                                      | Yes       | A keypath to an array in the form fields                                                                                                                 |
 | builder          | `() => GetAt<FormFields, Path>`                             | Yes       | A function returning new item fields to be appended to the field array at the specified path                                                             |
 | keyFrom          | `string`                                                    | Yes\*     | A keyof the array item pointing to some `FieldAtom`. When the item is of type `FormFields`. \*Optional when the array items are of type `FieldAtom<any>` |
-| children         | `(props: {fields, index, DeleteItemButton}) => JSX.Element` | Yes       | A render prop accepting item fields and `DeleteButton` component for current array field item at `index`                                                 |
+| children         | `(props: {fields, index, RemoveItemButton}) => JSX.Element` | Yes       | A render prop accepting item fields and `RemoveItemButton` component for current array field item at `index`                                             |
 | AddItemButton    | `(props: {add: () => void}) => JSX.Element`                 | No        | A render prop accepting `add` prop to instantiate new array items                                                                                        |
-| DeleteItemButton | `(props: {remove: () => void}) => JSX.Element`              | No        | A render prop accepting `remove` prop to delete current item                                                                                             |
+| RemoveItemButton | `(props: {remove: () => void}) => JSX.Element`              | No        | A render prop accepting `remove` prop to delete current item                                                                                             |
 
 #### Features
 
@@ -46,11 +46,11 @@ const Hobbies = () => (
     path={["hobbies"]}
     builder={() => ({ name: fieldAtom({ value: "" }) })}
   >
-    {({ fields, index, DeleteItemButton }) => (
+    {({ fields, index, RemoveItemButton }) => (
       <>
         <TextField field={fields.name} label={`Hobby ${index}`} />
         {/* calls remove(index) when clicked */}
-        <DeleteItemButton />
+        <RemoveItemButton />
       </>
     )}
   </ArrayField>
@@ -74,12 +74,12 @@ const Phones = () => (
     path={["phones"]}
     builder={() => fieldAtom({ value: "" })}
   >
-    {({ fields, index, DeleteItemButton }) => (
+    {({ fields, index, RemoveItemButton }) => (
       <>
         {/* NOTE: the item is itself field! */}
         <TextField field={fields} label={`Phone ${index}`} />
         {/* calls remove(index) when clicked */}
-        <DeleteItemButton />
+        <RemoveItemButton />
       </>
     )}
   </ArrayField>
@@ -116,9 +116,9 @@ const AdvancedNestedExample = () => {
         accounts: [],
       })}
     >
-      {({ fields, index, add, DeleteItemButton }) => (
+      {({ fields, index, add, RemoveItemButton }) => (
         <>
-          <label>Person #{index}</label> <DeleteItemButton />
+          <label>Person #{index}</label> <RemoveItemButton />
           <TextField field={fields.name} label="Name" />
           <ArrayField
             form={peopleForm}
@@ -126,9 +126,9 @@ const AdvancedNestedExample = () => {
             path={["people", index, "accounts"]}
             builder={() => ({ iban: fieldAtom({ value: "" }) })}
           >
-            {({ fields, index, DeleteItemButton }) => (
+            {({ fields, index, RemoveItemButton }) => (
               <>
-                <label>Account #{index}</label> <DeleteItemButton />
+                <label>Account #{index}</label> <RemoveItemButton />
                 <TextField field={fields.iban} label="IBAN" />
               </>
             )}
