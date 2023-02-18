@@ -3,8 +3,6 @@ import {
   FormAtom,
   FormFieldValues,
   FormFields,
-  fieldAtom,
-  formAtom,
   useForm,
   useFormActions,
 } from "form-atoms";
@@ -19,7 +17,7 @@ export const useArrayFieldActions = <
 >(
   form: FormAtom<Fields>,
   builder: () => Item,
-  path: string[]
+  path: (string | number)[]
 ) => {
   const { updateFields } = useFormActions(form);
 
@@ -96,7 +94,7 @@ type ArrayFieldPropsRecurr<
 ]
   ? Fields[P] extends RecurrFormFields
     ? ArrayFieldPropsRecurr<Fields[P], R>
-    : 3 // ["ERR: Path ", P, " is neither array nor fields object."]
+    : never
   : {
       builder: () => Fields extends (infer Item extends
         | FieldAtom<any>
@@ -124,46 +122,14 @@ export type ArrayFieldProps<
     : never
   : never;
 
-const fields = {
-  envs: [{ varName: fieldAtom({ value: 0 }) }],
-  z: fieldAtom({ value: 2 }),
-};
-type One = ArrayFieldProps<typeof fields, [""]>;
-
-// TODO: suport in core?
-const base: RecurrFormFields = [fieldAtom({ value: 0 })];
-
-// type Arr = ArrayFieldProps<typeof base, []>;
-
-const flat = {
-  envs: [fieldAtom({ value: 0 })],
-};
-type Flat = ArrayFieldProps<typeof flat, ["envs"]>;
-
-const envs = [fieldAtom({ value: 0 })];
-const deep = {
-  foo: {
-    envs: [fieldAtom({ value: 0 })],
-  },
-};
-
-type T = typeof envs extends FormFields ? true : false;
-
-type Deep = ArrayFieldProps<typeof deep, [3]>;
-
-const d3 = { deep };
-
-type Deep3 = ArrayFieldProps<typeof d3, ["deep", "foo", "envs"]>;
-
-const nested = { addresses: [{ people: [{ age: fieldAtom({ value: 0 }) }] }] };
-
-type Nested = ArrayFieldProps<typeof nested, ["addresses", 0, "people"]>;
-
+// export function ArrayField<
+//   Fields extends FormFields,
+//   Path extends (string | number)[]
+// >(props: RenderProps & ArrayFieldProps<Fields, Path>): JSX.Element;
 export function ArrayField<
   Fields extends FormFields,
   Path extends (string | number)[]
->(props: RenderProps & ArrayFieldProps<Fields, Path>): JSX.Element;
-export function ArrayField({
+>({
   path,
   form,
   builder,
@@ -171,7 +137,7 @@ export function ArrayField({
   DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
-}: any) {
+}: RenderProps & ArrayFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
@@ -195,6 +161,8 @@ export function ArrayField({
           {children({
             add,
             remove,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             fields,
             index,
             DeleteItemButton: () => (
@@ -207,13 +175,3 @@ export function ArrayField({
     </>
   );
 }
-
-const Simple = () => (
-  <ArrayField
-    path={["envs"]}
-    form={formAtom(fields)}
-    builder={() => ({ varName: fieldAtom({ value: 0 }) })}
-  >
-    {({ fields }) => <></>}
-  </ArrayField>
-);

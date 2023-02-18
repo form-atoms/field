@@ -44,8 +44,8 @@ const Hobbies = () => (
 | Name             | Type                                                        | Required? | Description                                                                                              |
 | ---------------- | ----------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
 | form             | `FormAtom<Fields>`                                          | Yes       | A form atom                                                                                              |
-| path             | `K1 = [keyof Fields] \| [K1, K2 = keyof Field[K1]] \| ...`  | Yes       | A keypath to an array in form fields                                                                     |
-| builder          | `() => FormFields[...path]`                                 | Yes       | A function returning item fields as existing on keypath in the form                                      |
+| path             | `(string \| number)[]`                                      | Yes       | A keypath to an array in the form fields                                                                 |
+| builder          | `() => GetAt<FormFields, Path>`                             | Yes       | A function returning new item fields to be appended to the field array at the specified path             |
 | children         | `(props: {fields, index, DeleteItemButton}) => JSX.Element` | Yes       | A render prop accepting item fields and `DeleteButton` component for current array field item at `index` |
 | AddItemButton    | `(props: {add: () => void}) => JSX.Element`                 | No        | A render prop accepting `add` prop to instantiate new array items                                        |
 | DeleteItemButton | `(props: {remove: () => void}) => JSX.Element`              | No        | A render prop accepting `remove` prop to delete current item                                             |
