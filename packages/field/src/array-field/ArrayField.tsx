@@ -4,6 +4,7 @@ import {
   FormFieldValues,
   FormFields,
   fieldAtom,
+  formAtom,
   useForm,
   useFormActions,
 } from "form-atoms";
@@ -12,9 +13,12 @@ import React, { Fragment, useCallback, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 // TODO: array field should have possible validation attached e.g.  min(n).max(m) to have array of <n, m> items.
-export const useArrayFieldActions = <Fields extends FormFields>(
+export const useArrayFieldActions = <
+  Fields extends FormFields,
+  Item extends FieldAtom<any> | FormFields
+>(
   form: FormAtom<Fields>,
-  builder: () => Fields,
+  builder: () => Item,
   path: string[]
 ) => {
   const { updateFields } = useFormActions(form);
@@ -79,44 +83,58 @@ export type ArrayItemRenderProps<Fields> = RenderProp<
   } & RenderProp<unknown, "DeleteItemButton">
 >;
 
-export type ArrayFieldProps<
-  Fields extends FormFields,
+type ArrayFields = FieldAtom<any>[] | FormFields[];
+
+type RecurrFormFields = FormFields | ArrayFields;
+
+type ArrayFieldPropsRecurr<
+  Fields extends RecurrFormFields,
   Path extends (string | number)[],
-  RPath extends (string | number)[] = [],
-  RootFields extends FormFields = Fields
+  Form,
+  RPath extends (string | number)[]
 > = Path extends [
   infer P extends keyof Fields,
   ...infer R extends (string | number)[]
 ]
-  ? Fields[P] extends FormFields
-    ? ArrayFieldProps<Fields[P], R, [...RPath, Exclude<P, symbol>], RootFields>
-    : Fields[P] extends FormFields[]
-    ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      ArrayFieldProps<Fields[P], R, [...RPath, Exclude<P, symbol>], RootFields>
-    : Fields[P] extends (infer Item)[]
-    ? {
-        path: [...RPath, P];
-        form: FormAtom<RootFields>;
-        builder: () => Item;
-      } & ArrayItemRenderProps<Item> &
-        RenderProps
-    : never
-  : Fields extends (infer Item)[]
+  ? Fields[P] extends RecurrFormFields
+    ? ArrayFieldPropsRecurr<Fields[P], R, Form, [...RPath, Exclude<P, symbol>]>
+    : never // ["ERR: Path ", P, " is neither array nor fields object."]
+  : Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
   ? {
       path: [...RPath];
-      form: FormAtom<RootFields>;
+      form: Form;
       builder: () => Item;
     } & ArrayItemRenderProps<Item> &
       RenderProps
-  : never;
+  : never; //"ERR: Can't infer array at path";
+
+export type ArrayFieldProps<
+  Fields extends FormFields,
+  Path extends (string | number)[]
+> = Path extends [
+  infer P extends keyof Fields,
+  ...infer Rest extends (string | number)[]
+]
+  ? Fields[P] extends RecurrFormFields
+    ? ArrayFieldPropsRecurr<
+        Fields[P],
+        Rest,
+        FormAtom<Fields>,
+        [Exclude<P, symbol>]
+      >
+    : never // ["ERR:", P, "Path is neither array nor fields object."]
+  : never; // ["ERR:", Path, "is not a valid key path in", Fields];
 
 const fields = {
   envs: [{ varName: fieldAtom({ value: 0 }) }],
   z: fieldAtom({ value: 2 }),
 };
+type One = ArrayFieldProps<typeof fields, [""]>;
 
-type One = ArrayFieldProps<typeof fields, ["envs"]>;
+// TODO: suport in core?
+const base: RecurrFormFields = [fieldAtom({ value: 0 })];
+
+// type Arr = ArrayFieldProps<typeof base, []>;
 
 const flat = {
   envs: [fieldAtom({ value: 0 })],
@@ -132,7 +150,7 @@ const deep = {
 
 type T = typeof envs extends FormFields ? true : false;
 
-type Deep = ArrayFieldProps<typeof deep, ["foo", "envs"]>;
+type Deep = ArrayFieldProps<typeof deep, [3]>;
 
 const d3 = { deep };
 
@@ -156,11 +174,9 @@ export function ArrayField<
 }: ArrayFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   const { add, remove } = useArrayFieldActions(form, builder, path);
 
-  const array: FormFields[] = useMemo(() => {
+  const array: ArrayFields = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return path.reduce(
@@ -168,7 +184,7 @@ export function ArrayField<
       // @ts-ignore
       (fields, key) => fields[key],
       fieldAtoms
-    ) as FormFields[];
+    ) as ArrayFields;
   }, [path, fieldAtoms]);
 
   return (
@@ -191,3 +207,13 @@ export function ArrayField<
     </>
   );
 }
+
+const Simple = () => (
+  <ArrayField
+    form={formAtom(fields)}
+    path={["envs"]}
+    builder={() => ({ varName: fieldAtom({ value: 0 }) })}
+  >
+    {({ fields }) => <></>}
+  </ArrayField>
+);
