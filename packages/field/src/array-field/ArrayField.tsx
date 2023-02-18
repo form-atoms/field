@@ -89,24 +89,25 @@ type RecurrFormFields = FormFields | ArrayFields;
 
 type ArrayFieldPropsRecurr<
   Fields extends RecurrFormFields,
-  Path extends (string | number)[],
-  Form,
-  RPath extends (string | number)[]
+  Path extends (string | number)[]
 > = Path extends [
   infer P extends keyof Fields,
   ...infer R extends (string | number)[]
 ]
   ? Fields[P] extends RecurrFormFields
-    ? ArrayFieldPropsRecurr<Fields[P], R, Form, [...RPath, Exclude<P, symbol>]>
-    : never // ["ERR: Path ", P, " is neither array nor fields object."]
-  : Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
-  ? {
-      path: [...RPath];
-      form: Form;
-      builder: () => Item;
-    } & ArrayItemRenderProps<Item> &
-      RenderProps
-  : never; //"ERR: Can't infer array at path";
+    ? ArrayFieldPropsRecurr<Fields[P], R>
+    : 3 // ["ERR: Path ", P, " is neither array nor fields object."]
+  : {
+      builder: () => Fields extends (infer Item extends
+        | FieldAtom<any>
+        | FormFields)[]
+        ? Item
+        : never;
+    } & ArrayItemRenderProps<
+      Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
+        ? Item
+        : never
+    >;
 
 export type ArrayFieldProps<
   Fields extends FormFields,
@@ -116,14 +117,12 @@ export type ArrayFieldProps<
   ...infer Rest extends (string | number)[]
 ]
   ? Fields[P] extends RecurrFormFields
-    ? ArrayFieldPropsRecurr<
+    ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
         Fields[P],
-        Rest,
-        FormAtom<Fields>,
-        [Exclude<P, symbol>]
+        Rest
       >
-    : never // ["ERR:", P, "Path is neither array nor fields object."]
-  : never; // ["ERR:", Path, "is not a valid key path in", Fields];
+    : 2
+  : 1;
 
 const fields = {
   envs: [{ varName: fieldAtom({ value: 0 }) }],
@@ -171,7 +170,18 @@ export function ArrayField<
   DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
-}: ArrayFieldProps<Fields, Path>) {
+}: RenderProps &
+  (Path extends [
+    infer P extends keyof Fields,
+    ...infer Rest extends (string | number)[]
+  ]
+    ? Fields[P] extends RecurrFormFields
+      ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
+          Fields[P],
+          Rest
+        >
+      : Record<string, number>
+    : Record<string, number>)) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
@@ -210,8 +220,8 @@ export function ArrayField<
 
 const Simple = () => (
   <ArrayField
-    form={formAtom(fields)}
     path={["envs"]}
+    form={formAtom(fields)}
     builder={() => ({ varName: fieldAtom({ value: 0 }) })}
   >
     {({ fields }) => <></>}
