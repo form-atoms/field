@@ -22,9 +22,9 @@ export const ArrayField = <
        *  @ts-ignore */}
       <HeadlessArrayField
         {...arrayProps}
-        DeleteItemButton={({ remove }) => (
+        RemoveItemButton={({ remove }) => (
           <Button color="failure" onClick={remove}>
-            Delete
+            Remove
           </Button>
         )}
         AddItemButton={({ add }) => (
@@ -37,7 +37,7 @@ export const ArrayField = <
           <Card>
             <div className="flex justify-between">
               {props.index}
-              <props.DeleteItemButton />
+              <props.RemoveItemButton />
             </div>
             {children(props)}
           </Card>

@@ -56,9 +56,9 @@ export function arrayFieldAtoms<Fields extends FormFields>(
   return values.map(builder);
 }
 
-export type DeleteItemButtonProp = RenderProp<
+export type RemoveItemButtonProp = RenderProp<
   { remove: () => void },
-  "DeleteItemButton"
+  "RemoveItemButton"
 >;
 
 export type AddItemButtonProp = RenderProp<
@@ -69,7 +69,7 @@ export type AddItemButtonProp = RenderProp<
 export type EmptyMessageProp = RenderProp<unknown, "EmptyMessage">;
 
 type RenderProps = Partial<
-  DeleteItemButtonProp & AddItemButtonProp & EmptyMessageProp
+  RemoveItemButtonProp & AddItemButtonProp & EmptyMessageProp
 >;
 
 export type ArrayItemRenderProps<Fields> = RenderProp<
@@ -78,7 +78,7 @@ export type ArrayItemRenderProps<Fields> = RenderProp<
     fields: Fields;
     add: () => void;
     remove: (index: number) => void;
-  } & RenderProp<unknown, "DeleteItemButton">
+  } & RenderProp<unknown, "RemoveItemButton">
 >;
 
 type ArrayFields = FieldAtom<any>[] | FormFields[];
@@ -136,7 +136,7 @@ export function ArrayField<
   builder,
   keyFrom,
   children,
-  DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
+  RemoveItemButton = ({ remove }) => <button onClick={remove}>remove</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
 }: ArrayFieldProps<Fields, Path>) {
@@ -173,8 +173,8 @@ export function ArrayField<
             // @ts-ignore
             fields,
             index,
-            DeleteItemButton: () => (
-              <DeleteItemButton remove={() => remove(index)} />
+            RemoveItemButton: () => (
+              <RemoveItemButton remove={() => remove(index)} />
             ),
           })}
         </Fragment>
