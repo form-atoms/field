@@ -121,8 +121,8 @@ export type ArrayFieldProps<
         Fields[P],
         Rest
       >
-    : 2
-  : 1;
+    : never
+  : never;
 
 const fields = {
   envs: [{ varName: fieldAtom({ value: 0 }) }],
@@ -162,7 +162,8 @@ type Nested = ArrayFieldProps<typeof nested, ["addresses", 0, "people"]>;
 export function ArrayField<
   Fields extends FormFields,
   Path extends (string | number)[]
->({
+>(props: RenderProps & ArrayFieldProps<Fields, Path>): JSX.Element;
+export function ArrayField({
   path,
   form,
   builder,
@@ -170,18 +171,7 @@ export function ArrayField<
   DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
-}: RenderProps &
-  (Path extends [
-    infer P extends keyof Fields,
-    ...infer Rest extends (string | number)[]
-  ]
-    ? Fields[P] extends RecurrFormFields
-      ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
-          Fields[P],
-          Rest
-        >
-      : Record<string, number>
-    : Record<string, number>)) {
+}: any) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
