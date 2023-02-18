@@ -45,7 +45,12 @@ export const PhonesArrayField: FormStory = {
   args: {
     fields: formFields,
     children: ({ form }: VariantProps<typeof formFields>) => (
-      <ArrayField path={["phones"]} form={form} builder={phoneBuilder}>
+      <ArrayField
+        keyFrom="number"
+        path={["phones"]}
+        form={form}
+        builder={phoneBuilder}
+      >
         {({ fields, index }) => (
           <Fragment key={index}>
             <TextField label="number" field={fields.number} />

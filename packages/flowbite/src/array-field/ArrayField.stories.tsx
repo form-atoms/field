@@ -41,7 +41,12 @@ export const AddressesArrayField: FormStory = {
   args: {
     fields,
     children: ({ form }: VariantProps<typeof fields>) => (
-      <ArrayField path={["addresses"]} form={form} builder={addressBuilder}>
+      <ArrayField
+        keyFrom="city"
+        path={["addresses"]}
+        form={form}
+        builder={addressBuilder}
+      >
         {({ fields, index }) => (
           <div key={index} className="grid grid-flow-col grid-cols-2 gap-4">
             <TextField label="City" field={fields.city} />

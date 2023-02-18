@@ -1,38 +1,46 @@
-import { ArrayField as HeadlessArrayField } from "@form-atoms/field";
+import {
+  ArrayFieldProps,
+  ArrayField as HeadlessArrayField,
+} from "@form-atoms/field";
 import { Button, Card, Label } from "flowbite-react";
+import { FormFields } from "form-atoms";
+import { ReactNode } from "react";
 
-export const ArrayField: typeof HeadlessArrayField = ({
+export const ArrayField = <
+  Fields extends FormFields,
+  Path extends (string | number)[]
+>({
   label,
   children,
-  AddItemButton = ({ add }: any) => (
-    <Button color="gray" onClick={add}>
-      Add Item
-    </Button>
-  ),
-  ...props
-}: any) => {
+  ...arrayProps
+}: ArrayFieldProps<Fields, Path> & Partial<{ label: ReactNode }>) => {
   return (
     <>
       {label && <Label>{label}</Label>}
+      {/**
+       *  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+       *  @ts-ignore */}
       <HeadlessArrayField
-        {...props}
-        DeleteItemButton={({ remove }) => (
+        {...arrayProps}
+        RemoveItemButton={({ remove }) => (
           <Button color="failure" onClick={remove}>
-            Delete
+            Remove
           </Button>
         )}
-        AddItemButton={AddItemButton}
+        AddItemButton={({ add }) => (
+          <Button color="gray" onClick={add}>
+            Add Item
+          </Button>
+        )}
       >
         {(props) => (
-          <>
-            <Card>
-              <div className="flex justify-between">
-                {props.index}
-                <props.DeleteItemButton />
-              </div>
-              {children(props)}
-            </Card>
-          </>
+          <Card>
+            <div className="flex justify-between">
+              {props.index}
+              <props.RemoveItemButton />
+            </div>
+            {children(props)}
+          </Card>
         )}
       </HeadlessArrayField>
     </>

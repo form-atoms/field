@@ -7,14 +7,17 @@ import {
   useFormActions,
 } from "form-atoms";
 import { del, push } from "object-path-immutable";
-import React, { useCallback, useMemo } from "react";
+import React, { Fragment, useCallback, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 // TODO: array field should have possible validation attached e.g.  min(n).max(m) to have array of <n, m> items.
-export const useArrayFieldActions = <Fields extends FormFields>(
+export const useArrayFieldActions = <
+  Fields extends FormFields,
+  Item extends FieldAtom<any> | FormFields
+>(
   form: FormAtom<Fields>,
-  builder: () => Fields,
-  path: string[]
+  builder: () => Item,
+  path: (string | number)[]
 ) => {
   const { updateFields } = useFormActions(form);
 
@@ -22,7 +25,6 @@ export const useArrayFieldActions = <Fields extends FormFields>(
     (index: number) => {
       return updateFields((current) => {
         console.log(current, [...path, index], del(current, [...path, index]));
-
         return del(current, [...path, index]);
       });
     },
@@ -54,9 +56,9 @@ export function arrayFieldAtoms<Fields extends FormFields>(
   return values.map(builder);
 }
 
-export type DeleteItemButtonProp = RenderProp<
+export type RemoveItemButtonProp = RenderProp<
   { remove: () => void },
-  "DeleteItemButton"
+  "RemoveItemButton"
 >;
 
 export type AddItemButtonProp = RenderProp<
@@ -67,7 +69,7 @@ export type AddItemButtonProp = RenderProp<
 export type EmptyMessageProp = RenderProp<unknown, "EmptyMessage">;
 
 type RenderProps = Partial<
-  DeleteItemButtonProp & AddItemButtonProp & EmptyMessageProp
+  RemoveItemButtonProp & AddItemButtonProp & EmptyMessageProp
 >;
 
 export type ArrayItemRenderProps<Fields> = RenderProp<
@@ -76,73 +78,73 @@ export type ArrayItemRenderProps<Fields> = RenderProp<
     fields: Fields;
     add: () => void;
     remove: (index: number) => void;
-  } & RenderProp<never, "DeleteItemButton">
+  } & RenderProp<unknown, "RemoveItemButton">
 >;
+
+type ArrayFields = FieldAtom<any>[] | FormFields[];
+
+type RecurrFormFields = FormFields | ArrayFields;
+
+type ArrayFieldPropsRecurr<
+  Fields extends RecurrFormFields,
+  Path extends (string | number)[]
+> = Path extends [
+  infer P extends keyof Fields,
+  ...infer R extends (string | number)[]
+]
+  ? Fields[P] extends RecurrFormFields
+    ? ArrayFieldPropsRecurr<Fields[P], R>
+    : never
+  : {
+      builder: () => Fields extends (infer Item extends
+        | FieldAtom<any>
+        | FormFields)[]
+        ? Item
+        : never;
+    } & (Fields extends (infer F extends FormFields)[]
+      ? { keyFrom: keyof F }
+      : // key not needed for FieldAtom<any>[], atom itself will be key
+        { keyFrom?: never }) &
+      ArrayItemRenderProps<
+        Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
+          ? Item
+          : never
+      >;
+
+export type ArrayFieldProps<
+  Fields extends FormFields,
+  Path extends (string | number)[]
+> = RenderProps &
+  (Path extends [
+    infer P extends keyof Fields,
+    ...infer Rest extends (string | number)[]
+  ]
+    ? Fields[P] extends RecurrFormFields
+      ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
+          Fields[P],
+          Rest
+        >
+      : never
+    : never);
 
 export function ArrayField<
   Fields extends FormFields,
-  P1 extends keyof Fields,
-  P2 extends Extract<keyof Fields[P1], number>,
-  P3 extends keyof Fields[P1][P2]
->(
-  props: {
-    path: [P1, P2, P3];
-    form: Fields[P1][P2][P3] extends FormFields[] ? FormAtom<Fields> : never;
-    builder: () => Fields[P1][P2][P3] extends (infer ItemFields)[]
-      ? ItemFields
-      : never;
-  } & ArrayItemRenderProps<
-    Fields[P1][P2][P3] extends (infer ItemFields)[] ? ItemFields : never
-  > &
-    RenderProps
-): JSX.Element;
-export function ArrayField<
-  Fields extends FormFields,
-  P1 extends keyof Fields,
-  P2 extends keyof Fields[P1]
->(
-  props: {
-    path: [P1, P2];
-    form: FormAtom<Fields>;
-    builder: () => Fields[P1][P2] extends (infer ItemType)[] ? ItemType : never;
-  } & ArrayItemRenderProps<
-    Fields[P1][P2] extends (infer ItemFields)[] ? ItemFields : never
-  > &
-    RenderProps
-): JSX.Element;
-export function ArrayField<Fields extends FormFields, P1 extends keyof Fields>(
-  props: {
-    path: [P1];
-    form: Fields[P1] extends FormFields[]
-      ? FormAtom<Fields>
-      : Fields[P1] extends FieldAtom<unknown>[]
-      ? FormAtom<Fields>
-      : never;
-    builder: () => Fields[P1] extends (infer ItemType)[] ? ItemType : never;
-  } & ArrayItemRenderProps<
-    Fields[P1] extends (infer ItemFields)[] ? ItemFields : never
-  > &
-    RenderProps
-): JSX.Element;
-export function ArrayField<Fields extends FormFields>({
+  Path extends (string | number)[]
+>({
   path,
   form,
   builder,
+  keyFrom,
   children,
-  DeleteItemButton = ({ remove }) => <button onClick={remove}>delete</button>,
+  RemoveItemButton = ({ remove }) => <button onClick={remove}>remove</button>,
   AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
   EmptyMessage,
-}: {
-  path: string[];
-  form: FormAtom<Fields>;
-  builder: () => Fields;
-} & ArrayItemRenderProps<unknown> &
-  RenderProps) {
+}: ArrayFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);
 
   const { add, remove } = useArrayFieldActions(form, builder, path);
 
-  const array: FormFields[] = useMemo(() => {
+  const array: ArrayFields = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return path.reduce(
@@ -150,23 +152,33 @@ export function ArrayField<Fields extends FormFields>({
       // @ts-ignore
       (fields, key) => fields[key],
       fieldAtoms
-    ) as FormFields[];
+    ) as ArrayFields;
   }, [path, fieldAtoms]);
+
+  const keyFn = (fields: FieldAtom<any> | FormFields) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return typeof keyFrom === "string" ? `${fields[keyFrom]}` : `${fields}`;
+  };
 
   return (
     <>
       {array.length === 0 && EmptyMessage ? <EmptyMessage /> : undefined}
-      {array.map((fields, index) =>
-        children({
-          add,
-          remove,
-          fields,
-          index,
-          DeleteItemButton: () => (
-            <DeleteItemButton remove={() => remove(index)} />
-          ),
-        })
-      )}
+      {array.map((fields, index) => (
+        <Fragment key={keyFn(fields)}>
+          {children({
+            add,
+            remove,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            fields,
+            index,
+            RemoveItemButton: () => (
+              <RemoveItemButton remove={() => remove(index)} />
+            ),
+          })}
+        </Fragment>
+      ))}
       <AddItemButton add={add} />
     </>
   );
