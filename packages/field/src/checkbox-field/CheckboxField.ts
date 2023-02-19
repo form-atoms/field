@@ -9,14 +9,13 @@ export const checkboxField = (
 ) =>
   validatedFieldAtom({
     value: false,
-    schema: config.optional
-      ? z.boolean()
-      : z.literal(true, {
-          errorMap: (issue) => {
-            return issue.code === "invalid_literal"
-              ? { message: "This field is required" }
-              : { message: issue.message ?? "Invalid" };
-          },
-        }),
+    schema: z.literal(true, {
+      errorMap: (issue) => {
+        return issue.code === "invalid_literal"
+          ? { message: "This field is required" }
+          : { message: issue.message ?? "Invalid" };
+      },
+    }),
+    optionalSchema: z.boolean(),
     ...config,
   });

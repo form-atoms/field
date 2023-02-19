@@ -7,6 +7,7 @@ import { z } from "zod";
 type ValidationConfig = {
   optional?: boolean;
   schema: z.Schema | ((get: Getter) => z.Schema);
+  optionalSchema?: z.Schema | ((get: Getter) => z.Schema);
 };
 
 export type ValidatedFieldAtomConfig<Value> = FieldAtomConfig<Value> &
@@ -27,6 +28,7 @@ export type ValidatedFieldAtom<Value> = FieldAtom<Value> extends Atom<infer R>
 export const validatedFieldAtom = <Value>({
   optional = false, // all fields required similarly as zod is required by default
   schema,
+  optionalSchema,
   ...atomConfig
 }: ValidatedFieldAtomConfig<Value>): ValidatedFieldAtom<Value> => {
   const requiredAtom = atomWithReset(!optional);
@@ -36,8 +38,12 @@ export const validatedFieldAtom = <Value>({
       (get) => {
         const required = get(requiredAtom);
         const schemaObj = typeof schema === "function" ? schema(get) : schema;
+        const optionalSchemaObj =
+          typeof optionalSchema === "function"
+            ? optionalSchema(get)
+            : optionalSchema ?? schemaObj; // fallback to schema when optional not customized
 
-        return required ? schemaObj : schemaObj.optional();
+        return required ? schemaObj : optionalSchemaObj.optional();
       },
       {
         on: "change",
