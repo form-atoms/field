@@ -1,14 +1,16 @@
 import {
   FieldProps,
   ValidatedFieldAtom,
+  useCheckboxFieldProps,
   useRequiredActions,
   useRequiredProps,
-  useSelectFieldProps,
 } from "@form-atoms/field";
 import { HelperText, Label, Radio } from "flowbite-react";
 import { useFieldActions } from "form-atoms";
+import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 
+import { RadioControlAtom } from "./RadioControl";
 import { useFieldError } from "../hooks";
 
 export const RadioField = <Field extends ValidatedFieldAtom<boolean>>({
@@ -18,56 +20,62 @@ export const RadioField = <Field extends ValidatedFieldAtom<boolean>>({
   label,
   helperText,
 }: FieldProps<Field> & {
-  control: ValidatedFieldAtom<string>;
+  control: RadioControlAtom;
 }) => {
-  const { value: activeValue, ...props } = useSelectFieldProps(control);
-  const value = `${field}`;
+  const id = `${field}`;
+  const props = useCheckboxFieldProps(field);
   const actions = useFieldActions(field);
-  const controlActions = useFieldActions(control);
-  const activeValueRef = useRef(activeValue);
   const requiredActions = useRequiredActions(field);
-
+  const { error } = useFieldError(field);
   const { isFieldRequired, ...requiredProps } = useRequiredProps(
     field,
     required
   );
-
-  useEffect(() => {
-    activeValueRef.current = activeValue;
-  }, [activeValue]);
-
-  useEffect(() => {
-    requiredActions.setRequired(!activeValue);
-
-    actions.setValue(value === activeValue);
-  }, [activeValue]);
+  const [radioAtom, setRadioControl] = useAtom(control);
+  const radioAtomRef = useRef(radioAtom);
 
   /**
-   * Given the array field is stable rendered in list via some item's atomKey,
+   * When radio is checked, signal to the control, so the others radios will uncheck.
+   */
+  useEffect(() => {
+    if (props.checked) {
+      setRadioControl(field);
+    }
+  }, [props.checked]);
+
+  useEffect(() => {
+    /**
+     * Make radios required when none is active, or optional when some is active.
+     */
+    requiredActions.setRequired(!radioAtom);
+
+    /**
+     * When the control changed, check/uncheck self and.
+     */
+    if (radioAtom) {
+      actions.setValue(field === radioAtom);
+    }
+
+    radioAtomRef.current = radioAtom;
+  }, [radioAtom]);
+
+  /**
+   * Given the array field is stable rendered in list via it's atomKey,
    * the effect cleanup callback can be called only when we destroy this item.
-   * REF is hacky here, to get access to current select value.
    */
   useEffect(() => {
     return () => {
-      if (activeValueRef.current === value) {
-        controlActions.setValue(undefined);
+      if (radioAtomRef.current === field) {
+        setRadioControl(undefined);
       }
     };
   }, []);
 
-  const { error } = useFieldError(control);
-
   return (
     <div className="flex items-center gap-2">
-      <Radio
-        {...props}
-        id={value}
-        value={value}
-        {...requiredProps}
-        role="radio"
-      />
+      <Radio {...props} id={id} {...requiredProps} role="radio" />
       <div className="flex flex-col">
-        <Label htmlFor={value} color={error ? "failure" : undefined}>
+        <Label htmlFor={id} color={error ? "failure" : undefined}>
           {label} {isFieldRequired ? "(required)" : ""}
         </Label>
         <HelperText

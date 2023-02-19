@@ -1,16 +1,26 @@
-import { ValidatedFieldAtom, selectField } from "@form-atoms/field";
+import { ValidatedFieldAtom } from "@form-atoms/field";
+import { atom } from "jotai";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
+
+type AtomValue = ValidatedFieldAtom<boolean> | undefined;
+
+const radioControlAtom = () => atom<AtomValue>(undefined);
+
+export type RadioControlAtom = ReturnType<typeof radioControlAtom>;
 
 export const RadioControl = ({
   name,
   children,
-}: { name: string } & RenderProp<{ control: ValidatedFieldAtom<string> }>) => {
+}: Partial<{ name: string }> & RenderProp<{ control: RadioControlAtom }>) => {
   /**
-   * Field to keep track of currently active radio option.
-   * This field is private and should not be passed to useForm().
+   * Atom to keep track of currently active checkbox fieldAtom.
    */
-  const control = useMemo(() => selectField({ name }), [name]);
+  const control = useMemo(() => {
+    const atom = radioControlAtom();
+    atom.debugLabel = `radioControl/${name}`;
+    return atom;
+  }, []);
 
   return children({ control });
 };
