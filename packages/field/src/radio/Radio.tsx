@@ -1,37 +1,60 @@
+import { useFieldActions, useFieldValue } from "form-atoms";
+import { useAtom } from "jotai";
+import { useEffect, useRef } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { FieldProps, ValidatedFieldAtom } from "../field";
-import { useFieldError } from "../field/useFieldError";
-import { useSelectFieldProps } from "../select-field";
+import { RadioControlAtom } from "./RadioControl";
+import { ValidatedFieldAtom, useRequiredActions } from "../field";
 
-type ChildrenProps = ReturnType<typeof useSelectFieldProps> & {
-  checked: boolean;
-  "aria-checked": boolean;
-  role: "radio";
-  error?: string;
+type Props = {
+  control: RadioControlAtom;
+  field: ValidatedFieldAtom<boolean>;
 };
 
-export const Radio = <Field extends ValidatedFieldAtom<any>>({
-  field,
-  value,
-  children,
-  ...uiProps
-}: FieldProps<Field> &
-  RenderProp<ChildrenProps> & { value: string; name?: string }) => {
-  const props = useSelectFieldProps(field);
+export const useRadio = ({ control, field }: Props) => {
+  const checked = useFieldValue(field);
+  const actions = useFieldActions(field);
+  const requiredActions = useRequiredActions(field);
+  const [radioAtom, setRadioControl] = useAtom(control);
+  const radioAtomRef = useRef(radioAtom);
 
-  const { error } = useFieldError(field);
+  /**
+   * When radio is checked, signal to the control, so the others radios will uncheck.
+   */
+  useEffect(() => {
+    if (checked) {
+      setRadioControl(field);
+    }
+  }, [checked]);
 
-  const checked = props.value === value;
+  useEffect(() => {
+    /**
+     * Make radios required when none is active, or optional when some is active.
+     */
+    requiredActions.setRequired(!radioAtom);
 
-  return children({
-    ...props,
-    id: value,
-    value,
-    role: "radio",
-    error,
-    name: uiProps.name ?? props.name,
-    checked,
-    "aria-checked": checked,
-  });
+    /**
+     * When the control changed, check/uncheck self and.
+     */
+    if (radioAtom) {
+      actions.setValue(field === radioAtom);
+    }
+
+    radioAtomRef.current = radioAtom;
+  }, [radioAtom]);
+
+  /**
+   * Given the array field is stable rendered in list via it's atomKey,
+   * the effect cleanup callback can be called only when we destroy this item.
+   */
+  useEffect(() => {
+    return () => {
+      if (radioAtomRef.current === field) {
+        setRadioControl(undefined);
+      }
+    };
+  }, []);
 };
+
+export const Radio = ({ field, control, children }: Props & RenderProp<void>) =>
+  children(useRadio({ control, field }));

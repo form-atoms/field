@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useMemo } from "react";
 
 import { ValidatedFieldAtom } from "./field";
@@ -26,5 +26,19 @@ export const useRequiredProps = <Value>(
       "aria-required": required,
     }),
     [required, isFieldRequired]
+  );
+};
+
+export const useRequiredActions = <Value>(
+  fieldAtom: ValidatedFieldAtom<Value>
+) => {
+  const field = useAtomValue(fieldAtom);
+  const setRequired = useSetAtom(field.required);
+
+  return useMemo(
+    () => ({
+      setRequired,
+    }),
+    [setRequired]
   );
 };

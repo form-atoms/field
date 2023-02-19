@@ -1,14 +1,12 @@
 import {
-  Radio as RadioOption,
-  arrayFieldAtoms,
-  numberField,
-  selectField,
+  Radio,
+  RadioControl,
+  checkboxField,
   textField,
 } from "@form-atoms/field";
-import { HelperText, Label, Radio } from "flowbite-react";
-import { Fragment } from "react";
 
 import { ArrayField } from "./ArrayField";
+import { RadioOption } from "../radio-option";
 import { FormStory, VariantProps, meta } from "../stories";
 import { TextField } from "../text-field";
 
@@ -18,66 +16,64 @@ export default {
 };
 
 type Phone = {
-  number: string;
-  primary?: boolean;
+  number?: string;
+  primary: boolean;
 };
 
 const phoneBuilder = (
-  { number }: Phone | undefined = {
-    number: "",
+  { number, primary }: Phone | undefined = {
+    number: undefined,
+    primary: false,
   }
 ) => ({
-  number: textField({
-    name: "number",
-    value: number,
+  number: textField({ name: "number", value: number }),
+  primary: checkboxField({
+    name: "primaryPhone",
+    value: primary,
   }),
 });
 
 const formFields = {
-  primaryPhone: selectField({ name: "primaryPhone" }),
-  phones: arrayFieldAtoms(phoneBuilder, [
-    { number: "+421 933 888 999" },
-    { number: "+420 905 100 200" },
-  ]),
+  phones: [
+    { number: "+421 933 888 999", primary: true },
+    { number: "+420 905 100 200", primary: false },
+  ].map(phoneBuilder),
 };
 
 export const PhonesArrayField: FormStory = {
   args: {
     fields: formFields,
-    children: ({ form }: VariantProps<typeof formFields>) => (
-      <ArrayField
-        keyFrom="number"
-        path={["phones"]}
-        form={form}
-        builder={phoneBuilder}
-      >
-        {({ fields, index }) => (
-          <Fragment key={index}>
-            <TextField label="number" field={fields.number} />
-            <RadioOption field={formFields.primaryPhone} value={`${index}`}>
-              {({ id, ref, error, ...props }) => (
-                <>
-                  <div className="flex items-center gap-2">
-                    <Radio role="radio" id={id} {...props} />
-                    <div className="flex flex-col">
-                      <Label htmlFor={id} color={error ? "failure" : undefined}>
-                        Primary number
-                      </Label>
-                      <HelperText
-                        className="mt-0 text-xs"
-                        color={error ? "failure" : undefined}
-                      >
-                        {error ??
-                          "SMS to this phone will be used for authentication purposes"}
-                      </HelperText>
-                    </div>
-                  </div>
-                </>
-              )}
-            </RadioOption>
-          </Fragment>
+    children: ({ required, form }: VariantProps<typeof formFields>) => (
+      <RadioControl name="primaryPhone">
+        {({ control }) => (
+          <ArrayField
+            keyFrom="primary"
+            form={form}
+            path={["phones"]}
+            builder={phoneBuilder}
+          >
+            {({ fields }) => (
+              <>
+                <TextField
+                  field={fields.number}
+                  required={required}
+                  label="Phone Number"
+                />
+                <Radio control={control} field={fields.primary}>
+                  {() => (
+                    <RadioOption
+                      field={fields.primary}
+                      required={required}
+                      label="Primary Phone"
+                      helperText="SMS to this phone will be used for authentication purposes"
+                    />
+                  )}
+                </Radio>
+              </>
+            )}
+          </ArrayField>
         )}
-      </ArrayField>
+      </RadioControl>
     ),
   },
 };
