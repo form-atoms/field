@@ -52,9 +52,12 @@ export const validatedFieldAtom = <Value>({
     ...atomConfig,
   });
 
-  return atom((get) => {
+  const validatedAtom = atom((get) => {
     const baseField = get(baseFieldAtom);
 
     return { ...baseField, required: requiredAtom };
   });
+
+  validatedAtom.debugLabel = `${atomConfig.name}/validatedAtom`;
+  return validatedAtom;
 };

@@ -1,4 +1,5 @@
 import "./style.css";
+import { DevTools } from "jotai-devtools";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,3 +10,12 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <>
+      <DevTools />
+      <Story />
+    </>
+  ),
+];

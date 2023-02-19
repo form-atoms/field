@@ -12,5 +12,10 @@
     "@babel/preset-typescript",
     "@babel/preset-react"
   ],
-  "plugins": []
+  "plugins": [
+    // Enables hot reload for atoms
+    "jotai/babel/plugin-react-refresh",
+    // Automatically adds debug labels to the atoms
+    "jotai/babel/plugin-debug-label"
+  ]
 }
