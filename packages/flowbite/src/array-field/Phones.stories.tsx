@@ -1,15 +1,12 @@
 import {
-  Radio as RadioOption,
-  arrayFieldAtoms,
+  Radio,
+  RadioControl,
   checkboxField,
-  numberField,
-  selectField,
   textField,
 } from "@form-atoms/field";
-import { Fragment } from "react";
 
 import { ArrayField } from "./ArrayField";
-import { RadioControl, RadioField } from "../radio";
+import { RadioOption } from "../radio-option";
 import { FormStory, VariantProps, meta } from "../stories";
 import { TextField } from "../text-field";
 
@@ -19,7 +16,7 @@ export default {
 };
 
 type Phone = {
-  number: string;
+  number?: string;
   primary: boolean;
 };
 
@@ -31,17 +28,16 @@ const phoneBuilder = (
 ) => ({
   number: textField({ name: "number", value: number }),
   primary: checkboxField({
-    optional: true,
     name: "primaryPhone",
     value: primary,
   }),
 });
 
 const formFields = {
-  phones: arrayFieldAtoms(phoneBuilder, [
+  phones: [
     { number: "+421 933 888 999", primary: true },
     { number: "+420 905 100 200", primary: false },
-  ]),
+  ].map(phoneBuilder),
 };
 
 export const PhonesArrayField: FormStory = {
@@ -63,13 +59,16 @@ export const PhonesArrayField: FormStory = {
                   required={required}
                   label="Phone Number"
                 />
-                <RadioField
-                  field={fields.primary}
-                  required={required}
-                  control={control}
-                  label="Primary Phone"
-                  helperText="SMS to this phone will be used for authentication purposes"
-                />
+                <Radio control={control} field={fields.primary}>
+                  {() => (
+                    <RadioOption
+                      field={fields.primary}
+                      required={required}
+                      label="Primary Phone"
+                      helperText="SMS to this phone will be used for authentication purposes"
+                    />
+                  )}
+                </Radio>
               </>
             )}
           </ArrayField>
