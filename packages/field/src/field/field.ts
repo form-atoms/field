@@ -55,9 +55,17 @@ export const validatedFieldAtom = <Value>({
   const validatedAtom = atom((get) => {
     const baseField = get(baseFieldAtom);
 
+    baseField.value.debugLabel = `field/value/${atomConfig.name}`;
+    baseField.validateStatus.debugLabel = `field/validateStatus/${atomConfig.name}`;
+    baseField.dirty.debugLabel = `field/dirty/${atomConfig.name}`;
+    baseField.touched.debugLabel = `field/touched/${atomConfig.name}`;
+    baseField.name.debugLabel = `field/name/${atomConfig.name}`;
+    baseField.errors.debugLabel = `field/errors/${atomConfig.name}`;
+    requiredAtom.debugLabel = `field/required/${atomConfig.name}`;
+
     return { ...baseField, required: requiredAtom };
   });
 
-  validatedAtom.debugLabel = `${atomConfig.name}/validatedAtom`;
+  validatedAtom.debugLabel = `field/${atomConfig.name}`;
   return validatedAtom;
 };
