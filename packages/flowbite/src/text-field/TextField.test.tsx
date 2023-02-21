@@ -13,7 +13,7 @@ describe("<TextField />", () => {
 
     render(<TextField field={lastName} label="last name" />);
 
-    await userEvent.click(screen.getByLabelText("last name"));
+    await userEvent.click(screen.getByLabelText("last name", { exact: false }));
 
     expect(screen.getByRole("textbox")).toHaveFocus();
   });

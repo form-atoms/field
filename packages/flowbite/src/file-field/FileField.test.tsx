@@ -13,7 +13,7 @@ describe("<FileField />", () => {
 
     render(<FileField field={profilePic} label="photo" />);
 
-    await userEvent.click(screen.getByLabelText("photo"));
+    await userEvent.click(screen.getByLabelText("photo", { exact: false }));
 
     expect(screen.getByRole("dialog")).toHaveFocus();
   });

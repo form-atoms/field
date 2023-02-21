@@ -20,7 +20,7 @@ describe("<SelectField />", () => {
   it("should focus input when clicked on label", async () => {
     render(<SelectField field={country} {...props} />);
 
-    await userEvent.click(screen.getByLabelText("country"));
+    await userEvent.click(screen.getByLabelText("country", { exact: false }));
 
     expect(screen.getByRole("combobox")).toHaveFocus();
   });
