@@ -4,41 +4,11 @@ import {
   FormFieldValues,
   FormFields,
   useForm,
-  useFormActions,
 } from "form-atoms";
-import { del, push } from "object-path-immutable";
-import React, { Fragment, useCallback, useMemo } from "react";
+import React, { Fragment, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-// TODO: array field should have possible validation attached e.g.  min(n).max(m) to have array of <n, m> items.
-export const useArrayFieldActions = <
-  Fields extends FormFields,
-  Item extends FieldAtom<any> | FormFields
->(
-  form: FormAtom<Fields>,
-  builder: () => Item,
-  path: (string | number)[]
-) => {
-  const { updateFields } = useFormActions(form);
-
-  const remove = useCallback(
-    (index: number) => {
-      return updateFields((current) => {
-        console.log(current, [...path, index], del(current, [...path, index]));
-        return del(current, [...path, index]);
-      });
-    },
-    [form]
-  );
-
-  const add = useCallback(() => {
-    updateFields((current) => {
-      return push(current, path, builder());
-    });
-  }, [form]);
-
-  return { remove, add };
-};
+import { useArrayFieldActions } from "./useArrayFieldActions";
 
 export function arrayFieldAtoms<TValue, TFieldAtom extends FieldAtom<TValue>>(
   builder: (value: TValue) => TFieldAtom,
