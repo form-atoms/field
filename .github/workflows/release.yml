@@ -42,7 +42,7 @@ jobs:
       - name: Build
         uses: borales/actions-yarn@v3.0.0
         with:
-          cmd: workspace @form-atoms/field build
+          cmd: build
 
       - name: Release
         uses: borales/actions-yarn@v3.0.0
@@ -50,4 +50,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
-          cmd: workspace @form-atoms/field semantic-release
+          cmd: semantic-release
