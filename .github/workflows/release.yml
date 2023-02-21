@@ -21,6 +21,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - run: echo ${{ github.workspace }}
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -35,21 +36,18 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install
-        uses: borales/actions-yarn@v3.0.0
+        uses: borales/actions-yarn@v4
         with:
           cmd: install
 
       - name: Build
-        uses: borales/actions-yarn@v3.0.0
+        uses: borales/actions-yarn@v4
         with:
           cmd: build
-
-      # FIX for error: The `semantic-release` command must be executed from a Git repository
-      - name: Checkout
-        uses: actions/checkout@v3
+      - run: echo $GITHUB_WORKSPACE
 
       - name: Release
-        uses: borales/actions-yarn@v3.0.0
+        uses: borales/actions-yarn@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
