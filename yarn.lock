@@ -3185,6 +3185,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@form-atoms/field@npm:0.0.4":
+  version: 0.0.4
+  resolution: "@form-atoms/field@npm:0.0.4"
+  dependencies:
+    form-atoms: 2.0.0
+    jotai: 2.0.0
+    object-path-immutable: 4.1.2
+    react: 18.2.0
+    react-render-prop-type: 0.1.0
+  checksum: e43f9170f24ab8b165658ef34da51dc76c423aa95fdb53bed08e0d1ae4bfe35836eb2e8ac81f9c044f96483775148a5527952210e5ecdd3532a49e2bdc30d483
+  languageName: node
+  linkType: hard
+
 "@form-atoms/field@workspace:*, @form-atoms/field@workspace:.":
   version: 0.0.0-use.local
   resolution: "@form-atoms/field@workspace:."
@@ -3222,7 +3235,7 @@ __metadata:
     "@babel/preset-env": ^7.20.2
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@form-atoms/field": "workspace:*"
+    "@form-atoms/field": 0.0.4
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^7.0.0-beta.46
     "@storybook/addon-docs": ^7.0.0-beta.46

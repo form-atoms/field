@@ -64,7 +64,7 @@
     "vitest": "0.28.4"
   },
   "dependencies": {
-    "@form-atoms/field": "workspace:*",
+    "@form-atoms/field": "0.0.4",
     "flowbite": "1.6.3",
     "flowbite-react": "0.3.8",
     "form-atoms": "2.0.0",
