@@ -1,16 +1,51 @@
 {
-  "name": "form-atoms-field",
+  "name": "@form-atoms/field",
   "packageManager": "yarn@3.4.1",
   "workspaces": [
     "packages/*"
   ],
+  "version": "0.0.0-development",
+  "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
+  "homepage": "https://github.com/MiroslavPetrik/form-atoms-field#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiroslavPetrik/form-atoms-field.git"
+  },
+  "bugs": "https://github.com/MiroslavPetrik/form-atoms-field/issues",
+  "license": "MIT",
+  "keywords": [
+    "react last field",
+    "react atom field",
+    "react field",
+    "react input",
+    "form atoms",
+    "form atoms field",
+    "form fields",
+    "jotai",
+    "jotai form",
+    "jotai form fields",
+    "react",
+    "react form",
+    "react hook field"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint --ext .tsx ./packages",
-    "lint:fix": "yarn run lint --fix"
+    "lint:fix": "yarn run lint --fix",
+    "build": "tsc --build ./tsconfig.build.json --force"
   },
   "devDependencies": {
+    "@dmeents/semantic-release-yarn": "^1.1.2",
+    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/git": "^10.0.1",
     "@types/eslint": "^8",
     "@types/prettier": "^2",
+    "@types/react": "^18",
+    "@types/semantic-release": "^20",
     "@typescript-eslint/eslint-plugin": "5.51.0",
     "@typescript-eslint/parser": "5.51.0",
     "eslint": "8.34.0",
@@ -19,6 +54,39 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.8.4",
-    "storybook": "^6.5.16"
+    "semantic-release": "^20.1.0",
+    "typescript": "4.9.4"
+  },
+  "dependencies": {
+    "form-atoms": "2.0.0",
+    "jotai": "2.0.0",
+    "object-path-immutable": "4.1.2",
+    "react": "18.2.0",
+    "react-render-prop-type": "0.1.0"
+  },
+  "release": {
+    "branches": [
+      "main",
+      {
+        "name": "next",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@dmeents/semantic-release-yarn",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+        }
+      ],
+      "@semantic-release/github"
+    ]
   }
 }
