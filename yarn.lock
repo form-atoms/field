@@ -3263,7 +3263,7 @@ __metadata:
     flowbite: 1.6.3
     flowbite-react: 0.3.8
     form-atoms: 2.0.0
-    happy-dom: ^8.2.6
+    happy-dom: 8.7.1
     jotai: 2.0.0
     jotai-devtools: 0.3.0-next.3
     postcss: 8.4.21
@@ -11497,9 +11497,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^8.2.6":
-  version: 8.2.6
-  resolution: "happy-dom@npm:8.2.6"
+"happy-dom@npm:8.7.1":
+  version: 8.7.1
+  resolution: "happy-dom@npm:8.7.1"
   dependencies:
     css.escape: ^1.5.1
     he: ^1.2.0
@@ -11507,7 +11507,7 @@ __metadata:
     webidl-conversions: ^7.0.0
     whatwg-encoding: ^2.0.0
     whatwg-mimetype: ^3.0.0
-  checksum: a68ed4d9eeb2f255275531865ca959dd2f4a16b205f560e62653b723359e9720be955de61a1c2042fbe6a30ae75d384a22467b25e83b95dc927461e4f950cceb
+  checksum: ca4d6db353225db13b8c5d1746bd76ab60f6074df9e94873ed7ac01048911325868d2e9c970dc05a324462e8bbe37bac03f15fbf859a29ae482d9a0805938ede
   languageName: node
   linkType: hard
 
