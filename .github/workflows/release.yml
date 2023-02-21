@@ -44,6 +44,10 @@ jobs:
         with:
           cmd: build
 
+      # FIX for error: The `semantic-release` command must be executed from a Git repository
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Release
         uses: borales/actions-yarn@v3.0.0
         env:
