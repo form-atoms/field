@@ -2647,18 +2647,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dmeents/semantic-release-yarn@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "@dmeents/semantic-release-yarn@npm:1.1.2"
-  dependencies:
-    "@semantic-release/error": ^3.0.0
-    execa: ^5.1.1
-    read-pkg: ^5.2.0
-    semver: ^7.3.8
-  checksum: 91ffa3f7a235fd7b6520fe82fb3fe0f1e4a7c6ee66bf867046040d50e9e880512108df82e866b5ad8fc5a6793bbe45e730fcbbbc7fad16dfae0d9c4ed58b017a
-  languageName: node
-  linkType: hard
-
 "@emotion/babel-plugin@npm:^11.10.5":
   version: 11.10.5
   resolution: "@emotion/babel-plugin@npm:11.10.5"
@@ -3202,7 +3190,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@form-atoms/field@workspace:."
   dependencies:
-    "@dmeents/semantic-release-yarn": ^1.1.2
     "@semantic-release/changelog": ^6.0.2
     "@semantic-release/git": ^10.0.1
     "@types/eslint": ^8
