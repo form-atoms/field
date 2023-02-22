@@ -97,7 +97,7 @@ Since the [file input is uncontrolled react component](https://reactjs.org/docs/
 
 `@form-atoms/field` comes with `<Fields />` pre-wired to popular UI libraries.
 
-| 📦Package Docs                     | 🎨 Storybook                                             | 📃Official Docs                                                 | About                                          |
-| ---------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
-| [flowbite](./packages/flowbite/)   | [Flowbite Fields](https://form-atoms-field.netlify.app/) | [flowbite-react](https://flowbite-react.com/forms)              | Bindigs to Tailwind component library Flowbite |
-| [chakra-ui](./packages/chakra-ui/) | 🚧 WIP                                                   | [chakra-ui](https://chakra-ui.com/docs/components/form-control) | Bindings to CSS-in-JS library Chakra UI        |
+| 📦Package Docs                                                    | 🎨 Storybook                                             | 📃Official Docs                                                 | About                                          |
+| ----------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
+| [flowbite](https://github.com/MiroslavPetrik/form-atoms-flowbite) | [Flowbite Fields](https://form-atoms-field.netlify.app/) | [flowbite-react](https://flowbite-react.com/forms)              | Bindigs to Tailwind component library Flowbite |
+| [chakra-ui](./packages/chakra-ui/)                                | 🚧 WIP                                                   | [chakra-ui](https://chakra-ui.com/docs/components/form-control) | Bindings to CSS-in-JS library Chakra UI        |
