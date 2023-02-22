@@ -65,7 +65,7 @@ Most UI libraries provide styled primitive `<Input>` components, form `<Label>` 
 
 | Hooks                                                   | About                         |
 | ------------------------------------------------------- | ----------------------------- |
-| [`useClearFileFieldEffect()`](#useClearFileFieldEffect) | A hook to control file input. |
+| [`useClearFileFieldEffect()`](#useclearfilefieldeffect) | A hook to control file input. |
 
 ## Fields
 
@@ -132,11 +132,11 @@ export const Form = () => {
 
 ## Components
 
-### <Field />
+### `<Field />`
 
 TODO
 
-### <ArrayField />
+### `<ArrayField />`
 
 The array field enables you to capture list of items with the same attributes.
 It offers `add` and `remove` callbacks to append new item or drop existing one.
@@ -271,7 +271,7 @@ const AdvancedNestedExample = () => {
 };
 ```
 
-### <RadioContorl />
+### `<RadioControl />`
 
 TODO
 
