@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useMemo } from "react";
 
-import { ValidatedFieldAtom } from "./field";
+import { ValidatedFieldAtom } from "./validatedFieldAtom";
 
 export type RequiredProps = {
   required: boolean;

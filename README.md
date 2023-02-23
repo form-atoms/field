@@ -132,9 +132,67 @@ export const Form = () => {
 
 ## Components
 
-### `<Field />`
+### `<FieldLabel />`
 
-TODO
+#### Features
+
+- ✅ Focuses the associate field input when clicked.
+- ✅ Text selection is prevented when double clicking label.
+
+#### Example
+
+```tsx
+import { textField, FieldLabel } from "@form-atoms/field";
+
+const field = textField();
+
+// render native <label /> with htmlFor props set to field key.
+<FieldLabel field={field} label="User Name" />;
+
+// use field key as id for some input
+<input id={`${field}`} />;
+```
+
+### `<RequirementIndicator />`
+
+#### Features
+
+- ✅ Visually indicate whether the field is optional or required.
+
+#### Example
+
+```tsx
+import { textField, FieldLabel, RequirementIndicator } from "@form-atoms/field";
+
+const field = textField(); // field is required by default
+
+// Enhance the default label with requirement indicator
+<FieldLabel
+  field={field}
+  label={
+    <>
+      User Name <RequirementIndicator field={field} />
+    </>
+  }
+/>;
+
+// Renders:
+// <label>User Name (required)</label>
+
+const optionalField = textField({ optional: true });
+
+<FieldLabel
+  field={optionalField}
+  label={
+    <>
+      Nick Name <RequirementIndicator field={optionalField} />
+    </>
+  }
+/>;
+
+// Renders:
+// <label>Nick Name (optional)</label>
+```
 
 ### `<ArrayField />`
 
@@ -160,8 +218,11 @@ It offers `add` and `remove` callbacks to append new item or drop existing one.
 
 #### Features
 
-- **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
+- ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
   This works thanks to Jotai's atom having `toString()` method providing stable `atomKey`.
+- ✅ Can render `<EmptyMessage />` when array length is 0.
+- ✅ Handles adding and removal of array items.
+- ✅ Supports deeply nested arrays in arrays.
 
 #### Example - [CodeSandbox](https://codesandbox.io/s/form-atoms-field-arrayfield-example-8wdwo4?file=/src/App.tsx)
 
