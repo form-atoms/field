@@ -57,11 +57,12 @@ Most UI libraries provide styled primitive `<Input>` components, form `<Label>` 
 | [`fileField()`](#filefield)         | A fieldAtom to capture `FileList` values. |
 | [`selectField()`](#selectfield)     | A fieldAtom to capture enum values.       |
 
-| Headless Component                  | About                                                          |
-| ----------------------------------- | -------------------------------------------------------------- |
-| [`<Field />`](#field)               | A headless component to control `FieldAtom<any>`.              |
-| [`<ArrayField />`](#arrayfield)     | A headless component to control `FieldAtom<>[]`.               |
-| [`<RadioControl />`](#radiocontrol) | A headless component to control multiple `FieldAtom<boolean>`. |
+| Headless Component                                   | About                                                          |
+| ---------------------------------------------------- | -------------------------------------------------------------- |
+| [`<FieldLabel />`](#fieldlabel-)                     | A headless component with accessible label.                    |
+| [`<RequirementIndicator />`](#requirementindicator-) | Displays an indicator whether a field is required or optional. |
+| [`<ArrayField />`](#arrayfield-)                     | A headless component to control `FieldAtom<>[]`.               |
+| [`<RadioControl />`](#radiocontrol-)                 | A headless component to control multiple `FieldAtom<boolean>`. |
 
 | Hooks                                                   | About                         |
 | ------------------------------------------------------- | ----------------------------- |
