@@ -1,7 +1,6 @@
+import { FieldAtom } from "form-atoms";
 import { MouseEventHandler, ReactNode, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
-
-import { ValidatedFieldAtom } from ".";
 
 type Children = RenderProp<{
   children: ReactNode;
@@ -9,12 +8,15 @@ type Children = RenderProp<{
   onMouseDown: MouseEventHandler;
 }>;
 
-type FieldLabelProps<Field extends ValidatedFieldAtom<any>> = {
+type FieldLabelProps<Field extends FieldAtom<any>> = {
   field: Field;
   label: ReactNode;
 } & Partial<Children>;
 
-export const FieldLabel = <Field extends ValidatedFieldAtom<any>>({
+/**
+ * Renders an accessible label controlling the field's input.
+ */
+export const FieldLabel = <Field extends FieldAtom<any>>({
   field,
   label,
   children = (props) => <label {...props} />,

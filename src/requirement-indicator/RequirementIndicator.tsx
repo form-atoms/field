@@ -1,11 +1,14 @@
-import { useRequiredProps } from "./useRequiredProps";
-import { ValidatedFieldAtom } from "./validatedFieldAtom";
+import { useRequiredProps } from "../field/useRequiredProps";
+import { ValidatedFieldAtom } from "../field/validatedFieldAtom";
 
-type Props<Field extends ValidatedFieldAtom<any>> = {
+export type Props<Field extends ValidatedFieldAtom<any>> = {
   field: Field;
   kind?: "icon" | "label";
 };
 
+/**
+ * Indicates field's required state by using the useRequiredProps() hook.
+ */
 export const RequirementIndicator = <Field extends ValidatedFieldAtom<any>>({
   kind = "icon",
   field,

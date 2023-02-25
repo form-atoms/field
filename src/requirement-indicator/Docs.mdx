@@ -1,0 +1,34 @@
+import {
+  Meta,
+  Source,
+  Canvas,
+  Controls,
+  Markdown,
+  Description,
+} from "@storybook/blocks";
+import * as RequirementIndicatorStories from "./RequirementIndicator.stories";
+import Props from "./props.md?raw";
+
+<Meta title="RequirementIndicator" />
+
+# RequirementIndicator
+
+<Description of={RequirementIndicatorStories} />
+<Canvas sourceState="none" of={RequirementIndicatorStories.Intro} />
+
+```tsx
+import { RequirementIndicator, textField } from "@form-atoms/field";
+
+<RequirementIndicator field={numberField()} kind="icon" />
+<RequirementIndicator field={numberField()} kind="label" />
+<RequirementIndicator field={numberField({ optional: true })} kind="icon" />
+<RequirementIndicator field={numberField({ optional: true })} kind="label" />
+```
+
+## Features
+
+- ✅ Hooks into field's required state via `useRequiredProps()` hook
+
+## Usage
+
+<Markdown>{Props}</Markdown>

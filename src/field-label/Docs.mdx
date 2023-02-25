@@ -1,0 +1,49 @@
+import {
+  Meta,
+  Source,
+  Canvas,
+  Controls,
+  Markdown,
+  Description,
+} from "@storybook/blocks";
+import { FieldLabel } from "./FieldLabel";
+import * as FieldLabelStories from "./FieldLabel.stories";
+import Props from "./props.md?raw";
+import renderProps from "./renderProps.md?raw";
+
+<Meta title="FieldLabel" />
+
+# FieldLabel
+
+<Description of={FieldLabelStories} />
+<Canvas sourceState="none" of={FieldLabelStories.Primary} />
+
+```tsx
+import { FieldLabel, textField } from "@form-atoms/field";
+
+const firstName = textField();
+
+const Example = () => (
+  <>
+    <FieldLabel field={firstName} label="First Name" />
+    {/* NOTE: the fieldAtom's .toString() returns unique id! 🤯 */}
+    <input type="text" id={`${firstName}`} />
+  </>
+);
+```
+
+## Features
+
+- ✅ Focuses the associate field input when clicked.
+- ✅ Text selection is prevented when double clicking label.
+
+## Usage
+
+<Markdown>{Props}</Markdown>
+
+### The `children` render prop usage
+
+Optionally you can override specify custom render function, when you need to override the default `<label>` element.
+
+<Canvas sourceState="shown" of={FieldLabelStories.WithRenderProp} />
+<Markdown>{renderProps}</Markdown>
