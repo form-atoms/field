@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.0...v1.0.1) (2023-02-26)
+
+
+### Bug Fixes
+
+* array field export add/remove button props ([c54fd3e](https://github.com/MiroslavPetrik/form-atoms-field/commit/c54fd3e42e8e92181cbe4f17a9f13e27c5d55e7c))
+
 # 1.0.0 (2023-02-21)
 
 
