@@ -243,7 +243,7 @@ export const WithRadioControl = () => ({
                 {() => (
                   <div style={{ marginBottom: 40 }}>
                     <InputField
-                      atom={fields.isPrimary}
+                      atom={fields.isPrimary as any}
                       render={(props) => (
                         <input
                           type="radio"
