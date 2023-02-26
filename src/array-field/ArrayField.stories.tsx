@@ -1,6 +1,10 @@
 import { InputField, fieldAtom, formAtom } from "form-atoms";
 
-import { ArrayField } from "./ArrayField";
+import {
+  AddItemButtonProps,
+  ArrayField,
+  RemoveItemButtonProps,
+} from "./ArrayField";
 
 export default {
   title: "ArrayField",
@@ -183,14 +187,14 @@ export const Nested = {
   ),
 };
 // This is a button that immutably pushes a new field atom to the hobbies array
-const AddHobbyField = ({ add }: { add: () => void }) => (
+const AddHobbyField = ({ add }: AddItemButtonProps) => (
   <button type="button" className="outline" onClick={add}>
     Add hobby
   </button>
 );
 
 // This is a button that removes current field atom from the hobbies array
-const RemoveButton = ({ remove }: { remove: () => void }) => (
+const RemoveButton = ({ remove }: RemoveItemButtonProps) => (
   <button type="button" className="outline secondary" onClick={remove}>
     Remove
   </button>

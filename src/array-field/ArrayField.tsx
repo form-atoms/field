@@ -26,15 +26,14 @@ export function arrayFieldAtoms<Fields extends FormFields>(
   return values.map(builder);
 }
 
+export type RemoveItemButtonProps = { remove: () => void };
 export type RemoveItemButtonProp = RenderProp<
-  { remove: () => void },
+  RemoveItemButtonProps,
   "RemoveItemButton"
 >;
 
-export type AddItemButtonProp = RenderProp<
-  { add: () => void },
-  "AddItemButton"
->;
+export type AddItemButtonProps = { add: () => void };
+export type AddItemButtonProp = RenderProp<AddItemButtonProps, "AddItemButton">;
 
 export type EmptyMessageProp = RenderProp<unknown, "EmptyMessage">;
 
