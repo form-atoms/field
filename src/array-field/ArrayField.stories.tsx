@@ -5,6 +5,9 @@ import {
   ArrayField,
   RemoveItemButtonProps,
 } from "./ArrayField";
+import { checkboxField } from "../checkbox-field";
+import { FieldLabel } from "../field-label";
+import { Radio, RadioControl } from "../radio";
 
 export default {
   title: "ArrayField",
@@ -186,6 +189,84 @@ export const Nested = {
     </ArrayField>
   ),
 };
+
+const contactForm = formAtom({
+  phones: [
+    {
+      number: fieldAtom({ value: "+421 200 300 500" }),
+      isPrimary: checkboxField({ name: "primaryPhone", value: true }),
+    },
+  ],
+});
+
+export const WithRadioControl = () => ({
+  render: () => (
+    <RadioControl>
+      {({ control }) => (
+        <ArrayField
+          form={contactForm}
+          path={["phones"]}
+          keyFrom="number"
+          builder={() => ({
+            number: fieldAtom({ value: "" }),
+            isPrimary: checkboxField({ name: "primaryPhone" }),
+          })}
+          AddItemButton={({ add }) => (
+            <button type="button" className="outline" onClick={add}>
+              Add contact phone
+            </button>
+          )}
+          RemoveItemButton={RemoveButton}
+        >
+          {({ fields, RemoveItemButton }) => (
+            <>
+              <div
+                style={{
+                  display: "grid",
+                  gridGap: 16,
+                  gridTemplateColumns: "auto min-content",
+                }}
+              >
+                <InputField
+                  atom={fields.number}
+                  render={(props) => (
+                    <input
+                      {...props}
+                      placeholder="Phone number in format +421 xxx xxx xxx"
+                    />
+                  )}
+                />
+
+                <RemoveItemButton />
+              </div>
+              <Radio control={control} field={fields.isPrimary}>
+                {() => (
+                  <div style={{ marginBottom: 40 }}>
+                    <InputField
+                      atom={fields.isPrimary}
+                      render={(props) => (
+                        <input
+                          type="radio"
+                          {...props}
+                          id={`${fields.isPrimary}`}
+                        />
+                      )}
+                    />
+                    <FieldLabel
+                      label="Primary, receive 2FA SMS on this phone."
+                      field={fields.isPrimary}
+                    />
+                  </div>
+                )}
+              </Radio>
+            </>
+          )}
+        </ArrayField>
+      )}
+    </RadioControl>
+  ),
+});
+
 // This is a button that immutably pushes a new field atom to the hobbies array
 const AddHobbyField = ({ add }: AddItemButtonProps) => (
   <button type="button" className="outline" onClick={add}>
