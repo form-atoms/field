@@ -106,8 +106,16 @@ export function ArrayField<
   builder,
   keyFrom,
   children,
-  RemoveItemButton = ({ remove }) => <button onClick={remove}>remove</button>,
-  AddItemButton = ({ add }) => <button onClick={add}>add item</button>,
+  RemoveItemButton = ({ remove }) => (
+    <button type="button" onClick={remove}>
+      Remove
+    </button>
+  ),
+  AddItemButton = ({ add }) => (
+    <button type="button" onClick={add}>
+      Add item
+    </button>
+  ),
   EmptyMessage,
 }: ArrayFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);

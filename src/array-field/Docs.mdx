@@ -17,6 +17,62 @@ import Props from "./props.md?raw";
 
 <Canvas sourceState="none" of={ArrayFieldStories.Primary} />
 
+```tsx
+import { formAtom, fieldAtom } from "form-atoms";
+import { ArrayField } from "@form-atoms/field";
+
+const envForm = formAtom({
+  envVars: [
+    {
+      name: fieldAtom({ value: "API_KEY" }),
+      value: fieldAtom({ value: "ff52d09a" }),
+    },
+  ],
+});
+
+const Example = () => (
+  <ArrayField
+    form={envForm}
+    path={["envVars"]}
+    keyFrom="name"
+    builder={() => ({
+      name: fieldAtom({ value: "" }),
+      value: fieldAtom({ value: "" }),
+    })}
+    AddItemButton={({ add }) => (
+      <button type="button" className="outline" onClick={add}>
+        Add environment variable
+      </button>
+    )}
+    RemoveItemButton={({ remove }) => (
+      <button type="button" className="outline secondary" onClick={remove}>
+        Remove
+      </button>
+    )}
+  >
+    {({ fields, RemoveItemButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto auto min-content",
+        }}
+      >
+        <InputField
+          atom={fields.name}
+          render={(props) => <input {...props} placeholder="Name" />}
+        />
+        <InputField
+          atom={fields.value}
+          render={(props) => <input {...props} placeholder="Value" />}
+        />
+        <RemoveItemButton />
+      </div>
+    )}
+  </ArrayField>
+);
+```
+
 ## Features
 
 - ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.

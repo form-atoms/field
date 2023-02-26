@@ -29,18 +29,18 @@ export const Primary = {
   render: () => (
     <ArrayField
       form={envForm}
-      keyFrom="name"
       path={["envVars"]}
-      AddItemButton={({ add }) => (
-        <button type="button" className="outline" onClick={add}>
-          Add variable
-        </button>
-      )}
-      RemoveItemButton={RemoveButton}
+      keyFrom="name"
       builder={() => ({
         name: fieldAtom({ value: "" }),
         value: fieldAtom({ value: "" }),
       })}
+      AddItemButton={({ add }) => (
+        <button type="button" className="outline" onClick={add}>
+          Add environment variable
+        </button>
+      )}
+      RemoveItemButton={RemoveButton}
     >
       {({ fields, RemoveItemButton }) => (
         <div
