@@ -6,13 +6,11 @@ import { textField } from "../text-field";
 export type LabelStory = StoryObj<typeof meta>;
 
 const meta = {
+  title: "FieldLabel",
   component: FieldLabel,
 } satisfies Meta<typeof FieldLabel>;
 
-export default {
-  title: "FieldLabel",
-  component: FieldLabel,
-};
+export default meta;
 
 export const Primary: LabelStory = {
   args: { field: textField(), label: "First Name" },

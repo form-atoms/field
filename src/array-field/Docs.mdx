@@ -1,0 +1,132 @@
+import {
+  Meta,
+  Source,
+  Canvas,
+  Controls,
+  Markdown,
+  Description,
+} from "@storybook/blocks";
+import * as ArrayFieldStories from "./ArrayField.stories";
+import Props from "./props.md?raw";
+
+<Meta title="ArrayField" />
+
+# ArrayField
+
+<Description of={ArrayFieldStories.Primary} />
+
+<Canvas sourceState="none" of={ArrayFieldStories.Primary} />
+
+## Features
+
+- ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
+  This works thanks to Jotai's atom having `toString()` method providing stable `atomKey`.
+- ✅ Can render `<EmptyMessage />` when array length is 0.
+- ✅ Handles adding and removal of array items.
+- ✅ Supports deeply nested arrays in arrays.
+
+## Usage
+
+```ts
+import { ArrayField } from "@form-atoms/field";
+```
+
+### Props
+
+<Controls of={ArrayFieldStories.Primary} sort="requiredFirst" />
+
+## Examples
+
+### Flat
+
+<Description of={ArrayFieldStories.Flat} />
+
+<Canvas sourceState="none" of={ArrayFieldStories.Flat} />
+
+```tsx
+import { formAtom, fieldAtom } from "form-atoms";
+import { ArrayField } from "@form-atoms/field";
+
+const hobbiesForm = formAtom({
+  hobbies: [fieldAtom({ value: "gardening" })],
+});
+
+// NOTE: the keyFrom prop is not needed as the item/fieldAtom itself is used as the render key default.
+const Example = () => (
+  <ArrayField
+    form={hobbiesForm}
+    path={["hobbies"]}
+    builder={() => fieldAtom({ value: "" })}
+  >
+    {({ fields, RemoveItemButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content",
+        }}
+      >
+        {/* NOTE: The item is itself a field atom */}
+        <InputField atom={fields} component="input" />
+        <RemoveItemButton />
+      </div>
+    )}
+  </ArrayField>
+);
+```
+
+### Nested
+
+ArrayField supports nested array fields.
+For example we can capture multiple people with multiple banking accounts:
+
+<Canvas sourceState="none" of={ArrayFieldStories.Nested} />
+
+```tsx
+const peopleForm = formAtom({
+  // level 0
+  people: [
+    {
+      name: fieldAtom({ value: "Jerry" }),
+      // level 1 (nested)
+      accounts: [{ iban: fieldAtom({ value: "DE10 ..." }) }],
+    },
+  ],
+});
+
+// Note that for nested component we stil provide the root form instance
+// the path prop to array also starts from the root
+const AdvancedNestedExample = () => {
+  return (
+    <ArrayField
+      form={peopleForm}
+      keyFrom="name"
+      path={["people"]}
+      builder={() => ({
+        name: fieldAtom({ value: "" }),
+        accounts: [],
+      })}
+    >
+      {({ fields, index, add, RemoveItemButton }) => (
+        <>
+          <label>Person #{index}</label> <RemoveItemButton />
+          <TextField field={fields.name} label="Name" />
+          <ArrayField
+            form={peopleForm}
+            keyFrom="iban"
+            path={["people", index, "accounts"]}
+            builder={() => ({ iban: fieldAtom({ value: "" }) })}
+          >
+            {({ fields, index, RemoveItemButton }) => (
+              <>
+                <label>Account #{index}</label> <RemoveItemButton />
+                <TextField field={fields.iban} label="IBAN" />
+              </>
+            )}
+          </ArrayField>
+        </>
+      )}
+    </ArrayField>
+  );
+};
+```

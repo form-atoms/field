@@ -26,13 +26,11 @@ const QuantityField = <Field extends ValidatedFieldAtom<any>>({
 );
 
 const meta = {
+  title: "RequirementIndicator",
   component: QuantityField,
 } satisfies Meta<typeof QuantityField>;
 
-export default {
-  title: "RequirementIndicator",
-  component: QuantityField,
-};
+export default meta;
 
 export const Intro: StoryType = {
   args: { field: numberField() },
