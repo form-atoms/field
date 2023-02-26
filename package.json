@@ -35,8 +35,10 @@
   ],
   "scripts": {
     "storybook": "storybook dev -p 6007",
+    "storybook-docs": "storybook dev --docs",
     "sb": "yarn storybook",
     "build-storybook": "storybook build",
+    "build-storybook-docs": "storybook build --docs",
     "lint": "eslint --ext .tsx ./packages",
     "lint:fix": "yarn run lint --fix",
     "build": "tsc --build ./tsconfig.build.json --force",

@@ -1,0 +1,54 @@
+name: storybook-docs
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Build Package
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
+
+      - name: Build Storybook Docs
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build-storybook-docs
+
+      - name: Upload Storybook
+        uses: actions/upload-pages-artifact@v1.0.4
+        with:
+          path: storybook-static
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        with:
+          token: ${{ github.token }}
