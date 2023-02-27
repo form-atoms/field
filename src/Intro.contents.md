@@ -1,7 +1,14 @@
+### Fields
+
+|                                                           |                                                            |
+| --------------------------------------------------------- | ---------------------------------------------------------- |
+| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                     |
+| [booleanField()](?path=/docs/fields-booleanfield--docs)   | 3-state checkbox with `true`, `false` or `undefined` value |
+
 ### Components
 
-|                                                                |                                                                |
-| -------------------------------------------------------------- | -------------------------------------------------------------- |
-| [FieldLabel](?path=/docs/fieldlabel--docs)                     | A headless component with accessible label.                    |
-| [RequirementIndicator](?path=/docs/requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
-| [ArrayField](?path=/docs/arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |
+|                                                                           |                                                                |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
+| [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
+| [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |

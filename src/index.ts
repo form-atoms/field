@@ -1,4 +1,5 @@
 export * from "./components/array-field";
+export * from "./fields/boolean-field";
 export * from "./fields/checkbox-field";
 export * from "./fields";
 export * from "./fields/file-field";

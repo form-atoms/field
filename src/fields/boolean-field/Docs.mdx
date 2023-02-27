@@ -1,0 +1,25 @@
+import { Meta, Markdown } from "@storybook/blocks";
+
+import Config from "./config.md?raw";
+
+<Meta title="fields/booleanField" />
+
+# `booleanField(): ValidatedFieldAtom<boolean | undefined>`
+
+A field which will have `true`, `false` or `undefined` value.
+You can think of it like 3-state checkbox. Sometimes, you can't initialize form with `false` checkbox, as the user must explicitly pick
+yes/no answer. This field starts in 'unanswered' state.
+
+```ts
+import { booleanField } from "@form-atoms/field";
+
+// required yes/no answer, value must be changed by user to true or false
+const yesNoAnswer = booleanField({
+  name: "agreesWithFuneralTerms"
+  required_error: "Please click yes or no button.",
+});
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
