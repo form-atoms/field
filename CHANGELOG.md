@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.3...v1.0.4) (2023-02-27)
+
+
+### Bug Fixes
+
+* fileField w/ configurable required message ([97f7ecd](https://github.com/MiroslavPetrik/form-atoms-field/commit/97f7ecd7a2ae997f88b7fd569ba84a7fdf21e98c))
+
 ## [1.0.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.2...v1.0.3) (2023-02-27)
 
 
