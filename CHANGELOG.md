@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.2...v1.0.3) (2023-02-27)
+
+
+### Bug Fixes
+
+* add boolean field ([2d93cda](https://github.com/MiroslavPetrik/form-atoms-field/commit/2d93cda9bec8db9f9887f7dc40c8439485006dc1))
+
 ## [1.0.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.1...v1.0.2) (2023-02-27)
 
 
