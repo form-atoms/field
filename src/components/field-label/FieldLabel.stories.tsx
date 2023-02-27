@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { FieldLabel } from "./FieldLabel";
-import { textField } from "../text-field";
+import { textField } from "../../text-field";
 
 export type LabelStory = StoryObj<typeof meta>;
 

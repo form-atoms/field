@@ -5,7 +5,7 @@ import {
   ArrayField,
   RemoveItemButtonProps,
 } from "./ArrayField";
-import { checkboxField } from "../checkbox-field";
+import { checkboxField } from "../../checkbox-field";
 import { FieldLabel } from "../field-label";
 import { Radio, RadioControl } from "../radio";
 

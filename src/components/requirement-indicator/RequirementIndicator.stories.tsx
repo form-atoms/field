@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import { ValidatedFieldAtom } from "../field";
+import { ValidatedFieldAtom } from "../../field";
 import { FieldLabel } from "../field-label";
-import { numberField } from "../number-field";
+import { numberField } from "../../number-field";
 
 import { Props, RequirementIndicator } from ".";
 
