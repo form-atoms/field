@@ -1,0 +1,23 @@
+import { Meta, Markdown } from "@storybook/blocks";
+
+import Config from "./config.md?raw";
+
+<Meta title="fields/numberField" />
+
+# `numberField(): ValidatedFieldAtom<number | undefined>`
+
+```ts
+import { numberField } from "@form-atoms/field";
+
+// required number, must be filled to submit
+const heightCentimeters = numberField({
+  required_error: "Please set your height.",
+});
+
+// optional number, can be empty to submit
+const tipAmount = numberField({ optional: true });
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>

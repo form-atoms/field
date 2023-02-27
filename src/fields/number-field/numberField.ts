@@ -5,16 +5,18 @@ import {
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
 } from "..";
+import { ZodParams, defaultParams } from "../zodParams";
 
-type NumberValue = number | undefined;
+export type NumberFieldValue = number | undefined;
 
-export type NumberFieldAtom = ValidatedFieldAtom<NumberValue>;
+export type NumberFieldAtom = ValidatedFieldAtom<NumberFieldValue>;
 
-export const numberField = (
-  config: Partial<ValidatedFieldAtomConfig<NumberValue>> = {}
-) =>
+export const numberField = ({
+  required_error = defaultParams.required_error,
+  ...config
+}: Partial<ValidatedFieldAtomConfig<NumberFieldValue>> & ZodParams = {}) =>
   validatedFieldAtom({
     value: undefined,
-    schema: z.number({ required_error: "This field is required" }),
+    schema: z.number({ required_error }),
     ...config,
   });

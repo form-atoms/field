@@ -49,13 +49,10 @@ Most UI libraries provide styled primitive `<Input>` components, form `<Label>` 
 
 ## Contents
 
-| Field                               | About                                     |
-| ----------------------------------- | ----------------------------------------- |
-| [`checkboxField()`](#checkboxfield) | A fieldAtom to capture `boolean` values.  |
-| [`textField()`](#textfield)         | A fieldAtom to capture `string` values.   |
-| [`numberField()`](#numberfield)     | A fieldAtom to capture `number` values.   |
-| [`fileField()`](#filefield)         | A fieldAtom to capture `FileList` values. |
-| [`selectField()`](#selectfield)     | A fieldAtom to capture enum values.       |
+| Field                           | About                                   |
+| ------------------------------- | --------------------------------------- |
+| [`textField()`](#textfield)     | A fieldAtom to capture `string` values. |
+| [`selectField()`](#selectfield) | A fieldAtom to capture enum values.     |
 
 | Headless Component                                   | About                                                          |
 | ---------------------------------------------------- | -------------------------------------------------------------- |
@@ -106,18 +103,6 @@ export const Form = () => {
 | Type                             | Default 'required' validation |
 | -------------------------------- | ----------------------------- |
 | `FieldAtom<string \| undefined>` | `z.string()`                  |
-
-### numberField()
-
-| Type                             | Default 'required' validation |
-| -------------------------------- | ----------------------------- |
-| `FieldAtom<number \| undefined>` | `z.number()`                  |
-
-### fileField()
-
-| Type                               | Default 'required' validation |
-| ---------------------------------- | ----------------------------- |
-| `FieldAtom<FileList \| undefined>` | `z.instanceof(FileList)`      |
 
 ### selectField()
 
