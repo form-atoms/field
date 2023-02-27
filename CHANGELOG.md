@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.4...v1.0.5) (2023-02-27)
+
+
+### Bug Fixes
+
+* numberField w/ required error message ([36c420c](https://github.com/MiroslavPetrik/form-atoms-field/commit/36c420c9d2edfa3eb056ca475cc19a9af0ed6d1d))
+
 ## [1.0.4](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.3...v1.0.4) (2023-02-27)
 
 
