@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.1...v1.0.2) (2023-02-27)
+
+
+### Bug Fixes
+
+* checkbox field w/ configurable required message ([5355f50](https://github.com/MiroslavPetrik/form-atoms-field/commit/5355f50887dd02efd7b722951668decf8bebe735))
+
 ## [1.0.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.0...v1.0.1) (2023-02-26)
 
 
