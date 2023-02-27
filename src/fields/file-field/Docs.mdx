@@ -1,0 +1,27 @@
+import { Meta, Markdown } from "@storybook/blocks";
+
+import Config from "./config.md?raw";
+
+<Meta title="fields/fileField" />
+
+# `fileField(): ValidatedFieldAtom<FileList | undefined>`
+
+A field to hold `input[type="file"]` values.
+
+> **NOTE:** Can hold any number of files, be it zero, one or many.
+
+```ts
+import { fileList } from "@form-atoms/field";
+
+// required file, must be filled to submit
+const profilePic = fileField({
+  required_error: "Please upload you profile picture.",
+});
+
+// optional files, can be empty to submit
+const attachments = fileField({ optional: true });
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>

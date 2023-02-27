@@ -1,9 +1,10 @@
 ### Fields
 
-|                                                           |                                                            |
-| --------------------------------------------------------- | ---------------------------------------------------------- |
-| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                     |
-| [booleanField()](?path=/docs/fields-booleanfield--docs)   | 3-state checkbox with `true`, `false` or `undefined` value |
+|                                                           |                                                             |
+| --------------------------------------------------------- | ----------------------------------------------------------- |
+| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                      |
+| [booleanField()](?path=/docs/fields-booleanfield--docs)   | 3-state checkbox with `true`, `false` or `undefined` value. |
+| [fileField()](?path=/docs/fields-filefield--docs)         | A filed to hold `FileList` value.                           |
 
 ### Components
 

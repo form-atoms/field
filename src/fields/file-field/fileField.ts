@@ -5,16 +5,18 @@ import {
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
 } from "..";
+import { ZodParams, defaultParams } from "../zodParams";
 
 export type FileValue = FileList | undefined;
 
 export type FileFieldAtom = ValidatedFieldAtom<FileValue>;
 
-export const fileField = (
-  config: Partial<ValidatedFieldAtomConfig<FileValue>> = {}
-) =>
+export const fileField = ({
+  required_error = defaultParams.required_error,
+  ...config
+}: Partial<ValidatedFieldAtomConfig<FileValue>> & ZodParams = {}) =>
   validatedFieldAtom({
     value: undefined,
-    schema: z.instanceof(FileList, "This field is required"),
+    schema: z.instanceof(FileList, required_error),
     ...config,
   });
