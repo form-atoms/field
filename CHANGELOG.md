@@ -1,3 +1,11 @@
+## [1.0.6](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.5...v1.0.6) (2023-02-27)
+
+
+### Bug Fixes
+
+* required textField with min 1 length ([eda10d6](https://github.com/MiroslavPetrik/form-atoms-field/commit/eda10d6549650e434ab031862a2920676aefb471))
+* selectField w/ required error message ([e7e2e71](https://github.com/MiroslavPetrik/form-atoms-field/commit/e7e2e71fd3130bfe81a30f4ce9e0fc1670334280))
+
 ## [1.0.5](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.4...v1.0.5) (2023-02-27)
 
 
