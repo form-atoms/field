@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-import { checkboxField } from "../checkbox-field";
-import { fileField } from "../file-field";
-import { numberField } from "../number-field";
-import { selectField } from "../select-field";
-import { textField } from "../text-field";
+import { checkboxField } from "../fields/checkbox-field";
+import { fileField } from "../fields/file-field";
+import { numberField } from "../fields/number-field";
+import { selectField } from "../fields/select-field";
+import { textField } from "../fields/text-field";
 
 export const countryOptions = [
   { code: "SK", name: "Slovak Republic" },

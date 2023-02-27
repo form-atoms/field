@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { ValidatedFieldAtom } from "../../field";
+import { ValidatedFieldAtom } from "../../fields";
 
 const radioControlAtom = () =>
   atom<ValidatedFieldAtom<boolean> | undefined>(undefined);

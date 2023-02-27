@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 import { SelectFieldAtom } from "./selectField";
-import { useFieldProps } from "../field";
+import { useFieldProps } from "..";
 
 const getEventValue = (
   event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>

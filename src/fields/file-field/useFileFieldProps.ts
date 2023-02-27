@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 import { FileFieldAtom } from "./fileField";
-import { FieldProps, useFieldProps } from "../field";
+import { FieldProps, useFieldProps } from "..";
 
 export type FileFieldProps = FieldProps<FileFieldAtom>;
 

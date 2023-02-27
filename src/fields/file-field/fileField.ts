@@ -4,7 +4,7 @@ import {
   ValidatedFieldAtom,
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
-} from "../field";
+} from "..";
 
 export type FileValue = FileList | undefined;
 

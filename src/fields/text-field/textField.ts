@@ -4,7 +4,7 @@ import {
   ValidatedFieldAtom,
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
-} from "../field";
+} from "..";
 
 export type TextValue = string | undefined;
 

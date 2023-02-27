@@ -1,7 +1,7 @@
 import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 
-import { textField } from "../text-field";
+import { textField } from "../fields/text-field";
 
 export const passwordInitial = textField({
   schema: z.string().min(6),

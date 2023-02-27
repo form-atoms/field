@@ -4,7 +4,7 @@ import {
   ValidatedFieldAtom,
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
-} from "../field";
+} from "..";
 
 type NumberValue = number | undefined;
 

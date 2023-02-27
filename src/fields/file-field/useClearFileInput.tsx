@@ -2,7 +2,7 @@ import { FieldAtom, useFieldValue } from "form-atoms";
 import { useEffect } from "react";
 
 import { FileValue } from "./fileField";
-import { useClearInputAction } from "../field";
+import { useClearInputAction } from "..";
 
 /**
  * File input is uncontrolled component. https://reactjs.org/docs/forms.html#the-file-input-tag

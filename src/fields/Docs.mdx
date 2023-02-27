@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="fields/Intro" />
+
+# A Field is pre-configured `fieldAtom`
+
+The `form-atoms` library exposes generic `fieldAtom()` API, which can be used to store any input value.
+Besides input values, `fieldAtoms` hold input metadata such as touched and dirty state, or the input's `ref`.
+
+However in a real application, we need specific field atoms for all the various data types such as `booleanFieldAtom` for checkboxes
+or `fileFieldAtom` for file inputs. Moreover all the specific data types require specific adaptations to inputs. For example the `boolean` field
+should supply input's `checked` prop instead of `value` prop. Or the `file` input value must be controlled manually, as `<input type="file" />` is uncontrolled in React.
+
+`@form-atoms/field` library provides such prefabricated data fields, alongside with useful hooks which handle the repetitive work for you.
+
+## Features of form-atoms fields
+
+### Controllable `required` property
+
+We extend the default `fieldAtom` with a `required` state. This allows us to specify optional & required `zod` validators for the most common cases.
+All the data fields are of type `ValidatedFieldAtom` which extends the default `FieldAtom`.
+Finally, the `required` state is used on UI layer to display requirement indicators to users or to set `aria` properties.
+
+### `undefined` as empty values
+
+When users leave your optional fields untouched, you will receive `undefined` values in the form submit data.
+
+### Pre-defined `zod` validators
+
+Our fields know whether they are required or optional. Based on that they have pre-set validation functions.
+This saves you time, provides runtime safety, and will error when you use a data field with mismatching input type.
+
+### Naming
+
+Unlike `form-atoms` our field constructor functions do not have the `atom` suffix, as the field is in reality an aggregation of dozen jotai atoms.

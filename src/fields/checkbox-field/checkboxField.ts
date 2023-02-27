@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ValidatedFieldAtomConfig, validatedFieldAtom } from "../field";
+import { ValidatedFieldAtomConfig, validatedFieldAtom } from "..";
 
 export type CheckboxValue = boolean;
 
