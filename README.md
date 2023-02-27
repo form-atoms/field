@@ -49,11 +49,6 @@ Most UI libraries provide styled primitive `<Input>` components, form `<Label>` 
 
 ## Contents
 
-| Field                           | About                                   |
-| ------------------------------- | --------------------------------------- |
-| [`textField()`](#textfield)     | A fieldAtom to capture `string` values. |
-| [`selectField()`](#selectfield) | A fieldAtom to capture enum values.     |
-
 | Hooks                                                   | About                         |
 | ------------------------------------------------------- | ----------------------------- |
 | [`useClearFileFieldEffect()`](#useclearfilefieldeffect) | A hook to control file input. |

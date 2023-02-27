@@ -5,18 +5,18 @@ import {
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
 } from "..";
+import { ZodParams, defaultParams } from "../zodParams";
 
 export type SelectFieldAtom<Value = string> = ValidatedFieldAtom<
   Value | undefined
 >;
 
-// possibly validate option literals, or union of literals
-// https://zod.dev/?id=unions
-export const selectField = <Value = string>(
-  config: Partial<ValidatedFieldAtomConfig<Value | undefined>> = {}
-) =>
+export const selectField = <Value = string>({
+  required_error = defaultParams.required_error,
+  ...config
+}: Partial<ValidatedFieldAtomConfig<Value | undefined>> & ZodParams = {}) =>
   validatedFieldAtom({
     value: undefined,
-    schema: z.string({ required_error: "This field is required" }),
+    schema: z.string({ required_error }),
     ...config,
   });

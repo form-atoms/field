@@ -1,0 +1,43 @@
+import { Meta, Markdown } from "@storybook/blocks";
+
+import Config from "./config.md?raw";
+
+<Meta title="fields/selectField" />
+
+# `selectField<Value = string>(): ValidatedFieldAtom<Value | undefined>`
+
+A generic choice field to hold a key of some options e.g. in `<input type="radio" />` or `<select />` elements.
+The `undefined` empty value means that no option is selected.
+
+```ts
+import { selectField } from "@form-atoms/field";
+
+// required string, must be filled to submit
+const favoriteCategory = selectField();
+
+// optional string, can be empty to submit
+const companySize = selectField({ optional: true });
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
+
+## Examples
+
+### Number select
+
+By default the select field works with `string` values. You can specify your own type. For example to make a rating field with choices 1-5
+you will need a `numericSelectField`:
+
+```ts
+import { selectField } from "@form-atoms/field";
+import { useFieldActions } from "form-atoms";
+
+const rating = selectField<number>({ schema: z.number() });
+
+const actions = useFieldActions(rating);
+
+actions.setValue("4"); // ERR!
+actions.setValue(4); // OK
+```

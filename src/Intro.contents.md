@@ -7,6 +7,7 @@
 | [fileField()](?path=/docs/fields-filefield--docs)         | A field to hold a `FileList` value.                         |
 | [numberField()](?path=/docs/fields-numberfield--docs)     | A field to hold a `number` type.                            |
 | [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` type.                            |
+| [selectField()](?path=/docs/fields-selectfield--docs)     | A generic field to hold one of radio or select options.     |
 
 ### Components
 
