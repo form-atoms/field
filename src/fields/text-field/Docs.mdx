@@ -1,0 +1,21 @@
+import { Meta, Markdown } from "@storybook/blocks";
+
+import Config from "./config.md?raw";
+
+<Meta title="fields/textField" />
+
+# `textField(): ValidatedFieldAtom<string>`
+
+```ts
+import { textField } from "@form-atoms/field";
+
+// required string, must be filled to submit
+const userName = textField();
+
+// optional string, can be empty to submit
+const bio = textField({ optional: true });
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
