@@ -1,0 +1,26 @@
+import { Meta, Markdown } from "@storybook/blocks";
+
+import Config from "./config.md?raw";
+
+<Meta title="fields/checkboxField" />
+
+# `checkboxField(): ValidatedFieldAtom<boolean>`
+
+A field which will have `true` or `false` value.
+
+```ts
+// required checkbox, must be checked to submit
+// the `schema` is used as validationSchema
+const termsOfService = checkboxField({
+  name: "tos",
+  required_error: "Please accept the terms of service to proceed.",
+});
+
+// optional checkbox, can be unchecked to submit
+// the `optionalSchema` is used as validationSchema
+const newsletter = checkboxField({ optional: true });
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>

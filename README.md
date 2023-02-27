@@ -101,12 +101,6 @@ export const Form = () => {
 };
 ```
 
-### checkboxField()
-
-| Type                 | Default 'required' validation |
-| -------------------- | ----------------------------- |
-| `FieldAtom<boolean>` | `z.literal(true)`             |
-
 ### textField()
 
 | Type                             | Default 'required' validation |
