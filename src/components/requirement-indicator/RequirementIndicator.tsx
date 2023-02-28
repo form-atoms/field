@@ -1,5 +1,5 @@
-import { useRequiredProps } from "../../fields/useRequiredProps";
 import { ValidatedFieldAtom } from "../../fields/validatedFieldAtom";
+import { useRequiredProps } from "../../hooks/use-required-props";
 
 export type Props<Field extends ValidatedFieldAtom<any>> = {
   field: Field;
