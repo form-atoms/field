@@ -31,27 +31,11 @@ With others libraries you often lose form state when your component or page unmo
 
 `form-atoms` on the other hand keeps the form state until you clear it, because it lives in jotai atoms. This way, you don't have to warn users about data loss if they navigate out of filled & unsubmitted form. Instead you can display 'continue where you left off' message when they return to the form.
 
-### What's in the box?
+#### Atomic headless components
 
 The `form-atoms` library provides atomic form primitives capable of tracking input value, touch state, validation status and more.
 
 `@form-atoms/field` extends these primitives & packages them into hooks & headless components (think 'smart components'), which can be easily wired to UI (think dumb components) checkbox, select or array field.
-
-### What is a `<Field />`?
-
-Most UI libraries provide styled primitive `<Input>` components, form `<Label>` and form `<Control>`. These must be integrated together with state & validation libraries, so when the input value is invalid, the error is propagated to the form control or the label is colored to red. The work to get this right is non-trivial and error prone.
-
-`@form-atoms/field` provides you with **integrated field components**:
-
-```
-<Field> = <Control> + <Input> + <Label> + <HelpText> + <Error>
-```
-
-## Contents
-
-| Hooks                                                   | About                         |
-| ------------------------------------------------------- | ----------------------------- |
-| [`useClearFileFieldEffect()`](#useclearfilefieldeffect) | A hook to control file input. |
 
 ## Fields
 
@@ -88,9 +72,9 @@ export const Form = () => {
 
 ## Integrations
 
-`@form-atoms/field` comes with `<Fields />` pre-wired to popular UI libraries.
+`@form-atoms/field` comes pre-wired to popular UI libraries:
 
-| 📦Package Docs                                                    | 🎨 Storybook                                             | 📃Official Docs                                                 | About                                          |
-| ----------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------- |
-| [flowbite](https://github.com/MiroslavPetrik/form-atoms-flowbite) | [Flowbite Fields](https://form-atoms-field.netlify.app/) | [flowbite-react](https://flowbite-react.com/forms)              | Bindigs to Tailwind component library Flowbite |
-| [chakra-ui](./packages/chakra-ui/)                                | 🚧 WIP                                                   | [chakra-ui](https://chakra-ui.com/docs/components/form-control) | Bindings to CSS-in-JS library Chakra UI        |
+| 📦Package                                                         | 🎨 Storybook                                                             | About                                          |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------- |
+| [flowbite](https://github.com/MiroslavPetrik/form-atoms-flowbite) | [Flowbite Fields](https://miroslavpetrik.github.io/form-atoms-flowbite/) | Bindigs to Tailwind component library Flowbite |
+| [chakra-ui](./packages/chakra-ui/)                                | 🚧 WIP                                                                   | Bindings to CSS-in-JS library Chakra UI        |
