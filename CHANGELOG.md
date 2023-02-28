@@ -1,3 +1,12 @@
+## [1.0.7](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.6...v1.0.7) (2023-02-28)
+
+
+### Bug Fixes
+
+* fieldErrors via component ([cac01a3](https://github.com/MiroslavPetrik/form-atoms-field/commit/cac01a30c03168fb1bc828379f5ab9c5bbbf3c4f))
+* normalize field value names ([30368dc](https://github.com/MiroslavPetrik/form-atoms-field/commit/30368dcfa6fe79c88319f68ad650000070592fe1))
+* radio import ([902e7d6](https://github.com/MiroslavPetrik/form-atoms-field/commit/902e7d69854927c858dca65af10bbf6a3b1c87db))
+
 ## [1.0.6](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.5...v1.0.6) (2023-02-27)
 
 
