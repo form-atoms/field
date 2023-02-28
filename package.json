@@ -34,7 +34,7 @@
     "dist"
   ],
   "scripts": {
-    "storybook": "storybook dev -p 6007",
+    "storybook": "storybook dev",
     "storybook-docs": "storybook dev --docs",
     "sb": "yarn storybook",
     "build-storybook": "storybook build",

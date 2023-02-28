@@ -1,7 +1,8 @@
 import { ChangeEvent, useMemo } from "react";
 
 import { CheckboxValue } from "./checkboxField";
-import { FieldProps, ValidatedFieldAtom, useFieldProps } from "..";
+import { FieldProps, useFieldProps } from "../../hooks";
+import { ValidatedFieldAtom } from "../validatedFieldAtom";
 
 export type CheckboxFieldAtom = ValidatedFieldAtom<CheckboxValue>;
 

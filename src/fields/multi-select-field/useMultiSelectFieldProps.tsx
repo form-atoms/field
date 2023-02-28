@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 import { MultiSelectFieldAtom } from "./multiSelectField";
-import { useFieldProps } from "..";
+import { useFieldProps } from "../../hooks";
 
 // TODO: make not dependent on checkbox input event
 const getEventValue = (event: ChangeEvent<HTMLInputElement>, value: string[]) =>
