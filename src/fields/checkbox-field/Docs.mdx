@@ -1,8 +1,9 @@
-import { Meta, Markdown } from "@storybook/blocks";
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as CheckboxStories from "./checkboxField.stories";
 
 import Config from "./config.md?raw";
 
-<Meta title="fields/checkboxField" />
+<Meta title="fields/checkboxField" of={CheckboxStories} />
 
 # `checkboxField(): ValidatedFieldAtom<boolean>`
 
@@ -25,3 +26,32 @@ const newsletter = checkboxField({ optional: true });
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
+
+## useCheckboxFieldProps(checkboxField)
+
+A hook providing props to controll a checkbox input.
+
+```tsx
+// Example component
+const CheckboxInput = ({
+  field,
+  label,
+}: {
+  field: CheckboxFieldAtom;
+  label: ReactNode;
+}) => {
+  const props = useCheckboxFieldProps(field);
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <input type="checkbox" {...props} />
+      <FieldLabel field={field} label={label} />
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+```
+
+<Stories />

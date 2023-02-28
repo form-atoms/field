@@ -28,11 +28,10 @@ export function useFieldProps<
   const validate = useSetAtom(field.validate);
   const ref = useSetAtom(field.ref);
   const [, startTransition] = useTransition();
-  const id = useId();
 
   return useMemo(
     () => ({
-      id,
+      id: `${fieldAtom}`,
       name,
       value: state.value,
       required,
