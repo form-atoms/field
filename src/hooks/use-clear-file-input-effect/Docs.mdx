@@ -1,0 +1,79 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import { Controlled, Uncontrolled } from "./useClearFileInputEffect.stories";
+
+<Meta title="hooks/useClearFileInputEffect" />
+
+# useClearFileInputEffect(fileField)
+
+An effect which clears the file input when its field value is reset to empty value.
+This effectively makes the file input controlled.
+
+<Canvas sourceState="none" of={Controlled} />
+
+```tsx
+import { FormAtom, FormFields, formAtom, useFormActions } from "form-atoms";
+import { PropsWithChildren } from "react";
+
+import { useClearFileInputEffect, useTextFieldProps } from "@form-atoms/fields";
+import {
+  FileFieldAtom,
+  fileField,
+  useFileFieldProps,
+} from "@form-atoms/fields";
+
+const profilePic = fileField();
+const form = formAtom({ profilePic });
+
+const Example = () => (
+  <ResetForm form={form}>
+    <ControlledFileInput field={profilePic} />
+  </ResetForm>
+);
+
+const ControlledFileInput = ({ field }: { field: FileFieldAtom }) => {
+  // value is discarded, as file input cannot be controlled in React
+  const { value, ...props } = useFileFieldProps(field);
+  // This effect will control the input, when we reset the form.
+  useClearFileInputEffect(field);
+
+  return <input type="file" {...props} />;
+};
+
+// helper form with reset functionality
+const ResetForm = <Fields extends FormFields>({
+  form,
+  children,
+}: PropsWithChildren<{ form: FormAtom<Fields> }>) => {
+  const { reset } = useFormActions(form);
+
+  return (
+    <form>
+      {children}
+      <button className="outline secondary" type="button" onClick={reset}>
+        Reset
+      </button>
+    </form>
+  );
+};
+```
+
+## Contra example
+
+When we don't use the hook, the input won't react to the form reset action:
+
+<Canvas sourceState="none" of={Uncontrolled} />
+
+```tsx
+const UncontrolledFileInput = ({ field }: { field: FileFieldAtom }) => {
+  // value is discarded, as file input cannot be controlled in React
+  const { value, ...props } = useFileFieldProps(field);
+
+  return <input type="file" {...props} />;
+};
+
+const Example = () => (
+  <ResetForm form={form}>
+    <UncontrolledFileInput field={profilePic} />
+  </ResetForm>
+);
+```

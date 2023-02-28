@@ -16,3 +16,10 @@
 | [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
 | [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
 | [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |
+
+### Hooks
+
+|                                                                            |                                                             |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [useClearInputAction](?path=/docs/hooks-useclearinputaction--docs)         | Hook providing action to clear input value via its ref.     |
+| [useClearFileInputEffect](?path=/docs/hooks-useclearfileinputeffect--docs) | An effect hook to clear file input when its field is reset. |

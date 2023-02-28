@@ -1,15 +1,15 @@
 import { FieldAtom, useFieldValue } from "form-atoms";
 import { useEffect } from "react";
 
-import { FileValue } from "./fileField";
-import { useClearInputAction } from "../../hooks";
+import { useClearInputAction } from "..";
+import { FileFieldValue } from "../../fields";
 
 /**
  * File input is uncontrolled component. https://reactjs.org/docs/forms.html#the-file-input-tag
  * Reseting a form with dirty file input has no effect.
  * This hook will observe the controlled value, and programatically clear the file input via it's ref when the form is reset.
  */
-export const useClearFileFieldEffect = (field: FieldAtom<FileValue>) => {
+export const useClearFileInputEffect = (field: FieldAtom<FileFieldValue>) => {
   const value = useFieldValue(field);
   const { clear } = useClearInputAction(field);
 
