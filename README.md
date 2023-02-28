@@ -37,6 +37,11 @@ The `form-atoms` library provides atomic form primitives capable of tracking inp
 
 `@form-atoms/field` extends these primitives & packages them into hooks & headless components (think 'smart components'), which can be easily wired to UI (think dumb components) checkbox, select or array field.
 
+## Docs
+
+[The documentation](https://miroslavpetrik.github.io/form-atoms-field/) will be enough for any application work. (Eventually, as it's a work in progress).
+For more generic and custom constructs you will need the original [`form-atoms` docs](https://github.com/jaredLunde/form-atoms).
+
 ## Fields
 
 For well-known field types we export data type specific `fieldAtom` constructors. These come with
@@ -74,7 +79,7 @@ export const Form = () => {
 
 `@form-atoms/field` comes pre-wired to popular UI libraries:
 
-| 📦Package                                                         | 🎨 Storybook                                                             | About                                          |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------- |
-| [flowbite](https://github.com/MiroslavPetrik/form-atoms-flowbite) | [Flowbite Fields](https://miroslavpetrik.github.io/form-atoms-flowbite/) | Bindigs to Tailwind component library Flowbite |
-| [chakra-ui](./packages/chakra-ui/)                                | 🚧 WIP                                                                   | Bindings to CSS-in-JS library Chakra UI        |
+| 📦Package                                                           | 🎨 Storybook                                                             | About                                          |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------- |
+| [flowbite](https://github.com/MiroslavPetrik/form-atoms-flowbite)   | [Flowbite Fields](https://miroslavpetrik.github.io/form-atoms-flowbite/) | Bindigs to Tailwind component library Flowbite |
+| [chakra-ui](https://github.com/MiroslavPetrik/form-atoms-chakra-ui) | 🚧 WIP                                                                   | Bindings to CSS-in-JS library Chakra UI        |
