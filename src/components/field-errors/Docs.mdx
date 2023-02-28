@@ -1,0 +1,36 @@
+import {
+  Meta,
+  Source,
+  Canvas,
+  Controls,
+  Markdown,
+  Description,
+} from "@storybook/blocks";
+
+<Meta title="components/FieldErrors" />
+
+# FieldErrors
+
+A JSX component version of the [`useFieldErrors()`](https://github.com/jaredLunde/form-atoms#usefielderrors) hook.
+
+```tsx
+import { FieldErrors, textField } from "@form-atoms/field";
+
+const firstName = textField();
+
+const Example = () => (
+  <FieldErrors field={firstName}>
+    {({ errors }) => <div>{errors.join("\n")}</div>}
+  </FieldErrors>
+);
+```
+
+## Features
+
+- ✅ Provides field errors via JSX component.
+
+## Usage
+
+```ts
+import { FieldErrors } from "@form-atoms/field";
+```

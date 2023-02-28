@@ -8,7 +8,6 @@ import {
 
 export type MultiSelectFieldAtom<Value = string> = ValidatedFieldAtom<Value[]>;
 
-// TODO: likely rename to multichoice
 export function multiSelectField<Value = string>(
   config: Partial<ValidatedFieldAtomConfig<Value[]>> = {}
 ) {
