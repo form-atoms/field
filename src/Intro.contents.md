@@ -13,9 +13,10 @@
 
 |                                                                           |                                                                |
 | ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |
+| [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.               |
 | [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
 | [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
-| [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |
 
 ### Hooks
 
