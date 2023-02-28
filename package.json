@@ -1,7 +1,7 @@
 {
   "name": "@form-atoms/field",
   "packageManager": "yarn@3.4.1",
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantic-release",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
   "homepage": "https://github.com/MiroslavPetrik/form-atoms-field#readme",
   "repository": {
