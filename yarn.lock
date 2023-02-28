@@ -1677,15 +1677,21 @@ __metadata:
     eslint-import-resolver-typescript: ^3.5.3
     eslint-plugin-import: ^2.27.5
     eslint-plugin-prettier: 4.2.1
-    form-atoms: 2.0.0
-    jotai: 2.0.0
+    form-atoms: ^2.1.1
+    jotai: ^2.0.2
     object-path-immutable: 4.1.2
     prettier: 2.8.4
-    react: 18.2.0
+    react: ^18.2.0
     react-render-prop-type: 0.1.0
     semantic-release: ^20.1.0
     storybook: ^7.0.0-beta.47
     typescript: 4.9.4
+    zod: ^3.20.6
+  peerDependencies:
+    form-atoms: ^2
+    jotai: ^2
+    react: ">=16.8"
+    zod: ^3
   languageName: unknown
   linkType: soft
 
@@ -4003,7 +4009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:>=16, @types/react@npm:^18":
+"@types/react@npm:>=16":
   version: 18.0.27
   resolution: "@types/react@npm:18.0.27"
   dependencies:
@@ -4011,6 +4017,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 600fdbc39a92ea4a77047db3e12f05f67776a710f5918248c0189a59ac2a38900c9db5a5d2e433a16df528a3ecab1aa114b322cacea573bb1ca2fc0b094c52d1
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18":
+  version: 18.0.28
+  resolution: "@types/react@npm:18.0.28"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: e752df961105e5127652460504785897ca6e77259e0da8f233f694f9e8f451cde7fa0709d4456ade0ff600c8ce909cfe29f9b08b9c247fa9b734e126ec53edd7
   languageName: node
   linkType: hard
 
@@ -7326,15 +7343,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-atoms@npm:2.0.0":
-  version: 2.0.0
-  resolution: "form-atoms@npm:2.0.0"
+"form-atoms@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "form-atoms@npm:2.1.1"
   dependencies:
     "@testing-library/user-event": ^13.0.0
   peerDependencies:
     jotai: ^2.0.0
     react: ">=16.8"
-  checksum: 1493f2e8d9cdc06a395e1cbb5a6fd88fe1e817dcf60bdf84c3c8a9c58c502db24dcfb2e79e2e65218e80df19e63467f89e282770fffacb5ad063c7db73b3a781
+  checksum: e81abed296d36bd88607c956d59a1e37477964382e3e058ff26193e08aa48d3cb88d5c95dc0587f5395df8ac94652a02c0890a427a9c11187745e7e8552eb8d9
   languageName: node
   linkType: hard
 
@@ -8756,15 +8773,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:2.0.0":
-  version: 2.0.0
-  resolution: "jotai@npm:2.0.0"
+"jotai@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "jotai@npm:2.0.2"
   peerDependencies:
     react: ">=17.0.0"
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 19ff656797ebfa3e935ab8e53f9895982c1d12d44a6f03611147b3ee3381387baf91edf5d81f2a17ed3c709a7278a26daee090164e83855120391ea60769e20b
+  checksum: f107d2b8e3b0853cf3fb3978e3a8b0d5b4925957d1901d038ddf534de7f1967d6bfd81b1ef69442fc3d8047176933bf3d9c9b5830d8a01b02ee1daae6d412ef3
   languageName: node
   linkType: hard
 
@@ -11342,7 +11359,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0":
+"react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -13511,5 +13528,12 @@ __metadata:
   version: 1.0.0
   resolution: "yocto-queue@npm:1.0.0"
   checksum: 2cac84540f65c64ccc1683c267edce396b26b1e931aa429660aefac8fbe0188167b7aee815a3c22fa59a28a58d898d1a2b1825048f834d8d629f4c2a5d443801
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.20.6":
+  version: 3.20.6
+  resolution: "zod@npm:3.20.6"
+  checksum: 804b1934b8b5e2fa3750bec90043e8118b201f330b9957b8b768389a971acadf812d2060cf62921086512dab4af691d10490acb03333da58fc485c0791893c89
   languageName: node
   linkType: hard
