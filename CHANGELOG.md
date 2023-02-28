@@ -1,3 +1,11 @@
+## [1.0.9](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.8...v1.0.9) (2023-02-28)
+
+
+### Bug Fixes
+
+* dependencies ([65b56f5](https://github.com/MiroslavPetrik/form-atoms-field/commit/65b56f585477e3ad7f3221f6f4d15cd118e2496e))
+* drop chakra yarnlock ([0ab9564](https://github.com/MiroslavPetrik/form-atoms-field/commit/0ab956494b868ad33999267c1dee06ca4fcae891))
+
 ## [1.0.8](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.7...v1.0.8) (2023-02-28)
 
 
