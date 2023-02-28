@@ -1,5 +1,5 @@
-| Param            | Value               |
-| ---------------- | ------------------- |
-| `value`          | `[]`                |
-| `schema`         | `z.string()`        |
-| `optionalSchema` | `schema.optional()` |
+| Param            | Value                            |
+| ---------------- | -------------------------------- |
+| `value`          | `[]`                             |
+| `schema`         | `z.array(z.string()).nonempty()` |
+| `optionalSchema` | `z.array(z.string())`            |
