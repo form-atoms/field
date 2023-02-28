@@ -1,0 +1,30 @@
+import { Meta, Canvas } from "@storybook/blocks";
+import { Primary } from "./useClearInputAction.stories";
+
+<Meta title="hooks/useClearInputAction" />
+
+# useClearInputAction(field)
+
+Clears input value.
+
+<Canvas sourceState="none" of={Primary} />
+
+```ts
+import { useClearInputAction, useTextFieldProps } from "@form-atoms/fields";
+
+const password = textField();
+
+const ClearInputDemo = () => {
+  const props = useTextFieldProps(password);
+  const { clear } = useClearInputAction(password);
+
+  return (
+    <>
+      <input type="password" {...props} />
+      <button className="outline secondary" onClick={clear}>
+        Clear
+      </button>
+    </>
+  );
+};
+```

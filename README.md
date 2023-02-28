@@ -86,18 +86,6 @@ export const Form = () => {
 };
 ```
 
-### textField()
-
-| Type                             | Default 'required' validation |
-| -------------------------------- | ----------------------------- |
-| `FieldAtom<string \| undefined>` | `z.string()`                  |
-
-### selectField()
-
-| Type                                                   | Default 'required' validation |
-| ------------------------------------------------------ | ----------------------------- |
-| `selectField(config?): FieldAtom<string \| undefined>` | `z.string()`                  |
-
 ## Components
 
 ### `<FieldLabel />`
@@ -299,12 +287,6 @@ const AdvancedNestedExample = () => {
   );
 };
 ```
-
-### `<RadioControl />`
-
-TODO
-
-## Hooks
 
 ### useClearFileFieldEffect(fileField)
 
