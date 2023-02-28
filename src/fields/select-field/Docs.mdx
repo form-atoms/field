@@ -1,8 +1,8 @@
-import { Meta, Markdown } from "@storybook/blocks";
-
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as SelectFieldStories from "./selectField.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/selectField" />
+<Meta title="fields/selectField" of={SelectFieldStories} />
 
 # `selectField<Value = string>(): ValidatedFieldAtom<Value | undefined>`
 
@@ -41,3 +41,67 @@ const actions = useFieldActions(rating);
 actions.setValue("4"); // ERR!
 actions.setValue(4); // OK
 ```
+
+## useSelectFieldProps(selectField)
+
+A hook providing props to control a select or radio input.
+
+## useSelectOptions(selectField, SelectProps)
+
+A hook which transforms generic options into value/label pairs and computes `isActive` prop for each option based on the selectField value.
+
+### Generic example
+
+```tsx
+const SelectInput = <Option,>({
+  field,
+  label,
+  getValue,
+  getLabel,
+  options,
+  placeholder,
+}: SelectFieldProps<Option>) => {
+  const props = useSelectFieldProps(field);
+
+  const { renderOptions, placeholderOption } = useSelectOptions(field, {
+    getValue,
+    getLabel,
+    options,
+    placeholder,
+  });
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <select {...props}>
+        {placeholderOption}
+        {renderOptions.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+
+// options data have custom shape
+const countryOptions = [
+  { name: "Slovak Republic", key: "SK" },
+  { name: "Czech Republic", key: "CZ" },
+];
+
+// provide value/label accessors
+<SelectInput
+  field={fields.country}
+  label="Country of Origin"
+  options={countryOptions}
+  getValue={({ key }) => key}
+  getLabel={({ name }) => name}
+/>;
+```
+
+<Stories />
