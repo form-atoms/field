@@ -1,9 +1,6 @@
 {
   "name": "@form-atoms/field",
   "packageManager": "yarn@3.4.1",
-  "workspaces": [
-    "packages/*"
-  ],
   "version": "0.0.0-development",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
   "homepage": "https://github.com/MiroslavPetrik/form-atoms-field#readme",
