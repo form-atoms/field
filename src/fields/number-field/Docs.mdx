@@ -1,8 +1,8 @@
-import { Meta, Markdown } from "@storybook/blocks";
-
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as NumberFieldStories from "./numberField.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/numberField" />
+<Meta title="fields/numberField" of={NumberFieldStories} />
 
 # `numberField(): ValidatedFieldAtom<number | undefined>`
 
@@ -21,3 +21,31 @@ const tipAmount = numberField({ optional: true });
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
+
+## useNumberFieldProps(numberField)
+
+A hook providing props to control a number input.
+
+```tsx
+const NumberInput = ({
+  field,
+  label,
+}: {
+  field: NumberFieldAtom;
+  label: ReactNode;
+}) => {
+  const props = useNumberFieldProps(field);
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <input type="number" {...props} />
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+```
+
+<Stories />
