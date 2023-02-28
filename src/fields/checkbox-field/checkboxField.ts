@@ -14,7 +14,7 @@ export type CheckboxFieldAtom = ValidatedFieldAtom<CheckboxFieldValue>;
 export const checkboxField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ValidatedFieldAtomConfig<CheckboxFieldValue>> & ZodParams) =>
+}: Partial<ValidatedFieldAtomConfig<CheckboxFieldValue>> & ZodParams = {}) =>
   validatedFieldAtom({
     value: false,
     /**

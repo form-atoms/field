@@ -1,8 +1,9 @@
-import { Meta, Markdown } from "@storybook/blocks";
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as FileFieldStories from "./fileField.stories";
 
 import Config from "./config.md?raw";
 
-<Meta title="fields/fileField" />
+<Meta title="fields/fileField" of={FileFieldStories} />
 
 # `fileField(): ValidatedFieldAtom<FileList | undefined>`
 
@@ -25,3 +26,32 @@ const attachments = fileField({ optional: true });
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
+
+## useFileFieldProps(fileField)
+
+A hook providing props to control a file input.
+
+```tsx
+const FileInput = ({
+  field,
+  label,
+}: {
+  field: FileFieldAtom;
+  label: ReactNode;
+}) => {
+  // the `value` is the FileList which cannot be passed to the input element, so we drop it
+  const { value, ...props } = useFileFieldProps(field);
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <input type="file" {...props} />
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+```
+
+<Stories />

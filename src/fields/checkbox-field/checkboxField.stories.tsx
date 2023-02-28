@@ -4,7 +4,7 @@ import { CheckboxFieldAtom, checkboxField } from "./checkboxField";
 import { useCheckboxFieldProps } from "./useCheckboxFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
-import { FormStory, meta } from "../../scenarios/StoryForm";
+import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
@@ -32,19 +32,14 @@ const CheckboxInput = ({
 };
 
 export const Required: FormStory = {
-  args: {
+  args: fixArgs({
     fields: {
-      termsOfService: checkboxField({
-        name: "tos",
-        required_error: "Please accept the terms of service to proceed.",
-      }),
+      termsOfService: checkboxField(),
     },
     children: ({ fields }) => (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       <CheckboxInput field={fields.termsOfService} label="Terms of Service" />
     ),
-  },
+  }),
   parameters: {
     docs: {
       description: {
@@ -56,21 +51,19 @@ export const Required: FormStory = {
 };
 
 export const Optional: FormStory = {
-  args: {
+  args: fixArgs({
     fields: {
       newsletter: checkboxField({
         optional: true,
       }),
     },
     children: ({ fields }) => (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       <CheckboxInput
         field={fields.newsletter}
         label="Subscribe to newsletter"
       />
     ),
-  },
+  }),
   parameters: {
     docs: {
       description: {
