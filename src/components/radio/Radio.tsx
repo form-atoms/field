@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 import { RadioControlAtom } from "./RadioControl";
-import { ValidatedFieldAtom, useRequiredActions } from "../../fields";
+import { ValidatedFieldAtom } from "../../fields";
+import { useRequiredActions } from "../../hooks";
 
 type Props = {
   control: RadioControlAtom;
