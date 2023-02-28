@@ -5,17 +5,17 @@ import {
   ValidatedFieldAtomConfig,
   validatedFieldAtom,
 } from "..";
+import { ZodParams, defaultParams } from "../zodParams";
 
 export type MultiSelectFieldAtom<Value = string> = ValidatedFieldAtom<Value[]>;
 
-export function multiSelectField<Value = string>(
-  config: Partial<ValidatedFieldAtomConfig<Value[]>> = {}
-) {
-  return validatedFieldAtom({
+export const multiSelectField = <Value = string>({
+  required_error = defaultParams.required_error,
+  ...config
+}: Partial<ValidatedFieldAtomConfig<Value[]>> & ZodParams = {}) =>
+  validatedFieldAtom({
     value: [],
-    schema: config.optional
-      ? z.array(z.string()) // TODO: this is static, and should change when required atom is flipped
-      : z.array(z.string()).nonempty("This field is required"),
+    schema: z.array(z.string()).nonempty(required_error),
+    optionalSchema: z.array(z.string()),
     ...config,
   });
-}

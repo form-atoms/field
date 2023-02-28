@@ -1,0 +1,97 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as MultiSelectFieldStories from "./multiSelectField.stories";
+import Config from "./config.md?raw";
+
+<Meta title="fields/multiSelectField" of={MultiSelectFieldStories} />
+
+# `multiSelectField<Value = string>(): ValidatedFieldAtom<Value[]>`
+
+A generic choice field to hold multiple values of some options e.g. checkbox group or multi select components.
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
+
+## useMultiSelectFieldProps(multiSelectField)
+
+A hook providing props to control a select or radio input.
+
+## useMultiSelectOptions(multiSelectField, SelectProps)
+
+A hook which transforms generic options into value/label pairs and computes `isActive` prop for each option based on the multiSelectField value.
+
+### Generic example
+
+```tsx
+const CheckboxGroup = <Option,>({
+  field,
+  label,
+  getValue,
+  getLabel,
+  options,
+  placeholder,
+}: MultiSelectFieldProps<Option>) => {
+  const props = useMultiSelectFieldProps(field);
+
+  const { renderOptions } = useMultiSelectOptions(field, {
+    getValue,
+    getLabel,
+    options,
+    placeholder,
+  });
+
+  // when one option is selected, thats enough for the required multiselect to be filled
+  const required = props.value.length === 0 ? props.required : false;
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <label>{label}</label>
+      {renderOptions.map(({ value, label, id, isActive }) => (
+        <div key={id}>
+          <input
+            type="checkbox"
+            {...props}
+            checked={isActive}
+            id={id}
+            value={value}
+            required={required}
+          />
+          <label htmlFor={id}>{label}</label>
+        </div>
+      ))}
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+
+const languagesOptions = [
+  { name: "Pascal", key: "pascal" },
+  { name: "Typescript", key: "ts" },
+  { name: "React", key: "react" },
+  { name: "English", key: "en" },
+  { name: "Holy C", key: "hc" },
+  { name: "Tensorflow", key: "tf" },
+  { name: "Na'vi", key: "navi" },
+];
+
+export const Required: FormStory = {
+  args: fixArgs({
+    fields: {
+      languages: multiSelectField(),
+    },
+    children: ({ fields }) => (
+      <CheckboxGroup
+        field={fields.languages}
+        label="What programming languages are you proficient with?"
+        options={languagesOptions}
+        getValue={({ key }) => key}
+        getLabel={({ name }) => name}
+      />
+    ),
+  }),
+};
+```
+
+<Stories />

@@ -26,6 +26,7 @@ export function useMultiSelectOptions<Option, Value = string>(
       options.map((option) => {
         return {
           option,
+          id: `${field}/${getValue(option)}`, // scope option id by the multiselect field
           isActive: value.includes(getValue(option)),
           value: getValue(option),
           label: getLabel(option),

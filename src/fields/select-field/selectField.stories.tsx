@@ -70,14 +70,14 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      attachment: selectField({
+      country: selectField({
         optional: true,
       }),
     },
     children: ({ fields }) => (
       <SelectInput
-        field={fields.attachment}
-        label="Pet count"
+        field={fields.country}
+        label="Country of Origin"
         options={countryOptions}
         getValue={({ key }) => key}
         getLabel={({ name }) => name}
