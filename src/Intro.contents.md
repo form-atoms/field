@@ -5,8 +5,8 @@
 | [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                      |
 | [booleanField()](?path=/docs/fields-booleanfield--docs)   | 3-state checkbox with `true`, `false` or `undefined` value. |
 | [fileField()](?path=/docs/fields-filefield--docs)         | A field to hold a `FileList` value.                         |
-| [numberField()](?path=/docs/fields-numberfield--docs)     | A field to hold a `number` type.                            |
-| [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` type.                            |
+| [numberField()](?path=/docs/fields-numberfield--docs)     | A field to hold a `number` value.                           |
+| [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` value.                           |
 | [selectField()](?path=/docs/fields-selectfield--docs)     | A generic field to hold one of radio or select options.     |
 
 ### Components
