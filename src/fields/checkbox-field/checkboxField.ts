@@ -1,14 +1,20 @@
 import { z } from "zod";
 
-import { ValidatedFieldAtomConfig, validatedFieldAtom } from "..";
+import {
+  ValidatedFieldAtom,
+  ValidatedFieldAtomConfig,
+  validatedFieldAtom,
+} from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type CheckboxValue = boolean;
+export type CheckboxFieldValue = boolean;
+
+export type CheckboxFieldAtom = ValidatedFieldAtom<CheckboxFieldValue>;
 
 export const checkboxField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ValidatedFieldAtomConfig<CheckboxValue>> & ZodParams) =>
+}: Partial<ValidatedFieldAtomConfig<CheckboxFieldValue>> & ZodParams) =>
   validatedFieldAtom({
     value: false,
     /**
