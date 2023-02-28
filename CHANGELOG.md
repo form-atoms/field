@@ -1,3 +1,11 @@
+## [1.0.8](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.7...v1.0.8) (2023-02-28)
+
+
+### Bug Fixes
+
+* checkboxField without params ([f264619](https://github.com/MiroslavPetrik/form-atoms-field/commit/f264619357db66ae9c753e98d73dd035a37c2761))
+* field error default children & field prop id as atom key ([ae3eaf6](https://github.com/MiroslavPetrik/form-atoms-field/commit/ae3eaf6fbdd759ad3acf109fedf43142af15824b))
+
 ## [1.0.7](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.6...v1.0.7) (2023-02-28)
 
 
