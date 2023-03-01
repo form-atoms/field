@@ -21,7 +21,8 @@
 
 ### Hooks
 
-|                                                                            |                                                             |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [useClearInputAction](?path=/docs/hooks-useclearinputaction--docs)         | Hook providing action to clear input value via its ref.     |
-| [useClearFileInputEffect](?path=/docs/hooks-useclearfileinputeffect--docs) | An effect hook to clear file input when its field is reset. |
+|                                                                            |                                                                                    |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [useClearInputAction](?path=/docs/hooks-useclearinputaction--docs)         | Hook providing action to clear input value via its ref.                            |
+| [useClearFileInputEffect](?path=/docs/hooks-useclearfileinputeffect--docs) | An effect hook to clear file input when its field is reset.                        |
+| [useOptions](?path=/docs/hooks-useoptions--docs)                           | A data hook to evaluate which of option(s) is(are) active with respect to a field. |

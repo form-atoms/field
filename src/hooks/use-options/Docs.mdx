@@ -1,43 +1,48 @@
-import { selectField } from "./selectField";
-import { useSelectFieldProps } from "./useSelectFieldProps";
-import { SelectFieldProps, useSelectOptions } from "./useSelectOptions";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { Meta, Markdown, Canvas } from "@storybook/blocks";
+import * as RadioGroupStories from "./radioGroup.stories";
 
-export default {
-  ...meta,
-  title: "fields/selectField/radioGroup",
-};
+import Props from "./props.md?raw";
 
+<Meta title="hooks/useOptions" />
+
+# `useOptions<Option, OptionValue, FieldValue>(props): {renderOptions: Option[]}`
+
+A generic hook which evaluates a list of options against a field value. It will compute which of the option(s) is active.
+Can be used to create various select or multiselect choice components.
+
+```ts
+import { useOptions } from "@form-atoms/field";
+```
+
+### Example with `<input type="radio" />`
+
+```tsx
 const RadioGroup = <Option,>({
   field,
   label,
   getValue,
   getLabel,
   options,
-  placeholder,
-}: SelectFieldProps<Option>) => {
+}: { field: SelectFieldAtom; label: ReactNode } & OptionProps<Option>) => {
   const props = useSelectFieldProps(field);
 
-  const { renderOptions } = useSelectOptions(field, {
+  const { renderOptions } = useOptions(field, {
     getValue,
     getLabel,
     options,
-    placeholder,
   });
 
   return (
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
-      {renderOptions.map(({ id, value, label, isActive }) => (
+      {renderOptions.map(({ id, value, label, checked }) => (
         <div key={id}>
           <input
             {...props}
             type="radio"
             id={id}
             value={value}
-            checked={isActive}
+            checked={checked}
           />
           <label htmlFor={id}>{label}</label>
         </div>
@@ -72,3 +77,8 @@ export const Required: FormStory = {
     ),
   }),
 };
+```
+
+### Required
+
+<Canvas of={RadioGroupStories.Required} />

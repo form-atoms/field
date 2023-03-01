@@ -1,3 +1,3 @@
 export * from "./selectField";
 export * from "./useSelectFieldProps";
-export * from "./useSelectOptions";
+export * from "../../hooks/use-options/useOptions";

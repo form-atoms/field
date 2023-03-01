@@ -1,6 +1,8 @@
-import { selectField } from "./selectField";
+import { ReactNode } from "react";
+
+import { SelectFieldAtom, selectField } from "./selectField";
 import { useSelectFieldProps } from "./useSelectFieldProps";
-import { SelectFieldProps, useSelectOptions } from "./useSelectOptions";
+import { SelectOptionsProps, useSelectOptions } from "./useSelectOptions";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
@@ -17,10 +19,13 @@ const SelectInput = <Option,>({
   getLabel,
   options,
   placeholder,
-}: SelectFieldProps<Option>) => {
+}: {
+  field: SelectFieldAtom;
+  label: ReactNode;
+} & SelectOptionsProps<Option>) => {
   const props = useSelectFieldProps(field);
 
-  const { renderOptions, placeholderOption } = useSelectOptions(field, {
+  const { selectOptions } = useSelectOptions(field, {
     getValue,
     getLabel,
     options,
@@ -30,14 +35,7 @@ const SelectInput = <Option,>({
   return (
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
-      <select {...props}>
-        {placeholderOption}
-        {renderOptions.map(({ value, label }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
+      <select {...props}>{selectOptions}</select>
       <div>
         <FieldErrors field={field} />
       </div>

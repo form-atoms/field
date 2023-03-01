@@ -1,55 +1,49 @@
-import { useFieldState } from "form-atoms";
-import { ReactNode, useMemo } from "react";
+import { OptionHTMLAttributes, useMemo } from "react";
 
-import { SelectFieldAtom } from "./selectField";
-import { FieldProps } from "../../hooks";
+import { OptionProps, useOptions } from "../../hooks/use-options";
+import { ValidatedFieldAtom } from "../validatedFieldAtom";
 
-export type SelectFieldProps<Option, Value = string> = FieldProps<
-  SelectFieldAtom<Value>
-> &
-  SelectProps<Option, Value>;
+type HTMLOptionValue = OptionHTMLAttributes<HTMLOptionElement>["value"];
 
-export type SelectProps<Option, Value = string> = {
-  getValue: (option: Option) => Value;
-  getLabel: (option: Option) => ReactNode;
-  options: readonly Option[];
+export type SelectOptionsProps<
+  Option,
+  OptionValue extends HTMLOptionValue = string,
+  FieldValue = OptionValue
+> = OptionProps<Option, OptionValue, FieldValue> & {
   placeholder?: string;
 };
 
-export function useSelectOptions<Option, Value = string>(
-  field: SelectFieldAtom<Value>,
+export function useSelectOptions<
+  Option,
+  OptionValue extends HTMLOptionValue = string,
+  FieldValue = OptionValue
+>(
+  field: ValidatedFieldAtom<FieldValue>,
   {
-    getValue,
-    getLabel,
-    options,
     placeholder = "Please select an option",
-  }: SelectProps<Option, Value>
+    ...optionsProps
+  }: SelectOptionsProps<Option, OptionValue, FieldValue>
 ) {
-  const { value } = useFieldState(field);
-
-  const renderOptions = useMemo(
-    () =>
-      options.map((option) => {
-        const optionValue = getValue(option);
-
-        return {
-          option,
-          value: optionValue,
-          id: `${field}${optionValue}`,
-          isActive: optionValue === value,
-          label: getLabel(option),
-        };
-      }),
-    [options, value, getValue, getLabel]
+  const { renderOptions } = useOptions<Option, OptionValue, FieldValue>(
+    field,
+    optionsProps
   );
 
   return useMemo(
     () => ({
-      renderOptions,
-      placeholderOption: (
-        <option value="" disabled selected>
-          {placeholder}
-        </option>
+      selectOptions: (
+        <>
+          {placeholder && (
+            <option value="" disabled selected>
+              {placeholder}
+            </option>
+          )}
+          {renderOptions.map(({ id, value, label }) => (
+            <option key={id} value={value}>
+              {label}
+            </option>
+          ))}
+        </>
       ),
     }),
     [renderOptions, placeholder]
