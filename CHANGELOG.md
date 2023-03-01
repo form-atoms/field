@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.11...v1.1.0) (2023-03-01)
+
+
+### Features
+
+* booleanFIeld input hook and demo ([d6957ba](https://github.com/MiroslavPetrik/form-atoms-field/commit/d6957ba4297890db79a56a18e4b7df642de36c57))
+
 ## [1.0.11](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.10...v1.0.11) (2023-03-01)
 
 
