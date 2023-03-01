@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.0...v1.1.1) (2023-03-01)
+
+
+### Bug Fixes
+
+* drop redundant multiselect ([5bf2320](https://github.com/MiroslavPetrik/form-atoms-field/commit/5bf2320e8e6a3cb2fdb7b8942a898ca87e9d82b1))
+* useSelectOptions based on useOptions ([6e1f282](https://github.com/MiroslavPetrik/form-atoms-field/commit/6e1f2820decef281addb977716f30028683a4f06))
+
 # [1.1.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.0.11...v1.1.0) (2023-03-01)
 
 
