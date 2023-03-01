@@ -8,7 +8,7 @@ import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
-  title: "numberField",
+  title: "fields/numberField",
 };
 
 const NumberInput = ({
