@@ -8,7 +8,7 @@ import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
-  title: "checkboxField",
+  title: "fields/checkboxField",
 };
 
 const CheckboxInput = ({

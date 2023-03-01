@@ -9,7 +9,7 @@ import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
-  title: "multiSelectField",
+  title: "fields/multiSelectField",
 };
 
 const CheckboxGroup = <Option,>({

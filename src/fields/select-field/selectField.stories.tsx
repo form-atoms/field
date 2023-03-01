@@ -7,7 +7,7 @@ import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
-  title: "selectField",
+  title: "fields/selectField",
 };
 
 const SelectInput = <Option,>({

@@ -1,5 +1,6 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { Meta, Markdown, Stories, Canvas } from "@storybook/blocks";
 import * as SelectFieldStories from "./selectField.stories";
+import * as RadioGroupStories from "./radioGroup.stories";
 import Config from "./config.md?raw";
 
 <Meta title="fields/selectField" of={SelectFieldStories} />
@@ -50,7 +51,7 @@ A hook providing props to control a select or radio input.
 
 A hook which transforms generic options into value/label pairs and computes `isActive` prop for each option based on the selectField value.
 
-### Generic example
+### Generic example with `<select />`
 
 ```tsx
 const SelectInput = <Option,>({
@@ -105,3 +106,65 @@ const countryOptions = [
 ```
 
 <Stories />
+
+### Generic example with `<input type="radio" />`
+
+```tsx
+const RadioGroup = <Option,>({
+  field,
+  label,
+  getValue,
+  getLabel,
+  options,
+  placeholder,
+}: SelectFieldProps<Option>) => {
+  const props = useSelectFieldProps(field);
+
+  const { renderOptions } = useSelectOptions(field, {
+    getValue,
+    getLabel,
+    options,
+    placeholder,
+  });
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      {renderOptions.map(({ id, value, label, isActive }) => (
+        <div key={id}>
+          <input
+            {...props}
+            type="radio"
+            id={id}
+            value={value}
+            checked={isActive}
+          />
+          <label htmlFor={id}>{label}</label>
+        </div>
+      ))}
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+
+const bashAnswers = [
+  { answer: "Bash, a Shell", key: "A" },
+  { answer: "Bash Ain't Shell", key: "B" },
+  { answer: "Bourne Again Shell", key: "C" },
+  { answer: "Behold! Another Shell", key: "D" },
+];
+
+<RadioGroup
+  field={fields.bash}
+  label="Bash stands for ____?"
+  options={bashAnswers}
+  getValue={({ key }) => key}
+  getLabel={({ answer }) => answer}
+/>;
+```
+
+### Required
+
+<Canvas of={RadioGroupStories.Required} />

@@ -30,12 +30,13 @@ export function useSelectOptions<Option, Value = string>(
   const renderOptions = useMemo(
     () =>
       options.map((option) => {
-        const isActive = getValue(option) === value;
+        const optionValue = getValue(option);
 
         return {
           option,
-          isActive,
-          value: getValue(option),
+          value: optionValue,
+          id: `${field}${optionValue}`,
+          isActive: optionValue === value,
           label: getLabel(option),
         };
       }),
