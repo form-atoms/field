@@ -1,15 +1,15 @@
 import { multiSelectField } from "./multiSelectField";
-import { useMultiSelectFieldProps } from "./useMultiSelectFieldProps";
 import {
   MultiSelectFieldProps,
-  useMultiSelectOptions,
-} from "./useMultiSelectOptions";
+  useMultiSelectFieldProps,
+} from "./useMultiSelectFieldProps";
 import { FieldErrors } from "../../components/field-errors";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { useOptions } from "../select-field";
 
 export default {
   ...meta,
-  title: "fields/multiSelectField",
+  title: "fields/multiSelectField/checkboxGroup",
 };
 
 const CheckboxGroup = <Option,>({
@@ -18,15 +18,14 @@ const CheckboxGroup = <Option,>({
   getValue,
   getLabel,
   options,
-  placeholder,
 }: MultiSelectFieldProps<Option>) => {
   const props = useMultiSelectFieldProps(field);
 
-  const { renderOptions } = useMultiSelectOptions(field, {
+  const { renderOptions } = useOptions(field, {
     getValue,
     getLabel,
     options,
-    placeholder,
+    isChecked: (optionValue, fieldValue) => fieldValue.includes(optionValue),
   });
 
   // when one option is selected, thats enough for the required multiselect to be filled
@@ -35,15 +34,15 @@ const CheckboxGroup = <Option,>({
   return (
     <div style={{ margin: "20px 0" }}>
       <label>{label}</label>
-      {renderOptions.map(({ value, label, id, isActive }) => (
+      {renderOptions.map(({ label, id, value, checked }) => (
         <div key={id}>
           <input
             type="checkbox"
             {...props}
-            checked={isActive}
+            required={required}
             id={id}
             value={value}
-            required={required}
+            checked={checked}
           />
           <label htmlFor={id}>{label}</label>
         </div>

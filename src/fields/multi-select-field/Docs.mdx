@@ -1,8 +1,8 @@
 import { Meta, Markdown, Stories } from "@storybook/blocks";
-import * as MultiSelectFieldStories from "./multiSelectField.stories";
+import * as CheckboxGroupStories from "./checkboxGroup.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/multiSelectField" of={MultiSelectFieldStories} />
+<Meta title="fields/multiSelectField" of={CheckboxGroupStories} />
 
 # `multiSelectField<Value = string>(): ValidatedFieldAtom<Value[]>`
 
@@ -14,30 +14,31 @@ A generic choice field to hold multiple values of some options e.g. checkbox gro
 
 ## useMultiSelectFieldProps(multiSelectField)
 
-A hook providing props to control a select or radio input.
+A hook providing props to control a select or input element.
 
-## useMultiSelectOptions(multiSelectField, SelectProps)
-
-A hook which transforms generic options into value/label pairs and computes `isActive` prop for each option based on the multiSelectField value.
-
-### Generic example
+### Example with `<CheckboxGroup />`
 
 ```tsx
+import {
+  useMultiSelectFieldProps,
+  MultiSelectFieldProps,
+  useOptions,
+} from "@form-atoms/field";
+
 const CheckboxGroup = <Option,>({
   field,
   label,
   getValue,
   getLabel,
   options,
-  placeholder,
 }: MultiSelectFieldProps<Option>) => {
   const props = useMultiSelectFieldProps(field);
 
-  const { renderOptions } = useMultiSelectOptions(field, {
+  const { renderOptions } = useOptions(field, {
     getValue,
     getLabel,
     options,
-    placeholder,
+    isChecked: (optionValue, fieldValue) => fieldValue.includes(optionValue),
   });
 
   // when one option is selected, thats enough for the required multiselect to be filled
@@ -46,15 +47,15 @@ const CheckboxGroup = <Option,>({
   return (
     <div style={{ margin: "20px 0" }}>
       <label>{label}</label>
-      {renderOptions.map(({ value, label, id, isActive }) => (
+      {renderOptions.map(({ label, id, value, checked }) => (
         <div key={id}>
           <input
             type="checkbox"
             {...props}
-            checked={isActive}
+            required={required}
             id={id}
             value={value}
-            required={required}
+            checked={checked}
           />
           <label htmlFor={id}>{label}</label>
         </div>
