@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.1...v1.1.2) (2023-03-03)
+
+
+### Bug Fixes
+
+* debug labels ([83716a4](https://github.com/MiroslavPetrik/form-atoms-field/commit/83716a44c6f68eb5909632c45c04a72ed3bd9c22))
+
 ## [1.1.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.0...v1.1.1) (2023-03-01)
 
 
