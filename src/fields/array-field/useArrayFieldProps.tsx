@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-import { MultiSelectFieldAtom } from "./multiSelectField";
+import { StringArrayField, StringArrayFieldValue } from "./stringArrayField";
 import { FieldProps, OptionProps, useFieldProps } from "../../hooks";
 
 // TODO: make not dependent on checkbox input event
@@ -9,10 +9,8 @@ const getEventValue = (event: ChangeEvent<HTMLInputElement>, value: string[]) =>
     ? [...value, event.target.value]
     : value.filter((val) => val != event.target.value);
 
-export type MultiSelectFieldProps<Option, OptionValue = string> = FieldProps<
-  MultiSelectFieldAtom<OptionValue>
-> &
-  OptionProps<Option, OptionValue, OptionValue[]>;
+export type StringArrayFieldProps<Option> = FieldProps<StringArrayField> &
+  OptionProps<Option, string, StringArrayFieldValue>;
 
-export const useMultiSelectFieldProps = (field: MultiSelectFieldAtom) =>
+export const useArrayFieldProps = (field: StringArrayField) =>
   useFieldProps<string[], HTMLInputElement>(field, getEventValue);

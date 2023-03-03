@@ -1,13 +1,14 @@
 import { ChangeEvent } from "react";
 
-import { SelectFieldAtom } from "./selectField";
+import { StringFieldAtom } from "./stringField";
 import { useFieldProps } from "../../hooks";
 
 const getEventValue = (
   event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
 ) => event.target.value || undefined;
 
-export const useSelectFieldProps = (field: SelectFieldAtom) =>
+// TODO: Coerce primitives & make generic
+export const useSelectFieldProps = (field: StringFieldAtom) =>
   useFieldProps<string | undefined, HTMLSelectElement | HTMLInputElement>(
     field,
     getEventValue

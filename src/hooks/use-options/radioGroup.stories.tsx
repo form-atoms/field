@@ -3,10 +3,10 @@ import { ReactNode } from "react";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import {
-  SelectFieldAtom,
-  selectField,
-} from "../../fields/select-field/selectField";
-import { useSelectFieldProps } from "../../fields/select-field/useSelectFieldProps";
+  StringFieldAtom,
+  stringField,
+  useSelectFieldProps,
+} from "../../fields";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 import { OptionProps, useOptions } from ".";
@@ -22,7 +22,7 @@ const RadioGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: { field: SelectFieldAtom; label: ReactNode } & OptionProps<Option>) => {
+}: { field: StringFieldAtom; label: ReactNode } & OptionProps<Option>) => {
   const props = useSelectFieldProps(field);
 
   const { renderOptions } = useOptions(field, {
@@ -63,7 +63,7 @@ const bashAnswers = [
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      bash: selectField(),
+      bash: stringField(),
     },
     children: ({ fields }) => (
       <RadioGroup

@@ -1,15 +1,15 @@
-import { multiSelectField } from "./multiSelectField";
+import { stringArrayField } from "./stringArrayField";
 import {
-  MultiSelectFieldProps,
-  useMultiSelectFieldProps,
-} from "./useMultiSelectFieldProps";
+  StringArrayFieldProps,
+  useArrayFieldProps,
+} from "./useArrayFieldProps";
 import { FieldErrors } from "../../components/field-errors";
+import { useOptions } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
-import { useOptions } from "../select-field";
 
 export default {
   ...meta,
-  title: "fields/multiSelectField/checkboxGroup",
+  title: "fields/arrayField/checkboxGroup",
 };
 
 const CheckboxGroup = <Option,>({
@@ -18,8 +18,8 @@ const CheckboxGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: MultiSelectFieldProps<Option>) => {
-  const props = useMultiSelectFieldProps(field);
+}: StringArrayFieldProps<Option>) => {
+  const props = useArrayFieldProps(field);
 
   const { renderOptions } = useOptions(field, {
     getValue,
@@ -67,7 +67,7 @@ const languagesOptions = [
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      languages: multiSelectField(),
+      languages: stringArrayField(),
     },
     children: ({ fields }) => (
       <CheckboxGroup
@@ -84,7 +84,7 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      attachment: multiSelectField({
+      attachment: stringArrayField({
         optional: true,
       }),
     },

@@ -3,7 +3,7 @@ import { useBooleanFieldProps } from "./useBooleanFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
-import { SelectFieldProps, useSelectOptions } from "../select-field";
+import { SelectFieldProps, useSelectOptions } from "../string-field";
 
 export default {
   ...meta,

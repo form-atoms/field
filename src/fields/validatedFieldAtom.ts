@@ -2,16 +2,22 @@ import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { Atom, Getter, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset } from "jotai/utils";
-import { z } from "zod";
+import { ZodNever, z } from "zod";
 
-type ValidationConfig = {
+type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
   optional?: boolean;
-  schema: z.Schema | ((get: Getter) => z.Schema);
-  optionalSchema?: z.Schema | ((get: Getter) => z.Schema);
+  schema: Schema | ((get: Getter) => Schema);
+  optionalSchema?: OptSchema | ((get: Getter) => OptSchema);
 };
 
-export type ValidatedFieldAtomConfig<Value> = FieldAtomConfig<Value> &
-  ValidationConfig;
+export type ValidatedFieldAtomConfig<
+  Schema extends z.Schema,
+  OptSchema extends z.Schema = ZodNever
+> = FieldAtomConfig<
+  | Schema["_output"]
+  | (OptSchema extends ZodNever ? undefined : OptSchema["_output"])
+> &
+  ValidationConfig<Schema, OptSchema>;
 
 export type ValidatedFieldAtom<Value> = FieldAtom<Value> extends Atom<infer R>
   ? Atom<
@@ -25,25 +31,33 @@ export type ValidatedFieldAtom<Value> = FieldAtom<Value> extends Atom<infer R>
     >
   : never;
 
-export const validatedFieldAtom = <Value>({
+export const validatedFieldAtom = <
+  Schema extends z.Schema,
+  OptSchema extends z.Schema = ZodNever,
+  Value =
+    | Schema["_output"]
+    | (OptSchema extends ZodNever ? undefined : OptSchema["_output"])
+>({
   optional = false, // all fields required similarly as zod is required by default
   schema,
   optionalSchema,
   ...config
-}: ValidatedFieldAtomConfig<Value>): ValidatedFieldAtom<Value> => {
+}: ValidatedFieldAtomConfig<Schema, OptSchema>): ValidatedFieldAtom<Value> => {
   const requiredAtom = atomWithReset(!optional);
 
   const baseFieldAtom = fieldAtom({
-    validate: zodValidate(
+    validate: zodValidate<Value>(
       (get) => {
         const required = get(requiredAtom);
         const schemaObj = typeof schema === "function" ? schema(get) : schema;
         const optionalSchemaObj =
           typeof optionalSchema === "function"
             ? optionalSchema(get)
-            : optionalSchema ?? schemaObj; // fallback to schema when optional not customized
+            : optionalSchema;
 
-        return required ? schemaObj : optionalSchemaObj.optional();
+        const optSchema = optionalSchemaObj ?? schemaObj.optional();
+
+        return required ? schemaObj : optSchema;
       },
       {
         on: "change",

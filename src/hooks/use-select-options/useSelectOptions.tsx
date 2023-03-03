@@ -1,7 +1,7 @@
 import { OptionHTMLAttributes, useMemo } from "react";
 
-import { OptionProps, useOptions } from "../../hooks/use-options";
-import { ValidatedFieldAtom } from "../validatedFieldAtom";
+import { ValidatedFieldAtom } from "../../fields/validatedFieldAtom";
+import { OptionProps, useOptions } from "../use-options";
 
 type HTMLOptionValue = OptionHTMLAttributes<HTMLOptionElement>["value"];
 

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { checkboxField } from "../fields/checkbox-field";
 import { fileField } from "../fields/file-field";
 import { numberField } from "../fields/number-field";
-import { selectField } from "../fields/select-field";
+import { stringField } from "../fields/string-field";
 import { textField } from "../fields/text-field";
 
 export const countryOptions = [
@@ -20,7 +20,7 @@ export const profileFields = {
     name: "age",
     schema: z.number().min(17).max(65),
   }),
-  country: selectField({ name: "country" }),
+  country: stringField({ name: "country" }),
   profilePicture: fileField({ name: "profilePicture" }),
   bio: textField({
     name: "bio",
