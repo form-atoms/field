@@ -2,9 +2,9 @@ import { Meta, Markdown, Stories } from "@storybook/blocks";
 import * as CheckboxGroupStories from "./checkboxGroup.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/multiSelectField" of={CheckboxGroupStories} />
+<Meta title="fields/arrayField" of={CheckboxGroupStories} />
 
-# `multiSelectField<Value = string>(): ValidatedFieldAtom<Value[]>`
+# `arrayField<Value = string>(): ValidatedFieldAtom<Value[]>`
 
 A generic choice field to hold multiple values of some options e.g. checkbox group or multi select components.
 
@@ -12,7 +12,7 @@ A generic choice field to hold multiple values of some options e.g. checkbox gro
 
 <Markdown>{Config}</Markdown>
 
-## useMultiSelectFieldProps(multiSelectField)
+## useArrayFieldProps(arrayField)
 
 A hook providing props to control a select or input element.
 
@@ -20,8 +20,8 @@ A hook providing props to control a select or input element.
 
 ```tsx
 import {
-  useMultiSelectFieldProps,
-  MultiSelectFieldProps,
+  useArrayFieldProps,
+  arrayFieldProps,
   useOptions,
 } from "@form-atoms/field";
 
@@ -31,8 +31,8 @@ const CheckboxGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: MultiSelectFieldProps<Option>) => {
-  const props = useMultiSelectFieldProps(field);
+}: arrayFieldProps<Option>) => {
+  const props = useArrayFieldProps(field);
 
   const { renderOptions } = useOptions(field, {
     getValue,
@@ -80,7 +80,7 @@ const languagesOptions = [
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      languages: multiSelectField(),
+      languages: arrayField(),
     },
     children: ({ fields }) => (
       <CheckboxGroup
