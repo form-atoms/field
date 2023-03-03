@@ -29,7 +29,7 @@ export const validatedFieldAtom = <Value>({
   optional = false, // all fields required similarly as zod is required by default
   schema,
   optionalSchema,
-  ...atomConfig
+  ...config
 }: ValidatedFieldAtomConfig<Value>): ValidatedFieldAtom<Value> => {
   const requiredAtom = atomWithReset(!optional);
 
@@ -49,23 +49,30 @@ export const validatedFieldAtom = <Value>({
         on: "change",
       }
     ),
-    ...atomConfig,
+    ...config,
   });
 
   const validatedAtom = atom((get) => {
     const baseField = get(baseFieldAtom);
 
-    baseField.value.debugLabel = `field/value/${atomConfig.name}`;
-    baseField.validateStatus.debugLabel = `field/validateStatus/${atomConfig.name}`;
-    baseField.dirty.debugLabel = `field/dirty/${atomConfig.name}`;
-    baseField.touched.debugLabel = `field/touched/${atomConfig.name}`;
-    baseField.name.debugLabel = `field/name/${atomConfig.name}`;
-    baseField.errors.debugLabel = `field/errors/${atomConfig.name}`;
-    requiredAtom.debugLabel = `field/required/${atomConfig.name}`;
+    const fieldAtoms = {
+      required: requiredAtom,
+    };
 
-    return { ...baseField, required: requiredAtom };
+    if (
+      typeof process !== "undefined" &&
+      process.env.NODE_ENV !== "production"
+    ) {
+      Object.entries(fieldAtoms).map(([atomName, atom]) => {
+        atom.debugLabel = `field/${atomName}/${
+          config.name ?? "<unnamed-field>"
+        }`;
+      });
+    }
+
+    return { ...baseField, ...fieldAtoms };
   });
 
-  validatedAtom.debugLabel = `field/${atomConfig.name}`;
+  validatedAtom.debugLabel = `field/${config.name}`;
   return validatedAtom;
 };
