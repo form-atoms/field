@@ -1,7 +1,7 @@
 import { ExtractAtomValue } from "jotai";
 import { ZodString, z } from "zod";
 
-import { ValidatedFieldAtomConfig, validatedFieldAtom } from "..";
+import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
 export type StringFieldAtom = ReturnType<typeof stringField>;
@@ -13,8 +13,8 @@ export type StringFieldValue = ExtractAtomValue<
 export const stringField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ValidatedFieldAtomConfig<ZodString>> & ZodParams = {}) =>
-  validatedFieldAtom({
+}: Partial<ZodFieldConfig<ZodString>> & ZodParams = {}) =>
+  zodField({
     value: undefined,
     schema: z.string({ required_error }),
     ...config,

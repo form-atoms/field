@@ -1,7 +1,7 @@
 import { ExtractAtomValue } from "jotai";
 import { z } from "zod";
 
-import { ValidatedFieldAtomConfig, validatedFieldAtom } from "..";
+import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
 export type FileFieldAtom = ReturnType<typeof fileField>;
@@ -16,8 +16,8 @@ type ZodFileListInstance = typeof fileListInstanceSchema;
 export const fileField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ValidatedFieldAtomConfig<ZodFileListInstance>> & ZodParams = {}) =>
-  validatedFieldAtom({
+}: Partial<ZodFieldConfig<ZodFileListInstance>> & ZodParams = {}) =>
+  zodField({
     value: undefined,
     schema: z.instanceof(FileList, required_error),
     ...config,

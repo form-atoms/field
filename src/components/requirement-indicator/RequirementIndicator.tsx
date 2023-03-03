@@ -1,7 +1,7 @@
-import { ValidatedFieldAtom } from "../../fields/validatedFieldAtom";
+import { ZodField } from "../../fields/zodField";
 import { useRequiredProps } from "../../hooks/use-required-props";
 
-export type Props<Field extends ValidatedFieldAtom<any>> = {
+export type Props<Field extends ZodField<any>> = {
   field: Field;
   kind?: "icon" | "label";
 };
@@ -9,7 +9,7 @@ export type Props<Field extends ValidatedFieldAtom<any>> = {
 /**
  * Indicates field's required state by using the useRequiredProps() hook.
  */
-export const RequirementIndicator = <Field extends ValidatedFieldAtom<any>>({
+export const RequirementIndicator = <Field extends ZodField<any>>({
   kind = "icon",
   field,
 }: Props<Field>) => {

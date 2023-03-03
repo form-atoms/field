@@ -1,7 +1,7 @@
 import { ExtractAtomValue } from "jotai";
 import { ZodBoolean, ZodLiteral, z } from "zod";
 
-import { ValidatedFieldAtomConfig, validatedFieldAtom } from "..";
+import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
 export type CheckboxFieldAtom = ReturnType<typeof checkboxField>;
@@ -15,12 +15,12 @@ export const checkboxField = ({
   ...config
 }: Partial<
   Omit<
-    ValidatedFieldAtomConfig<ZodLiteral<true>, ZodBoolean>,
+    ZodFieldConfig<ZodLiteral<true>, ZodBoolean>,
     "schema" | "optionalSchema" | "validate"
   >
 > &
   ZodParams = {}) =>
-  validatedFieldAtom({
+  zodField({
     value: false,
     /**
      * When checkbox is required, it must be checked, so the value must be true.

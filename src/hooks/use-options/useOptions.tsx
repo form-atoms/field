@@ -1,7 +1,7 @@
 import { useFieldState } from "form-atoms";
 import { ReactNode, useMemo } from "react";
 
-import { ValidatedFieldAtom } from "../../fields";
+import { ZodField } from "../../fields";
 
 export type OptionProps<
   Option,
@@ -19,7 +19,7 @@ export function useOptions<
   OptionValue = string,
   FieldValue = OptionValue
 >(
-  field: ValidatedFieldAtom<FieldValue>,
+  field: ZodField<FieldValue>,
   {
     getValue,
     getLabel,

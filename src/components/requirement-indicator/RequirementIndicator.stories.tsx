@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import { ValidatedFieldAtom } from "../../fields";
-import { FieldLabel } from "../field-label";
+import { ZodField } from "../../fields";
 import { numberField } from "../../fields/number-field";
+import { FieldLabel } from "../field-label";
 
 import { Props, RequirementIndicator } from ".";
 
 export type StoryType = StoryObj<typeof meta>;
 
-const QuantityField = <Field extends ValidatedFieldAtom<any>>({
+const QuantityField = <Field extends ZodField<any>>({
   field,
   kind,
 }: Props<Field>) => (

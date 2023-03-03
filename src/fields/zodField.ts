@@ -10,7 +10,7 @@ type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
   optionalSchema?: OptSchema | ((get: Getter) => OptSchema);
 };
 
-export type ValidatedFieldAtomConfig<
+export type ZodFieldConfig<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodNever
 > = FieldAtomConfig<
@@ -19,7 +19,7 @@ export type ValidatedFieldAtomConfig<
 > &
   ValidationConfig<Schema, OptSchema>;
 
-export type ValidatedFieldAtom<Value> = FieldAtom<Value> extends Atom<infer R>
+export type ZodField<Value> = FieldAtom<Value> extends Atom<infer R>
   ? Atom<
       R & {
         required: WritableAtom<
@@ -31,7 +31,7 @@ export type ValidatedFieldAtom<Value> = FieldAtom<Value> extends Atom<infer R>
     >
   : never;
 
-export const validatedFieldAtom = <
+export const zodField = <
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodNever,
   Value =
@@ -42,7 +42,7 @@ export const validatedFieldAtom = <
   schema,
   optionalSchema,
   ...config
-}: ValidatedFieldAtomConfig<Schema, OptSchema>): ValidatedFieldAtom<Value> => {
+}: ZodFieldConfig<Schema, OptSchema>): ZodField<Value> => {
   const requiredAtom = atomWithReset(!optional);
 
   const baseFieldAtom = fieldAtom({
@@ -66,7 +66,7 @@ export const validatedFieldAtom = <
     ...config,
   });
 
-  const validatedAtom = atom((get) => {
+  const zodField = atom((get) => {
     const baseField = get(baseFieldAtom);
 
     const fieldAtoms = {
@@ -87,6 +87,6 @@ export const validatedFieldAtom = <
     return { ...baseField, ...fieldAtoms };
   });
 
-  validatedAtom.debugLabel = `field/${config.name}`;
-  return validatedAtom;
+  zodField.debugLabel = `field/zodField/${config.name}`;
+  return zodField;
 };

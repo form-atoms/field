@@ -1,6 +1,6 @@
 import { OptionHTMLAttributes, useMemo } from "react";
 
-import { ValidatedFieldAtom } from "../../fields/validatedFieldAtom";
+import { ZodField } from "../../fields/zodField";
 import { OptionProps, useOptions } from "../use-options";
 
 type HTMLOptionValue = OptionHTMLAttributes<HTMLOptionElement>["value"];
@@ -18,7 +18,7 @@ export function useSelectOptions<
   OptionValue extends HTMLOptionValue = string,
   FieldValue = OptionValue
 >(
-  field: ValidatedFieldAtom<FieldValue>,
+  field: ZodField<FieldValue>,
   {
     placeholder = "Please select an option",
     ...optionsProps

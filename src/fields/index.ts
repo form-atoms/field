@@ -5,4 +5,4 @@ export * from "./array-field";
 export * from "./number-field";
 export * from "./string-field";
 export * from "./text-field";
-export * from "./validatedFieldAtom";
+export * from "./zodField";

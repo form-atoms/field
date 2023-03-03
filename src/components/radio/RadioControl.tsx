@@ -2,10 +2,9 @@ import { atom } from "jotai";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { ValidatedFieldAtom } from "../../fields";
+import { ZodField } from "../../fields";
 
-const radioControlAtom = () =>
-  atom<ValidatedFieldAtom<boolean> | undefined>(undefined);
+const radioControlAtom = () => atom<ZodField<boolean> | undefined>(undefined);
 
 export type RadioControlAtom = ReturnType<typeof radioControlAtom>;
 
