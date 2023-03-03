@@ -1,3 +1,33 @@
+# [2.0.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.2...v2.0.0) (2023-03-03)
+
+
+* Next (#20) ([7aeb138](https://github.com/MiroslavPetrik/form-atoms-field/commit/7aeb13803dd37ac5012451cf5925400a631b151e)), closes [#20](https://github.com/MiroslavPetrik/form-atoms-field/issues/20)
+
+
+### BREAKING CHANGES
+
+* renamed select&multiselect field as those are not 'real'. For multiselect there is arrayField and the selectField is regular stringField.
+
+selectFieldHook will be made generic to support boolean, number, string, date (all primitive values) selection from list of options.
+
+* chore(release): 2.0.0-next.1
+
+# [2.0.0-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.2...v2.0.0-next.1) (2023-03-03)
+
+### Code Refactoring
+
+* infer field value from field schema ([378d1b5](https://github.com/MiroslavPetrik/form-atoms-field/commit/378d1b5b32d9b9c55b848e0d4c872aceb3cff6de))
+
+### BREAKING CHANGES
+
+* renamed select&multiselect field as those are not 'real'. For multiselect there is arrayField and the selectField is regular stringField.
+
+selectFieldHook will be made generic to support boolean, number, string, date (all primitive values) selection from list of options.
+
+* docs: update recent changes
+
+* refactor: rename ValidatedField to ZodField
+
 # [2.0.0-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.2...v2.0.0-next.1) (2023-03-03)
 
 
