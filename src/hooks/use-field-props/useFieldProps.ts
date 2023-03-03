@@ -2,9 +2,9 @@ import { useField } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChangeEvent, ReactNode, useMemo, useTransition } from "react";
 
-import { ValidatedFieldAtom } from "../../fields/validatedFieldAtom";
+import { ZodField } from "../../fields/zodField";
 
-export type FieldProps<Field extends ValidatedFieldAtom<any>> = {
+export type FieldProps<Field extends ZodField<any>> = {
   field: Field;
   label?: ReactNode;
   helperText?: ReactNode;
@@ -15,7 +15,7 @@ export function useFieldProps<
   Value,
   Element extends HTMLElement = HTMLInputElement
 >(
-  fieldAtom: ValidatedFieldAtom<Value>,
+  fieldAtom: ZodField<Value>,
   // support element to be union via distributive conditional types
   getEventValue: Element extends unknown
     ? (event: ChangeEvent<Element>, value: Value) => Value

@@ -1,29 +1,16 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
-import * as CheckboxGroupStories from "./checkboxGroup.stories";
-import Config from "./config.md?raw";
-
-<Meta title="fields/multiSelectField" of={CheckboxGroupStories} />
-
-# `multiSelectField<Value = string>(): ValidatedFieldAtom<Value[]>`
-
-A generic choice field to hold multiple values of some options e.g. checkbox group or multi select components.
-
-## Initial Config
-
-<Markdown>{Config}</Markdown>
-
-## useMultiSelectFieldProps(multiSelectField)
-
-A hook providing props to control a select or input element.
-
-### Example with `<CheckboxGroup />`
-
-```tsx
+import { stringArrayField } from "./stringArrayField";
 import {
-  useMultiSelectFieldProps,
-  MultiSelectFieldProps,
-  useOptions,
-} from "@form-atoms/field";
+  StringArrayFieldProps,
+  useArrayFieldProps,
+} from "./useArrayFieldProps";
+import { FieldErrors } from "../../components/field-errors";
+import { useOptions } from "../../hooks";
+import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+
+export default {
+  ...meta,
+  title: "fields/arrayField/checkboxGroup",
+};
 
 const CheckboxGroup = <Option,>({
   field,
@@ -31,8 +18,8 @@ const CheckboxGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: MultiSelectFieldProps<Option>) => {
-  const props = useMultiSelectFieldProps(field);
+}: StringArrayFieldProps<Option>) => {
+  const props = useArrayFieldProps(field);
 
   const { renderOptions } = useOptions(field, {
     getValue,
@@ -80,7 +67,7 @@ const languagesOptions = [
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      languages: multiSelectField(),
+      languages: stringArrayField(),
     },
     children: ({ fields }) => (
       <CheckboxGroup
@@ -93,6 +80,22 @@ export const Required: FormStory = {
     ),
   }),
 };
-```
 
-<Stories />
+export const Optional: FormStory = {
+  args: fixArgs({
+    fields: {
+      attachment: stringArrayField({
+        optional: true,
+      }),
+    },
+    children: ({ fields }) => (
+      <CheckboxGroup
+        field={fields.attachment}
+        label="What programming languages are you proficient with?"
+        options={languagesOptions}
+        getValue={({ key }) => key}
+        getLabel={({ name }) => name}
+      />
+    ),
+  }),
+};

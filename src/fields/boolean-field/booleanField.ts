@@ -1,21 +1,20 @@
-import { z } from "zod";
+import { ExtractAtomValue } from "jotai";
+import { ZodBoolean, z } from "zod";
 
-import {
-  ValidatedFieldAtom,
-  ValidatedFieldAtomConfig,
-  validatedFieldAtom,
-} from "..";
+import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type BooleanFieldValue = boolean | undefined;
+export type BooleanFieldAtom = ReturnType<typeof booleanField>;
 
-export type BooleanFieldAtom = ValidatedFieldAtom<BooleanFieldValue>;
+export type BooleanFieldValue = ExtractAtomValue<
+  ExtractAtomValue<BooleanFieldAtom>["value"]
+>;
 
 export const booleanField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ValidatedFieldAtomConfig<BooleanFieldValue>> & ZodParams = {}) =>
-  validatedFieldAtom({
+}: Partial<ZodFieldConfig<ZodBoolean>> & ZodParams = {}) =>
+  zodField({
     value: undefined,
     schema: z.boolean({ required_error }),
     ...config,

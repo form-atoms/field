@@ -1,16 +1,29 @@
-import { multiSelectField } from "./multiSelectField";
-import {
-  MultiSelectFieldProps,
-  useMultiSelectFieldProps,
-} from "./useMultiSelectFieldProps";
-import { FieldErrors } from "../../components/field-errors";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
-import { useOptions } from "../select-field";
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as CheckboxGroupStories from "./checkboxGroup.stories";
+import Config from "./config.md?raw";
 
-export default {
-  ...meta,
-  title: "fields/multiSelectField/checkboxGroup",
-};
+<Meta title="fields/arrayField" of={CheckboxGroupStories} />
+
+# `arrayField<Value = string>(): ValidatedFieldAtom<Value[]>`
+
+A generic choice field to hold multiple values of some options e.g. checkbox group or multi select components.
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
+
+## useArrayFieldProps(arrayField)
+
+A hook providing props to control a select or input element.
+
+### Example with `<CheckboxGroup />`
+
+```tsx
+import {
+  useArrayFieldProps,
+  arrayFieldProps,
+  useOptions,
+} from "@form-atoms/field";
 
 const CheckboxGroup = <Option,>({
   field,
@@ -18,8 +31,8 @@ const CheckboxGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: MultiSelectFieldProps<Option>) => {
-  const props = useMultiSelectFieldProps(field);
+}: arrayFieldProps<Option>) => {
+  const props = useArrayFieldProps(field);
 
   const { renderOptions } = useOptions(field, {
     getValue,
@@ -67,7 +80,7 @@ const languagesOptions = [
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      languages: multiSelectField(),
+      languages: arrayField(),
     },
     children: ({ fields }) => (
       <CheckboxGroup
@@ -80,22 +93,6 @@ export const Required: FormStory = {
     ),
   }),
 };
+```
 
-export const Optional: FormStory = {
-  args: fixArgs({
-    fields: {
-      attachment: multiSelectField({
-        optional: true,
-      }),
-    },
-    children: ({ fields }) => (
-      <CheckboxGroup
-        field={fields.attachment}
-        label="What programming languages are you proficient with?"
-        options={languagesOptions}
-        getValue={({ key }) => key}
-        getLabel={({ name }) => name}
-      />
-    ),
-  }),
-};
+<Stories />

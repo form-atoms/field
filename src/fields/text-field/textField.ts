@@ -1,21 +1,20 @@
-import { z } from "zod";
+import { ExtractAtomValue } from "jotai";
+import { ZodString, z } from "zod";
 
-import {
-  ValidatedFieldAtom,
-  ValidatedFieldAtomConfig,
-  validatedFieldAtom,
-} from "..";
+import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type TextFieldValue = string;
+export type TextFieldAtom = ReturnType<typeof textField>;
 
-export type TextFieldAtom = ValidatedFieldAtom<TextFieldValue>;
+export type TextFieldValue = ExtractAtomValue<
+  ExtractAtomValue<TextFieldAtom>["value"]
+>;
 
 export const textField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ValidatedFieldAtomConfig<TextFieldValue>> & ZodParams = {}) =>
-  validatedFieldAtom({
+}: Partial<ZodFieldConfig<ZodString, ZodString>> & ZodParams = {}) =>
+  zodField({
     value: "",
     // https://github.com/colinhacks/zod/issues/63
     schema: z.string().trim().min(1, required_error),

@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
 
-import { SelectFieldAtom, selectField } from "./selectField";
+import { StringFieldAtom, stringField } from "./stringField";
 import { useSelectFieldProps } from "./useSelectFieldProps";
-import { SelectOptionsProps, useSelectOptions } from "./useSelectOptions";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
+import { SelectOptionsProps, useSelectOptions } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
-  title: "fields/selectField",
+  title: "fields/stringField",
 };
 
 const SelectInput = <Option,>({
@@ -20,7 +20,7 @@ const SelectInput = <Option,>({
   options,
   placeholder,
 }: {
-  field: SelectFieldAtom;
+  field: StringFieldAtom;
   label: ReactNode;
 } & SelectOptionsProps<Option>) => {
   const props = useSelectFieldProps(field);
@@ -51,7 +51,7 @@ const countryOptions = [
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      country: selectField(),
+      country: stringField(),
     },
     children: ({ fields }) => (
       <SelectInput
@@ -68,7 +68,7 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      country: selectField({
+      country: stringField({
         optional: true,
       }),
     },

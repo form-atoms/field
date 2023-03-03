@@ -1,22 +1,24 @@
 import { Meta, Markdown, Stories, Canvas } from "@storybook/blocks";
-import * as SelectFieldStories from "./selectField.stories";
+import * as StringFieldStories from "./stringField.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/selectField" of={SelectFieldStories} />
+<Meta title="fields/stringField" of={StringFieldStories} />
 
-# `selectField<Value = string>(): ValidatedFieldAtom<Value | undefined>`
+# `stringField(): ValidatedFieldAtom<string | undefined>`
 
 A generic choice field to hold a key of some options e.g. in `<input type="radio" />` or `<select />` elements.
 The `undefined` empty value means that no option is selected.
 
+Unlike [textField()](?path=/docs/fields-textfield--docs), the `stringField` can be `undefined` and does not have requirement for length..
+
 ```ts
-import { selectField } from "@form-atoms/field";
+import { stringField } from "@form-atoms/field";
 
 // required string, must be filled to submit
-const favoriteCategory = selectField();
+const favoriteCategory = stringField();
 
 // optional string, can be empty to submit
-const companySize = selectField({ optional: true });
+const companySize = stringField({ optional: true });
 ```
 
 ## Initial Config
@@ -25,30 +27,13 @@ const companySize = selectField({ optional: true });
 
 ## Examples
 
-### Number select
-
-By default the select field works with `string` values. You can specify your own type. For example to make a rating field with choices 1-5
-you will need a `numericSelectField`:
-
-```ts
-import { selectField } from "@form-atoms/field";
-import { useFieldActions } from "form-atoms";
-
-const rating = selectField<number>({ schema: z.number() });
-
-const actions = useFieldActions(rating);
-
-actions.setValue("4"); // ERR!
-actions.setValue(4); // OK
-```
-
-## useSelectFieldProps(selectField)
+## useSelectFieldProps(stringField)
 
 A hook providing props to control a select or radio input.
 
-## useSelectOptions(selectField, SelectProps)
+## useSelectOptions(stringField, SelectProps)
 
-A special case of [useOptions](?path=/docs/hooks-useoptions--docs) hook, which transforms generic options into value/label pairs and computes `checked` prop for each option based on the selectField value.
+A special case of [useOptions](?path=/docs/hooks-useoptions--docs) hook, which transforms generic options into value/label pairs and computes `checked` prop for each option based on the stringField value.
 
 ### Example with `<select />`
 
@@ -61,7 +46,7 @@ const SelectInput = <Option,>({
   options,
   placeholder,
 }: {
-  field: SelectFieldAtom;
+  field: stringFieldAtom;
   label: ReactNode;
 } & SelectOptionsProps<Option>) => {
   const props = useSelectFieldProps(field);

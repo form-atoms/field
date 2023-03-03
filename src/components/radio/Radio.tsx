@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 import { RadioControlAtom } from "./RadioControl";
-import { ValidatedFieldAtom } from "../../fields";
+import { ZodField } from "../../fields";
 import { useRequiredActions } from "../../hooks";
 
 type Props = {
   control: RadioControlAtom;
-  field: ValidatedFieldAtom<boolean>;
+  field: ZodField<boolean>;
 };
 
 export const useRadio = ({ control, field }: Props) => {
