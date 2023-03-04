@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.0.0...v2.1.0) (2023-03-04)
+
+
+### Features
+
+* generic select and radio for primitive fields by coercing schema ([f3419f5](https://github.com/MiroslavPetrik/form-atoms-field/commit/f3419f572c49a11af568329ff82ef2eb08430d09))
+
 # [2.0.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v1.1.2...v2.0.0) (2023-03-03)
 
 
