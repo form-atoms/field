@@ -2,12 +2,9 @@ import { ReactNode } from "react";
 
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
-import {
-  StringFieldAtom,
-  stringField,
-  useSelectFieldProps,
-} from "../../fields";
+import { StringFieldAtom, StringFieldValue, stringField } from "../../fields";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { useOptionFieldProps } from "../use-option-field-props/useOptionFieldProps";
 
 import { OptionProps, useOptions } from ".";
 
@@ -22,14 +19,13 @@ const RadioGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: { field: StringFieldAtom; label: ReactNode } & OptionProps<Option>) => {
-  const props = useSelectFieldProps(field);
+}: { field: StringFieldAtom; label: ReactNode } & OptionProps<
+  Option,
+  StringFieldValue
+>) => {
+  const props = useOptionFieldProps(field);
 
-  const { renderOptions } = useOptions(field, {
-    getValue,
-    getLabel,
-    options,
-  });
+  const { renderOptions } = useOptions({ field, getValue, getLabel, options });
 
   return (
     <div style={{ margin: "20px 0" }}>

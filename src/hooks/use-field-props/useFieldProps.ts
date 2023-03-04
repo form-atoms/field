@@ -2,7 +2,7 @@ import { useField } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChangeEvent, ReactNode, useMemo, useTransition } from "react";
 
-import { ZodField } from "../../fields/zodField";
+import { ZodField, ZodFieldValue } from "../../fields/zodField";
 
 export type FieldProps<Field extends ZodField<any>> = {
   field: Field;
@@ -12,16 +12,19 @@ export type FieldProps<Field extends ZodField<any>> = {
 };
 
 export function useFieldProps<
-  Value,
+  Field extends ZodField<any>,
   Element extends HTMLElement = HTMLInputElement
 >(
-  fieldAtom: ZodField<Value>,
+  fieldAtom: Field,
   // support element to be union via distributive conditional types
   getEventValue: Element extends unknown
-    ? (event: ChangeEvent<Element>, value: Value) => Value
+    ? (
+        event: ChangeEvent<Element>,
+        value: ZodFieldValue<Field>
+      ) => ZodFieldValue<Field>
     : never
 ) {
-  const { actions, state } = useField(fieldAtom);
+  const { actions, state } = useField<ZodFieldValue<Field>>(fieldAtom);
   const field = useAtomValue(fieldAtom);
   const name = useAtomValue(field.name);
   const required = useAtomValue(field.required);

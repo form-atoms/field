@@ -1,10 +1,12 @@
 import { atom } from "jotai";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
+import { ZodBoolean } from "zod";
 
 import { ZodField } from "../../fields";
 
-const radioControlAtom = () => atom<ZodField<boolean> | undefined>(undefined);
+const radioControlAtom = () =>
+  atom<ZodField<ZodBoolean> | undefined>(undefined);
 
 export type RadioControlAtom = ReturnType<typeof radioControlAtom>;
 

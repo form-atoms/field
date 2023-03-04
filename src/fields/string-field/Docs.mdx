@@ -1,8 +1,7 @@
 import { Meta, Markdown, Stories, Canvas } from "@storybook/blocks";
-import * as StringFieldStories from "./stringField.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/stringField" of={StringFieldStories} />
+<Meta title="fields/stringField" />
 
 # `stringField(): ValidatedFieldAtom<string | undefined>`
 
@@ -24,63 +23,3 @@ const companySize = stringField({ optional: true });
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
-
-## Examples
-
-## useSelectFieldProps(stringField)
-
-A hook providing props to control a select or radio input.
-
-## useSelectOptions(stringField, SelectProps)
-
-A special case of [useOptions](?path=/docs/hooks-useoptions--docs) hook, which transforms generic options into value/label pairs and computes `checked` prop for each option based on the stringField value.
-
-### Example with `<select />`
-
-```tsx
-const SelectInput = <Option,>({
-  field,
-  label,
-  getValue,
-  getLabel,
-  options,
-  placeholder,
-}: {
-  field: stringFieldAtom;
-  label: ReactNode;
-} & SelectOptionsProps<Option>) => {
-  const props = useSelectFieldProps(field);
-
-  const { selectOptions } = useSelectOptions(field, {
-    getValue,
-    getLabel,
-    options,
-    placeholder,
-  });
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      <select {...props}>{selectOptions}</select>
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-
-const countryOptions = [
-  { name: "Slovak Republic", key: "SK" },
-  { name: "Czech Republic", key: "CZ" },
-];
-
-<SelectInput
-  field={fields.country}
-  label="Country of Origin"
-  options={countryOptions}
-  getValue={({ key }) => key}
-  getLabel={({ name }) => name}
-/>;
-```
-
-<Stories />

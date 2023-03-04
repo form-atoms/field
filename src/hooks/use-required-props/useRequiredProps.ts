@@ -9,8 +9,8 @@ export type RequiredProps = {
   isFieldRequired: boolean;
 };
 
-export const useRequiredProps = <Value>(
-  fieldAtom: ZodField<Value>,
+export const useRequiredProps = (
+  fieldAtom: ZodField<any>,
   uiRequired?: boolean
 ) => {
   const field = useAtomValue(fieldAtom);
@@ -29,7 +29,7 @@ export const useRequiredProps = <Value>(
   );
 };
 
-export const useRequiredActions = <Value>(fieldAtom: ZodField<Value>) => {
+export const useRequiredActions = (fieldAtom: ZodField<any>) => {
   const field = useAtomValue(fieldAtom);
   const setRequired = useSetAtom(field.required);
 

@@ -1,32 +1,25 @@
-import { OptionHTMLAttributes, useMemo } from "react";
+import { useMemo } from "react";
 
-import { ZodField } from "../../fields/zodField";
-import { OptionProps, useOptions } from "../use-options";
-
-type HTMLOptionValue = OptionHTMLAttributes<HTMLOptionElement>["value"];
+import { OptionProps, OptionValue, useOptions } from "../use-options";
 
 export type SelectOptionsProps<
   Option,
-  OptionValue extends HTMLOptionValue = string,
-  FieldValue = OptionValue
-> = OptionProps<Option, OptionValue, FieldValue> & {
+  FieldValue extends OptionValue,
+  TOptionValue extends OptionValue = FieldValue
+> = OptionProps<Option, FieldValue, TOptionValue> & {
   placeholder?: string;
 };
 
 export function useSelectOptions<
   Option,
-  OptionValue extends HTMLOptionValue = string,
-  FieldValue = OptionValue
->(
-  field: ZodField<FieldValue>,
-  {
-    placeholder = "Please select an option",
-    ...optionsProps
-  }: SelectOptionsProps<Option, OptionValue, FieldValue>
-) {
-  const { renderOptions } = useOptions<Option, OptionValue, FieldValue>(
-    field,
-    optionsProps
+  FieldValue extends OptionValue,
+  TOptionValue extends OptionValue = FieldValue
+>({
+  placeholder = "Please select an option",
+  ...optionsProps
+}: SelectOptionsProps<Option, FieldValue, TOptionValue>) {
+  const { renderOptions } = useOptions<Option, FieldValue, TOptionValue>(
+    optionsProps //as OptionProps<Option, FieldValue, TOptionValue>
   );
 
   return useMemo(

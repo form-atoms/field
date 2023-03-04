@@ -4,9 +4,9 @@ import { RenderProp } from "react-render-prop-type";
 
 type Props = RenderProp<{ errors: ReturnType<typeof useFieldErrors> }>;
 
-export const FieldErrors = <Value,>({
+export const FieldErrors = ({
   field,
   children = ({ errors }) => <>{errors.join("/n")}</>,
 }: {
-  field: FieldAtom<Value>;
+  field: FieldAtom<any>;
 } & Partial<Props>) => children({ errors: useFieldErrors(field) });

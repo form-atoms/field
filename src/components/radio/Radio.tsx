@@ -2,6 +2,7 @@ import { useFieldActions, useFieldValue } from "form-atoms";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { RenderProp } from "react-render-prop-type";
+import { ZodBoolean } from "zod";
 
 import { RadioControlAtom } from "./RadioControl";
 import { ZodField } from "../../fields";
@@ -9,7 +10,7 @@ import { useRequiredActions } from "../../hooks";
 
 type Props = {
   control: RadioControlAtom;
-  field: ZodField<boolean>;
+  field: ZodField<ZodBoolean>;
 };
 
 export const useRadio = ({ control, field }: Props) => {

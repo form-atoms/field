@@ -2,7 +2,7 @@ import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { Atom, Getter, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset } from "jotai/utils";
-import { ZodNever, z } from "zod";
+import { ZodAny, ZodAnyDef, ZodNever, z } from "zod";
 
 type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
   optional?: boolean;
@@ -19,7 +19,21 @@ export type ZodFieldConfig<
 > &
   ValidationConfig<Schema, OptSchema>;
 
-export type ZodField<Value> = FieldAtom<Value> extends Atom<infer R>
+export type ZodFieldValue<Field> = Field extends ZodField<
+  infer _,
+  infer __,
+  infer Value
+>
+  ? Value
+  : never;
+
+export type ZodField<
+  Schema extends z.Schema,
+  OptSchema extends z.Schema = ZodNever,
+  Value =
+    | Schema["_output"]
+    | (OptSchema extends ZodNever ? undefined : OptSchema["_output"])
+> = FieldAtom<Value> extends Atom<infer R>
   ? Atom<
       R & {
         required: WritableAtom<
@@ -27,6 +41,7 @@ export type ZodField<Value> = FieldAtom<Value> extends Atom<infer R>
           [boolean | typeof RESET | ((prev: boolean) => boolean)],
           void
         >;
+        schema: Atom<Schema>;
       }
     >
   : never;
@@ -42,14 +57,17 @@ export const zodField = <
   schema,
   optionalSchema,
   ...config
-}: ZodFieldConfig<Schema, OptSchema>): ZodField<Value> => {
+}: ZodFieldConfig<Schema, OptSchema>): ZodField<Schema, OptSchema> => {
   const requiredAtom = atomWithReset(!optional);
+  const schemaAtom = atom((get) =>
+    typeof schema === "function" ? schema(get) : schema
+  );
 
   const baseFieldAtom = fieldAtom({
     validate: zodValidate<Value>(
       (get) => {
         const required = get(requiredAtom);
-        const schemaObj = typeof schema === "function" ? schema(get) : schema;
+        const schemaObj = get(schemaAtom);
         const optionalSchemaObj =
           typeof optionalSchema === "function"
             ? optionalSchema(get)
@@ -70,6 +88,7 @@ export const zodField = <
     const baseField = get(baseFieldAtom);
 
     const fieldAtoms = {
+      schema: schemaAtom,
       required: requiredAtom,
     };
 

@@ -1,33 +1,37 @@
-import { useFieldState } from "form-atoms";
-import { ReactNode, useMemo } from "react";
+import { FieldAtom, useFieldState } from "form-atoms";
+import { OptionHTMLAttributes, ReactNode, useMemo } from "react";
 
-import { ZodField } from "../../fields";
+// The same as InputHTMLAttributes
+type HTMLOptionValue = OptionHTMLAttributes<HTMLOptionElement>["value"];
+
+// We provide support for boolean values by having custom serialization
+export type OptionValue = HTMLOptionValue | boolean;
 
 export type OptionProps<
   Option,
-  OptionValue = string,
-  FieldValue = OptionValue
+  FieldValue extends OptionValue,
+  TOptionValue extends OptionValue = FieldValue
 > = {
-  getValue: (option: Option) => OptionValue;
+  field: FieldAtom<FieldValue>;
+  getValue: (option: Option) => TOptionValue;
   getLabel: (option: Option) => ReactNode;
-  isChecked?: (optionValue: OptionValue, fieldValue: FieldValue) => boolean;
+  isChecked?: (optionValue: TOptionValue, fieldValue: FieldValue) => boolean;
   options: readonly Option[];
 };
 
+// TODO: could be renamed to useRadioOptions, given the strict HTMLValue type
 export function useOptions<
   Option,
-  OptionValue = string,
-  FieldValue = OptionValue
->(
-  field: ZodField<FieldValue>,
-  {
-    getValue,
-    getLabel,
-    // @ts-expect-error its fine to compare field and option value by default
-    isChecked = (optionValue, fieldValue) => optionValue === fieldValue,
-    options,
-  }: OptionProps<Option, OptionValue, FieldValue>
-) {
+  FieldValue extends OptionValue,
+  TOptionValue extends OptionValue = FieldValue
+>({
+  field,
+  getValue,
+  getLabel,
+  // @ts-expect-error no problem to compare option with field for most cases
+  isChecked = (optionValue, fieldValue) => optionValue === fieldValue,
+  options,
+}: OptionProps<Option, FieldValue, TOptionValue>) {
   const { value } = useFieldState(field);
 
   return useMemo(
@@ -37,7 +41,7 @@ export function useOptions<
 
         return {
           id: `${field}/${optionValue}`,
-          value: optionValue,
+          value: serializeValue(optionValue),
           checked: isChecked(optionValue, value),
           label: getLabel(option),
         };
@@ -46,3 +50,12 @@ export function useOptions<
     [options, value, getValue, getLabel]
   );
 }
+
+/**
+ * Serialize to string, with special handling of boolean to truthy/falsy value.
+ * Deserialization:
+ * z.coerce.boolean().parse("1") // true
+ * z.coerce.boolean().parse("") // false
+ */
+export const serializeValue = <Val extends OptionValue>(value: OptionValue) =>
+  typeof value === "boolean" ? (value ? "1" : "") : value;

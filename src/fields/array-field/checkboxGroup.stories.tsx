@@ -21,7 +21,8 @@ const CheckboxGroup = <Option,>({
 }: StringArrayFieldProps<Option>) => {
   const props = useArrayFieldProps(field);
 
-  const { renderOptions } = useOptions(field, {
+  const { renderOptions } = useOptions({
+    field,
     getValue,
     getLabel,
     options,
