@@ -19,7 +19,7 @@ export function useSelectOptions<
   ...optionsProps
 }: SelectOptionsProps<Option, FieldValue, TOptionValue>) {
   const { renderOptions } = useOptions<Option, FieldValue, TOptionValue>(
-    optionsProps //as OptionProps<Option, FieldValue, TOptionValue>
+    optionsProps
   );
 
   return useMemo(
