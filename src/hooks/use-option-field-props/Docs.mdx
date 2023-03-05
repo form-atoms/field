@@ -3,14 +3,30 @@ import * as OptionStories from "./useOptionFieldProps.stories";
 
 <Meta title="hooks/useOptionFieldProps" of={OptionStories} />
 
-# useOptionFieldProps(stringField)
+# useOptionFieldProps(field: OptionFieldAtom)
 
-A hook providing props to control a select or radio input.
+A special hook to be used in tandem with [useOptions](?path=/docs/hooks-useoptions--docs). It can manage a primitive field atom which will
+store the currently active option.
+
+The supported primitive field are:
+
+```ts
+type OptionFieldAtom = BooleanFieldAtom | NumberFieldAtom | StringFieldAtom;
+```
+
+For all the primitive types, it has well defined serialization & coercion to & from `HTMLInput` or `HTMLSelect` elements.
+This generic behavior is allows us to build generic `<Select />` or `<RadioGroup />` components.
+
+### Usage
+
+```ts
+import { useOptionFieldProps } from "@form-atoms/field";
+```
 
 ### Example with `<select />`
 
 ```tsx
-const SelectInput = <Option,>({
+const SelectInput = <Option, Field extends OptionFieldAtom>({
   field,
   label,
   getValue,
@@ -18,12 +34,12 @@ const SelectInput = <Option,>({
   options,
   placeholder,
 }: {
-  field: StringFieldAtom;
   label: ReactNode;
-} & SelectOptionsProps<Option>) => {
+  field: Field;
+} & UseSelectOptionsProps<Option, ZodFieldValue<Field>>) => {
   const props = useOptionFieldProps(field);
-
-  const { selectOptions } = useSelectOptions(field, {
+  const { selectOptions } = useSelectOptions({
+    field,
     getValue,
     getLabel,
     options,
@@ -46,8 +62,11 @@ const countryOptions = [
   { name: "Czech Republic", key: "CZ" },
 ];
 
+// the active option has key of type string
+const country = stringField()
+
 <SelectInput
-  field={fields.country}
+  field={country}
   label="Country of Origin"
   options={countryOptions}
   getValue={({ key }) => key}

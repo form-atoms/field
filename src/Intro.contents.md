@@ -27,3 +27,4 @@
 | [useClearFileInputEffect](?path=/docs/hooks-useclearfileinputeffect--docs) | An effect hook to clear file input when its field is reset.                                |
 | [useOptions](?path=/docs/hooks-useoptions--docs)                           | A data hook to evaluate which of option(s) is(are) active with respect to a field.         |
 | [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)               | An extension of `useOptions` hook which returns `<option />` elements instead of raw data. |
+| [useOptionFieldProps](?path=/docs/hooks-useoptionfieldprops--docs)         | A generic hook to manage a field holding active option from primitive options.             |

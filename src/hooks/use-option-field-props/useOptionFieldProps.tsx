@@ -12,9 +12,9 @@ import {
 
 // primitive fields which can be serialized by useOptions & coerced back to original type
 export type OptionFieldAtom =
-  | StringFieldAtom
   | BooleanFieldAtom
-  | NumberFieldAtom;
+  | NumberFieldAtom
+  | StringFieldAtom;
 
 export const useOptionFieldProps = <Field extends OptionFieldAtom>(
   field: Field
