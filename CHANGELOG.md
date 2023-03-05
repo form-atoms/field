@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.2.0...v2.3.0) (2023-03-05)
+
+
+### Features
+
+* Select ([95ab917](https://github.com/MiroslavPetrik/form-atoms-field/commit/95ab9172000eab0bc23cccc621b3c92bb2a1800f))
+
 # [2.2.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.1.2...v2.2.0) (2023-03-05)
 
 
