@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.3.0...v2.3.1) (2023-03-05)
+
+
+### Bug Fixes
+
+* select placeholder value ([60cbd70](https://github.com/MiroslavPetrik/form-atoms-field/commit/60cbd709ea50b7a8433dd7789bcd59a583779b4d)), closes [#22](https://github.com/MiroslavPetrik/form-atoms-field/issues/22)
+
 # [2.3.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.2.0...v2.3.0) (2023-03-05)
 
 
