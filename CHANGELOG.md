@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.1.0...v2.1.1) (2023-03-05)
+
+
+### Bug Fixes
+
+* normalize option hooks prop type names ([389ae92](https://github.com/MiroslavPetrik/form-atoms-field/commit/389ae92ab31a361b8352d08a2b0a11cc8e67b07f))
+
 # [2.1.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.0.0...v2.1.0) (2023-03-04)
 
 
