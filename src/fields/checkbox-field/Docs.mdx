@@ -8,6 +8,7 @@ import Config from "./config.md?raw";
 # `checkboxField(): ZodField<boolean>`
 
 A field which will have `true` or `false` value.
+Unlike [booleanField()](?path=/docs/fields-booleanfield--docs), this field cannot have `undefined` value.
 
 ```ts
 import { checkboxField } from "@form-atoms/field";
