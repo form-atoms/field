@@ -6,9 +6,12 @@ import Config from "./config.md?raw";
 
 # `booleanField(): ZodField<boolean | undefined>`
 
-A field which will have `true`, `false` or `undefined` value.
-You can think of it like 3-state checkbox. Sometimes, you can't initialize form with `false` checkbox, as the user must explicitly pick
-yes/no answer. This field starts in 'unanswered' state.
+A field to represent a 3-state checkbox which will have `true`, `false` or `undefined` value.
+
+Unlike [checkboxField()](?path=/docs/fields-checkboxfield--docs), the `booleanField`:
+
+- starts with `undefined` value e.g. 'unanswered' state
+- when required, it's value can be `false` or `true` for the form to submit (cannot be `undefined`)
 
 ```ts
 import { booleanField } from "@form-atoms/field";
