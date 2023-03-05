@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.1.2...v2.2.0) (2023-03-05)
+
+
+### Features
+
+* RadioGroup ([259e6b2](https://github.com/MiroslavPetrik/form-atoms-field/commit/259e6b2e988cf8c29afec1616228bc3af78a810a))
+
 ## [2.1.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.1.1...v2.1.2) (2023-03-05)
 
 
