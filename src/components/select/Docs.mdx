@@ -1,0 +1,41 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as SelectStories from "./Select.stories";
+
+<Meta title="components/Select" of={SelectStories} />
+
+# Select
+
+A combination of generic [useOptionFieldProps](?path=/docs/hooks-useoptionfieldprops--docs) and [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)
+which renders the options as the children of `<select />`.
+
+```ts
+import { Select } from "@form-atoms/field";
+```
+
+## Example
+
+```tsx
+import {
+  Select,
+  SelectProps,
+  FieldLabel,
+  FieldErrors,
+  OptionFieldAtom,
+} from "@form-atoms/field";
+
+const SelectField = <Option, Field extends OptionFieldAtom>({
+  field,
+  label,
+  ...props
+}: {
+  label: ReactNode;
+} & SelectProps<Option, Field>) => (
+  <div style={{ margin: "20px 0" }}>
+    <FieldLabel field={field} label={label} />
+    <Select {...props} field={field} />
+    <FieldErrors field={field} />
+  </div>
+);
+```
+
+<Stories />

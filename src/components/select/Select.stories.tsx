@@ -1,53 +1,29 @@
 import { ReactNode } from "react";
 
-import { OptionFieldAtom, useOptionFieldProps } from "./useOptionFieldProps";
-import { UseSelectOptionsProps, useSelectOptions } from "..";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
-import {
-  ZodFieldValue,
-  booleanField,
-  numberField,
-  stringField,
-} from "../../fields";
+import { FieldLabel, Select, SelectProps } from "..";
+import { booleanField, numberField, stringField } from "../../fields";
+import { OptionFieldAtom } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { FieldErrors } from "../field-errors";
 
 export default {
   ...meta,
-  title: "hooks/useOptionFieldProps",
+  title: "components/Select",
 };
 
-const SelectInput = <Option, Field extends OptionFieldAtom>({
+const SelectField = <Option, Field extends OptionFieldAtom>({
   field,
   label,
-  getValue,
-  getLabel,
-  options,
-  placeholder,
+  ...props
 }: {
   label: ReactNode;
-  field: Field;
-} & UseSelectOptionsProps<Option, ZodFieldValue<Field>>) => {
-  const props = useOptionFieldProps(field);
-
-  const { selectOptions } = useSelectOptions({
-    field,
-    getValue,
-    getLabel,
-    options,
-    placeholder,
-  });
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      <select {...props}>{selectOptions}</select>
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
+} & SelectProps<Option, Field>) => (
+  <div style={{ margin: "20px 0" }}>
+    <FieldLabel field={field} label={label} />
+    <Select {...props} field={field} />
+    <FieldErrors field={field} />
+  </div>
+);
 
 const countryOptions = [
   { name: "Slovak Republic", key: "SK" },
@@ -60,26 +36,7 @@ export const RequiredString: FormStory = {
       country: stringField(),
     },
     children: ({ fields }) => (
-      <SelectInput
-        field={fields.country}
-        label="Country of Origin"
-        options={countryOptions}
-        getValue={({ key }) => key}
-        getLabel={({ name }) => name}
-      />
-    ),
-  }),
-};
-
-export const OptionalString: FormStory = {
-  args: fixArgs({
-    fields: {
-      country: stringField({
-        optional: true,
-      }),
-    },
-    children: ({ fields }) => (
-      <SelectInput
+      <SelectField
         field={fields.country}
         label="Country of Origin"
         options={countryOptions}
@@ -98,7 +55,7 @@ export const RequiredNumber: FormStory = {
       rating: numberField(),
     },
     children: ({ fields }) => (
-      <SelectInput
+      <SelectField
         field={fields.rating}
         label="How do you rate this docs?"
         options={ratingOptions}
@@ -120,7 +77,7 @@ export const RequiredBoolean: FormStory = {
       approved: booleanField(),
     },
     children: ({ fields }) => (
-      <SelectInput
+      <SelectField
         field={fields.approved}
         label="Do you approve this message?"
         options={approvalOptions}

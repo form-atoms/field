@@ -19,6 +19,7 @@
 | [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
 | [RadioGroup](?path=/docs/components-radiogroup--docs)                     | Select a generic option via `<input type="radio">`.            |
 | [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
+| [Select](?path=/docs/components-select--docs)                             | Select a generic option via `<select>`.                        |
 
 ### Hooks
 
