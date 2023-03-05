@@ -17,6 +17,7 @@
 | [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |
 | [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.               |
 | [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
+| [RadioGroup](?path=/docs/components-radiogroup--docs)                     | Select a generic option via `<input type="radio">`.            |
 | [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
 
 ### Hooks
