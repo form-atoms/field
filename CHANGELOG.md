@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.1.1...v2.1.2) (2023-03-05)
+
+
+### Bug Fixes
+
+* export useOptionFieldProps ([a2f84bd](https://github.com/MiroslavPetrik/form-atoms-field/commit/a2f84bd9831b89a1fe8c35900f779afea57979c4))
+
 ## [2.1.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.1.0...v2.1.1) (2023-03-05)
 
 
