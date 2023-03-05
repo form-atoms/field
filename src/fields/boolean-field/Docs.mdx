@@ -4,7 +4,7 @@ import Config from "./config.md?raw";
 
 <Meta title="fields/booleanField" of={BooleanFieldStories} />
 
-# `booleanField(): ValidatedFieldAtom<boolean | undefined>`
+# `booleanField(): ZodField<boolean | undefined>`
 
 A field which will have `true`, `false` or `undefined` value.
 You can think of it like 3-state checkbox. Sometimes, you can't initialize form with `false` checkbox, as the user must explicitly pick
@@ -26,46 +26,14 @@ const yesNoAnswer = booleanField({
 
 ## useBooleanFieldProps()
 
-The `useBooleanFieldProps` will parse the input values as boolean. You can think of it like `valueAsBoolean` which is similar to `valueAsNumber` used in the `useNumberFieldProps`.
-Note that the example uses generic `useSelectOptions` hook.
+The `useBooleanFieldProps` will parse the input values as boolean. The inputs must be rendered with boolean strings:
 
-```tsx
-const YesNoOptions = <Option,>({
-  field,
-  label,
-  getValue,
-  getLabel,
-  options,
-}: SelectFieldProps<Option, boolean>) => {
-  const props = useBooleanFieldProps(field);
+```ts
+type InputValue = "true" | "false"; // only these values will be parsed by this hook
 
-  const { renderOptions } = useSelectOptions(field, {
-    getValue,
-    getLabel,
-    options,
-  });
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      {renderOptions.map(({ id, value, label, isActive }) => (
-        <div key={id}>
-          <input
-            type="radio"
-            {...props}
-            id={id}
-            value={`${value}`}
-            checked={isActive}
-          />
-          <label htmlFor={id}>{label}</label>
-        </div>
-      ))}
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
+// example
+<input value="true" />
+<input value="false" />
 ```
 
-<Stories />
+You can think of it like `valueAsBoolean` which is similar to `valueAsNumber` used in the `useNumberFieldProps`.

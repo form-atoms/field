@@ -18,7 +18,7 @@ should supply input's `checked` prop instead of `value` prop. Or the `file` inpu
 ### Controllable `required` property
 
 We extend the default `fieldAtom` with a `required` state. This allows us to specify optional & required `zod` validators for the most common cases.
-All the data fields are of type `ValidatedFieldAtom` which extends the default `FieldAtom`.
+All the data fields are of type `ZodField` which extends the default `FieldAtom`.
 Finally, the `required` state is used on UI layer to display requirement indicators to users or to set `aria` properties.
 
 ### `undefined` as empty values
