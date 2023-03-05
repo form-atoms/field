@@ -1,0 +1,42 @@
+import { Meta, Markdown, Canvas } from "@storybook/blocks";
+
+<Meta title="hooks/useSelectOptions" />
+
+# `useSelectOptions<Option, OptionValue, FieldValue>(props): UseSelectOptions`
+
+A wrapper arround [useOptions](?path=/docs/hooks-useoptions--docs) which renders the options into `<option />` elements.
+
+### Usage
+
+```tsx
+import { useSelectOptions } from "@form-atoms/field";
+
+// pass your props the same way as in `useOptions` hook:
+const { selectOptions } = useSelectOptions({
+  field,
+  getValue,
+  getLabel,
+  options,
+  placeholder,
+});
+
+// render as <select> children:
+<select {...props}>{selectOptions}</select>;
+```
+
+### Props
+
+The props extend the [UseOptionsProps](?path=/docs/hooks-useoptions--docs#props) with a `placeholder`:
+
+```ts
+export type UseSelectOptionsProps<
+  Option,
+  FieldValue extends OptionValue,
+  TOptionValue extends OptionValue = FieldValue
+> = UseOptionsProps<Option, FieldValue, TOptionValue> & {
+  /**
+   * A text for custom placeholder.
+   */
+  placeholder?: string;
+};
+```
