@@ -7,7 +7,7 @@ type HTMLOptionValue = OptionHTMLAttributes<HTMLOptionElement>["value"];
 // We provide support for boolean values by having custom serialization
 export type OptionValue = HTMLOptionValue | boolean;
 
-export type OptionProps<
+export type UseOptionProps<
   Option,
   FieldValue extends OptionValue,
   TOptionValue extends OptionValue = FieldValue
@@ -31,7 +31,7 @@ export function useOptions<
   // @ts-expect-error no problem to compare option with field for most cases
   isChecked = (optionValue, fieldValue) => optionValue === fieldValue,
   options,
-}: OptionProps<Option, FieldValue, TOptionValue>) {
+}: UseOptionProps<Option, FieldValue, TOptionValue>) {
   const { value } = useFieldState(field);
 
   return useMemo(

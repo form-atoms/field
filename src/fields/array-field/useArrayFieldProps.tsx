@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 import { StringArrayField, StringArrayFieldValue } from "./stringArrayField";
-import { FieldProps, OptionProps, useFieldProps } from "../../hooks";
+import { FieldProps, UseOptionProps, useFieldProps } from "../../hooks";
 
 const getEventValue = (event: ChangeEvent<HTMLInputElement>, value: string[]) =>
   event.target.checked
@@ -9,7 +9,7 @@ const getEventValue = (event: ChangeEvent<HTMLInputElement>, value: string[]) =>
     : value.filter((val) => val != event.target.value);
 
 export type StringArrayFieldProps<Option> = FieldProps<StringArrayField> &
-  OptionProps<Option, StringArrayFieldValue, string>;
+  UseOptionProps<Option, StringArrayFieldValue, string>;
 
 export const useArrayFieldProps = (field: StringArrayField) =>
   useFieldProps<StringArrayField, HTMLInputElement>(field, getEventValue);

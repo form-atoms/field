@@ -6,7 +6,7 @@ import { StringFieldAtom, StringFieldValue, stringField } from "../../fields";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 import { useOptionFieldProps } from "../use-option-field-props/useOptionFieldProps";
 
-import { OptionProps, useOptions } from ".";
+import { UseOptionProps, useOptions } from ".";
 
 export default {
   ...meta,
@@ -19,7 +19,7 @@ const RadioGroup = <Option,>({
   getValue,
   getLabel,
   options,
-}: { field: StringFieldAtom; label: ReactNode } & OptionProps<
+}: { field: StringFieldAtom; label: ReactNode } & UseOptionProps<
   Option,
   StringFieldValue
 >) => {

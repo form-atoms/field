@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 
-import { OptionProps, OptionValue, useOptions } from "../use-options";
+import { OptionValue, UseOptionProps, useOptions } from "../use-options";
 
-export type SelectOptionsProps<
+export type UseSelectOptionsProps<
   Option,
   FieldValue extends OptionValue,
   TOptionValue extends OptionValue = FieldValue
-> = OptionProps<Option, FieldValue, TOptionValue> & {
+> = UseOptionProps<Option, FieldValue, TOptionValue> & {
   placeholder?: string;
 };
 
@@ -17,7 +17,7 @@ export function useSelectOptions<
 >({
   placeholder = "Please select an option",
   ...optionsProps
-}: SelectOptionsProps<Option, FieldValue, TOptionValue>) {
+}: UseSelectOptionsProps<Option, FieldValue, TOptionValue>) {
   const { renderOptions } = useOptions<Option, FieldValue, TOptionValue>(
     optionsProps
   );

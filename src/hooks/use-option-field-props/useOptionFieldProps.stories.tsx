@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { OptionFieldAtom, useOptionFieldProps } from "./useOptionFieldProps";
-import { SelectOptionsProps, useSelectOptions } from "..";
+import { UseSelectOptionsProps, useSelectOptions } from "..";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import {
@@ -27,7 +27,7 @@ const SelectInput = <Option, Field extends OptionFieldAtom>({
 }: {
   label: ReactNode;
   field: Field;
-} & SelectOptionsProps<Option, ZodFieldValue<Field>>) => {
+} & UseSelectOptionsProps<Option, ZodFieldValue<Field>>) => {
   const props = useOptionFieldProps(field);
 
   const { selectOptions } = useSelectOptions({

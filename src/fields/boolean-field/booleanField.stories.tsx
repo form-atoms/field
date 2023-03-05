@@ -7,7 +7,7 @@ import {
 } from "./booleanField";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
-import { OptionProps, useOptions } from "../../hooks";
+import { UseOptionProps, useOptions } from "../../hooks";
 import { useOptionFieldProps } from "../../hooks/use-option-field-props/useOptionFieldProps";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
@@ -22,7 +22,7 @@ const YesNoOptions = <Option,>({
   getValue,
   getLabel,
   options,
-}: { label: ReactNode; field: BooleanFieldAtom } & OptionProps<
+}: { label: ReactNode; field: BooleanFieldAtom } & UseOptionProps<
   Option,
   BooleanFieldValue
 >) => {
