@@ -27,7 +27,7 @@ export function useSelectOptions<
       selectOptions: (
         <>
           {placeholder && (
-            <option value="" disabled selected>
+            <option value="__PLACEHOLDER__" disabled selected>
               {placeholder}
             </option>
           )}
