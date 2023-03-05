@@ -12,8 +12,8 @@ export const stringArrayField = (
   } = {}
 ) => arrayField({ elementSchema: z.string(), ...params });
 
-export type StringArrayField = ReturnType<typeof stringArrayField>;
+export type StringArrayFieldAtom = ReturnType<typeof stringArrayField>;
 
 export type StringArrayFieldValue = ExtractAtomValue<
-  ExtractAtomValue<StringArrayField>["value"]
+  ExtractAtomValue<StringArrayFieldAtom>["value"]
 >;

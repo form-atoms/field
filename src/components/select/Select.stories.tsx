@@ -1,8 +1,14 @@
 import { ReactNode } from "react";
 
 import { FieldLabel, Select, SelectProps } from "..";
-import { booleanField, numberField, stringField } from "../../fields";
-import { OptionFieldAtom } from "../../hooks";
+import {
+  ZodFieldValue,
+  booleanField,
+  numberField,
+  stringArrayField,
+  stringField,
+} from "../../fields";
+import { OptionFieldAtom, OptionValue } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -11,13 +17,17 @@ export default {
   title: "components/Select",
 };
 
-const SelectField = <Option, Field extends OptionFieldAtom>({
+const SelectField = <
+  Option,
+  Field extends OptionFieldAtom,
+  TOptionValue extends OptionValue = ZodFieldValue<Field>
+>({
   field,
   label,
   ...props
 }: {
   label: ReactNode;
-} & SelectProps<Option, Field>) => (
+} & SelectProps<Option, Field, TOptionValue>) => (
   <div style={{ margin: "20px 0" }}>
     <FieldLabel field={field} label={label} />
     <Select {...props} field={field} />
@@ -28,12 +38,31 @@ const SelectField = <Option, Field extends OptionFieldAtom>({
 const countryOptions = [
   { name: "Slovak Republic", key: "SK" },
   { name: "Czech Republic", key: "CZ" },
+  { name: "Poland", key: "PL" },
+  { name: "Hungary", key: "HU" },
 ];
 
 export const RequiredString: FormStory = {
   args: fixArgs({
     fields: {
       country: stringField(),
+    },
+    children: ({ fields }) => (
+      <SelectField
+        field={fields.country}
+        label="Country of Origin"
+        options={countryOptions}
+        getValue={({ key }) => key}
+        getLabel={({ name }) => name}
+      />
+    ),
+  }),
+};
+
+export const OptionalString: FormStory = {
+  args: fixArgs({
+    fields: {
+      country: stringField({ optional: true }),
     },
     children: ({ fields }) => (
       <SelectField
@@ -83,6 +112,25 @@ export const RequiredBoolean: FormStory = {
         options={approvalOptions}
         getValue={({ key }) => key}
         getLabel={({ label }) => label}
+      />
+    ),
+  }),
+};
+
+export const RequiredArrayString: FormStory = {
+  name: "Multiple select - Required Array<string>",
+  args: fixArgs({
+    fields: {
+      visitedCountries: stringArrayField(),
+    },
+    children: ({ fields }) => (
+      <SelectField
+        multiple
+        field={fields.visitedCountries}
+        label="Visited countried"
+        options={countryOptions}
+        getValue={({ key }) => key}
+        getLabel={({ name }) => name}
       />
     ),
   }),

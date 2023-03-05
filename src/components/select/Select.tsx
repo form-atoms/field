@@ -1,22 +1,33 @@
 import { ZodFieldValue } from "../../fields";
 import {
   OptionFieldAtom,
+  OptionValue,
   UseSelectOptionsProps,
   useOptionFieldProps,
   useSelectOptions,
 } from "../../hooks";
 
-export type SelectProps<Option, Field extends OptionFieldAtom> = {
+export type SelectProps<
+  Option,
+  Field extends OptionFieldAtom,
+  TOptionValue extends OptionValue = ZodFieldValue<Field>
+> = {
   field: Field;
-} & UseSelectOptionsProps<Option, ZodFieldValue<Field>>;
+  multiple?: boolean;
+} & UseSelectOptionsProps<Option, ZodFieldValue<Field>, TOptionValue>;
 
-export const Select = <Option, Field extends OptionFieldAtom>({
+export const Select = <
+  Option,
+  Field extends OptionFieldAtom,
+  TOptionValue extends OptionValue = ZodFieldValue<Field>
+>({
   field,
+  multiple = false,
   getValue,
   getLabel,
   options,
   placeholder,
-}: SelectProps<Option, Field>) => {
+}: SelectProps<Option, Field, TOptionValue>) => {
   const props = useOptionFieldProps(field);
 
   const { selectOptions } = useSelectOptions({
@@ -27,5 +38,9 @@ export const Select = <Option, Field extends OptionFieldAtom>({
     placeholder,
   });
 
-  return <select {...props}>{selectOptions}</select>;
+  return (
+    <select {...props} multiple={multiple}>
+      {selectOptions}
+    </select>
+  );
 };

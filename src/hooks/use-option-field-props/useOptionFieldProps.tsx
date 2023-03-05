@@ -6,6 +6,7 @@ import { serializeValue, useFieldProps } from "..";
 import {
   BooleanFieldAtom,
   NumberFieldAtom,
+  StringArrayFieldAtom,
   StringFieldAtom,
   ZodFieldValue,
 } from "../../fields";
@@ -14,7 +15,13 @@ import {
 export type OptionFieldAtom =
   | BooleanFieldAtom
   | NumberFieldAtom
-  | StringFieldAtom;
+  | StringFieldAtom
+  | StringArrayFieldAtom;
+
+const isSelectMultipleEvent = (
+  event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+): event is ChangeEvent<HTMLSelectElement> =>
+  event.currentTarget.type === "select-multiple";
 
 export const useOptionFieldProps = <Field extends OptionFieldAtom>(
   field: Field
@@ -24,7 +31,11 @@ export const useOptionFieldProps = <Field extends OptionFieldAtom>(
 
   const getEventValue = useCallback(
     (event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
-      // TODO: this can throw with wrong runtime atom; perhaps catch & set error into the field?
+      if (isSelectMultipleEvent(event)) {
+        return [...event.currentTarget.options]
+          .filter(({ selected }) => selected)
+          .map(({ value }) => value) as ZodFieldValue<Field>;
+      }
 
       const coerceSchema =
         schema instanceof ZodBoolean
@@ -35,6 +46,7 @@ export const useOptionFieldProps = <Field extends OptionFieldAtom>(
           ? z.coerce.string()
           : z.never();
 
+      // TODO: this can throw with wrong runtime atom; perhaps catch & set error into the field?
       return coerceSchema.parse(event.target.value) as ZodFieldValue<Field>;
     },
     [schema]
