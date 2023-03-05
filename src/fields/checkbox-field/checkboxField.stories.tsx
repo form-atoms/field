@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { CheckboxFieldAtom, checkboxField } from "./checkboxField";
+import { CheckboxField, checkboxField } from "./checkboxField";
 import { useCheckboxFieldProps } from "./useCheckboxFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
@@ -15,7 +15,7 @@ const CheckboxInput = ({
   field,
   label,
 }: {
-  field: CheckboxFieldAtom;
+  field: CheckboxField;
   label: ReactNode;
 }) => {
   const props = useCheckboxFieldProps(field);

@@ -8,7 +8,7 @@ import {
   stringArrayField,
   stringField,
 } from "../../fields";
-import { OptionFieldAtom, OptionValue } from "../../hooks";
+import { OptionField, OptionValue } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -19,7 +19,7 @@ export default {
 
 const SelectField = <
   Option,
-  Field extends OptionFieldAtom,
+  Field extends OptionField,
   TOptionValue extends OptionValue = ZodFieldValue<Field>
 >({
   field,

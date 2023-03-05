@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
 
-import { BooleanFieldAtom } from "./booleanField";
+import { BooleanField } from "./booleanField";
 import { FieldProps, useFieldProps } from "../../hooks";
 
-export type NumberFieldProps = FieldProps<BooleanFieldAtom>;
+export type NumberFieldProps = FieldProps<BooleanField>;
 
 const valueAsBoolean = (event: ChangeEvent<HTMLInputElement>) => {
   const value = JSON.parse(event.currentTarget.value);
@@ -11,5 +11,5 @@ const valueAsBoolean = (event: ChangeEvent<HTMLInputElement>) => {
   return typeof value === "boolean" ? value : undefined;
 };
 
-export const useBooleanFieldProps = (field: BooleanFieldAtom) =>
+export const useBooleanFieldProps = (field: BooleanField) =>
   useFieldProps(field, valueAsBoolean);

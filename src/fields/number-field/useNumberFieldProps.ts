@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
 
-import { NumberFieldAtom } from "./numberField";
+import { NumberField } from "./numberField";
 import { FieldProps, useFieldProps } from "../../hooks";
 
-export type NumberFieldProps = FieldProps<NumberFieldAtom>;
+export type NumberFieldProps = FieldProps<NumberField>;
 
 const getNumber = (event: ChangeEvent<HTMLInputElement>) => {
   const { valueAsNumber } = event.currentTarget;
@@ -12,5 +12,5 @@ const getNumber = (event: ChangeEvent<HTMLInputElement>) => {
   return Number.isNaN(valueAsNumber) ? undefined : valueAsNumber;
 };
 
-export const useNumberFieldProps = (field: NumberFieldAtom) =>
+export const useNumberFieldProps = (field: NumberField) =>
   useFieldProps(field, getNumber);

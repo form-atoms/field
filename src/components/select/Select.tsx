@@ -1,6 +1,6 @@
 import { ZodFieldValue } from "../../fields";
 import {
-  OptionFieldAtom,
+  OptionField,
   OptionValue,
   UseSelectOptionsProps,
   useOptionFieldProps,
@@ -9,7 +9,7 @@ import {
 
 export type SelectProps<
   Option,
-  Field extends OptionFieldAtom,
+  Field extends OptionField,
   TOptionValue extends OptionValue = ZodFieldValue<Field>
 > = {
   field: Field;
@@ -18,15 +18,15 @@ export type SelectProps<
 
 export const Select = <
   Option,
-  Field extends OptionFieldAtom,
+  Field extends OptionField,
   TOptionValue extends OptionValue = ZodFieldValue<Field>
 >({
   field,
-  multiple = false,
   getValue,
   getLabel,
   options,
   placeholder,
+  multiple = false,
 }: SelectProps<Option, Field, TOptionValue>) => {
   const props = useOptionFieldProps(field);
 

@@ -4,10 +4,10 @@ import { ZodString, z } from "zod";
 import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type TextFieldAtom = ReturnType<typeof textField>;
+export type TextField = ReturnType<typeof textField>;
 
 export type TextFieldValue = ExtractAtomValue<
-  ExtractAtomValue<TextFieldAtom>["value"]
+  ExtractAtomValue<TextField>["value"]
 >;
 
 export const textField = ({

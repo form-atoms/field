@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { NumberFieldAtom, numberField } from "./numberField";
+import { NumberField, numberField } from "./numberField";
 import { useNumberFieldProps } from "./useNumberFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
@@ -15,7 +15,7 @@ const NumberInput = ({
   field,
   label,
 }: {
-  field: NumberFieldAtom;
+  field: NumberField;
   label: ReactNode;
 }) => {
   const props = useNumberFieldProps(field);

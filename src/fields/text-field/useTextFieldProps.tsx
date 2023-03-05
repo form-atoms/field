@@ -1,16 +1,16 @@
 import { ChangeEvent } from "react";
 
-import { TextFieldAtom } from "./textField";
+import { TextField } from "./textField";
 import { FieldProps, useFieldProps } from "../../hooks";
 
-export type TextFieldProps = FieldProps<TextFieldAtom>;
+export type TextFieldProps = FieldProps<TextField>;
 
 const getEventValue = (
   event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
 ) => event.target.value;
 
-export const useTextFieldProps = (field: TextFieldAtom) =>
-  useFieldProps<TextFieldAtom, HTMLInputElement | HTMLTextAreaElement>(
+export const useTextFieldProps = (field: TextField) =>
+  useFieldProps<TextField, HTMLInputElement | HTMLTextAreaElement>(
     field,
     getEventValue
   );

@@ -4,10 +4,10 @@ import { z } from "zod";
 import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type FileFieldAtom = ReturnType<typeof fileField>;
+export type FileField = ReturnType<typeof fileField>;
 
 export type FileFieldValue = ExtractAtomValue<
-  ExtractAtomValue<FileFieldAtom>["value"]
+  ExtractAtomValue<FileField>["value"]
 >;
 
 const fileListInstanceSchema = z.instanceof(FileList);

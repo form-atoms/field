@@ -1,16 +1,16 @@
 import { ZodFieldValue } from "../../fields";
 import {
-  OptionFieldAtom,
+  OptionField,
   UseOptionProps,
   useOptionFieldProps,
   useOptions,
 } from "../../hooks";
 
-export type RadioGroupProps<Option, Field extends OptionFieldAtom> = {
+export type RadioGroupProps<Option, Field extends OptionField> = {
   field: Field;
 } & UseOptionProps<Option, ZodFieldValue<Field>>;
 
-export const RadioGroup = <Option, Field extends OptionFieldAtom>({
+export const RadioGroup = <Option, Field extends OptionField>({
   field,
   getValue,
   getLabel,

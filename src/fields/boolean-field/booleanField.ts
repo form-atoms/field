@@ -4,10 +4,10 @@ import { ZodBoolean, z } from "zod";
 import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type BooleanFieldAtom = ReturnType<typeof booleanField>;
+export type BooleanField = ReturnType<typeof booleanField>;
 
 export type BooleanFieldValue = ExtractAtomValue<
-  ExtractAtomValue<BooleanFieldAtom>["value"]
+  ExtractAtomValue<BooleanField>["value"]
 >;
 
 export const booleanField = ({

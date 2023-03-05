@@ -2,7 +2,7 @@ import { FormAtom, FormFields, formAtom, useFormActions } from "form-atoms";
 import { PropsWithChildren } from "react";
 
 import { useClearFileInputEffect } from "./useClearFileInputEffect";
-import { FileFieldAtom, fileField, useFileFieldProps } from "../../fields";
+import { FileField, fileField, useFileFieldProps } from "../../fields";
 
 const DemoForm = <Fields extends FormFields>({
   form,
@@ -25,7 +25,7 @@ export default {
   component: DemoForm,
 };
 
-const UncontrolledFileInput = ({ field }: { field: FileFieldAtom }) => {
+const UncontrolledFileInput = ({ field }: { field: FileField }) => {
   const { value, ...props } = useFileFieldProps(field);
 
   return <input type="file" {...props} />;
@@ -42,7 +42,7 @@ export const Uncontrolled = {
 
 const profilePic = fileField();
 
-const ControlledFileInput = ({ field }: { field: FileFieldAtom }) => {
+const ControlledFileInput = ({ field }: { field: FileField }) => {
   const { value, ...props } = useFileFieldProps(field);
   useClearFileInputEffect(field);
 

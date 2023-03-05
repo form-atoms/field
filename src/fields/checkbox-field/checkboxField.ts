@@ -4,10 +4,10 @@ import { ZodBoolean, ZodLiteral, z } from "zod";
 import { ZodFieldConfig, zodField } from "..";
 import { ZodParams, defaultParams } from "../zodParams";
 
-export type CheckboxFieldAtom = ReturnType<typeof checkboxField>;
+export type CheckboxField = ReturnType<typeof checkboxField>;
 
 export type CheckboxFieldValue = ExtractAtomValue<
-  ExtractAtomValue<CheckboxFieldAtom>["value"]
+  ExtractAtomValue<CheckboxField>["value"]
 >;
 
 export const checkboxField = ({

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { FileFieldAtom, fileField } from "./fileField";
+import { FileField, fileField } from "./fileField";
 import { useFileFieldProps } from "./useFileFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
@@ -15,7 +15,7 @@ const FileInput = ({
   field,
   label,
 }: {
-  field: FileFieldAtom;
+  field: FileField;
   label: ReactNode;
 }) => {
   const { value, ...props } = useFileFieldProps(field);

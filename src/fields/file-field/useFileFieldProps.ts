@@ -1,12 +1,12 @@
 import { ChangeEvent } from "react";
 
-import { FileFieldAtom } from "./fileField";
+import { FileField } from "./fileField";
 import { FieldProps, useFieldProps } from "../../hooks";
 
-export type FileFieldProps = FieldProps<FileFieldAtom>;
+export type FileFieldProps = FieldProps<FileField>;
 
 const getFiles = (event: ChangeEvent<HTMLInputElement>) =>
   event.target.files ?? undefined;
 
-export const useFileFieldProps = (field: FileFieldAtom) =>
+export const useFileFieldProps = (field: FileField) =>
   useFieldProps(field, getFiles);

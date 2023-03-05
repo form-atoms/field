@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { RadioGroup, RadioGroupProps } from "./RadioGroup";
 import { FieldLabel } from "..";
 import { booleanField, numberField, stringField } from "../../fields";
-import { OptionFieldAtom } from "../../hooks";
+import { OptionField } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -12,7 +12,7 @@ export default {
   title: "components/RadioGroup",
 };
 
-const RadioGroupField = <Option, Field extends OptionFieldAtom>({
+const RadioGroupField = <Option, Field extends OptionField>({
   field,
   label,
   getValue,

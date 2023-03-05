@@ -2,7 +2,7 @@ import { Meta, Stories } from "@storybook/blocks";
 
 <Meta title="hooks/useOptionFieldProps" />
 
-# useOptionFieldProps(field: OptionFieldAtom)
+# useOptionFieldProps(field: OptionField)
 
 A special hook to be used in tandem with [useOptions](?path=/docs/hooks-useoptions--docs). It can manage a primitive field atom which will
 store the currently active option.
@@ -10,7 +10,7 @@ store the currently active option.
 The supported primitive field are:
 
 ```ts
-type OptionFieldAtom = BooleanFieldAtom | NumberFieldAtom | StringFieldAtom;
+type OptionField = BooleanField | NumberField | StringField;
 ```
 
 For all the primitive types, it has well defined serialization & coercion to & from `HTMLInput` or `HTMLSelect` elements.
@@ -25,7 +25,7 @@ import { useOptionFieldProps } from "@form-atoms/field";
 ### Example with `<select />`
 
 ```tsx
-const SelectInput = <Option, Field extends OptionFieldAtom>({
+const SelectInput = <Option, Field extends OptionField>({
   field,
   label,
   getValue,

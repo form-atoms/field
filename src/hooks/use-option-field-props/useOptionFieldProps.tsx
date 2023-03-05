@@ -4,26 +4,26 @@ import { ZodBoolean, ZodNumber, ZodString, z } from "zod";
 
 import { serializeValue, useFieldProps } from "..";
 import {
-  BooleanFieldAtom,
-  NumberFieldAtom,
-  StringArrayFieldAtom,
-  StringFieldAtom,
+  BooleanField,
+  NumberField,
+  StringArrayField,
+  StringField,
   ZodFieldValue,
 } from "../../fields";
 
 // primitive fields which can be serialized by useOptions & coerced back to original type
-export type OptionFieldAtom =
-  | BooleanFieldAtom
-  | NumberFieldAtom
-  | StringFieldAtom
-  | StringArrayFieldAtom;
+export type OptionField =
+  | BooleanField
+  | NumberField
+  | StringField
+  | StringArrayField;
 
 const isSelectMultipleEvent = (
   event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
 ): event is ChangeEvent<HTMLSelectElement> =>
   event.currentTarget.type === "select-multiple";
 
-export const useOptionFieldProps = <Field extends OptionFieldAtom>(
+export const useOptionFieldProps = <Field extends OptionField>(
   field: Field
 ) => {
   const atom = useAtomValue(field);
