@@ -1,3 +1,15 @@
+# [2.4.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.3.1...v2.4.0) (2023-03-05)
+
+
+### Bug Fixes
+
+* field naming ([795abe7](https://github.com/MiroslavPetrik/form-atoms-field/commit/795abe7bd4e7567b53fbfb2a1dadeee3aead2f5f))
+
+
+### Features
+
+* Select with multiple prop ([7b15833](https://github.com/MiroslavPetrik/form-atoms-field/commit/7b158335c81e92663e0ada78d5f889c73c204698)), closes [#25](https://github.com/MiroslavPetrik/form-atoms-field/issues/25)
+
 ## [2.3.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.3.0...v2.3.1) (2023-03-05)
 
 
