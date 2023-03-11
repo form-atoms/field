@@ -1,0 +1,63 @@
+import { Meta, Stories } from "@storybook/blocks";
+
+<Meta title="hooks/useSelectFieldProps" />
+
+# `useSelectFieldProps<Option, Field extends SelectField>(props)`
+
+A special hook to be used in tandem with [useSelectOptions](?path=/docs/hooks-useselectoptions--docs). It can manage a primitive field atom which will
+store the currently active option.
+
+### Usage
+
+```ts
+import { useSelectFieldProps } from "@form-atoms/field";
+```
+
+### Example with `<select />`
+
+```tsx
+import { useSelectFieldProps, UseSelectOptionsProps, SelectField } from "@form-atoms/field";
+
+const SelectInput = <Option, Field extends SelectField>({
+  field,
+  label,
+  getValue,
+  getLabel,
+  options,
+  placeholder,
+}: {
+  label: ReactNode;
+} & UseSelectOptionsProps<Option, Field>) => {
+  const props = useSelectFieldProps({field, options, getValue});
+  const { selectOptions } = useSelectOptions({
+    field,
+    options,
+    getLabel,
+    placeholder,
+  });
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <select {...props}>{selectOptions}</select>
+      <FieldErrors field={field} />
+    </div>
+  );
+};
+
+const countryOptions = [
+  { name: "Slovak Republic", key: "SK" },
+  { name: "Czech Republic", key: "CZ" },
+];
+
+// the active option has key of type string
+const country = stringField()
+
+<SelectInput
+  field={country}
+  label="Country of Origin"
+  options={countryOptions}
+  getValue={({ key }) => key}
+  getLabel={({ name }) => name}
+/>;
+```

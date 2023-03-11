@@ -1,14 +1,8 @@
 import { ReactNode } from "react";
 
 import { FieldLabel, Select, SelectProps } from "..";
-import {
-  ZodFieldValue,
-  booleanField,
-  numberField,
-  stringArrayField,
-  stringField,
-} from "../../fields";
-import { OptionField, OptionValue } from "../../hooks";
+import { booleanField, numberField, stringField } from "../../fields";
+import type { SelectField } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -17,20 +11,16 @@ export default {
   title: "components/Select",
 };
 
-const SelectField = <
-  Option,
-  Field extends OptionField,
-  TOptionValue extends OptionValue = ZodFieldValue<Field>
->({
+const SelectField = <Option, Field extends SelectField>({
   field,
   label,
   ...props
 }: {
   label: ReactNode;
-} & SelectProps<Option, Field, TOptionValue>) => (
+} & SelectProps<Option, Field>) => (
   <div style={{ margin: "20px 0" }}>
     <FieldLabel field={field} label={label} />
-    <Select {...props} field={field} />
+    <Select field={field} {...props} />
     <FieldErrors field={field} />
   </div>
 );
@@ -112,25 +102,6 @@ export const RequiredBoolean: FormStory = {
         options={approvalOptions}
         getValue={({ key }) => key}
         getLabel={({ label }) => label}
-      />
-    ),
-  }),
-};
-
-export const RequiredArrayString: FormStory = {
-  name: "Multiple select - Required Array<string>",
-  args: fixArgs({
-    fields: {
-      visitedCountries: stringArrayField(),
-    },
-    children: ({ fields }) => (
-      <SelectField
-        multiple
-        field={fields.visitedCountries}
-        label="Visited countried"
-        options={countryOptions}
-        getValue={({ key }) => key}
-        getLabel={({ name }) => name}
       />
     ),
   }),

@@ -18,12 +18,13 @@ import { Select } from "@form-atoms/field";
 import {
   Select,
   SelectProps,
+  SelectField,
   FieldLabel,
   FieldErrors,
   OptionField,
 } from "@form-atoms/field";
 
-const SelectField = <Option, Field extends OptionField>({
+const SelectField = <Option, Field extends SelectField>({
   field,
   label,
   ...props

@@ -1,8 +1,7 @@
 import { Meta, Markdown, Stories } from "@storybook/blocks";
-import * as CheckboxGroupStories from "./checkboxGroup.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/arrayField" of={CheckboxGroupStories} />
+<Meta title="fields/arrayField" />
 
 # `arrayField<Value = string>(): ZodField<Value[]>`
 
@@ -34,11 +33,10 @@ const CheckboxGroup = <Option,>({
 }: arrayFieldProps<Option>) => {
   const props = useArrayFieldProps(field);
 
-  const { renderOptions } = useOptions(field, {
-    getValue,
-    getLabel,
+  const { renderOptions } = useOptions({
+    field,
     options,
-    isChecked: (optionValue, fieldValue) => fieldValue.includes(optionValue),
+    getLabel,
   });
 
   // when one option is selected, thats enough for the required multiselect to be filled
@@ -94,5 +92,3 @@ export const Required: FormStory = {
   }),
 };
 ```
-
-<Stories />

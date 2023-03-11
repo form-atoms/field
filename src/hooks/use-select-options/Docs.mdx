@@ -2,7 +2,7 @@ import { Meta, Markdown, Canvas } from "@storybook/blocks";
 
 <Meta title="hooks/useSelectOptions" />
 
-# `useSelectOptions<Option, OptionValue, FieldValue>(props): UseSelectOptions`
+# `useSelectOptions<Option>(props): UseSelectOptions`
 
 A wrapper arround [useOptions](?path=/docs/hooks-useoptions--docs) which renders the options into `<option />` elements.
 
@@ -14,7 +14,6 @@ import { useSelectOptions } from "@form-atoms/field";
 // pass your props the same way as in `useOptions` hook:
 const { selectOptions } = useSelectOptions({
   field,
-  getValue,
   getLabel,
   options,
   placeholder,
@@ -24,19 +23,29 @@ const { selectOptions } = useSelectOptions({
 <select {...props}>{selectOptions}</select>;
 ```
 
+### Features
+
+- ✅ Renders custom placeholder as a disabled option at the start of `selectOptions`.
+
 ### Props
 
 The props extend the [UseOptionsProps](?path=/docs/hooks-useoptions--docs#props) with a `placeholder`:
 
 ```ts
-export type UseSelectOptionsProps<
-  Option,
-  FieldValue extends OptionValue,
-  TOptionValue extends OptionValue = FieldValue
-> = UseOptionsProps<Option, FieldValue, TOptionValue> & {
+export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
   /**
-   * A text for custom placeholder.
+   * A text for a custom placeholder option at the start of selectOptions.
+   * @default "Please select an option"
    */
   placeholder?: string;
 };
+```
+
+To disable the default placeholder, set it to empty string:
+
+```ts
+const { selectOptions } = useSelectOptions({
+  placeholder = "",
+  // rest of props
+});
 ```

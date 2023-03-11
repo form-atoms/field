@@ -3,12 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
-import {
-  booleanField,
-  numberField,
-  stringArrayField,
-  stringField,
-} from "../../fields";
+import { booleanField, numberField, stringField } from "../../fields";
 
 import { Select } from ".";
 
@@ -94,33 +89,6 @@ describe("<Select />", () => {
       });
 
       expect(onSubmit).toHaveBeenCalledWith({ field: "some" });
-    });
-  });
-
-  describe("multiple with stringArrayField", () => {
-    const props = {
-      field: stringArrayField(),
-      options: ["pl", "hu", "sk", "cz"],
-      getLabel: (val: string) => val,
-      getValue: (val: string) => val,
-    };
-
-    it("submits with string[] value", async () => {
-      const form = formAtom({ field: props.field });
-      const { result } = renderHook(() => useFormSubmit(form));
-      render(<Select multiple {...props} />);
-
-      await userEvent.selectOptions(screen.getByRole("listbox"), [
-        screen.getByText("cz"),
-        screen.getByText("sk"),
-      ]);
-
-      const onSubmit = vi.fn();
-      await act(async () => {
-        result.current(onSubmit)();
-      });
-
-      expect(onSubmit).toHaveBeenCalledWith({ field: ["sk", "cz"] });
     });
   });
 });

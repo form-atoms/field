@@ -1,38 +1,40 @@
-import { ZodFieldValue } from "../../fields";
 import {
-  OptionField,
+  SelectField,
   UseOptionProps,
-  useOptionFieldProps,
+  UseSelectFieldProps,
   useOptions,
+  useSelectFieldProps,
 } from "../../hooks";
 
-export type RadioGroupProps<Option, Field extends OptionField> = {
-  field: Field;
-} & UseOptionProps<Option, ZodFieldValue<Field>>;
+export type RadioGroupProps<Option, Field extends SelectField> = Omit<
+  UseOptionProps<Option>,
+  "field"
+> &
+  UseSelectFieldProps<Option, Field>;
 
-export const RadioGroup = <Option, Field extends OptionField>({
+export const RadioGroup = <Option, Field extends SelectField>({
   field,
+  options,
   getValue,
   getLabel,
-  options,
 }: RadioGroupProps<Option, Field>) => {
   /**
    * ref for multiple inputs not needed.
    */
-  const { ref, ...props } = useOptionFieldProps(field);
+  const { ref, ...props } = useSelectFieldProps({ field, options, getValue });
 
-  const { renderOptions } = useOptions({ field, getValue, getLabel, options });
+  const { renderOptions } = useOptions({ field, options, getLabel });
 
   return (
     <>
-      {renderOptions.map(({ id, value, label, checked }) => (
+      {renderOptions.map(({ id, value, label }) => (
         <div key={id}>
           <input
             {...props}
             type="radio"
             id={id}
             value={value}
-            checked={checked}
+            checked={props.value === value}
           />
           <label htmlFor={id}>{label}</label>
         </div>
