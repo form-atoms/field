@@ -1,3 +1,10 @@
+## [2.4.1-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.0...v2.4.1-next.1) (2023-03-12)
+
+
+### Bug Fixes
+
+* UseOptionsProps name ([128fc26](https://github.com/MiroslavPetrik/form-atoms-field/commit/128fc261af2f9b07cfdd66ca4be0450149a7b5b2))
+
 # [2.4.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.3.1...v2.4.0) (2023-03-05)
 
 
