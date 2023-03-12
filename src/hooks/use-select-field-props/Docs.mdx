@@ -4,8 +4,16 @@ import { Meta, Stories } from "@storybook/blocks";
 
 # `useSelectFieldProps<Option, Field extends SelectField>(props)`
 
-A special hook to be used in tandem with [useSelectOptions](?path=/docs/hooks-useselectoptions--docs). It can manage a primitive field atom which will
-store the currently active option.
+A hook that enables you to pick a single choice from a list of options.
+
+It is used in [Select](?path=/docs/components-select--docs) and [RadioGroup](?path=/docs/components-radiogroup--docs) components.
+
+### Features
+
+Given `useOptions` hook creates options with indexed values, this hook:
+
+- ✅ holds the active index as value for the UI element (e.g. for `<select />`)
+- ✅ controls the field's value
 
 ### Usage
 
@@ -13,7 +21,29 @@ store the currently active option.
 import { useSelectFieldProps } from "@form-atoms/field";
 ```
 
-### Example with `<select />`
+### Props
+
+```ts
+export type UseSelectFieldProps<Option, Field extends SelectField> = {
+  /**
+   * Your field atom.
+   */
+  field: Field;
+  /**
+   * Transform function to turn option into field value.
+   */
+  getValue: (option: Option) => NonNullable<ZodFieldValue<Field>>;
+  /**
+   * List of your generic options.
+   */
+  options: readonly Option[];
+};
+```
+
+### Example uage with `<select />`
+
+For example, `useSelectFieldProps` can be used in tandem with [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)
+to define a custom `SelectInput` component:
 
 ```tsx
 import { useSelectFieldProps, UseSelectOptionsProps, SelectField } from "@form-atoms/field";
