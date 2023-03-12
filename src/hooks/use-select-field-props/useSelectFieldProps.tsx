@@ -1,7 +1,7 @@
 import { useAtomValue } from "jotai";
 import { ChangeEvent, useCallback, useState } from "react";
 
-import { UseOptionProps, useFieldProps } from "..";
+import { UseOptionsProps, useFieldProps } from "..";
 import { ZodField, ZodFieldValue } from "../../fields";
 
 /**
@@ -12,7 +12,7 @@ export type SelectField = ZodField<any>;
 export type UseSelectFieldProps<Option, Field extends SelectField> = {
   field: Field;
   getValue: (option: Option) => NonNullable<ZodFieldValue<Field>>;
-} & Pick<UseOptionProps<Option>, "options">;
+} & Pick<UseOptionsProps<Option>, "options">;
 
 export const useSelectFieldProps = <Option, Field extends SelectField>({
   field,

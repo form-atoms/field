@@ -4,7 +4,7 @@ import { BooleanField, booleanField } from "./booleanField";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import {
-  UseOptionProps,
+  UseOptionsProps,
   UseSelectFieldProps,
   useOptions,
   useSelectFieldProps,
@@ -22,7 +22,7 @@ const YesNoOptions = <Option,>({
   getValue,
   getLabel,
   options,
-}: { label: ReactNode } & UseOptionProps<Option> &
+}: { label: ReactNode } & UseOptionsProps<Option> &
   UseSelectFieldProps<Option, BooleanField>) => {
   const props = useSelectFieldProps({ field, options, getValue });
 

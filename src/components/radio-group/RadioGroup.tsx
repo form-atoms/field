@@ -1,13 +1,13 @@
 import {
   SelectField,
-  UseOptionProps,
+  UseOptionsProps,
   UseSelectFieldProps,
   useOptions,
   useSelectFieldProps,
 } from "../../hooks";
 
 export type RadioGroupProps<Option, Field extends SelectField> = Omit<
-  UseOptionProps<Option>,
+  UseOptionsProps<Option>,
   "field"
 > &
   UseSelectFieldProps<Option, Field>;

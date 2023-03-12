@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
-import { UseOptionProps, useOptions } from "../use-options";
+import { UseOptionsProps, useOptions } from "../use-options";
 
-export type UseSelectOptionsProps<Option> = UseOptionProps<Option> & {
+export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
   /**
    * A text for a custom placeholder option at the start of selectOptions.
    * @default "Please select an option"

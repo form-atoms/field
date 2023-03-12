@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import { ChangeEvent, useCallback, useState } from "react";
 import { ZodArray, ZodString } from "zod";
 
-import { UseOptionProps, useFieldProps } from "..";
+import { UseOptionsProps, useFieldProps } from "..";
 import { ZodField, ZodFieldValue } from "../../fields";
 
 export type ZodArrayField = ZodField<ZodArray<any, any>, ZodArray<any, any>>;
@@ -10,7 +10,7 @@ export type ZodArrayField = ZodField<ZodArray<any, any>, ZodArray<any, any>>;
 export type UseMultiSelectFieldProps<Option, Field extends ZodArrayField> = {
   field: Field;
   getValue: (option: Option) => ZodArrayFieldValue<Field>;
-} & Pick<UseOptionProps<Option>, "options">;
+} & Pick<UseOptionsProps<Option>, "options">;
 
 type T = UseMultiSelectFieldProps<
   string,

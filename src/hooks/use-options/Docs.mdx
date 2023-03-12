@@ -7,7 +7,9 @@ import { Meta, Markdown, Canvas } from "@storybook/blocks";
 A generic hook which evaluates a list of options against a field value.
 Can be used to create various select or multiselect choice components.
 
-#### Features
+For the `<select /> & <option />` elements there is special version of this hook [useSelectOptions](?path=/docs/hooks-useselectoptions--docs).
+
+### Features
 
 - ✅ Gives each option an `id` as a combination of field key & option index.
 
@@ -36,8 +38,6 @@ export type UseOptionsProps<Option> = {
 
 ### Returns
 
-For the `<select /> & <option />` elements there is special version of this hook [useSelectOptions](?path=/docs/hooks-useselectoptions--docs).
-
 ```ts
 type UseOptions = {
   renderOptions: ReadonlyArray<{
@@ -57,44 +57,12 @@ type UseOptions = {
 };
 ```
 
-### Example usage with `<RadioGroup>` handling `string` option values.
+### Example
 
 ```tsx
-const RadioGroup = <Option,>({
-  field,
-  label,
-  getLabel,
-  options,
-}: { field: StringFieldAtom; label: ReactNode } & OptionProps<
-  Option,
-  StringFieldValue
->) => {
-  const props = useOptionFieldProps(field);
+import { stringField, useOptions } from "@form-atoms/field";
 
-  const { renderOptions } = useOptions({ field, getLabel, options });
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      {renderOptions.map(({ id, value, label, checked }) => (
-        <div key={id}>
-          <input
-            {...props}
-            type="radio"
-            id={id}
-            value={value}
-            checked={checked}
-          />
-          <label htmlFor={id}>{label}</label>
-        </div>
-      ))}
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-
+// 1. example static data
 const bashAnswers = [
   { answer: "Bash, a Shell", key: "A" },
   { answer: "Bash Ain't Shell", key: "B" },
@@ -102,20 +70,36 @@ const bashAnswers = [
   { answer: "Behold! Another Shell", key: "D" },
 ];
 
-export const Required: FormStory = {
-  args: fixArgs({
-    fields: {
-      bash: stringField(),
-    },
-    children: ({ fields }) => (
-      <RadioGroup
-        field={fields.bash}
-        label="Bash stands for ____?"
-        options={bashAnswers}
-        getValue={({ key }) => key}
-        getLabel={({ answer }) => answer}
-      />
+// 2. hook call in a component
+const { renderOptions } = useOptions({
+  field: stringField(),
+  getLabel: ({ answer, key }) => (
+    <>
+      <strong>{key}</strong> {answer}
+    </>
+  ),
+  options: bashAnswers,
+});
+
+// 3. created renderOptions shape:
+[
+  {
+    id: "atom24/0",
+    value: 0,
+    label: (
+      <>
+        <strong>(A)</strong> Bash, a Shell
+      </>
     ),
-  }),
-};
+  },
+  {
+    id: "atom24/1",
+    value: 1,
+    label: (
+      <>
+        <strong>(B)</strong> Bash Ain't Shell
+      </>
+    ),
+  },
+];
 ```
