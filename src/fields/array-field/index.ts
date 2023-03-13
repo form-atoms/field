@@ -1,3 +1,3 @@
 export * from "./arrayField";
-export * from "./useArrayFieldProps";
+export * from "../../components/checkbox-group/useCheckboxGroupProps";
 export * from "./stringArrayField";

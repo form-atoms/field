@@ -1,10 +1,14 @@
 import { ReactNode } from "react";
 
-import { BooleanField, BooleanFieldValue, booleanField } from "./booleanField";
+import { BooleanField, booleanField } from "./booleanField";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
-import { UseOptionProps, useOptions } from "../../hooks";
-import { useOptionFieldProps } from "../../hooks/use-option-field-props/useOptionFieldProps";
+import {
+  UseOptionsProps,
+  UseSelectFieldProps,
+  useOptions,
+  useSelectFieldProps,
+} from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
@@ -18,15 +22,12 @@ const YesNoOptions = <Option,>({
   getValue,
   getLabel,
   options,
-}: { label: ReactNode; field: BooleanField } & UseOptionProps<
-  Option,
-  BooleanFieldValue
->) => {
-  const props = useOptionFieldProps(field);
+}: { label: ReactNode } & UseOptionsProps<Option> &
+  UseSelectFieldProps<Option, BooleanField>) => {
+  const props = useSelectFieldProps({ field, options, getValue });
 
   const { renderOptions } = useOptions({
     field,
-    getValue,
     getLabel,
     options,
   });
@@ -34,14 +35,14 @@ const YesNoOptions = <Option,>({
   return (
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
-      {renderOptions.map(({ id, value, label, checked }) => (
+      {renderOptions.map(({ id, value, label }) => (
         <div key={id}>
           <input
             type="radio"
             {...props}
             id={id}
             value={value}
-            checked={checked}
+            checked={props.value === value}
           />
           <label htmlFor={id}>{label}</label>
         </div>
@@ -63,6 +64,7 @@ const yesNoOptions = [
     value: false,
   },
 ];
+
 export const Required: FormStory = {
   args: fixArgs({
     fields: {

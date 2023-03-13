@@ -2,49 +2,33 @@ import { Meta, Markdown, Canvas } from "@storybook/blocks";
 
 <Meta title="hooks/useOptions" />
 
-# `useOptions<Option, OptionValue, FieldValue>(props): UseOptions`
+# `useOptions<Option>(props): UseOptions`
 
-A generic hook which evaluates a list of options against a field value. It will compute which of the option(s) is active.
+A generic hook which evaluates a list of options against a field value.
 Can be used to create various select or multiselect choice components.
+
+For the `<select /> & <option />` elements there is special version of this hook [useSelectOptions](?path=/docs/hooks-useselectoptions--docs).
+
+### Features
+
+- ✅ Gives each option an `id` as a combination of field key & option index.
 
 ```ts
 import { useOptions } from "@form-atoms/field";
 ```
 
-### Supported values
-
-The hook is meant to create options for `HTMLOptionElement` or `HTMLInputElement` thus the option values are constrained as follows:
-
-```ts
-type OptionValue = string | number | boolean | readonly string[] | undefined;
-```
-
-Note that the standard input value property is extended by `boolean` for which the hook does custom serialization.
-
 ### Props
 
 ```ts
-export type UseOptionsProps<
-  Option,
-  FieldValue extends OptionValue,
-  TOptionValue extends OptionValue = FieldValue
-> = {
+export type UseOptionsProps<Option> = {
   /**
    * Your `fieldAtom` which value
    */
   field: FieldAtom<FieldValue>;
   /**
-   * Transform function to get value from generic option.
-   */
-  getValue: (option: Option) => TOptionValue;
-  /**
    * Transform function to get label from generic option.
    */
   getLabel: (option: Option) => ReactNode;
-  /**
-   * Comparison function to resolve option as checked or not.
-   */
-  isChecked?: (optionValue: TOptionValue, fieldValue: FieldValue) => boolean;
   /**
    * List of your generic options.
    */
@@ -54,26 +38,17 @@ export type UseOptionsProps<
 
 ### Returns
 
-The returned `renderOptions` are meant to be used with `<input type="checkbox" />` or `<input type="radio">`
-elements to build CheckboxGroup or RadioGroup respectively.
-
-For the `<select /> & <option />` elements there is special version of this hook [useSelectOptions](?path=/docs/hooks-useselectoptions--docs).
-
 ```ts
-type UseOptions<OptionValue> = {
+type UseOptions = {
   renderOptions: ReadonlyArray<{
     /**
-     * Unique option id defined by combination of the field atom key & option value.
+     * Unique option id defined by combination of the field atom key & option index.
      */
     id: string;
     /**
-     * The value returned by `getValue` prop
+     * The index of current option
      */
-    value: OptionValue;
-    /**
-     * The value returned by `isChecked` prop
-     */
-    checked: boolean;
+    value: string;
     /**
      * as returned by the `getLabel` prop
      */
@@ -82,45 +57,12 @@ type UseOptions<OptionValue> = {
 };
 ```
 
-### Example usage with `<RadioGroup>` handling `string` option values.
+### Example
 
 ```tsx
-const RadioGroup = <Option,>({
-  field,
-  label,
-  getValue,
-  getLabel,
-  options,
-}: { field: StringFieldAtom; label: ReactNode } & OptionProps<
-  Option,
-  StringFieldValue
->) => {
-  const props = useOptionFieldProps(field);
+import { stringField, useOptions } from "@form-atoms/field";
 
-  const { renderOptions } = useOptions({ field, getValue, getLabel, options });
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      {renderOptions.map(({ id, value, label, checked }) => (
-        <div key={id}>
-          <input
-            {...props}
-            type="radio"
-            id={id}
-            value={value}
-            checked={checked}
-          />
-          <label htmlFor={id}>{label}</label>
-        </div>
-      ))}
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-
+// 1. example static data
 const bashAnswers = [
   { answer: "Bash, a Shell", key: "A" },
   { answer: "Bash Ain't Shell", key: "B" },
@@ -128,20 +70,36 @@ const bashAnswers = [
   { answer: "Behold! Another Shell", key: "D" },
 ];
 
-export const Required: FormStory = {
-  args: fixArgs({
-    fields: {
-      bash: stringField(),
-    },
-    children: ({ fields }) => (
-      <RadioGroup
-        field={fields.bash}
-        label="Bash stands for ____?"
-        options={bashAnswers}
-        getValue={({ key }) => key}
-        getLabel={({ answer }) => answer}
-      />
+// 2. hook call in a component
+const { renderOptions } = useOptions({
+  field: stringField(),
+  getLabel: ({ answer, key }) => (
+    <>
+      <strong>{key}</strong> {answer}
+    </>
+  ),
+  options: bashAnswers,
+});
+
+// 3. created renderOptions shape:
+[
+  {
+    id: "atom24/0",
+    value: 0,
+    label: (
+      <>
+        <strong>(A)</strong> Bash, a Shell
+      </>
     ),
-  }),
-};
+  },
+  {
+    id: "atom24/1",
+    value: 1,
+    label: (
+      <>
+        <strong>(B)</strong> Bash Ain't Shell
+      </>
+    ),
+  },
+];
 ```

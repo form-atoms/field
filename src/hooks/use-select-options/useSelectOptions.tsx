@@ -1,26 +1,20 @@
 import { useMemo } from "react";
 
-import { OptionValue, UseOptionProps, useOptions } from "../use-options";
+import { UseOptionsProps, useOptions } from "../use-options";
 
-export type UseSelectOptionsProps<
-  Option,
-  FieldValue extends OptionValue,
-  TOptionValue extends OptionValue = FieldValue
-> = UseOptionProps<Option, FieldValue, TOptionValue> & {
+export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
+  /**
+   * A text for a custom placeholder option at the start of selectOptions.
+   * @default "Please select an option"
+   */
   placeholder?: string;
 };
 
-export function useSelectOptions<
-  Option,
-  FieldValue extends OptionValue,
-  TOptionValue extends OptionValue = FieldValue
->({
+export function useSelectOptions<Option>({
   placeholder = "Please select an option",
   ...optionsProps
-}: UseSelectOptionsProps<Option, FieldValue, TOptionValue>) {
-  const { renderOptions } = useOptions<Option, FieldValue, TOptionValue>(
-    optionsProps
-  );
+}: UseSelectOptionsProps<Option>) {
+  const { renderOptions } = useOptions(optionsProps);
 
   return useMemo(
     () => ({

@@ -1,0 +1,65 @@
+import { Meta, Stories } from "@storybook/blocks";
+
+<Meta title="hooks/useMultiSelectFieldProps" />
+
+# `useMultiSelectFieldProps<Option, Field extends ZodArrayFieldeld>(props)`
+
+A special hook to control `<select multiple />` element. It accepts only fields which keep array of elements as value.
+This is constrained via `ZodArrayField` type.
+
+### Usage
+
+```ts
+import { useMultiSelectFieldProps, ZodArrayField } from "@form-atoms/field";
+```
+
+### Example
+
+To build a custom multi select:
+
+```tsx
+import { useMultiSelectFieldProps, UseMultiSelectOptionsProps, ZodArrayField } from "@form-atoms/field";
+
+const MultiSelectInput = <Option, Field extends ZodArrayField>({
+  field,
+  label,
+  getValue,
+  getLabel,
+  options,
+  placeholder,
+}: {
+  label: ReactNode;
+} & UseMultiSelectOptionsProps<Option, Field>) => {
+  const props = useMultiSelectFieldProps({field, options, getValue});
+  const { selectOptions } = useSelectOptions({
+    field,
+    options,
+    getLabel,
+    placeholder,
+  });
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <select multiple {...props}>{selectOptions}</select>
+      <FieldErrors field={field} />
+    </div>
+  );
+};
+
+const countryOptions = [
+  { name: "Slovak Republic", key: "SK" },
+  { name: "Czech Republic", key: "CZ" },
+];
+
+// the active option has key of type string
+const country = stringArrayField()
+
+<SelectInput
+  field={country}
+  label="Country of Origin"
+  options={countryOptions}
+  getValue={({ key }) => key}
+  getLabel={({ name }) => name}
+/>;
+```

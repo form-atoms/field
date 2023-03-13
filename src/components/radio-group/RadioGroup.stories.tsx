@@ -2,8 +2,13 @@ import { ReactNode } from "react";
 
 import { RadioGroup, RadioGroupProps } from "./RadioGroup";
 import { FieldLabel } from "..";
-import { booleanField, numberField, stringField } from "../../fields";
-import { OptionField } from "../../hooks";
+import {
+  booleanField,
+  numberField,
+  stringArrayField,
+  stringField,
+} from "../../fields";
+import { SelectField } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -12,7 +17,7 @@ export default {
   title: "components/RadioGroup",
 };
 
-const RadioGroupField = <Option, Field extends OptionField>({
+const RadioGroupField = <Option, Field extends SelectField>({
   field,
   label,
   getValue,
@@ -49,7 +54,11 @@ export const RequiredString: FormStory = {
         label="Bash stands for ____?"
         options={bashAnswers}
         getValue={({ key }) => key}
-        getLabel={({ answer }) => answer}
+        getLabel={({ key, answer }) => (
+          <>
+            <strong>({key})</strong> {answer}
+          </>
+        )}
       />
     ),
   }),
@@ -91,6 +100,31 @@ export const RequiredBoolean: FormStory = {
         options={approvalOptions}
         getValue={({ key }) => key}
         getLabel={({ label }) => label}
+      />
+    ),
+  }),
+};
+
+const namePairs = [
+  ["Marta", "Peter"],
+  ["Andrea", "Kristine"],
+  ["Lincoln", "Tugg"],
+  ["Lambda", "Xavier"],
+];
+
+export const RequiredArrayString: FormStory = {
+  name: "Required Array<string>",
+  args: fixArgs({
+    fields: {
+      names: stringArrayField(),
+    },
+    children: ({ fields }) => (
+      <RadioGroupField
+        field={fields.names}
+        label="Which name pair you like the most?"
+        options={namePairs}
+        getValue={(pair) => pair}
+        getLabel={(pair) => pair.join(" and ")}
       />
     ),
   }),

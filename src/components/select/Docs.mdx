@@ -5,7 +5,7 @@ import * as SelectStories from "./Select.stories";
 
 # Select
 
-A combination of generic [useOptionFieldProps](?path=/docs/hooks-useoptionfieldprops--docs) and [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)
+A combination of generic [useSelectFieldProps](?path=/docs/hooks-useselectfieldprops--docs) and [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)
 which renders the options as the children of `<select />`.
 
 ```ts
@@ -18,12 +18,13 @@ import { Select } from "@form-atoms/field";
 import {
   Select,
   SelectProps,
+  SelectField,
   FieldLabel,
   FieldErrors,
   OptionField,
 } from "@form-atoms/field";
 
-const SelectField = <Option, Field extends OptionField>({
+const SelectField = <Option, Field extends SelectField>({
   field,
   label,
   ...props

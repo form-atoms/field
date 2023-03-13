@@ -58,6 +58,6 @@ export function useFieldProps<
         });
       },
     }),
-    [state, actions, name, required, ref, validate]
+    [state, actions, name, required, getEventValue, ref, validate]
   );
 }
