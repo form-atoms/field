@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.0...v2.4.1) (2023-03-13)
+
+
+### Bug Fixes
+
+* bump versions ([24814df](https://github.com/MiroslavPetrik/form-atoms-field/commit/24814df84b8eb1aa93080e570dc632d764238c79))
+
 # [2.5.0-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.1-next.1...v2.5.0-next.1) (2023-03-13)
 
 
