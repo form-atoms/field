@@ -1723,11 +1723,11 @@ __metadata:
     eslint-import-resolver-typescript: ^3.5.3
     eslint-plugin-import: ^2.27.5
     eslint-plugin-prettier: 4.2.1
-    form-atoms: ^2.1.1
+    form-atoms: ^3.0.0
     happy-dom: ^8.9.0
-    jotai: ^2.0.2
+    jotai: ^2.0.3
     jsdom: ^21.1.0
-    object-path-immutable: 4.1.2
+    object-path-immutable: ^4.1.2
     prettier: 2.8.4
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -1736,9 +1736,9 @@ __metadata:
     storybook: ^7.0.0-beta.47
     typescript: 4.9.4
     vitest: ^0.29.2
-    zod: ^3.20.6
+    zod: 3.20.6
   peerDependencies:
-    form-atoms: ^2
+    form-atoms: ^3
     jotai: ^2
     react: ">=16.8"
     zod: ^3
@@ -7839,15 +7839,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-atoms@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "form-atoms@npm:2.1.1"
+"form-atoms@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "form-atoms@npm:3.0.0"
   dependencies:
     "@testing-library/user-event": ^13.0.0
   peerDependencies:
     jotai: ^2.0.0
     react: ">=16.8"
-  checksum: e81abed296d36bd88607c956d59a1e37477964382e3e058ff26193e08aa48d3cb88d5c95dc0587f5395df8ac94652a02c0890a427a9c11187745e7e8552eb8d9
+  checksum: be820a018e0c132f625ef86c4c82a641a84cb6b52286839108f4fb88ee570a9d30bed44a060a658e557310e4eb6045ac753d11f656364a308806f39a33eef2d4
   languageName: node
   linkType: hard
 
@@ -9387,15 +9387,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "jotai@npm:2.0.2"
+"jotai@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "jotai@npm:2.0.3"
   peerDependencies:
     react: ">=17.0.0"
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: f107d2b8e3b0853cf3fb3978e3a8b0d5b4925957d1901d038ddf534de7f1967d6bfd81b1ef69442fc3d8047176933bf3d9c9b5830d8a01b02ee1daae6d412ef3
+  checksum: 3ad1d6a9b7e40a8dd8cdc423441164c25852a328c98806ed0e2a283a4e07af661f4a88b50528367aeae582932171bc8979e45cbc9023af30b9f4a348faeed567
   languageName: node
   linkType: hard
 
@@ -11049,7 +11049,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-path-immutable@npm:4.1.2":
+"object-path-immutable@npm:^4.1.2":
   version: 4.1.2
   resolution: "object-path-immutable@npm:4.1.2"
   dependencies:
@@ -14714,7 +14714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.20.6":
+"zod@npm:3.20.6":
   version: 3.20.6
   resolution: "zod@npm:3.20.6"
   checksum: 804b1934b8b5e2fa3750bec90043e8118b201f330b9957b8b768389a971acadf812d2060cf62921086512dab4af691d10490acb03333da58fc485c0791893c89
