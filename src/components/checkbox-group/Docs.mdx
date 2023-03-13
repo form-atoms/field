@@ -1,0 +1,21 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as CheckboxGroupStories from "./CheckboxGroup.stories";
+
+<Meta title="components/CheckboxGroup" of={CheckboxGroupStories} />
+
+# CheckboxGroup
+
+A generic multi-choice component enabling users to select multiple values from a list of options. It uses the [useOptions](?path=/docs/hooks-useoptions--docs) hook
+which renders the options as a list of `<input type="checkbox" />`.
+
+An alternative to the [MultiSelect](?path=/docs/components-multiselect--docs) component.
+
+```ts
+import { CheckboxGroup } from "@form-atoms/field";
+```
+
+### Features
+
+- ✅ When empty & required, it adds the `required` prop to the checkbox, prompting user to select one of the options.
+
+<Stories />

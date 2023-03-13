@@ -12,14 +12,16 @@
 
 ### Components
 
-|                                                                           |                                                                |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]`.               |
-| [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.               |
-| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
-| [RadioGroup](?path=/docs/components-radiogroup--docs)                     | Select a generic option via `<input type="radio">`.            |
-| [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
-| [Select](?path=/docs/components-select--docs)                             | Select a generic option via `<select>`.                        |
+|                                                                           |                                                                                      |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]` or `FormFields[]`.                   |
+| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs)               | Select multiple values from a list of generic options via `<input type="checkbox">`. |
+| [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.                                     |
+| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                                          |
+| [MultiSelect](?path=/docs/components-multiselect--docs)                   | Select multiple values via `<select multiple>`.                                      |
+| [RadioGroup](?path=/docs/components-radiogroup--docs)                     | Select a generic option via `<input type="radio">`.                                  |
+| [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional.                       |
+| [Select](?path=/docs/components-select--docs)                             | Select a generic option via `<select>`.                                              |
 
 ### Hooks
 

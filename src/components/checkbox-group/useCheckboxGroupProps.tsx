@@ -40,7 +40,6 @@ export const useCheckboxGroupFieldProps = <
 
   useEffect(() => {
     if (fieldValue.length === 0 && value.length !== 0) {
-      console.log("reset");
       // reset local state, when form was reset
       setValue([]);
     }
