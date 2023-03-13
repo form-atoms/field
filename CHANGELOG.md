@@ -1,3 +1,10 @@
+## [2.4.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.1...v2.4.2) (2023-03-13)
+
+
+### Bug Fixes
+
+* placeholder value as -1 ([0afa86f](https://github.com/MiroslavPetrik/form-atoms-field/commit/0afa86f2a5c73ba87d2835efe92cc011f466a550))
+
 ## [2.4.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.0...v2.4.1) (2023-03-13)
 
 
