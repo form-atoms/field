@@ -42,7 +42,7 @@ export const RequiredArrayString: FormStory = {
     children: ({ fields }) => (
       <MultiSelectField
         field={fields.visitedCountries}
-        label="Visited countried"
+        label="Visited countries"
         options={countryOptions}
         getValue={({ key }) => key}
         getLabel={({ name }) => name}
