@@ -1,3 +1,10 @@
+# [2.5.0-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.1-next.1...v2.5.0-next.1) (2023-03-13)
+
+
+### Features
+
+* checkbox group ([c3e1b0f](https://github.com/MiroslavPetrik/form-atoms-field/commit/c3e1b0f119547864ec960e8f6165281873fda4d1))
+
 ## [2.4.1-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.0...v2.4.1-next.1) (2023-03-12)
 
 
