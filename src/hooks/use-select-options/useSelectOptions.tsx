@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 import { UseOptionsProps, useOptions } from "../use-options";
+import { EMPTY_VALUE } from "../use-select-field-props";
 
 export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
   /**
@@ -21,7 +22,7 @@ export function useSelectOptions<Option>({
       selectOptions: (
         <>
           {placeholder && (
-            <option value={-1} disabled selected>
+            <option value={EMPTY_VALUE} disabled selected>
               {placeholder}
             </option>
           )}

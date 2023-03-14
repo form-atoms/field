@@ -1,9 +1,10 @@
 import { act, render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { formAtom, useFormSubmit } from "form-atoms";
+import { formAtom, useFormActions, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { booleanField, numberField, stringField } from "../../fields";
+import { EMPTY_VALUE } from "../../hooks";
 
 import { Select } from ".";
 
@@ -90,5 +91,35 @@ describe("<Select />", () => {
 
       expect(onSubmit).toHaveBeenCalledWith({ field: "some" });
     });
+  });
+
+  it("clears value when the form is reset", async () => {
+    const props = {
+      field: booleanField(),
+      options: [true, false],
+      getLabel: (bool: boolean) => (bool ? "yes" : "no"),
+      getValue: (bool: boolean) => bool,
+    };
+
+    const form = formAtom({ field: props.field });
+    const { result } = renderHook(() => useFormActions(form));
+    render(<Select {...props} />);
+
+    await userEvent.selectOptions(screen.getByRole("combobox"), [
+      screen.getByText("yes"),
+    ]);
+
+    await act(async () => {
+      result.current.reset();
+    });
+
+    expect(screen.getByRole("combobox")).toHaveValue(`${EMPTY_VALUE}`);
+
+    const onSubmit = vi.fn();
+    await act(async () => {
+      result.current.submit(onSubmit)();
+    });
+
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });

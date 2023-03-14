@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import { UseOptionsProps, useFieldProps } from "..";
 import { ZodField, ZodFieldValue } from "../../fields";
@@ -13,6 +13,11 @@ export type UseSelectFieldProps<Option, Field extends SelectField> = {
   field: Field;
   getValue: (option: Option) => NonNullable<ZodFieldValue<Field>>;
 } & Pick<UseOptionsProps<Option>, "options">;
+
+/**
+ * When field is empty, we map the undefined from data layer to -1 on presentation (UI) layer.
+ */
+export const EMPTY_VALUE = -1;
 
 export const useSelectFieldProps = <Option, Field extends SelectField>({
   field,
@@ -38,6 +43,13 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
     },
     []
   );
+
+  useEffect(() => {
+    if (fieldValue === undefined) {
+      // reset local state, when form was reset
+      setValue(EMPTY_VALUE);
+    }
+  }, [fieldValue]);
 
   const props = useFieldProps<Field, HTMLSelectElement | HTMLInputElement>(
     field,
