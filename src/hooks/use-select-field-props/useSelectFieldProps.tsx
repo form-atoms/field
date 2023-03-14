@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 import { UseOptionsProps, useFieldProps } from "..";
 import { ZodField, ZodFieldValue } from "../../fields";
@@ -26,22 +26,24 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
 }: UseSelectFieldProps<Option, Field>) => {
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
-  const [value, setValue] = useState(options.indexOf(fieldValue));
+  // TODO: getValue should be useMemo dependency, currently we asume its stable
+  const values = useMemo(() => options.map(getValue), [options]);
+  const [value, setValue] = useState(values.indexOf(fieldValue));
 
   const getEventValue = useCallback(
     (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
       const { value } = event.currentTarget;
       const index = parseInt(value);
-      const activeOption = options[index];
+      const activeValue = values[index];
 
-      if (!activeOption) {
+      if (!activeValue) {
         throw new Error(`Index ${index} out of bounds.`);
       }
 
       setValue(index);
-      return getValue(activeOption);
+      return activeValue;
     },
-    []
+    [values]
   );
 
   useEffect(() => {
