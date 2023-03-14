@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.1...v2.5.2) (2023-03-14)
+
+
+### Bug Fixes
+
+* react warning about select option being selected ([004dd89](https://github.com/MiroslavPetrik/form-atoms-field/commit/004dd8996203108aee35256a5f9de9b1fb86402f))
+
 ## [2.5.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.0...v2.5.1) (2023-03-14)
 
 
