@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.2...v2.5.0) (2023-03-14)
+
+
+### Features
+
+* checkbox group export ([0a7d756](https://github.com/MiroslavPetrik/form-atoms-field/commit/0a7d7561a4623ef189183357aeb42ce9e75a7803)), closes [#24](https://github.com/MiroslavPetrik/form-atoms-field/issues/24) [#23](https://github.com/MiroslavPetrik/form-atoms-field/issues/23)
+
 ## [2.4.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.1...v2.4.2) (2023-03-13)
 
 
