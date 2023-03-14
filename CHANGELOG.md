@@ -1,3 +1,10 @@
+## [2.5.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.2...v2.5.3) (2023-03-14)
+
+
+### Bug Fixes
+
+* select initialized for object value ([9695c40](https://github.com/MiroslavPetrik/form-atoms-field/commit/9695c40894643b5cb77019e362b330f772a06c65))
+
 ## [2.5.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.1...v2.5.2) (2023-03-14)
 
 
