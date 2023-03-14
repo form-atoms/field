@@ -79,7 +79,7 @@ export const RequiredNumber: FormStory = {
         label="How do you rate this docs?"
         options={ratingOptions}
         getValue={(value) => value}
-        getLabel={(value) => `${value} star(s)`}
+        getLabel={(value) => Array(value + 1).join("🌟")}
       />
     ),
   }),
