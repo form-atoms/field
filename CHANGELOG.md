@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.0...v2.5.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* select clears to empty value when form reset ([9c1925b](https://github.com/MiroslavPetrik/form-atoms-field/commit/9c1925bc5308b59274a3032467a1a226338acc59))
+
 # [2.5.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.4.2...v2.5.0) (2023-03-14)
 
 
