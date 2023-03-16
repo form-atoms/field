@@ -1,3 +1,10 @@
+## [2.5.4](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.3...v2.5.4) (2023-03-16)
+
+
+### Bug Fixes
+
+* MultiSelect - initialize options value from field ([83f1587](https://github.com/MiroslavPetrik/form-atoms-field/commit/83f15871f76e50877aecbb59689967ba6b03233c))
+
 ## [2.5.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.2...v2.5.3) (2023-03-14)
 
 
