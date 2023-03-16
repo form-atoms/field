@@ -1,5 +1,6 @@
+import { useAtomValue } from "jotai";
+
 import { ZodField } from "../../fields/zodField";
-import { useRequiredProps } from "../../hooks/use-required-props";
 
 export type Props<Field extends ZodField<any>> = {
   field: Field;
@@ -13,7 +14,8 @@ export const RequirementIndicator = <Field extends ZodField<any>>({
   kind = "icon",
   field,
 }: Props<Field>) => {
-  const { isFieldRequired } = useRequiredProps(field);
+  const atom = useAtomValue(field);
+  const isFieldRequired = useAtomValue(atom.required);
 
   const requiredIndicator = kind === "icon" ? "*" : "(required)"; // TODO: i18n
   const opitonalIndicator = kind === "icon" ? "" : "(optional)";

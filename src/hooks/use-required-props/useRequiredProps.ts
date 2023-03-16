@@ -6,26 +6,27 @@ import { ZodField } from "../../fields/zodField";
 export type RequiredProps = {
   required: boolean;
   "aria-required": boolean;
-  isFieldRequired: boolean;
 };
 
-export const useRequiredProps = (
-  fieldAtom: ZodField<any>,
-  uiRequired?: boolean
-) => {
-  const field = useAtomValue(fieldAtom);
-  const isFieldRequired = useAtomValue(field.required);
+export const useRequiredProps = ({
+  field,
+  required: manualRequired,
+}: {
+  field: ZodField<any>;
+  required?: boolean;
+}) => {
+  const atom = useAtomValue(field);
+  const isFieldRequired = useAtomValue(atom.required);
 
-  // when data-required, prefer the uiProp
-  const required = isFieldRequired && (uiRequired ?? true);
+  // when field is required, prefer the manualRequired
+  const required = isFieldRequired && (manualRequired ?? true);
 
   return useMemo(
     () => ({
-      isFieldRequired,
       required,
       "aria-required": required,
     }),
-    [required, isFieldRequired]
+    [required]
   );
 };
 
