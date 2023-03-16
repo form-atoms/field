@@ -1,3 +1,10 @@
+## [2.5.5](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.4...v2.5.5) (2023-03-16)
+
+
+### Bug Fixes
+
+* decouple requirement indicator from the requiredProps hook ([b7bcc4d](https://github.com/MiroslavPetrik/form-atoms-field/commit/b7bcc4d245439f7a0b6919b9c004368b9dcacad9))
+
 ## [2.5.4](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.3...v2.5.4) (2023-03-16)
 
 
