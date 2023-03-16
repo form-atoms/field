@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { z } from "zod";
 
 import { RadioGroup, RadioGroupProps } from "./RadioGroup";
 import { FieldLabel } from "..";
@@ -7,6 +8,7 @@ import {
   numberField,
   stringArrayField,
   stringField,
+  zodField,
 } from "../../fields";
 import { SelectField } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
@@ -114,6 +116,14 @@ const namePairs = [
 
 export const RequiredArrayString: FormStory = {
   name: "Required Array<string>",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "To capture non-primitive value of type `string[]`, you can use the `stringArrayField()` field.",
+      },
+    },
+  },
   args: fixArgs({
     fields: {
       names: stringArrayField(),
@@ -125,6 +135,43 @@ export const RequiredArrayString: FormStory = {
         options={namePairs}
         getValue={(pair) => pair}
         getLabel={(pair) => pair.join(" and ")}
+      />
+    ),
+  }),
+};
+
+const addresses = [
+  { street: "Kosicka", city: "Bratislava" },
+  { street: "Hlavna", city: "Kosice" },
+];
+
+export const RequiredCustomAddress: FormStory = {
+  name: "Required custom type (Address)",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "For custom type, here `{street: string, city: string}`, pass a custom zodField",
+      },
+    },
+  },
+  args: fixArgs({
+    fields: {
+      names: zodField({
+        value: undefined,
+        schema: z.object(
+          { street: z.string(), city: z.string() },
+          { required_error: "Please choose shipping address." }
+        ),
+      }),
+    },
+    children: ({ fields }) => (
+      <RadioGroupField
+        field={fields.names}
+        label="Pick a shipping address"
+        options={addresses}
+        getValue={(addr) => addr}
+        getLabel={({ street, city }) => `${street}, ${city}`}
       />
     ),
   }),
