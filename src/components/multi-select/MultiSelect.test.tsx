@@ -34,4 +34,17 @@ describe("<MultiSelect />", () => {
       expect(onSubmit).toHaveBeenCalledWith({ field: ["sk", "cz"] });
     });
   });
+
+  it("initializes options as selected when field value is not empty", async () => {
+    const props = {
+      field: stringArrayField({ value: ["cz", "sk"] }),
+      options: ["pl", "hu", "sk", "cz"],
+      getLabel: (val: string) => val,
+      getValue: (val: string) => val,
+    };
+
+    render(<MultiSelect {...props} />);
+
+    expect(screen.getByRole("listbox")).toHaveValue(["2", "3"]);
+  });
 });

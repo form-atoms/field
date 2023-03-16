@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { ZodArray, ZodString } from "zod";
 
 import { UseOptionsProps, useFieldProps } from "..";
@@ -31,22 +31,22 @@ export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>({
 }: UseMultiSelectFieldProps<Option, Field>) => {
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
-  // TODO: initialize from field value
-  const [value, setValue] = useState<string[]>([]);
+  // TODO: getValue should be useMemo dependency, currently we asume it's stable
+  const values = useMemo(() => options.map(getValue), [options]);
+  const [value, setValue] = useState<string[]>(() =>
+    fieldValue.map((value) => `${values.indexOf(value)}`)
+  );
 
   const getEventValue = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
-    const values = [...event.currentTarget.options]
-      .filter(({ selected }) => selected)
-      .map(({ value }) => value);
+    const value = [...event.currentTarget.options]
+      .filter((option) => option.selected)
+      .map((option) => option.value);
 
-    setValue(values);
+    setValue(value);
 
-    const activeOptions = values
-      .map((val) => parseInt(val))
-      .map((idx) => options[idx])
-      .filter(Boolean) as Option[];
+    const nextValue = value.map((idx) => values[parseInt(idx)]);
 
-    return activeOptions.map(getValue) as ZodFieldValue<Field>;
+    return nextValue as ZodFieldValue<Field>;
   }, []);
 
   const props = useFieldProps<Field, HTMLSelectElement>(field, getEventValue);
