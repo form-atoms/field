@@ -1,5 +1,5 @@
-| Param            | Value                    |
-| ---------------- | ------------------------ |
-| `value`          | `undefined`              |
-| `schema`         | `z.instanceof(FileList)` |
-| `optionalSchema` | `schema.optional()`      |
+| Param            | Value                                    |
+| ---------------- | ---------------------------------------- |
+| `value`          | `undefined`                              |
+| `schema`         | `z.array(z.instanceof(File))`            |
+| `optionalSchema` | `z.array(z.instanceof(File)).optional()` |

@@ -5,7 +5,7 @@ import Config from "./config.md?raw";
 
 <Meta title="fields/fileField" of={FileFieldStories} />
 
-# `fileField(): ZodField<FileList | undefined>`
+# `fileField(): ZodField<ZodArray<ZodType<File>> | undefined>`
 
 A field to hold `input[type="file"]` values.
 
@@ -26,6 +26,8 @@ const attachments = fileField({ optional: true });
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
+
+> **NOTE:** the `File` API is not available on the server side, so in practice the schema is defined as `z.array(isServer ? z.undefined() : z.instanceof(File)`.
 
 ## useFileFieldProps(fileField)
 

@@ -10,15 +10,19 @@ export type FileFieldValue = ExtractAtomValue<
   ExtractAtomValue<FileField>["value"]
 >;
 
-const fileListInstanceSchema = z.instanceof(FileList);
-type ZodFileListInstance = typeof fileListInstanceSchema;
+const isServer = typeof window === "undefined";
+
+const fileFieldSchema = z.array(isServer ? z.undefined() : z.instanceof(File));
+type ZodFileFieldSchema = typeof fileFieldSchema;
 
 export const fileField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ZodFieldConfig<ZodFileListInstance>> & ZodParams = {}) =>
+}: Partial<ZodFieldConfig<ZodFileFieldSchema>> & ZodParams = {}) =>
   zodField({
     value: undefined,
-    schema: z.instanceof(FileList, required_error),
+    schema: z.array(isServer ? z.undefined() : z.instanceof(File), {
+      required_error,
+    }),
     ...config,
   });
