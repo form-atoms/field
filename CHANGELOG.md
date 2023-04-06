@@ -1,3 +1,10 @@
+## [2.5.6](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.5...v2.5.6) (2023-04-06)
+
+
+### Bug Fixes
+
+* fileField with array value & SSR support ([4d64c50](https://github.com/MiroslavPetrik/form-atoms-field/commit/4d64c50394b0279fe69dc65c0e6362da2881f1b0)), closes [#19](https://github.com/MiroslavPetrik/form-atoms-field/issues/19)
+
 ## [2.5.5](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.4...v2.5.5) (2023-03-16)
 
 
