@@ -1,3 +1,10 @@
+## [2.5.8](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.7...v2.5.8) (2023-04-07)
+
+
+### Bug Fixes
+
+* radio control with checkbox field ([20cebc8](https://github.com/MiroslavPetrik/form-atoms-field/commit/20cebc8a0991cc4b45d8331e579d6d3d257c8d63))
+
 ## [2.5.7](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.6...v2.5.7) (2023-04-07)
 
 
