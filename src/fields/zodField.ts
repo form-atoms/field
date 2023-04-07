@@ -97,15 +97,13 @@ export const zodField = <
       process.env.NODE_ENV !== "production"
     ) {
       Object.entries(fieldAtoms).map(([atomName, atom]) => {
-        atom.debugLabel = `field/${atomName}/${
-          config.name ?? "<unnamed-field>"
-        }`;
+        atom.debugLabel = `field/${atomName}/${config.name ?? zodField}`;
       });
     }
 
     return { ...baseField, ...fieldAtoms };
   });
 
-  zodField.debugLabel = `field/zodField/${config.name}`;
+  zodField.debugLabel = `field/zodField/${config.name ?? zodField}`;
   return zodField;
 };
