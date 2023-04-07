@@ -2,15 +2,23 @@ import { useFieldActions, useFieldValue } from "form-atoms";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
 import { RenderProp } from "react-render-prop-type";
-import { ZodBoolean } from "zod";
 
 import { RadioControlAtom } from "./RadioControl";
-import { ZodField } from "../../fields";
-import { useRequiredActions } from "../../hooks";
+import { CheckboxField } from "../../fields";
+import { useFieldProps, useRequiredActions } from "../../hooks";
 
 type Props = {
   control: RadioControlAtom;
-  field: ZodField<ZodBoolean>;
+  field: CheckboxField;
+};
+
+const useCheckboxFieldProps = (field: CheckboxField) => {
+  const { value, ...props } = useFieldProps(
+    field,
+    (event) => event.currentTarget.checked
+  );
+
+  return { ...props, checked: value };
 };
 
 export const useRadio = ({ control, field }: Props) => {
@@ -56,7 +64,13 @@ export const useRadio = ({ control, field }: Props) => {
       }
     };
   }, []);
+
+  return useCheckboxFieldProps(field);
 };
 
-export const Radio = ({ field, control, children }: Props & RenderProp<void>) =>
+export const Radio = ({
+  field,
+  control,
+  children,
+}: Props & RenderProp<ReturnType<typeof useCheckboxFieldProps>>) =>
   children(useRadio({ control, field }));

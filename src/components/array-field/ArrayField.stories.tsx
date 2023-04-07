@@ -240,18 +240,9 @@ export const WithRadioControl = () => ({
                 <RemoveItemButton />
               </div>
               <Radio control={control} field={fields.isPrimary}>
-                {() => (
+                {(props) => (
                   <div style={{ marginBottom: 40 }}>
-                    <InputField
-                      atom={fields.isPrimary as any}
-                      render={(props) => (
-                        <input
-                          type="radio"
-                          {...props}
-                          id={`${fields.isPrimary}`}
-                        />
-                      )}
-                    />
+                    <input {...props} type="radio" id={`${fields.isPrimary}`} />
                     <FieldLabel
                       label="Primary, receive 2FA SMS on this phone."
                       field={fields.isPrimary}
