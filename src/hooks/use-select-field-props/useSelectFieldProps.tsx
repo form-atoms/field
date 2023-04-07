@@ -36,8 +36,9 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
       const index = parseInt(value);
       const activeValue = values[index];
 
-      if (!activeValue) {
-        throw new Error(`Index ${index} out of bounds.`);
+      if (activeValue === undefined) {
+        setValue(EMPTY_VALUE);
+        return undefined as ZodFieldValue<Field>;
       }
 
       setValue(index);

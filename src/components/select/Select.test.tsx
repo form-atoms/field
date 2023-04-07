@@ -24,7 +24,7 @@ describe("<Select />", () => {
       render(<Select {...props} />);
 
       await userEvent.selectOptions(screen.getByRole("combobox"), [
-        screen.getByText("yes"),
+        screen.getByText("no"),
       ]);
 
       const onSubmit = vi.fn();
@@ -32,7 +32,7 @@ describe("<Select />", () => {
         result.current(onSubmit)();
       });
 
-      expect(onSubmit).toHaveBeenCalledWith({ field: true });
+      expect(onSubmit).toHaveBeenCalledWith({ field: false });
     });
 
     it("should use the placeholder prop", () => {
