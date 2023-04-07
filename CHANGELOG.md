@@ -1,3 +1,10 @@
+## [2.5.9](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.8...v2.5.9) (2023-04-07)
+
+
+### Bug Fixes
+
+* debugLabel with atom id instead of unnamed ([124886f](https://github.com/MiroslavPetrik/form-atoms-field/commit/124886f3e9ce61b5a9880f76f5363122a45796d3))
+
 ## [2.5.8](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.7...v2.5.8) (2023-04-07)
 
 
