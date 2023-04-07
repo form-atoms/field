@@ -1,3 +1,10 @@
+## [2.5.7](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.6...v2.5.7) (2023-04-07)
+
+
+### Bug Fixes
+
+* selectFieldProps reset out-of-bounds values to empty value ([9bc978e](https://github.com/MiroslavPetrik/form-atoms-field/commit/9bc978e90c774a1947458d34535964698ff18017))
+
 ## [2.5.6](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.5...v2.5.6) (2023-04-06)
 
 
