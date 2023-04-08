@@ -34,10 +34,10 @@ const NumberInput = ({
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      profilePic: numberField(),
+      height: numberField(),
     },
     children: ({ fields }) => (
-      <NumberInput field={fields.profilePic} label="Your height" />
+      <NumberInput field={fields.height} label="Your height" />
     ),
   }),
 };
@@ -45,12 +45,12 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      attachment: numberField({
+      petCount: numberField({
         optional: true,
       }),
     },
     children: ({ fields }) => (
-      <NumberInput field={fields.attachment} label="Pet count" />
+      <NumberInput field={fields.petCount} label="Pet count" />
     ),
   }),
 };
