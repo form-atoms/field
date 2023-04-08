@@ -1,3 +1,10 @@
+## [2.5.10](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.9...v2.5.10) (2023-04-08)
+
+
+### Bug Fixes
+
+* controlled numberFieldProps ([487c577](https://github.com/MiroslavPetrik/form-atoms-field/commit/487c57779cd7cdcd0b727bb9d289083ba7ce9024))
+
 ## [2.5.9](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.8...v2.5.9) (2023-04-07)
 
 
