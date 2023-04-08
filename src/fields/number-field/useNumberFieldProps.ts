@@ -13,4 +13,4 @@ const getNumber = (event: ChangeEvent<HTMLInputElement>) => {
 };
 
 export const useNumberFieldProps = (field: NumberField) =>
-  useFieldProps(field, getNumber);
+  useFieldProps(field, getNumber, "");
