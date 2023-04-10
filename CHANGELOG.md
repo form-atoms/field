@@ -1,3 +1,10 @@
+## [2.5.11](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.10...v2.5.11) (2023-04-10)
+
+
+### Bug Fixes
+
+* newline for errors ([33e4108](https://github.com/MiroslavPetrik/form-atoms-field/commit/33e410819874b60c2762ef3299f62e24933c8ce0))
+
 ## [2.5.10](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.9...v2.5.10) (2023-04-08)
 
 
