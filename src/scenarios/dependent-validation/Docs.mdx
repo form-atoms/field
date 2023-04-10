@@ -1,0 +1,36 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as PasswordValidation from "./PasswordValidation.stories";
+
+<Meta title="guides/DependentValidation" of={PasswordValidation} />
+
+# Dependend field validation
+
+For dependent field validation, use the [zodValidate](https://github.com/jaredLunde/form-atoms#zodvalidate) function in the field config instead of the `schema`:
+
+```tsx
+const password = textField({
+  schema: z.string().min(6),
+});
+
+const confirmPassword = textField({
+  validate: zodValidate(
+    (get) => {
+      // 1. jotai's get will read the atom value
+      const initialPassword = get(get(password).value);
+
+      // 2. validate exact match by z.literal()
+      return z.literal(initialPassword);
+    },
+    {
+      on: "change",
+      formatError: ({ issues }) => {
+        return issues.map(({ code, message }) =>
+          code === "invalid_literal" ? "Passwords must match" : message
+        );
+      },
+    }
+  ),
+});
+```
+
+<Stories />
