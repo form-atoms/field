@@ -6,7 +6,7 @@ type Props = RenderProp<{ errors: ReturnType<typeof useFieldErrors> }>;
 
 export const FieldErrors = ({
   field,
-  children = ({ errors }) => <>{errors.join("/n")}</>,
+  children = ({ errors }) => <>{errors.join("\n")}</>,
 }: {
   field: FieldAtom<any>;
 } & Partial<Props>) => children({ errors: useFieldErrors(field) });
