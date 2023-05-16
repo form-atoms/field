@@ -12,10 +12,12 @@ export default {
 };
 
 const password = textField({
+  name: "password",
   schema: z.string().min(6),
 });
 
 const confirmPassword = textField({
+  name: "confirmPassword",
   validate: zodValidate(
     (get) => {
       const initialPassword = get(get(password).value);

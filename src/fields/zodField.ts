@@ -78,9 +78,10 @@ export const zodField = <
         return required ? schemaObj : optSchema;
       },
       {
-        on: "change",
+        on: "blur",
+        when: "dirty",
       }
-    ),
+    ).or({ on: "change", when: "touched" }),
     ...config,
   });
 
