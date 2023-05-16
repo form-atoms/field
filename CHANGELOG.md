@@ -1,3 +1,10 @@
+## [2.5.12](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.11...v2.5.12) (2023-05-16)
+
+
+### Bug Fixes
+
+* validation on blur when dirty & change when touched ([d550dab](https://github.com/MiroslavPetrik/form-atoms-field/commit/d550dab4626f6df474b62a375629a23c8fae2506))
+
 ## [2.5.11](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.10...v2.5.11) (2023-04-10)
 
 
