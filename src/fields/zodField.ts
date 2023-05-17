@@ -2,7 +2,7 @@ import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { Atom, Getter, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset } from "jotai/utils";
-import { ZodNever, z } from "zod";
+import { ZodUndefined, z } from "zod";
 
 type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
   optional?: boolean;
@@ -12,11 +12,8 @@ type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
 
 export type ZodFieldConfig<
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodNever
-> = FieldAtomConfig<
-  | Schema["_output"]
-  | (OptSchema extends ZodNever ? undefined : OptSchema["_output"])
-> &
+  OptSchema extends z.Schema = ZodUndefined
+> = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
   ValidationConfig<Schema, OptSchema>;
 
 export type ZodFieldValue<Field> = Field extends ZodField<
@@ -29,10 +26,8 @@ export type ZodFieldValue<Field> = Field extends ZodField<
 
 export type ZodField<
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodNever,
-  Value =
-    | Schema["_output"]
-    | (OptSchema extends ZodNever ? undefined : OptSchema["_output"])
+  OptSchema extends z.Schema = ZodUndefined,
+  Value = Schema["_output"] | OptSchema["_output"]
 > = FieldAtom<Value> extends Atom<infer R>
   ? Atom<
       R & {
@@ -47,10 +42,8 @@ export type ZodField<
 
 export const zodField = <
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodNever,
-  Value =
-    | Schema["_output"]
-    | (OptSchema extends ZodNever ? undefined : OptSchema["_output"])
+  OptSchema extends z.Schema = ZodUndefined,
+  Value = Schema["_output"] | OptSchema["_output"]
 >({
   optional = false, // all fields required similarly as zod is required by default
   schema,
