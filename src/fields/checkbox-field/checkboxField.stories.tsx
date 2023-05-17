@@ -1,34 +1,10 @@
-import { ReactNode } from "react";
-
-import { CheckboxField, checkboxField } from "./checkboxField";
-import { useCheckboxFieldProps } from "./useCheckboxFieldProps";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
+import { checkboxField } from "./checkboxField";
+import { CheckboxInput } from "./CheckboxInput";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
   title: "fields/checkboxField",
-};
-
-const CheckboxInput = ({
-  field,
-  label,
-}: {
-  field: CheckboxField;
-  label: ReactNode;
-}) => {
-  const props = useCheckboxFieldProps(field);
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <input type="checkbox" {...props} />
-      <FieldLabel field={field} label={label} />
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
 };
 
 export const Required: FormStory = {
@@ -53,14 +29,12 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      newsletter: checkboxField({
-        optional: true,
-      }),
+      newsletter: checkboxField({ name: "newsletter" }).optional(),
     },
     children: ({ fields }) => (
       <CheckboxInput
         field={fields.newsletter}
-        label="Subscribe to newsletter"
+        label="Subscribe to Newsletter"
       />
     ),
   }),
@@ -68,7 +42,7 @@ export const Optional: FormStory = {
     docs: {
       description: {
         story:
-          "Optional checkboxField will have true or false value in the submit data.",
+          "Optional _checkboxField_ will have `true` or `false` value in the submit data. (Never `undefined` like the _booleanField_ can)",
       },
     },
   },

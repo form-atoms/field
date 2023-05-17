@@ -58,7 +58,7 @@ import { NumberField } from "@form-atoms/flowbite"; // or /chakra-ui
 
 const height = numberField();
 const age = numberField({ schema: z.number().min(18) }); // override default schema
-const numOfKids = numberField({ optional: true }); // make field optional
+const numOfKids = numberField().optional(); // make field optional
 
 const personForm = formAtom({ height, age, numOfKids });
 

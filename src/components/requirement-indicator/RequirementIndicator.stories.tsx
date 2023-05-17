@@ -38,8 +38,8 @@ export const Intro: StoryType = {
     <>
       <QuantityField field={numberField()} kind="icon" />
       <QuantityField field={numberField()} kind="label" />
-      <QuantityField field={numberField({ optional: true })} kind="icon" />
-      <QuantityField field={numberField({ optional: true })} kind="label" />
+      <QuantityField field={numberField().optional()} kind="icon" />
+      <QuantityField field={numberField().optional()} kind="label" />
     </>
   ),
 };
@@ -53,9 +53,9 @@ export const RequiredLabel: StoryType = {
 };
 
 export const Optional: StoryType = {
-  args: { field: numberField({ optional: true }) },
+  args: { field: numberField().optional() },
 };
 
 export const OptionalLabel: StoryType = {
-  args: { field: numberField({ optional: true }), kind: "label" },
+  args: { field: numberField().optional(), kind: "label" },
 };

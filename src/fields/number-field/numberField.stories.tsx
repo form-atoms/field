@@ -1,9 +1,5 @@
-import { ReactNode } from "react";
-
-import { NumberField, numberField } from "./numberField";
-import { useNumberFieldProps } from "./useNumberFieldProps";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
+import { numberField } from "./numberField";
+import { NumberInput } from "./NumberInput";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
 
 export default {
@@ -11,30 +7,10 @@ export default {
   title: "fields/numberField",
 };
 
-const NumberInput = ({
-  field,
-  label,
-}: {
-  field: NumberField;
-  label: ReactNode;
-}) => {
-  const props = useNumberFieldProps(field);
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      <input type="number" {...props} />
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      height: numberField(),
+      height: numberField({ name: "height" }),
     },
     children: ({ fields }) => (
       <NumberInput field={fields.height} label="Your height" />
@@ -45,9 +21,7 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      petCount: numberField({
-        optional: true,
-      }),
+      petCount: numberField({ name: "petCount" }).optional(),
     },
     children: ({ fields }) => (
       <NumberInput field={fields.petCount} label="Pet count" />

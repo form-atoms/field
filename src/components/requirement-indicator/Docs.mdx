@@ -21,8 +21,8 @@ import { RequirementIndicator, textField } from "@form-atoms/field";
 
 <RequirementIndicator field={numberField()} kind="icon" />
 <RequirementIndicator field={numberField()} kind="label" />
-<RequirementIndicator field={numberField({ optional: true })} kind="icon" />
-<RequirementIndicator field={numberField({ optional: true })} kind="label" />
+<RequirementIndicator field={numberField().optional()} kind="icon" />
+<RequirementIndicator field={numberField().optional()} kind="label" />
 ```
 
 ## Features
