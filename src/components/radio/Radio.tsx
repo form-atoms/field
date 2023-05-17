@@ -9,7 +9,7 @@ import { useFieldProps, useRequiredActions } from "../../hooks";
 
 type Props = {
   control: RadioControlAtom;
-  field: CheckboxField;
+  field: ReturnType<CheckboxField["optional"]>;
 };
 
 const useCheckboxFieldProps = (field: CheckboxField) => {

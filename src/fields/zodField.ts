@@ -1,7 +1,7 @@
 import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Atom, Getter, atom } from "jotai";
-import { atomWithReset } from "jotai/utils";
+import { Atom, Getter, WritableAtom, atom } from "jotai";
+import { RESET, atomWithReset } from "jotai/utils";
 import { ZodUndefined, z } from "zod";
 
 type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
@@ -15,41 +15,49 @@ export type ZodFieldConfig<
 > = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
   ValidationConfig<Schema, OptSchema>;
 
-export type ZodFieldValue<Field> = Field extends ZodField<
-  infer _,
-  infer __,
-  infer Value
->
+export type ZodFieldValue<Field> = Field extends FieldAtom<infer Value>
   ? Value
   : never;
+
+export type OptionalZodField<
+  Schema extends z.Schema,
+  OptSchema extends z.Schema = ZodUndefined
+> = ZodField<
+  Schema,
+  OptSchema,
+  WritableAtom<
+    boolean,
+    [boolean | typeof RESET | ((prev: boolean) => boolean)],
+    void
+  >
+>;
 
 export type ZodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
-  Value = Schema["_output"] | OptSchema["_output"]
-> = FieldAtom<Value> extends Atom<infer R>
+  Required = Atom<boolean>
+> = FieldAtom<Schema["_output"] | OptSchema["_output"]> extends Atom<infer R>
   ? {
-      optional: () => ZodField<Schema, OptSchema, Value>;
+      optional: () => OptionalZodField<Schema, OptSchema>;
     } & Atom<
       R & {
-        required: Atom<boolean>;
+        required: Required;
       }
     >
   : never;
 
 export const zodField = <
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodUndefined,
-  Value = Schema["_output"] | OptSchema["_output"]
+  OptSchema extends z.Schema = ZodUndefined
 >({
   schema,
   optionalSchema,
   ...config
 }: ZodFieldConfig<Schema, OptSchema>): ZodField<Schema, OptSchema> => {
-  const requiredAtom = atomWithReset(true);
+  const requiredAtom = atom(true); // constant, unwritable when .optional() is not called
 
   const baseFieldAtom = fieldAtom({
-    validate: zodValidate<Value>(
+    validate: zodValidate(
       (get) => {
         const schemaObj = typeof schema === "function" ? schema(get) : schema;
         return schemaObj;
@@ -84,8 +92,8 @@ export const zodField = <
   zodField.debugLabel = `field/zodField/${config.name ?? zodField}`;
 
   const makeOptional = () => {
-    const requiredAtom = atom(false);
-    const validateCallback = zodValidate<Value>(
+    const requiredAtom = atomWithReset(false);
+    const validateCallback = zodValidate(
       (get) => {
         const schemaObj = typeof schema === "function" ? schema(get) : schema;
 

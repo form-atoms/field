@@ -194,7 +194,10 @@ const contactForm = formAtom({
   phones: [
     {
       number: fieldAtom({ value: "+421 200 300 500" }),
-      isPrimary: checkboxField({ name: "primaryPhone", value: true }),
+      isPrimary: checkboxField({
+        name: "primaryPhone",
+        value: true,
+      }).optional(),
     },
   ],
 });
@@ -209,7 +212,7 @@ export const WithRadioControl = () => ({
           keyFrom="number"
           builder={() => ({
             number: fieldAtom({ value: "" }),
-            isPrimary: checkboxField({ name: "primaryPhone" }),
+            isPrimary: checkboxField({ name: "primaryPhone" }).optional(),
           })}
           AddItemButton={({ add }) => (
             <button type="button" className="outline" onClick={add}>
