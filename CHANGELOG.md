@@ -1,3 +1,15 @@
+# [3.0.0-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.14...v3.0.0-next.1) (2023-05-17)
+
+
+* BREAKING CHANGE: optional field via .optional() method ([de99234](https://github.com/MiroslavPetrik/form-atoms-field/commit/de99234ec45d9cdc53b4750b61abaa8531eb7012))
+
+
+### BREAKING CHANGES
+
+* switch submit value based on required/optional g param
+
+closes 29
+
 ## [2.5.14](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.13...v2.5.14) (2023-05-17)
 
 
