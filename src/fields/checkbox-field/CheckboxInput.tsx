@@ -4,13 +4,12 @@ import { CheckboxField } from "./checkboxField";
 import { useCheckboxFieldProps } from "./useCheckboxFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
-import { BooleanField } from "../boolean-field";
 
 export const CheckboxInput = ({
   field,
   label,
 }: {
-  field: CheckboxField | BooleanField;
+  field: CheckboxField;
   label: ReactNode;
 }) => {
   const props = useCheckboxFieldProps(field);

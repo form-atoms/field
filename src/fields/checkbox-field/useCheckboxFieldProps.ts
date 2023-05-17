@@ -2,14 +2,13 @@ import { ChangeEvent, useMemo } from "react";
 
 import { CheckboxField } from "./checkboxField";
 import { FieldProps, useFieldProps } from "../../hooks";
-import { BooleanField } from "../boolean-field";
 
-export type CheckboxFieldProps = FieldProps<BooleanField>;
+export type CheckboxFieldProps = FieldProps<CheckboxField>;
 
 const getChecked = (event: ChangeEvent<HTMLInputElement>) =>
   event.target.checked;
 
-export function useCheckboxFieldProps(field: BooleanField | CheckboxField) {
+export function useCheckboxFieldProps(field: CheckboxField) {
   const { value: checked, ...props } = useFieldProps(field, getChecked);
 
   return useMemo(
