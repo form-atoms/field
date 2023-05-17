@@ -1,3 +1,10 @@
+## [2.5.15-next.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.14...v2.5.15-next.1) (2023-05-17)
+
+
+### Bug Fixes
+
+* optional checkbox in radio & required ([1d9d8c4](https://github.com/MiroslavPetrik/form-atoms-field/commit/1d9d8c4d4395af24a6755a6ca067cc9a8e7c3d0d))
+
 ## [2.5.14](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.13...v2.5.14) (2023-05-17)
 
 
