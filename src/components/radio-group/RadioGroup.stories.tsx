@@ -1,8 +1,6 @@
-import { ReactNode } from "react";
 import { z } from "zod";
 
-import { RadioGroup, RadioGroupProps } from "./RadioGroup";
-import { FieldLabel } from "..";
+import { RadioGroupField } from "./RadioGroupField";
 import {
   booleanField,
   numberField,
@@ -10,33 +8,12 @@ import {
   stringField,
   zodField,
 } from "../../fields";
-import { SelectField } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
-import { FieldErrors } from "../field-errors";
 
 export default {
   ...meta,
   title: "components/RadioGroup",
 };
-
-const RadioGroupField = <Option, Field extends SelectField>({
-  field,
-  label,
-  getValue,
-  getLabel,
-  options,
-}: { label: ReactNode } & RadioGroupProps<Option, Field>) => (
-  <div style={{ margin: "20px 0" }}>
-    <FieldLabel field={field} label={label} />
-    <RadioGroup
-      field={field}
-      getLabel={getLabel}
-      getValue={getValue}
-      options={options}
-    />
-    <FieldErrors field={field} />
-  </div>
-);
 
 const bashAnswers = [
   { answer: "Bash, a Shell", key: "A" },
