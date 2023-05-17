@@ -1,3 +1,10 @@
+## [2.5.14](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.13...v2.5.14) (2023-05-17)
+
+
+### Bug Fixes
+
+* zod opt schema undefined by default instead of never ([395207e](https://github.com/MiroslavPetrik/form-atoms-field/commit/395207e2e990b9dfcfd9b551b1bc87226e5d78ff))
+
 ## [2.5.13](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.12...v2.5.13) (2023-05-17)
 
 
