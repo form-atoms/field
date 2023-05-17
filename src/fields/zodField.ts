@@ -2,7 +2,7 @@ import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { Atom, Getter, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset } from "jotai/utils";
-import { ZodAny, ZodAnyDef, ZodNever, z } from "zod";
+import { ZodNever, z } from "zod";
 
 type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
   optional?: boolean;
@@ -41,7 +41,6 @@ export type ZodField<
           [boolean | typeof RESET | ((prev: boolean) => boolean)],
           void
         >;
-        schema: Atom<Schema>;
       }
     >
   : never;
@@ -59,15 +58,12 @@ export const zodField = <
   ...config
 }: ZodFieldConfig<Schema, OptSchema>): ZodField<Schema, OptSchema> => {
   const requiredAtom = atomWithReset(!optional);
-  const schemaAtom = atom((get) =>
-    typeof schema === "function" ? schema(get) : schema
-  );
 
   const baseFieldAtom = fieldAtom({
     validate: zodValidate<Value>(
       (get) => {
         const required = get(requiredAtom);
-        const schemaObj = get(schemaAtom);
+        const schemaObj = typeof schema === "function" ? schema(get) : schema;
         const optionalSchemaObj =
           typeof optionalSchema === "function"
             ? optionalSchema(get)
@@ -89,7 +85,6 @@ export const zodField = <
     const baseField = get(baseFieldAtom);
 
     const fieldAtoms = {
-      schema: schemaAtom,
       required: requiredAtom,
     };
 
@@ -106,5 +101,6 @@ export const zodField = <
   });
 
   zodField.debugLabel = `field/zodField/${config.name ?? zodField}`;
+
   return zodField;
 };
