@@ -1,3 +1,34 @@
+# [3.0.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.14...v3.0.0) (2023-05-17)
+
+
+* Next (#32) ([a446e33](https://github.com/MiroslavPetrik/form-atoms-field/commit/a446e33c9102874b5afdccbe5963068046469781)), closes [#32](https://github.com/MiroslavPetrik/form-atoms-field/issues/32) [#29](https://github.com/MiroslavPetrik/form-atoms-field/issues/29)
+
+
+### BREAKING CHANGES
+
+* optional field via .optional() method
+
+
+fix: optional checkbox in radio & required
+* switch submit value based on required/optional g param
+* optional field via .optional() method ([de99234](https://github.com/MiroslavPetrik/form-atoms-field/commit/de99234ec45d9cdc53b4750b61abaa8531eb7012))
+
+### BREAKING CHANGES
+
+* switch submit value based on required/optional g param
+
+closes 29
+
+* fix: revert checkbox field props
+
+* chore(release): 3.0.0-next.2
+
+# [3.0.0-next.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.0-next.1...v3.0.0-next.2) (2023-05-17)
+
+### Bug Fixes
+
+* revert checkbox field props ([09a4d80](https://github.com/MiroslavPetrik/form-atoms-field/commit/09a4d80bee4d09b6b5f2f4068ec5046a341d4850))
+
 # [3.0.0-next.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.0-next.1...v3.0.0-next.2) (2023-05-17)
 
 
