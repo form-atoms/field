@@ -1,3 +1,10 @@
+## [2.5.13](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.12...v2.5.13) (2023-05-17)
+
+
+### Bug Fixes
+
+* drop schema atom from field ([686a517](https://github.com/MiroslavPetrik/form-atoms-field/commit/686a517447fa97a9a7e87387eef7f8a8c737e6d7))
+
 ## [2.5.12](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.11...v2.5.12) (2023-05-16)
 
 
