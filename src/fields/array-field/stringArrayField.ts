@@ -7,7 +7,6 @@ import { ZodParams } from "../zodParams";
 export const stringArrayField = (
   params: ZodParams & {
     value?: string[];
-    optional?: boolean;
     name?: string;
   } = {}
 ) => arrayField({ elementSchema: z.string(), ...params });
