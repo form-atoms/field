@@ -133,37 +133,38 @@ export const zodField = <
     }
 
     return { ...baseField, ...fieldAtoms };
-  });
-
-  zodField.debugLabel = `field/zodField/${config.name ?? zodField}`;
+  }) as unknown as ZodField<Schema, OptSchema>;
 
   const makeOptional = () => {
     const requiredAtom = atomWithReset(false);
-    const validateCallback = zodValidate(
-      (get) => {
-        const schemaObj = typeof schema === "function" ? schema(get) : schema;
 
-        const optionalSchemaObj =
-          typeof optionalSchema === "function"
-            ? optionalSchema(get)
-            : optionalSchema;
+    const baseFieldAtom = fieldAtom({
+      validate: zodValidate(
+        (get) => {
+          const schemaObj = typeof schema === "function" ? schema(get) : schema;
 
-        const optSchema = optionalSchemaObj ?? schemaObj.optional();
+          const optionalSchemaObj =
+            typeof optionalSchema === "function"
+              ? optionalSchema(get)
+              : optionalSchema;
 
-        return optSchema;
-      },
-      {
-        on: "blur",
-        when: "dirty",
-      }
-    ).or({ on: "change", when: "touched" });
+          const optSchema = optionalSchemaObj ?? schemaObj.optional();
 
-    const zodField = atom((get) => {
+          return optSchema;
+        },
+        {
+          on: "blur",
+          when: "dirty",
+        }
+      ).or({ on: "change", when: "touched" }),
+      ...config,
+    });
+
+    const optionalZodField = atom((get) => {
       const baseField = get(baseFieldAtom);
 
       const fieldAtoms = {
         required: requiredAtom,
-        validate: validateCallback,
       };
 
       if (
@@ -178,13 +179,17 @@ export const zodField = <
       return {
         ...baseField,
         ...fieldAtoms,
-        _validateCallback: validateCallback,
       };
-    });
+    }) as OptionalZodField<Schema, OptSchema>;
 
-    // TODO: no need to call .optional().optional()
-    return { ...zodField, optional: makeOptional };
+    optionalZodField.optional = () => optionalZodField;
+    optionalZodField.debugLabel = `optionalZodField/${config.name ?? zodField}`;
+
+    return optionalZodField;
   };
 
-  return { ...zodField, optional: makeOptional };
+  zodField.optional = makeOptional;
+  zodField.debugLabel = `zodField/${config.name ?? zodField}`;
+
+  return zodField;
 };
