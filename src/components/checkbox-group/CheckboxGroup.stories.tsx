@@ -62,9 +62,7 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      attachment: stringArrayField({
-        optional: true,
-      }),
+      attachment: stringArrayField().optional(),
     },
     children: ({ fields }) => (
       <CheckboxGroupField
