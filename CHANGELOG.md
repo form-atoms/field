@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.1...v3.0.2) (2023-05-18)
+
+
+### Bug Fixes
+
+* **#34:** for required field, indicate aria-valid only after validation ([334d276](https://github.com/MiroslavPetrik/form-atoms-field/commit/334d276bf08b36e6a012caa60164cff68b161712)), closes [#34](https://github.com/MiroslavPetrik/form-atoms-field/issues/34)
+
 ## [3.0.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.0...v3.0.1) (2023-05-18)
 
 
