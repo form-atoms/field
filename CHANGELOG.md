@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.0...v3.0.1) (2023-05-18)
+
+
+### Bug Fixes
+
+* optional zod field as field atom ([3b1ea99](https://github.com/MiroslavPetrik/form-atoms-field/commit/3b1ea99fe87f2e170406f23081e474219256484a))
+
 # [3.0.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v2.5.14...v3.0.0) (2023-05-17)
 
 
