@@ -2431,7 +2431,7 @@ __metadata:
     eslint-import-resolver-typescript: ^3.5.3
     eslint-plugin-import: ^2.27.5
     eslint-plugin-prettier: 4.2.1
-    form-atoms: ^3.0.0
+    form-atoms: ^3.0.2
     happy-dom: ^8.9.0
     jotai: ^2.0.3
     jotai-devtools: ^0.5.3
@@ -4653,7 +4653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:^13.0.0, @testing-library/user-event@npm:^13.2.1":
+"@testing-library/user-event@npm:^13.2.1":
   version: 13.5.0
   resolution: "@testing-library/user-event@npm:13.5.0"
   dependencies:
@@ -8960,15 +8960,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-atoms@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "form-atoms@npm:3.0.0"
-  dependencies:
-    "@testing-library/user-event": ^13.0.0
+"form-atoms@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "form-atoms@npm:3.0.2"
   peerDependencies:
     jotai: ^2.0.0
     react: ">=16.8"
-  checksum: be820a018e0c132f625ef86c4c82a641a84cb6b52286839108f4fb88ee570a9d30bed44a060a658e557310e4eb6045ac753d11f656364a308806f39a33eef2d4
+  checksum: 37c52d280385d4a0cb93d627df5fe8e15f8e845a490df545301455006c62fe40b9ab53fe3c811cee9aa20592609880b876a7509be9dbdf72586c88404264bfe0
   languageName: node
   linkType: hard
 
