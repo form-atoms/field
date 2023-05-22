@@ -10,10 +10,14 @@ export default {
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      termsOfService: checkboxField(),
+      termsOfService: checkboxField({ name: "termsOfService" }),
     },
-    children: ({ fields }) => (
-      <CheckboxInput field={fields.termsOfService} label="Terms of Service" />
+    children: ({ fields, required }) => (
+      <CheckboxInput
+        field={fields.termsOfService}
+        label="Terms of Service"
+        required={required}
+      />
     ),
   }),
   parameters: {

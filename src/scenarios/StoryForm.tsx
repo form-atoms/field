@@ -3,13 +3,18 @@ import { FormFields, formAtom, useFormActions } from "form-atoms";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-type Props<Fields extends FormFields> = { fields: Fields } & RenderProp<{
+type Props<Fields extends FormFields> = {
   fields: Fields;
+  required?: boolean;
+} & RenderProp<{
+  fields: Fields;
+  required: boolean;
 }>;
 
 export const StoryForm = <Fields extends FormFields>({
   fields,
   children,
+  required = true,
 }: Props<Fields>) => {
   const form = useMemo(() => formAtom(fields), []);
   const { reset, submit } = useFormActions(form);
@@ -20,7 +25,7 @@ export const StoryForm = <Fields extends FormFields>({
         window.alert(JSON.stringify(values));
       })}
     >
-      {children({ fields })}
+      {children({ fields, required })}
       <button>Submit</button>
       <button className="outline secondary" type="button" onClick={reset}>
         Reset
@@ -33,6 +38,20 @@ export type FormStory = StoryObj<typeof meta>;
 
 export const meta = {
   component: StoryForm,
+  args: { required: true },
+  argTypes: {
+    required: {
+      description: "Whether browser should require", // TODO: does not work
+      table: {
+        type: {
+          summary: "Input prop to control browser focus.",
+          detail: "Does NOT relate to the form validation!",
+        },
+      },
+    },
+    fields: { table: { disable: true } },
+    children: { table: { disable: true } },
+  },
 } satisfies Meta<typeof StoryForm>;
 
 // The StoryObj meta type omits the generic parameter, so the fields in children args are untyped
@@ -40,4 +59,7 @@ export const meta = {
 export const fixArgs = <Fields extends FormFields>({
   fields,
   children,
-}: Props<Fields>) => ({ fields, children: () => children({ fields }) });
+}: Props<Fields>) => ({
+  fields,
+  children,
+});
