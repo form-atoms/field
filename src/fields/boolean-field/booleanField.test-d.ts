@@ -1,25 +1,25 @@
 import { formAtom } from "form-atoms";
 import { expectTypeOf } from "vitest";
 
-import { checkboxField } from "./checkboxField";
+import { booleanField } from "./booleanField";
 import { FormSubmitValues } from "../zodField";
 
-test("required checkboxField has 'true' submit value", () => {
+test("required booleanField has 'boolean' submit value", () => {
   const form = formAtom({
-    field: checkboxField(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
-    field: true;
-  }>();
-});
-
-test("optional checkboxField has 'boolean' submit value", () => {
-  const form = formAtom({
-    field: checkboxField().optional(),
+    field: booleanField(),
   });
 
   expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
     field: boolean;
+  }>();
+});
+
+test("optional booleanField has 'boolean | undefined' submit value", () => {
+  const form = formAtom({
+    field: booleanField().optional(),
+  });
+
+  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+    field: boolean | undefined;
   }>();
 });
