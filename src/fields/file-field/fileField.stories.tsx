@@ -49,9 +49,7 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      attachment: fileField({
-        optional: true,
-      }),
+      attachment: fileField().optional(),
     },
     children: ({ fields }) => (
       <FileInput field={fields.attachment} label="Upload attachment" />

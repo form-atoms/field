@@ -32,6 +32,7 @@
   ],
   "scripts": {
     "test": "vitest",
+    "typecheck": "vitest typecheck",
     "storybook": "storybook dev",
     "storybook-docs": "storybook dev --docs",
     "sb": "yarn storybook",

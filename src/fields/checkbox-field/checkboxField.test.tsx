@@ -3,20 +3,8 @@ import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { checkboxField } from "./checkboxField";
-import { FormSubmitValues } from "../zodField";
 
 describe("checkboxField()", () => {
-  it.skip("TODO type tests", () => {
-    const fields = {
-      acceptedTermsOfService: checkboxField(),
-      newsletter: checkboxField().optional(),
-    };
-
-    const signupFormAtom = formAtom(fields);
-
-    type SignUpFormValues = FormSubmitValues<typeof signupFormAtom>;
-  });
-
   describe("when required", () => {
     it("doesn't submit empty", async () => {
       const field = checkboxField();

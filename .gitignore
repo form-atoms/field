@@ -14,3 +14,5 @@ storybook-static/
 # Documentation here: https://yarnpkg.com/features/zero-installs
 #!.yarn/cache
 #.pnp.*
+
+tsconfig.vitest-temp.json

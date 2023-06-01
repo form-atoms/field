@@ -53,7 +53,7 @@ export const RequiredString: FormStory = {
 export const OptionalString: FormStory = {
   args: fixArgs({
     fields: {
-      country: stringField({ optional: true }),
+      country: stringField().optional(),
     },
     children: ({ fields }) => (
       <SelectField
