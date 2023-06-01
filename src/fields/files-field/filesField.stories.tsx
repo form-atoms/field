@@ -1,15 +1,16 @@
 import type { InputHTMLAttributes, ReactNode } from "react";
 import { z } from "zod";
 
-import { FileField, fileField } from "./fileField";
-import { useFileFieldProps } from "./useFileFieldProps";
+import { FilesField, filesField } from "./filesField";
+import { useFilesFieldProps } from "./useFilesFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import { useClearFileInputEffect } from "../../hooks";
 import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+
 export default {
   ...meta,
-  title: "fields/fileField",
+  title: "fields/filesField",
 };
 
 const FileInput = ({
@@ -17,10 +18,10 @@ const FileInput = ({
   label,
   ...inputProps
 }: {
-  field: FileField;
+  field: FilesField;
   label: ReactNode;
 } & InputHTMLAttributes<HTMLInputElement>) => {
-  const { value, ...props } = useFileFieldProps(field);
+  const { value, ...props } = useFilesFieldProps(field);
 
   useClearFileInputEffect(field);
 
@@ -38,7 +39,7 @@ const FileInput = ({
 export const Required: FormStory = {
   args: fixArgs({
     fields: {
-      profilePic: fileField(),
+      profilePic: filesField(),
     },
     children: ({ fields }) => (
       <FileInput field={fields.profilePic} label="Your avatar" />
@@ -49,7 +50,7 @@ export const Required: FormStory = {
 export const Optional: FormStory = {
   args: fixArgs({
     fields: {
-      attachment: fileField().optional(),
+      attachment: filesField().optional(),
     },
     children: ({ fields }) => (
       <FileInput field={fields.attachment} label="Upload attachment" />
@@ -62,14 +63,14 @@ export const Multiple: FormStory = {
     docs: {
       description: {
         story:
-          "Pass custom schema to field config e.g. `z.array(z.instanceof(File)).max(2)` to limit min/max number of files.",
+          "Pass custom schema to field config e.g. `z.array(z.instanceof(File)).nonempty().max(2)` to limit min/max number of files.",
       },
     },
   },
   args: fixArgs({
     fields: {
-      attachments: fileField({
-        schema: z.array(z.instanceof(File)).max(2),
+      attachments: filesField({
+        schema: z.array(z.instanceof(File)).nonempty().max(2),
       }),
     },
     children: ({ fields }) => (
