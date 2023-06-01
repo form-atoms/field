@@ -1,15 +1,13 @@
 import { ExtractAtomValue } from "jotai";
 import { z } from "zod";
 
-import { arrayField } from "./arrayField";
-import { ZodParams } from "../zodParams";
+import { ArrayFieldParams, arrayField } from "./arrayField";
+
+const elementSchema = z.string();
 
 export const stringArrayField = (
-  params: ZodParams & {
-    value?: string[];
-    name?: string;
-  } = {}
-) => arrayField({ elementSchema: z.string(), ...params });
+  params: Partial<ArrayFieldParams<typeof elementSchema>> = {}
+) => arrayField({ elementSchema, ...params });
 
 export type StringArrayField = ReturnType<typeof stringArrayField>;
 

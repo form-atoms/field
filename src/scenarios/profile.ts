@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { checkboxField } from "../fields/checkbox-field";
-import { fileField } from "../fields/file-field";
+import { filesField } from "../fields/files-field";
 import { numberField } from "../fields/number-field";
 import { stringField } from "../fields/string-field";
 import { textField } from "../fields/text-field";
@@ -21,7 +21,7 @@ export const profileFields = {
     schema: z.number().min(17).max(65),
   }),
   country: stringField({ name: "country" }),
-  profilePicture: fileField({ name: "profilePicture" }),
+  profilePicture: filesField({ name: "profilePicture" }),
   bio: textField({
     name: "bio",
   }),

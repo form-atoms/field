@@ -1,35 +1,35 @@
 import { Meta, Markdown, Stories } from "@storybook/blocks";
-import * as FileFieldStories from "./fileField.stories";
+import * as FilesFieldStories from "./filesField.stories";
 
 import Config from "./config.md?raw";
 
-<Meta title="fields/fileField" of={FileFieldStories} />
+<Meta title="fields/filesField" of={FilesFieldStories} />
 
-# `fileField(): ZodField<ZodArray<ZodType<File>> | undefined>`
+# `filesField(): ZodField<File[] | [File, ...File[]]>`
 
 A field to hold `input[type="file"]` values.
 
 > **NOTE:** Can hold any number of files, be it zero, one or many.
 
 ```ts
-import { fileField } from "@form-atoms/field";
+import { filesField } from "@form-atoms/field";
 
 // required file, must be filled to submit
-const profilePic = fileField({
+const profilePic = filesField({
   required_error: "Please upload you profile picture.",
 });
 
 // optional files, can be empty to submit
-const attachments = fileField({ optional: true });
+const attachments = filesField().optional();
 ```
 
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
 
-> **NOTE:** the `File` API is not available on the server side, so in practice the schema is defined as `z.array(isServer ? z.undefined() : z.instanceof(File)`.
+> **NOTE:** the `File` API is not available on the server side, so in practice the schema is defined as `z.array(isServer ? z.never() : z.instanceof(File)`.
 
-## useFileFieldProps(fileField)
+## useFilesFieldProps(filesField)
 
 A hook providing props to control a file input.
 
@@ -38,11 +38,11 @@ const FileInput = ({
   field,
   label,
 }: {
-  field: FileFieldAtom;
+  field: FilesFieldAtom;
   label: ReactNode;
 }) => {
   // the `value` is the FileList which cannot be passed to the input element, so we drop it
-  const { value, ...props } = useFileFieldProps(field);
+  const { value, ...props } = useFilesFieldProps(field);
 
   return (
     <div style={{ margin: "20px 0" }}>
