@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.2...v3.1.0) (2023-06-01)
+
+
+### Features
+
+* filesField as arrayField ([#36](https://github.com/MiroslavPetrik/form-atoms-field/issues/36)) ([946268c](https://github.com/MiroslavPetrik/form-atoms-field/commit/946268c482029f1821c412d989827fd5368c4fc8)), closes [#30](https://github.com/MiroslavPetrik/form-atoms-field/issues/30)
+
 ## [3.0.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.1...v3.0.2) (2023-05-18)
 
 
