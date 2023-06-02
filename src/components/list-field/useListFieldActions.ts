@@ -2,7 +2,7 @@ import { FieldAtom, FormAtom, FormFields, useFormActions } from "form-atoms";
 import { del, push } from "object-path-immutable";
 import { useCallback } from "react";
 
-export const useArrayFieldActions = <
+export const useListFieldActions = <
   Fields extends FormFields,
   Item extends FieldAtom<any> | FormFields
 >(

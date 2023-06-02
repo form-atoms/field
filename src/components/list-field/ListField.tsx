@@ -8,18 +8,18 @@ import {
 import React, { Fragment, useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { useArrayFieldActions } from "./useArrayFieldActions";
+import { useListFieldActions } from "./useListFieldActions";
 
-export function arrayFieldAtoms<TValue, TFieldAtom extends FieldAtom<TValue>>(
+export function listFieldAtoms<TValue, TFieldAtom extends FieldAtom<TValue>>(
   builder: (value: TValue) => TFieldAtom,
   values: TValue[]
 ): TFieldAtom[];
-export function arrayFieldAtoms<Fields extends FormFields>(
+export function listFieldAtoms<Fields extends FormFields>(
   builder: (values: FormFieldValues<Fields>) => Fields,
   values: FormFieldValues<Fields>[]
 ): Fields[];
 // actual type must be one of overloads, as this one is ignored
-export function arrayFieldAtoms<Fields extends FormFields>(
+export function listFieldAtoms<Fields extends FormFields>(
   builder: (values: FormFieldValues<Fields>) => Fields,
   values: FormFieldValues<Fields>[]
 ): Fields[] {
@@ -41,7 +41,7 @@ type RenderProps = Partial<
   RemoveItemButtonProp & AddItemButtonProp & EmptyMessageProp
 >;
 
-export type ArrayItemRenderProps<Fields> = RenderProp<
+export type ListItemRenderProps<Fields> = RenderProp<
   {
     index: number;
     fields: Fields;
@@ -50,11 +50,11 @@ export type ArrayItemRenderProps<Fields> = RenderProp<
   } & RenderProp<unknown, "RemoveItemButton">
 >;
 
-type ArrayFields = FieldAtom<any>[] | FormFields[];
+type ListFields = FieldAtom<any>[] | FormFields[];
 
-type RecurrFormFields = FormFields | ArrayFields;
+type RecurrFormFields = FormFields | ListFields;
 
-type ArrayFieldPropsRecurr<
+type ListFieldPropsRecurr<
   Fields extends RecurrFormFields,
   Path extends (string | number)[]
 > = Path extends [
@@ -62,7 +62,7 @@ type ArrayFieldPropsRecurr<
   ...infer R extends (string | number)[]
 ]
   ? Fields[P] extends RecurrFormFields
-    ? ArrayFieldPropsRecurr<Fields[P], R>
+    ? ListFieldPropsRecurr<Fields[P], R>
     : never
   : {
       builder: () => Fields extends (infer Item extends
@@ -74,13 +74,13 @@ type ArrayFieldPropsRecurr<
       ? { keyFrom: keyof F }
       : // key not needed for FieldAtom<any>[], atom itself will be key
         { keyFrom?: never }) &
-      ArrayItemRenderProps<
+      ListItemRenderProps<
         Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
           ? Item
           : never
       >;
 
-export type ArrayFieldProps<
+export type ListFieldProps<
   Fields extends FormFields,
   Path extends (string | number)[]
 > = RenderProps &
@@ -89,14 +89,14 @@ export type ArrayFieldProps<
     ...infer Rest extends (string | number)[]
   ]
     ? Fields[P] extends RecurrFormFields
-      ? { form: FormAtom<Fields>; path: Path } & ArrayFieldPropsRecurr<
+      ? { form: FormAtom<Fields>; path: Path } & ListFieldPropsRecurr<
           Fields[P],
           Rest
         >
       : never
     : never);
 
-export function ArrayField<
+export function ListField<
   Fields extends FormFields,
   Path extends (string | number)[]
 >({
@@ -116,12 +116,12 @@ export function ArrayField<
     </button>
   ),
   EmptyMessage,
-}: ArrayFieldProps<Fields, Path>) {
+}: ListFieldProps<Fields, Path>) {
   const { fieldAtoms } = useForm(form);
 
-  const { add, remove } = useArrayFieldActions(form, builder, path);
+  const { add, remove } = useListFieldActions(form, builder, path);
 
-  const array: ArrayFields = useMemo(() => {
+  const array: ListFields = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return path.reduce(
@@ -129,7 +129,7 @@ export function ArrayField<
       // @ts-ignore
       (fields, key) => fields[key],
       fieldAtoms
-    ) as ArrayFields;
+    ) as ListFields;
   }, [path, fieldAtoms]);
 
   const keyFn = (fields: FieldAtom<any> | FormFields) => {

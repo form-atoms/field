@@ -6,20 +6,20 @@ import {
   Markdown,
   Description,
 } from "@storybook/blocks";
-import * as ArrayFieldStories from "./ArrayField.stories";
+import * as ListFieldStories from "./ListField.stories";
 import Props from "./props.md?raw";
 
-<Meta title="components/ArrayField" />
+<Meta title="components/ListField" />
 
-# ArrayField
+# ListField
 
-<Description of={ArrayFieldStories.Primary} />
+<Description of={ListFieldStories.Primary} />
 
-<Canvas sourceState="none" of={ArrayFieldStories.Primary} />
+<Canvas sourceState="none" of={ListFieldStories.Primary} />
 
 ```tsx
 import { formAtom, fieldAtom } from "form-atoms";
-import { ArrayField } from "@form-atoms/field";
+import { ListField } from "@form-atoms/field";
 
 const envForm = formAtom({
   envVars: [
@@ -31,7 +31,7 @@ const envForm = formAtom({
 });
 
 const Example = () => (
-  <ArrayField
+  <ListField
     form={envForm}
     path={["envVars"]}
     keyFrom="name"
@@ -69,7 +69,7 @@ const Example = () => (
         <RemoveItemButton />
       </div>
     )}
-  </ArrayField>
+  </ListField>
 );
 ```
 
@@ -84,24 +84,24 @@ const Example = () => (
 ## Usage
 
 ```ts
-import { ArrayField } from "@form-atoms/field";
+import { ListField } from "@form-atoms/field";
 ```
 
 ### Props
 
-<Controls of={ArrayFieldStories.Primary} sort="requiredFirst" />
+<Controls of={ListFieldStories.Primary} sort="requiredFirst" />
 
 ## Examples
 
 ### Flat
 
-<Description of={ArrayFieldStories.Flat} />
+<Description of={ListFieldStories.Flat} />
 
-<Canvas sourceState="none" of={ArrayFieldStories.Flat} />
+<Canvas sourceState="none" of={ListFieldStories.Flat} />
 
 ```tsx
 import { formAtom, fieldAtom } from "form-atoms";
-import { ArrayField } from "@form-atoms/field";
+import { ListField } from "@form-atoms/field";
 
 const hobbiesForm = formAtom({
   hobbies: [fieldAtom({ value: "gardening" })],
@@ -109,7 +109,7 @@ const hobbiesForm = formAtom({
 
 // NOTE: the keyFrom prop is not needed as the item/fieldAtom itself is used as the render key default.
 const Example = () => (
-  <ArrayField
+  <ListField
     form={hobbiesForm}
     path={["hobbies"]}
     builder={() => fieldAtom({ value: "" })}
@@ -127,16 +127,16 @@ const Example = () => (
         <RemoveItemButton />
       </div>
     )}
-  </ArrayField>
+  </ListField>
 );
 ```
 
 ### Nested
 
-ArrayField supports nested array fields.
+ListField supports nested array fields.
 For example we can capture multiple people with multiple banking accounts:
 
-<Canvas sourceState="none" of={ArrayFieldStories.Nested} />
+<Canvas sourceState="none" of={ListFieldStories.Nested} />
 
 ```tsx
 const peopleForm = formAtom({
@@ -154,7 +154,7 @@ const peopleForm = formAtom({
 // the path prop to array also starts from the root
 const AdvancedNestedExample = () => {
   return (
-    <ArrayField
+    <ListField
       form={peopleForm}
       keyFrom="name"
       path={["people"]}
@@ -167,7 +167,7 @@ const AdvancedNestedExample = () => {
         <>
           <label>Person #{index}</label> <RemoveItemButton />
           <TextField field={fields.name} label="Name" />
-          <ArrayField
+          <ListField
             form={peopleForm}
             keyFrom="iban"
             path={["people", index, "accounts"]}
@@ -179,14 +179,14 @@ const AdvancedNestedExample = () => {
                 <TextField field={fields.iban} label="IBAN" />
               </>
             )}
-          </ArrayField>
+          </ListField>
         </>
       )}
-    </ArrayField>
+    </ListField>
   );
 };
 ```
 
 ### With RadioControl over the array items
 
-<Canvas sourceState="none" of={ArrayFieldStories.WithRadioControl} />
+<Canvas sourceState="none" of={ListFieldStories.WithRadioControl} />
