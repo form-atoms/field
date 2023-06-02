@@ -1,14 +1,14 @@
 import { checkboxField } from "./checkboxField";
 import { CheckboxInput } from "./CheckboxInput";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
   title: "fields/checkboxField",
 };
 
-export const Required: FormStory = {
-  args: fixArgs({
+export const Required = formStory({
+  args: {
     fields: {
       termsOfService: checkboxField({ name: "termsOfService" }),
     },
@@ -19,7 +19,7 @@ export const Required: FormStory = {
         required={required}
       />
     ),
-  }),
+  },
   parameters: {
     docs: {
       description: {
@@ -28,10 +28,10 @@ export const Required: FormStory = {
       },
     },
   },
-};
+});
 
-export const Optional: FormStory = {
-  args: fixArgs({
+export const Optional = formStory({
+  args: {
     fields: {
       newsletter: checkboxField({ name: "newsletter" }).optional(),
     },
@@ -41,7 +41,7 @@ export const Optional: FormStory = {
         label="Subscribe to Newsletter"
       />
     ),
-  }),
+  },
   parameters: {
     docs: {
       description: {
@@ -50,4 +50,4 @@ export const Optional: FormStory = {
       },
     },
   },
-};
+});

@@ -56,16 +56,6 @@ export const meta = {
 
 // The StoryObj meta type omits the generic parameter, so the fields in children args are untyped
 // this way we build the args with generic fields BEFORE the FormStory runs over it
-export const fixArgs = <Fields extends FormFields>({
-  fields,
-  children,
-}: Props<Fields>) => ({
-  fields,
-  children,
-});
-
-// The StoryObj meta type omits the generic parameter, so the fields in children args are untyped
-// this way we build the args with generic fields BEFORE the FormStory runs over it
 export const formStory = <Fields extends FormFields>(
   props: {
     args: Props<Fields>;

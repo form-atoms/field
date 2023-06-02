@@ -4,7 +4,7 @@ import { MultiSelect, MultiSelectProps } from "./MultiSelect";
 import { FieldLabel } from "..";
 import { stringArrayField } from "../../fields";
 import { ZodArrayField } from "../../hooks";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
 export default {
@@ -33,9 +33,9 @@ const countryOptions = [
   { name: "Hungary", key: "HU" },
 ];
 
-export const RequiredArrayString: FormStory = {
+export const RequiredArrayString = formStory({
   name: "Required Array<string>",
-  args: fixArgs({
+  args: {
     fields: {
       visitedCountries: stringArrayField(),
     },
@@ -48,5 +48,5 @@ export const RequiredArrayString: FormStory = {
         getLabel={({ name }) => name}
       />
     ),
-  }),
-};
+  },
+});

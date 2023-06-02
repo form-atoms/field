@@ -75,8 +75,8 @@ const languagesOptions = [
   { name: "Na'vi", key: "navi" },
 ];
 
-export const Required: FormStory = {
-  args: fixArgs({
+export const Required = formStory({
+  args: {
     fields: {
       languages: arrayField(),
     },
@@ -89,6 +89,6 @@ export const Required: FormStory = {
         getLabel={({ name }) => name}
       />
     ),
-  }),
-};
+  },
+});
 ```

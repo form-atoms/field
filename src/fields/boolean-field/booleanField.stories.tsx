@@ -1,6 +1,6 @@
 import { booleanField } from "./booleanField";
 import { RadioGroupField } from "../../components/radio-group/RadioGroupField";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
@@ -18,8 +18,8 @@ const funeralTermsOptions = [
   },
 ];
 
-export const Required: FormStory = {
-  args: fixArgs({
+export const Required = formStory({
+  args: {
     fields: {
       funeralTerms: booleanField({ name: "funeralTerms" }),
     },
@@ -32,7 +32,7 @@ export const Required: FormStory = {
         getValue={({ value }) => value}
       />
     ),
-  }),
+  },
   parameters: {
     docs: {
       description: {
@@ -41,15 +41,15 @@ export const Required: FormStory = {
       },
     },
   },
-};
+});
 
 const surveyOptions = [
   { label: "I like this experience", key: true },
   { label: "I don't like this", key: false },
 ];
 
-export const Optional: FormStory = {
-  args: fixArgs({
+export const Optional = formStory({
+  args: {
     fields: {
       approved: booleanField().optional(),
     },
@@ -62,7 +62,7 @@ export const Optional: FormStory = {
         getLabel={({ label }) => label}
       />
     ),
-  }),
+  },
   parameters: {
     docs: {
       description: {
@@ -71,4 +71,4 @@ export const Optional: FormStory = {
       },
     },
   },
-};
+});

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { FieldLabel, Select, SelectProps } from "..";
 import { booleanField, numberField, stringField, zodField } from "../../fields";
 import type { SelectField } from "../../hooks";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
 export default {
@@ -33,8 +33,8 @@ const countryOptions = [
   { name: "Hungary", key: "HU" },
 ];
 
-export const RequiredString: FormStory = {
-  args: fixArgs({
+export const RequiredString = formStory({
+  args: {
     fields: {
       country: stringField(),
     },
@@ -47,11 +47,11 @@ export const RequiredString: FormStory = {
         getLabel={({ name }) => name}
       />
     ),
-  }),
-};
+  },
+});
 
-export const OptionalString: FormStory = {
-  args: fixArgs({
+export const OptionalString = formStory({
+  args: {
     fields: {
       country: stringField().optional(),
     },
@@ -64,13 +64,13 @@ export const OptionalString: FormStory = {
         getLabel={({ name }) => name}
       />
     ),
-  }),
-};
+  },
+});
 
 const ratingOptions = [5, 4, 3, 2, 1];
 
-export const RequiredNumber: FormStory = {
-  args: fixArgs({
+export const RequiredNumber = formStory({
+  args: {
     fields: {
       rating: numberField(),
     },
@@ -83,16 +83,16 @@ export const RequiredNumber: FormStory = {
         getLabel={(value) => Array(value + 1).join("🌟")}
       />
     ),
-  }),
-};
+  },
+});
 
 const approvalOptions = [
   { label: "I approve this message", key: true },
   { label: "I have some comments", key: false },
 ];
 
-export const RequiredBoolean: FormStory = {
-  args: fixArgs({
+export const RequiredBoolean = formStory({
+  args: {
     fields: {
       approved: booleanField(),
     },
@@ -105,8 +105,8 @@ export const RequiredBoolean: FormStory = {
         getLabel={({ label }) => label}
       />
     ),
-  }),
-};
+  },
+});
 
 const customers = [
   { name: "Github", city: "San Francisco" },
@@ -114,7 +114,7 @@ const customers = [
   { name: "basic IT", city: "Bratislava" },
 ];
 
-export const RequiredCustomer: FormStory = {
+export const RequiredCustomer = formStory({
   name: "Required custom type (Customer)",
   parameters: {
     docs: {
@@ -124,7 +124,7 @@ export const RequiredCustomer: FormStory = {
       },
     },
   },
-  args: fixArgs({
+  args: {
     fields: {
       names: zodField({
         value: undefined,
@@ -143,5 +143,5 @@ export const RequiredCustomer: FormStory = {
         getLabel={({ name, city }) => `${name} in ${city}`}
       />
     ),
-  }),
-};
+  },
+});

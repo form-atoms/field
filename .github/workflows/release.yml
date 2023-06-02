@@ -32,7 +32,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Install
+      - name: 🏗️ Install
         uses: borales/actions-yarn@v4
         with:
           cmd: install
@@ -43,12 +43,12 @@ jobs:
       - name: 🧪 Test
         run: yarn test
 
-      - name: Build
+      - name: 🔨 Build
         uses: borales/actions-yarn@v4
         with:
           cmd: build
 
-      - name: Release
+      - name: 🚢 Release
         uses: borales/actions-yarn@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

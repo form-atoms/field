@@ -6,7 +6,7 @@ import { useFilesFieldProps } from "./useFilesFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import { useClearFileInputEffect } from "../../hooks";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
@@ -36,29 +36,29 @@ const FileInput = ({
   );
 };
 
-export const Required: FormStory = {
-  args: fixArgs({
+export const Required = formStory({
+  args: {
     fields: {
       profilePic: filesField(),
     },
     children: ({ fields }) => (
       <FileInput field={fields.profilePic} label="Your avatar" />
     ),
-  }),
-};
+  },
+});
 
-export const Optional: FormStory = {
-  args: fixArgs({
+export const Optional = formStory({
+  args: {
     fields: {
       attachment: filesField().optional(),
     },
     children: ({ fields }) => (
       <FileInput field={fields.attachment} label="Upload attachment" />
     ),
-  }),
-};
+  },
+});
 
-export const Multiple: FormStory = {
+export const Multiple = formStory({
   parameters: {
     docs: {
       description: {
@@ -67,7 +67,7 @@ export const Multiple: FormStory = {
       },
     },
   },
-  args: fixArgs({
+  args: {
     fields: {
       attachments: filesField({
         schema: z.array(z.instanceof(File)).nonempty().max(2),
@@ -80,5 +80,5 @@ export const Multiple: FormStory = {
         multiple
       />
     ),
-  }),
-};
+  },
+});

@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { FieldErrors, FieldLabel } from "../../components";
 import { textField } from "../../fields/text-field";
-import { FormStory, fixArgs, meta } from "../StoryForm";
+import { formStory, meta } from "../StoryForm";
 
 export default {
   ...meta,
@@ -37,8 +37,8 @@ const confirmPassword = textField({
   ),
 });
 
-export const Primary: FormStory = {
-  args: fixArgs({
+export const Primary = formStory({
+  args: {
     fields: {
       password,
       confirmPassword,
@@ -70,5 +70,5 @@ export const Primary: FormStory = {
         />
       </>
     ),
-  }),
-};
+  },
+});
