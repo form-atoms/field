@@ -2,16 +2,16 @@ import { InputField, fieldAtom, formAtom } from "form-atoms";
 
 import {
   AddItemButtonProps,
-  ArrayField,
+  ListField,
   RemoveItemButtonProps,
-} from "./ArrayField";
+} from "./ListField";
 import { checkboxField } from "../../fields/checkbox-field";
 import { FieldLabel } from "../field-label";
 import { Radio, RadioControl } from "../radio";
 
 export default {
-  title: "ArrayField",
-  component: ArrayField,
+  title: "ListField",
+  component: ListField,
 };
 
 const envForm = formAtom({
@@ -34,7 +34,7 @@ export const Primary = {
   },
   args: {},
   render: () => (
-    <ArrayField
+    <ListField
       form={envForm}
       path={["envVars"]}
       keyFrom="name"
@@ -68,7 +68,7 @@ export const Primary = {
           <RemoveItemButton />
         </div>
       )}
-    </ArrayField>
+    </ListField>
   ),
 };
 
@@ -87,7 +87,7 @@ export const Flat = {
   },
   args: {},
   render: () => (
-    <ArrayField
+    <ListField
       form={hobbiesForm}
       path={["hobbies"]}
       AddItemButton={AddHobbyField}
@@ -106,7 +106,7 @@ export const Flat = {
           <RemoveItemButton />
         </div>
       )}
-    </ArrayField>
+    </ListField>
   ),
 };
 
@@ -123,7 +123,7 @@ const peopleForm = formAtom({
 
 export const Nested = {
   render: () => (
-    <ArrayField
+    <ListField
       form={peopleForm}
       keyFrom="name"
       path={["people"]}
@@ -153,7 +153,7 @@ export const Nested = {
             atom={fields.name}
             render={(props) => <input {...props} placeholder="Name" />}
           />
-          <ArrayField
+          <ListField
             form={peopleForm}
             keyFrom="iban"
             path={["people", index, "accounts"]}
@@ -183,10 +183,10 @@ export const Nested = {
                 </div>
               </div>
             )}
-          </ArrayField>
+          </ListField>
         </>
       )}
-    </ArrayField>
+    </ListField>
   ),
 };
 
@@ -206,7 +206,7 @@ export const WithRadioControl = () => ({
   render: () => (
     <RadioControl>
       {({ control }) => (
-        <ArrayField
+        <ListField
           form={contactForm}
           path={["phones"]}
           keyFrom="number"
@@ -255,7 +255,7 @@ export const WithRadioControl = () => ({
               </Radio>
             </>
           )}
-        </ArrayField>
+        </ListField>
       )}
     </RadioControl>
   ),

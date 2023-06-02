@@ -2,10 +2,10 @@ import { act, render, renderHook, screen } from "@testing-library/react";
 import { InputField, formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
-import { ArrayField } from "./ArrayField";
+import { ListField } from "./ListField";
 import { textField } from "../../fields";
 
-describe("<ArrayField />", () => {
+describe("<ListField />", () => {
   it("works with flat list of fields", async () => {
     const fields = {
       friends: [textField({ value: "Bryan" }), textField({ value: "Alice" })],
@@ -14,9 +14,9 @@ describe("<ArrayField />", () => {
     const form = formAtom(fields);
     const { result } = renderHook(() => useFormSubmit(form));
     render(
-      <ArrayField path={["friends"]} form={form} builder={() => textField()}>
+      <ListField path={["friends"]} form={form} builder={() => textField()}>
         {({ fields }) => <InputField atom={fields} component="input" />}
-      </ArrayField>
+      </ListField>
     );
 
     expect(screen.getByDisplayValue("Bryan")).toBeInTheDocument();
