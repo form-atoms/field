@@ -2,10 +2,10 @@
 
 |                                                           |                                                                                               |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                                                        |
+| [arrayField()](?path=/docs/fields-arrayfield--docs)       | A generic field to hold options of multi-choice inputs.                                       |
 | [booleanField()](?path=/docs/fields-booleanfield--docs)   | 3-state checkbox with `true`, `false` or `undefined` value.                                   |
-| [fileField()](?path=/docs/fields-filefield--docs)         | A field to hold a `FileList` value.                                                           |
-| [arrayField()](?path=/docs/fields-arrayfield--docs)       | A generic field to hold multiple values of some options.                                      |
+| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                                                        |
+| [filesField()](?path=/docs/fields-filesfield--docs)       | A field to hold a `File[]` value.                                                             |
 | [numberField()](?path=/docs/fields-numberfield--docs)     | A field to hold a `number` value.                                                             |
 | [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`.       |
 | [stringField()](?path=/docs/fields-stringfield--docs)     | A generic field to hold one of options. Compatible with `<select>` or `<input type="radio">`. |
@@ -14,10 +14,10 @@
 
 |                                                                           |                                                                                      |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [ArrayField](?path=/docs/components-arrayfield--docs)                     | A headless component to control `FieldAtom<>[]` or `FormFields[]`.                   |
 | [CheckboxGroup](?path=/docs/components-checkboxgroup--docs)               | Select multiple values from a list of generic options via `<input type="checkbox">`. |
 | [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.                                     |
 | [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                                          |
+| [ListField](?path=/docs/components-listfield--docs)                       | An advanced headless component to control `FieldAtom<>[]` or `FormFields[]`.         |
 | [MultiSelect](?path=/docs/components-multiselect--docs)                   | Select multiple values via `<select multiple>`.                                      |
 | [RadioGroup](?path=/docs/components-radiogroup--docs)                     | Select a generic option via `<input type="radio">`.                                  |
 | [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional.                       |
