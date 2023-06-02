@@ -37,6 +37,12 @@ jobs:
         with:
           cmd: install
 
+      - name: ✅ Typecheck
+        run: yarn typecheck
+
+      - name: 🧪 Test
+        run: yarn test
+
       - name: Build
         uses: borales/actions-yarn@v4
         with:
