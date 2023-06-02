@@ -138,4 +138,34 @@ describe("<ListField />", () => {
       expect(screen.queryAllByLabelText("lucky")).toHaveLength(2);
     });
   });
+
+  describe("EmptyMessage", () => {
+    it("renders when the list is/becomes empty", async () => {
+      const form = formAtom({
+        luckyNumbers: [numberField({ value: 3 })],
+      });
+
+      render(
+        <ListField
+          path={["luckyNumbers"]}
+          form={form}
+          builder={() => numberField()}
+          EmptyMessage={() => <p>No lucky numbers</p>}
+        >
+          {({ fields, RemoveItemButton }) => (
+            <>
+              <NumberInput field={fields} label="" /> <RemoveItemButton />
+            </>
+          )}
+        </ListField>
+      );
+
+      const removeItemButton = screen.getByText("Remove");
+
+      expect(removeItemButton).toBeInTheDocument();
+      expect(screen.queryByText("No lucky numbers")).not.toBeInTheDocument();
+      await act(() => userEvent.click(removeItemButton));
+      expect(screen.queryByText("No lucky numbers")).toBeInTheDocument();
+    });
+  });
 });
