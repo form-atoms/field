@@ -133,6 +133,7 @@ describe("<ListField />", () => {
 
       await act(() => userEvent.click(addItemButton));
 
+      expect(builder).toHaveBeenCalledOnce();
       expect(screen.queryByDisplayValue("6")).toBeInTheDocument();
       expect(screen.queryAllByLabelText("lucky")).toHaveLength(2);
     });
