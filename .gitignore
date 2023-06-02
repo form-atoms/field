@@ -16,3 +16,5 @@ storybook-static/
 #.pnp.*
 
 tsconfig.vitest-temp.json
+
+tsconfig.tsbuildinfo

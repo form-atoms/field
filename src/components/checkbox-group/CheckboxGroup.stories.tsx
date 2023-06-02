@@ -4,7 +4,7 @@ import { CheckboxGroup } from "./CheckboxGroup";
 import { UseCheckboxGroupProps } from "./useCheckboxGroup";
 import { stringArrayField } from "../../fields/array-field/stringArrayField";
 import { ZodArrayField } from "../../hooks";
-import { FormStory, fixArgs, meta } from "../../scenarios/StoryForm";
+import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 import { FieldLabel } from "../field-label";
 
@@ -42,8 +42,8 @@ const CheckboxGroupField = <Option, Field extends ZodArrayField>({
   </div>
 );
 
-export const Required: FormStory = {
-  args: fixArgs({
+export const Required = formStory({
+  args: {
     fields: {
       languages: stringArrayField(),
     },
@@ -56,11 +56,11 @@ export const Required: FormStory = {
         getLabel={({ name }) => name}
       />
     ),
-  }),
-};
+  },
+});
 
-export const Optional: FormStory = {
-  args: fixArgs({
+export const Optional = formStory({
+  args: {
     fields: {
       attachment: stringArrayField().optional(),
     },
@@ -73,5 +73,5 @@ export const Optional: FormStory = {
         getLabel={({ name }) => name}
       />
     ),
-  }),
-};
+  },
+});
