@@ -1,3 +1,15 @@
+# [3.2.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.1.0...v3.2.0) (2023-06-02)
+
+
+### Bug Fixes
+
+* add formStory ([c3a3328](https://github.com/MiroslavPetrik/form-atoms-field/commit/c3a332849c24a68fae411c7495ee4dcf67fc7520))
+
+
+### Features
+
+* list field ([#38](https://github.com/MiroslavPetrik/form-atoms-field/issues/38)) ([ce51657](https://github.com/MiroslavPetrik/form-atoms-field/commit/ce516574ef992e4adcd7f9871ae8cc5a7f195ba4))
+
 # [3.1.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.0.2...v3.1.0) (2023-06-01)
 
 
