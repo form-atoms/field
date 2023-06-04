@@ -3,92 +3,28 @@ import Config from "./config.md?raw";
 
 <Meta title="fields/arrayField" />
 
-# `arrayField<Value = string>(): ZodField<Value[]>`
+# `arrayField<Value>(): ZodField<Value[]>`
 
-A generic choice field to hold multiple values of some options e.g. checkbox group or multi select components.
+A generic field to hold multiple values of the same type.
+
+```ts
+import { arrayField } from "@form-atoms/field";
+```
 
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
 
-## useArrayFieldProps(arrayField)
+## Common cases
 
-A hook providing props to control a select or input element.
+### `stringArrayField(): ZodField<string[]>`
 
-### Example with `<CheckboxGroup />`
+Commonly used to capture answers from multi-choice components such as [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) or [MultiSelect](?path=/docs/components-multiselect--docs).
 
-```tsx
-import {
-  useArrayFieldProps,
-  arrayFieldProps,
-  useOptions,
-} from "@form-atoms/field";
-
-const CheckboxGroup = <Option,>({
-  field,
-  label,
-  getValue,
-  getLabel,
-  options,
-}: arrayFieldProps<Option>) => {
-  const props = useArrayFieldProps(field);
-
-  const { renderOptions } = useOptions({
-    field,
-    options,
-    getLabel,
-  });
-
-  // when one option is selected, thats enough for the required multiselect to be filled
-  const required = props.value.length === 0 ? props.required : false;
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <label>{label}</label>
-      {renderOptions.map(({ label, id, value, checked }) => (
-        <div key={id}>
-          <input
-            type="checkbox"
-            {...props}
-            required={required}
-            id={id}
-            value={value}
-            checked={checked}
-          />
-          <label htmlFor={id}>{label}</label>
-        </div>
-      ))}
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-
-const languagesOptions = [
-  { name: "Pascal", key: "pascal" },
-  { name: "Typescript", key: "ts" },
-  { name: "React", key: "react" },
-  { name: "English", key: "en" },
-  { name: "Holy C", key: "hc" },
-  { name: "Tensorflow", key: "tf" },
-  { name: "Na'vi", key: "navi" },
-];
-
-export const Required = formStory({
-  args: {
-    fields: {
-      languages: arrayField(),
-    },
-    children: ({ fields }) => (
-      <CheckboxGroup
-        field={fields.languages}
-        label="What programming languages are you proficient with?"
-        options={languagesOptions}
-        getValue={({ key }) => key}
-        getLabel={({ name }) => name}
-      />
-    ),
-  },
-});
+```ts
+import { stringArrayField } from "@form-atoms/field";
 ```
+
+### `filesField(): ZodField<File[]>`
+
+See [filesField() docs](?path=/docs/fields-filesfield--docs) for detail.
