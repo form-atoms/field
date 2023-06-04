@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useMemo } from "react";
 
-import { OptionalZodField, ZodField } from "../../fields/zodField";
+import { OptionalZodField, ZodField } from "../../fields/zod-field/zodField";
 
 export type RequiredProps = {
   required: boolean;

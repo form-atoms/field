@@ -2,7 +2,7 @@ import { formAtom } from "form-atoms";
 import { expectTypeOf } from "vitest";
 
 import { booleanField } from "./booleanField";
-import { FormSubmitValues } from "../zodField";
+import { FormSubmitValues } from "../zod-field/zodField";
 
 test("required booleanField has 'boolean' submit value", () => {
   const form = formAtom({

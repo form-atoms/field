@@ -82,11 +82,13 @@ export type ZodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
   RequiredAtom = Atom<boolean> // required field have read-only RequiredAtom
-> = FieldAtom<Schema["_output"] | OptSchema["_output"]> extends Atom<infer R>
+> = FieldAtom<Schema["_output"] | OptSchema["_output"]> extends Atom<
+  infer Config
+>
   ? {
       optional: () => OptionalZodField<Schema, OptSchema>;
     } & Atom<
-      R & {
+      Config & {
         required: RequiredAtom;
       }
     >

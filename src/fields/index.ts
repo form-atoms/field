@@ -5,4 +5,4 @@ export * from "./files-field";
 export * from "./number-field";
 export * from "./string-field";
 export * from "./text-field";
-export * from "./zodField";
+export * from "./zod-field";

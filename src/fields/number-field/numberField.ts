@@ -2,7 +2,7 @@ import { ExtractAtomValue } from "jotai";
 import { ZodNumber, z } from "zod";
 
 import { ZodFieldConfig, zodField } from "..";
-import { ZodParams, defaultParams } from "../zodParams";
+import { ZodParams, defaultParams } from "../zod-field/zodParams";
 
 export type NumberField = ReturnType<typeof numberField>;
 

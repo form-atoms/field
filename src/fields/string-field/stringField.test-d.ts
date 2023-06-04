@@ -2,7 +2,7 @@ import { formAtom } from "form-atoms";
 import { expectTypeOf } from "vitest";
 
 import { stringField } from "./stringField";
-import { FormSubmitValues } from "../zodField";
+import { FormSubmitValues } from "../zod-field/zodField";
 
 test("required stringField has 'string' submit value", () => {
   const form = formAtom({

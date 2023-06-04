@@ -1,0 +1,57 @@
+import { Meta, Markdown } from "@storybook/blocks";
+import Config from "./config.md?raw";
+
+<Meta title="fields/zodField" />
+
+# `zodField()`
+
+`zodField` extends the `fieldAtom` with `required` state which is `true` by default.
+It accepts `zod` `schema` & `optionalSchema` in its config, which are used in the validation function based on the required state.
+
+### Arguments
+
+<Markdown>{Config}</Markdown>
+
+### Returns
+
+Returns `fieldAtom` holding value constrained by `schema` & `optionalSchema` with read-only `required` atom.
+
+```ts
+type ZodField<
+  Schema extends z.Schema,
+  OptSchema extends z.Schema = ZodUndefined
+> = FieldAtom<Schema["_output"] | OptSchema["_output"]> & {
+  optional: () => OptionalZodField<Schema, OptSchema>;
+} & Atom<
+    Config & {
+      required: Atom<boolean>;
+    }
+  >;
+```
+
+### API
+
+#### `.optional()`
+
+Returns zodField with a writable `required` atom.
+
+## Features
+
+### Controllable optionality
+
+We extend the default `fieldAtom` with a `required` state. This allows us to specify optional & required `zod` validators for the most common cases.
+All the data fields are of type `ZodField` which extends the default `FieldAtom`.
+Finally, the `required` state is used on UI layer to display requirement indicators to users or to set `aria` properties.
+
+### `undefined` as empty values
+
+When users leave your optional fields untouched, you will receive `undefined` values in the form submit data.
+
+### Pre-defined `zod` validators
+
+Our fields know whether they are required or optional. Based on that they have pre-set validation functions.
+This saves you time, provides runtime safety, and will error when you use a data field with mismatching input type.
+
+### Naming
+
+Unlike `form-atoms` our field constructor functions do not have the `atom` suffix, as the field is in reality an aggregation of dozen jotai atoms.

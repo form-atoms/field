@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 
-import { ZodField } from "../../fields/zodField";
+import { ZodField } from "../../fields/zod-field/zodField";
 
 export type Props<Field extends ZodField<any>> = {
   field: Field;

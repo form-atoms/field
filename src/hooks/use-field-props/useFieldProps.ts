@@ -2,7 +2,7 @@ import { useField } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ChangeEvent, ReactNode, useMemo, useTransition } from "react";
 
-import { ZodField, ZodFieldValue } from "../../fields/zodField";
+import { ZodField, ZodFieldValue } from "../../fields/zod-field/zodField";
 
 export type FieldProps<Field extends ZodField<any>> = {
   field: Field;
