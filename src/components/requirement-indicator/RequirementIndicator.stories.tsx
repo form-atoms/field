@@ -26,7 +26,7 @@ const QuantityField = <Field extends ZodField<any>>({
 );
 
 const meta = {
-  title: "RequirementIndicator",
+  title: "components/RequirementIndicator",
   component: QuantityField,
 } satisfies Meta<typeof QuantityField>;
 

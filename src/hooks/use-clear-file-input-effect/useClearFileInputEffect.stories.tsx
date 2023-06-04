@@ -21,7 +21,7 @@ const DemoForm = <Fields extends FormFields>({
 };
 
 export default {
-  title: "useClearFileInputEffect",
+  title: "hooks/useClearFileInputEffect",
   component: DemoForm,
 };
 

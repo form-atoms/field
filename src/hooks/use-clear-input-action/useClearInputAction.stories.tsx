@@ -10,7 +10,7 @@ const ClearInputDemo = () => {
   return (
     <>
       <input type="password" {...props} />
-      <button className="outline secondary" onClick={clear}>
+      <button type="button" className="outline secondary" onClick={clear}>
         Clear
       </button>
     </>
@@ -18,7 +18,7 @@ const ClearInputDemo = () => {
 };
 
 export default {
-  title: "useClearInputAction",
+  title: "hooks/useClearInputAction",
   component: ClearInputDemo,
 };
 

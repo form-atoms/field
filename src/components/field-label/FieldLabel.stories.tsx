@@ -6,7 +6,7 @@ import { textField } from "../../fields/text-field";
 export type LabelStory = StoryObj<typeof meta>;
 
 const meta = {
-  title: "FieldLabel",
+  title: "components/FieldLabel",
   component: FieldLabel,
 } satisfies Meta<typeof FieldLabel>;
 

@@ -10,7 +10,7 @@ import { FieldLabel } from "../field-label";
 import { Radio, RadioControl } from "../radio";
 
 export default {
-  title: "ListField",
+  title: "components/ListField",
   component: ListField,
 };
 
