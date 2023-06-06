@@ -4,21 +4,92 @@ import { Meta } from "@storybook/blocks";
 
 # Features
 
-## Controllable optionality
+## Primitive fields with `undefined` as empty value
 
-We extend the default `fieldAtom` with a `required` state. This allows us to specify optional & required `zod` validators for the most common cases.
-All the data fields are of type `ZodField` which extends the default `FieldAtom`.
-Finally, the `required` state is used on UI layer to display requirement indicators to users or to set `aria` properties.
+The native language types like `boolean`, `number` and `string` have their respective `$typeField()` which start with `undefined` as empty value.
+All the primitive fields have analogical zod schema e.g. `z.boolean()` for `booleanField().
+This guarantees that the fields cannot be submitted unless filled, since the schema is used in a validator and `undefined` will throw.
 
-## `undefined` as empty values
+```ts
+z.boolean().parse(undefined); // throws (FAIL)
+```
 
-When users leave your optional fields untouched, you will receive `undefined` values in the form submit data.
+The main reasons for choosing undefined as empty value:
 
-## Pre-defined `zod` validators
+#### Parity with zod's [.optional()](https://zod.dev/?id=optional) method
 
-Our fields know whether they are required or optional. Based on that they have pre-set validation functions.
-This saves you time, provides runtime safety, and will error when you use a data field with mismatching input type.
+Similarly to zod, calling the static `.optional()` method on a `ZodField` returns a new field, where the `optionalSchema` runs in validation.
+For primitive fields the `optionalSchema` is simply `schema.optional()` so for the previous boolean case it means, that validation will work:
 
-## Naming
+```ts
+z.boolean().optional().parse(undefined); // undefined (OK)
+```
 
-Unlike `form-atoms` our field constructor functions do not have the `atom` suffix, as the field is in reality an aggregation of dozen jotai atoms.
+#### Prevents mixing falsy values throughout your app
+
+Often with a large dev team your forms can be plagued with various empty values like `""` or `null` throughout the app.
+Having a meaningful default like `undefined` makes it easier to keep things consistent.
+
+#### Untouched/Empty fields won't be transferred
+
+When you serialize (e.g. `JSON.stringify()`) the submit data, the `undefined` values will be automatically omitted:
+
+```ts
+JSON.stringify({ optionalField: undefined }); // '{}'
+```
+
+## Type safety
+
+You can statically express whether your field is required or not.
+Non-optional fields will have a different _submit value_, while they will have the same _form value_:
+
+```ts
+import { formAtom } from "form-atoms";
+import { booleanField, FormSubmitValues, FormValues } from "@form-atoms/field";
+
+const form = formAtom({
+  acceptTerms: booleanField(), // required boolean
+  newsletter: booleanField().optional(),
+});
+
+// Both required & optional fields have initially 'undefined' as empty value, so their types are the same:
+type RuntimeValues = FormValues<typeof form>;
+// {
+//  acceptTerms: boolean | undefined
+//  newsletter: boolean | undefined
+// }
+
+// After submit, the values must conform to the schema:
+type SubmitValues = FormSubmitValues<typeof form>;
+// {
+//  acceptTerms: boolean, 🤯
+//  newsletter: boolean | undefined
+// }
+```
+
+## Advanced fields
+
+Besides the primitive fields, there are more specific fields for various user scenarios.
+Let's say you want to implement a required checkbox. A mere `booleanField` would not be enough, as it permits the `false` submit value.
+
+Instead you can choose stricter [checkboxField()](?path=/docs/fields-checkboxfield--docs) which won't permit form submit unless the checkbox is checked:
+
+```ts
+import { formAtom } from "form-atoms";
+import { checkboxField, FormSubmitValues } from "@form-atoms/field";
+
+const form = formAtom({
+  iknow: checkboxField(), // required checkbox
+});
+
+type SubmitValues = FormSubmitValues<typeof form>;
+// {
+//  iknow: true
+// }
+```
+
+Other advanced fields include:
+
+- [arrayField()](?path=/docs/fields-arrayfield--docs)
+- [filesField()](?path=/docs/fields-filesfield--docs)
+- [textField()](?path=/docs/fields-textfield--docs)

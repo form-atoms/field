@@ -1,14 +1,21 @@
 ### Fields
 
-|                                                           |                                                                                               |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [arrayField()](?path=/docs/fields-arrayfield--docs)       | A generic field to hold options of multi-choice inputs.                                       |
-| [booleanField()](?path=/docs/fields-booleanfield--docs)   | 3-state checkbox with `true`, `false` or `undefined` value.                                   |
-| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                                                        |
-| [filesField()](?path=/docs/fields-filesfield--docs)       | A field to hold a `File[]` value.                                                             |
-| [numberField()](?path=/docs/fields-numberfield--docs)     | A field to hold a `number` value.                                                             |
-| [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`.       |
-| [stringField()](?path=/docs/fields-stringfield--docs)     | A generic field to hold one of options. Compatible with `<select>` or `<input type="radio">`. |
+#### Primitives
+
+|                                                         |                                                                                               |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [booleanField()](?path=/docs/fields-booleanfield--docs) | 3-state checkbox with `true`, `false` or `undefined` value.                                   |
+| [numberField()](?path=/docs/fields-numberfield--docs)   | A field to hold a `number` value.                                                             |
+| [stringField()](?path=/docs/fields-stringfield--docs)   | A generic field to hold one of options. Compatible with `<select>` or `<input type="radio">`. |
+
+#### Advanced
+
+|                                                           |                                                                                         |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [arrayField()](?path=/docs/fields-arrayfield--docs)       | A generic field to hold options of multi-choice inputs.                                 |
+| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                                                  |
+| [filesField()](?path=/docs/fields-filesfield--docs)       | A field to hold a `File[]` value.                                                       |
+| [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`. |
 
 ### Components
 
