@@ -72,7 +72,7 @@ type SubmitValues = FormSubmitValues<typeof form>;
 Besides the primitive fields, there are more specific fields for various user scenarios.
 Let's say you want to implement a required checkbox. A mere `booleanField` would not be enough, as it permits the `false` submit value.
 
-Instead you can choose stricter [checkboxField()](?path=/docs/fields-checkboxfield--docs) which won't permit form submit unless the checkbox is checked:
+Instead you can choose stricter [checkboxField()](?path=/docs/fields-checkboxfield--docs#checkboxfield) which won't permit form submit unless the checkbox is checked:
 
 ```ts
 import { formAtom } from "form-atoms";

@@ -10,12 +10,12 @@
 
 #### Advanced
 
-|                                                           |                                                                                         |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [arrayField()](?path=/docs/fields-arrayfield--docs)       | A generic field to hold options of multi-choice inputs.                                 |
-| [checkboxField()](?path=/docs/fields-checkboxfield--docs) | A true boolean 2-state checkbox field.                                                  |
-| [filesField()](?path=/docs/fields-filesfield--docs)       | A field to hold a `File[]` value.                                                       |
-| [textField()](?path=/docs/fields-textfield--docs)         | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`. |
+|                                                                         |                                                                                         |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [arrayField()](?path=/docs/fields-arrayfield--docs)                     | A generic field to hold options of multi-choice inputs.                                 |
+| [checkboxField()](?path=/docs/fields-checkboxfield--docs#checkboxfield) | A true boolean 2-state checkbox field.                                                  |
+| [filesField()](?path=/docs/fields-filesfield--docs)                     | A field to hold a `File[]` value.                                                       |
+| [textField()](?path=/docs/fields-textfield--docs)                       | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`. |
 
 ### Components
 
