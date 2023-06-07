@@ -18,9 +18,7 @@ export const NumberInput = ({
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
       <input type="number" {...props} />
-      <div>
-        <FieldErrors field={field} />
-      </div>
+      <FieldErrors field={field} />
     </div>
   );
 };

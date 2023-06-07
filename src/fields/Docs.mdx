@@ -6,12 +6,12 @@ import { Meta } from "@storybook/blocks";
 
 ## Primitive fields with `undefined` as empty value
 
-The native language types like `boolean`, `number` and `string` have their respective `$typeField()` which start with `undefined` as empty value.
-All the primitive fields have analogical zod schema e.g. `z.boolean()` for `booleanField().
-This guarantees that the fields cannot be submitted unless filled, since the schema is used in a validator and `undefined` will throw.
+The native language types like `boolean`, `number`, `string` and `date` have their respective `$typeField()` which start with `undefined` as empty value.
+All the primitive fields have analogical zod schema e.g. `z.boolean()` for `booleanField()`.
+This guarantees that the fields cannot be submitted unless filled, since the schema is used in a validator and `undefined` will throw an error:
 
 ```ts
-z.boolean().parse(undefined); // throws (FAIL)
+z.boolean().parse(undefined); // throws (ERR)
 ```
 
 The main reasons for choosing undefined as empty value:
