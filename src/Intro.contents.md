@@ -5,6 +5,7 @@
 |                                                         |                                                                                               |
 | ------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | [booleanField()](?path=/docs/fields-booleanfield--docs) | 3-state checkbox with `true`, `false` or `undefined` value.                                   |
+| [dateField()](?path=/docs/fields-datefield--docs)       | A field to hold a `Date` value.                                                               |
 | [numberField()](?path=/docs/fields-numberfield--docs)   | A field to hold a `number` value.                                                             |
 | [stringField()](?path=/docs/fields-stringfield--docs)   | A generic field to hold one of options. Compatible with `<select>` or `<input type="radio">`. |
 

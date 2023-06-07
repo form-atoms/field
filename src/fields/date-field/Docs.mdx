@@ -1,0 +1,67 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as dateFieldStories from "./dateField.stories";
+import Config from "./config.md?raw";
+
+<Meta title="fields/dateField" of={dateFieldStories} />
+
+# `dateField(): ZodField<date | undefined>`
+
+```ts
+import { dateField } from "@form-atoms/field";
+
+const joinedGameAt = dateField({
+  required_error: "Please specify your birth date.",
+});
+
+const leftGameAt = dateField().optional();
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
+
+## useDateFieldProps(dateField)
+
+A hook providing props to control a date input:
+
+### Features
+
+- ✅ Reads input value as `valueAsDate`
+- ✅ Normalizes the default empty input value `null` to empty field value `undefined`
+
+### Example usage
+
+Note that the `value` is of type `Date` so it must be transformed to `string` to fit the `<input>` props.
+
+```tsx
+import {
+  useDateFieldProps,
+  DateField,
+  FieldLabel,
+  FieldErrors,
+} from "@form-atoms/fields";
+
+const DateInput = ({
+  field,
+  label,
+}: {
+  field: DateField;
+  label: ReactNode;
+}) => {
+  const { value, ...props } = useDateFieldProps(field);
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <input
+        type="date"
+        {...props}
+        value={`${value?.toISOString().slice(0, 10) ?? ""}`}
+      />
+      <FieldErrors field={field} />
+    </div>
+  );
+};
+```
+
+<Stories />
