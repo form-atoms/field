@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.2.0...v3.3.0) (2023-06-07)
+
+
+### Features
+
+* add dateField ([#41](https://github.com/MiroslavPetrik/form-atoms-field/issues/41)) ([c2066ab](https://github.com/MiroslavPetrik/form-atoms-field/commit/c2066ab5c68832b7606ffd3207360b80a25cd444))
+
 # [3.2.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.1.0...v3.2.0) (2023-06-02)
 
 
