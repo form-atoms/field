@@ -2433,7 +2433,7 @@ __metadata:
     eslint-plugin-prettier: 4.2.1
     form-atoms: ^3.0.2
     happy-dom: ^8.9.0
-    jotai: ^2.0.3
+    jotai: ^2.1.1
     jotai-devtools: ^0.5.3
     jsdom: ^21.1.0
     object-path-immutable: ^4.1.2
@@ -2443,9 +2443,9 @@ __metadata:
     react-render-prop-type: 0.1.0
     semantic-release: ^20.1.0
     storybook: 7.0.18
-    typescript: 4.9.4
+    typescript: 5.1.3
     vitest: ^0.29.2
-    zod: 3.20.6
+    zod: 3.21.4
   peerDependencies:
     form-atoms: ^3
     jotai: ^2
@@ -10756,15 +10756,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "jotai@npm:2.0.3"
+"jotai@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "jotai@npm:2.1.1"
   peerDependencies:
     react: ">=17.0.0"
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 3ad1d6a9b7e40a8dd8cdc423441164c25852a328c98806ed0e2a283a4e07af661f4a88b50528367aeae582932171bc8979e45cbc9023af30b9f4a348faeed567
+  checksum: edb2198e7af0526ae5e6307c0c7c4f71cc0d11f4eef83f3334008ddd4658719a061b24c6a5bbbfa2c181412a0749af5b46366bebef31cefa73e866b7d3171e1b
   languageName: node
   linkType: hard
 
@@ -15529,23 +15529,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.9.4":
-  version: 4.9.4
-  resolution: "typescript@npm:4.9.4"
+"typescript@npm:5.1.3":
+  version: 5.1.3
+  resolution: "typescript@npm:5.1.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: e782fb9e0031cb258a80000f6c13530288c6d63f1177ed43f770533fdc15740d271554cdae86701c1dd2c83b082cea808b07e97fd68b38a172a83dbf9e0d0ef9
+  checksum: d9d51862d98efa46534f2800a1071a613751b1585dc78884807d0c179bcd93d6e9d4012a508e276742f5f33c480adefc52ffcafaf9e0e00ab641a14cde9a31c7
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.9.4#~builtin<compat/typescript>":
-  version: 4.9.4
-  resolution: "typescript@patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=23ec76"
+"typescript@patch:typescript@5.1.3#~builtin<compat/typescript>":
+  version: 5.1.3
+  resolution: "typescript@patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=1f5320"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3e2ab0772908676d9b9cb83398c70003a3b08e1c6b3b122409df9f4b520f2fdaefa20c3d7d57dce283fed760ac94b3ce94d4a7fa875127b67852904425a1f0dc
+  checksum: 32a25b2e128a4616f999d4ee502aabb1525d5647bc8955e6edf05d7fbc53af8aa98252e2f6ba80bcedfc0260c982b885f3c09cfac8bb65d2924f3133ad1e1e62
   languageName: node
   linkType: hard
 
@@ -16480,9 +16480,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.20.6":
-  version: 3.20.6
-  resolution: "zod@npm:3.20.6"
-  checksum: 804b1934b8b5e2fa3750bec90043e8118b201f330b9957b8b768389a971acadf812d2060cf62921086512dab4af691d10490acb03333da58fc485c0791893c89
+"zod@npm:3.21.4":
+  version: 3.21.4
+  resolution: "zod@npm:3.21.4"
+  checksum: f185ba87342ff16f7a06686767c2b2a7af41110c7edf7c1974095d8db7a73792696bcb4a00853de0d2edeb34a5b2ea6a55871bc864227dace682a0a28de33e1f
   languageName: node
   linkType: hard
