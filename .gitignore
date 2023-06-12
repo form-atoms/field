@@ -18,3 +18,5 @@ storybook-static/
 tsconfig.vitest-temp.json
 
 tsconfig.tsbuildinfo
+
+coverage/
