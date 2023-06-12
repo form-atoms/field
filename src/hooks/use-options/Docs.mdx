@@ -9,20 +9,21 @@ Can be used to create various select or multiselect choice components.
 
 For the `<select> & <option>` elements there is special version of this hook [useSelectOptions](?path=/docs/hooks-useselectoptions--docs).
 
-### Features
-
-- ✅ Gives each option an `id` as a combination of field key & option index.
-
 ```ts
 import { useOptions } from "@form-atoms/field";
 ```
+
+### Features
+
+- ✅ **Gives each option a unique `id` as a combination of field key & option index.** Since all the HTML IDs must be unique, scoping the IDs of our options enables
+  us to reuse them with multiple inputs/form elements.
 
 ### Props
 
 ```ts
 export type UseOptionsProps<Option> = {
   /**
-   * Your `fieldAtom` which value
+   * Your `fieldAtom` with which the option IDs will be scoped.
    */
   field: FieldAtom<FieldValue>;
   /**
@@ -48,9 +49,9 @@ type UseOptions = {
     /**
      * The index of current option
      */
-    value: string;
+    value: number;
     /**
-     * as returned by the `getLabel` prop
+     * as returned from the `getLabel` prop
      */
     label: ReactNode;
   }>;
@@ -101,5 +102,6 @@ const { renderOptions } = useOptions({
       </>
     ),
   },
+  // ... etc
 ];
 ```
