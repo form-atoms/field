@@ -40,10 +40,24 @@ export type UseSelectFieldProps<Option, Field extends SelectField> = {
 };
 ```
 
-### Example uage with `<select>`
+### Returns
+
+```ts
+/**
+ * All the props of useFieldProps<Field>()
+ */
+type SelectFieldProps<Field> = FieldProps<Field> & {
+  /**
+   * Index of currently active option. Equals `-1` when the field is empty.
+   */
+  value: number;
+};
+```
+
+### Example usage with `<select>`
 
 For example, `useSelectFieldProps` can be used in tandem with [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)
-to define a custom `SelectInput` component:
+to define a custom `<SelectInput>` component:
 
 ```tsx
 import { useSelectFieldProps, UseSelectOptionsProps, SelectField } from "@form-atoms/field";

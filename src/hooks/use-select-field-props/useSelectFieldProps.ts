@@ -26,7 +26,7 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
 }: UseSelectFieldProps<Option, Field>) => {
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
-  // TODO: getValue should be useMemo dependency, currently we asume its stable
+  // TODO: getValue should be useMemo dependency, currently we asume that it is stable
   const values = useMemo(() => options.map(getValue), [options]);
   const [value, setValue] = useState(values.indexOf(fieldValue));
 
