@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { ListField } from "./ListField";
 import { numberField, textField } from "../../fields";
-import { NumberInput } from "../../fields/number-field/NumberInput";
+import { NumberInput } from "../../fields/number-field/NumberInput.mock";
 
 describe("<ListField />", () => {
   it("works with flat list of fields", async () => {

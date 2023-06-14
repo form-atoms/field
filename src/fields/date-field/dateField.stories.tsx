@@ -1,5 +1,5 @@
 import { dateField } from "./dateField";
-import { DateInput } from "./DateInput";
+import { DateInput } from "./DateInput.mock";
 import { RadioGroupField } from "../../components/radio-group/RadioGroupField";
 import { formStory, meta } from "../../scenarios/StoryForm";
 

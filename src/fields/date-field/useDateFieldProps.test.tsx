@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
 import { dateField } from "./dateField";
-import { getDateString } from "./DateInput";
+import { getDateString } from "./DateInput.mock";
 import { useDateFieldProps } from "./useDateFieldProps";
 
 describe("useDateFieldProps", () => {

@@ -1,5 +1,5 @@
 import { checkboxField } from "./checkboxField";
-import { CheckboxInput } from "./CheckboxInput";
+import { CheckboxInput } from "./CheckboxInput.mock";
 import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {

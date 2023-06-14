@@ -1,5 +1,5 @@
 import { numberField } from "./numberField";
-import { NumberInput } from "./NumberInput";
+import { NumberInput } from "./NumberInput.mock";
 import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {
