@@ -8,5 +8,10 @@
     "outDir": "dist",
     "rootDir": "src"
   },
-  "exclude": ["src/scenarios/*", "src/**/*.stories.tsx", "src/**/*.test.tsx"]
+  "exclude": [
+    "src/scenarios/*",
+    "src/**/*.stories.tsx",
+    "src/**/*.test.tsx",
+    "src/**/*.mock.tsx"
+  ]
 }

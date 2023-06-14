@@ -1,37 +1,14 @@
-import { ReactNode } from "react";
 import { z } from "zod";
 
-import { FieldLabel, Select, SelectProps } from "..";
+import { SelectField } from "./SelectField.mock";
 import { booleanField, numberField, stringField, zodField } from "../../fields";
-import type { SelectField } from "../../hooks";
+import { countryOptions } from "../../scenarios/mocks";
 import { formStory, meta } from "../../scenarios/StoryForm";
-import { FieldErrors } from "../field-errors";
 
 export default {
   ...meta,
   title: "components/Select",
 };
-
-const SelectField = <Option, Field extends SelectField>({
-  field,
-  label,
-  ...props
-}: {
-  label: ReactNode;
-} & SelectProps<Option, Field>) => (
-  <div style={{ margin: "20px 0" }}>
-    <FieldLabel field={field} label={label} />
-    <Select field={field} {...props} />
-    <FieldErrors field={field} />
-  </div>
-);
-
-const countryOptions = [
-  { name: "Slovak Republic", key: "SK" },
-  { name: "Czech Republic", key: "CZ" },
-  { name: "Poland", key: "PL" },
-  { name: "Hungary", key: "HU" },
-];
 
 export const RequiredString = formStory({
   args: {

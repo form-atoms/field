@@ -4,6 +4,7 @@ import { MultiSelect, MultiSelectProps } from "./MultiSelect";
 import { FieldLabel } from "..";
 import { stringArrayField } from "../../fields";
 import { ZodArrayField } from "../../hooks";
+import { countryOptions } from "../../scenarios/mocks";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -26,13 +27,6 @@ const MultiSelectField = <Option, Field extends ZodArrayField>({
   </div>
 );
 
-const countryOptions = [
-  { name: "Slovak Republic", key: "SK" },
-  { name: "Czech Republic", key: "CZ" },
-  { name: "Poland", key: "PL" },
-  { name: "Hungary", key: "HU" },
-];
-
 export const RequiredArrayString = formStory({
   name: "Required Array<string>",
   args: {
@@ -45,7 +39,11 @@ export const RequiredArrayString = formStory({
         label="Visited countries"
         options={countryOptions}
         getValue={({ key }) => key}
-        getLabel={({ name }) => name}
+        getLabel={({ name, flag }) => (
+          <>
+            {flag} {name}
+          </>
+        )}
       />
     ),
   },
