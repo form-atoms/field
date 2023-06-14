@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.0...v3.3.1) (2023-06-14)
+
+
+### Bug Fixes
+
+* exclude story components from build ([1f1cb10](https://github.com/MiroslavPetrik/form-atoms-field/commit/1f1cb100ba622d8167d4467e7bde4b824472547a))
+
 # [3.3.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.2.0...v3.3.0) (2023-06-07)
 
 
