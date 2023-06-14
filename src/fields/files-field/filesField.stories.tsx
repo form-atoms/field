@@ -1,39 +1,12 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
 import { z } from "zod";
 
-import { FilesField, filesField } from "./filesField";
-import { useFilesFieldProps } from "./useFilesFieldProps";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
-import { useClearFileInputEffect } from "../../hooks";
+import { filesField } from "./filesField";
+import { FilesInput } from "./FilesInput.mock";
 import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,
   title: "fields/filesField",
-};
-
-const FileInput = ({
-  field,
-  label,
-  ...inputProps
-}: {
-  field: FilesField;
-  label: ReactNode;
-} & InputHTMLAttributes<HTMLInputElement>) => {
-  const { value, ...props } = useFilesFieldProps(field);
-
-  useClearFileInputEffect(field);
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      <input type="file" {...inputProps} {...props} />
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
 };
 
 export const Required = formStory({
@@ -42,7 +15,7 @@ export const Required = formStory({
       profilePic: filesField(),
     },
     children: ({ fields }) => (
-      <FileInput field={fields.profilePic} label="Your avatar" />
+      <FilesInput field={fields.profilePic} label="Your avatar" />
     ),
   },
 });
@@ -53,7 +26,7 @@ export const Optional = formStory({
       attachment: filesField().optional(),
     },
     children: ({ fields }) => (
-      <FileInput field={fields.attachment} label="Upload attachment" />
+      <FilesInput field={fields.attachment} label="Upload attachment" />
     ),
   },
 });
@@ -74,7 +47,7 @@ export const Multiple = formStory({
       }),
     },
     children: ({ fields }) => (
-      <FileInput
+      <FilesInput
         field={fields.attachments}
         label="Upload attachments (max 2)"
         multiple
