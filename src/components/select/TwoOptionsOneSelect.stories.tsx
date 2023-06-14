@@ -1,3 +1,4 @@
+import shuffle from "lodash.shuffle";
 import { useCallback, useState } from "react";
 import { RenderProp } from "react-render-prop-type";
 
@@ -56,11 +57,18 @@ const SwapCountries = ({
     );
   }, [countries]);
 
+  const shuffleCountries = useCallback(() => {
+    setCountries(shuffle(countries));
+  }, [countries]);
+
   return (
     <>
       {children({ countries })}
-      <button type="button" onClick={swapCountries}>
-        Swap countriess
+      <button type="button" className="secondary" onClick={swapCountries}>
+        Swap Hungary/Austria
+      </button>
+      <button type="button" className="secondary" onClick={shuffleCountries}>
+        Shuffle countriess
       </button>
     </>
   );

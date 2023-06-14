@@ -93,7 +93,7 @@ const DummySelect = ({
   const props = useSelectFieldProps({
     field,
     options,
-    getValue: () => "",
+    getValue: (opt) => opt,
   });
 
   return (

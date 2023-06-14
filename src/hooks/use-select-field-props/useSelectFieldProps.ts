@@ -28,7 +28,7 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
   const fieldValue = useAtomValue(atom.value);
   // TODO: getValue should be useMemo dependency, currently we asume that it is stable
   const values = useMemo(() => options.map(getValue), [options]);
-  const [value, setValue] = useState(values.indexOf(fieldValue));
+  const value = useMemo(() => values.indexOf(fieldValue), [fieldValue, values]);
 
   const getEventValue = useCallback(
     (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -36,23 +36,10 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
       const index = parseInt(value);
       const activeValue = values[index];
 
-      if (activeValue === undefined) {
-        setValue(EMPTY_VALUE);
-        return undefined as ZodFieldValue<Field>;
-      }
-
-      setValue(index);
-      return activeValue;
+      return activeValue as ZodFieldValue<Field>;
     },
     [values]
   );
-
-  useEffect(() => {
-    if (fieldValue === undefined) {
-      // reset local state, when form was reset
-      setValue(EMPTY_VALUE);
-    }
-  }, [fieldValue]);
 
   const props = useFieldProps<Field, HTMLSelectElement | HTMLInputElement>(
     field,
