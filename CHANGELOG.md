@@ -1,3 +1,10 @@
+## [3.3.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.1...v3.3.2) (2023-06-14)
+
+
+### Bug Fixes
+
+* **Select:** make immune to react-key render bug when shuffling options ([6d52da8](https://github.com/MiroslavPetrik/form-atoms-field/commit/6d52da8c81ec5a7c4d9681a6d36cd6fa7daa9cef))
+
 ## [3.3.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.0...v3.3.1) (2023-06-14)
 
 
