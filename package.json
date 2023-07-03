@@ -31,16 +31,16 @@
     "dist"
   ],
   "scripts": {
+    "build": "tsc --build ./tsconfig.build.json --force",
+    "build:docs": "storybook build --docs",
+    "build:storybook": "storybook build",
     "test": "vitest",
     "typecheck": "vitest typecheck",
     "storybook": "storybook dev",
-    "storybook-docs": "storybook dev --docs",
     "sb": "yarn storybook",
-    "build-storybook": "storybook build",
-    "build-storybook-docs": "storybook build --docs",
+    "docs": "storybook dev --docs",
     "lint": "eslint --ext .tsx ./packages",
     "lint:fix": "yarn run lint --fix",
-    "build": "tsc --build ./tsconfig.build.json --force",
     "semantic-release": "semantic-release"
   },
   "devDependencies": {

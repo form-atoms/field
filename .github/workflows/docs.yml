@@ -41,7 +41,7 @@ jobs:
       - name: Build Storybook Docs
         uses: borales/actions-yarn@v4
         with:
-          cmd: build-storybook-docs
+          cmd: build:docs
 
       - name: Upload Storybook
         uses: actions/upload-pages-artifact@v1.0.4
