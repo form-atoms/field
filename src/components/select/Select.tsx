@@ -10,7 +10,7 @@ export type SelectProps<
   Option,
   Field extends SelectField
 > = UseSelectFieldProps<Option, Field> &
-  Omit<UseSelectOptionsProps<Option>, "field">;
+  Omit<UseSelectOptionsProps<Option>, "field" | "placeholderDisabled">;
 
 export const Select = <Option, Field extends SelectField>({
   field,
@@ -30,6 +30,7 @@ export const Select = <Option, Field extends SelectField>({
     getLabel,
     options,
     placeholder,
+    placeholderDisabled: props.required,
   });
 
   return <select {...props}>{selectOptions}</select>;

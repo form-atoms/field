@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { PropsWithChildren } from "react";
 import { describe, expect, it } from "vitest";
 
-import { EMPTY_VALUE, useSelectFieldProps } from "./useSelectFieldProps";
+import { EMPTY_SELECT_VALUE, useSelectFieldProps } from "./useSelectFieldProps";
 import { StringField, stringField } from "../../fields";
 
 describe("useSelectFieldProps()", () => {
@@ -98,7 +98,7 @@ const DummySelect = ({
 
   return (
     <select {...props}>
-      <option value={EMPTY_VALUE}>placeholder</option>
+      <option value={EMPTY_SELECT_VALUE}>placeholder</option>
       {children}
     </select>
   );

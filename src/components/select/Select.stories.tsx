@@ -28,6 +28,14 @@ export const RequiredString = formStory({
 });
 
 export const OptionalString = formStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Tip: With optional field you can select an option and then clear the select by selecting the placeholder (empty).",
+      },
+    },
+  },
   args: {
     fields: {
       country: stringField().optional(),

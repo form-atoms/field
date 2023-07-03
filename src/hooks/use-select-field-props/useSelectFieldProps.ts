@@ -17,7 +17,7 @@ export type UseSelectFieldProps<Option, Field extends SelectField> = {
 /**
  * When field is empty, we map the undefined from data layer to -1 on presentation (UI) layer.
  */
-export const EMPTY_VALUE = -1;
+export const EMPTY_SELECT_VALUE = -1;
 
 export const useSelectFieldProps = <Option, Field extends SelectField>({
   field,

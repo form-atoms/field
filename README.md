@@ -51,16 +51,16 @@ Similarly to `zod` schema fields, by default all the fieldAtoms are required.
 ### Usage
 
 ```tsx
-import { numberField } from "@form-atoms/field";
+import { numberField, stringField, Select } from "@form-atoms/field";
 import { fromAtom } from "form-atoms";
 import { z } from "zod";
 import { NumberField } from "@form-atoms/flowbite"; // or /chakra-ui
 
 const height = numberField();
 const age = numberField({ schema: z.number().min(18) }); // override default schema
-const numOfKids = numberField().optional(); // make field optional
+const character = stringField().optional(); // make field optional
 
-const personForm = formAtom({ height, age, numOfKids });
+const personForm = formAtom({ height, age, character });
 
 export const Form = () => {
   const { submit } = useForm(personForm);
@@ -69,7 +69,13 @@ export const Form = () => {
     <form onSubmit={submit(console.log)}>
       <NumberField field={height} label="Height (in cm)" />
       <NumberField field={age} label="Your age (min 18)" />
-      <NumberField field={numOfKids} label="Number of kids" />
+      <Select
+        field={character}
+        label="Character"
+        options={["the good", "the bad", "the ugly"]}
+        getValue={(option) => option}
+        getLabel={(option) => option}
+      />
     </form>
   );
 };

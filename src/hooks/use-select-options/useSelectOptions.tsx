@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { UseOptionsProps, useOptions } from "../use-options";
-import { EMPTY_VALUE } from "../use-select-field-props";
+import { EMPTY_SELECT_VALUE } from "../use-select-field-props";
 
 export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
   /**
@@ -9,10 +9,12 @@ export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
    * @default "Please select an option"
    */
   placeholder?: string;
+  placeholderDisabled?: boolean;
 };
 
 export function useSelectOptions<Option>({
   placeholder = "Please select an option",
+  placeholderDisabled = true,
   ...optionsProps
 }: UseSelectOptionsProps<Option>) {
   const { renderOptions } = useOptions(optionsProps);
@@ -22,7 +24,7 @@ export function useSelectOptions<Option>({
       selectOptions: (
         <>
           {placeholder && (
-            <option value={EMPTY_VALUE} disabled>
+            <option value={EMPTY_SELECT_VALUE} disabled={placeholderDisabled}>
               {placeholder}
             </option>
           )}

@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 
 import { booleanField, numberField, stringField, zodField } from "../../fields";
-import { EMPTY_VALUE } from "../../hooks";
+import { EMPTY_SELECT_VALUE } from "../../hooks";
 
 import { Select } from ".";
 
@@ -23,9 +23,11 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} />);
 
-      await userEvent.selectOptions(screen.getByRole("combobox"), [
-        screen.getByText("no"),
-      ]);
+      await act(() =>
+        userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("no"),
+        ])
+      );
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -55,9 +57,11 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} />);
 
-      await userEvent.selectOptions(screen.getByRole("combobox"), [
-        screen.getByText("1971"),
-      ]);
+      await act(() =>
+        userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("1971"),
+        ])
+      );
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -81,9 +85,11 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} />);
 
-      await userEvent.selectOptions(screen.getByRole("combobox"), [
-        screen.getByText("some"),
-      ]);
+      await act(() =>
+        userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("some"),
+        ])
+      );
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -106,15 +112,17 @@ describe("<Select />", () => {
     const { result } = renderHook(() => useFormActions(form));
     render(<Select {...props} />);
 
-    await userEvent.selectOptions(screen.getByRole("combobox"), [
-      screen.getByText("yes"),
-    ]);
+    await act(() =>
+      userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("yes"),
+      ])
+    );
 
     await act(async () => {
       result.current.reset();
     });
 
-    expect(screen.getByRole("combobox")).toHaveValue(`${EMPTY_VALUE}`);
+    expect(screen.getByRole("combobox")).toHaveValue(`${EMPTY_SELECT_VALUE}`);
 
     const onSubmit = vi.fn();
     await act(async () => {
@@ -149,9 +157,11 @@ describe("<Select />", () => {
     const { result } = renderHook(() => useFormActions(form));
     render(<Select {...props} />);
 
-    await userEvent.selectOptions(screen.getByRole("combobox"), [
-      screen.getByText("boo 2"),
-    ]);
+    await act(() =>
+      userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("boo 2"),
+      ])
+    );
 
     const onSubmit = vi.fn();
     await act(async () => {
@@ -159,5 +169,46 @@ describe("<Select />", () => {
     });
 
     expect(onSubmit).toHaveBeenCalledWith({ field: options[1] });
+  });
+
+  describe("with optional field", () => {
+    it("can be cleared by selecting the placeholder option", async () => {
+      const props = {
+        field: stringField().optional(),
+        options: ["male", "female"],
+        getLabel: (val: string) => val,
+        getValue: (val: string) => val,
+      };
+
+      const form = formAtom({ field: props.field });
+      const { result } = renderHook(() => useFormSubmit(form));
+      render(<Select {...props} placeholder="gender" />);
+
+      await act(() =>
+        userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("male"),
+        ])
+      );
+
+      const onSubmit = vi.fn();
+      await act(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ field: "male" });
+
+      await act(() =>
+        userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("gender"),
+        ])
+      );
+
+      const onSubmit2 = vi.fn();
+      await act(async () => {
+        result.current(onSubmit2)();
+      });
+
+      expect(onSubmit2).toHaveBeenCalledWith({ field: undefined });
+    });
   });
 });
