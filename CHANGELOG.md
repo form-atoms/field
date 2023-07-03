@@ -1,3 +1,10 @@
+## [3.3.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.2...v3.3.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* **Select:** optional field can be cleared by clicking on the placeholder (fixes [#44](https://github.com/MiroslavPetrik/form-atoms-field/issues/44)) ([096deae](https://github.com/MiroslavPetrik/form-atoms-field/commit/096deaea6c399d4cdb994ec2da3a84450a08aee4))
+
 ## [3.3.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.1...v3.3.2) (2023-06-14)
 
 
