@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.3...v3.4.0) (2023-07-12)
+
+
+### Features
+
+* **PlaceholderOption:** separate placeholder from useOptions fixes [#45](https://github.com/MiroslavPetrik/form-atoms-field/issues/45) [#43](https://github.com/MiroslavPetrik/form-atoms-field/issues/43) ([b2f4726](https://github.com/MiroslavPetrik/form-atoms-field/commit/b2f4726cfe5bd85b429a18127cebde8e3020e903))
+
 ## [3.3.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.2...v3.3.3) (2023-07-03)
 
 
