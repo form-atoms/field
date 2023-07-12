@@ -20,16 +20,24 @@
 
 ### Components
 
-|                                                                           |                                                                                      |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs)               | Select multiple values from a list of generic options via `<input type="checkbox">`. |
-| [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.                                     |
-| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                                          |
-| [ListField](?path=/docs/components-listfield--docs)                       | An advanced headless component to control `FieldAtom<>[]` or `FormFields[]`.         |
-| [MultiSelect](?path=/docs/components-multiselect--docs)                   | Select multiple values via `<select multiple>`.                                      |
-| [RadioGroup](?path=/docs/components-radiogroup--docs)                     | Select a generic option via `<input type="radio">`.                                  |
-| [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional.                       |
-| [Select](?path=/docs/components-select--docs)                             | Select a generic option via `<select>`.                                              |
+#### Atomic Components
+
+|                                                                           |                                                                |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.               |
+| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
+| [PlaceholderOption](?path=/docs/components-placeholderoption--docs)       | A special `<option>` to be rendered in an empty `<Select>`.    |
+| [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
+
+#### Native Generic Components
+
+|                                                             |                                                                                      |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) | Select multiple values from a list of generic options via `<input type="checkbox">`. |
+| [ListField](?path=/docs/components-listfield--docs)         | An advanced headless component to control `FieldAtom<>[]` or `FormFields[]`.         |
+| [MultiSelect](?path=/docs/components-multiselect--docs)     | Select multiple values via `<select multiple>`.                                      |
+| [RadioGroup](?path=/docs/components-radiogroup--docs)       | Select a generic option via `<input type="radio">`.                                  |
+| [Select](?path=/docs/components-select--docs)               | Select a generic option via `<select>`.                                              |
 
 ### Hooks
 

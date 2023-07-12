@@ -25,10 +25,9 @@ export const MultiSelect = <Option, Field extends ZodArrayField>({
   });
 
   const { selectOptions } = useSelectOptions({
-    placeholder: "",
     field,
-    getLabel,
     options,
+    getLabel,
   });
 
   return (

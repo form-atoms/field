@@ -10,42 +10,24 @@ A wrapper arround [useOptions](?path=/docs/hooks-useoptions--docs) which renders
 
 ```tsx
 import { useSelectOptions } from "@form-atoms/field";
-
-// pass your props the same way as in `useOptions` hook:
-const { selectOptions } = useSelectOptions({
-  field,
-  getLabel,
-  options,
-  placeholder,
-});
-
-// render as <select> children:
-<select {...props}>{selectOptions}</select>;
 ```
 
 ### Features
 
-- ✅ Renders custom placeholder as a disabled option at the start of `selectOptions`.
+- ✅ Renders `<option>` list ready to be used as `<select>` children.
 
-### Props
+### Example
 
-The props extend the [UseOptionsProps](?path=/docs/hooks-useoptions--docs#props) with a `placeholder`:
+```tsx
+import { useSelectOptions } from "@form-atoms/field";
 
-```ts
-export type UseSelectOptionsProps<Option> = UseOptionsProps<Option> & {
-  /**
-   * A text for a custom placeholder option at the start of selectOptions.
-   * @default "Please select an option"
-   */
-  placeholder?: string;
-};
-```
-
-To disable the default placeholder, set it to empty string:
-
-```ts
+// pass your props the same way as in the `useOptions` hook:
 const { selectOptions } = useSelectOptions({
-  placeholder = "",
-  // rest of props
+  field,
+  options,
+  getLabel,
 });
+
+// render as <select> children:
+<select {...props}>{selectOptions}</select>;
 ```

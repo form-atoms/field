@@ -3,6 +3,7 @@ export * from "./field-errors";
 export * from "./field-label";
 export * from "./list-field";
 export * from "./multi-select";
+export * from "./placeholder-option";
 export * from "./radio";
 export * from "./radio-group";
 export * from "./requirement-indicator";

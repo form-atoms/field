@@ -1,0 +1,40 @@
+import {
+  Meta,
+  Source,
+  Canvas,
+  Controls,
+  Markdown,
+  Description,
+} from "@storybook/blocks";
+
+<Meta title="components/atomic/PlaceholderOption" />
+
+# PlaceholderOption
+
+An atomic component to be used when your `<select>` is controlled with [useSelectFieldProps](?path=/docs/hooks-useselectfieldprops--docs).
+Used internally in the [Select](?path=/docs/components-select--docs) component.
+
+## Usage
+
+```ts
+import { PlaceholderOption } from "@form-atoms/field";
+```
+
+## Features
+
+- ✅ Renders an `<option>` to appear selected while the respective `<select>` is empty.
+- ✅ Enables to clear a select using an optional field.
+
+## Example
+
+```tsx
+import { PlaceholderOption } from "@form-atoms/field";
+
+// the placeholder must be used as the first child option:
+const Example = () => (
+  <select>
+    <PlaceholderOption>Pick an option</PlaceholderOption>
+    <option>regular options go after the placeholder</option>
+  </select>
+);
+```

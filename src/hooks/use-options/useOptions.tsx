@@ -3,8 +3,8 @@ import { ReactNode, useMemo } from "react";
 
 export type UseOptionsProps<Option> = {
   field: FieldAtom<any>;
-  getLabel: (option: Option) => ReactNode;
   options: readonly Option[];
+  getLabel: (option: Option) => ReactNode;
 };
 
 export function useOptions<Option>({

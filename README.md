@@ -31,11 +31,22 @@ With others libraries you often lose form state when your component or page unmo
 
 `form-atoms` on the other hand keeps the form state until you clear it, because it lives in jotai atoms. This way, you don't have to warn users about data loss if they navigate out of filled & unsubmitted form. Instead you can display 'continue where you left off' message when they return to the form.
 
-#### Atomic headless components
+#### Atomic Components
 
-The `form-atoms` library provides atomic form primitives capable of tracking input value, touch state, validation status and more.
+When implementing forms, there are subtle details which you must likely implement yourself. For example you might need to implement a placeholder for a select,
+a clickable label which focuses the respective input, or a custom indicator whether the input is required or optional.
 
-`@form-atoms/field` extends these primitives & packages them into hooks & headless components (think 'smart components'), which can be easily wired to UI (think dumb components) checkbox, select or array field.
+We take care of these details in atomic 'low-level' components like `PlaceholderOption`, `FieldLabel` and `RequirementIndicator` respectively.
+
+#### Generic Native Components
+
+With other form libraries you might find yourself repeatedly wiring them into recurring scenarios like checkbox multi select or radio group.
+We've created highly reusable generic components which integrate the native components.
+For example to select a value of generic type you can use the generic [RadioGroup](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-radiogroup--docs) or [Select](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-select--docs).
+
+To select multiple values (array of values) you can use the generic [CheckboxGroup](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-checkboxgroup--docs) or [MultiSelect](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-multiselect--docs)
+
+Lastly to capture a list of objects, you will find the [ListField](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-listfield--docs) handy.
 
 ## Docs
 

@@ -5,19 +5,20 @@ import {
   useSelectFieldProps,
   useSelectOptions,
 } from "../../hooks";
+import { PlaceholderOption } from "../placeholder-option";
 
 export type SelectProps<
   Option,
   Field extends SelectField
 > = UseSelectFieldProps<Option, Field> &
-  Omit<UseSelectOptionsProps<Option>, "field" | "placeholderDisabled">;
+  UseSelectOptionsProps<Option> & { placeholder?: string };
 
 export const Select = <Option, Field extends SelectField>({
   field,
   getValue,
   getLabel,
   options,
-  placeholder,
+  placeholder = "Please select an option",
 }: SelectProps<Option, Field>) => {
   const props = useSelectFieldProps({
     field,
@@ -27,11 +28,18 @@ export const Select = <Option, Field extends SelectField>({
 
   const { selectOptions } = useSelectOptions({
     field,
-    getLabel,
     options,
-    placeholder,
-    placeholderDisabled: props.required,
+    getLabel,
   });
 
-  return <select {...props}>{selectOptions}</select>;
+  return (
+    <select {...props}>
+      {placeholder && (
+        <PlaceholderOption disabled={props.required}>
+          {placeholder}
+        </PlaceholderOption>
+      )}
+      {selectOptions}
+    </select>
+  );
 };
