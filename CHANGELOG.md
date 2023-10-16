@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.4.0...v3.5.0) (2023-10-16)
+
+
+### Features
+
+* clear file input value via atomEffect ([#47](https://github.com/MiroslavPetrik/form-atoms-field/issues/47)) ([e124aaa](https://github.com/MiroslavPetrik/form-atoms-field/commit/e124aaaa3c9281e509c6418be31fefafc355055e))
+
 # [3.4.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.3.3...v3.4.0) (2023-07-12)
 
 
