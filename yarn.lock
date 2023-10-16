@@ -2447,6 +2447,7 @@ __metadata:
     happy-dom: ^8.9.0
     jotai: ^2.1.1
     jotai-devtools: ^0.5.3
+    jotai-effect: 0.1.0
     jsdom: ^21.1.0
     lodash.shuffle: ^4.2.0
     object-path-immutable: ^4.1.2
@@ -2462,6 +2463,7 @@ __metadata:
   peerDependencies:
     form-atoms: ^3
     jotai: ^2
+    jotai-effect: ^0
     react: ">=16.8"
     zod: ^3
   languageName: unknown
@@ -10825,6 +10827,15 @@ __metadata:
     jotai: ">=1.11.0"
     react: ">=17.0.0"
   checksum: 596137cd8f228b60be162876983345ac91f9cbf30397a95317a4405c168cb55b8ecacf8c99092844e529f10b42c0a32db056712a4b75bb998e4aa4b34a8320bf
+  languageName: node
+  linkType: hard
+
+"jotai-effect@npm:0.1.0":
+  version: 0.1.0
+  resolution: "jotai-effect@npm:0.1.0"
+  peerDependencies:
+    jotai: ">=2.4.3"
+  checksum: fdf8794f9383c911978aa992a994fa5610e8bf2e7752ed995482dc480f87fc0cd7f68a9df5648a0f2fc7335a02b58bee507f3b1394c28fbbc226f81ca06dc694
   languageName: node
   linkType: hard
 

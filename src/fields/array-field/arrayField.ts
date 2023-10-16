@@ -1,7 +1,11 @@
 import { ZodArray, z } from "zod";
 
-import { ZodFieldConfig, zodField } from "..";
-import { ZodParams, defaultParams } from "../zod-field";
+import {
+  ZodFieldConfig,
+  ZodParams,
+  defaultParams,
+  zodField,
+} from "../zod-field";
 
 export type ArrayFieldParams<ElementSchema extends z.Schema> = Partial<
   ZodFieldConfig<

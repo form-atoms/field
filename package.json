@@ -87,6 +87,7 @@
     "happy-dom": "^8.9.0",
     "jotai": "^2.1.1",
     "jotai-devtools": "^0.5.3",
+    "jotai-effect": "0.1.0",
     "jsdom": "^21.1.0",
     "lodash.shuffle": "^4.2.0",
     "prettier": "2.8.4",
@@ -130,6 +131,7 @@
   "peerDependencies": {
     "form-atoms": "^3",
     "jotai": "^2",
+    "jotai-effect": "^0",
     "react": ">=16.8",
     "zod": "^3"
   }

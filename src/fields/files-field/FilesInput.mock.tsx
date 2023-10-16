@@ -3,7 +3,6 @@ import { InputHTMLAttributes, ReactNode } from "react";
 import { FilesField } from "./filesField";
 import { useFilesFieldProps } from "./useFilesFieldProps";
 import { FieldErrors, FieldLabel } from "../../components";
-import { useClearFileInputEffect } from "../../hooks";
 
 export const FilesInput = ({
   field,
@@ -13,9 +12,7 @@ export const FilesInput = ({
   field: FilesField;
   label: ReactNode;
 } & InputHTMLAttributes<HTMLInputElement>) => {
-  const { value, ...props } = useFilesFieldProps(field);
-
-  useClearFileInputEffect(field);
+  const props = useFilesFieldProps(field);
 
   return (
     <div style={{ margin: "20px 0" }}>
