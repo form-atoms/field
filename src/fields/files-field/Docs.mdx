@@ -33,6 +33,10 @@ const attachments = filesField().optional();
 
 A hook providing props to control a file input.
 
+### Features
+
+- ✅ Clears the file input, when the form is reset.
+
 ```tsx
 const FileInput = ({
   field,
@@ -41,8 +45,7 @@ const FileInput = ({
   field: FilesFieldAtom;
   label: ReactNode;
 }) => {
-  // the `value` is the FileList which cannot be passed to the input element, so we drop it
-  const { value, ...props } = useFilesFieldProps(field);
+  const props = useFilesFieldProps(field);
 
   return (
     <div style={{ margin: "20px 0" }}>
