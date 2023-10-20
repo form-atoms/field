@@ -76,6 +76,7 @@ export const useListFieldActions = <
           }, fields);
 
           return fields;
+          return { ...fields };
         });
       }),
     []
