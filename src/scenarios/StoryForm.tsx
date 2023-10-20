@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FormFields, formAtom, useFormActions } from "form-atoms";
+import { action } from "@storybook/addon-actions";
+import { FormAtom, FormFields, formAtom, useFormActions } from "form-atoms";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
 
@@ -7,6 +8,7 @@ type Props<Fields extends FormFields> = {
   fields: Fields;
   required?: boolean;
 } & RenderProp<{
+  form: FormAtom<Fields>;
   fields: Fields;
   required: boolean;
 }>;
@@ -20,12 +22,8 @@ export const StoryForm = <Fields extends FormFields>({
   const { reset, submit } = useFormActions(form);
 
   return (
-    <form
-      onSubmit={submit((values) => {
-        window.alert(JSON.stringify(values));
-      })}
-    >
-      {children({ fields, required })}
+    <form onSubmit={submit(action("submit"))}>
+      {children({ fields, required, form })}
       <button>Submit</button>
       <button className="outline secondary" type="button" onClick={reset}>
         Reset
