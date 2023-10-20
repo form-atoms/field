@@ -1,3 +1,11 @@
+## [3.5.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.1...v3.5.2) (2023-10-20)
+
+
+### Bug Fixes
+
+* **#49:** use splitAtom instead of immutable object path ([95da83a](https://github.com/MiroslavPetrik/form-atoms-field/commit/95da83af00506ef4eb40af5f36b1d60bc2088041)), closes [#49](https://github.com/MiroslavPetrik/form-atoms-field/issues/49)
+* listField change update values ([79302c4](https://github.com/MiroslavPetrik/form-atoms-field/commit/79302c4a01b35e3cf32cd1f4427bda99deceb5d8))
+
 ## [3.5.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.0...v3.5.1) (2023-10-20)
 
 
