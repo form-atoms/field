@@ -1,11 +1,5 @@
-import {
-  FieldAtom,
-  FormAtom,
-  FormFieldValues,
-  FormFields,
-  useForm,
-} from "form-atoms";
-import React, { Fragment, useMemo } from "react";
+import { FieldAtom, FormAtom, FormFieldValues, FormFields } from "form-atoms";
+import React, { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 import { useListFieldActions } from "./useListFieldActions";
@@ -46,11 +40,11 @@ export type ListItemRenderProps<Fields> = RenderProp<
     index: number;
     fields: Fields;
     add: () => void;
-    remove: (index: number) => void;
+    remove: (field: FieldAtom<any> | FormFields) => void;
   } & RenderProp<unknown, "RemoveItemButton">
 >;
 
-type ListFields = FieldAtom<any>[] | FormFields[];
+export type ListFields = FieldAtom<any>[] | FormFields[];
 
 type RecurrFormFields = FormFields | ListFields;
 
@@ -117,42 +111,37 @@ export function ListField<
   ),
   EmptyMessage,
 }: ListFieldProps<Fields, Path>) {
-  const { fieldAtoms } = useForm(form);
+  const keyExtractor = useCallback(
+    (fields: FieldAtom<any> | FormFields) => {
+      if (typeof keyFrom === "string" && keyFrom in fields) {
+        // @ts-ignore
+        return `${fields[keyFrom]}`;
+      } else {
+        return `${fields}`;
+      }
+    },
+    [keyFrom]
+  );
 
-  const { add, remove } = useListFieldActions(form, builder, path);
-
-  const array: ListFields = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return path.reduce(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      (fields, key) => fields[key],
-      fieldAtoms
-    ) as ListFields;
-  }, [path, fieldAtoms]);
-
-  const keyFn = (fields: FieldAtom<any> | FormFields) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return typeof keyFrom === "string" ? `${fields[keyFrom]}` : `${fields}`;
-  };
+  const { add, isEmpty, items } = useListFieldActions(
+    form,
+    builder,
+    path,
+    keyExtractor
+  );
 
   return (
     <>
-      {array.length === 0 && EmptyMessage ? <EmptyMessage /> : undefined}
-      {array.map((fields, index) => (
-        <Fragment key={keyFn(fields)}>
+      {isEmpty && EmptyMessage ? <EmptyMessage /> : undefined}
+      {items.map(({ remove, fields, key }, index) => (
+        <Fragment key={key}>
           {children({
             add,
             remove,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             fields,
             index,
-            RemoveItemButton: () => (
-              <RemoveItemButton remove={() => remove(index)} />
-            ),
+            RemoveItemButton: () => <RemoveItemButton remove={remove} />,
           })}
         </Fragment>
       ))}
