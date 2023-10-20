@@ -100,7 +100,6 @@
     "zod": "3.21.4"
   },
   "dependencies": {
-    "object-path-immutable": "^4.1.2",
     "react-render-prop-type": "0.1.0"
   },
   "release": {
