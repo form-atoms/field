@@ -91,4 +91,58 @@ describe("useListFieldActions()", () => {
       expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [] });
     });
   });
+
+  describe("moving items", () => {
+    it("moves item before previous when moveUp is called", async () => {
+      const form = formAtom({
+        luckyNumbers: [numberField({ value: 6 }), numberField({ value: 9 })],
+      });
+
+      const builder = () => numberField();
+
+      const { result: listFieldAction } = renderHook(() =>
+        useListFieldActions(
+          form,
+          builder,
+          ["luckyNumbers"],
+          (field) => `${field}`
+        )
+      );
+
+      const { result: formSubmit } = renderHook(() => useFormSubmit(form));
+
+      await act(() => listFieldAction.current.items[1]?.moveUp());
+
+      const onSubmit = vi.fn();
+      await act(() => formSubmit.current(onSubmit)());
+
+      expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [9, 6] });
+    });
+
+    it("moves item after previous when moveDown is called", async () => {
+      const form = formAtom({
+        luckyNumbers: [numberField({ value: 6 }), numberField({ value: 9 })],
+      });
+
+      const builder = () => numberField();
+
+      const { result: listFieldAction } = renderHook(() =>
+        useListFieldActions(
+          form,
+          builder,
+          ["luckyNumbers"],
+          (field) => `${field}`
+        )
+      );
+
+      const { result: formSubmit } = renderHook(() => useFormSubmit(form));
+
+      await act(() => listFieldAction.current.items[0]?.moveDown());
+
+      const onSubmit = vi.fn();
+      await act(() => formSubmit.current(onSubmit)());
+
+      expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [9, 6] });
+    });
+  });
 });

@@ -43,6 +43,8 @@ export type ListItemRenderProps<Fields> = RenderProp<
     fields: Fields;
     add: (before?: PrimitiveAtom<Fields>) => void;
     remove: (field: FieldAtom<any> | FormFields) => void;
+    moveUp: () => void;
+    moveDown: () => void;
   } & RenderProp<unknown, "RemoveItemButton">
 >;
 
@@ -135,13 +137,15 @@ export function ListField<
   return (
     <>
       {isEmpty && EmptyMessage ? <EmptyMessage /> : undefined}
-      {items.map(({ remove, fields, key, atom }, index) => (
+      {items.map(({ remove, fields, key, atom, moveUp, moveDown }, index) => (
         <Fragment key={key}>
           {children({
             // @ts-ignore
             atom,
             add,
             remove,
+            moveUp,
+            moveDown,
             // @ts-ignore
             fields,
             index,

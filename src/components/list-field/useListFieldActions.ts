@@ -93,6 +93,14 @@ export const useListFieldActions = <
     dispatch({ type: "insert", value: builder(), before });
   }, []);
 
+  const move = useCallback(
+    (atom: PrimitiveAtom<Item>, before?: PrimitiveAtom<Item>) => {
+      // @ts-ignore
+      dispatch({ type: "move", atom, before });
+    },
+    []
+  );
+
   const items = splitItems.map((atom, index) => ({
     atom,
     // @ts-ignore
@@ -100,7 +108,11 @@ export const useListFieldActions = <
     fields: value[index]!,
     // @ts-ignore
     remove: () => remove(atom),
+    // @ts-ignore
+    moveUp: () => move(atom, splitItems[index - 1]),
+    // @ts-ignore
+    moveDown: () => move(atom, splitItems[index + 2]),
   }));
 
-  return { remove, add, isEmpty, items };
+  return { remove, add, move, isEmpty, items };
 };

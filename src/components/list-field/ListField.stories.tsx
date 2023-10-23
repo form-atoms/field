@@ -151,6 +151,50 @@ export const Prepend = formStory({
   },
 });
 
+export const Ordering = formStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Items can be reordered by calling the moveUp and moveDown actions.",
+      },
+    },
+  },
+  args: {
+    fields: {
+      hobbies: [fieldAtom({ value: "gardening" })],
+    },
+    children: ({ form }) => (
+      <ListField
+        form={form}
+        path={["hobbies"]}
+        AddItemButton={AddHobbyField}
+        RemoveItemButton={RemoveButton}
+        builder={() => fieldAtom({ value: "" })}
+      >
+        {({ fields, RemoveItemButton, moveDown, moveUp }) => (
+          <div
+            style={{
+              display: "grid",
+              gridGap: 16,
+              gridTemplateColumns: "auto min-content min-content min-content",
+            }}
+          >
+            <InputField atom={fields} component="input" />
+            <button type="button" className="outline" onClick={moveUp}>
+              Up
+            </button>
+            <button type="button" className="outline" onClick={moveDown}>
+              Down
+            </button>
+            <RemoveItemButton />
+          </div>
+        )}
+      </ListField>
+    ),
+  },
+});
+
 export const Nested = formStory({
   args: {
     fields: {
