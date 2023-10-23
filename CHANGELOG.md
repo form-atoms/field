@@ -1,3 +1,10 @@
+## [3.5.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.2...v3.5.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* sync split hook with field & test use list field actions ([4e6fa06](https://github.com/MiroslavPetrik/form-atoms-field/commit/4e6fa0675b80059635fc7c91fe59bd3a0908f205))
+
 ## [3.5.2](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.1...v3.5.2) (2023-10-20)
 
 
