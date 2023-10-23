@@ -111,6 +111,46 @@ export const Flat = formStory({
   },
 });
 
+export const Prepend = formStory({
+  parameters: {
+    docs: {
+      description: {
+        story: "New list items can be prepended to any of the existing items.",
+      },
+    },
+  },
+  args: {
+    fields: {
+      hobbies: [fieldAtom({ value: "gardening" })],
+    },
+    children: ({ form }) => (
+      <ListField
+        form={form}
+        path={["hobbies"]}
+        AddItemButton={AddHobbyField}
+        RemoveItemButton={RemoveButton}
+        builder={() => fieldAtom({ value: "" })}
+      >
+        {({ fields, RemoveItemButton, add, atom }) => (
+          <div
+            style={{
+              display: "grid",
+              gridGap: 16,
+              gridTemplateColumns: "auto min-content min-content",
+            }}
+          >
+            <InputField atom={fields} component="input" />
+            <button type="button" className="outline" onClick={() => add(atom)}>
+              Prepend
+            </button>
+            <RemoveItemButton />
+          </div>
+        )}
+      </ListField>
+    ),
+  },
+});
+
 export const Nested = formStory({
   args: {
     fields: {
