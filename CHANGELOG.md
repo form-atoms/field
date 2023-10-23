@@ -1,3 +1,10 @@
+## [3.5.4](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.3...v3.5.4) (2023-10-23)
+
+
+### Bug Fixes
+
+* **listField:** enable adding new items before existing ones ([a888c4d](https://github.com/MiroslavPetrik/form-atoms-field/commit/a888c4d0fb24b4500f3b64078a9e8bea228957e0))
+
 ## [3.5.3](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.2...v3.5.3) (2023-10-23)
 
 
