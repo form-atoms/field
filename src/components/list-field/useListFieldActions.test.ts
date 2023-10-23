@@ -53,6 +53,7 @@ describe("useListFieldActions()", () => {
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
 
       await act(() =>
+        // @ts-ignore
         listFieldAction.current.add(listFieldAction.current.items[0]?.atom)
       );
 
