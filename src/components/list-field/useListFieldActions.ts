@@ -83,24 +83,23 @@ export const useListFieldActions = <
 
   useAtom(syncListEffect);
 
-  const remove = useCallback(
-    (atom: PrimitiveAtom<FieldAtom<any>> | PrimitiveAtom<FormFields>) => {
-      // @ts-ignore TODO | FormFields?
-      dispatch({ type: "remove", atom });
-    },
-    []
-  );
-
-  const add = useCallback(() => {
-    // @ts-ignore
-    dispatch({ type: "insert", value: builder() });
+  const remove = useCallback((atom: PrimitiveAtom<Item>) => {
+    // @ts-ignore TODO | FormFields?
+    dispatch({ type: "remove", atom });
   }, []);
 
-  const items = splitItems.map((item, index) => ({
+  const add = useCallback((before?: PrimitiveAtom<Item>) => {
+    // @ts-ignore
+    dispatch({ type: "insert", value: builder(), before });
+  }, []);
+
+  const items = splitItems.map((atom, index) => ({
+    atom,
     // @ts-ignore
     key: keyExtractor(value[index]!),
     fields: value[index]!,
-    remove: () => remove(item),
+    // @ts-ignore
+    remove: () => remove(atom),
   }));
 
   return { remove, add, isEmpty, items };

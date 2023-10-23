@@ -3,6 +3,7 @@ import React, { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 import { useListFieldActions } from "./useListFieldActions";
+import { PrimitiveAtom } from "jotai";
 
 export function listFieldAtoms<TValue, TFieldAtom extends FieldAtom<TValue>>(
   builder: (value: TValue) => TFieldAtom,
@@ -37,9 +38,10 @@ type RenderProps = Partial<
 
 export type ListItemRenderProps<Fields> = RenderProp<
   {
+    atom: PrimitiveAtom<Fields>;
     index: number;
     fields: Fields;
-    add: () => void;
+    add: (before?: PrimitiveAtom<Fields>) => void;
     remove: (field: FieldAtom<any> | FormFields) => void;
   } & RenderProp<unknown, "RemoveItemButton">
 >;
@@ -133,9 +135,11 @@ export function ListField<
   return (
     <>
       {isEmpty && EmptyMessage ? <EmptyMessage /> : undefined}
-      {items.map(({ remove, fields, key }, index) => (
+      {items.map(({ remove, fields, key, atom }, index) => (
         <Fragment key={key}>
           {children({
+            // @ts-ignore
+            atom,
             add,
             remove,
             // @ts-ignore
@@ -145,7 +149,7 @@ export function ListField<
           })}
         </Fragment>
       ))}
-      <AddItemButton add={add} />
+      <AddItemButton add={useCallback(() => add(), [add])} />
     </>
   );
 }

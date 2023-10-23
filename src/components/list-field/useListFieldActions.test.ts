@@ -7,7 +7,7 @@ import { numberField } from "../../fields";
 
 describe("useListFieldActions()", () => {
   describe("adding item to the list", () => {
-    it("submits the new item", async () => {
+    it("appends the new item to the end of the list", async () => {
       const form = formAtom({
         luckyNumbers: [numberField({ value: 6 })],
       });
@@ -32,6 +32,34 @@ describe("useListFieldActions()", () => {
       await act(() => formSubmit.current(onSubmit)());
 
       expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [6, 9, 9] });
+    });
+
+    it("adds the item before a field when specified", async () => {
+      const form = formAtom({
+        luckyNumbers: [numberField({ value: 6 })],
+      });
+
+      const builder = () => numberField({ value: 9 });
+
+      const { result: listFieldAction } = renderHook(() =>
+        useListFieldActions(
+          form,
+          builder,
+          ["luckyNumbers"],
+          (field) => `${field}`
+        )
+      );
+
+      const { result: formSubmit } = renderHook(() => useFormSubmit(form));
+
+      await act(() =>
+        listFieldAction.current.add(listFieldAction.current.items[0]?.atom)
+      );
+
+      const onSubmit = vi.fn();
+      await act(() => formSubmit.current(onSubmit)());
+
+      expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [9, 6] });
     });
   });
 
