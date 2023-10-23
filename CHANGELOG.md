@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.4...v3.6.0) (2023-10-23)
+
+
+### Features
+
+* **ListField:** moveUp & moveDown actions (fixes [#48](https://github.com/MiroslavPetrik/form-atoms-field/issues/48)) ([bba571e](https://github.com/MiroslavPetrik/form-atoms-field/commit/bba571e475238439bcf5613db5028e5fb9c4bfd2))
+
 ## [3.5.4](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.3...v3.5.4) (2023-10-23)
 
 
