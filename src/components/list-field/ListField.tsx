@@ -149,6 +149,7 @@ export function ListField<
             // @ts-ignore
             fields,
             index,
+            count: items.length,
             RemoveItemButton: () => <RemoveItemButton remove={remove} />,
           })}
         </Fragment>
