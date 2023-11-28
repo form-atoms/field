@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.6.0...v3.6.1) (2023-11-28)
+
+
+### Bug Fixes
+
+* **ListField:** add count property ([3f3a327](https://github.com/MiroslavPetrik/form-atoms-field/commit/3f3a327de52347c72a07f7748a4db01a932c3c70))
+
 # [3.6.0](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.5.4...v3.6.0) (2023-10-23)
 
 
