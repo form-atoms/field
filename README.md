@@ -9,6 +9,10 @@ Declarative & headless form fields build on top of [`jotai & form-atoms`](https:
 yarn add jotai form-atoms @form-atoms/field
 ```
 
+<a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
+</a>
+
 ## Motivation
 
 `form-atoms` is the 'last-mile' of your app's form stack. It has layered, bottom-up architecture with clear separation of concerns.
