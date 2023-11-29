@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/form-atoms/field/compare/v3.6.1...v3.6.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* release with node lts ([d01160e](https://github.com/form-atoms/field/commit/d01160e554ec4a2fec06edce86a5dc8ee133d483))
+
 ## [3.6.1](https://github.com/MiroslavPetrik/form-atoms-field/compare/v3.6.0...v3.6.1) (2023-11-28)
 
 
