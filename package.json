@@ -44,10 +44,6 @@
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.3",
-    "@babel/preset-env": "^7.23.3",
-    "@babel/preset-react": "^7.23.3",
-    "@babel/preset-typescript": "^7.23.3",
     "@emotion/react": "^11.11.1",
     "@mdx-js/react": "^1.6.22",
     "@semantic-release/changelog": "^6.0.2",
@@ -65,8 +61,6 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
-    "@types/babel__core": "^7",
-    "@types/babel__preset-env": "^7",
     "@types/eslint": "^8",
     "@types/jsdom": "^21",
     "@types/lodash.shuffle": "^4",
