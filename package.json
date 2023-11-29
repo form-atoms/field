@@ -4,12 +4,12 @@
   "version": "0.0.0-semantic-release",
   "type": "module",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
-  "homepage": "https://github.com/MiroslavPetrik/form-atoms-field#readme",
+  "homepage": "https://github.com/form-atoms/field#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MiroslavPetrik/form-atoms-field.git"
+    "url": "https://github.com/form-atoms/field.git"
   },
-  "bugs": "https://github.com/MiroslavPetrik/form-atoms-field/issues",
+  "bugs": "https://github.com/form-atoms/field/issues",
   "license": "MIT",
   "keywords": [
     "react last field",

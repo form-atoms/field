@@ -42,15 +42,15 @@ We take care of these details in atomic 'low-level' components like `Placeholder
 
 With other form libraries you might find yourself repeatedly wiring them into recurring scenarios like checkbox multi select or radio group.
 We've created highly reusable generic components which integrate the native components.
-For example to select a value of generic type you can use the generic [RadioGroup](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-radiogroup--docs) or [Select](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-select--docs).
+For example to select a value of generic type you can use the generic [RadioGroup](https://form-atoms.github.io/field/?path=/docs/components-radiogroup--docs) or [Select](https://form-atoms.github.io/field/?path=/docs/components-select--docs).
 
-To select multiple values (array of values) you can use the generic [CheckboxGroup](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-checkboxgroup--docs) or [MultiSelect](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-multiselect--docs)
+To select multiple values (array of values) you can use the generic [CheckboxGroup](https://form-atoms.github.io/field/?path=/docs/components-checkboxgroup--docs) or [MultiSelect](https://form-atoms.github.io/field/?path=/docs/components-multiselect--docs)
 
-Lastly to capture a list of objects, you will find the [ListField](https://miroslavpetrik.github.io/form-atoms-field/?path=/docs/components-listfield--docs) handy.
+Lastly to capture a list of objects, you will find the [ListField](https://form-atoms.github.io/field/?path=/docs/components-listfield--docs) handy.
 
 ## Docs
 
-[The documentation](https://miroslavpetrik.github.io/form-atoms-field/) will be enough for any application work. (Eventually, as it's a work in progress).
+[The documentation](https://form-atoms.github.io/field/) will be enough for any application work. (Eventually, as it's a work in progress).
 For more generic and custom constructs you will need the original [`form-atoms` docs](https://github.com/jaredLunde/form-atoms).
 
 ## Fields
@@ -96,7 +96,7 @@ export const Form = () => {
 
 `@form-atoms/field` comes pre-wired to popular UI libraries:
 
-| 📦Package                                                           | 🎨 Storybook                                                             | About                                          |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------- |
-| [flowbite](https://github.com/MiroslavPetrik/form-atoms-flowbite)   | [Flowbite Fields](https://miroslavpetrik.github.io/form-atoms-flowbite/) | Bindigs to Tailwind component library Flowbite |
-| [chakra-ui](https://github.com/MiroslavPetrik/form-atoms-chakra-ui) | 🚧 WIP                                                                   | Bindings to CSS-in-JS library Chakra UI        |
+| 📦Package                                            | 🎨 Storybook                                              | About                                          |
+| ---------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------- |
+| [flowbite](https://github.com/form-atoms/flowbite)   | [Flowbite Fields](https://form-atoms.github.io/flowbite/) | Bindigs to Tailwind component library Flowbite |
+| [chakra-ui](https://github.com/form-atoms/chakra-ui) | 🚧 WIP                                                    | Bindings to CSS-in-JS library Chakra UI        |
