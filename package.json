@@ -7,7 +7,7 @@
   "homepage": "https://github.com/form-atoms/field#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/form-atoms/field.git"
+    "url": "git+https://github.com/form-atoms/field.git"
   },
   "bugs": "https://github.com/form-atoms/field/issues",
   "license": "MIT",
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@emotion/react": "^11.11.1",
     "@mdx-js/react": "^1.6.22",
-    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@storybook/addon-actions": "7.6.0",
     "@storybook/addon-docs": "7.6.0",
@@ -88,7 +88,7 @@
     "prettier": "2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "semantic-release": "^20.1.0",
+    "semantic-release": "^22.0.8",
     "storybook": "7.6.0",
     "typescript": "5.2.2",
     "vite-tsconfig-paths": "^4.2.1",
