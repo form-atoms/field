@@ -15,5 +15,5 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src"]
+  "include": ["src", "./storybook"]
 }
