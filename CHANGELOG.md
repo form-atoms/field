@@ -1,3 +1,10 @@
+## [3.6.3](https://github.com/form-atoms/field/compare/v3.6.2...v3.6.3) (2023-11-29)
+
+
+### Bug Fixes
+
+* bump linter and prettier ([bd45862](https://github.com/form-atoms/field/commit/bd458628fcec8ea9a94eb28579cd82982b24f741))
+
 ## [3.6.2](https://github.com/form-atoms/field/compare/v3.6.1...v3.6.2) (2023-11-29)
 
 
