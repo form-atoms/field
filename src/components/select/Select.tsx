@@ -9,7 +9,7 @@ import { PlaceholderOption } from "../placeholder-option";
 
 export type SelectProps<
   Option,
-  Field extends SelectField
+  Field extends SelectField,
 > = UseSelectFieldProps<Option, Field> &
   UseSelectOptionsProps<Option> & { placeholder?: string };
 

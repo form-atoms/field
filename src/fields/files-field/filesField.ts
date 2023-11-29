@@ -36,7 +36,7 @@ const makeClearInputEffect = (atom: typeof filesArrayField) => {
 };
 
 export const filesField = (
-  params: Partial<ArrayFieldParams<typeof elementSchema>> = {}
+  params: Partial<ArrayFieldParams<typeof elementSchema>> = {},
 ) => {
   const fieldAtom = arrayField({
     elementSchema,

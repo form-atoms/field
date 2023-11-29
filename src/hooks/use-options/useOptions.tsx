@@ -22,6 +22,6 @@ export function useOptions<Option>({
         };
       }),
     }),
-    [options, field, getLabel]
+    [options, field, getLabel],
   );
 }

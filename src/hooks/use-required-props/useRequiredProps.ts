@@ -26,7 +26,7 @@ export const useRequiredProps = ({
       required,
       "aria-required": required,
     }),
-    [required]
+    [required],
   );
 };
 
@@ -38,6 +38,6 @@ export const useRequiredActions = (fieldAtom: OptionalZodField<any>) => {
     () => ({
       setRequired,
     }),
-    [setRequired]
+    [setRequired],
   );
 };

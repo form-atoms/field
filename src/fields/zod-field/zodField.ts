@@ -2,7 +2,7 @@ import { FieldAtom, FieldAtomConfig, FormAtom, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
 import { Atom, Getter, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset } from "jotai/utils";
-import { ZodUndefined, z } from "zod";
+import { ZodAny, ZodUndefined, z } from "zod";
 
 type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
   schema: Schema | ((get: Getter) => Schema);
@@ -21,18 +21,18 @@ type FormFieldSubmitValues<Fields extends FormFields> = Flatten<{
   [Key in keyof Fields]: Fields[Key] extends ZodField<any>
     ? ZodFieldSubmitValue<Fields[Key]>
     : Fields[Key] extends FieldAtom<infer Value>
-    ? Value
-    : Fields[Key] extends FormFields
-    ? FormFieldSubmitValues<Fields[Key]>
-    : Fields[Key] extends Array<infer Item>
-    ? Item extends ZodField<any>
-      ? ZodFieldSubmitValue<Fields[Key]>[]
-      : Item extends FieldAtom<infer Value>
-      ? Value[]
-      : Item extends FormFields
-      ? FormFieldSubmitValues<Item>[]
-      : never
-    : never;
+      ? Value
+      : Fields[Key] extends FormFields
+        ? FormFieldSubmitValues<Fields[Key]>
+        : Fields[Key] extends Array<infer Item>
+          ? Item extends ZodField<any>
+            ? ZodFieldSubmitValue<Fields[Key]>[]
+            : Item extends FieldAtom<infer Value>
+              ? Value[]
+              : Item extends FormFields
+                ? FormFieldSubmitValues<Item>[]
+                : never
+          : never;
 }>;
 
 type FormFields = {
@@ -47,7 +47,7 @@ type FormFields = {
 
 export type ZodFieldConfig<
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodUndefined
+  OptSchema extends z.Schema = ZodUndefined,
 > = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
   ValidationConfig<Schema, OptSchema>;
 
@@ -69,19 +69,19 @@ type ZodFieldSubmitValue<Field> = Field extends ZodField<
   ? Required extends WritableRequiredAtom
     ? Schema["_output"] | OptSchema["_output"]
     : Required extends Atom<boolean>
-    ? Schema["_output"]
-    : never
+      ? Schema["_output"]
+      : never
   : never;
 
 export type OptionalZodField<
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodUndefined
+  OptSchema extends z.Schema = ZodUndefined,
 > = ZodField<Schema, OptSchema, WritableRequiredAtom>; // for OptionalZodField we can write false to the required atom
 
 export type ZodField<
-  Schema extends z.Schema,
+  Schema extends z.Schema = ZodAny,
   OptSchema extends z.Schema = ZodUndefined,
-  RequiredAtom = Atom<boolean> // required field have read-only RequiredAtom
+  RequiredAtom = Atom<boolean>, // required field have read-only RequiredAtom
 > = FieldAtom<Schema["_output"] | OptSchema["_output"]> extends Atom<
   infer Config
 >
@@ -96,7 +96,7 @@ export type ZodField<
 
 export const zodField = <
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodUndefined
+  OptSchema extends z.Schema = ZodUndefined,
 >({
   schema,
   optionalSchema,
@@ -113,7 +113,7 @@ export const zodField = <
       {
         on: "blur",
         when: "dirty",
-      }
+      },
     ).or({ on: "change", when: "touched" }),
     ...config,
   });
@@ -157,7 +157,7 @@ export const zodField = <
         {
           on: "blur",
           when: "dirty",
-        }
+        },
       ).or({ on: "change", when: "touched" }),
       ...config,
     });

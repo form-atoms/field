@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 
 import { ZodField } from "../../fields/zod-field/zodField";
 
-export type Props<Field extends ZodField<any>> = {
+export type Props<Field extends ZodField> = {
   field: Field;
   kind?: "icon" | "label";
 };
@@ -10,7 +10,7 @@ export type Props<Field extends ZodField<any>> = {
 /**
  * Indicates field's required state by using the useRequiredProps() hook.
  */
-export const RequirementIndicator = <Field extends ZodField<any>>({
+export const RequirementIndicator = <Field extends ZodField>({
   kind = "icon",
   field,
 }: Props<Field>) => {

@@ -1,5 +1,5 @@
 import { act, render, renderHook, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
 import { dateField } from "./dateField";
@@ -19,7 +19,7 @@ describe("useDateFieldProps", () => {
         value={`${
           result.current.value ? getDateString(result.current.value) : ""
         }`}
-      />
+      />,
     );
 
     expect(result.current.value).toBeInstanceOf(Date);
@@ -43,7 +43,7 @@ describe("useDateFieldProps", () => {
         value={`${
           result.current.value ? getDateString(result.current.value) : ""
         }`}
-      />
+      />,
     );
 
     const input = screen.getByTestId("date");

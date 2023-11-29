@@ -1,22 +1,22 @@
 import { FieldAtom, FormAtom, FormFieldValues, FormFields } from "form-atoms";
+import { PrimitiveAtom } from "jotai";
 import React, { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 import { useListFieldActions } from "./useListFieldActions";
-import { PrimitiveAtom } from "jotai";
 
 export function listFieldAtoms<TValue, TFieldAtom extends FieldAtom<TValue>>(
   builder: (value: TValue) => TFieldAtom,
-  values: TValue[]
+  values: TValue[],
 ): TFieldAtom[];
 export function listFieldAtoms<Fields extends FormFields>(
   builder: (values: FormFieldValues<Fields>) => Fields,
-  values: FormFieldValues<Fields>[]
+  values: FormFieldValues<Fields>[],
 ): Fields[];
 // actual type must be one of overloads, as this one is ignored
 export function listFieldAtoms<Fields extends FormFields>(
   builder: (values: FormFieldValues<Fields>) => Fields,
-  values: FormFieldValues<Fields>[]
+  values: FormFieldValues<Fields>[],
 ): Fields[] {
   return values.map(builder);
 }
@@ -54,10 +54,10 @@ type RecurrFormFields = FormFields | ListFields;
 
 type ListFieldPropsRecurr<
   Fields extends RecurrFormFields,
-  Path extends (string | number)[]
+  Path extends (string | number)[],
 > = Path extends [
   infer P extends keyof Fields,
-  ...infer R extends (string | number)[]
+  ...infer R extends (string | number)[],
 ]
   ? Fields[P] extends RecurrFormFields
     ? ListFieldPropsRecurr<Fields[P], R>
@@ -80,11 +80,11 @@ type ListFieldPropsRecurr<
 
 export type ListFieldProps<
   Fields extends FormFields,
-  Path extends (string | number)[]
+  Path extends (string | number)[],
 > = RenderProps &
   (Path extends [
     infer P extends keyof Fields,
-    ...infer Rest extends (string | number)[]
+    ...infer Rest extends (string | number)[],
   ]
     ? Fields[P] extends RecurrFormFields
       ? { form: FormAtom<Fields>; path: Path } & ListFieldPropsRecurr<
@@ -96,7 +96,7 @@ export type ListFieldProps<
 
 export function ListField<
   Fields extends FormFields,
-  Path extends (string | number)[]
+  Path extends (string | number)[],
 >({
   path,
   form,
@@ -118,20 +118,20 @@ export function ListField<
   const keyExtractor = useCallback(
     (fields: FieldAtom<any> | FormFields) => {
       if (typeof keyFrom === "string" && keyFrom in fields) {
-        // @ts-ignore
+        // @ts-expect-error atoms have toString()
         return `${fields[keyFrom]}`;
       } else {
         return `${fields}`;
       }
     },
-    [keyFrom]
+    [keyFrom],
   );
 
   const { add, isEmpty, items } = useListFieldActions(
     form,
     builder,
     path,
-    keyExtractor
+    keyExtractor,
   );
 
   return (
@@ -140,13 +140,13 @@ export function ListField<
       {items.map(({ remove, fields, key, atom, moveUp, moveDown }, index) => (
         <Fragment key={key}>
           {children({
-            // @ts-ignore
+            // @ts-expect-error complicated
             atom,
             add,
             remove,
             moveUp,
             moveDown,
-            // @ts-ignore
+            // @ts-expect-error complicated
             fields,
             index,
             count: items.length,

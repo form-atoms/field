@@ -15,7 +15,7 @@ type Props = {
 const useCheckboxFieldProps = (field: CheckboxField) => {
   const { value, ...props } = useFieldProps(
     field,
-    (event) => event.currentTarget.checked
+    (event) => event.currentTarget.checked,
   );
 
   return { ...props, checked: value };

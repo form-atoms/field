@@ -8,7 +8,7 @@ import {
 
 export type MultiSelectProps<
   Option,
-  Field extends ZodArrayField
+  Field extends ZodArrayField,
 > = UseMultiSelectFieldProps<Option, Field> &
   Omit<UseOptionsProps<Option>, "field">;
 

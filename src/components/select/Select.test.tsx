@@ -1,5 +1,5 @@
 import { act, render, renderHook, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { formAtom, useFormActions, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
@@ -26,7 +26,7 @@ describe("<Select />", () => {
       await act(() =>
         userEvent.selectOptions(screen.getByRole("combobox"), [
           screen.getByText("no"),
-        ])
+        ]),
       );
 
       const onSubmit = vi.fn();
@@ -60,7 +60,7 @@ describe("<Select />", () => {
       await act(() =>
         userEvent.selectOptions(screen.getByRole("combobox"), [
           screen.getByText("1971"),
-        ])
+        ]),
       );
 
       const onSubmit = vi.fn();
@@ -88,7 +88,7 @@ describe("<Select />", () => {
       await act(() =>
         userEvent.selectOptions(screen.getByRole("combobox"), [
           screen.getByText("some"),
-        ])
+        ]),
       );
 
       const onSubmit = vi.fn();
@@ -115,7 +115,7 @@ describe("<Select />", () => {
     await act(() =>
       userEvent.selectOptions(screen.getByRole("combobox"), [
         screen.getByText("yes"),
-      ])
+      ]),
     );
 
     await act(async () => {
@@ -160,7 +160,7 @@ describe("<Select />", () => {
     await act(() =>
       userEvent.selectOptions(screen.getByRole("combobox"), [
         screen.getByText("boo 2"),
-      ])
+      ]),
     );
 
     const onSubmit = vi.fn();
@@ -187,7 +187,7 @@ describe("<Select />", () => {
       await act(() =>
         userEvent.selectOptions(screen.getByRole("combobox"), [
           screen.getByText("male"),
-        ])
+        ]),
       );
 
       const onSubmit = vi.fn();
@@ -200,7 +200,7 @@ describe("<Select />", () => {
       await act(() =>
         userEvent.selectOptions(screen.getByRole("combobox"), [
           screen.getByText("gender"),
-        ])
+        ]),
       );
 
       const onSubmit2 = vi.fn();

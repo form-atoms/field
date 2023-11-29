@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo } from "react";
 
 import { UseOptionsProps, useFieldProps } from "..";
 import { ZodField, ZodFieldValue } from "../../fields";
@@ -38,12 +38,12 @@ export const useSelectFieldProps = <Option, Field extends SelectField>({
 
       return activeValue as ZodFieldValue<Field>;
     },
-    [values]
+    [values],
   );
 
   const props = useFieldProps<Field, HTMLSelectElement | HTMLInputElement>(
     field,
-    getEventValue
+    getEventValue,
   );
 
   return { ...props, value };

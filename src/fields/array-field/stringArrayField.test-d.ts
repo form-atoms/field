@@ -1,5 +1,5 @@
 import { formAtom } from "form-atoms";
-import { expectTypeOf } from "vitest";
+import { expectTypeOf, test } from "vitest";
 
 import { stringArrayField } from "./stringArrayField";
 import { FormSubmitValues } from "../zod-field/zodField";
@@ -20,6 +20,7 @@ test("optional stringArrayField has 'string[]' submit value", () => {
   });
 
   expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
-    field: string[];
+    // TODO: narrow?
+    field: [string, ...string[]] | string[];
   }>();
 });

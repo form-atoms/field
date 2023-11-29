@@ -1,4 +1,4 @@
-import { InputField, fieldAtom, formAtom } from "form-atoms";
+import { InputField, fieldAtom } from "form-atoms";
 
 import {
   AddItemButtonProps,
@@ -6,9 +6,9 @@ import {
   RemoveItemButtonProps,
 } from "./ListField";
 import { checkboxField } from "../../fields/checkbox-field";
+import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
 import { Radio, RadioControl } from "../radio";
-import { formStory, meta } from "../../scenarios/StoryForm";
 
 export default {
   ...meta,

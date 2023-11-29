@@ -115,7 +115,7 @@ export const RequiredCustomer = formStory({
         value: undefined,
         schema: z.object(
           { name: z.string(), city: z.string() },
-          { required_error: "Please select a customer." }
+          { required_error: "Please select a customer." },
         ),
       }),
     },

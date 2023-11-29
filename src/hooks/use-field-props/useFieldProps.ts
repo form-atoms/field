@@ -14,17 +14,17 @@ export type FieldProps<Field extends ZodField<any>> = {
 export function useFieldProps<
   Field extends ZodField<any>,
   Element extends HTMLElement = HTMLInputElement,
-  Empty extends string | undefined = undefined
+  Empty extends string | undefined = undefined,
 >(
   fieldAtom: Field,
   // support element to be union via distributive conditional types
   getEventValue: Element extends unknown
     ? (
         event: ChangeEvent<Element>,
-        value: ZodFieldValue<Field>
+        value: ZodFieldValue<Field>,
       ) => ZodFieldValue<Field>
     : never,
-  empty?: Empty
+  empty?: Empty,
 ) {
   const { actions, state } = useField<ZodFieldValue<Field>>(fieldAtom);
   const field = useAtomValue(fieldAtom);
@@ -74,6 +74,6 @@ export function useFieldProps<
       getEventValue,
       ref,
       validate,
-    ]
+    ],
   );
 }

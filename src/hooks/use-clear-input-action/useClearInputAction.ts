@@ -4,7 +4,7 @@ import { useMemo } from "react";
 
 export const useClearInputAction = <Value>(
   fieldAtom: FieldAtom<Value>,
-  options?: UseAtomOptions
+  options?: UseAtomOptions,
 ) => {
   const field = useAtomValue(fieldAtom, options);
   const ref = useAtomValue(field.ref, options);
@@ -17,6 +17,6 @@ export const useClearInputAction = <Value>(
         }
       },
     }),
-    [ref]
+    [ref],
   );
 };

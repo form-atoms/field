@@ -21,7 +21,12 @@ export const RadioGroup = <Option, Field extends SelectField>({
   /**
    * ref for multiple inputs not needed.
    */
-  const { ref, ...props } = useSelectFieldProps({ field, options, getValue });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { ref, ...props } = useSelectFieldProps({
+    field,
+    options,
+    getValue,
+  });
 
   const { renderOptions } = useOptions({ field, options, getLabel });
 

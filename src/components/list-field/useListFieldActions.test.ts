@@ -1,8 +1,8 @@
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { useListFieldActions } from "./useListFieldActions";
-import { formAtom, useFormSubmit } from "form-atoms";
 import { numberField } from "../../fields";
 
 describe("useListFieldActions()", () => {
@@ -19,8 +19,8 @@ describe("useListFieldActions()", () => {
           form,
           builder,
           ["luckyNumbers"],
-          (field) => `${field}`
-        )
+          (field) => `${field}`,
+        ),
       );
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
@@ -46,15 +46,15 @@ describe("useListFieldActions()", () => {
           form,
           builder,
           ["luckyNumbers"],
-          (field) => `${field}`
-        )
+          (field) => `${field}`,
+        ),
       );
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
 
       await act(() =>
-        // @ts-ignore
-        listFieldAction.current.add(listFieldAction.current.items[0]?.atom)
+        // @ts-expect-error there is one number
+        listFieldAction.current.add(listFieldAction.current.items[0]?.atom),
       );
 
       const onSubmit = vi.fn();
@@ -77,8 +77,8 @@ describe("useListFieldActions()", () => {
           form,
           builder,
           ["luckyNumbers"],
-          (field) => `${field}`
-        )
+          (field) => `${field}`,
+        ),
       );
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
@@ -105,8 +105,8 @@ describe("useListFieldActions()", () => {
           form,
           builder,
           ["luckyNumbers"],
-          (field) => `${field}`
-        )
+          (field) => `${field}`,
+        ),
       );
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
@@ -131,8 +131,8 @@ describe("useListFieldActions()", () => {
           form,
           builder,
           ["luckyNumbers"],
-          (field) => `${field}`
-        )
+          (field) => `${field}`,
+        ),
       );
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));

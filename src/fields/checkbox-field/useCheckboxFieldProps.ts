@@ -18,6 +18,6 @@ export function useCheckboxFieldProps(field: CheckboxField) {
       "aria-checked": checked,
       ...props,
     }),
-    [checked, props]
+    [checked, props],
   );
 }

@@ -8,7 +8,7 @@ import { Props, RequirementIndicator } from ".";
 
 export type StoryType = StoryObj<typeof meta>;
 
-const QuantityField = <Field extends ZodField<any>>({
+const QuantityField = <Field extends ZodField>({
   field,
   kind,
 }: Props<Field>) => (

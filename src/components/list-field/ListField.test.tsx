@@ -1,5 +1,5 @@
 import { act, render, renderHook, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { InputField, formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
@@ -18,7 +18,7 @@ describe("<ListField />", () => {
     render(
       <ListField path={["friends"]} form={form} builder={() => textField()}>
         {({ fields }) => <InputField atom={fields} component="input" />}
-      </ListField>
+      </ListField>,
     );
 
     expect(screen.getByDisplayValue("Bryan")).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe("<ListField />", () => {
               <RemoveItemButton />
             </>
           )}
-        </ListField>
+        </ListField>,
       );
 
       const removeItemButton = screen.getByText("Remove");
@@ -74,7 +74,7 @@ describe("<ListField />", () => {
               <NumberInput field={fields} label="" /> <RemoveItemButton />
             </>
           )}
-        </ListField>
+        </ListField>,
       );
 
       const removeItemButton = screen.getByText("Remove");
@@ -101,7 +101,7 @@ describe("<ListField />", () => {
           builder={() => numberField()}
         >
           {() => <></>}
-        </ListField>
+        </ListField>,
       );
 
       const addItemButton = screen.getByText("Add item");
@@ -124,7 +124,7 @@ describe("<ListField />", () => {
               <NumberInput field={fields} label="lucky" />
             </>
           )}
-        </ListField>
+        </ListField>,
       );
 
       const addItemButton = screen.getByText("Add item");
@@ -157,7 +157,7 @@ describe("<ListField />", () => {
               <NumberInput field={fields} label="" /> <RemoveItemButton />
             </>
           )}
-        </ListField>
+        </ListField>,
       );
 
       const removeItemButton = screen.getByText("Remove");

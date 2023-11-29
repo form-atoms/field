@@ -1,5 +1,5 @@
 import { act, render, renderHook, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { formAtom, useFormActions } from "form-atoms";
 import { describe, expect, it } from "vitest";
 
@@ -23,8 +23,8 @@ describe("useFilesFieldProps", () => {
           input,
           new File(["content"], "file-name.png", {
             type: "image/png",
-          })
-        )
+          }),
+        ),
       );
 
       expect(input).toHaveValue("C:\\fakepath\\file-name.png");
@@ -51,8 +51,8 @@ describe("useFilesFieldProps", () => {
           input,
           new File(["content"], "file-name.png", {
             type: "image/png",
-          })
-        )
+          }),
+        ),
       );
 
       expect(input).toHaveValue("C:\\fakepath\\file-name.png");

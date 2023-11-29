@@ -5,11 +5,12 @@ import {
   useForm,
   useFormActions,
 } from "form-atoms";
-import { useCallback, useMemo } from "react";
+import { PrimitiveAtom, atom, useAtom, useAtomValue } from "jotai";
 import { splitAtom } from "jotai/utils";
-import { ListFields } from "./ListField";
-import { PrimitiveAtom, atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { atomEffect } from "jotai-effect";
+import { useCallback, useMemo } from "react";
+
+import { ListFields } from "./ListField";
 
 const getAt = (obj: Record<any, unknown>, path: (string | number)[]) =>
   // @ts-expect-error TODO recursive typing
@@ -21,7 +22,7 @@ const getAt = (obj: Record<any, unknown>, path: (string | number)[]) =>
 // TODO error/validate atoms
 const listFieldAtom = (listFields: ListFields) => {
   const valueAtom = atom(listFields);
-  // @ts-ignore
+  // @ts-expect-error ???
   const splitListAtom = splitAtom(valueAtom);
   const emptyAtom = atom((get) => get(valueAtom).length === 0);
 
@@ -36,12 +37,12 @@ const listFieldAtom = (listFields: ListFields) => {
 
 export const useListFieldActions = <
   Fields extends FormFields,
-  Item extends FieldAtom<any> | FormFields
+  Item extends FieldAtom<any> | FormFields,
 >(
   form: FormAtom<Fields>,
   builder: () => Item,
   path: (string | number)[],
-  keyExtractor: (item: Item) => string
+  keyExtractor: (item: Item) => string,
 ) => {
   const { fieldAtoms } = useForm(form);
   const { updateFields } = useFormActions(form);
@@ -49,7 +50,7 @@ export const useListFieldActions = <
   // could be defined statically, will require changes in the core form-atoms api
   const listAtom = useMemo(
     () => listFieldAtom(getAt(fieldAtoms, path) as unknown as ListFields),
-    []
+    [],
   );
 
   const list = useAtomValue(listAtom);
@@ -63,11 +64,11 @@ export const useListFieldActions = <
         const arr = get(list.value);
 
         updateFields((fields) => {
-          // @ts-ignore
+          // @ts-expect-error traverse
           path.reduce((fields, key, index) => {
             if (index === path.length - 1) {
               // when a path key is the last, update the list reference
-              // @ts-ignore
+              // @ts-expect-error traverse
               fields[key] = arr;
             } else {
               // otherwise walk the path towards the list
@@ -78,39 +79,39 @@ export const useListFieldActions = <
           return { ...fields };
         });
       }),
-    []
+    [],
   );
 
   useAtom(syncListEffect);
 
   const remove = useCallback((atom: PrimitiveAtom<Item>) => {
-    // @ts-ignore TODO | FormFields?
+    // @ts-expect-error traverses anything TODO | FormFields?
     dispatch({ type: "remove", atom });
   }, []);
 
   const add = useCallback((before?: PrimitiveAtom<Item>) => {
-    // @ts-ignore
+    // @ts-expect-error traverses anything
     dispatch({ type: "insert", value: builder(), before });
   }, []);
 
   const move = useCallback(
     (atom: PrimitiveAtom<Item>, before?: PrimitiveAtom<Item>) => {
-      // @ts-ignore
+      // @ts-expect-error traverses anything
       dispatch({ type: "move", atom, before });
     },
-    []
+    [],
   );
 
   const items = splitItems.map((atom, index) => ({
     atom,
-    // @ts-ignore
+    // @ts-expect-error traverses anything
     key: keyExtractor(value[index]!),
     fields: value[index]!,
-    // @ts-ignore
+    // @ts-expect-error traverses anything
     remove: () => remove(atom),
-    // @ts-ignore
+    // @ts-expect-error traverses anything
     moveUp: () => move(atom, splitItems[index - 1]),
-    // @ts-ignore
+    // @ts-expect-error traverses anything
     moveDown: () => move(atom, splitItems[index + 2]),
   }));
 

@@ -9,9 +9,12 @@
     "rootDir": "src"
   },
   "exclude": [
+    "setup.ts",
     "src/scenarios/*",
     "src/**/*.stories.tsx",
     "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.test-d.ts",
     "src/**/*.mock.tsx"
   ]
 }

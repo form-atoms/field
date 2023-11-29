@@ -19,6 +19,6 @@ export function useSelectOptions<Option>(props: UseSelectOptionsProps<Option>) {
         </>
       ),
     }),
-    [renderOptions]
+    [renderOptions],
   );
 }

@@ -138,7 +138,7 @@ export const RequiredCustomAddress = formStory({
         value: undefined,
         schema: z.object(
           { street: z.string(), city: z.string() },
-          { required_error: "Please choose shipping address." }
+          { required_error: "Please choose shipping address." },
         ),
       }),
     },

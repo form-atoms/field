@@ -8,7 +8,7 @@ import {
 
 export type UseCheckboxGroupProps<
   Option,
-  Field extends ZodArrayField
+  Field extends ZodArrayField,
 > = UseMultiSelectFieldProps<Option, Field> & UseOptionsProps<Option>;
 
 export const useCheckboxGroup = <Option, Field extends ZodArrayField>({

@@ -10,7 +10,7 @@ import {
 
 export const useCheckboxGroupFieldProps = <
   Option,
-  Field extends ZodArrayField
+  Field extends ZodArrayField,
 >({
   field,
   options,
@@ -19,7 +19,7 @@ export const useCheckboxGroupFieldProps = <
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
   const [value, setValue] = useState<number[]>(() =>
-    fieldValue.map((activeOption) => options.indexOf(activeOption))
+    fieldValue.map((activeOption) => options.indexOf(activeOption)),
   );
 
   const getEventValue = (event: ChangeEvent<HTMLInputElement>) => {

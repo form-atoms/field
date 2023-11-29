@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { Meta, StoryObj } from "@storybook/react";
 import { FormAtom, FormFields, formAtom, useFormActions } from "form-atoms";
 import { useMemo } from "react";
 import { RenderProp } from "react-render-prop-type";
@@ -57,5 +57,5 @@ export const meta = {
 export const formStory = <Fields extends FormFields>(
   props: {
     args: Props<Fields>;
-  } & Omit<FormStory, "args">
+  } & Omit<FormStory, "args">,
 ) => props;

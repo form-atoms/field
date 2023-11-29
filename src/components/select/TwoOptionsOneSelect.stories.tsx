@@ -53,7 +53,7 @@ const SwapCountries = ({
 
   const swapCountries = useCallback(() => {
     setCountries(
-      countries === countryOptions ? mutatedCountries : countryOptions
+      countries === countryOptions ? mutatedCountries : countryOptions,
     );
   }, [countries]);
 

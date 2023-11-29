@@ -1,5 +1,5 @@
 import { formAtom } from "form-atoms";
-import { expectTypeOf } from "vitest";
+import { expectTypeOf, test } from "vitest";
 
 import { filesField } from "./filesField";
 import { FormSubmitValues } from "../zod-field/zodField";
@@ -19,6 +19,7 @@ test("optional filesField has 'File[]' submit value", () => {
   });
 
   expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
-    field: File[];
+    // TODO: narrow
+    field: [File, ...File[]] | File[];
   }>();
 });

@@ -16,6 +16,7 @@ module.exports = {
     "plugin:import/typescript",
   ],
   rules: {
+    "@typescript-eslint/no-explicit-any": "off",
     "sort-imports": [
       "error",
       {

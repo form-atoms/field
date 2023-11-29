@@ -13,7 +13,7 @@ describe("useOptions()", () => {
         field,
         options: [false, true],
         getLabel: (yes) => (yes ? "yes" : "no"),
-      })
+      }),
     );
 
     const fieldId = `${field}`;
