@@ -1,3 +1,10 @@
+## [3.6.4](https://github.com/form-atoms/field/compare/v3.6.3...v3.6.4) (2023-11-30)
+
+
+### Bug Fixes
+
+* initialize advanced fields with empty values ([67e8ab5](https://github.com/form-atoms/field/commit/67e8ab5250df1945820e32eb7bcf5db31021d19d)), closes [#52](https://github.com/form-atoms/field/issues/52)
+
 ## [3.6.3](https://github.com/form-atoms/field/compare/v3.6.2...v3.6.3) (2023-11-29)
 
 
