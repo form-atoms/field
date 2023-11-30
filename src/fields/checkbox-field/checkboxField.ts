@@ -12,6 +12,7 @@ export type CheckboxFieldValue = ExtractAtomValue<
 
 export const checkboxField = ({
   required_error = defaultParams.required_error,
+  value = false,
   ...config
 }: Partial<
   Omit<
@@ -21,7 +22,7 @@ export const checkboxField = ({
 > &
   ZodParams = {}) =>
   zodField({
-    value: false,
+    value,
     /**
      * When checkbox is required, it must be checked, so the value must be true.
      */

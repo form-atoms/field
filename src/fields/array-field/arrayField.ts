@@ -17,11 +17,12 @@ export type ArrayFieldParams<ElementSchema extends z.Schema> = Partial<
 
 export const arrayField = <ElementSchema extends z.Schema>({
   required_error = defaultParams.required_error,
+  value = [],
   elementSchema,
   ...config
 }: { elementSchema: ElementSchema } & ArrayFieldParams<ElementSchema>) =>
   zodField({
-    value: [],
+    value,
     schema: z.array(elementSchema).nonempty(required_error),
     optionalSchema: z.array(elementSchema),
     ...config,

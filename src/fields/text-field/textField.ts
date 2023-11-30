@@ -12,10 +12,11 @@ export type TextFieldValue = ExtractAtomValue<
 
 export const textField = ({
   required_error = defaultParams.required_error,
+  value = "",
   ...config
 }: Partial<ZodFieldConfig<ZodString, ZodString>> & ZodParams = {}) =>
   zodField({
-    value: "",
+    value,
     // https://github.com/colinhacks/zod/issues/63
     schema: z.string().trim().min(1, required_error),
     optionalSchema: z.string().trim(),
