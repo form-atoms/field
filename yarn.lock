@@ -2676,11 +2676,11 @@ __metadata:
     eslint-import-resolver-typescript: "npm:^3.6.1"
     eslint-plugin-import: "npm:^2.29.0"
     eslint-plugin-prettier: "npm:5.0.1"
-    form-atoms: "npm:^3.0.2"
+    form-atoms: "npm:^3.2.0"
     happy-dom: "npm:^8.9.0"
     jotai: "npm:2.6.0"
     jotai-devtools: "npm:0.7.0"
-    jotai-effect: "npm:0.1.0"
+    jotai-effect: "npm:0.2.3"
     jsdom: "npm:^21.1.0"
     lodash.shuffle: "npm:^4.2.0"
     prettier: "npm:3.1.0"
@@ -2692,7 +2692,7 @@ __metadata:
     typescript: "npm:5.3.2"
     vite-tsconfig-paths: "npm:^4.2.1"
     vitest: "npm:^0.34.6"
-    zod: "npm:3.21.4"
+    zod: "npm:3.22.4"
   peerDependencies:
     form-atoms: ^3
     jotai: ^2
@@ -9286,13 +9286,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-atoms@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "form-atoms@npm:3.0.2"
+"form-atoms@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "form-atoms@npm:3.2.0"
   peerDependencies:
     jotai: ^2.0.0
     react: ">=16.8"
-  checksum: d98fc6939e7745211adc8e160187d1dcc2c376a7f023913445a7d3cd1e21a97c330d34d68b4bbda191ee2712f05625d6bc92f510264ccb4fbd300414d26b00c0
+  checksum: a096c2077da6ad4d2ed0a56d6b33862586e027ac52697b0f7bc7b56993da815cf4debeec78bdba5e8836c582f686fb8ade5e5c4ca89f710aaa86dbc05c64fa83
   languageName: node
   linkType: hard
 
@@ -11012,12 +11012,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai-effect@npm:0.1.0":
-  version: 0.1.0
-  resolution: "jotai-effect@npm:0.1.0"
+"jotai-effect@npm:0.2.3":
+  version: 0.2.3
+  resolution: "jotai-effect@npm:0.2.3"
   peerDependencies:
     jotai: ">=2.4.3"
-  checksum: 38d87a3c64dfd9e1b9467b9b589947f03fdd29134f950bb11591cd335a670ce6cd13261e7e7bc4c0c9852ce0f663be215aa469c43f974ab1ef8823828e81db3d
+  checksum: 3c99923fa6684231920ff34c15d42e4fc06e6dabe9596d6ac480eb35153ef3119c7682077370654b289aafb39b6e9a42b72f410cfda92f40c856af1b4598c4ba
   languageName: node
   linkType: hard
 
@@ -16816,9 +16816,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.21.4":
-  version: 3.21.4
-  resolution: "zod@npm:3.21.4"
-  checksum: 03c79fa4610a35e24119771970be764c6e177a271a225587f86a7fc35d55e94a154d8e1970d23ffe35b567c147262bedbcb53b31aa30eeef2493fbd13e1b4aca
+"zod@npm:3.22.4":
+  version: 3.22.4
+  resolution: "zod@npm:3.22.4"
+  checksum: 73622ca36a916f785cf528fe612a884b3e0f183dbe6b33365a7d0fc92abdbedf7804c5e2bd8df0a278e1472106d46674281397a3dd800fa9031dc3429758c6ac
   languageName: node
   linkType: hard
