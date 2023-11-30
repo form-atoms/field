@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/form-atoms/field/compare/v3.6.4...v3.7.0) (2023-11-30)
+
+
+### Features
+
+* **ListField:** improved builder ([35d19aa](https://github.com/form-atoms/field/commit/35d19aa7e765a4ada31078d52780d0d255215e2b)), closes [#40](https://github.com/form-atoms/field/issues/40)
+
 ## [3.6.4](https://github.com/form-atoms/field/compare/v3.6.3...v3.6.4) (2023-11-30)
 
 
