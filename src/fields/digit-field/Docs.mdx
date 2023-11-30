@@ -1,0 +1,24 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import Config from "./config.md?raw";
+
+<Meta title="fields/digitField" />
+
+# `digitField(): ZodField<0 | 1 | ... | 9 | undefined>`
+
+```ts
+import { digitField } from "@form-atoms/field";
+
+// Create 4 inputs, each accepting only number 0-9
+const pinForm = formAtom({
+  pinCode: [
+    digitField({ name: "pin-1" }),
+    digitField({ name: "pin-2" }),
+    digitField({ name: "pin-3" }),
+    digitField({ name: "pin-4" }),
+  ],
+});
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
