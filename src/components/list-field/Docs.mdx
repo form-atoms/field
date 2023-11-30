@@ -22,27 +22,32 @@ import { ListField } from "@form-atoms/field";
 <Canvas sourceState="none" of={ListFieldStories.Primary} />
 
 ```tsx
-import { formAtom, fieldAtom } from "form-atoms";
-import { ListField } from "@form-atoms/field";
+import { formAtom } from "form-atoms";
+import { ListField, textField, listFieldBuilder } from "@form-atoms/field";
+
+// listFieldBulder creates a builder which helps initialize form fields for you
+// the callback item shape is based on the callback form fields returned from it!
+const envVarsBuilder = listFieldBuilder((item: { variable; value }) => ({
+  variable: textField({ name: "variable", value: variable }),
+  value: textField({ name: "value", value: value }),
+  // Uncommenting the following line will make item.owner property available!
+  // owner: textField({ name: "owner" }),
+}));
 
 const envForm = formAtom({
-  envVars: [
-    {
-      name: fieldAtom({ value: "API_KEY" }),
-      value: fieldAtom({ value: "ff52d09a" }),
-    },
-  ],
+  // call the builder with your data, when initializing the form
+  envVars: envVarsBuilder([
+    { variable: "GITHUB_TOKEN", value: "ff52d09a" },
+    { variable: "NPM_TOKEN", value: "deepsecret" },
+  ]),
 });
 
 const Example = () => (
   <ListField
     form={envForm}
     path={["envVars"]}
-    keyFrom="name"
-    builder={() => ({
-      name: fieldAtom({ value: "" }),
-      value: fieldAtom({ value: "" }),
-    })}
+    keyFrom="variable"
+    builder={envVarsBuilder}
     AddItemButton={({ add }) => (
       <button type="button" className="outline" onClick={add}>
         Add environment variable
@@ -63,12 +68,12 @@ const Example = () => (
         }}
       >
         <InputField
-          atom={fields.name}
-          render={(props) => <input {...props} placeholder="Name" />}
+          atom={fields.variable}
+          render={(props) => <input {...props} placeholder="Variable Name" />}
         />
         <InputField
           atom={fields.value}
-          render={(props) => <input {...props} placeholder="Value" />}
+          render={(props) => <input {...props} placeholder="Variable Value" />}
         />
         <RemoveItemButton />
       </div>

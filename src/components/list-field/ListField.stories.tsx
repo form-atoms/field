@@ -5,6 +5,8 @@ import {
   ListField,
   RemoveItemButtonProps,
 } from "./ListField";
+import { listFieldBuilder } from "./listFieldBuilder";
+import { textField } from "../../fields";
 import { checkboxField } from "../../fields/checkbox-field";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
@@ -15,33 +17,33 @@ export default {
   title: "components/ListField",
 };
 
+const envVarsBuilder = listFieldBuilder(({ variable, value }) => ({
+  variable: textField({ name: "variable", value: variable }),
+  value: textField({ name: "value", value: value }),
+}));
+
 export const Primary = formStory({
   parameters: {
     docs: {
       description: {
         story:
-          "The array field enables you to capture list of items with the same attributes. It offers `add` and `remove` callbacks to append new item or drop existing one.",
+          "The array field enables you to capture list of items with the same attributes. It offers `add` and `remove` callbacks to append new item or drop an existing one.",
       },
     },
   },
   args: {
     fields: {
-      envVars: [
-        {
-          name: fieldAtom({ value: "API_KEY" }),
-          value: fieldAtom({ value: "ff52d09a" }),
-        },
-      ],
+      envVars: envVarsBuilder([
+        { variable: "GITHUB_TOKEN", value: "ff52d09a" },
+        { variable: "NPM_TOKEN", value: "deepsecret" },
+      ]),
     },
     children: ({ form }) => (
       <ListField
         form={form}
         path={["envVars"]}
-        keyFrom="name"
-        builder={() => ({
-          name: fieldAtom({ value: "" }),
-          value: fieldAtom({ value: "" }),
-        })}
+        keyFrom="variable"
+        builder={envVarsBuilder}
         AddItemButton={({ add }) => (
           <button type="button" className="outline" onClick={add}>
             Add environment variable
@@ -58,12 +60,16 @@ export const Primary = formStory({
             }}
           >
             <InputField
-              atom={fields.name}
-              render={(props) => <input {...props} placeholder="Name" />}
+              atom={fields.variable}
+              render={(props) => (
+                <input {...props} placeholder="Variable Name" />
+              )}
             />
             <InputField
               atom={fields.value}
-              render={(props) => <input {...props} placeholder="Value" />}
+              render={(props) => (
+                <input {...props} placeholder="Variable Value" />
+              )}
             />
             <RemoveItemButton />
           </div>
