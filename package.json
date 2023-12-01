@@ -96,6 +96,9 @@
   "dependencies": {
     "react-render-prop-type": "0.1.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "release": {
     "branches": [
       "main",
