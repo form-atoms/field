@@ -1,3 +1,10 @@
+## [3.8.1](https://github.com/form-atoms/field/compare/v3.8.0...v3.8.1) (2023-12-01)
+
+
+### Bug Fixes
+
+* **ListItem:** document the count child prop ([43297e4](https://github.com/form-atoms/field/commit/43297e456f437412e3bde0730578d90fa1a188e9))
+
 # [3.8.0](https://github.com/form-atoms/field/compare/v3.7.0...v3.8.0) (2023-11-30)
 
 
