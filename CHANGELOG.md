@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/form-atoms/field/compare/v3.7.0...v3.8.0) (2023-11-30)
+
+
+### Features
+
+* digitField ([89e979e](https://github.com/form-atoms/field/commit/89e979e589078efcb717434ce4fe0cacf4555146))
+
 # [3.7.0](https://github.com/form-atoms/field/compare/v3.6.4...v3.7.0) (2023-11-30)
 
 
