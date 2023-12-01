@@ -39,7 +39,14 @@ type RenderProps = Partial<
 export type ListItemRenderProps<Fields> = RenderProp<
   {
     atom: PrimitiveAtom<Fields>;
+    /**
+     * The index of the current item.
+     */
     index: number;
+    /**
+     * Total count of items in the list.
+     */
+    count: number;
     fields: Fields;
     add: (before?: PrimitiveAtom<Fields>) => void;
     remove: (field: FieldAtom<any> | FormFields) => void;
