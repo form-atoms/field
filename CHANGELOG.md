@@ -1,3 +1,10 @@
+## [3.8.2](https://github.com/form-atoms/field/compare/v3.8.1...v3.8.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* add publish config ([3f6895f](https://github.com/form-atoms/field/commit/3f6895ff443083ccce3586cf59b90de0d5298229))
+
 ## [3.8.1](https://github.com/form-atoms/field/compare/v3.8.0...v3.8.1) (2023-12-01)
 
 
