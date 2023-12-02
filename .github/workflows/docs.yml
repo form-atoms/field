@@ -16,33 +16,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: 🧫 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/Iron
 
-      - name: Cache node_modules
+      - name: 💾 Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install
+      - name: 🏗️ Install
         run: npm install
 
-      - name: Build Package
+      - name: 📦 Build Package
         run: npm run build
 
-      - name: Build Storybook Docs
+      - name: 🎨 Build Storybook Docs
         run: npm run build:docs
 
-      - name: Upload Storybook
+      - name: ⬆️ Upload Storybook
         uses: actions/upload-pages-artifact@v2
         with:
           path: storybook-static
 
-      - name: Deploy to GitHub Pages
+      - name: 🚢 Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
         with:
           token: ${{ github.token }}
