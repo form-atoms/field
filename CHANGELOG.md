@@ -1,3 +1,10 @@
+## [3.8.4](https://github.com/form-atoms/field/compare/v3.8.3...v3.8.4) (2023-12-02)
+
+
+### Bug Fixes
+
+* no ESM ([27037e8](https://github.com/form-atoms/field/commit/27037e8014aa6db7c4963d789c2a87fa73b14863))
+
 ## [3.8.3](https://github.com/form-atoms/field/compare/v3.8.2...v3.8.3) (2023-12-02)
 
 
