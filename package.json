@@ -1,6 +1,5 @@
 {
   "name": "@form-atoms/field",
-  "packageManager": "yarn@4.0.2",
   "version": "0.0.0-semantic-release",
   "type": "module",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
@@ -37,10 +36,10 @@
     "test": "vitest",
     "typecheck": "vitest typecheck",
     "storybook": "storybook dev",
-    "sb": "yarn storybook",
+    "sb": "npm run storybook",
     "docs": "storybook dev --docs",
     "lint": "eslint --ext .tsx,.ts ./src",
-    "lint:fix": "yarn run lint --fix",
+    "lint:fix": "npm run lint --fix",
     "semantic-release": "semantic-release",
     "ui": "yarn upgrade-interactive"
   },

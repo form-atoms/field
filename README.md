@@ -6,7 +6,7 @@
 Declarative & headless form fields build on top of [`jotai & form-atoms`](https://github.com/jaredLunde/form-atoms).
 
 ```
-yarn add jotai form-atoms @form-atoms/field
+npm install jotai form-atoms @form-atoms/field
 ```
 
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">

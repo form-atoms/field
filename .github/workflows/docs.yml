@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: lts/Iron
 
@@ -26,29 +26,23 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+        run: npm install
 
       - name: Build Package
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
+        run: npm run build
 
       - name: Build Storybook Docs
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build:docs
+        run: npm run build:docs
 
       - name: Upload Storybook
-        uses: actions/upload-pages-artifact@v1.0.4
+        uses: actions/upload-pages-artifact@v2
         with:
           path: storybook-static
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
         with:
           token: ${{ github.token }}
