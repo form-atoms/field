@@ -2646,7 +2646,11 @@ __metadata:
     "@emotion/react": "npm:^11.11.1"
     "@mdx-js/react": "npm:^2.3.0"
     "@semantic-release/changelog": "npm:^6.0.3"
+    "@semantic-release/commit-analyzer": "npm:^11.1.0"
     "@semantic-release/git": "npm:^10.0.1"
+    "@semantic-release/github": "npm:^9.2.4"
+    "@semantic-release/npm": "npm:^11.0.1"
+    "@semantic-release/release-notes-generator": "npm:^12.1.0"
     "@storybook/addon-actions": "npm:7.6.0"
     "@storybook/addon-docs": "npm:7.6.0"
     "@storybook/addon-essentials": "npm:7.6.0"
@@ -2687,6 +2691,7 @@ __metadata:
     semantic-release: "npm:^22.0.8"
     storybook: "npm:7.6.0"
     typescript: "npm:5.3.2"
+    vite: "npm:^5.0.4"
     vite-tsconfig-paths: "npm:^4.2.1"
     vitest: "npm:^0.34.6"
     zod: "npm:3.22.4"
@@ -4246,7 +4251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/commit-analyzer@npm:^11.0.0":
+"@semantic-release/commit-analyzer@npm:^11.0.0, @semantic-release/commit-analyzer@npm:^11.1.0":
   version: 11.1.0
   resolution: "@semantic-release/commit-analyzer@npm:11.1.0"
   dependencies:
@@ -4321,7 +4326,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/npm@npm:^11.0.0":
+"@semantic-release/github@npm:^9.2.4":
+  version: 9.2.4
+  resolution: "@semantic-release/github@npm:9.2.4"
+  dependencies:
+    "@octokit/core": "npm:^5.0.0"
+    "@octokit/plugin-paginate-rest": "npm:^9.0.0"
+    "@octokit/plugin-retry": "npm:^6.0.0"
+    "@octokit/plugin-throttling": "npm:^8.0.0"
+    "@semantic-release/error": "npm:^4.0.0"
+    aggregate-error: "npm:^5.0.0"
+    debug: "npm:^4.3.4"
+    dir-glob: "npm:^3.0.1"
+    globby: "npm:^14.0.0"
+    http-proxy-agent: "npm:^7.0.0"
+    https-proxy-agent: "npm:^7.0.0"
+    issue-parser: "npm:^6.0.0"
+    lodash-es: "npm:^4.17.21"
+    mime: "npm:^4.0.0"
+    p-filter: "npm:^3.0.0"
+    url-join: "npm:^5.0.0"
+  peerDependencies:
+    semantic-release: ">=20.1.0"
+  checksum: bfe46b69c8f17798110818d98fe10a5909b089bae1d887a85bfe6c51b87c201b927b76c4365d877110e570b625a3b4aab22f19144615a9b130ed448635b88ab2
+  languageName: node
+  linkType: hard
+
+"@semantic-release/npm@npm:^11.0.0, @semantic-release/npm@npm:^11.0.1":
   version: 11.0.1
   resolution: "@semantic-release/npm@npm:11.0.1"
   dependencies:
@@ -4344,7 +4375,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/release-notes-generator@npm:^12.0.0":
+"@semantic-release/release-notes-generator@npm:^12.0.0, @semantic-release/release-notes-generator@npm:^12.1.0":
   version: 12.1.0
   resolution: "@semantic-release/release-notes-generator@npm:12.1.0"
   dependencies:
@@ -11750,6 +11781,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mime@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "mime@npm:4.0.0"
+  bin:
+    mime: bin/cli.js
+  checksum: 47bc35bc58325edb51c584928a54bca4001d7b7f70a9d2525153fe6e99b5c39811d4cc29ddeabe05fa029a3d04f64132836291a6b2c4850a19a6a1a8533dc679
+  languageName: node
+  linkType: hard
+
 "mimic-fn@npm:^2.1.0":
   version: 2.1.0
   resolution: "mimic-fn@npm:2.1.0"
@@ -15955,7 +15995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.0.0 || ^4.0.0 || ^5.0.0-0, vite@npm:^3.1.0 || ^4.0.0 || ^5.0.0-0":
+"vite@npm:^3.0.0 || ^4.0.0 || ^5.0.0-0, vite@npm:^3.1.0 || ^4.0.0 || ^5.0.0-0, vite@npm:^5.0.4":
   version: 5.0.4
   resolution: "vite@npm:5.0.4"
   dependencies:
