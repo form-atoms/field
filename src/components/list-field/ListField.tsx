@@ -1,25 +1,9 @@
-import { FieldAtom, FormAtom, FormFieldValues, FormFields } from "form-atoms";
+import { FieldAtom, FormAtom, FormFields } from "form-atoms";
 import { PrimitiveAtom } from "jotai";
-import React, { Fragment, useCallback } from "react";
+import { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
 import { useListFieldActions } from "./useListFieldActions";
-
-export function listFieldAtoms<TValue, TFieldAtom extends FieldAtom<TValue>>(
-  builder: (value: TValue) => TFieldAtom,
-  values: TValue[],
-): TFieldAtom[];
-export function listFieldAtoms<Fields extends FormFields>(
-  builder: (values: FormFieldValues<Fields>) => Fields,
-  values: FormFieldValues<Fields>[],
-): Fields[];
-// actual type must be one of overloads, as this one is ignored
-export function listFieldAtoms<Fields extends FormFields>(
-  builder: (values: FormFieldValues<Fields>) => Fields,
-  values: FormFieldValues<Fields>[],
-): Fields[] {
-  return values.map(builder);
-}
 
 export type RemoveItemButtonProps = { remove: () => void };
 export type RemoveItemButtonProp = RenderProp<
