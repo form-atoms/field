@@ -15,5 +15,5 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "./storybook", "./setup.ts"]
+  "include": ["src", "./setup.ts"]
 }
