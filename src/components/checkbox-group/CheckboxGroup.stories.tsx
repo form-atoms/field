@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
 
 import { CheckboxGroup } from "./CheckboxGroup";
-import { UseCheckboxGroupProps } from "./useCheckboxGroup";
-import { stringArrayField } from "../../fields/array-field/stringArrayField";
-import { ZodArrayField } from "../../hooks";
+import { stringArrayField } from "../../fields";
+import { UseCheckboxGroupProps, ZodArrayField } from "../../hooks";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 import { FieldLabel } from "../field-label";

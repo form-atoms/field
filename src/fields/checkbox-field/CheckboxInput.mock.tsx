@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 
 import { CheckboxField } from "./checkboxField";
-import { useCheckboxFieldProps } from "./useCheckboxFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
-import { useRequiredProps } from "../../hooks";
+import { useCheckboxFieldProps, useRequiredProps } from "../../hooks";
 
 export const CheckboxInput = ({
   field,

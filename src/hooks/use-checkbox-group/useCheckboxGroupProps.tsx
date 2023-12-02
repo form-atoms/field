@@ -1,12 +1,12 @@
 import { useAtomValue } from "jotai";
 import { ChangeEvent, useEffect, useState } from "react";
 
-import { ZodFieldValue } from "../../fields";
 import {
   UseMultiSelectFieldProps as UseCheckboxGroupFieldProps,
   ZodArrayField,
   useFieldProps,
-} from "../../hooks";
+} from "../";
+import { ZodFieldValue } from "../../fields";
 
 export const useCheckboxGroupFieldProps = <
   Option,
@@ -24,7 +24,6 @@ export const useCheckboxGroupFieldProps = <
 
   const getEventValue = (event: ChangeEvent<HTMLInputElement>) => {
     const index = parseInt(event.currentTarget.value);
-    console.log("inner", value);
     const values = event.currentTarget.checked
       ? [...value, index]
       : value.filter((val) => val != index);

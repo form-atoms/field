@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { DateField } from "./dateField";
-import { useDateFieldProps } from "./useDateFieldProps";
+import { useDateFieldProps } from "../../hooks/use-date-field-props/useDateFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 

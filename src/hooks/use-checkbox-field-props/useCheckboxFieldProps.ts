@@ -1,7 +1,7 @@
 import { ChangeEvent, useMemo } from "react";
 
-import { CheckboxField } from "./checkboxField";
-import { FieldProps, useFieldProps } from "../../hooks";
+import { FieldProps, useFieldProps } from "../";
+import { type CheckboxField } from "../../fields";
 
 export type CheckboxFieldProps = FieldProps<CheckboxField>;
 

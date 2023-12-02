@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
-import { FilesField } from "./filesField";
-import { FieldProps, useFieldProps } from "../../hooks";
+import { FieldProps, useFieldProps } from "../";
+import { type FilesField } from "../../fields";
 
 export type FileFieldProps = FieldProps<FilesField>;
 

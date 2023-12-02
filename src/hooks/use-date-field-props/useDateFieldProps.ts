@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
-import { DateField } from "./dateField";
-import { FieldProps, useFieldProps } from "../../hooks";
+import { FieldProps, useFieldProps } from "../";
+import { type DateField } from "../../fields/";
 
 export type DateFieldProps = FieldProps<DateField>;
 

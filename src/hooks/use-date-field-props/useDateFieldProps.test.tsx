@@ -2,9 +2,9 @@ import { act, render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
-import { dateField } from "./dateField";
-import { getDateString } from "./DateInput.mock";
 import { useDateFieldProps } from "./useDateFieldProps";
+import { dateField } from "../../fields/date-field";
+import { getDateString } from "../../fields/date-field/DateInput.mock";
 
 describe("useDateFieldProps", () => {
   it("reads empty value as undefined", async () => {

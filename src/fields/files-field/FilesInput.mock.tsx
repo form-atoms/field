@@ -1,8 +1,8 @@
 import { InputHTMLAttributes, ReactNode } from "react";
 
 import { FilesField } from "./filesField";
-import { useFilesFieldProps } from "./useFilesFieldProps";
 import { FieldErrors, FieldLabel } from "../../components";
+import { useFilesFieldProps } from "../../hooks/";
 
 export const FilesInput = ({
   field,

@@ -4,6 +4,7 @@ export * from "./checkbox-field";
 export * from "./date-field";
 export * from "./digit-field";
 export * from "./files-field";
+export * from "./list-field";
 export * from "./number-field";
 export * from "./string-field";
 export * from "./text-field";

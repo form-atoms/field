@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from "vitest";
 
 import { listFieldBuilder } from "./listFieldBuilder";
-import { textField } from "../../fields";
+import { textField } from "../";
 
 test("listFieldBuilder - cannot build with random data", () => {
   const addressBuilder = listFieldBuilder(({ street }) => ({

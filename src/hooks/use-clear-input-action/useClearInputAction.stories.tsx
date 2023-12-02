@@ -1,5 +1,6 @@
 import { useClearInputAction } from "./useClearInputAction";
-import { textField, useTextFieldProps } from "../../fields";
+import { textField } from "../../fields";
+import { useTextFieldProps } from "../use-text-field-props";
 
 const password = textField();
 

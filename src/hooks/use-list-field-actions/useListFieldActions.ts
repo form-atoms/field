@@ -10,7 +10,7 @@ import { splitAtom } from "jotai/utils";
 import { atomEffect } from "jotai-effect";
 import { useCallback, useMemo } from "react";
 
-import { ListFields } from "./ListField";
+import { type ListFields } from "../../components/list-field";
 
 const getAt = (obj: Record<any, unknown>, path: (string | number)[]) =>
   // @ts-expect-error TODO recursive typing

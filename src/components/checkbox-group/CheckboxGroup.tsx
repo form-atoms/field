@@ -1,5 +1,8 @@
-import { UseCheckboxGroupProps, useCheckboxGroup } from "./useCheckboxGroup";
-import { ZodArrayField } from "../../hooks";
+import {
+  UseCheckboxGroupProps,
+  ZodArrayField,
+  useCheckboxGroup,
+} from "../../hooks";
 
 export const CheckboxGroup = <Option, Field extends ZodArrayField>({
   field,

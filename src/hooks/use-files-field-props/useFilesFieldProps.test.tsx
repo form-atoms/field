@@ -3,8 +3,8 @@ import { userEvent } from "@testing-library/user-event";
 import { formAtom, useFormActions } from "form-atoms";
 import { describe, expect, it } from "vitest";
 
-import { filesField } from "./filesField";
 import { useFilesFieldProps } from "./useFilesFieldProps";
+import { filesField } from "../../fields";
 
 describe("useFilesFieldProps", () => {
   describe("with required field", () => {

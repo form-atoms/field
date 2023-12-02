@@ -3,7 +3,7 @@ import { PrimitiveAtom } from "jotai";
 import { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { useListFieldActions } from "./useListFieldActions";
+import { useListFieldActions } from "../../hooks";
 
 export type RemoveItemButtonProps = { remove: () => void };
 export type RemoveItemButtonProp = RenderProp<

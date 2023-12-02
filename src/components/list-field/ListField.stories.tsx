@@ -5,8 +5,7 @@ import {
   ListField,
   RemoveItemButtonProps,
 } from "./ListField";
-import { listFieldBuilder } from "./listFieldBuilder";
-import { textField } from "../../fields";
+import { listFieldBuilder, textField } from "../../fields";
 import { checkboxField } from "../../fields/checkbox-field";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";

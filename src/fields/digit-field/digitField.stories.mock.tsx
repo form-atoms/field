@@ -1,7 +1,9 @@
-import { digitField } from "..";
-import { ListField, listFieldBuilder } from "../../components";
+import { listFieldBuilder } from "../";
+import { ListField } from "../../components";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { NumberInput } from "../number-field/NumberInput.mock";
+
+import { digitField } from ".";
 
 export default {
   ...meta,

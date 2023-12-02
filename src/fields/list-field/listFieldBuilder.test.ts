@@ -3,7 +3,7 @@ import { formAtom, useFormValues } from "form-atoms";
 import { describe, expect, it } from "vitest";
 
 import { listFieldBuilder } from "./listFieldBuilder";
-import { textField } from "../../fields";
+import { textField } from "../";
 
 describe("listFieldBuilder()", () => {
   describe("building plain atoms", () => {

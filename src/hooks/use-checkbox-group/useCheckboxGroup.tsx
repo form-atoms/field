@@ -1,10 +1,9 @@
 import { useCheckboxGroupFieldProps } from "./useCheckboxGroupProps";
 import {
-  UseMultiSelectFieldProps,
-  UseOptionsProps,
-  ZodArrayField,
-  useOptions,
-} from "../../hooks";
+  type UseMultiSelectFieldProps,
+  type ZodArrayField,
+} from "../use-multiselect-field-props";
+import { type UseOptionsProps, useOptions } from "../use-options";
 
 export type UseCheckboxGroupProps<
   Option,

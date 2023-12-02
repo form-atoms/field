@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
-import { NumberField } from "./numberField";
-import { FieldProps, useFieldProps } from "../../hooks";
+import { FieldProps, useFieldProps } from "../";
+import { type NumberField } from "../../fields/";
 
 export type NumberFieldProps = FieldProps<NumberField>;
 
