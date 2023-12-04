@@ -31,6 +31,7 @@ export const Primary = formStory({
     },
   },
   args: {
+    resettable: false,
     fields: {
       envVars: envVarsBuilder([
         { variable: "GITHUB_TOKEN", value: "ff52d09a" },
@@ -92,6 +93,7 @@ export const Flat = formStory({
     },
   },
   args: {
+    resettable: false,
     fields: {
       benefits: typescriptBenefits(["safe function calls", "it's fast"]),
     },
@@ -138,6 +140,7 @@ export const Prepend = formStory({
     },
   },
   args: {
+    resettable: false,
     fields: {
       hobbies: [fieldAtom({ value: "gardening" })],
     },
@@ -179,6 +182,7 @@ export const Ordering = formStory({
     },
   },
   args: {
+    resettable: false,
     fields: {
       hobbies: [fieldAtom({ value: "gardening" })],
     },
@@ -215,6 +219,7 @@ export const Ordering = formStory({
 
 export const Nested = formStory({
   args: {
+    resettable: false,
     fields: {
       people: [
         {
@@ -296,6 +301,7 @@ export const Nested = formStory({
 
 export const WithRadioControl = formStory({
   args: {
+    resettable: false,
     fields: {
       phones: [
         {

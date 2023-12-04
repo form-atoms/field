@@ -6,6 +6,7 @@ import { RenderProp } from "react-render-prop-type";
 
 type Props<Fields extends FormFields> = {
   fields: Fields;
+  resettable?: boolean;
   required?: boolean;
 } & RenderProp<{
   form: FormAtom<Fields>;
@@ -14,6 +15,7 @@ type Props<Fields extends FormFields> = {
 }>;
 
 export const StoryForm = <Fields extends FormFields>({
+  resettable = true,
   fields,
   children,
   required = true,
@@ -25,9 +27,11 @@ export const StoryForm = <Fields extends FormFields>({
     <form onSubmit={submit(action("submit"))}>
       {children({ fields, required, form })}
       <button>Submit</button>
-      <button className="outline secondary" type="button" onClick={reset}>
-        Reset
-      </button>
+      {resettable && (
+        <button className="outline secondary" type="button" onClick={reset}>
+          Reset
+        </button>
+      )}
     </form>
   );
 };
