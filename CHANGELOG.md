@@ -1,3 +1,10 @@
+## [3.8.5](https://github.com/form-atoms/field/compare/v3.8.4...v3.8.5) (2023-12-04)
+
+
+### Bug Fixes
+
+* **types:** readable ZodField type ([af53ad7](https://github.com/form-atoms/field/commit/af53ad791ad24fd41e12abbe3cd57a0713921f9c)), closes [#55](https://github.com/form-atoms/field/issues/55)
+
 ## [3.8.4](https://github.com/form-atoms/field/compare/v3.8.3...v3.8.4) (2023-12-02)
 
 
