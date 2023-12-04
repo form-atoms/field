@@ -1,3 +1,10 @@
+## [3.8.6](https://github.com/form-atoms/field/compare/v3.8.5...v3.8.6) (2023-12-04)
+
+
+### Bug Fixes
+
+* **required-field:** share the default required atom ([bd92273](https://github.com/form-atoms/field/commit/bd922733f2a1099033c4d139b2ab440a942e88a5))
+
 ## [3.8.5](https://github.com/form-atoms/field/compare/v3.8.4...v3.8.5) (2023-12-04)
 
 
