@@ -110,33 +110,51 @@ import { ListField } from "@form-atoms/field";
 
 ```tsx
 import { formAtom, fieldAtom } from "form-atoms";
-import { ListField } from "@form-atoms/field";
+import {
+  AddItemButtonProps,
+  ListField,
+  listFieldBuilder,
+  textField,
+} from "@form-atoms/field";
 
-const hobbiesForm = formAtom({
-  hobbies: [fieldAtom({ value: "gardening" })],
+const typescriptBenefits = listFieldBuilder((value) =>
+  textField({ name: "ts-benefit", value }),
+);
+
+const form = formAtom({
+  benefits: typescriptBenefits(["safe function calls", "it's fast"]),
 });
 
 // NOTE: the keyFrom prop is not needed as the item/fieldAtom itself is used as the render key default.
 const Example = () => (
-  <ListField
-    form={hobbiesForm}
-    path={["hobbies"]}
-    builder={() => fieldAtom({ value: "" })}
-  >
-    {({ fields, RemoveItemButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto min-content",
-        }}
-      >
-        {/* NOTE: The item is itself a field atom */}
-        <InputField atom={fields} component="input" />
-        <RemoveItemButton />
-      </div>
-    )}
-  </ListField>
+  <>
+    <label style={{ marginBottom: 16 }}>
+      What are some benefits of TypeScript?
+    </label>
+    <ListField
+      form={form}
+      path={["benefits"]}
+      AddItemButton={({ add }: AddItemButtonProps) => (
+        <button type="button" className="outline" onClick={add}>
+          Add Benefit
+        </button>
+      )}
+      builder={typescriptBenefits}
+    >
+      {({ fields, RemoveItemButton }) => (
+        <div
+          style={{
+            display: "grid",
+            gridGap: 16,
+            gridTemplateColumns: "auto min-content",
+          }}
+        >
+          <InputField atom={fields} component="input" />
+          <RemoveItemButton />
+        </div>
+      )}
+    </ListField>
+  </>
 );
 ```
 

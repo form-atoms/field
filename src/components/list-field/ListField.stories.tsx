@@ -78,40 +78,53 @@ export const Primary = formStory({
   },
 });
 
+const typescriptBenefits = listFieldBuilder((value) =>
+  textField({ name: "ts-benefit", value }),
+);
+
 export const Flat = formStory({
   parameters: {
     docs: {
       description: {
         story:
-          "The array items can be plain field atoms. This is usefull when you want to capture list of primitives, e.g. strings or numbers. Here our hobbies list contains `FieldAtom<string>` items.",
+          "The array items can be plain field atoms. This is usefull when you want to capture list of primitives, e.g. strings or numbers. Here our list of TypeScript benefits contains `FieldAtom<string>` items.",
       },
     },
   },
   args: {
     fields: {
-      hobbies: [fieldAtom({ value: "gardening" })],
+      benefits: typescriptBenefits(["safe function calls", "it's fast"]),
     },
     children: ({ form }) => (
-      <ListField
-        form={form}
-        path={["hobbies"]}
-        AddItemButton={AddHobbyField}
-        RemoveItemButton={RemoveButton}
-        builder={() => fieldAtom({ value: "" })}
-      >
-        {({ fields, RemoveItemButton }) => (
-          <div
-            style={{
-              display: "grid",
-              gridGap: 16,
-              gridTemplateColumns: "auto min-content",
-            }}
-          >
-            <InputField atom={fields} component="input" />
-            <RemoveItemButton />
-          </div>
-        )}
-      </ListField>
+      <>
+        <label style={{ marginBottom: 16 }}>
+          What are some benefits of TypeScript?
+        </label>
+        <ListField
+          form={form}
+          path={["benefits"]}
+          AddItemButton={({ add }: AddItemButtonProps) => (
+            <button type="button" className="outline" onClick={add}>
+              Add Benefit
+            </button>
+          )}
+          RemoveItemButton={RemoveButton}
+          builder={typescriptBenefits}
+        >
+          {({ fields, RemoveItemButton }) => (
+            <div
+              style={{
+                display: "grid",
+                gridGap: 16,
+                gridTemplateColumns: "auto min-content",
+              }}
+            >
+              <InputField atom={fields} component="input" />
+              <RemoveItemButton />
+            </div>
+          )}
+        </ListField>
+      </>
     ),
   },
 });
