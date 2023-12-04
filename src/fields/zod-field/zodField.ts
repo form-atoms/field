@@ -78,31 +78,43 @@ export type OptionalZodField<
   OptSchema extends z.Schema = ZodUndefined,
 > = ZodField<Schema, OptSchema, WritableRequiredAtom>; // for OptionalZodField we can write false to the required atom
 
+/**
+ * This is an alias to ZodField, it hides the 3rd argument from type tooltip.
+ */
+type RequiredZodField<
+  Schema extends z.Schema = ZodAny,
+  OptSchema extends z.Schema = ZodUndefined,
+> = ZodField<Schema, OptSchema>;
+
+type ExtendFieldAtom<Value, State> = FieldAtom<Value> extends Atom<
+  infer DefaultState
+>
+  ? Atom<DefaultState & State>
+  : never;
+
 export type ZodField<
   Schema extends z.Schema = ZodAny,
   OptSchema extends z.Schema = ZodUndefined,
-  RequiredAtom = Atom<boolean>, // required field have read-only RequiredAtom
-> = FieldAtom<Schema["_output"] | OptSchema["_output"]> extends Atom<
-  infer Config
->
-  ? {
-      optional: () => OptionalZodField<Schema, OptSchema>;
-    } & Atom<
-      Config & {
-        required: RequiredAtom;
-      }
-    >
-  : never;
+  RequiredAtom = Atom<boolean>,
+> = ExtendFieldAtom<
+  Schema["_output"] | OptSchema["_output"],
+  { required: RequiredAtom }
+> & {
+  optional: () => OptionalZodField<Schema, OptSchema>;
+};
 
-export const zodField = <
+export function zodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
 >({
   schema,
   optionalSchema,
   ...config
-}: ZodFieldConfig<Schema, OptSchema>): ZodField<Schema, OptSchema> => {
-  const requiredAtom = atom(true); // constant, unwritable when .optional() is not called
+}: ZodFieldConfig<Schema, OptSchema>): RequiredZodField<Schema, OptSchema> {
+  /**
+   * Read-only atom for default zodFields which all are required.
+   */
+  const requiredAtom = atom(true);
 
   const baseFieldAtom = fieldAtom({
     validate: zodValidate(
@@ -194,4 +206,4 @@ export const zodField = <
   zodField.debugLabel = `zodField/${config.name ?? zodField}`;
 
   return zodField;
-};
+}
