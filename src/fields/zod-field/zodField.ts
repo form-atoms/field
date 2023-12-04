@@ -103,6 +103,12 @@ export type ZodField<
   optional: () => OptionalZodField<Schema, OptSchema>;
 };
 
+/**
+ * Read-only atom for default zodFields which all are required.
+ */
+const defaultRequiredAtom = atom(true as const);
+defaultRequiredAtom.debugLabel = "zodField/defaultRequired";
+
 export function zodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
@@ -111,11 +117,6 @@ export function zodField<
   optionalSchema,
   ...config
 }: ZodFieldConfig<Schema, OptSchema>): RequiredZodField<Schema, OptSchema> {
-  /**
-   * Read-only atom for default zodFields which all are required.
-   */
-  const requiredAtom = atom(true);
-
   const baseFieldAtom = fieldAtom({
     validate: zodValidate(
       (get) => {
@@ -134,17 +135,8 @@ export function zodField<
     const baseField = get(baseFieldAtom);
 
     const fieldAtoms = {
-      required: requiredAtom,
+      required: defaultRequiredAtom,
     };
-
-    if (
-      typeof process !== "undefined" &&
-      process.env.NODE_ENV !== "production"
-    ) {
-      Object.entries(fieldAtoms).map(([atomName, atom]) => {
-        atom.debugLabel = `field/${atomName}/${config.name ?? zodField}`;
-      });
-    }
 
     return { ...baseField, ...fieldAtoms };
   }) as unknown as ZodField<Schema, OptSchema>;
