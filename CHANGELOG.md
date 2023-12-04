@@ -1,3 +1,10 @@
+## [3.8.7](https://github.com/form-atoms/field/compare/v3.8.6...v3.8.7) (2023-12-04)
+
+
+### Bug Fixes
+
+* **types:** `listFieldBuilder` with proper type for primitive and fields ([8beff9b](https://github.com/form-atoms/field/commit/8beff9bb03b6ed66c1308d6a2e6af6475a62390b)), closes [#56](https://github.com/form-atoms/field/issues/56)
+
 ## [3.8.6](https://github.com/form-atoms/field/compare/v3.8.5...v3.8.6) (2023-12-04)
 
 
