@@ -1,3 +1,10 @@
+## [3.8.9](https://github.com/form-atoms/field/compare/v3.8.8...v3.8.9) (2023-12-05)
+
+
+### Bug Fixes
+
+* **useCheckboxFieldProps:** extend to support BooleanField as input ([c3c59c0](https://github.com/form-atoms/field/commit/c3c59c002bdc0b1c0970ed4832c58f81aa078f5f)), closes [#33](https://github.com/form-atoms/field/issues/33)
+
 ## [3.8.8](https://github.com/form-atoms/field/compare/v3.8.7...v3.8.8) (2023-12-05)
 
 
