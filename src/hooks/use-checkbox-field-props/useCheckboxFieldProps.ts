@@ -6,7 +6,7 @@ import { BooleanField, type CheckboxField } from "../../fields";
 export type CheckboxFieldProps = FieldProps<CheckboxField | BooleanField>;
 
 const getChecked = (event: ChangeEvent<HTMLInputElement>) =>
-  event.target.checked;
+  event.currentTarget.checked;
 
 export function useCheckboxFieldProps(field: CheckboxField | BooleanField) {
   // undefined (empty checkbox) is rendered as unchecked input
