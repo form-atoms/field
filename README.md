@@ -3,7 +3,7 @@
   <h1>Atomic Form Fields for React</h1>
 </div>
 
-Declarative & headless form fields build on top of [`jotai & form-atoms`](https://github.com/jaredLunde/form-atoms).
+Declarative & headless form fields build on top of [`jotai & form-atoms`](https://github.com/form-atom/form-atoms).
 
 ```
 yarn add jotai form-atoms @form-atoms/field
@@ -11,6 +11,9 @@ yarn add jotai form-atoms @form-atoms/field
 
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
+</a>
+<a aria-label="Code coverage report" href="https://codecov.io/gh/form-atom/field">
+  <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/form-atom/field?style=for-the-badge&labelColor=24292e">
 </a>
 
 ## Motivation
@@ -55,7 +58,7 @@ Lastly to capture a list of objects, you will find the [ListField](https://form-
 ## Docs
 
 [The documentation](https://form-atoms.github.io/field/) will be enough for any application work. (Eventually, as it's a work in progress).
-For more generic and custom constructs you will need the original [`form-atoms` docs](https://github.com/jaredLunde/form-atoms).
+For more generic and custom constructs you will need the original [`form-atoms` docs](https://github.com/form-atom/form-atoms).
 
 ## Fields
 
@@ -67,7 +70,7 @@ Similarly to `zod` schema fields, by default all the fieldAtoms are required.
 
 ```tsx
 import { numberField, stringField, Select } from "@form-atoms/field";
-import { fromAtom } from "form-atoms";
+import { fromAtom, useForm } from "form-atoms";
 import { z } from "zod";
 import { NumberField } from "@form-atoms/flowbite"; // or /chakra-ui
 
@@ -103,4 +106,4 @@ export const Form = () => {
 | 📦Package                                            | 🎨 Storybook                                              | About                                          |
 | ---------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------- |
 | [flowbite](https://github.com/form-atoms/flowbite)   | [Flowbite Fields](https://form-atoms.github.io/flowbite/) | Bindigs to Tailwind component library Flowbite |
-| [chakra-ui](https://github.com/form-atoms/chakra-ui) | 🚧 WIP                                                    | Bindings to CSS-in-JS library Chakra UI        |
+| [chakra-ui](https://github.com/form-atoms/chakra-ui) | [ChakraUI Fields](https://form-atoms.github.io/chakra-ui) | Bindings to CSS-in-JS library Chakra UI        |
