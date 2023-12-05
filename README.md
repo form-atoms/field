@@ -12,8 +12,8 @@ yarn add jotai form-atoms @form-atoms/field
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
 </a>
-<a aria-label="Code coverage report" href="https://codecov.io/gh/form-atom/field">
-  <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/form-atom/field?style=for-the-badge&labelColor=24292e">
+<a aria-label="Code coverage report" href="https://codecov.io/gh/form-atoms/field">
+  <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/form-atoms/field?style=for-the-badge&labelColor=24292e">
 </a>
 
 ## Motivation
@@ -57,8 +57,7 @@ Lastly to capture a list of objects, you will find the [ListField](https://form-
 
 ## Docs
 
-[The documentation](https://form-atoms.github.io/field/) will be enough for any application work. (Eventually, as it's a work in progress).
-For more generic and custom constructs you will need the original [`form-atoms` docs](https://github.com/form-atom/form-atoms).
+Checkout [our Storybook docs](https://form-atoms.github.io/field/) and for additional primitives see the [`form-atoms` docs](https://github.com/form-atoms/form-atoms).
 
 ## Fields
 
