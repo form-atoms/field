@@ -1,3 +1,10 @@
+## [3.8.12](https://github.com/form-atoms/field/compare/v3.8.11...v3.8.12) (2023-12-05)
+
+
+### Bug Fixes
+
+* **test:** add coverage action ([962eb86](https://github.com/form-atoms/field/commit/962eb86478dc8fb4ebbba7a28fe36217542a8edb))
+
 ## [3.8.11](https://github.com/form-atoms/field/compare/v3.8.10...v3.8.11) (2023-12-05)
 
 
