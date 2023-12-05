@@ -1,3 +1,10 @@
+## [3.8.11](https://github.com/form-atoms/field/compare/v3.8.10...v3.8.11) (2023-12-05)
+
+
+### Bug Fixes
+
+* read currentTarget from events ([3afd6e3](https://github.com/form-atoms/field/commit/3afd6e301a2016966657d759a64104dc8e9e53e7))
+
 ## [3.8.10](https://github.com/form-atoms/field/compare/v3.8.9...v3.8.10) (2023-12-05)
 
 
