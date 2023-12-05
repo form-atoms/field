@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 
 import { DateField } from "./dateField";
-import { useDateFieldProps } from "../../hooks/use-date-field-props/useDateFieldProps";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
+import { useDateFieldProps } from "../../hooks";
 
 export const getDateString = (date: Date = new Date()) =>
   date.toISOString().slice(0, 10);
