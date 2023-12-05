@@ -1,3 +1,10 @@
+## [3.8.10](https://github.com/form-atoms/field/compare/v3.8.9...v3.8.10) (2023-12-05)
+
+
+### Bug Fixes
+
+* **useFieldProps:** drop the empty argument as its specific to each field type and not generic ([1554612](https://github.com/form-atoms/field/commit/1554612fe722d756ba25e113f1952c360f24b446))
+
 ## [3.8.9](https://github.com/form-atoms/field/compare/v3.8.8...v3.8.9) (2023-12-05)
 
 
