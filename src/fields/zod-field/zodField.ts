@@ -1,6 +1,6 @@
 import { FieldAtom, FieldAtomConfig, FormAtom, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Atom, WritableAtom, atom } from "jotai";
+import { Atom, Getter, WritableAtom, atom } from "jotai";
 import { RESET } from "jotai/utils";
 import { ZodAny, ZodUndefined, z } from "zod";
 
