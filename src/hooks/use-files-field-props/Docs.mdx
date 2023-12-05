@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="hooks/useFilesFieldProps" />
+
+# `useFilesFieldProps(field: FilesField)`
+
+A hook to control the file inputs e.g. `input[type=file]`.
+
+```ts
+import { useFilesFieldProps } from "@form-atoms/field";
+```
+
+Works with
+
+- [filesField()](?path=/docs/fields-filesField--docs)
+
+### Features
+
+- ✅ **Reads the `event.files` value** from the event handler.
+- ✅ **Clears the file input**, when the form is reset.
+
+### Example Usage
+
+```tsx
+import { FilesField, useFilesFieldProps } from "@form-atoms/field";
+
+const FileInputMock = ({
+  field,
+  label,
+}: {
+  field: FilesField;
+  label: ReactNode;
+}) => {
+  const props = useFilesFieldProps(field);
+
+  return <input type="file" {...props} />;
+};
+```

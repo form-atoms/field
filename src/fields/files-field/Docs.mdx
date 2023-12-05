@@ -23,40 +23,12 @@ const profilePic = filesField({
 const attachments = filesField().optional();
 ```
 
+Usable with [useFilesFieldProps()](?path=/docs/hooks-useFilesfieldprops--docs)
+
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
 
 > **NOTE:** the `File` API is not available on the server side, so in practice the schema is defined as `z.array(isServer ? z.never() : z.instanceof(File)`.
-
-## useFilesFieldProps(filesField)
-
-A hook providing props to control a file input.
-
-### Features
-
-- ✅ Clears the file input, when the form is reset.
-
-```tsx
-const FileInput = ({
-  field,
-  label,
-}: {
-  field: FilesFieldAtom;
-  label: ReactNode;
-}) => {
-  const props = useFilesFieldProps(field);
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      <input type="file" {...props} />
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-```
 
 <Stories />
