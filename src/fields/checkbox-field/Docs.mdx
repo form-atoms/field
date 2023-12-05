@@ -28,35 +28,10 @@ const termsOfService = checkboxField({
 const newsletter = checkboxField().optional();
 ```
 
+Usable with [useCheckboxFieldProps()](?path=/docs/hooks-usecheckboxfieldprops--docs)
+
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
-
-## useCheckboxFieldProps(checkboxField)
-
-A hook providing props to controll a checkbox input.
-
-```tsx
-// Example component
-const CheckboxInput = ({
-  field,
-  label,
-}: {
-  field: CheckboxFieldAtom;
-  label: ReactNode;
-}) => {
-  const props = useCheckboxFieldProps(field);
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <input type="checkbox" {...props} />
-      <FieldLabel field={field} label={label} />
-      <div>
-        <FieldErrors field={field} />
-      </div>
-    </div>
-  );
-};
-```
 
 <Stories />

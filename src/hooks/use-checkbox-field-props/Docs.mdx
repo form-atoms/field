@@ -1,0 +1,53 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="hooks/useCheckboxFieldProps" />
+
+# `useCheckboxFieldProps(field: BooleanField | CheckboxField)`
+
+A hook providing props to control the `input[type=checkbox]`.
+
+```ts
+import { useCheckboxFieldProps } from "@form-atoms/field";
+```
+
+Works with
+
+- [booleanField()](?path=/docs/fields-booleanfield--docs)
+- [checkboxField()](?path=/docs/fields-checkboxfield--docs#checkboxfield)
+
+### Features
+
+- ✅ **Reads the `event.checked` value** from the event handler.
+- ✅ Adapts the empty field value `undefined` to the input as a **controlled `false` value**
+
+### Example Usage
+
+```tsx
+import { CheckboxField, useCheckboxFieldProps } from "@form-atoms/field";
+
+const CheckboxInputMock = ({
+  field,
+  label,
+}: {
+  field: CheckboxField;
+  label: ReactNode;
+}) => {
+  // props suitable for input[type=checkbox]
+  const props = useCheckboxFieldProps(field);
+  // {
+  // checked: boolean;
+  // role: "checkbox";
+  // ...
+  // }
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <input type="checkbox" {...props} />
+      <FieldLabel field={field} label={label} />
+      <div>
+        <FieldErrors field={field} />
+      </div>
+    </div>
+  );
+};
+```
