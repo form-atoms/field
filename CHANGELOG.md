@@ -1,3 +1,11 @@
+## [3.8.8](https://github.com/form-atoms/field/compare/v3.8.7...v3.8.8) (2023-12-05)
+
+
+### Bug Fixes
+
+* missing type ([52c2d2a](https://github.com/form-atoms/field/commit/52c2d2a67b79dae99521783071a46cc41eac1114))
+* **zodField:** accept read for dynamic required state in optional method ([8524974](https://github.com/form-atoms/field/commit/8524974a87f66195fb53021e8cd42f4c6f5e9f37))
+
 ## [3.8.7](https://github.com/form-atoms/field/compare/v3.8.6...v3.8.7) (2023-12-04)
 
 
