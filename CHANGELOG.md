@@ -1,3 +1,10 @@
+## [3.8.13](https://github.com/form-atoms/field/compare/v3.8.12...v3.8.13) (2023-12-05)
+
+
+### Bug Fixes
+
+* **CheckboxGroup:** option type as checkbox, add tests ([d0c7a6f](https://github.com/form-atoms/field/commit/d0c7a6f8284e4514d6439e722cfa1392fbac24c7))
+
 ## [3.8.12](https://github.com/form-atoms/field/compare/v3.8.11...v3.8.12) (2023-12-05)
 
 
