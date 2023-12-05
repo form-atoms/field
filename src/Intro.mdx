@@ -1,4 +1,4 @@
-import { Meta, Description, Title, Markdown } from "@storybook/blocks";
+import { Meta, Title, Markdown } from "@storybook/blocks";
 import Contents from "./Intro.contents.md?raw";
 
 <Meta title="Introduction" />
@@ -12,15 +12,41 @@ import Contents from "./Intro.contents.md?raw";
   <Title>Atomic Form Fields for React</Title>
 </div>
 
+## About
+
+Declarative & headless form fields build on top of jotai.
+
+<div>
+  <a
+    style={{ marginRight: 12 }}
+    aria-label="NPM version"
+    href="https://www.npmjs.com/package/%40form-atoms/field"
+  >
+    <img
+      alt="NPM Version"
+      src="https://img.shields.io/npm/v/%40form-atoms/field?style=for-the-badge&labelColor=24292e"
+    />
+  </a>
+  <a href="https://github.com/form-atoms/field#readme">
+    <img
+      alt="GitHub release"
+      src="https://img.shields.io/github/v/release/form-atoms/field?style=social"
+    />
+  </a>
+</div>
 ## Installation
 
 ```
-yarn add jotai form-atoms @form-atoms/field
+npm install jotai jotai-effect form-atoms @form-atoms/field
+```
+
+```
+yarn add jotai jotai-effect form-atoms @form-atoms/field
 ```
 
 ## Features
 
-On top of [form-atoms](https://github.com/jaredLunde/form-atoms#features) features the `@form-atoms/field` library provides:
+Every [form-atoms](https://github.com/jaredLunde/form-atoms#features) features the `@form-atoms/field` library provides:
 
 - ✅ Pre-configured field atoms, notably two and three state checkbox, multiselect and more.
 - ✅ Support for required and optional fields with pre-cofigured field schemas with `zod`.
