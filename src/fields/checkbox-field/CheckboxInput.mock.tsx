@@ -4,13 +4,14 @@ import { CheckboxField } from "./checkboxField";
 import { FieldLabel } from "../../components";
 import { FieldErrors } from "../../components/field-errors";
 import { useCheckboxFieldProps, useRequiredProps } from "../../hooks";
+import { BooleanField } from "../boolean-field";
 
 export const CheckboxInput = ({
   field,
   label,
   required,
 }: {
-  field: CheckboxField;
+  field: BooleanField | CheckboxField;
   label: ReactNode;
   required?: boolean;
 }) => {

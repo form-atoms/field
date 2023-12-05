@@ -1,6 +1,7 @@
 import { booleanField } from "./booleanField";
 import { RadioGroupField } from "../../components/radio-group/RadioGroupField";
 import { formStory, meta } from "../../scenarios/StoryForm";
+import { CheckboxInput } from "../checkbox-field/CheckboxInput.mock";
 
 export default {
   ...meta,
@@ -60,6 +61,28 @@ export const Optional = formStory({
         options={surveyOptions}
         getValue={({ key }) => key}
         getLabel={({ label }) => label}
+      />
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Optional _booleanField_ can be submitted with the initial `undefined` value which indicates that the user didn't care to interact with the field.",
+      },
+    },
+  },
+});
+
+export const OptionalCheckbox = formStory({
+  args: {
+    fields: {
+      approved: booleanField().optional(),
+    },
+    children: ({ fields }) => (
+      <CheckboxInput
+        field={fields.approved}
+        label="I preffer the digital form to the paper one"
       />
     ),
   },
