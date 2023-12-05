@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="hooks/useNumberFieldProps" />
+
+# `useNumberFieldProps(field: NumberField)`
+
+A hook to control the numeric inputs e.g. `input[type=number]`, `input[type=range]`.
+
+```ts
+import { useNumberFieldProps } from "@form-atoms/field";
+```
+
+Works with
+
+- [numberField()](?path=/docs/fields-numberField--docs)
+- [digitField()](?path=/docs/fields-digitfield--docs)
+
+### Features
+
+- ✅ **Reads the `event.valueAsNumber` value** from the event handler.
+- ✅ Normalizes the the empty `NaN` value.
+
+### Example Usage
+
+```tsx
+import { NumberField, useNumberFieldProps } from "@form-atoms/field";
+
+const NumberInput = ({
+  field,
+  label,
+}: {
+  field: NumberField;
+  label: ReactNode;
+}) => {
+  const props = useNumberFieldProps(field);
+
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <FieldLabel field={field} label={label} />
+      <input type="number" {...props} />
+      <FieldErrors field={field} />
+    </div>
+  );
+};
+```

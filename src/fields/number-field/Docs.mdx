@@ -18,32 +18,10 @@ const heightCentimeters = numberField({
 const tipAmount = numberField().optional();
 ```
 
+Usable with [useNumberFieldProps()](?path=/docs/hooks-useNumberFieldProps--docs)
+
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
-
-## useNumberFieldProps(numberField)
-
-A hook providing props to control a number input.
-
-```tsx
-const NumberInput = ({
-  field,
-  label,
-}: {
-  field: NumberFieldAtom;
-  label: ReactNode;
-}) => {
-  const props = useNumberFieldProps(field);
-
-  return (
-    <div style={{ margin: "20px 0" }}>
-      <FieldLabel field={field} label={label} />
-      <input type="number" {...props} />
-      <FieldErrors field={field} />
-    </div>
-  );
-};
-```
 
 <Stories />

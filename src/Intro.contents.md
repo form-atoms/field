@@ -44,7 +44,8 @@
 |                                                                        |                                                                                          |
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | [useClearInputAction](?path=/docs/hooks-useclearinputaction--docs)     | Hook providing action to clear input value via its ref.                                  |
-| [useCheckboxFieldProps](?path=/docs/hooks-usecheckboxfieldprops--docs) | Controls fields having `boolean` values                                                  |
+| [useCheckboxFieldProps](?path=/docs/hooks-usecheckboxfieldprops--docs) | Adapts fields having `boolean` values to controlled checkbox inputs.                     |
+| [useNumberFieldProps](?path=/docs/hooks-usenumberfieldprops--docs)     | Adapts fields having `number` values to controlled numeric inputs.                       |
 | [useOptions](?path=/docs/hooks-useoptions--docs)                       | A data hook to evaluate which of option(s) is(are) active with respect to a field.       |
 | [useRequiredProps](?path=/docs/hooks-userequiredprops--docs)           | Provides the `required` prop for input based on field optionality.                       |
 | [useSelectFieldProps](?path=/docs/hooks-useselectfieldprops--docs)     | A generic hook to manage a field holding active option from primitive options.           |
