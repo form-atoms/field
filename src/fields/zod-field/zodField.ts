@@ -1,7 +1,7 @@
 import { FieldAtom, FieldAtomConfig, FormAtom, fieldAtom } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Atom, Getter, WritableAtom, atom } from "jotai";
-import { RESET, atomWithReset } from "jotai/utils";
+import { Atom, WritableAtom, atom } from "jotai";
+import { RESET } from "jotai/utils";
 import { ZodAny, ZodUndefined, z } from "zod";
 
 type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
@@ -100,7 +100,9 @@ export type ZodField<
   Schema["_output"] | OptSchema["_output"],
   { required: RequiredAtom }
 > & {
-  optional: () => OptionalZodField<Schema, OptSchema>;
+  optional: (
+    read?: Atom<boolean>["read"],
+  ) => OptionalZodField<Schema, OptSchema>;
 };
 
 /**
@@ -141,8 +143,8 @@ export function zodField<
     return { ...baseField, ...fieldAtoms };
   }) as unknown as ZodField<Schema, OptSchema>;
 
-  const makeOptional = () => {
-    const requiredAtom = atomWithReset(false);
+  const makeOptional = (readRequired: Atom<boolean>["read"] = () => false) => {
+    const requiredAtom = atom(readRequired);
 
     const baseFieldAtom = fieldAtom({
       validate: zodValidate(
@@ -156,7 +158,9 @@ export function zodField<
 
           const optSchema = optionalSchemaObj ?? schemaObj.optional();
 
-          return optSchema;
+          const isRequired = get(requiredAtom);
+
+          return isRequired ? schemaObj : optSchema;
         },
         {
           on: "blur",
