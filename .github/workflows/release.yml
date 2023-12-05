@@ -41,7 +41,13 @@ jobs:
         run: yarn typecheck
 
       - name: 🧪 Test
-        run: yarn test
+        run: yarn test:cov
+
+      - name: 📊 Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          directory: coverage
+          verbose: true
 
       - name: 🔨 Build
         uses: borales/actions-yarn@v4

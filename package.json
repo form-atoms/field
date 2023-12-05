@@ -34,6 +34,7 @@
     "build:docs": "storybook build --docs",
     "build:storybook": "storybook build",
     "test": "vitest",
+    "test:cov": "vitest --coverage",
     "typecheck": "vitest typecheck",
     "storybook": "storybook dev",
     "sb": "yarn storybook",
