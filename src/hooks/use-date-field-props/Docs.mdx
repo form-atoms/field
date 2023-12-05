@@ -1,0 +1,46 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="hooks/useDateFieldProps" />
+
+# `useDateFieldProps(field: DateField)`
+
+A hook to control the date inputs e.g. `input[type=date]`.
+
+```ts
+import { useDateFieldProps } from "@form-atoms/field";
+```
+
+Works with
+
+- [dateField()](?path=/docs/fields-dateField--docs)
+
+### Features
+
+- ✅ Reads the input value as `event.valueAsDate`
+- ✅ Normalizes the empty date value `null` as empty field value `undefined`
+
+### Example usage
+
+Note that the `value` is of type `Date` so it must be transformed to `string` to fit the `<input>` props.
+
+```tsx
+import { DateField, useDateFieldProps } from "@form-atoms/fields";
+
+const DateInputMock = ({
+  field,
+  label,
+}: {
+  field: DateField;
+  label: ReactNode;
+}) => {
+  const { value, ...props } = useDateFieldProps(field);
+
+  return (
+    <input
+      type="date"
+      {...props}
+      value={`${value?.toISOString().slice(0, 10) ?? ""}`}
+    />
+  );
+};
+```

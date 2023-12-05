@@ -45,6 +45,7 @@
 | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | [useClearInputAction](?path=/docs/hooks-useclearinputaction--docs)     | Hook providing action to clear input value via its ref.                                  |
 | [useCheckboxFieldProps](?path=/docs/hooks-usecheckboxfieldprops--docs) | Adapts fields having `boolean` values to controlled checkbox inputs.                     |
+| [useDateFieldProps](?path=/docs/hooks-useDateFieldprops--docs)         | Adapts fields having `Date` values to controlled date inputs.                            |
 | [useFilesFieldProps](?path=/docs/hooks-useFilesfieldprops--docs)       | Adapts fields having `File[]` values to controlled `input[type=file]`.                   |
 | [useNumberFieldProps](?path=/docs/hooks-usenumberfieldprops--docs)     | Adapts fields having `number` values to controlled numeric inputs.                       |
 | [useOptions](?path=/docs/hooks-useoptions--docs)                       | A data hook to evaluate which of option(s) is(are) active with respect to a field.       |
