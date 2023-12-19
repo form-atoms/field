@@ -2,7 +2,7 @@ import { FieldAtom, FormFields } from "form-atoms";
 import { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { type ListField, ListFieldItems, ListFieldValues } from "../../fields";
+import { type ListField, ListFieldItems, ListFieldValue } from "../../fields";
 import { ListItem, useListField } from "../../hooks";
 
 export type RemoveItemButtonProps = { remove: () => void };
@@ -43,16 +43,18 @@ export type ListFields = FieldAtom<any>[] | FormFields[];
 
 export type ListFieldProps<
   Fields extends ListFieldItems,
-  Value extends ListFieldValues<Fields>,
+  Value extends ListFieldValue<Fields>,
 > = RenderProps & {
   field: ListField<Fields, Value>;
+  initialValue?: Value[];
 } & ListItemRenderProps<Fields>;
 
 export function ListField<
   Fields extends ListFieldItems,
-  Value extends ListFieldValues<Fields>,
+  Value extends ListFieldValue<Fields>,
 >({
   field,
+  initialValue,
   children,
   RemoveItemButton = ({ remove }) => (
     <button type="button" onClick={remove}>
@@ -66,7 +68,7 @@ export function ListField<
   ),
   EmptyMessage,
 }: ListFieldProps<Fields, Value>) {
-  const { add, isEmpty, items } = useListField(field);
+  const { add, isEmpty, items } = useListField(field, { initialValue });
 
   return (
     <>

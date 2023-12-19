@@ -10,7 +10,7 @@ import { RESET, atomWithReset, splitAtom } from "jotai/utils";
 
 import {
   type ListFieldItems,
-  type ListFieldValues,
+  type ListFieldValue,
   listFieldBuilder,
 } from "./listFieldBuilder";
 import { ExtendFieldAtom } from "../zod-field";
@@ -34,9 +34,9 @@ type SplitAtomAction<Item> =
 
 export type ListField<
   Fields extends ListFieldItems,
-  Values extends ListFieldValues<Fields>,
+  Value extends ListFieldValue<Fields>,
 > = ExtendFieldAtom<
-  Values[],
+  Value[],
   {
     empty: Atom<boolean>;
     buildItem(): FormAtom<{
@@ -71,7 +71,7 @@ export type ListField<
 
 export const listField = <
   Fields extends ListFieldItems,
-  Value extends ListFieldValues<Fields>,
+  Value extends ListFieldValue<Fields>,
 >(
   config: {
     builder: (value: Value) => Fields;

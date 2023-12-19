@@ -1,8 +1,8 @@
-import { FormAtom } from "form-atoms";
+import { FormAtom, UseFieldOptions, useFieldInitialValue } from "form-atoms";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { useCallback } from "react";
 
-import { ListField, ListFieldItems, ListFieldValues } from "../../fields";
+import { ListField, ListFieldItems, ListFieldValue } from "../../fields";
 
 export type ListItem<Fields extends ListFieldItems> = PrimitiveAtom<
   FormAtom<{
@@ -12,16 +12,17 @@ export type ListItem<Fields extends ListFieldItems> = PrimitiveAtom<
 
 export const useListField = <
   Fields extends ListFieldItems,
-  Values extends ListFieldValues<Fields>,
+  Value extends ListFieldValue<Fields>,
 >(
-  list: ListField<Fields, Values>,
+  list: ListField<Fields, Value>,
+  options?: UseFieldOptions<Value[]>,
 ) => {
   const atoms = useAtomValue(list);
-
   const [splitItems, dispatch] = useAtom(atoms._splitList);
   const formList = useAtomValue(atoms._formList);
   const formFields = useAtomValue(atoms._formFields);
   const isEmpty = useAtomValue(atoms.empty);
+  useFieldInitialValue(list, options?.initialValue, options);
 
   const remove = useCallback((atom: ListItem<Fields>) => {
     dispatch({ type: "remove", atom });

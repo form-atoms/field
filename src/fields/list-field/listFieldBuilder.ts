@@ -16,7 +16,7 @@ type EmptyValues<Fields extends FormFields> = {
 
 export type ListFieldItems = FieldAtom<any> | FormFields;
 
-export type ListFieldValues<T> = T extends FieldAtom<infer Value>
+export type ListFieldValue<T> = T extends FieldAtom<infer Value>
   ? Value | undefined // also empty
   : T extends FormFields
     ? FormFieldValues<T> | EmptyValues<T>
@@ -30,7 +30,7 @@ export function listFieldBuilder<
    * Having the Values computed in generic argument,
    * fixes the return types **when the argument to builder is used**.
    */
-  Values extends ListFieldValues<Fields>,
+  Values extends ListFieldValue<Fields>,
 >(builder: (value: Values) => Fields) {
   let emptyValue: undefined | Values = undefined;
   try {
@@ -48,7 +48,7 @@ export function listFieldBuilder<
    * HACK2:
    * the data is not simply Values, as that would produce the any[] on the returned function.
    */
-  function buildFields(data: ListFieldValues<Fields>[]): Fields[];
+  function buildFields(data: ListFieldValue<Fields>[]): Fields[];
   function buildFields(data?: Values[]) {
     if (data) {
       return data.map(builder);

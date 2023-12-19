@@ -28,11 +28,33 @@ describe("<ListField />", () => {
     expect(screen.getByDisplayValue("Alice")).toBeInTheDocument();
 
     const onSubmit = vi.fn();
-    await act(async () => {
-      result.current(onSubmit)();
-    });
+    await act(async () => result.current(onSubmit)());
 
     expect(onSubmit).toHaveBeenCalledWith({ friends: ["Bob", "Alice"] });
+  });
+
+  describe("initialValue prop", () => {
+    it("is used as submit value", async () => {
+      const fields = {
+        friends: listField({
+          value: ["Bob", "Alice"],
+          builder: (value) => textField({ value }),
+        }),
+      };
+
+      const form = formAtom(fields);
+      const { result } = renderHook(() => useFormSubmit(form));
+      render(
+        <ListField field={fields.friends} initialValue={["Mark"]}>
+          {({ fields }) => <InputField atom={fields} component="input" />}
+        </ListField>,
+      );
+
+      const onSubmit = vi.fn();
+      await act(async () => result.current(onSubmit)());
+
+      expect(onSubmit).toHaveBeenCalledWith({ friends: ["Mark"] });
+    });
   });
 
   describe("RemoveItemButton", () => {
