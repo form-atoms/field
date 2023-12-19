@@ -14,9 +14,9 @@ type EmptyValues<Fields extends FormFields> = {
         : never;
 };
 
-type ListFieldItems = FieldAtom<any> | FormFields;
+export type ListFieldItems = FieldAtom<any> | FormFields;
 
-type ListFieldValues<T> = T extends FieldAtom<infer Value>
+export type ListFieldValues<T> = T extends FieldAtom<infer Value>
   ? Value | undefined // also empty
   : T extends FormFields
     ? FormFieldValues<T> | EmptyValues<T>

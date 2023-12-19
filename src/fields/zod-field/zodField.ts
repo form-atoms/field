@@ -86,7 +86,7 @@ type RequiredZodField<
   OptSchema extends z.Schema = ZodUndefined,
 > = ZodField<Schema, OptSchema>;
 
-type ExtendFieldAtom<Value, State> = FieldAtom<Value> extends Atom<
+export type ExtendFieldAtom<Value, State> = FieldAtom<Value> extends Atom<
   infer DefaultState
 >
   ? Atom<DefaultState & State>
