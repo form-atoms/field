@@ -1,12 +1,35 @@
-import { renderHook } from "@testing-library/react";
-import { useFieldValue } from "form-atoms";
+import { act, renderHook } from "@testing-library/react";
+import {
+  formAtom,
+  useFieldActions,
+  useFieldValue,
+  useFormActions,
+  useFormSubmit,
+} from "form-atoms";
 import { useAtomValue } from "jotai";
-import { describe, expect, it, test } from "vitest";
+import { describe, expect, it, test, vi } from "vitest";
 
 import { listField } from "./listField";
 import { numberField } from "../number-field";
 
 describe("listField()", () => {
+  test("can be submitted within formAtom", async () => {
+    const nums = listField({
+      value: [10, 20],
+      builder: (value) => numberField({ value }),
+    });
+
+    const form = formAtom({ nums });
+
+    const { result: submit } = renderHook(() => useFormSubmit(form));
+
+    const onSubmit = vi.fn();
+
+    await act(async () => submit.current(onSubmit)());
+
+    expect(onSubmit).toHaveBeenCalledWith({ nums: [10, 20] });
+  });
+
   describe("empty atom", () => {
     it("is true when values is empty array", () => {
       const list = listField({
@@ -55,5 +78,29 @@ describe("listField()", () => {
     const result = renderHook(() => useFieldValue(list));
 
     expect(result.result.current).toEqual([10, 20, 30]);
+  });
+
+  describe("resetting value", () => {
+    test("the formResetAction resets value", async () => {
+      const ages = listField({
+        value: [10],
+        builder: (age) => numberField({ value: age }),
+      });
+      const form = formAtom({ ages });
+
+      const { result: formActions } = renderHook(() => useFormActions(form));
+      const { result: fieldActions } = renderHook(() => useFieldActions(ages));
+
+      await act(async () => fieldActions.current.setValue([30]));
+      const onSubmit = vi.fn();
+      await act(async () => formActions.current.submit(onSubmit)());
+      expect(onSubmit).toHaveBeenCalledWith({ ages: [30] });
+
+      await act(async () => formActions.current.reset());
+
+      const reset_onSubmit = vi.fn();
+      await act(async () => formActions.current.submit(reset_onSubmit)());
+      expect(reset_onSubmit).toHaveBeenCalledWith({ ages: [10] });
+    });
   });
 });

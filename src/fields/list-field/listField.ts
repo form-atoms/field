@@ -92,6 +92,10 @@ export const listField = <
     formBuilder(config.value).map((fields) => formAtom({ fields })),
   );
   const _splitListAtom = splitAtom(_formListAtom);
+
+  /**
+   * Unwraps the list of formAtoms, into list of fields of each form.
+   */
   const _formFieldsAtom = atom((get) => {
     const formLists = get(_formListAtom);
 
@@ -115,10 +119,10 @@ export const listField = <
     (get) => {
       const formLists = get(_formListAtom);
 
-      return formLists.map((formAtom, index) => {
+      return formLists.map((formAtom) => {
         const formAtoms = get(formAtom);
         const { fields } = get(formAtoms.values);
-        console.log(index, fields, `${formAtom}`);
+
         return fields as Value;
       });
     },
@@ -143,7 +147,7 @@ export const listField = <
   const resetAtom = atom<null, [void], void>(null, (get, set) => {
     set(errorsAtom, []);
     set(touchedAtom, RESET);
-    // set(valueAtom, get(initialValueAtom) ?? config.value);
+    set(valueAtom, get(initialValueAtom) ?? RESET);
 
     // Need to set a new pointer to prevent stale validation results
     // from being set to state after this invocation.
