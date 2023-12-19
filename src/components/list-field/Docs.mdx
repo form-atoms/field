@@ -22,32 +22,31 @@ import { ListField } from "@form-atoms/field";
 <Canvas sourceState="none" of={ListFieldStories.Primary} />
 
 ```tsx
-import { formAtom } from "form-atoms";
-import { ListField, textField, listFieldBuilder } from "@form-atoms/field";
+import {
+  listField,
+  ListField,
+  textField,
+  listFieldBuilder,
+} from "@form-atoms/field";
 
-// listFieldBulder creates a builder which helps initialize form fields for you
-// the callback item shape is based on the callback form fields returned from it!
-const envVarsBuilder = listFieldBuilder((item: { variable; value }) => ({
-  variable: textField({ name: "variable", value: variable }),
-  value: textField({ name: "value", value: value }),
-  // Uncommenting the following line will make item.owner property available!
-  // owner: textField({ name: "owner" }),
-}));
-
-const envForm = formAtom({
-  // call the builder with your data, when initializing the form
-  envVars: envVarsBuilder([
-    { variable: "GITHUB_TOKEN", value: "ff52d09a" },
-    { variable: "NPM_TOKEN", value: "deepsecret" },
-  ]),
-});
+const fields = {
+  envVars: listField({
+    value: [
+      { variable: "GITHUB_TOKEN", value: "ff52d09a" },
+      { variable: "NPM_TOKEN", value: "deepsecret" },
+    ],
+    builder: (item: { variable; value }) => ({
+      variable: textField({ name: "variable", value: variable }),
+      value: textField({ name: "value", value: value }),
+      // Uncommenting the following line will make item.owner property available!
+      // owner: textField({ name: "owner" }),
+    }),
+  }),
+};
 
 const Example = () => (
   <ListField
-    form={envForm}
-    path={["envVars"]}
-    keyFrom="variable"
-    builder={envVarsBuilder}
+    field={fields.envVars}
     AddItemButton={({ add }) => (
       <button type="button" className="outline" onClick={add}>
         Add environment variable
@@ -99,37 +98,33 @@ const Example = () => (
 <Canvas sourceState="none" of={ListFieldStories.Flat} />
 
 ```tsx
-import { formAtom, fieldAtom } from "form-atoms";
 import {
   AddItemButtonProps,
   ListField,
+  listField,
   listFieldBuilder,
   textField,
 } from "@form-atoms/field";
 
-const typescriptBenefits = listFieldBuilder((value) =>
-  textField({ name: "ts-benefit", value }),
-);
+const fields = {
+  benefits: listField({
+    value: ["safe function calls", "it's fast"],
+    builder: (value) => textField({ name: "ts-benefit", value }),
+  }),
+};
 
-const form = formAtom({
-  benefits: typescriptBenefits(["safe function calls", "it's fast"]),
-});
-
-// NOTE: the keyFrom prop is not needed as the item/fieldAtom itself is used as the render key default.
 const Example = () => (
   <>
     <label style={{ marginBottom: 16 }}>
       What are some benefits of TypeScript?
     </label>
     <ListField
-      form={form}
-      path={["benefits"]}
+      field={fields.benefits}
       AddItemButton={({ add }: AddItemButtonProps) => (
         <button type="button" className="outline" onClick={add}>
           Add Benefit
         </button>
       )}
-      builder={typescriptBenefits}
     >
       {({ fields, RemoveItemButton }) => (
         <div

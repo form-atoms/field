@@ -4,24 +4,27 @@ import { InputField, formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { ListField } from "./ListField";
-import { numberField, textField } from "../../fields";
+import { listField, numberField, textField } from "../../fields";
 import { NumberInput } from "../../fields/number-field/NumberInput.mock";
 
 describe("<ListField />", () => {
   it("works with flat list of fields", async () => {
     const fields = {
-      friends: [textField({ value: "Bryan" }), textField({ value: "Alice" })],
+      friends: listField({
+        value: ["Bob", "Alice"],
+        builder: (value) => textField({ value }),
+      }),
     };
 
     const form = formAtom(fields);
     const { result } = renderHook(() => useFormSubmit(form));
     render(
-      <ListField path={["friends"]} form={form} builder={() => textField()}>
+      <ListField field={fields.friends}>
         {({ fields }) => <InputField atom={fields} component="input" />}
       </ListField>,
     );
 
-    expect(screen.getByDisplayValue("Bryan")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("Bob")).toBeInTheDocument();
     expect(screen.getByDisplayValue("Alice")).toBeInTheDocument();
 
     const onSubmit = vi.fn();
@@ -29,21 +32,20 @@ describe("<ListField />", () => {
       result.current(onSubmit)();
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({ friends: ["Bryan", "Alice"] });
+    expect(onSubmit).toHaveBeenCalledWith({ friends: ["Bob", "Alice"] });
   });
 
   describe("RemoveItemButton", () => {
     it("has 'Remove' label by default", () => {
-      const form = formAtom({
-        luckyNumbers: [numberField({ value: 3 })],
-      });
+      const fields = {
+        luckyNumbers: listField({
+          value: [3],
+          builder: (value) => numberField({ value }),
+        }),
+      };
 
       render(
-        <ListField
-          path={["luckyNumbers"]}
-          form={form}
-          builder={() => numberField()}
-        >
+        <ListField field={fields.luckyNumbers}>
           {({ RemoveItemButton }) => (
             <>
               <RemoveItemButton />
@@ -59,16 +61,15 @@ describe("<ListField />", () => {
     });
 
     it("removes the respective list item", async () => {
-      const form = formAtom({
-        luckyNumbers: [numberField({ value: 3 })],
-      });
+      const fields = {
+        luckyNumbers: listField({
+          value: [3],
+          builder: (value) => numberField({ value }),
+        }),
+      };
 
       render(
-        <ListField
-          path={["luckyNumbers"]}
-          form={form}
-          builder={() => numberField()}
-        >
+        <ListField field={fields.luckyNumbers}>
           {({ fields, RemoveItemButton }) => (
             <>
               <NumberInput field={fields} label="" /> <RemoveItemButton />
@@ -90,19 +91,14 @@ describe("<ListField />", () => {
 
   describe("AddItemButton", () => {
     it("has 'Add item' label by default", () => {
-      const form = formAtom({
-        luckyNumbers: [numberField({ value: 3 })],
-      });
+      const fields = {
+        luckyNumbers: listField({
+          value: [3, 6, 9],
+          builder: (value) => numberField({ value }),
+        }),
+      };
 
-      render(
-        <ListField
-          path={["luckyNumbers"]}
-          form={form}
-          builder={() => numberField()}
-        >
-          {() => <></>}
-        </ListField>,
-      );
+      render(<ListField field={fields.luckyNumbers}>{() => <></>}</ListField>);
 
       const addItemButton = screen.getByText("Add item");
 
@@ -111,14 +107,15 @@ describe("<ListField />", () => {
     });
 
     it("appends empty item to the list by calling the item builder prop", async () => {
-      const form = formAtom({
-        luckyNumbers: [numberField({ value: 3 })],
-      });
-
-      const builder = vi.fn(() => numberField({ value: 6 }));
+      const fields = {
+        luckyNumbers: listField({
+          value: [],
+          builder: () => numberField({ value: 6 }),
+        }),
+      };
 
       render(
-        <ListField path={["luckyNumbers"]} form={form} builder={builder}>
+        <ListField field={fields.luckyNumbers}>
           {({ fields }) => (
             <>
               <NumberInput field={fields} label="lucky" />
@@ -133,38 +130,33 @@ describe("<ListField />", () => {
 
       await act(() => userEvent.click(addItemButton));
 
-      expect(builder).toHaveBeenCalledOnce();
       expect(screen.queryByDisplayValue("6")).toBeInTheDocument();
-      expect(screen.queryAllByLabelText("lucky")).toHaveLength(2);
+      expect(screen.queryAllByLabelText("lucky")).toHaveLength(1);
     });
   });
 
   describe("EmptyMessage", () => {
-    it("renders when the list is/becomes empty", async () => {
-      const form = formAtom({
-        luckyNumbers: [numberField({ value: 3 })],
-      });
+    it("renders when the initial list is empty", async () => {
+      const fields = {
+        luckyNumbers: listField({
+          value: [],
+          builder: (value) => numberField({ value }),
+        }),
+      };
 
       render(
         <ListField
-          path={["luckyNumbers"]}
-          form={form}
-          builder={() => numberField()}
+          field={fields.luckyNumbers}
           EmptyMessage={() => <p>No lucky numbers</p>}
         >
-          {({ fields, RemoveItemButton }) => (
+          {({ fields }) => (
             <>
-              <NumberInput field={fields} label="" /> <RemoveItemButton />
+              <NumberInput field={fields} label="" />
             </>
           )}
         </ListField>,
       );
 
-      const removeItemButton = screen.getByText("Remove");
-
-      expect(removeItemButton).toBeInTheDocument();
-      expect(screen.queryByText("No lucky numbers")).not.toBeInTheDocument();
-      await act(() => userEvent.click(removeItemButton));
       expect(screen.queryByText("No lucky numbers")).toBeInTheDocument();
     });
   });

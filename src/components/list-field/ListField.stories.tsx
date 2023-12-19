@@ -5,7 +5,7 @@ import {
   ListField,
   RemoveItemButtonProps,
 } from "./ListField";
-import { listFieldBuilder, textField } from "../../fields";
+import { listField, textField } from "../../fields";
 import { checkboxField } from "../../fields/checkbox-field";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
@@ -15,11 +15,6 @@ export default {
   ...meta,
   title: "components/ListField",
 };
-
-const envVarsBuilder = listFieldBuilder(({ variable, value }) => ({
-  variable: textField({ name: "variable", value: variable }),
-  value: textField({ name: "value", value: value }),
-}));
 
 export const Primary = formStory({
   parameters: {
@@ -31,19 +26,21 @@ export const Primary = formStory({
     },
   },
   args: {
-    resettable: false,
     fields: {
-      envVars: envVarsBuilder([
-        { variable: "GITHUB_TOKEN", value: "ff52d09a" },
-        { variable: "NPM_TOKEN", value: "deepsecret" },
-      ]),
+      envVars: listField({
+        value: [
+          { variable: "GITHUB_TOKEN", value: "ff52d09a" },
+          { variable: "NPM_TOKEN", value: "deepsecret" },
+        ],
+        builder: ({ variable, value }) => ({
+          variable: textField({ name: "variable", value: variable }),
+          value: textField({ name: "value", value: value }),
+        }),
+      }),
     },
-    children: ({ form }) => (
+    children: ({ fields }) => (
       <ListField
-        form={form}
-        path={["envVars"]}
-        keyFrom="variable"
-        builder={envVarsBuilder}
+        field={fields.envVars}
         AddItemButton={({ add }) => (
           <button type="button" className="outline" onClick={add}>
             Add environment variable
@@ -79,10 +76,6 @@ export const Primary = formStory({
   },
 });
 
-const typescriptBenefits = listFieldBuilder((value) =>
-  textField({ name: "ts-benefit", value }),
-);
-
 export const Flat = formStory({
   parameters: {
     docs: {
@@ -93,25 +86,25 @@ export const Flat = formStory({
     },
   },
   args: {
-    resettable: false,
     fields: {
-      benefits: typescriptBenefits(["safe function calls", "it's fast"]),
+      benefits: listField({
+        value: ["safe function calls", "it's fast"],
+        builder: (value) => textField({ name: "ts-benefit", value }),
+      }),
     },
-    children: ({ form }) => (
+    children: ({ fields }) => (
       <>
         <label style={{ marginBottom: 16 }}>
           What are some benefits of TypeScript?
         </label>
         <ListField
-          form={form}
-          path={["benefits"]}
+          field={fields.benefits}
           AddItemButton={({ add }: AddItemButtonProps) => (
             <button type="button" className="outline" onClick={add}>
               Add Benefit
             </button>
           )}
           RemoveItemButton={RemoveButton}
-          builder={typescriptBenefits}
         >
           {({ fields, RemoveItemButton }) => (
             <div
@@ -140,17 +133,17 @@ export const Prepend = formStory({
     },
   },
   args: {
-    resettable: false,
     fields: {
-      hobbies: [fieldAtom({ value: "gardening" })],
+      hobbies: listField({
+        value: ["gardening"],
+        builder: (value) => textField({ value }),
+      }),
     },
-    children: ({ form }) => (
+    children: ({ fields }) => (
       <ListField
-        form={form}
-        path={["hobbies"]}
+        field={fields.hobbies}
         AddItemButton={AddHobbyField}
         RemoveItemButton={RemoveButton}
-        builder={() => fieldAtom({ value: "" })}
       >
         {({ fields, RemoveItemButton, add, atom }) => (
           <div
@@ -182,17 +175,17 @@ export const Ordering = formStory({
     },
   },
   args: {
-    resettable: false,
     fields: {
-      hobbies: [fieldAtom({ value: "gardening" })],
+      hobbies: listField({
+        value: ["gardening"],
+        builder: (value) => textField({ value }),
+      }),
     },
-    children: ({ form }) => (
+    children: ({ fields }) => (
       <ListField
-        form={form}
-        path={["hobbies"]}
+        field={fields.hobbies}
         AddItemButton={AddHobbyField}
         RemoveItemButton={RemoveButton}
-        builder={() => fieldAtom({ value: "" })}
       >
         {({ fields, RemoveItemButton, moveDown, moveUp }) => (
           <div
@@ -219,24 +212,26 @@ export const Ordering = formStory({
 
 export const Nested = formStory({
   args: {
-    resettable: false,
     fields: {
-      people: [
-        {
-          name: fieldAtom({ value: "Jerry" }),
-          accounts: [{ iban: fieldAtom({ value: "DE10 ..." }) }],
-        },
-      ],
-    },
-    children: ({ form }) => (
-      <ListField
-        form={form}
-        keyFrom="name"
-        path={["people"]}
-        builder={() => ({
+      people: listField({
+        value: [
+          {
+            name: "Jerry",
+            accounts: [{ iban: "DE10 ..." }],
+          },
+        ],
+        builder: () => ({
           name: fieldAtom({ value: "" }),
-          accounts: [],
-        })}
+          accounts: listField({
+            value: [] as { iban: string }[],
+            builder: ({ iban }) => ({ iban: textField({ value: iban }) }),
+          }),
+        }),
+      }),
+    },
+    children: ({ fields }) => (
+      <ListField
+        field={fields.people}
         AddItemButton={({ add }) => (
           <button type="button" className="outline" onClick={add}>
             Add Person
@@ -260,10 +255,7 @@ export const Nested = formStory({
               render={(props) => <input {...props} placeholder="Name" />}
             />
             <ListField
-              form={form}
-              keyFrom="iban"
-              path={["people", index, "accounts"]}
-              builder={() => ({ iban: fieldAtom({ value: "" }) })}
+              field={fields.accounts}
               AddItemButton={({ add }) => (
                 <button type="button" className="outline" onClick={add}>
                   Add Bank Account
@@ -301,29 +293,25 @@ export const Nested = formStory({
 
 export const WithRadioControl = formStory({
   args: {
-    resettable: false,
     fields: {
-      phones: [
-        {
-          number: fieldAtom({ value: "+421 200 300 500" }),
-          isPrimary: checkboxField({
-            name: "primaryPhone",
-            value: true,
-          }).optional(),
-        },
-      ],
+      phones: listField({
+        value: [
+          {
+            number: "+421 200 300 500",
+            isPrimary: true,
+          },
+        ],
+        builder: ({ number }) => ({
+          number: fieldAtom({ value: number }),
+          isPrimary: checkboxField({ name: "primaryPhone" }).optional(),
+        }),
+      }),
     },
-    children: ({ form }) => (
+    children: ({ fields }) => (
       <RadioControl>
         {({ control }) => (
           <ListField
-            form={form}
-            path={["phones"]}
-            keyFrom="number"
-            builder={() => ({
-              number: fieldAtom({ value: "" }),
-              isPrimary: checkboxField({ name: "primaryPhone" }).optional(),
-            })}
+            field={fields.phones}
             AddItemButton={({ add }) => (
               <button type="button" className="outline" onClick={add}>
                 Add contact phone

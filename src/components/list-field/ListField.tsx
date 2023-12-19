@@ -1,9 +1,9 @@
-import { FieldAtom, FormAtom, FormFields } from "form-atoms";
-import { PrimitiveAtom } from "jotai";
+import { FieldAtom, FormFields } from "form-atoms";
 import { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { useListFieldActions } from "../../hooks";
+import { type ListField, ListFieldItems, ListFieldValues } from "../../fields";
+import { ListItem, useListField } from "../../hooks";
 
 export type RemoveItemButtonProps = { remove: () => void };
 export type RemoveItemButtonProp = RenderProp<
@@ -20,9 +20,9 @@ type RenderProps = Partial<
   RemoveItemButtonProp & AddItemButtonProp & EmptyMessageProp
 >;
 
-export type ListItemRenderProps<Fields> = RenderProp<
+export type ListItemRenderProps<Fields extends ListFieldItems> = RenderProp<
   {
-    atom: PrimitiveAtom<Fields>;
+    atom: ListItem<Fields>;
     /**
      * The index of the current item.
      */
@@ -32,7 +32,7 @@ export type ListItemRenderProps<Fields> = RenderProp<
      */
     count: number;
     fields: Fields;
-    add: (before?: PrimitiveAtom<Fields>) => void;
+    add: (before?: ListItem<Fields>) => void;
     remove: (field: FieldAtom<any> | FormFields) => void;
     moveUp: () => void;
     moveDown: () => void;
@@ -41,58 +41,18 @@ export type ListItemRenderProps<Fields> = RenderProp<
 
 export type ListFields = FieldAtom<any>[] | FormFields[];
 
-type RecurrFormFields = FormFields | ListFields;
-
-type ListFieldPropsRecurr<
-  Fields extends RecurrFormFields,
-  Path extends (string | number)[],
-> = Path extends [
-  infer P extends keyof Fields,
-  ...infer R extends (string | number)[],
-]
-  ? Fields[P] extends RecurrFormFields
-    ? ListFieldPropsRecurr<Fields[P], R>
-    : never
-  : {
-      builder: () => Fields extends (infer Item extends
-        | FieldAtom<any>
-        | FormFields)[]
-        ? Item
-        : never;
-    } & (Fields extends (infer F extends FormFields)[]
-      ? { keyFrom: keyof F }
-      : // key not needed for FieldAtom<any>[], atom itself will be key
-        { keyFrom?: never }) &
-      ListItemRenderProps<
-        Fields extends (infer Item extends FieldAtom<any> | FormFields)[]
-          ? Item
-          : never
-      >;
-
 export type ListFieldProps<
-  Fields extends FormFields,
-  Path extends (string | number)[],
-> = RenderProps &
-  (Path extends [
-    infer P extends keyof Fields,
-    ...infer Rest extends (string | number)[],
-  ]
-    ? Fields[P] extends RecurrFormFields
-      ? { form: FormAtom<Fields>; path: Path } & ListFieldPropsRecurr<
-          Fields[P],
-          Rest
-        >
-      : never
-    : never);
+  Fields extends ListFieldItems,
+  Value extends ListFieldValues<Fields>,
+> = RenderProps & {
+  field: ListField<Fields, Value>;
+} & ListItemRenderProps<Fields>;
 
 export function ListField<
-  Fields extends FormFields,
-  Path extends (string | number)[],
+  Fields extends ListFieldItems,
+  Value extends ListFieldValues<Fields>,
 >({
-  path,
-  form,
-  builder,
-  keyFrom,
+  field,
   children,
   RemoveItemButton = ({ remove }) => (
     <button type="button" onClick={remove}>
@@ -105,25 +65,8 @@ export function ListField<
     </button>
   ),
   EmptyMessage,
-}: ListFieldProps<Fields, Path>) {
-  const keyExtractor = useCallback(
-    (fields: FieldAtom<any> | FormFields) => {
-      if (typeof keyFrom === "string" && keyFrom in fields) {
-        // @ts-expect-error atoms have toString()
-        return `${fields[keyFrom]}`;
-      } else {
-        return `${fields}`;
-      }
-    },
-    [keyFrom],
-  );
-
-  const { add, isEmpty, items } = useListFieldActions(
-    form,
-    builder,
-    path,
-    keyExtractor,
-  );
+}: ListFieldProps<Fields, Value>) {
+  const { add, isEmpty, items } = useListField(field);
 
   return (
     <>
@@ -131,13 +74,11 @@ export function ListField<
       {items.map(({ remove, fields, key, atom, moveUp, moveDown }, index) => (
         <Fragment key={key}>
           {children({
-            // @ts-expect-error complicated
             atom,
             add,
             remove,
             moveUp,
             moveDown,
-            // @ts-expect-error complicated
             fields,
             index,
             count: items.length,
