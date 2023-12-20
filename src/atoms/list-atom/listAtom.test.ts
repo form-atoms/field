@@ -9,46 +9,12 @@ import {
 import { useAtomValue } from "jotai";
 import { describe, expect, it, test, vi } from "vitest";
 
-import { listField } from "./listField";
-import { numberField } from "../number-field";
+import { listAtom } from "./listAtom";
+import { numberField } from "../../fields";
 
-describe("listField()", () => {
-  describe("when required (default)", () => {
-    it("can't be submitted with empty value", async () => {
-      const list = listField({
-        value: [],
-        builder: (age) => numberField({ value: age }),
-      });
-
-      const form = formAtom({ list });
-
-      const { result: submit } = renderHook(() => useFormSubmit(form));
-      const onSubmit = vi.fn();
-      await act(async () => submit.current(onSubmit)());
-
-      expect(onSubmit).not.toHaveBeenCalled();
-    });
-  });
-
-  describe("when optional", () => {
-    it("will submit with empty value", async () => {
-      const list = listField({
-        value: [],
-        builder: (age) => numberField({ value: age }),
-      }).optional();
-
-      const form = formAtom({ list });
-
-      const { result: submit } = renderHook(() => useFormSubmit(form));
-      const onSubmit = vi.fn();
-      await act(async () => submit.current(onSubmit)());
-
-      expect(onSubmit).toHaveBeenCalled();
-    });
-  });
-
+describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
-    const nums = listField({
+    const nums = listAtom({
       value: [10, 20],
       builder: (value) => numberField({ value }),
     });
@@ -66,7 +32,7 @@ describe("listField()", () => {
 
   describe("empty atom", () => {
     it("is true when values is empty array", () => {
-      const list = listField({
+      const list = listAtom({
         value: [],
         builder: ({ age }) => ({ age: numberField({ value: age }) }),
       });
@@ -79,7 +45,7 @@ describe("listField()", () => {
     });
 
     it("is false when value contain data", () => {
-      const list = listField({
+      const list = listAtom({
         value: [{ age: 3 }],
         builder: ({ age }) => ({ age: numberField({ value: age }) }),
       });
@@ -93,7 +59,7 @@ describe("listField()", () => {
   });
 
   test("useFieldValue() reads list of object value", () => {
-    const list = listField({
+    const list = listAtom({
       value: [{ age: 80 }, { age: 70 }],
       builder: ({ age }) => ({ age: numberField({ value: age }) }),
     });
@@ -104,7 +70,7 @@ describe("listField()", () => {
   });
 
   test("useFieldValue() reads list of primitive value", () => {
-    const list = listField({
+    const list = listAtom({
       value: [10, 20, 30],
       builder: (age) => numberField({ value: age }),
     });
@@ -116,7 +82,7 @@ describe("listField()", () => {
 
   describe("resetting value", () => {
     test("the formResetAction resets value", async () => {
-      const ages = listField({
+      const ages = listAtom({
         value: [10],
         builder: (age) => numberField({ value: age }),
       });

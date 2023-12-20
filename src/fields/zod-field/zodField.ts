@@ -1,13 +1,13 @@
 import { FieldAtom, FieldAtomConfig, FormAtom, fieldAtom } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
-import { Atom, Getter, WritableAtom, atom } from "jotai";
-import { RESET } from "jotai/utils";
+import { Atom } from "jotai";
 import { ZodAny, ZodUndefined, z } from "zod";
 
-type ValidationConfig<Schema extends z.Schema, OptSchema extends z.Schema> = {
-  schema: Schema | ((get: Getter) => Schema);
-  optionalSchema?: OptSchema | ((get: Getter) => OptSchema);
-};
+import { ExtendFieldAtom, extendFieldAtom } from "../../atoms/extendFieldAtom";
+import {
+  ValidateConfig,
+  WritableRequiredAtom,
+  schemaValidate,
+} from "../../atoms/schemaValidate";
 
 type Flatten<T> = Identity<{
   [K in keyof T]: T[K];
@@ -49,17 +49,11 @@ export type ZodFieldConfig<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
 > = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
-  ValidationConfig<Schema, OptSchema>;
+  ValidateConfig<Schema, OptSchema>;
 
 export type ZodFieldValue<Field> = Field extends FieldAtom<infer Value>
   ? Value
   : never;
-
-type WritableRequiredAtom = WritableAtom<
-  boolean,
-  [boolean | typeof RESET | ((prev: boolean) => boolean)],
-  void
->;
 
 type ZodFieldSubmitValue<Field> = Field extends ZodField<
   infer Schema,
@@ -86,12 +80,6 @@ type RequiredZodField<
   OptSchema extends z.Schema = ZodUndefined,
 > = ZodField<Schema, OptSchema>;
 
-export type ExtendFieldAtom<Value, State> = FieldAtom<Value> extends Atom<
-  infer DefaultState
->
-  ? Atom<DefaultState & State>
-  : never;
-
 export type ZodField<
   Schema extends z.Schema = ZodAny,
   OptSchema extends z.Schema = ZodUndefined,
@@ -105,101 +93,42 @@ export type ZodField<
   ) => OptionalZodField<Schema, OptSchema>;
 };
 
-/**
- * Read-only atom for default zodFields which all are required.
- */
-const defaultRequiredAtom = atom(true as const);
-defaultRequiredAtom.debugLabel = "zodField/defaultRequired";
-
 export function zodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
->({
-  schema,
-  optionalSchema,
-  ...config
-}: ZodFieldConfig<Schema, OptSchema>): RequiredZodField<Schema, OptSchema> {
-  const baseFieldAtom = fieldAtom({
-    validate: zodValidate(
-      (get) => {
-        const schemaObj = typeof schema === "function" ? schema(get) : schema;
-        return schemaObj;
-      },
-      {
-        on: "blur",
-        when: "dirty",
-      },
-    ).or({ on: "change", when: "touched" }),
-    ...config,
+>({ schema, optionalSchema, ...config }: ZodFieldConfig<Schema, OptSchema>) {
+  const { validate, requiredAtom, makeOptional } = schemaValidate({
+    schema,
+    optionalSchema,
   });
 
-  const zodField = atom((get) => {
-    const baseField = get(baseFieldAtom);
+  const zodFieldAtom = extendFieldAtom(fieldAtom({ ...config, validate }), {
+    required: requiredAtom,
+  }) as unknown as RequiredZodField<Schema, OptSchema>;
 
-    const fieldAtoms = {
-      required: defaultRequiredAtom,
-    };
+  zodFieldAtom.optional = (
+    readRequired: Atom<boolean>["read"] = () => false,
+  ) => {
+    const { validate, requiredAtom } = makeOptional(readRequired);
 
-    return { ...baseField, ...fieldAtoms };
-  }) as unknown as ZodField<Schema, OptSchema>;
+    const optionalZodFieldAtom = extendFieldAtom(
+      fieldAtom({ ...config, validate }),
+      { required: requiredAtom },
+    ) as OptionalZodField<Schema, OptSchema>;
 
-  const makeOptional = (readRequired: Atom<boolean>["read"] = () => false) => {
-    const requiredAtom = atom(readRequired);
+    optionalZodFieldAtom.optional = () => optionalZodFieldAtom;
 
-    const baseFieldAtom = fieldAtom({
-      validate: zodValidate(
-        (get) => {
-          const schemaObj = typeof schema === "function" ? schema(get) : schema;
-
-          const optionalSchemaObj =
-            typeof optionalSchema === "function"
-              ? optionalSchema(get)
-              : optionalSchema;
-
-          const optSchema = optionalSchemaObj ?? schemaObj.optional();
-
-          const isRequired = get(requiredAtom);
-
-          return isRequired ? schemaObj : optSchema;
-        },
-        {
-          on: "blur",
-          when: "dirty",
-        },
-      ).or({ on: "change", when: "touched" }),
-      ...config,
-    });
-
-    const optionalZodField = atom((get) => {
-      const baseField = get(baseFieldAtom);
-
-      const fieldAtoms = {
-        required: requiredAtom,
-      };
-
-      if (
-        typeof process !== "undefined" &&
-        process.env.NODE_ENV !== "production"
-      ) {
-        Object.entries(fieldAtoms).map(([atomName, atom]) => {
-          atom.debugLabel = `field/${atomName}/${config.name ?? zodField}`;
-        });
-      }
-
-      return {
-        ...baseField,
-        ...fieldAtoms,
-      };
-    }) as OptionalZodField<Schema, OptSchema>;
-
-    optionalZodField.optional = () => optionalZodField;
-    optionalZodField.debugLabel = `optionalZodField/${config.name ?? zodField}`;
-
-    return optionalZodField;
+    return optionalZodFieldAtom;
   };
 
-  zodField.optional = makeOptional;
-  zodField.debugLabel = `zodField/${config.name ?? zodField}`;
-
-  return zodField;
+  return zodFieldAtom;
 }
+
+// if (
+//   typeof process !== "undefined" &&
+//   process.env.NODE_ENV !== "production"
+// ) {
+//   Object.entries(fieldAtoms).map(([atomName, atom]) => {
+//     atom.debugLabel = `field/${atomName}/${config.name ?? zodField}`;
+//   });
+// }
