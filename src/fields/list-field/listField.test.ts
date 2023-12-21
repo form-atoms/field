@@ -31,7 +31,7 @@ describe("listField()", () => {
   });
 
   describe("when optional", () => {
-    it("will submit with empty value", async () => {
+    it("can submit with empty value", async () => {
       const list = listField({
         value: [],
         builder: (age) => numberField({ value: age }),
@@ -44,6 +44,17 @@ describe("listField()", () => {
       await act(async () => submit.current(onSubmit)());
 
       expect(onSubmit).toHaveBeenCalled();
+    });
+
+    it("returns the same field when calling optional", () => {
+      const list = listField({
+        value: [],
+        builder: (age) => numberField({ value: age }),
+      }).optional();
+
+      const listRef = list.optional().optional();
+
+      expect(listRef).toEqual(list);
     });
   });
 
