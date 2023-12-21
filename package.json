@@ -24,6 +24,7 @@
     "react form",
     "react hook field"
   ],
+  "main": "./dist/index.js",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
