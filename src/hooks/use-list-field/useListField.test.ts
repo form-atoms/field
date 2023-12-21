@@ -65,7 +65,7 @@ describe("useListField()", () => {
           name: "luckyNumbers",
           value: [6],
           builder: (value) => numberField({ value }),
-        }),
+        }).optional(),
       };
       const form = formAtom(fields);
 

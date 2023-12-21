@@ -6,6 +6,7 @@ import { extendFieldAtom } from "../../atoms/extendFieldAtom";
 import {
   ListAtom,
   ListAtomItems,
+  ListAtomSubmitValue,
   ListAtomValue,
   listAtom,
 } from "../../atoms/list-atom";
@@ -30,6 +31,15 @@ export type ListField<
 > = ExtendListAtom<Fields, Value, { required: RequiredAtom }> & {
   optional: (read?: Atom<boolean>["read"]) => OptionalListField<Fields>;
 };
+
+export type ListFieldSubmitValue<
+  Fields extends ListAtomItems,
+  Required,
+> = Required extends WritableRequiredAtom
+  ? ListAtomSubmitValue<Fields>[]
+  : Required extends Atom<boolean>
+    ? [ListAtomSubmitValue<Fields>, ...ListAtomSubmitValue<Fields>[]]
+    : never;
 
 /**
  * This is an alias to ListField, it hides the 2nd and 3rd argument from type tooltip.
@@ -56,7 +66,7 @@ export const listField = <
 } & FieldAtomConfig<Value[]> &
   ZodParams) => {
   const { validate, requiredAtom, makeOptional } = schemaValidate({
-    schema: z.array(z.number()).nonempty(required_error),
+    schema: z.array(z.any()).nonempty(required_error),
     optionalSchema: z.array(z.any()),
   });
 

@@ -2,17 +2,18 @@ import { FormAtom, UseFieldOptions, useFieldInitialValue } from "form-atoms";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { useCallback } from "react";
 
-import { ListField, ListFieldItems, ListFieldValue } from "../../fields";
+import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
+import { ListField } from "../../fields";
 
-export type ListItem<Fields extends ListFieldItems> = PrimitiveAtom<
+export type ListItem<Fields extends ListAtomItems> = PrimitiveAtom<
   FormAtom<{
     fields: Fields;
   }>
 >;
 
 export const useListField = <
-  Fields extends ListFieldItems,
-  Value extends ListFieldValue<Fields>,
+  Fields extends ListAtomItems,
+  Value extends ListAtomValue<Fields>,
 >(
   list: ListField<Fields, Value>,
   options?: UseFieldOptions<Value[]>,

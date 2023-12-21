@@ -2,7 +2,7 @@ import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
 import { textField } from "./textField";
-import { FormSubmitValues } from "../zod-field/zodField";
+import { FormSubmitValues } from "../../components/form";
 
 // could be stricter? e.g. matching pattern by min length
 test("required textField has 'string' submit value", () => {

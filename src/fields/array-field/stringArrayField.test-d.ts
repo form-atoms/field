@@ -2,7 +2,7 @@ import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
 import { stringArrayField } from "./stringArrayField";
-import { FormSubmitValues } from "../zod-field/zodField";
+import { FormSubmitValues } from "../../components/form";
 
 test("required stringArrayField has '[string, ...string[]]' submit value", () => {
   const form = formAtom({

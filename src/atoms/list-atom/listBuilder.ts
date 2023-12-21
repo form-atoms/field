@@ -1,25 +1,22 @@
 import { FieldAtom, FormFieldValues, FormFields } from "form-atoms";
 
-type EmptyValues<Fields extends FormFields> = {
-  [Key in keyof Fields]: Fields[Key] extends FieldAtom<any>
-    ? undefined
-    : Fields[Key] extends FormFields
-      ? EmptyValues<Fields[Key]>
-      : Fields[Key] extends Array<infer Item>
-        ? Item extends FieldAtom<any>
-          ? undefined[]
-          : Item extends FormFields
-            ? EmptyValues<Item>[]
-            : never
-        : never;
-};
+import { FormFieldSubmitValues } from "../../components/form";
+import { ZodField, ZodFieldSubmitValue } from "../../fields";
 
 export type ListAtomItems = FieldAtom<any> | FormFields;
 
-export type ListAtomValue<T> = T extends FieldAtom<infer Value>
-  ? Value | undefined // also empty
+export type ListAtomValue<T extends ListAtomItems> = T extends FieldAtom<
+  infer Value
+>
+  ? Value
   : T extends FormFields
-    ? FormFieldValues<T> | EmptyValues<T>
+    ? FormFieldValues<T>
+    : never;
+
+export type ListAtomSubmitValue<T extends ListAtomItems> = T extends ZodField
+  ? ZodFieldSubmitValue<T>
+  : T extends FormFields
+    ? FormFieldSubmitValues<T>
     : never;
 
 // actual type must be one of overloads, as this one is ignored
