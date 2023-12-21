@@ -1,3 +1,10 @@
+## [3.8.14](https://github.com/form-atoms/field/compare/v3.8.13...v3.8.14) (2023-12-21)
+
+
+### Bug Fixes
+
+* **package:** entry point ([eb0e0fe](https://github.com/form-atoms/field/commit/eb0e0feea9042c9af720504374f4ac6879bf2248))
+
 ## [3.8.13](https://github.com/form-atoms/field/compare/v3.8.12...v3.8.13) (2023-12-05)
 
 
