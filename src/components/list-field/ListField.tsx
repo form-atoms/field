@@ -6,20 +6,15 @@ import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { type ListField } from "../../fields";
 import { ListItem, useListField } from "../../hooks";
 
-export type RemoveItemButtonProps = { remove: () => void };
-export type RemoveItemButtonProp = RenderProp<
-  RemoveItemButtonProps,
-  "RemoveItemButton"
->;
+export type RemoveButtonProps = { remove: () => void };
+export type RemoveButtonProp = RenderProp<RemoveButtonProps, "RemoveButton">;
 
-export type AddItemButtonProps = { add: () => void };
-export type AddItemButtonProp = RenderProp<AddItemButtonProps, "AddItemButton">;
+export type AddButtonProps = { add: () => void };
+export type AddButtonProp = RenderProp<AddButtonProps, "AddButton">;
 
 export type EmptyProp = RenderProp<unknown, "Empty">;
 
-type RenderProps = Partial<
-  RemoveItemButtonProp & AddItemButtonProp & EmptyProp
->;
+type RenderProps = Partial<RemoveButtonProp & AddButtonProp & EmptyProp>;
 
 export type ListItemRenderProps<Fields extends ListAtomItems> = RenderProp<
   {
@@ -37,7 +32,7 @@ export type ListItemRenderProps<Fields extends ListAtomItems> = RenderProp<
     remove: (field: FieldAtom<any> | FormFields) => void;
     moveUp: () => void;
     moveDown: () => void;
-  } & RenderProp<unknown, "RemoveItemButton">
+  } & RenderProp<unknown, "RemoveButton">
 >;
 
 export type ListFields = FieldAtom<any>[] | FormFields[];
@@ -57,12 +52,12 @@ export function ListField<
   field,
   initialValue,
   children,
-  RemoveItemButton = ({ remove }) => (
+  RemoveButton = ({ remove }) => (
     <button type="button" onClick={remove}>
       Remove
     </button>
   ),
-  AddItemButton = ({ add }) => (
+  AddButton = ({ add }) => (
     <button type="button" onClick={add}>
       Add item
     </button>
@@ -85,11 +80,11 @@ export function ListField<
             fields,
             index,
             count: items.length,
-            RemoveItemButton: () => <RemoveItemButton remove={remove} />,
+            RemoveButton: () => <RemoveButton remove={remove} />,
           })}
         </Fragment>
       ))}
-      <AddItemButton add={useCallback(() => add(), [add])} />
+      <AddButton add={useCallback(() => add(), [add])} />
     </>
   );
 }

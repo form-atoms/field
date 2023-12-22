@@ -57,7 +57,7 @@ describe("<ListField />", () => {
     });
   });
 
-  describe("RemoveItemButton", () => {
+  describe("RemoveButton", () => {
     it("has 'Remove' label by default", () => {
       const fields = {
         luckyNumbers: listField({
@@ -68,18 +68,18 @@ describe("<ListField />", () => {
 
       render(
         <ListField field={fields.luckyNumbers}>
-          {({ RemoveItemButton }) => (
+          {({ RemoveButton }) => (
             <>
-              <RemoveItemButton />
+              <RemoveButton />
             </>
           )}
         </ListField>,
       );
 
-      const removeItemButton = screen.getByText("Remove");
+      const RemoveButton = screen.getByText("Remove");
 
-      expect(removeItemButton).toBeInTheDocument();
-      expect(removeItemButton).toHaveAttribute("type", "button");
+      expect(RemoveButton).toBeInTheDocument();
+      expect(RemoveButton).toHaveAttribute("type", "button");
     });
 
     it("removes the respective list item", async () => {
@@ -92,26 +92,26 @@ describe("<ListField />", () => {
 
       render(
         <ListField field={fields.luckyNumbers}>
-          {({ fields, RemoveItemButton }) => (
+          {({ fields, RemoveButton }) => (
             <>
-              <NumberInput field={fields} label="" /> <RemoveItemButton />
+              <NumberInput field={fields} label="" /> <RemoveButton />
             </>
           )}
         </ListField>,
       );
 
-      const removeItemButton = screen.getByText("Remove");
+      const RemoveButton = screen.getByText("Remove");
 
-      expect(removeItemButton).toBeInTheDocument();
+      expect(RemoveButton).toBeInTheDocument();
       expect(screen.queryByDisplayValue("3")).toBeInTheDocument();
 
-      await act(() => userEvent.click(removeItemButton));
+      await act(() => userEvent.click(RemoveButton));
 
       expect(screen.queryByDisplayValue("3")).not.toBeInTheDocument();
     });
   });
 
-  describe("AddItemButton", () => {
+  describe("AddButton", () => {
     it("has 'Add item' label by default", () => {
       const fields = {
         luckyNumbers: listField({
@@ -122,10 +122,10 @@ describe("<ListField />", () => {
 
       render(<ListField field={fields.luckyNumbers}>{() => <></>}</ListField>);
 
-      const addItemButton = screen.getByText("Add item");
+      const AddButton = screen.getByText("Add item");
 
-      expect(addItemButton).toBeInTheDocument();
-      expect(addItemButton).toHaveAttribute("type", "button");
+      expect(AddButton).toBeInTheDocument();
+      expect(AddButton).toHaveAttribute("type", "button");
     });
 
     it("appends empty item to the list by calling the item builder prop", async () => {
@@ -146,11 +146,11 @@ describe("<ListField />", () => {
         </ListField>,
       );
 
-      const addItemButton = screen.getByText("Add item");
+      const AddButton = screen.getByText("Add item");
 
-      expect(addItemButton).toBeInTheDocument();
+      expect(AddButton).toBeInTheDocument();
 
-      await act(() => userEvent.click(addItemButton));
+      await act(() => userEvent.click(AddButton));
 
       expect(screen.queryByDisplayValue("6")).toBeInTheDocument();
       expect(screen.queryAllByLabelText("lucky")).toHaveLength(1);

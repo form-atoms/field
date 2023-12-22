@@ -35,8 +35,8 @@ export const PinCodeListField = formStory({
         <ListField
           form={form}
           path={["pinCode"]}
-          AddItemButton={AddHobbyField}
-          RemoveItemButton={RemoveButton}
+          AddButton={AddHobbyField}
+          RemoveButton={RemoveButton}
           builder={digitsBuilder}
         >
           {({ fields }) => (

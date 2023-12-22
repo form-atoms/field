@@ -1,10 +1,6 @@
 import { InputField, fieldAtom } from "form-atoms";
 
-import {
-  AddItemButtonProps,
-  ListField,
-  RemoveItemButtonProps,
-} from "./ListField";
+import { AddButtonProps, ListField, RemoveButtonProps } from "./ListField";
 import { checkboxField, listField, textField } from "../../fields";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
@@ -41,14 +37,14 @@ export const Primary = formStory({
     children: ({ fields }) => (
       <ListField
         field={fields.envVars}
-        AddItemButton={({ add }) => (
+        AddButton={({ add }) => (
           <button type="button" className="outline" onClick={add}>
             Add environment variable
           </button>
         )}
-        RemoveItemButton={RemoveButton}
+        RemoveButton={RemoveButton}
       >
-        {({ fields, RemoveItemButton }) => (
+        {({ fields, RemoveButton }) => (
           <div
             style={{
               display: "grid",
@@ -68,7 +64,7 @@ export const Primary = formStory({
                 <input {...props} placeholder="Variable Value" />
               )}
             />
-            <RemoveItemButton />
+            <RemoveButton />
           </div>
         )}
       </ListField>
@@ -99,14 +95,14 @@ export const Flat = formStory({
         </label>
         <ListField
           field={fields.benefits}
-          AddItemButton={({ add }: AddItemButtonProps) => (
+          AddButton={({ add }: AddButtonProps) => (
             <button type="button" className="outline" onClick={add}>
               Add Benefit
             </button>
           )}
-          RemoveItemButton={RemoveButton}
+          RemoveButton={RemoveButton}
         >
-          {({ fields, RemoveItemButton }) => (
+          {({ fields, RemoveButton }) => (
             <div
               style={{
                 display: "grid",
@@ -115,7 +111,7 @@ export const Flat = formStory({
               }}
             >
               <InputField atom={fields} component="input" />
-              <RemoveItemButton />
+              <RemoveButton />
             </div>
           )}
         </ListField>
@@ -136,8 +132,8 @@ export const Empty = formStory({
       <>
         <ListField
           field={fields.hobbies}
-          AddItemButton={AddHobbyField}
-          RemoveItemButton={RemoveButton}
+          AddButton={AddHobbyField}
+          RemoveButton={RemoveButton}
           Empty={() => (
             <p>
               You don't have any hobbies in your list. Start by adding the
@@ -145,7 +141,7 @@ export const Empty = formStory({
             </p>
           )}
         >
-          {({ fields, RemoveItemButton }) => (
+          {({ fields, RemoveButton }) => (
             <div
               style={{
                 display: "grid",
@@ -154,7 +150,7 @@ export const Empty = formStory({
               }}
             >
               <InputField atom={fields} component="input" />
-              <RemoveItemButton />
+              <RemoveButton />
             </div>
           )}
         </ListField>
@@ -182,10 +178,10 @@ export const Prepend = formStory({
     children: ({ fields }) => (
       <ListField
         field={fields.hobbies}
-        AddItemButton={AddHobbyField}
-        RemoveItemButton={RemoveButton}
+        AddButton={AddHobbyField}
+        RemoveButton={RemoveButton}
       >
-        {({ fields, RemoveItemButton, add, atom }) => (
+        {({ fields, RemoveButton, add, atom }) => (
           <div
             style={{
               display: "grid",
@@ -197,7 +193,7 @@ export const Prepend = formStory({
             <button type="button" className="outline" onClick={() => add(atom)}>
               Prepend
             </button>
-            <RemoveItemButton />
+            <RemoveButton />
           </div>
         )}
       </ListField>
@@ -224,10 +220,10 @@ export const Ordering = formStory({
     children: ({ fields }) => (
       <ListField
         field={fields.hobbies}
-        AddItemButton={AddHobbyField}
-        RemoveItemButton={RemoveButton}
+        AddButton={AddHobbyField}
+        RemoveButton={RemoveButton}
       >
-        {({ fields, RemoveItemButton, moveDown, moveUp }) => (
+        {({ fields, RemoveButton, moveDown, moveUp }) => (
           <div
             style={{
               display: "grid",
@@ -242,7 +238,7 @@ export const Ordering = formStory({
             <button type="button" className="outline" onClick={moveDown}>
               Down
             </button>
-            <RemoveItemButton />
+            <RemoveButton />
           </div>
         )}
       </ListField>
@@ -272,14 +268,14 @@ export const Nested = formStory({
     children: ({ fields }) => (
       <ListField
         field={fields.people}
-        AddItemButton={({ add }) => (
+        AddButton={({ add }) => (
           <button type="button" className="outline" onClick={add}>
             Add Person
           </button>
         )}
-        RemoveItemButton={RemoveButton}
+        RemoveButton={RemoveButton}
       >
-        {({ fields, index, RemoveItemButton }) => (
+        {({ fields, index, RemoveButton }) => (
           <>
             <div
               style={{
@@ -288,7 +284,7 @@ export const Nested = formStory({
                 gridTemplateColumns: "auto min-content",
               }}
             >
-              <label>Person #{index + 1}</label> <RemoveItemButton />
+              <label>Person #{index + 1}</label> <RemoveButton />
             </div>
             <InputField
               atom={fields.name}
@@ -296,14 +292,14 @@ export const Nested = formStory({
             />
             <ListField
               field={fields.accounts}
-              AddItemButton={({ add }) => (
+              AddButton={({ add }) => (
                 <button type="button" className="outline" onClick={add}>
                   Add Bank Account
                 </button>
               )}
-              RemoveItemButton={RemoveButton}
+              RemoveButton={RemoveButton}
             >
-              {({ fields, index, RemoveItemButton }) => (
+              {({ fields, index, RemoveButton }) => (
                 <div style={{ marginLeft: 48 }}>
                   <label>Account #{index + 1}</label>
                   <div
@@ -319,7 +315,7 @@ export const Nested = formStory({
                         <input {...props} placeholder="IBAN" />
                       )}
                     />
-                    <RemoveItemButton />
+                    <RemoveButton />
                   </div>
                 </div>
               )}
@@ -352,14 +348,14 @@ export const WithRadioControl = formStory({
         {({ control }) => (
           <ListField
             field={fields.phones}
-            AddItemButton={({ add }) => (
+            AddButton={({ add }) => (
               <button type="button" className="outline" onClick={add}>
                 Add contact phone
               </button>
             )}
-            RemoveItemButton={RemoveButton}
+            RemoveButton={RemoveButton}
           >
-            {({ fields, RemoveItemButton }) => (
+            {({ fields, RemoveButton }) => (
               <>
                 <div
                   style={{
@@ -378,7 +374,7 @@ export const WithRadioControl = formStory({
                     )}
                   />
 
-                  <RemoveItemButton />
+                  <RemoveButton />
                 </div>
                 <Radio control={control} field={fields.isPrimary}>
                   {(props) => (
@@ -405,14 +401,14 @@ export const WithRadioControl = formStory({
 });
 
 // This is a button that immutably pushes a new field atom to the hobbies array
-const AddHobbyField = ({ add }: AddItemButtonProps) => (
+const AddHobbyField = ({ add }: AddButtonProps) => (
   <button type="button" className="outline" onClick={add}>
     Add hobby
   </button>
 );
 
 // This is a button that removes current field atom from the hobbies array
-const RemoveButton = ({ remove }: RemoveItemButtonProps) => (
+const RemoveButton = ({ remove }: RemoveButtonProps) => (
   <button type="button" className="outline secondary" onClick={remove}>
     Remove
   </button>

@@ -47,18 +47,18 @@ const fields = {
 const Example = () => (
   <ListField
     field={fields.envVars}
-    AddItemButton={({ add }) => (
+    AddButton={({ add }) => (
       <button type="button" className="outline" onClick={add}>
         Add environment variable
       </button>
     )}
-    RemoveItemButton={({ remove }) => (
+    RemoveButton={({ remove }) => (
       <button type="button" className="outline secondary" onClick={remove}>
         Remove
       </button>
     )}
   >
-    {({ fields, RemoveItemButton }) => (
+    {({ fields, RemoveButton }) => (
       <div
         style={{
           display: "grid",
@@ -74,7 +74,7 @@ const Example = () => (
           atom={fields.value}
           render={(props) => <input {...props} placeholder="Variable Value" />}
         />
-        <RemoveItemButton />
+        <RemoveButton />
       </div>
     )}
   </ListField>
@@ -99,7 +99,7 @@ const Example = () => (
 
 ```tsx
 import {
-  AddItemButtonProps,
+  AddButtonProps,
   ListField,
   listField,
   listFieldBuilder,
@@ -120,13 +120,13 @@ const Example = () => (
     </label>
     <ListField
       field={fields.benefits}
-      AddItemButton={({ add }: AddItemButtonProps) => (
+      AddButton={({ add }: AddButtonProps) => (
         <button type="button" className="outline" onClick={add}>
           Add Benefit
         </button>
       )}
     >
-      {({ fields, RemoveItemButton }) => (
+      {({ fields, RemoveButton }) => (
         <div
           style={{
             display: "grid",
@@ -135,7 +135,7 @@ const Example = () => (
           }}
         >
           <InputField atom={fields} component="input" />
-          <RemoveItemButton />
+          <RemoveButton />
         </div>
       )}
     </ListField>
@@ -175,9 +175,9 @@ const AdvancedNestedExample = () => {
         accounts: [],
       })}
     >
-      {({ fields, index, add, RemoveItemButton }) => (
+      {({ fields, index, add, RemoveButton }) => (
         <>
-          <label>Person #{index}</label> <RemoveItemButton />
+          <label>Person #{index}</label> <RemoveButton />
           <TextField field={fields.name} label="Name" />
           <ListField
             form={peopleForm}
@@ -185,9 +185,9 @@ const AdvancedNestedExample = () => {
             path={["people", index, "accounts"]}
             builder={() => ({ iban: fieldAtom({ value: "" }) })}
           >
-            {({ fields, index, RemoveItemButton }) => (
+            {({ fields, index, RemoveButton }) => (
               <>
-                <label>Account #{index}</label> <RemoveItemButton />
+                <label>Account #{index}</label> <RemoveButton />
                 <TextField field={fields.iban} label="IBAN" />
               </>
             )}
