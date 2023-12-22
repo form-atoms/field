@@ -249,17 +249,17 @@ export const Ordering = formStory({
 export const Nested = formStory({
   args: {
     fields: {
-      people: listField({
+      users: listField({
         value: [
           {
             name: "Jerry",
             accounts: [{ iban: "DE10 ..." }],
           },
         ],
-        builder: () => ({
-          name: fieldAtom({ value: "" }),
+        builder: ({ name, accounts = [] }) => ({
+          name: fieldAtom({ value: name }),
           accounts: listField({
-            value: [] as { iban: string }[],
+            value: accounts,
             builder: ({ iban }) => ({ iban: textField({ value: iban }) }),
           }),
         }),
@@ -267,7 +267,7 @@ export const Nested = formStory({
     },
     children: ({ fields }) => (
       <ListField
-        field={fields.people}
+        field={fields.users}
         AddButton={({ add }) => (
           <button type="button" className="outline" onClick={add}>
             Add Person
@@ -275,7 +275,7 @@ export const Nested = formStory({
         )}
         RemoveButton={RemoveButton}
       >
-        {({ fields, index, RemoveButton }) => (
+        {({ fields, index, RemoveButton: RemoveUser }) => (
           <>
             <div
               style={{
@@ -284,7 +284,7 @@ export const Nested = formStory({
                 gridTemplateColumns: "auto min-content",
               }}
             >
-              <label>Person #{index + 1}</label> <RemoveButton />
+              <label>Person #{index + 1}</label> <RemoveUser />
             </div>
             <InputField
               atom={fields.name}
@@ -299,7 +299,7 @@ export const Nested = formStory({
               )}
               RemoveButton={RemoveButton}
             >
-              {({ fields, index, RemoveButton }) => (
+              {({ fields, index, RemoveButton: RemoveIban }) => (
                 <div style={{ marginLeft: 48 }}>
                   <label>Account #{index + 1}</label>
                   <div
@@ -315,7 +315,7 @@ export const Nested = formStory({
                         <input {...props} placeholder="IBAN" />
                       )}
                     />
-                    <RemoveButton />
+                    <RemoveIban />
                   </div>
                 </div>
               )}
