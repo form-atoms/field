@@ -127,12 +127,19 @@ export function listAtom<
       });
     },
     (
-      _get,
+      get,
       set,
       value: Value[] | typeof RESET | ((prev: Value[]) => Value[]), // the function is here just to match the type of FieldAtom!
     ) => {
       if (value === RESET) {
         set(_formListAtom, value);
+
+        const forms = get(_formListAtom);
+
+        for (const form of forms) {
+          const { reset } = get(form);
+          set(reset);
+        }
       } else if (Array.isArray(value)) {
         set(
           _formListAtom,

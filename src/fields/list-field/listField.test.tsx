@@ -1,5 +1,7 @@
-import { act, renderHook } from "@testing-library/react";
+import { act, render, renderHook, screen } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 import {
+  InputField,
   formAtom,
   useFieldActions,
   useFieldValue,
@@ -10,8 +12,10 @@ import { useAtomValue } from "jotai";
 import { describe, expect, it, test, vi } from "vitest";
 
 import { listField } from "./listField";
+import { ListField } from "../../components";
 import { useFieldError } from "../../hooks";
 import { numberField } from "../number-field";
+import { textField } from "../text-field";
 
 describe("listField()", () => {
   describe("when required (default)", () => {
@@ -164,6 +168,59 @@ describe("listField()", () => {
       const reset_onSubmit = vi.fn();
       await act(async () => formActions.current.submit(reset_onSubmit)());
       expect(reset_onSubmit).toHaveBeenCalledWith({ ages: [10] });
+    });
+
+    test.only("nested list is reset", async () => {
+      const users = listField({
+        name: "users",
+        value: [{ name: "Johnson", accounts: [] }],
+        builder: ({ name, accounts }) => ({
+          name: textField({ value: name }),
+          accounts: listField({
+            name: "bank-accounts",
+            value: accounts,
+            builder: (iban) => textField({ name: "iban", value: iban }),
+          }),
+        }),
+      });
+
+      const form = formAtom({ users });
+      const { result: formActions } = renderHook(() => useFormActions(form));
+
+      render(
+        <ListField field={users}>
+          {({ fields }) => (
+            <ListField
+              field={fields.accounts}
+              AddButton={({ add }) => (
+                <button onClick={add} type="button">
+                  add iban
+                </button>
+              )}
+            >
+              {({ fields }) => (
+                <InputField
+                  atom={fields}
+                  render={(props) => (
+                    <input {...props} data-testid="input-iban" />
+                  )}
+                />
+              )}
+            </ListField>
+          )}
+        </ListField>,
+      );
+
+      expect(screen.getByText("add iban")).toBeInTheDocument();
+      expect(screen.queryByTestId("input-iban")).not.toBeInTheDocument();
+
+      await userEvent.click(screen.getByText("add iban"));
+
+      expect(screen.queryByTestId("input-iban")).toBeInTheDocument();
+
+      await act(async () => formActions.current.reset());
+
+      expect(screen.queryByTestId("input-iban")).not.toBeInTheDocument();
     });
   });
 });

@@ -250,15 +250,17 @@ export const Nested = formStory({
   args: {
     fields: {
       users: listField({
+        name: "users",
         value: [
           {
             name: "Jerry",
-            accounts: [{ iban: "DE10 ..." }],
+            accounts: [{ iban: "SK89 7500 0000 0000 1234 5671" }],
           },
         ],
         builder: ({ name, accounts = [] }) => ({
           name: fieldAtom({ value: name }),
           accounts: listField({
+            name: "accounts",
             value: accounts,
             builder: ({ iban }) => ({ iban: textField({ value: iban }) }),
           }),
