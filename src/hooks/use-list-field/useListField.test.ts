@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
+import { z } from "zod";
 
 import { useListField } from "./useListField";
 import { listField, numberField } from "../../fields";
@@ -58,7 +59,7 @@ describe("useListField()", () => {
       expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [9, 6] });
     });
 
-    it.only("clears the 'field is required' error (when previously empty & required list submitted)", async () => {
+    it("clears the 'field is required' error (when previously empty & required list submitted)", async () => {
       const list = listField({
         value: [],
         builder: (value) => numberField({ value }),
@@ -80,8 +81,8 @@ describe("useListField()", () => {
     });
   });
 
-  describe("removing last item from the list", () => {
-    it("form becomes empty & submits empty array", async () => {
+  describe("removing item from the list", () => {
+    it("form becomes empty & submits empty array when the last item is removed", async () => {
       const fields = {
         luckyNumbers: listField({
           name: "luckyNumbers",
@@ -97,13 +98,35 @@ describe("useListField()", () => {
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
 
-      await act(() => list.current.items[0]?.remove());
+      await act(async () => list.current.items[0]?.remove());
 
       const onSubmit = vi.fn();
-      await act(() => formSubmit.current(onSubmit)());
+      await act(async () => formSubmit.current(onSubmit)());
 
       expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [] });
       expect(list.current.isEmpty).toBe(true);
+    });
+
+    it("clears the validation error, when over-the-bounds item is removed", async () => {
+      const list = listField({
+        value: [1, 2, 3, 4],
+        schema: z.array(z.any()).nonempty().max(3),
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ list });
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+
+      await act(async () => submit.current(vi.fn())());
+
+      const { result } = renderHook(() => useFieldError(list));
+      const { result: field } = renderHook(() => useListField(list));
+
+      expect(result.current.isInvalid).toBe(true);
+
+      await act(async () => field.current.remove(field.current.items[0]!.atom));
+
+      expect(result.current.isInvalid).toBe(false);
     });
   });
 

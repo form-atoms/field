@@ -29,6 +29,9 @@ export const useListField = <
 
   const remove = useCallback((atom: ListItem<Fields>) => {
     dispatch({ type: "remove", atom });
+    startTransition(() => {
+      validate("change");
+    });
   }, []);
 
   const add = useCallback((before?: ListItem<Fields>) => {

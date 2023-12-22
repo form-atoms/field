@@ -1,6 +1,6 @@
 import { FieldAtomConfig } from "form-atoms";
 import { Atom } from "jotai";
-import { z } from "zod";
+import { ZodAny, ZodArray, z } from "zod";
 
 import { extendFieldAtom } from "../../atoms/extendFieldAtom";
 import {
@@ -11,6 +11,7 @@ import {
   listAtom,
 } from "../../atoms/list-atom";
 import {
+  ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
 } from "../../atoms/schemaValidate";
@@ -60,14 +61,19 @@ export const listField = <
   Value extends ListAtomValue<Fields>,
 >({
   required_error = defaultParams.required_error,
+  schema,
+  optionalSchema,
   ...config
 }: {
   builder: (value: Value) => Fields;
 } & FieldAtomConfig<Value[]> &
-  ZodParams) => {
+  ZodParams &
+  Partial<
+    ValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>
+  >) => {
   const { validate, requiredAtom, makeOptional } = schemaValidate({
-    schema: z.array(z.any()).nonempty(required_error),
-    optionalSchema: z.array(z.any()),
+    schema: schema ?? z.array(z.any()).nonempty(required_error),
+    optionalSchema: optionalSchema ?? z.array(z.any()),
   });
 
   const listFieldAtom = extendFieldAtom(listAtom({ ...config, validate }), {
