@@ -2,7 +2,8 @@ import { FieldAtom, FormFields } from "form-atoms";
 import { Fragment, useCallback } from "react";
 import { RenderProp } from "react-render-prop-type";
 
-import { type ListField, ListFieldItems, ListFieldValue } from "../../fields";
+import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
+import { type ListField } from "../../fields";
 import { ListItem, useListField } from "../../hooks";
 
 export type RemoveItemButtonProps = { remove: () => void };
@@ -14,13 +15,13 @@ export type RemoveItemButtonProp = RenderProp<
 export type AddItemButtonProps = { add: () => void };
 export type AddItemButtonProp = RenderProp<AddItemButtonProps, "AddItemButton">;
 
-export type EmptyMessageProp = RenderProp<unknown, "EmptyMessage">;
+export type EmptyProp = RenderProp<unknown, "Empty">;
 
 type RenderProps = Partial<
-  RemoveItemButtonProp & AddItemButtonProp & EmptyMessageProp
+  RemoveItemButtonProp & AddItemButtonProp & EmptyProp
 >;
 
-export type ListItemRenderProps<Fields extends ListFieldItems> = RenderProp<
+export type ListItemRenderProps<Fields extends ListAtomItems> = RenderProp<
   {
     atom: ListItem<Fields>;
     /**
@@ -42,16 +43,16 @@ export type ListItemRenderProps<Fields extends ListFieldItems> = RenderProp<
 export type ListFields = FieldAtom<any>[] | FormFields[];
 
 export type ListFieldProps<
-  Fields extends ListFieldItems,
-  Value extends ListFieldValue<Fields>,
+  Fields extends ListAtomItems,
+  Value extends ListAtomValue<Fields>,
 > = RenderProps & {
   field: ListField<Fields, Value>;
   initialValue?: Value[];
 } & ListItemRenderProps<Fields>;
 
 export function ListField<
-  Fields extends ListFieldItems,
-  Value extends ListFieldValue<Fields>,
+  Fields extends ListAtomItems,
+  Value extends ListAtomValue<Fields>,
 >({
   field,
   initialValue,
@@ -66,13 +67,13 @@ export function ListField<
       Add item
     </button>
   ),
-  EmptyMessage,
+  Empty,
 }: ListFieldProps<Fields, Value>) {
   const { add, isEmpty, items } = useListField(field, { initialValue });
 
   return (
     <>
-      {isEmpty && EmptyMessage ? <EmptyMessage /> : undefined}
+      {isEmpty && Empty ? <Empty /> : undefined}
       {items.map(({ remove, fields, key, atom, moveUp, moveDown }, index) => (
         <Fragment key={key}>
           {children({

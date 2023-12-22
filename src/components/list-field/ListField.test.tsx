@@ -157,7 +157,7 @@ describe("<ListField />", () => {
     });
   });
 
-  describe("EmptyMessage", () => {
+  describe("Empty", () => {
     it("renders when the initial list is empty", async () => {
       const fields = {
         luckyNumbers: listField({
@@ -169,7 +169,7 @@ describe("<ListField />", () => {
       render(
         <ListField
           field={fields.luckyNumbers}
-          EmptyMessage={() => <p>No lucky numbers</p>}
+          Empty={() => <p>No lucky numbers</p>}
         >
           {({ fields }) => (
             <>

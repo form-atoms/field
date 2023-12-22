@@ -138,7 +138,7 @@ export const Empty = formStory({
           field={fields.hobbies}
           AddItemButton={AddHobbyField}
           RemoveItemButton={RemoveButton}
-          EmptyMessage={() => (
+          Empty={() => (
             <p>
               You don't have any hobbies in your list. Start by adding the
               first.

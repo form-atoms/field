@@ -85,7 +85,7 @@ const Example = () => (
 
 - ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
   This works thanks to Jotai's atom having `toString()` method providing stable `atomKey`.
-- ✅ Can render `<EmptyMessage />` when array length is 0.
+- ✅ Can render `<Empty />` when array length is 0.
 - ✅ Handles adding and removal of array items.
 - ✅ Supports deeply nested arrays in arrays.
 
