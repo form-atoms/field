@@ -5,9 +5,9 @@ import {
   ListField,
   RemoveItemButtonProps,
 } from "./ListField";
-import { listField, textField } from "../../fields";
-import { checkboxField } from "../../fields/checkbox-field";
+import { checkboxField, listField, textField } from "../../fields";
 import { formStory, meta } from "../../scenarios/StoryForm";
+import { FieldErrors } from "../field-errors";
 import { FieldLabel } from "../field-label";
 import { Radio, RadioControl } from "../radio";
 
@@ -119,6 +119,46 @@ export const Flat = formStory({
             </div>
           )}
         </ListField>
+      </>
+    ),
+  },
+});
+
+export const Empty = formStory({
+  args: {
+    fields: {
+      hobbies: listField({
+        value: [],
+        builder: (value) => textField({ value }),
+      }),
+    },
+    children: ({ fields }) => (
+      <>
+        <ListField
+          field={fields.hobbies}
+          AddItemButton={AddHobbyField}
+          RemoveItemButton={RemoveButton}
+          EmptyMessage={() => (
+            <p>
+              You don't have any hobbies in your list. Start by adding the
+              first.
+            </p>
+          )}
+        >
+          {({ fields, RemoveItemButton }) => (
+            <div
+              style={{
+                display: "grid",
+                gridGap: 16,
+                gridTemplateColumns: "auto min-content min-content",
+              }}
+            >
+              <InputField atom={fields} component="input" />
+              <RemoveItemButton />
+            </div>
+          )}
+        </ListField>
+        <FieldErrors field={fields.hobbies} />
       </>
     ),
   },

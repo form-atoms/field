@@ -14,7 +14,7 @@ import {
   WritableRequiredAtom,
   schemaValidate,
 } from "../../atoms/schemaValidate";
-import { ZodParams } from "../zod-field";
+import { ZodParams, defaultParams } from "../zod-field";
 
 export type ExtendListAtom<
   Fields extends ListAtomItems,
@@ -59,7 +59,7 @@ export const listField = <
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
 >({
-  required_error,
+  required_error = defaultParams.required_error,
   ...config
 }: {
   builder: (value: Value) => Fields;

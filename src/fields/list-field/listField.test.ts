@@ -10,6 +10,7 @@ import { useAtomValue } from "jotai";
 import { describe, expect, it, test, vi } from "vitest";
 
 import { listField } from "./listField";
+import { useFieldError } from "../../hooks";
 import { numberField } from "../number-field";
 
 describe("listField()", () => {
@@ -27,6 +28,23 @@ describe("listField()", () => {
       await act(async () => submit.current(onSubmit)());
 
       expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it.only("has thedefault error  when submitted empty", async () => {
+      const list = listField({
+        value: [],
+        builder: (age) => numberField({ value: age }),
+      });
+
+      const form = formAtom({ list });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const onSubmit = vi.fn();
+      await act(async () => submit.current(onSubmit)());
+
+      const { result } = renderHook(() => useFieldError(list));
+
+      expect(result.current.error).toBe("This field is required");
     });
   });
 
