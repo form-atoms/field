@@ -34,7 +34,7 @@ describe("listField()", () => {
       expect(onSubmit).not.toHaveBeenCalled();
     });
 
-    it.only("has thedefault error  when submitted empty", async () => {
+    it("has the default error when submitted empty", async () => {
       const list = listField({
         value: [],
         builder: (age) => numberField({ value: age }),
@@ -170,7 +170,7 @@ describe("listField()", () => {
       expect(reset_onSubmit).toHaveBeenCalledWith({ ages: [10] });
     });
 
-    test.only("nested list is reset", async () => {
+    test("nested list is reset", async () => {
       const users = listField({
         name: "users",
         value: [{ name: "Johnson", accounts: [] }],

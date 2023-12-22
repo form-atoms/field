@@ -1,6 +1,6 @@
 import { FormAtom, UseFieldOptions, useFieldInitialValue } from "form-atoms";
-import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { useCallback } from "react";
+import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useCallback, useTransition } from "react";
 
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { ListField } from "../../fields";
@@ -19,10 +19,12 @@ export const useListField = <
   options?: UseFieldOptions<Value[]>,
 ) => {
   const atoms = useAtomValue(list);
+  const validate = useSetAtom(atoms.validate, options);
   const [splitItems, dispatch] = useAtom(atoms._splitList);
   const formList = useAtomValue(atoms._formList);
   const formFields = useAtomValue(atoms._formFields);
   const isEmpty = useAtomValue(atoms.empty);
+  const [, startTransition] = useTransition();
   useFieldInitialValue(list, options?.initialValue, options);
 
   const remove = useCallback((atom: ListItem<Fields>) => {
@@ -31,6 +33,9 @@ export const useListField = <
 
   const add = useCallback((before?: ListItem<Fields>) => {
     dispatch({ type: "insert", value: atoms.buildItem(), before });
+    startTransition(() => {
+      validate("change");
+    });
   }, []);
 
   const move = useCallback(

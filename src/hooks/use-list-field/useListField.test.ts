@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { useListField } from "./useListField";
 import { listField, numberField } from "../../fields";
+import { useFieldError } from "../use-field-error";
 
 describe("useListField()", () => {
   describe("adding item to the list", () => {
@@ -55,6 +56,27 @@ describe("useListField()", () => {
       await act(() => formSubmit.current(onSubmit)());
 
       expect(onSubmit).toHaveBeenCalledWith({ luckyNumbers: [9, 6] });
+    });
+
+    it.only("clears the 'field is required' error (when previously empty & required list submitted)", async () => {
+      const list = listField({
+        value: [],
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ list });
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+
+      await act(async () => submit.current(vi.fn())());
+
+      const { result } = renderHook(() => useFieldError(list));
+      const { result: field } = renderHook(() => useListField(list));
+
+      expect(result.current.isInvalid).toBe(true);
+
+      await act(async () => field.current.add());
+
+      expect(result.current.isInvalid).toBe(false);
     });
   });
 
