@@ -223,4 +223,21 @@ describe("listField()", () => {
       expect(screen.queryByTestId("input-iban")).not.toBeInTheDocument();
     });
   });
+
+  describe("nested validation", () => {
+    it.only("can't be submitted with invalid item's field", async () => {
+      const field = listField({
+        value: [undefined], // empty value for number
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ field });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const onSubmit = vi.fn();
+      await act(async () => submit.current(onSubmit)());
+
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
 });

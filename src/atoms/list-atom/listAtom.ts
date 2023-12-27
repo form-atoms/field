@@ -1,6 +1,7 @@
 import {
   FieldAtomConfig,
   FormAtom,
+  Validate,
   ValidateOn,
   ValidateStatus,
   formAtom,
@@ -206,6 +207,17 @@ export function listAtom<
     },
   );
 
+  const validateCallback: Validate<Value> = (state) => {
+    // TODO: aggregate errors
+    const formLists = state.get(_formListAtom).map((formAtom) => {
+      const form = state.get(formAtom);
+
+      // state.set(form.validate, state.event);
+    });
+
+    return config.validate?.(state);
+  };
+
   const listAtoms = {
     name: nameAtom,
     value: valueAtom,
@@ -219,7 +231,7 @@ export function listAtom<
     ref: refAtom,
     buildItem,
     _validateCount: validateCountAtom,
-    _validateCallback: config.validate,
+    _validateCallback: validateCallback,
     /**
      * List private atoms
      */
