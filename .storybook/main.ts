@@ -17,6 +17,10 @@ export default {
     return {
       ...config,
       plugins: [...(config.plugins || []), tsconfigPaths()],
+      define: {
+        ...(config.define || {}),
+        'process.env': {}
+      }
     };
   },
 };

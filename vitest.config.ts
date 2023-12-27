@@ -11,4 +11,7 @@ export default defineConfig({
       provider: "v8",
     },
   },
+  define: {
+    'process.env': {}
+  }
 });
