@@ -52,6 +52,23 @@ const typeScriptBenefits = listField({
 });
 ```
 
+### `schema: ZodArray<ZodAny, "atleastone">`
+
+You can constrain the maximum number of list items by passing custom schema.
+
+As an example, we can require the user to insert between 1-3 recovery phrases:
+
+```js
+const recoveryPhrases = listField({
+  value: [],
+  schema: z.array(z.any()).nonempty().max(3),
+  builder: ({ hint, phrase }) => ({
+    hint: textField({ value: hint }),
+    phrase: textField({ value: phrase }),
+  }),
+});
+```
+
 ## API
 
 ### `.optional(readRequired?: ReadRequired) => OptionalListField<Fields>`
@@ -92,3 +109,31 @@ const ref = field.optional();
 
 field === ref; // true
 ```
+
+## Recipes
+
+### Initializing values
+
+In practice the `config.value` is not used, as the field is usually initialized 'statically' in the module - outside of the React components, where there is no access to the values.
+The `listField` can be initialized as any other field with the `useFieldInitialValue` hook:
+
+```tsx
+import { useFieldInitialValue } from "form-atoms";
+import { listField } from "@form-atoms/field";
+
+// no access to props/query data outside of component!
+const typeScriptBenefits = listField({
+  value: [],
+  builder: (item) => textField({ value: item }),
+});
+
+const MyComponent = (props) => {
+  const { initialValue = ["safe function calls", "it's fast"] } = props;
+
+  useFieldInitialValue(item, initialValue);
+
+  return <></>;
+};
+```
+
+Generally, this is not needed, as most of the time we use the `useListField()` hook to manage the list field.
