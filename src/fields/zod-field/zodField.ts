@@ -4,6 +4,7 @@ import { ZodAny, ZodUndefined, z } from "zod";
 
 import { ExtendFieldAtom, extendFieldAtom } from "../../atoms/extendFieldAtom";
 import {
+  ReadRequired,
   ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
@@ -53,7 +54,7 @@ export type ZodField<
   { required: RequiredAtom }
 > & {
   optional: (
-    read?: Atom<boolean>["read"],
+    readRequired?: ReadRequired,
   ) => OptionalZodField<Schema, OptSchema>;
 };
 
@@ -70,9 +71,7 @@ export function zodField<
     required: requiredAtom,
   }) as unknown as RequiredZodField<Schema, OptSchema>;
 
-  zodFieldAtom.optional = (
-    readRequired: Atom<boolean>["read"] = () => false,
-  ) => {
+  zodFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
     const optionalZodFieldAtom = extendFieldAtom(

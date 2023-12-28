@@ -13,11 +13,19 @@ import Props from "./props.md?raw";
 
 # ListField
 
-<Description of={ListFieldStories.Primary} />
+The ListField component enables you to easily render & manage a `listField()` atom. It offers `add` and `remove` callbacks to append new item or drop an existing one.
 
 ```ts
 import { ListField } from "@form-atoms/field";
 ```
+
+## Features
+
+- ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
+  This works thanks to Jotai's atom having `toString()` method providing stable `atomKey`.
+- ✅ Can render `<Empty />` when array length is 0.
+- ✅ Handles adding and removal of array items.
+- ✅ Supports deeply nested arrays in arrays.
 
 <Canvas sourceState="none" of={ListFieldStories.Primary} />
 
@@ -80,14 +88,6 @@ const Example = () => (
   </ListField>
 );
 ```
-
-## Features
-
-- ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
-  This works thanks to Jotai's atom having `toString()` method providing stable `atomKey`.
-- ✅ Can render `<Empty />` when array length is 0.
-- ✅ Handles adding and removal of array items.
-- ✅ Supports deeply nested arrays in arrays.
 
 ## Examples
 

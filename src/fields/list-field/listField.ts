@@ -11,6 +11,7 @@ import {
   listAtom,
 } from "../../atoms/list-atom";
 import {
+  ReadRequired,
   ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
@@ -30,7 +31,7 @@ export type ListField<
   Value extends ListAtomValue<Fields>,
   RequiredAtom = Atom<boolean>,
 > = ExtendListAtom<Fields, Value, { required: RequiredAtom }> & {
-  optional: (read?: Atom<boolean>["read"]) => OptionalListField<Fields>;
+  optional: (readRequired?: ReadRequired) => OptionalListField<Fields>;
 };
 
 export type ListFieldSubmitValue<
@@ -80,9 +81,7 @@ export const listField = <
     required: requiredAtom,
   }) as unknown as RequiredListField<Fields>;
 
-  listFieldAtom.optional = (
-    readRequired: Atom<boolean>["read"] = () => false,
-  ) => {
+  listFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
     const optionalZodFieldAtom = extendFieldAtom(

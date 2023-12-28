@@ -24,6 +24,8 @@ export type WritableRequiredAtom = WritableAtom<
 const defaultRequiredAtom = atom(true as const);
 defaultRequiredAtom.debugLabel = "zodField/defaultRequired";
 
+export type ReadRequired = Parameters<typeof atomWithDefault<boolean>>[0];
+
 export function schemaValidate<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
@@ -39,9 +41,7 @@ export function schemaValidate<
     },
   ).or({ on: "change", when: "touched" });
 
-  const makeOptional = (
-    readRequired: Parameters<typeof atomWithDefault<boolean>>[0] = () => false,
-  ) => {
+  const makeOptional = (readRequired: ReadRequired = () => false) => {
     const requiredAtom = atomWithDefault(readRequired);
     const validate = zodValidate(
       (get) => {
