@@ -1872,7 +1872,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.20.7":
+"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.6":
   version: 7.21.5
   resolution: "@babel/runtime@npm:7.21.5"
   dependencies:
@@ -1887,6 +1887,15 @@ __metadata:
   dependencies:
     regenerator-runtime: "npm:^0.13.11"
   checksum: 7a2f4d8d2ed40ea9fa70c1debc94c9ca1afa86f2cad851eb040489c1f46c1233779e5f25fda4ddc2f7ed471067cd0072cb3caf329b4c0427e1ad828541f30017
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.23.2":
+  version: 7.23.6
+  resolution: "@babel/runtime@npm:7.23.6"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 4c4ab16f0361c59fb23956e4d0a29935f1f8a64aa8dd37876ce38355b6f4d8f0e54237aacb89c73b1532def60539ddde2d651523c8fa887b30b19a8cf0c465b0
   languageName: node
   linkType: hard
 
@@ -2680,10 +2689,10 @@ __metadata:
     eslint-import-resolver-typescript: "npm:^3.6.1"
     eslint-plugin-import: "npm:^2.29.0"
     eslint-plugin-prettier: "npm:5.0.1"
-    form-atoms: "npm:^3.2.0"
+    form-atoms: "npm:^3.2.1"
     happy-dom: "npm:^12.10.3"
     jotai: "npm:2.6.0"
-    jotai-devtools: "npm:0.7.0"
+    jotai-devtools: "npm:0.7.1"
     jotai-effect: "npm:0.2.3"
     lodash.shuffle: "npm:^4.2.0"
     prettier: "npm:3.1.0"
@@ -4127,15 +4136,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redux-devtools/extension@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "@redux-devtools/extension@npm:3.2.5"
+"@redux-devtools/extension@npm:^3.2.6":
+  version: 3.3.0
+  resolution: "@redux-devtools/extension@npm:3.3.0"
   dependencies:
-    "@babel/runtime": "npm:^7.20.7"
-    immutable: "npm:^4.2.2"
+    "@babel/runtime": "npm:^7.23.2"
+    immutable: "npm:^4.3.4"
   peerDependencies:
-    redux: ^3.1.0 || ^4.0.0
-  checksum: abd623e57c0cc3fd3a3d9292bbae76447c25ae23b8d20fd1b2947c88e2e8848f75347fefd5c0bff0f6a3d2cefb645f458f28ffc9f1e6a5d87c08c58e77de76b7
+    redux: ^3.1.0 || ^4.0.0 || ^5.0.0
+  checksum: 07c2bb6f786900f29509f1e414ae0af845cb276a471e1e0e961d3a6a7dc16485ffe620bf01a1e0a545181d550058d197525760bbddb2c172acac25ddbe9dbd0d
   languageName: node
   linkType: hard
 
@@ -9190,13 +9199,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-atoms@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "form-atoms@npm:3.2.0"
+"form-atoms@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "form-atoms@npm:3.2.1"
   peerDependencies:
     jotai: ^2.0.0
     react: ">=16.8"
-  checksum: a096c2077da6ad4d2ed0a56d6b33862586e027ac52697b0f7bc7b56993da815cf4debeec78bdba5e8836c582f686fb8ade5e5c4ca89f710aaa86dbc05c64fa83
+  checksum: 70d8bf68d2462e36419622038776faad85342fcda0513b4be81cc4658adee0ab6d369f90030f5bc58c2f37cf91698b04afb076fd93db3453f28178beae59a918
   languageName: node
   linkType: hard
 
@@ -10038,10 +10047,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immutable@npm:^4.2.2":
-  version: 4.3.0
-  resolution: "immutable@npm:4.3.0"
-  checksum: 0a2d1cb374da24752a063466ae5a8189bfcbcfa38f307c3193cebd9224209b467ca14cc6f94b89e98c3c73572e12d23460078fb28931b34b6bd5dbc71f3a60cd
+"immutable@npm:^4.3.4":
+  version: 4.3.4
+  resolution: "immutable@npm:4.3.4"
+  checksum: ea187acc1eec9dcfaa0823bae59e1ae0ea82e7a40d2ace9fb84d467875d5506ced684a79b68e70451f1e1761a387a958ba724171f93aa10330998b026fcb5d29
   languageName: node
   linkType: hard
 
@@ -10870,14 +10879,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai-devtools@npm:0.7.0":
-  version: 0.7.0
-  resolution: "jotai-devtools@npm:0.7.0"
+"jotai-devtools@npm:0.7.1":
+  version: 0.7.1
+  resolution: "jotai-devtools@npm:0.7.1"
   dependencies:
     "@mantine/core": "npm:^6.0.21"
     "@mantine/hooks": "npm:^6.0.21"
     "@mantine/prism": "npm:^6.0.21"
-    "@redux-devtools/extension": "npm:^3.2.5"
+    "@redux-devtools/extension": "npm:^3.2.6"
     javascript-stringify: "npm:^2.1.0"
     jsondiffpatch: "npm:^0.5.0"
     react-error-boundary: "npm:^4.0.11"
@@ -10886,7 +10895,7 @@ __metadata:
   peerDependencies:
     "@emotion/react": ">=11.0.0"
     react: ">=17.0.0"
-  checksum: ae43f6cf36060dac024f9a73606cfd6c6cfb13233a1066501cd9ea449edc815aede9ae4fce7db9c4651f2b98f064fd1d3bbbe45c1a115f11389d5c095e0d1cdf
+  checksum: c6af39b12111504b4031a704c8cb7e7287f74f3e73586ce47a30ad00b9d77870d9fda860fae70b577dfa116c628f82eb88b3c0388e9587acbf48d5318006d387
   languageName: node
   linkType: hard
 
@@ -13899,6 +13908,13 @@ __metadata:
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: d493e9e118abef5b099c78170834f18540c4933cedf9bfabc32d3af94abfb59a7907bd7950259cbab0a929ebca7db77301e8024e5121e6482a82f78283dfd20c
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 5db3161abb311eef8c45bcf6565f4f378f785900ed3945acf740a9888c792f75b98ecb77f0775f3bf95502ff423529d23e94f41d80c8256e8fa05ed4b07cf471
   languageName: node
   linkType: hard
 
