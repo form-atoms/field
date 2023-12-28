@@ -10,7 +10,7 @@ import { useAtomValue } from "jotai";
 import { describe, expect, it, test, vi } from "vitest";
 
 import { listAtom } from "./listAtom";
-import { numberField } from "../../fields";
+import { numberField, textField } from "../../fields";
 
 describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
@@ -101,6 +101,45 @@ describe("listAtom()", () => {
       const reset_onSubmit = vi.fn();
       await act(async () => formActions.current.submit(reset_onSubmit)());
       expect(reset_onSubmit).toHaveBeenCalledWith({ ages: [10] });
+    });
+  });
+
+  describe("nested validation", () => {
+    it("can't be submitted with invalid item's field", async () => {
+      const field = listAtom({
+        value: [undefined], // empty value for number
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ field });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const onSubmit = vi.fn();
+      await act(async () => submit.current(onSubmit)());
+
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("can't be submitted when item of nested list is invalid", async () => {
+      const field = listAtom({
+        name: "users",
+        value: [{ accounts: [undefined] }],
+        builder: ({ accounts }) => ({
+          accounts: listAtom({
+            name: "bank-accounts",
+            value: accounts,
+            builder: (iban) => textField({ name: "iban", value: iban }),
+          }),
+        }),
+      });
+
+      const form = formAtom({ field });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const onSubmit = vi.fn();
+      await act(async () => submit.current(onSubmit)());
+
+      expect(onSubmit).not.toHaveBeenCalled();
     });
   });
 });

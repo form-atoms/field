@@ -5,6 +5,7 @@ import {
   ValidateOn,
   ValidateStatus,
   formAtom,
+  walkFields,
 } from "form-atoms";
 import { Atom, PrimitiveAtom, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset, splitAtom } from "jotai/utils";
@@ -183,6 +184,7 @@ export function listAtom<
 
         const maybeValidatePromise = config.validate?.({
           get,
+          set,
           dirty,
           touched: get(touchedAtom),
           value,
@@ -207,15 +209,54 @@ export function listAtom<
     },
   );
 
-  const validateCallback: Validate<Value> = (state) => {
-    // TODO: aggregate errors
-    const formLists = state.get(_formListAtom).map((formAtom) => {
+  const validateCallback: Validate<Value> = async (state) => {
+    // run validation for nested forms
+    state.get(_formListAtom).map((formAtom) => {
       const form = state.get(formAtom);
-
-      // state.set(form.validate, state.event);
+      state.set(form.validate, state.event);
     });
 
-    return config.validate?.(state);
+    // validate the listAtom itself
+    const listValidate = config.validate?.(state);
+
+    const listError = isPromise(listValidate)
+      ? await listValidate
+      : listValidate;
+
+    // get errors from the nested forms
+    const hasInvalidForm = state
+      .get(_formListAtom)
+      .map((formAtom) => {
+        const form = state.get(formAtom);
+
+        let invalid = false;
+
+        walkFields(state.get(form.fields), (field) => {
+          const atoms = state.get(field);
+
+          const errors = state.get(atoms.errors);
+
+          if (errors.length) {
+            invalid = true;
+            return false;
+          }
+        });
+
+        // does not work with async
+        // state.get(form.validateStatus) === "invalid";
+        return invalid;
+      })
+      .some((invalid) => invalid);
+
+    const errors = listError ?? [];
+
+    if (hasInvalidForm) {
+      errors.push("Some list items contain errors.");
+    }
+
+    state.set(errorsAtom, errors);
+
+    return errors;
   };
 
   const listAtoms = {
