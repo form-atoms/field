@@ -1,6 +1,7 @@
 import { RESET } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Atom, Getter, WritableAtom, atom } from "jotai";
+import { Getter, WritableAtom, atom } from "jotai";
+import { atomWithDefault } from "jotai/utils";
 import { ZodUndefined, z } from "zod";
 
 export type ValidateConfig<
@@ -38,8 +39,10 @@ export function schemaValidate<
     },
   ).or({ on: "change", when: "touched" });
 
-  const makeOptional = (readRequired: Atom<boolean>["read"] = () => false) => {
-    const requiredAtom = atom(readRequired);
+  const makeOptional = (
+    readRequired: Parameters<typeof atomWithDefault<boolean>>[0] = () => false,
+  ) => {
+    const requiredAtom = atomWithDefault(readRequired);
     const validate = zodValidate(
       (get) => {
         const schemaObj = typeof schema === "function" ? schema(get) : schema;
