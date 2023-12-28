@@ -105,8 +105,13 @@ describe("listAtom()", () => {
   });
 
   describe("nested validation", () => {
+    // hack to wait for the form validation to finish (when listAtom used raw, without listField which has validate function)
+    const HACK_validate = () =>
+      new Promise<[]>((resolve) => setTimeout(() => resolve([]), 0));
+
     it("can't be submitted with invalid item's field", async () => {
       const field = listAtom({
+        validate: HACK_validate,
         value: [undefined], // empty value for number
         builder: (value) => numberField({ value }),
       });
@@ -122,10 +127,12 @@ describe("listAtom()", () => {
 
     it("can't be submitted when item of nested list is invalid", async () => {
       const field = listAtom({
+        validate: HACK_validate,
         name: "users",
         value: [{ accounts: [undefined] }],
         builder: ({ accounts }) => ({
           accounts: listAtom({
+            validate: HACK_validate,
             name: "bank-accounts",
             value: accounts,
             builder: (iban) => textField({ name: "iban", value: iban }),
