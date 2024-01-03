@@ -3,7 +3,6 @@ import { InputField, fieldAtom } from "form-atoms";
 import { AddButtonProps, ListField, RemoveButtonProps } from "./ListField";
 import { checkboxField, listField, textField } from "../../fields";
 import { formStory, meta } from "../../scenarios/StoryForm";
-import { FieldErrors } from "../field-errors";
 import { FieldLabel } from "../field-label";
 import { Radio, RadioControl } from "../radio";
 
@@ -259,11 +258,13 @@ export const Nested = formStory({
         value: [
           {
             name: "Jerry",
+            lastName: "Park",
             accounts: [{ iban: "SK89 7500 0000 0000 1234 5671" }],
           },
         ],
-        builder: ({ name, accounts = [] }) => ({
+        builder: ({ name, lastName, accounts = [] }) => ({
           name: fieldAtom({ value: name }),
+          lastName: fieldAtom({ value: lastName }),
           accounts: listField({
             name: "accounts",
             value: accounts,
@@ -280,23 +281,51 @@ export const Nested = formStory({
             Add Person
           </button>
         )}
-        RemoveButton={RemoveButton}
       >
-        {({ fields, index, RemoveButton: RemoveUser }) => (
-          <>
-            <div
-              style={{
-                display: "grid",
-                gridGap: 16,
-                gridTemplateColumns: "auto min-content",
-              }}
-            >
-              <label>Person #{index + 1}</label> <RemoveUser />
+        {({ fields, index, item, remove }) => (
+          <article>
+            <header>
+              <nav>
+                <ul>
+                  <li>
+                    <strong>Person #{index + 1}</strong>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <a
+                      href="#"
+                      role="button"
+                      className="outline secondary"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        remove(item);
+                      }}
+                    >
+                      Remove
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </header>
+            <div className="grid">
+              <div>
+                <FieldLabel field={fields.name} label="First Name" />
+                <InputField
+                  atom={fields.name}
+                  render={(props) => <input {...props} placeholder="Name" />}
+                />
+              </div>
+              <div>
+                <FieldLabel field={fields.lastName} label="Last Name" />
+                <InputField
+                  atom={fields.lastName}
+                  render={(props) => (
+                    <input {...props} placeholder="Last Name" />
+                  )}
+                />
+              </div>
             </div>
-            <InputField
-              atom={fields.name}
-              render={(props) => <input {...props} placeholder="Name" />}
-            />
             <ListField
               field={fields.accounts}
               AddButton={({ add }) => (
@@ -307,7 +336,7 @@ export const Nested = formStory({
               RemoveButton={RemoveButton}
             >
               {({ fields, index, RemoveButton: RemoveIban }) => (
-                <div style={{ marginLeft: 48 }}>
+                <>
                   <label>Account #{index + 1}</label>
                   <div
                     style={{
@@ -324,10 +353,10 @@ export const Nested = formStory({
                     />
                     <RemoveIban />
                   </div>
-                </div>
+                </>
               )}
             </ListField>
-          </>
+          </article>
         )}
       </ListField>
     ),

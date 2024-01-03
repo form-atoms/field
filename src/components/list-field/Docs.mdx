@@ -173,52 +173,120 @@ For example we can capture multiple people with multiple banking accounts:
 <Canvas sourceState="none" of={ListFieldStories.Nested} />
 
 ```tsx
-const peopleForm = formAtom({
-  // level 0
-  people: [
+import { fieldAtom, InputField } from "form-atoms";
+import { FieldLabel, listField, ListField, textField } from "@form-atoms/field";
+
+const users = listField({
+  name: "users",
+  value: [
     {
-      name: fieldAtom({ value: "Jerry" }),
-      // level 1 (nested)
-      accounts: [{ iban: fieldAtom({ value: "DE10 ..." }) }],
+      name: "Jerry",
+      lastName: "Park",
+      accounts: [{ iban: "SK89 7500 0000 0000 1234 5671" }],
     },
   ],
+  builder: ({ name, lastName, accounts = [] }) => ({
+    name: fieldAtom({ value: name }),
+    lastName: fieldAtom({ value: lastName }),
+    accounts: listField({
+      name: "accounts",
+      value: accounts,
+      builder: ({ iban }) => ({ iban: textField({ value: iban }) }),
+    }),
+  }),
 });
 
-// Note that for nested component we stil provide the root form instance
-// the path prop to array also starts from the root
 const AdvancedNestedExample = () => {
   return (
     <ListField
-      form={peopleForm}
-      keyFrom="name"
-      path={["people"]}
-      builder={() => ({
-        name: fieldAtom({ value: "" }),
-        accounts: [],
-      })}
+      field={users}
+      AddButton={({ add }) => (
+        <button type="button" className="outline" onClick={add}>
+          Add Person
+        </button>
+      )}
     >
-      {({ fields, index, add, RemoveButton }) => (
-        <>
-          <label>Person #{index}</label> <RemoveButton />
-          <TextField field={fields.name} label="Name" />
+      {({ fields, index, item, remove }) => (
+        <article>
+          <header>
+            <nav>
+              <ul>
+                <li>
+                  <strong>Person #{index + 1}</strong>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    role="button"
+                    className="outline secondary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      remove(item);
+                    }}
+                  >
+                    Remove
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <div className="grid">
+            <div>
+              <FieldLabel field={fields.name} label="First Name" />
+              <InputField
+                atom={fields.name}
+                render={(props) => <input {...props} placeholder="Name" />}
+              />
+            </div>
+            <div>
+              <FieldLabel field={fields.lastName} label="Last Name" />
+              <InputField
+                atom={fields.lastName}
+                render={(props) => <input {...props} placeholder="Last Name" />}
+              />
+            </div>
+          </div>
           <ListField
-            form={peopleForm}
-            keyFrom="iban"
-            path={["people", index, "accounts"]}
-            builder={() => ({ iban: fieldAtom({ value: "" }) })}
+            field={fields.accounts}
+            AddButton={({ add }) => (
+              <button type="button" className="outline" onClick={add}>
+                Add Bank Account
+              </button>
+            )}
+            RemoveButton={RemoveButton}
           >
-            {({ fields, index, RemoveButton }) => (
+            {({ fields, index, RemoveButton: RemoveIban }) => (
               <>
-                <label>Account #{index}</label> <RemoveButton />
-                <TextField field={fields.iban} label="IBAN" />
+                <label>Account #{index + 1}</label>
+                <div
+                  style={{
+                    display: "grid",
+                    gridGap: 16,
+                    gridTemplateColumns: "auto min-content",
+                  }}
+                >
+                  <InputField
+                    atom={fields.iban}
+                    render={(props) => <input {...props} placeholder="IBAN" />}
+                  />
+                  <RemoveIban />
+                </div>
               </>
             )}
           </ListField>
-        </>
+        </article>
       )}
     </ListField>
   );
 };
+
+const RemoveButton = ({ remove }: RemoveButtonProps) => (
+  <button type="button" className="outline secondary" onClick={remove}>
+    Remove
+  </button>
+);
 ```
 
 ### With RadioControl over the array items
