@@ -29,7 +29,7 @@ export type ListItemRenderProps<Fields extends ListAtomItems> = RenderProp<
     count: number;
     fields: Fields;
     add: (before?: ListItem<Fields>) => void;
-    remove: (field: FieldAtom<any> | FormFields) => void;
+    remove: (item: ListItem<Fields>) => void;
     moveUp: () => void;
     moveDown: () => void;
   } & RenderProp<unknown, "RemoveButton">
