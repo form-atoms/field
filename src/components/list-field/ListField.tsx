@@ -18,7 +18,7 @@ type RenderProps = Partial<RemoveButtonProp & AddButtonProp & EmptyProp>;
 
 export type ListItemRenderProps<Fields extends ListAtomItems> = RenderProp<
   {
-    atom: ListItem<Fields>;
+    item: ListItem<Fields>;
     /**
      * The index of the current item.
      */
@@ -69,10 +69,10 @@ export function ListField<
   return (
     <>
       {isEmpty && Empty ? <Empty /> : undefined}
-      {items.map(({ remove, fields, key, atom, moveUp, moveDown }, index) => (
+      {items.map(({ remove, fields, key, item, moveUp, moveDown }, index) => (
         <Fragment key={key}>
           {children({
-            atom,
+            item,
             add,
             remove,
             moveUp,

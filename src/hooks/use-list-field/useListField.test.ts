@@ -51,7 +51,7 @@ describe("useListField()", () => {
 
       const { result: formSubmit } = renderHook(() => useFormSubmit(form));
 
-      await act(() => list.current.add(list.current.items[0]?.atom));
+      await act(() => list.current.add(list.current.items[0]?.item));
 
       const onSubmit = vi.fn();
       await act(() => formSubmit.current(onSubmit)());
@@ -124,7 +124,7 @@ describe("useListField()", () => {
 
       expect(result.current.isInvalid).toBe(true);
 
-      await act(async () => field.current.remove(field.current.items[0]!.atom));
+      await act(async () => field.current.remove(field.current.items[0]!.item));
 
       expect(result.current.isInvalid).toBe(false);
     });

@@ -27,8 +27,8 @@ export const useListField = <
   const [, startTransition] = useTransition();
   useFieldInitialValue(list, options?.initialValue, options);
 
-  const remove = useCallback((atom: ListItem<Fields>) => {
-    dispatch({ type: "remove", atom });
+  const remove = useCallback((item: ListItem<Fields>) => {
+    dispatch({ type: "remove", atom: item });
     startTransition(() => {
       validate("change");
     });
@@ -42,19 +42,19 @@ export const useListField = <
   }, []);
 
   const move = useCallback(
-    (atom: ListItem<Fields>, before?: ListItem<Fields>) => {
-      dispatch({ type: "move", atom, before });
+    (item: ListItem<Fields>, before?: ListItem<Fields>) => {
+      dispatch({ type: "move", atom: item, before });
     },
     [],
   );
 
-  const items = splitItems.map((atom, index) => ({
-    atom,
+  const items = splitItems.map((item, index) => ({
+    item,
     key: `${formList[index]}`,
     fields: formFields[index]!,
-    remove: () => remove(atom),
-    moveUp: () => move(atom, splitItems[index - 1]),
-    moveDown: () => move(atom, splitItems[index + 2]),
+    remove: () => remove(item),
+    moveUp: () => move(item, splitItems[index - 1]),
+    moveDown: () => move(item, splitItems[index + 2]),
   }));
 
   return { remove, add, move, isEmpty, items };

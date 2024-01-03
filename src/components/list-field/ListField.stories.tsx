@@ -181,7 +181,7 @@ export const Prepend = formStory({
         AddButton={AddHobbyField}
         RemoveButton={RemoveButton}
       >
-        {({ fields, RemoveButton, add, atom }) => (
+        {({ fields, RemoveButton, add, item }) => (
           <div
             style={{
               display: "grid",
@@ -190,7 +190,7 @@ export const Prepend = formStory({
             }}
           >
             <InputField atom={fields} component="input" />
-            <button type="button" className="outline" onClick={() => add(atom)}>
+            <button type="button" className="outline" onClick={() => add(item)}>
               Prepend
             </button>
             <RemoveButton />
