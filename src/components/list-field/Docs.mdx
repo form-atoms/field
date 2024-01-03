@@ -7,6 +7,7 @@ import {
   Description,
 } from "@storybook/blocks";
 import * as ListFieldStories from "./ListField.stories";
+
 import Props from "./props.md?raw";
 
 <Meta title="components/ListField" />
@@ -165,12 +166,12 @@ const Example = () => (
 );
 ```
 
-### Nested
+### Nested List Field
 
 ListField supports nested array fields.
 For example we can capture multiple people with multiple banking accounts:
 
-<Canvas sourceState="none" of={ListFieldStories.Nested} />
+<Canvas sourceState="none" of={ListFieldStories.NestedListField} />
 
 ```tsx
 import { fieldAtom, InputField } from "form-atoms";
@@ -288,7 +289,3 @@ const RemoveButton = ({ remove }: RemoveButtonProps) => (
   </button>
 );
 ```
-
-### With RadioControl over the array items
-
-<Canvas sourceState="none" of={ListFieldStories.WithRadioControl} />
