@@ -13,7 +13,8 @@ import Props from "./props.md?raw";
 
 # ListField
 
-The ListField component enables you to easily render & manage a `listField()` atom. It offers `add` and `remove` callbacks to append new item or drop an existing one.
+The ListField component enables you to easily render & manage a [listField()](?path=/docs/fields-listField--docs). It is a higher order component, which internally uses the [useListField](?path=/docs/hooks-useListField--docs)
+hook.
 
 ```ts
 import { ListField } from "@form-atoms/field";
@@ -21,42 +22,35 @@ import { ListField } from "@form-atoms/field";
 
 ## Features
 
-- ✅ **Optimized rendering**. the `keyFrom` prop will use the array item's field as stable render key. This is done internally, so you don't have to specify the `key` when the list is being rendered.
-  This works thanks to Jotai's atom having `toString()` method providing stable `atomKey`.
-- ✅ Can render `<Empty />` when array length is 0.
-- ✅ Handles adding and removal of array items.
-- ✅ Supports deeply nested arrays in arrays.
+- ✅ **Performant rendering**. Each list item is rendered with a stable `key` derived from an internal form atom.
+- ✅ Handles **adding, removal and ordering** of the list items with custom render props.
+- ✅ **Blank Slate ready**. Can render a custom `<Empty />` component via render prop when the list is empty.
+- ✅ **Reorder items** with pre-configured **`moveUp` & `moveDown` actions.**
+- ✅ Supports **nested lists in lists**.
+
+## Example
 
 <Canvas sourceState="none" of={ListFieldStories.Primary} />
 
 ```tsx
-import {
-  listField,
-  ListField,
-  textField,
-  listFieldBuilder,
-} from "@form-atoms/field";
+import { listField, ListField, textField } from "@form-atoms/field";
 
-const fields = {
-  envVars: listField({
-    value: [
-      { variable: "GITHUB_TOKEN", value: "ff52d09a" },
-      { variable: "NPM_TOKEN", value: "deepsecret" },
-    ],
-    builder: (item: { variable; value }) => ({
-      variable: textField({ name: "variable", value: variable }),
-      value: textField({ name: "value", value: value }),
-      // Uncommenting the following line will make item.owner property available!
-      // owner: textField({ name: "owner" }),
-    }),
+const envVars = listField({
+  value: [
+    { variable: "GITHUB_TOKEN", value: "ff52d09a" },
+    { variable: "NPM_TOKEN", value: "deepsecret" },
+  ],
+  builder: ({ variable, value }) => ({
+    variable: textField({ name: "variable", value: variable }),
+    value: textField({ name: "value", value: value }),
   }),
-};
+});
 
 const Example = () => (
   <ListField
-    field={fields.envVars}
+    field={envVars}
     AddButton={({ add }) => (
-      <button type="button" className="outline" onClick={add}>
+      <button type="button" className="secondary" onClick={add}>
         Add environment variable
       </button>
     )}
@@ -89,43 +83,28 @@ const Example = () => (
 );
 ```
 
-## Examples
+## Recipes
 
-### Flat
+### List of primitive values
 
-<Description of={ListFieldStories.Flat} />
+<Description of={ListFieldStories.ListOfPrimitiveValues} />
 
-<Canvas sourceState="none" of={ListFieldStories.Flat} />
+<Canvas sourceState="none" of={ListFieldStories.ListOfPrimitiveValues} />
 
 ```tsx
-import {
-  AddButtonProps,
-  ListField,
-  listField,
-  listFieldBuilder,
-  textField,
-} from "@form-atoms/field";
+import { ListField, listField, textField } from "@form-atoms/field";
 
-const fields = {
-  benefits: listField({
-    value: ["safe function calls", "it's fast"],
-    builder: (value) => textField({ name: "ts-benefit", value }),
-  }),
-};
+const productPros = listField({
+  value: ["quality materials used", "not so heavy"],
+  builder: (value) => textField({ value }),
+});
 
 const Example = () => (
   <>
     <label style={{ marginBottom: 16 }}>
       What are some benefits of TypeScript?
     </label>
-    <ListField
-      field={fields.benefits}
-      AddButton={({ add }: AddButtonProps) => (
-        <button type="button" className="outline" onClick={add}>
-          Add Benefit
-        </button>
-      )}
-    >
+    <ListField field={productPros}>
       {({ fields, RemoveButton }) => (
         <div
           style={{
@@ -134,12 +113,55 @@ const Example = () => (
             gridTemplateColumns: "auto min-content",
           }}
         >
+          {/* IMPORTANT NOTE: when the list item contains primitive field, the `fields` prop is the primitive field atom: */}
           <InputField atom={fields} component="input" />
           <RemoveButton />
         </div>
       )}
     </ListField>
   </>
+);
+```
+
+### `Empty` render prop
+
+<Description of={ListFieldStories.EmptyRenderProp} />
+
+<Canvas sourceState="none" of={ListFieldStories.EmptyRenderProp} />
+
+```tsx
+import { ListField, listField, textField } from "@form-atoms/field";
+
+const productPros = listField({
+  value: ["quality materials used", "not so heavy"],
+  builder: (value) => textField({ value }),
+});
+
+// BEST PRACTICE: define your component statically. Avoid inline definitions when specifying props.
+// NOTE: The `Empty` prop does not accept any props
+const NoHobbiesCard = () => (
+  <article>
+    <p style={{ textAlign: "center" }}>
+      You don't have any hobbies in your list. Start by adding your first one.
+    </p>
+  </article>
+);
+
+const Example = () => (
+  <ListField field={fields.hobbies} Empty={NoHobbiesCard}>
+    {({ fields, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content",
+        }}
+      >
+        <InputField atom={fields} component="input" />
+        <RemoveButton />
+      </div>
+    )}
+  </ListField>
 );
 ```
 

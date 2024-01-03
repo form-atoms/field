@@ -17,7 +17,7 @@ export const Primary = formStory({
     docs: {
       description: {
         story:
-          "The array field enables you to capture list of items with the same attributes. It offers `add` and `remove` callbacks to append new item or drop an existing one.",
+          "The list field enables you to capture list of items with the same attributes. It offers `add`, `remove` & `move` callbacks to manage the list items.",
       },
     },
   },
@@ -72,34 +72,30 @@ export const Primary = formStory({
   },
 });
 
-export const Flat = formStory({
+export const ListOfPrimitiveValues = formStory({
   parameters: {
     docs: {
       description: {
         story:
-          "The array items can be plain field atoms. This is usefull when you want to capture list of primitives, e.g. strings or numbers. Here our list of TypeScript benefits contains `FieldAtom<string>` items.",
+          "Your `listField` builder can produce plain field atoms, as opposed to the common `FormFields` object. This is usefull when you want to capture list of primitives, e.g. `string[]` or `number[]`. For example we can capture list of pros (and cons) as if in eshop product review:",
       },
     },
   },
   args: {
     fields: {
       benefits: listField({
-        value: ["safe function calls", "it's fast"],
-        builder: (value) => textField({ name: "ts-benefit", value }),
+        value: ["quality materials used", "not so heavy"],
+        builder: (value) => textField({ value }),
       }),
     },
     children: ({ fields }) => (
       <>
         <label style={{ marginBottom: 16 }}>
-          What are some benefits of TypeScript?
+          What do you like about the product?
         </label>
         <ListField
           field={fields.benefits}
-          AddButton={({ add }: AddButtonProps) => (
-            <button type="button" className="outline" onClick={add}>
-              Add Benefit
-            </button>
-          )}
+          AddButton={AddButton}
           RemoveButton={RemoveButton}
         >
           {({ fields, RemoveButton }) => (
@@ -120,7 +116,15 @@ export const Flat = formStory({
   },
 });
 
-export const Empty = formStory({
+export const EmptyRenderProp = formStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Provide `Empty` render prop, to render a blank slate when the list is empty.",
+      },
+    },
+  },
   args: {
     fields: {
       hobbies: listField({
@@ -132,13 +136,15 @@ export const Empty = formStory({
       <>
         <ListField
           field={fields.hobbies}
-          AddButton={AddHobbyField}
+          AddButton={AddHobbyButton}
           RemoveButton={RemoveButton}
           Empty={() => (
-            <p>
-              You don't have any hobbies in your list. Start by adding the
-              first.
-            </p>
+            <article>
+              <p style={{ textAlign: "center" }}>
+                You don't have any hobbies in your list. Start by adding your
+                first one.
+              </p>
+            </article>
           )}
         >
           {({ fields, RemoveButton }) => (
@@ -146,7 +152,7 @@ export const Empty = formStory({
               style={{
                 display: "grid",
                 gridGap: 16,
-                gridTemplateColumns: "auto min-content min-content",
+                gridTemplateColumns: "auto min-content",
               }}
             >
               <InputField atom={fields} component="input" />
@@ -154,7 +160,6 @@ export const Empty = formStory({
             </div>
           )}
         </ListField>
-        <FieldErrors field={fields.hobbies} />
       </>
     ),
   },
@@ -178,7 +183,7 @@ export const Prepend = formStory({
     children: ({ fields }) => (
       <ListField
         field={fields.hobbies}
-        AddButton={AddHobbyField}
+        AddButton={AddHobbyButton}
         RemoveButton={RemoveButton}
       >
         {({ fields, RemoveButton, add, item }) => (
@@ -220,7 +225,7 @@ export const Ordering = formStory({
     children: ({ fields }) => (
       <ListField
         field={fields.hobbies}
-        AddButton={AddHobbyField}
+        AddButton={AddHobbyButton}
         RemoveButton={RemoveButton}
       >
         {({ fields, RemoveButton, moveDown, moveUp }) => (
@@ -402,16 +407,20 @@ export const WithRadioControl = formStory({
   },
 });
 
-// This is a button that immutably pushes a new field atom to the hobbies array
-const AddHobbyField = ({ add }: AddButtonProps) => (
+const AddHobbyButton = ({ add }: AddButtonProps) => (
   <button type="button" className="outline" onClick={add}>
     Add hobby
   </button>
 );
 
-// This is a button that removes current field atom from the hobbies array
 const RemoveButton = ({ remove }: RemoveButtonProps) => (
   <button type="button" className="outline secondary" onClick={remove}>
     Remove
+  </button>
+);
+
+const AddButton = ({ add }: AddButtonProps) => (
+  <button type="button" className="outline" onClick={add}>
+    Add item
   </button>
 );
