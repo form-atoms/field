@@ -1,16 +1,8 @@
-import {
-  Meta,
-  Source,
-  Canvas,
-  Controls,
-  Markdown,
-  Description,
-} from "@storybook/blocks";
+import { Meta, Canvas, ArgTypes, Description } from "@storybook/blocks";
 import * as ListFieldStories from "./ListField.stories";
-
 import Props from "./props.md?raw";
 
-<Meta title="components/ListField" />
+<Meta title="components/ListField" of={ListFieldStories} />
 
 # ListField
 
@@ -28,6 +20,10 @@ import { ListField } from "@form-atoms/field";
 - ✅ **Blank Slate ready**. Can render a custom `<Empty />` component via render prop when the list is empty.
 - ✅ **Reorder items** with pre-configured **`moveUp` & `moveDown` actions.**
 - ✅ Supports **nested lists in lists**.
+
+## Props
+
+<ArgTypes />
 
 ## Example
 
@@ -174,7 +170,7 @@ For example we can capture multiple people with multiple banking accounts:
 <Canvas sourceState="none" of={ListFieldStories.NestedListField} />
 
 ```tsx
-import { fieldAtom, InputField } from "form-atoms";
+import { InputField } from "form-atoms";
 import { FieldLabel, listField, ListField, textField } from "@form-atoms/field";
 
 const users = listField({
@@ -187,8 +183,8 @@ const users = listField({
     },
   ],
   builder: ({ name, lastName, accounts = [] }) => ({
-    name: fieldAtom({ value: name }),
-    lastName: fieldAtom({ value: lastName }),
+    name: textField({ value: name }),
+    lastName: textField({ value: lastName }),
     accounts: listField({
       name: "accounts",
       value: accounts,
