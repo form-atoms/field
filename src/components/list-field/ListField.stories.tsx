@@ -19,8 +19,6 @@ const meta = {
 
 export default meta;
 
-export type ListStory = StoryObj<typeof meta>;
-
 const AddHobbyButton = ({ add }: AddButtonProps) => (
   <button type="button" className="outline" onClick={add}>
     Add hobby
@@ -42,7 +40,7 @@ const AddButton = ({ add }: AddButtonProps) => (
 const listFieldStory = <Fields extends ListAtomItems>(
   storyObj: {
     args: ListFieldProps<Fields, ListAtomValue<Fields>>;
-  } & Omit<ListStory, "args">,
+  } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
   ...storyObj,
   decorators: [

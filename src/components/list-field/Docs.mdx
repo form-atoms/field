@@ -1,5 +1,7 @@
 import { Meta, Canvas, ArgTypes, Description } from "@storybook/blocks";
 import * as ListFieldStories from "./ListField.stories";
+import * as ListItemStories from "./item/Item.stories";
+
 import Props from "./props.md?raw";
 
 <Meta title="components/ListField" of={ListFieldStories} />
@@ -24,6 +26,12 @@ import { ListField } from "@form-atoms/field";
 ## Props
 
 <ArgTypes />
+
+### Children props
+
+The `children` render prop will receive the following props:
+
+<ArgTypes of={ListItemStories} />
 
 ## Examples
 

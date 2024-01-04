@@ -16,23 +16,42 @@ export type EmptyProp = RenderProp<unknown, "Empty">;
 
 type RenderProps = Partial<RemoveButtonProp & AddButtonProp & EmptyProp>;
 
-export type ListItemRenderProps<Fields extends ListAtomItems> = RenderProp<
-  {
-    item: ListItem<Fields>;
-    /**
-     * The index of the current item.
-     */
-    index: number;
-    /**
-     * Total count of items in the list.
-     */
-    count: number;
-    fields: Fields;
-    add: (before?: ListItem<Fields>) => void;
-    remove: (item: ListItem<Fields>) => void;
-    moveUp: () => void;
-    moveDown: () => void;
-  } & RenderProp<unknown, "RemoveButton">
+export type ListItemProps<Fields extends ListAtomItems> = {
+  item: ListItem<Fields>;
+  /**
+   * The index of the current item.
+   */
+  index: number;
+  /**
+   * Total count of items in the list.
+   */
+  count: number;
+  /**
+   * The fields of current item, as returned from the builder function.
+   */
+  fields: Fields;
+  /**
+   * Append a new item to the end of the list.
+   * WHen called with current item, it will be prepend with a new item.
+   */
+  add: (before?: ListItem<Fields>) => void;
+  /**
+   * Removes the current item.
+   */
+  remove: () => void;
+  /**
+   * Moves the current item one slot up in the list.
+   * When called for the first item, the action is no-op.
+   */
+  moveUp: () => void;
+  /**
+   * Moves the current item one slot down in the list.
+   * When called for the last item, the item moves to the start of the list.
+   */
+  moveDown: () => void;
+} & RenderProp<unknown, "RemoveButton">;
+export type ListItemProp<Fields extends ListAtomItems> = RenderProp<
+  ListItemProps<Fields>
 >;
 
 export type ListFields = FieldAtom<any>[] | FormFields[];
@@ -43,7 +62,7 @@ export type ListFieldProps<
 > = RenderProps & {
   field: ListField<Fields, Value>;
   initialValue?: Value[];
-} & ListItemRenderProps<Fields>;
+} & ListItemProp<Fields>;
 
 export function ListField<
   Fields extends ListAtomItems,
