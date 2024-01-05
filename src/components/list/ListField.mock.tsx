@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 
-import { FieldErrors, FieldLabel } from "..";
+import { FieldLabel } from "..";
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 import { List, ListProps } from ".";
 
@@ -16,9 +17,7 @@ export const ListField = <Fields extends ListAtomItems>({
     <>
       <FieldLabel field={field} label={label} />
       <List field={field} {...listProps} />
-      <div style={{ marginBottom: 16, color: "var(--del-color)" }}>
-        <FieldErrors field={field} />
-      </div>
+      <PicoFieldErrors field={field} />
     </>
   );
 };
