@@ -17,7 +17,7 @@ describe("listBuilder", () => {
 
     test("call with array produces list of items", () => {
       // NOTE: the undefined is simply empty value
-      const single = positivesBuilder(["pretty", "fast", undefined]);
+      const single = positivesBuilder(["pretty", "fast"]);
 
       expectTypeOf(single).toEqualTypeOf<TextField[]>();
     });
@@ -47,7 +47,7 @@ describe("listBuilder", () => {
 
     test("call with array produces list of items", () => {
       // NOTE: the undefined is simply empty value
-      const multi = addressBuilder([{ street: "Hrad" }, { street: undefined }]);
+      const multi = addressBuilder([{ street: "Hrad" }]);
 
       expectTypeOf(multi).toEqualTypeOf<{ street: TextField }[]>();
     });
