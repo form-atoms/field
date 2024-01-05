@@ -1,5 +1,5 @@
 import { booleanField } from "./booleanField";
-import { RadioGroupField } from "../../components/radio-group/RadioGroupField";
+import { RadioGroupField } from "../../components/radio-group/RadioGroupField.mock";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { CheckboxInput } from "../checkbox-field/CheckboxInput.mock";
 

@@ -1,6 +1,8 @@
+import { StoryObj } from "@storybook/react";
 import { z } from "zod";
 
-import { RadioGroupField } from "./RadioGroupField";
+import { RadioGroup, RadioGroupProps } from "./RadioGroup";
+import { RadioGroupField } from "./RadioGroupField.mock";
 import {
   booleanField,
   numberField,
@@ -8,12 +10,35 @@ import {
   stringField,
   zodField,
 } from "../../fields";
-import { formStory, meta } from "../../scenarios/StoryForm";
+import { SelectField } from "../../hooks";
+import { StoryForm } from "../../scenarios/StoryForm";
 
-export default {
-  ...meta,
+const meta = {
+  component: RadioGroup,
   title: "components/RadioGroup",
 };
+
+export default meta;
+
+const radioGroupStory = <Option, Field extends SelectField>(
+  storyObj: {
+    args: Pick<RadioGroupProps<Option, Field>, "field"> &
+      Omit<Partial<RadioGroupProps<Option, Field>>, "field">;
+  } & Omit<StoryObj<typeof meta>, "args">,
+) => ({
+  ...storyObj,
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <StoryForm fields={{ field: storyObj.args.field }}>
+        {() => (
+          <p>
+            <Story />
+          </p>
+        )}
+      </StoryForm>
+    ),
+  ],
+});
 
 const bashAnswers = [
   { answer: "Bash, a Shell", key: "A" },
@@ -22,43 +47,42 @@ const bashAnswers = [
   { answer: "Behold! Another Shell", key: "D" },
 ];
 
-export const RequiredString = formStory({
-  args: {
-    fields: {
-      bash: stringField(),
+export const RequiredString = radioGroupStory({
+  parameters: {
+    docs: {
+      description: {
+        story: "With `stringField()`, the submit value is `string`.",
+      },
     },
-    children: ({ fields }) => (
-      <RadioGroupField
-        field={fields.bash}
-        label="Bash stands for ____?"
-        options={bashAnswers}
-        getValue={({ key }) => key}
-        getLabel={({ key, answer }) => (
-          <>
-            <strong>({key})</strong> {answer}
-          </>
-        )}
-      />
+  },
+  args: {
+    field: stringField(),
+    options: bashAnswers,
+    getValue: ({ key }) => key,
+    getLabel: ({ key, answer }) => (
+      <>
+        <strong>({key})</strong> {answer}
+      </>
     ),
   },
 });
 
 const ratingOptions = [5, 4, 3, 2, 1];
 
-export const RequiredNumber = formStory({
-  args: {
-    fields: {
-      rating: numberField(),
+export const RequiredNumber = radioGroupStory({
+  parameters: {
+    docs: {
+      description: {
+        story: "With `numberField()`, the submit value is `number`.",
+      },
     },
-    children: ({ fields }) => (
-      <RadioGroupField
-        field={fields.rating}
-        label="How do you like the RadioGroup component?"
-        options={ratingOptions}
-        getValue={(value) => value}
-        getLabel={(value) => Array(value + 1).join("⭐")}
-      />
-    ),
+  },
+  args: {
+    field: numberField(),
+    options: ratingOptions,
+    getValue: (value) => value,
+    getLabel: (value) => Array(value + 1).join("⭐"),
+    // label="How do you like the RadioGroup component?"
   },
 });
 
@@ -67,20 +91,20 @@ const approvalOptions = [
   { label: "I have some comments", key: false },
 ];
 
-export const RequiredBoolean = formStory({
-  args: {
-    fields: {
-      approved: booleanField(),
+export const RequiredBoolean = radioGroupStory({
+  parameters: {
+    docs: {
+      description: {
+        story: "With `booleanField()`, the submit value is `boolean`.",
+      },
     },
-    children: ({ fields }) => (
-      <RadioGroupField
-        field={fields.approved}
-        label="Do you approve this message?"
-        options={approvalOptions}
-        getValue={({ key }) => key}
-        getLabel={({ label }) => label}
-      />
-    ),
+  },
+  args: {
+    field: booleanField(),
+    options: approvalOptions,
+    getValue: ({ key }) => key,
+    getLabel: ({ label }) => label,
+    // label="Do you approve this message?"
   },
 });
 
@@ -91,7 +115,7 @@ const namePairs = [
   ["Lambda", "Xavier"],
 ];
 
-export const RequiredArrayString = formStory({
+export const RequiredArrayString = radioGroupStory({
   name: "Required Array<string>",
   parameters: {
     docs: {
@@ -102,18 +126,11 @@ export const RequiredArrayString = formStory({
     },
   },
   args: {
-    fields: {
-      names: stringArrayField(),
-    },
-    children: ({ fields }) => (
-      <RadioGroupField
-        field={fields.names}
-        label="Which name pair you like the most?"
-        options={namePairs}
-        getValue={(pair) => pair}
-        getLabel={(pair) => pair.join(" and ")}
-      />
-    ),
+    field: stringArrayField(),
+    options: namePairs,
+    getValue: (pair) => pair,
+    getLabel: (pair) => pair.join(" and "),
+    // label="Which name pair you like the most?"
   },
 });
 
@@ -122,34 +139,42 @@ const addresses = [
   { street: "Hlavna", city: "Kosice" },
 ];
 
-export const RequiredCustomAddress = formStory({
+export const RequiredCustomAddress = radioGroupStory({
   name: "Required custom type (Address)",
   parameters: {
     docs: {
       description: {
         story:
-          "For custom type, here `{street: string, city: string}`, pass a custom zodField",
+          "For an entity type, here `type Address = {street: string, city: string}`, pass a custom schema `const addressSchema = z.object({street: z.string(), city: z.string()})` as  `zodField({schema: addressSchema})`",
       },
     },
   },
   args: {
-    fields: {
-      names: zodField({
-        value: undefined,
-        schema: z.object(
-          { street: z.string(), city: z.string() },
-          { required_error: "Please choose shipping address." },
-        ),
-      }),
+    field: zodField({
+      value: undefined,
+      schema: z.object(
+        { street: z.string(), city: z.string() },
+        { required_error: "Please choose shipping address." },
+      ),
+    }),
+    options: addresses,
+    getValue: (addr) => addr,
+    getLabel: ({ street, city }) => `${street}, ${city}`,
+    // label="Pick a shipping address"
+  },
+});
+
+export const ComposedField = radioGroupStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "In practice, you will want to display the `RadioGroup` together with the `FieldErrors`, `FieldLabel` or `RequirementIndicator` in a custom UI & layout. Here is an example for a `RadioGroupField`:",
+      },
     },
-    children: ({ fields }) => (
-      <RadioGroupField
-        field={fields.names}
-        label="Pick a shipping address"
-        options={addresses}
-        getValue={(addr) => addr}
-        getLabel={({ street, city }) => `${street}, ${city}`}
-      />
-    ),
+  },
+  args: { ...RequiredString.args, field: stringField() },
+  render: (props) => {
+    return <RadioGroupField {...props} label="Bash stands for ____?" />;
   },
 });

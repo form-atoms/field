@@ -1,4 +1,4 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { ArgTypes, Meta, Stories } from "@storybook/blocks";
 import * as RadioGroupStories from "./RadioGroup.stories";
 
 <Meta title="components/RadioGroup" of={RadioGroupStories} />
@@ -12,9 +12,17 @@ which renders the options as a list of `<input type="radio">`.
 import { RadioGroup } from "@form-atoms/field";
 ```
 
-### Alternative
+### Features
+
+- ✅ Supports fully generic list of options.
+
+#### Alternative
 
 - [Select](?path=/docs/components-select--docs) component is an alternative for a single-choice answer.
 - Prefer the `RadioGroup` when there are few options to select from.
+
+### Props
+
+<ArgTypes />
 
 <Stories />

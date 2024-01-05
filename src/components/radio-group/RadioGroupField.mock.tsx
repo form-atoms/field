@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { RadioGroup, RadioGroupProps } from "./RadioGroup";
 import { FieldLabel } from "..";
 import { SelectField } from "../../hooks";
-import { FieldErrors } from "../field-errors";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 export const RadioGroupField = <Option, Field extends SelectField>({
   field,
@@ -12,7 +12,7 @@ export const RadioGroupField = <Option, Field extends SelectField>({
   getLabel,
   options,
 }: { label: ReactNode } & RadioGroupProps<Option, Field>) => (
-  <div style={{ margin: "20px 0" }}>
+  <>
     <FieldLabel field={field} label={label} />
     <RadioGroup
       field={field}
@@ -20,6 +20,6 @@ export const RadioGroupField = <Option, Field extends SelectField>({
       getValue={getValue}
       options={options}
     />
-    <FieldErrors field={field} />
-  </div>
+    <PicoFieldErrors field={field} />
+  </>
 );

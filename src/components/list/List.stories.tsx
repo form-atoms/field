@@ -348,6 +348,14 @@ export const NestedList = listStory({
 });
 
 export const ComposedListField = listStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "In practice, you will want to display List together with `FieldErrors`, `FieldLabel` or `RequirementIndicator` in a custom layout. Here is an example for a `ListField`:",
+      },
+    },
+  },
   args: {
     field: listField({
       value: [],
