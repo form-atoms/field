@@ -1,3 +1,40 @@
+# [4.0.0](https://github.com/form-atoms/field/compare/v3.8.14...v4.0.0) (2024-01-05)
+
+
+* Next (#65) ([e5afcde](https://github.com/form-atoms/field/commit/e5afcde5d1d0a3857ef3e026658a26b1644bd2c0)), closes [#65](https://github.com/form-atoms/field/issues/65) [#64](https://github.com/form-atoms/field/issues/64) [#61](https://github.com/form-atoms/field/issues/61) [#60](https://github.com/form-atoms/field/issues/60) [#62](https://github.com/form-atoms/field/issues/62) [#64](https://github.com/form-atoms/field/issues/64) [#61](https://github.com/form-atoms/field/issues/61) [#60](https://github.com/form-atoms/field/issues/60) [#62](https://github.com/form-atoms/field/issues/62)
+
+
+### BREAKING CHANGES
+
+* the ListField no longer uses path access to form fields, instead it works directly with the new `listField()`
+* The EmptyMessage render prop has been renamed to simply Empty:
+
+```diff
+<ListField
+  field={fields.luckyNumbers}
+-  EmptyMessage={() => <p>No lucky numbers</p>}
++  Empty={() => <p>No lucky numbers</p>}
+>
+```
+
+* fix(ListField): Rename render props for add/remove button
+
+BREAKING CHANGE
+
+the `AddItemButton` and `RemoveItemButton` props were renamed to `AddButton` and `RemoveButton` respectively.
+
+* docs(ListField): fix nested example
+
+* fix(listAtom): reset nested forms
+
+* fix(listField): adding new item to list revalidates field with a change event
+
+* fix(listField): revalidate the field with change event when the item is removed
+
+* test & callback wrapper
+
+* fix: nested listAtom in listAtom validation
+
 # [4.0.0-next.1](https://github.com/form-atoms/field/compare/v3.8.14...v4.0.0-next.1) (2024-01-05)
 
 
