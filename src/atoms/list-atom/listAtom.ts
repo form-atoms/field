@@ -71,12 +71,16 @@ export type ListAtom<
   }
 >;
 
+/**
+ * @private
+ */
 export function listAtom<
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
 >(
   config: {
     builder: (value: Value) => Fields;
+    invalidItemError?: string;
   } & Pick<FieldAtomConfig<Value[]>, "name" | "validate" | "value">,
 ): ListAtom<Fields, Value> {
   const nameAtom = atomWithReset(config.name);
@@ -251,7 +255,7 @@ export function listAtom<
     const errors = listError ?? [];
 
     if (hasInvalidForm) {
-      errors.push("Some list items contain errors.");
+      errors.push(config.invalidItemError ?? "Some list items contain errors.");
     }
 
     state.set(errorsAtom, errors);

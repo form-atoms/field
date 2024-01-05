@@ -11,6 +11,7 @@ import { describe, expect, it, test, vi } from "vitest";
 
 import { listAtom } from "./listAtom";
 import { numberField, textField } from "../../fields";
+import { useFieldError } from "../../hooks";
 
 describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
@@ -147,6 +148,27 @@ describe("listAtom()", () => {
       await act(async () => submit.current(onSubmit)());
 
       expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("has the invalidItemError, when item of nested list is invalid", async () => {
+      const field = listAtom({
+        invalidItemError: "There are some errors",
+        validate: HACK_validate,
+        value: [undefined], // empty value for a required number will cause error
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ field });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const { result: fieldError } = renderHook(() => useFieldError(field));
+
+      await act(async () => submit.current(vi.fn())());
+      await act(
+        () => new Promise<void>((resolve) => setTimeout(() => resolve(), 0)),
+      );
+
+      expect(fieldError.current.error).toBe("There are some errors");
     });
   });
 });
