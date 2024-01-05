@@ -3,12 +3,7 @@ import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { ArrayCardinality, ZodAny, ZodArray } from "zod";
 
 import { UseOptionsProps, useFieldProps } from "..";
-import { ZodField, ZodFieldValue } from "../../fields";
-
-export type ZodArrayField = ZodField<
-  ZodArray<ZodAny, ArrayCardinality>,
-  ZodArray<ZodAny, ArrayCardinality>
->;
+import { ZodArrayField, ZodField, ZodFieldValue } from "../../fields";
 
 export type UseMultiSelectFieldProps<Option, Field extends ZodArrayField> = {
   field: Field;

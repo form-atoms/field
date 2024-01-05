@@ -1,11 +1,17 @@
-import { ZodArray, z } from "zod";
+import { ArrayCardinality, ZodAny, ZodArray, ZodSchema, z } from "zod";
 
 import {
+  ZodField,
   ZodFieldConfig,
   ZodParams,
   defaultParams,
   zodField,
 } from "../zod-field";
+
+export type ZodArrayField<Element extends ZodSchema = ZodAny> = ZodField<
+  ZodArray<Element, ArrayCardinality>,
+  ZodArray<Element, ArrayCardinality>
+>;
 
 export type ArrayFieldParams<ElementSchema extends z.Schema> = Partial<
   ZodFieldConfig<

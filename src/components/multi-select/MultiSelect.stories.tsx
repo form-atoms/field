@@ -2,8 +2,7 @@ import { ReactNode } from "react";
 
 import { MultiSelect, MultiSelectProps } from "./MultiSelect";
 import { FieldLabel } from "..";
-import { stringArrayField } from "../../fields";
-import { ZodArrayField } from "../../hooks";
+import { ZodArrayField, stringArrayField } from "../../fields";
 import { countryOptions } from "../../scenarios/mocks";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";

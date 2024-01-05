@@ -3,10 +3,9 @@ import { ChangeEvent, useEffect, useState } from "react";
 
 import {
   UseMultiSelectFieldProps as UseCheckboxGroupFieldProps,
-  ZodArrayField,
   useFieldProps,
 } from "../";
-import { ZodFieldValue } from "../../fields";
+import { ZodArrayField, ZodFieldValue } from "../../fields";
 
 export const useCheckboxGroupFieldProps = <
   Option,

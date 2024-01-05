@@ -2,8 +2,8 @@ import { StoryObj } from "@storybook/react";
 
 import { CheckboxGroup } from "./CheckboxGroup";
 import { CheckboxGroupField } from "./CheckboxGroupField.mock";
-import { stringArrayField } from "../../fields";
-import { UseCheckboxGroupProps, ZodArrayField } from "../../hooks";
+import { ZodArrayField, stringArrayField } from "../../fields";
+import { UseCheckboxGroupProps } from "../../hooks";
 import { StoryForm } from "../../scenarios/StoryForm";
 
 const languagesOptions = [

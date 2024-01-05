@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 
 import { CheckboxGroup } from "./CheckboxGroup";
-import { UseCheckboxGroupProps, ZodArrayField } from "../../hooks";
+import { ZodArrayField } from "../../fields";
+import { UseCheckboxGroupProps } from "../../hooks";
 import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 import { FieldLabel } from "../field-label";
 

@@ -1,8 +1,6 @@
 import { useCheckboxGroupFieldProps } from "./useCheckboxGroupProps";
-import {
-  type UseMultiSelectFieldProps,
-  type ZodArrayField,
-} from "../use-multiselect-field-props";
+import { ZodArrayField } from "../../fields";
+import { type UseMultiSelectFieldProps } from "../use-multiselect-field-props";
 import { type UseOptionsProps, useOptions } from "../use-options";
 
 export type UseCheckboxGroupProps<
