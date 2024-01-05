@@ -237,6 +237,14 @@ export const Ordering = listFieldStory({
 });
 
 export const NestedListField = listFieldStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Since the `listField()` supports nesting, we can render `<List />` within `<List />`. As an example we capture multiple people with multiple banking accounts:",
+      },
+    },
+  },
   args: {
     field: listField({
       name: "users",
