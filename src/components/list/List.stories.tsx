@@ -237,7 +237,7 @@ export const OrderingItems = listFieldStory({
   },
 });
 
-export const NestedListField = listFieldStory({
+export const NestedList = listFieldStory({
   parameters: {
     docs: {
       description: {
