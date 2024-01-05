@@ -213,7 +213,7 @@ const AdvancedNestedExample = () => {
         </button>
       )}
     >
-      {({ fields, index, item, remove }) => (
+      {({ fields, index, remove }) => (
         <article>
           <header>
             <nav>
@@ -230,7 +230,7 @@ const AdvancedNestedExample = () => {
                     className="outline secondary"
                     onClick={(e) => {
                       e.preventDefault();
-                      remove(item);
+                      remove();
                     }}
                   >
                     Remove

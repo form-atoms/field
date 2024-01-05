@@ -268,7 +268,7 @@ export const NestedListField = listFieldStory({
         Add Person
       </button>
     ),
-    children: ({ fields, index, item, remove }) => (
+    children: ({ fields, index, remove }) => (
       <article>
         <header>
           <nav>
@@ -285,7 +285,7 @@ export const NestedListField = listFieldStory({
                   className="outline secondary"
                   onClick={(e) => {
                     e.preventDefault();
-                    remove(item);
+                    remove();
                   }}
                 >
                   Remove
