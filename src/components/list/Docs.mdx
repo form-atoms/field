@@ -41,7 +41,7 @@ The `children` render prop will receive the following props:
 
 ```tsx
 import { InputField } from "form-atoms";
-import { listField, ListField, textField } from "@form-atoms/field";
+import { listField, List, textField } from "@form-atoms/field";
 
 const envVars = listField({
   value: [
@@ -55,7 +55,7 @@ const envVars = listField({
 });
 
 const Example = () => (
-  <ListField
+  <List
     field={envVars}
     AddButton={({ add }) => (
       <button type="button" className="secondary" onClick={add}>
@@ -87,7 +87,7 @@ const Example = () => (
         <RemoveButton />
       </div>
     )}
-  </ListField>
+  </List>
 );
 ```
 
@@ -99,7 +99,7 @@ const Example = () => (
 
 ```tsx
 import { InputField } from "form-atoms";
-import { ListField, listField, textField } from "@form-atoms/field";
+import { List, listField, textField } from "@form-atoms/field";
 
 const productPros = listField({
   value: ["quality materials used", "not so heavy"],
@@ -111,7 +111,7 @@ const Example = () => (
     <label style={{ marginBottom: 16 }}>
       What are some benefits of TypeScript?
     </label>
-    <ListField field={productPros}>
+    <List field={productPros}>
       {({ fields, RemoveButton }) => (
         <div
           style={{
@@ -125,7 +125,7 @@ const Example = () => (
           <RemoveButton />
         </div>
       )}
-    </ListField>
+    </List>
   </>
 );
 ```
@@ -138,7 +138,7 @@ const Example = () => (
 
 ```tsx
 import { InputField } from "form-atoms";
-import { ListField, listField, textField } from "@form-atoms/field";
+import { List, listField, textField } from "@form-atoms/field";
 
 const productPros = listField({
   value: ["quality materials used", "not so heavy"],
@@ -156,7 +156,7 @@ const NoHobbiesCard = () => (
 );
 
 const Example = () => (
-  <ListField field={fields.hobbies} Empty={NoHobbiesCard}>
+  <List field={fields.hobbies} Empty={NoHobbiesCard}>
     {({ fields, RemoveButton }) => (
       <div
         style={{
@@ -169,7 +169,7 @@ const Example = () => (
         <RemoveButton />
       </div>
     )}
-  </ListField>
+  </List>
 );
 ```
 
@@ -181,7 +181,7 @@ const Example = () => (
 
 ```tsx
 import { InputField } from "form-atoms";
-import { ListField, listField, textField } from "@form-atoms/field";
+import { List, listField, textField } from "@form-atoms/field";
 
 const hobbies = listField({
   value: [],
@@ -190,10 +190,7 @@ const hobbies = listField({
 });
 
 const Example = () => (
-  <ListField
-    field={hobbies}
-    initialValue={["coding", "gardening", "mountain bike"]}
-  >
+  <List field={hobbies} initialValue={["coding", "gardening", "mountain bike"]}>
     {({ fields, moveUp, moveDown, RemoveButton }) => (
       <div
         style={{
@@ -212,7 +209,7 @@ const Example = () => (
         <RemoveButton />
       </div>
     )}
-  </ListField>
+  </List>
 );
 ```
 
@@ -226,7 +223,7 @@ const Example = () => (
 
 ```tsx
 import { InputField } from "form-atoms";
-import { FieldLabel, listField, ListField, textField } from "@form-atoms/field";
+import { FieldLabel, listField, List, textField } from "@form-atoms/field";
 
 const users = listField({
   name: "users",
@@ -250,7 +247,7 @@ const users = listField({
 
 const NestedListExample = () => {
   return (
-    <ListField
+    <List
       field={users}
       AddButton={({ add }) => (
         <button type="button" className="outline" onClick={add}>
@@ -300,7 +297,7 @@ const NestedListExample = () => {
               />
             </div>
           </div>
-          <ListField
+          <List
             field={fields.accounts}
             AddButton={({ add }) => (
               <button type="button" className="outline" onClick={add}>
@@ -327,10 +324,10 @@ const NestedListExample = () => {
                 </div>
               </>
             )}
-          </ListField>
+          </List>
         </article>
       )}
-    </ListField>
+    </List>
   );
 };
 
