@@ -2,6 +2,7 @@ import { StoryObj } from "@storybook/react";
 import { InputField } from "form-atoms";
 
 import { AddButtonProps, List, ListProps, RemoveButtonProps } from "./List";
+import { ListField } from "./ListField.mock";
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { listField, textField } from "../../fields";
 import { StoryForm } from "../../scenarios/StoryForm";
@@ -343,5 +344,30 @@ export const NestedList = listFieldStory({
         </List>
       </article>
     ),
+  },
+});
+
+export const ComposedListField = listFieldStory({
+  args: {
+    field: listField({
+      value: [],
+      name: "hobbies",
+      builder: (value) => textField({ value }),
+    }),
+    children: ({ fields, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content",
+        }}
+      >
+        <InputField atom={fields} component="input" />
+        <RemoveButton />
+      </div>
+    ),
+  },
+  render: (props) => {
+    return <ListField label="Please insert one or more hobbies:" {...props} />;
   },
 });

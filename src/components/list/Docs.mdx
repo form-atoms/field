@@ -340,3 +340,40 @@ const RemoveButton = ({ remove }: RemoveButtonProps) => (
   </button>
 );
 ```
+
+### Composed List Field
+
+In practice, you will want to display List together with `FieldErrors`, `FieldLabel` or `RequirementIndicator` in a custom layout. Here is an example for a `ListField`:
+
+<Canvas sourceState="none" of={ListStories.ComposedListField} />
+
+```tsx
+import { ReactNode } from "react";
+
+import {
+  List,
+  ListProps,
+  FieldLabel,
+  FieldErrors,
+  ListAtomItems,
+  ListAtomValue,
+} from "@form-atoms/field";
+
+export const ListField = <Fields extends ListAtomItems>({
+  field,
+  label,
+  ...listProps
+}: {
+  label: ReactNode;
+} & ListProps<Fields, ListAtomValue<Fields>>) => {
+  return (
+    <>
+      <FieldLabel field={field} label={label} />
+      <List field={field} {...listProps} />
+      <div style={{ marginBottom: 16, color: "var(--del-color)" }}>
+        <FieldErrors field={field} />
+      </div>
+    </>
+  );
+};
+```
