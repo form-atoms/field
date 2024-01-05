@@ -199,23 +199,24 @@ export const Prepend = listFieldStory({
   },
 });
 
-export const Ordering = listFieldStory({
+export const OrderingItems = listFieldStory({
   parameters: {
     docs: {
       description: {
         story:
-          "Items can be reordered by calling the moveUp and moveDown actions.",
+          "The list items can be reordered by calling the `moveUp` and `moveDown` actions.",
       },
     },
   },
   args: {
+    initialValue: ["coding", "gardening", "mountain bike"],
     field: listField({
+      value: [],
       name: "hobbies",
-      value: ["gardening"],
       builder: (value) => textField({ value }),
     }),
     AddButton: AddHobbyButton,
-    children: ({ fields, RemoveButton, moveDown, moveUp }) => (
+    children: ({ fields, moveUp, moveDown, RemoveButton }) => (
       <div
         style={{
           display: "grid",

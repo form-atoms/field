@@ -40,6 +40,7 @@ The `children` render prop will receive the following props:
 <Canvas sourceState="none" of={ListStories.ListOfObjects} />
 
 ```tsx
+import { InputField } from "form-atoms";
 import { listField, ListField, textField } from "@form-atoms/field";
 
 const envVars = listField({
@@ -97,6 +98,7 @@ const Example = () => (
 <Canvas sourceState="none" of={ListStories.ListOfPrimitiveValues} />
 
 ```tsx
+import { InputField } from "form-atoms";
 import { ListField, listField, textField } from "@form-atoms/field";
 
 const productPros = listField({
@@ -135,6 +137,7 @@ const Example = () => (
 <Canvas sourceState="none" of={ListStories.EmptyRenderProp} />
 
 ```tsx
+import { InputField } from "form-atoms";
 import { ListField, listField, textField } from "@form-atoms/field";
 
 const productPros = listField({
@@ -163,6 +166,49 @@ const Example = () => (
         }}
       >
         <InputField atom={fields} component="input" />
+        <RemoveButton />
+      </div>
+    )}
+  </ListField>
+);
+```
+
+### Ordering items
+
+<Description of={ListStories.OrderingItems} />
+
+<Canvas sourceState="none" of={ListStories.OrderingItems} />
+
+```tsx
+import { InputField } from "form-atoms";
+import { ListField, listField, textField } from "@form-atoms/field";
+
+const hobbies = listField({
+  value: [],
+  name: "hobbies",
+  builder: (value) => textField({ value }),
+});
+
+const Example = () => (
+  <ListField
+    field={hobbies}
+    initialValue={["coding", "gardening", "mountain bike"]}
+  >
+    {({ fields, moveUp, moveDown, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content min-content min-content",
+        }}
+      >
+        <InputField atom={fields} component="input" />
+        <button type="button" className="outline" onClick={moveUp}>
+          Up
+        </button>
+        <button type="button" className="outline" onClick={moveDown}>
+          Down
+        </button>
         <RemoveButton />
       </div>
     )}
@@ -200,7 +246,7 @@ const users = listField({
   }),
 });
 
-const AdvancedNestedExample = () => {
+const NestedListExample = () => {
   return (
     <ListField
       field={users}
