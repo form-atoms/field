@@ -2,12 +2,12 @@ import { renderHook } from "@testing-library/react";
 import { formAtom, useFormValues } from "form-atoms";
 import { describe, expect, it } from "vitest";
 
-import { listFieldBuilder } from "./listFieldBuilder";
-import { textField } from "../";
+import { listBuilder } from "./listBuilder";
+import { textField } from "../../fields";
 
-describe("listFieldBuilder()", () => {
+describe("listBuilder()", () => {
   describe("building plain atoms", () => {
-    const builder = listFieldBuilder((value) =>
+    const builder = listBuilder((value) =>
       textField({ name: "street", value }),
     );
 
@@ -31,7 +31,7 @@ describe("listFieldBuilder()", () => {
   });
 
   describe("building form fields object", () => {
-    const addressBuilder = listFieldBuilder(({ street, city }) => ({
+    const addressBuilder = listBuilder(({ street, city }) => ({
       street: textField({ name: "street", value: street }),
       city: textField({ name: "city", value: city }),
     }));
