@@ -37,7 +37,7 @@ const AddHobbyButton = ({ add }: AddButtonProps) => (
   </button>
 );
 
-const listFieldStory = <Fields extends ListAtomItems>(
+const listStory = <Fields extends ListAtomItems>(
   storyObj: {
     args: ListProps<Fields, ListAtomValue<Fields>>;
   } & Omit<StoryObj<typeof meta>, "args">,
@@ -52,7 +52,7 @@ const listFieldStory = <Fields extends ListAtomItems>(
   ],
 });
 
-export const ListOfObjects = listFieldStory({
+export const ListOfObjects = listStory({
   parameters: {
     docs: {
       description: {
@@ -100,7 +100,7 @@ export const ListOfObjects = listFieldStory({
 What do you like about the product?
 </label> */
 }
-export const ListOfPrimitiveValues = listFieldStory({
+export const ListOfPrimitiveValues = listStory({
   parameters: {
     docs: {
       description: {
@@ -129,7 +129,7 @@ export const ListOfPrimitiveValues = listFieldStory({
   },
 });
 
-export const EmptyRenderProp = listFieldStory({
+export const EmptyRenderProp = listStory({
   parameters: {
     docs: {
       description: {
@@ -167,7 +167,7 @@ export const EmptyRenderProp = listFieldStory({
   },
 });
 
-export const Prepend = listFieldStory({
+export const Prepend = listStory({
   parameters: {
     docs: {
       description: {
@@ -200,7 +200,7 @@ export const Prepend = listFieldStory({
   },
 });
 
-export const OrderingItems = listFieldStory({
+export const OrderingItems = listStory({
   parameters: {
     docs: {
       description: {
@@ -238,7 +238,7 @@ export const OrderingItems = listFieldStory({
   },
 });
 
-export const NestedList = listFieldStory({
+export const NestedList = listStory({
   parameters: {
     docs: {
       description: {
@@ -347,7 +347,7 @@ export const NestedList = listFieldStory({
   },
 });
 
-export const ComposedListField = listFieldStory({
+export const ComposedListField = listStory({
   args: {
     field: listField({
       value: [],
