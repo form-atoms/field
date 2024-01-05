@@ -52,12 +52,12 @@ const listFieldStory = <Fields extends ListAtomItems>(
   ],
 });
 
-export const Primary = listFieldStory({
+export const ListOfObjects = listFieldStory({
   parameters: {
     docs: {
       description: {
         story:
-          "The list field enables you to capture list of items with the same attributes. It offers `add`, `remove` & `move` callbacks to manage the list items.",
+          "Usually the List is used to capture a list of objects like addresses or environment variables:.",
       },
     },
   },
