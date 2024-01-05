@@ -1,0 +1,376 @@
+import { Meta, Canvas, ArgTypes, Description } from "@storybook/blocks";
+import * as ListStories from "./List.stories";
+import * as ListItemStories from "./item/Item.stories";
+
+<Meta title="components/List" of={ListStories} />
+
+# List
+
+The List component enables you to easily render & manage a [listField()](?path=/docs/fields-listField--docs). It is a higher order component, which internally uses the [useListField](?path=/docs/hooks-useListField--docs)
+hook.
+
+```ts
+import { List } from "@form-atoms/field";
+```
+
+## Features
+
+- ✅ **Performant rendering**. Each list item is rendered with a stable `key` derived from an internal form atom.
+- ✅ Handles **adding, removal and ordering** of the list items with custom render props.
+- ✅ **Blank Slate ready**. Can render a custom `<Empty />` component via render prop when the list is empty.
+- ✅ **Reorder items** with pre-configured **`moveUp` & `moveDown` actions.**
+- ✅ Supports **nested lists in lists**.
+
+## Props
+
+<ArgTypes />
+
+### Children props
+
+The `children` render prop will receive the following props:
+
+<ArgTypes of={ListItemStories} />
+
+## Examples
+
+### List of objects
+
+<Description of={ListStories.ListOfObjects} />
+
+<Canvas sourceState="none" of={ListStories.ListOfObjects} />
+
+```tsx
+import { InputField } from "form-atoms";
+import { listField, List, textField } from "@form-atoms/field";
+
+const envVars = listField({
+  value: [
+    { variable: "GITHUB_TOKEN", value: "ff52d09a" },
+    { variable: "NPM_TOKEN", value: "deepsecret" },
+  ],
+  builder: ({ variable, value }) => ({
+    variable: textField({ name: "variable", value: variable }),
+    value: textField({ name: "value", value: value }),
+  }),
+});
+
+const Example = () => (
+  <List
+    field={envVars}
+    AddButton={({ add }) => (
+      <button type="button" className="secondary" onClick={add}>
+        Add environment variable
+      </button>
+    )}
+    RemoveButton={({ remove }) => (
+      <button type="button" className="outline secondary" onClick={remove}>
+        Remove
+      </button>
+    )}
+  >
+    {({ fields, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto auto min-content",
+        }}
+      >
+        <InputField
+          atom={fields.variable}
+          render={(props) => <input {...props} placeholder="Variable Name" />}
+        />
+        <InputField
+          atom={fields.value}
+          render={(props) => <input {...props} placeholder="Variable Value" />}
+        />
+        <RemoveButton />
+      </div>
+    )}
+  </List>
+);
+```
+
+### List of primitive values
+
+<Description of={ListStories.ListOfPrimitiveValues} />
+
+<Canvas sourceState="none" of={ListStories.ListOfPrimitiveValues} />
+
+```tsx
+import { InputField } from "form-atoms";
+import { List, listField, textField } from "@form-atoms/field";
+
+const productPros = listField({
+  value: ["quality materials used", "not so heavy"],
+  builder: (value) => textField({ value }),
+});
+
+const Example = () => (
+  <>
+    <label style={{ marginBottom: 16 }}>
+      What are some benefits of TypeScript?
+    </label>
+    <List field={productPros}>
+      {({ fields, RemoveButton }) => (
+        <div
+          style={{
+            display: "grid",
+            gridGap: 16,
+            gridTemplateColumns: "auto min-content",
+          }}
+        >
+          {/* IMPORTANT NOTE: when the list item contains primitive field, the `fields` prop is the primitive field atom: */}
+          <InputField atom={fields} component="input" />
+          <RemoveButton />
+        </div>
+      )}
+    </List>
+  </>
+);
+```
+
+### `Empty` render prop
+
+<Description of={ListStories.EmptyRenderProp} />
+
+<Canvas sourceState="none" of={ListStories.EmptyRenderProp} />
+
+```tsx
+import { InputField } from "form-atoms";
+import { List, listField, textField } from "@form-atoms/field";
+
+const productPros = listField({
+  value: ["quality materials used", "not so heavy"],
+  builder: (value) => textField({ value }),
+});
+
+// BEST PRACTICE: define your component statically. Avoid inline definitions when specifying props.
+// NOTE: The `Empty` prop does not accept any props
+const NoHobbiesCard = () => (
+  <article>
+    <p style={{ textAlign: "center" }}>
+      You don't have any hobbies in your list. Start by adding your first one.
+    </p>
+  </article>
+);
+
+const Example = () => (
+  <List field={fields.hobbies} Empty={NoHobbiesCard}>
+    {({ fields, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content",
+        }}
+      >
+        <InputField atom={fields} component="input" />
+        <RemoveButton />
+      </div>
+    )}
+  </List>
+);
+```
+
+### Ordering items
+
+<Description of={ListStories.OrderingItems} />
+
+<Canvas sourceState="none" of={ListStories.OrderingItems} />
+
+```tsx
+import { InputField } from "form-atoms";
+import { List, listField, textField } from "@form-atoms/field";
+
+const hobbies = listField({
+  value: [],
+  name: "hobbies",
+  builder: (value) => textField({ value }),
+});
+
+const Example = () => (
+  <List field={hobbies} initialValue={["coding", "gardening", "mountain bike"]}>
+    {({ fields, moveUp, moveDown, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content min-content min-content",
+        }}
+      >
+        <InputField atom={fields} component="input" />
+        <button type="button" className="outline" onClick={moveUp}>
+          Up
+        </button>
+        <button type="button" className="outline" onClick={moveDown}>
+          Down
+        </button>
+        <RemoveButton />
+      </div>
+    )}
+  </List>
+);
+```
+
+## Advanced
+
+### Nested List
+
+<Description of={ListStories.NestedList} />
+
+<Canvas sourceState="none" of={ListStories.NestedList} />
+
+```tsx
+import { InputField } from "form-atoms";
+import { FieldLabel, listField, List, textField } from "@form-atoms/field";
+
+const users = listField({
+  name: "users",
+  value: [
+    {
+      name: "Jerry",
+      lastName: "Park",
+      accounts: [{ iban: "SK89 7500 0000 0000 1234 5671" }],
+    },
+  ],
+  builder: ({ name, lastName, accounts = [] }) => ({
+    name: textField({ value: name }),
+    lastName: textField({ value: lastName }),
+    accounts: listField({
+      name: "accounts",
+      value: accounts,
+      builder: ({ iban }) => ({ iban: textField({ value: iban }) }),
+    }),
+  }),
+});
+
+const NestedListExample = () => {
+  return (
+    <List
+      field={users}
+      AddButton={({ add }) => (
+        <button type="button" className="outline" onClick={add}>
+          Add Person
+        </button>
+      )}
+    >
+      {({ fields, index, remove }) => (
+        <article>
+          <header>
+            <nav>
+              <ul>
+                <li>
+                  <strong>Person #{index + 1}</strong>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    role="button"
+                    className="outline secondary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      remove();
+                    }}
+                  >
+                    Remove
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <div className="grid">
+            <div>
+              <FieldLabel field={fields.name} label="First Name" />
+              <InputField
+                atom={fields.name}
+                render={(props) => <input {...props} placeholder="Name" />}
+              />
+            </div>
+            <div>
+              <FieldLabel field={fields.lastName} label="Last Name" />
+              <InputField
+                atom={fields.lastName}
+                render={(props) => <input {...props} placeholder="Last Name" />}
+              />
+            </div>
+          </div>
+          <List
+            field={fields.accounts}
+            AddButton={({ add }) => (
+              <button type="button" className="outline" onClick={add}>
+                Add Bank Account
+              </button>
+            )}
+            RemoveButton={RemoveButton}
+          >
+            {({ fields, index, RemoveButton: RemoveIban }) => (
+              <>
+                <label>Account #{index + 1}</label>
+                <div
+                  style={{
+                    display: "grid",
+                    gridGap: 16,
+                    gridTemplateColumns: "auto min-content",
+                  }}
+                >
+                  <InputField
+                    atom={fields.iban}
+                    render={(props) => <input {...props} placeholder="IBAN" />}
+                  />
+                  <RemoveIban />
+                </div>
+              </>
+            )}
+          </List>
+        </article>
+      )}
+    </List>
+  );
+};
+
+const RemoveButton = ({ remove }: RemoveButtonProps) => (
+  <button type="button" className="outline secondary" onClick={remove}>
+    Remove
+  </button>
+);
+```
+
+### Composed List Field
+
+In practice, you will want to display List together with `FieldErrors`, `FieldLabel` or `RequirementIndicator` in a custom layout. Here is an example for a `ListField`:
+
+<Canvas sourceState="none" of={ListStories.ComposedListField} />
+
+```tsx
+import { ReactNode } from "react";
+
+import {
+  List,
+  ListProps,
+  FieldLabel,
+  FieldErrors,
+  ListAtomItems,
+  ListAtomValue,
+} from "@form-atoms/field";
+
+export const ListField = <Fields extends ListAtomItems>({
+  field,
+  label,
+  ...listProps
+}: {
+  label: ReactNode;
+} & ListProps<Fields, ListAtomValue<Fields>>) => {
+  return (
+    <>
+      <FieldLabel field={field} label={label} />
+      <List field={field} {...listProps} />
+      <div style={{ marginBottom: 16, color: "var(--del-color)" }}>
+        <FieldErrors field={field} />
+      </div>
+    </>
+  );
+};
+```

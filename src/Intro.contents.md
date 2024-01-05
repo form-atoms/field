@@ -16,6 +16,7 @@
 | [arrayField()](?path=/docs/fields-arrayfield--docs)                     | A generic field to hold options of multi-choice inputs.                                 |
 | [checkboxField()](?path=/docs/fields-checkboxfield--docs#checkboxfield) | A true boolean 2-state checkbox field.                                                  |
 | [filesField()](?path=/docs/fields-filesfield--docs)                     | A field to hold a `File[]` value.                                                       |
+| [listField()](?path=/docs/fields-listField--docs)                       | A field to capture list of generic items.                                               |
 | [textField()](?path=/docs/fields-textfield--docs)                       | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`. |
 
 ### Components
@@ -31,13 +32,13 @@
 
 #### Native Generic Components
 
-|                                                             |                                                                                      |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) | Select multiple values from a list of generic options via `<input type="checkbox">`. |
-| [ListField](?path=/docs/components-listfield--docs)         | An advanced headless component to control `FieldAtom<>[]` or `FormFields[]`.         |
-| [MultiSelect](?path=/docs/components-multiselect--docs)     | Select multiple values via `<select multiple>`.                                      |
-| [RadioGroup](?path=/docs/components-radiogroup--docs)       | Select a generic option via `<input type="radio">`.                                  |
-| [Select](?path=/docs/components-select--docs)               | Select a generic option via `<select>`.                                              |
+|                                                             |                                                                                                  |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) | Select multiple values from a list of generic options via `<input type="checkbox">`.             |
+| [List](?path=/docs/components-list--docs)                   | An advanced headless component to control the [listField()](?path=/docs/fields-listField--docs). |
+| [MultiSelect](?path=/docs/components-multiselect--docs)     | Select multiple values via `<select multiple>`.                                                  |
+| [RadioGroup](?path=/docs/components-radiogroup--docs)       | Select a generic option via `<input type="radio">`.                                              |
+| [Select](?path=/docs/components-select--docs)               | Select a generic option via `<select>`.                                                          |
 
 ### Hooks
 
@@ -47,6 +48,7 @@
 | [useCheckboxFieldProps](?path=/docs/hooks-usecheckboxfieldprops--docs) | Adapts fields having `boolean` values to controlled checkbox inputs.                     |
 | [useDateFieldProps](?path=/docs/hooks-useDateFieldprops--docs)         | Adapts fields having `Date` values to controlled date inputs.                            |
 | [useFilesFieldProps](?path=/docs/hooks-useFilesfieldprops--docs)       | Adapts fields having `File[]` values to controlled `input[type=file]`.                   |
+| [useListField](?path=/docs/hooks-useListField--docs)                   | Manages a `listField()`.                                                                 |
 | [useNumberFieldProps](?path=/docs/hooks-usenumberfieldprops--docs)     | Adapts fields having `number` values to controlled numeric inputs.                       |
 | [useOptions](?path=/docs/hooks-useoptions--docs)                       | A data hook to evaluate which of option(s) is(are) active with respect to a field.       |
 | [useRequiredProps](?path=/docs/hooks-userequiredprops--docs)           | Provides the `required` prop for input based on field optionality.                       |

@@ -2,7 +2,7 @@ import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
 import { checkboxField } from "./checkboxField";
-import { FormSubmitValues } from "../zod-field/zodField";
+import { FormSubmitValues } from "../../components/form";
 
 test("required checkboxField has 'true' submit value", () => {
   const form = formAtom({

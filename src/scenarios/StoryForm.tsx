@@ -26,12 +26,14 @@ export const StoryForm = <Fields extends FormFields>({
   return (
     <form onSubmit={submit(action("submit"))}>
       {children({ fields, required, form })}
-      <button>Submit</button>
-      {resettable && (
-        <button className="outline secondary" type="button" onClick={reset}>
-          Reset
-        </button>
-      )}
+      <div className="grid">
+        <button>Submit</button>
+        {resettable && (
+          <button className="secondary" type="button" onClick={reset}>
+            Reset
+          </button>
+        )}
+      </div>
     </form>
   );
 };
@@ -59,7 +61,7 @@ export const meta = {
 // The StoryObj meta type omits the generic parameter, so the fields in children args are untyped
 // this way we build the args with generic fields BEFORE the FormStory runs over it
 export const formStory = <Fields extends FormFields>(
-  props: {
+  storyObj: {
     args: Props<Fields>;
   } & Omit<FormStory, "args">,
-) => props;
+) => storyObj;

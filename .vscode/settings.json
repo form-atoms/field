@@ -2,7 +2,7 @@
   "editor.formatOnSave": true,
   "eslint.validate": ["typescript"],
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }

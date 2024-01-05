@@ -1,11 +1,11 @@
 import { describe, expectTypeOf, test } from "vitest";
 
-import { listFieldBuilder } from "./listFieldBuilder";
-import { type TextField, textField } from "../";
+import { listBuilder } from "./listBuilder";
+import { type TextField, textField } from "../../fields";
 
-describe("listFieldBuilder", () => {
+describe("listBuilder", () => {
   describe("when building list of primitive atoms", () => {
-    const positivesBuilder = listFieldBuilder((positive) =>
+    const positivesBuilder = listBuilder((positive) =>
       textField({ name: "positive", value: positive }),
     );
 
@@ -17,14 +17,14 @@ describe("listFieldBuilder", () => {
 
     test("call with array produces list of items", () => {
       // NOTE: the undefined is simply empty value
-      const single = positivesBuilder(["pretty", "fast", undefined]);
+      const single = positivesBuilder(["pretty", "fast"]);
 
       expectTypeOf(single).toEqualTypeOf<TextField[]>();
     });
   });
 
   describe("when building list of form fields", () => {
-    const addressBuilder = listFieldBuilder(({ street }) => ({
+    const addressBuilder = listBuilder(({ street }) => ({
       street: textField({ name: "street", value: street }),
     }));
 
@@ -47,7 +47,7 @@ describe("listFieldBuilder", () => {
 
     test("call with array produces list of items", () => {
       // NOTE: the undefined is simply empty value
-      const multi = addressBuilder([{ street: "Hrad" }, { street: undefined }]);
+      const multi = addressBuilder([{ street: "Hrad" }]);
 
       expectTypeOf(multi).toEqualTypeOf<{ street: TextField }[]>();
     });

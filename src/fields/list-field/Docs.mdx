@@ -1,0 +1,187 @@
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import Config from "./config.md?raw";
+
+<Meta title="fields/listField" />
+
+# `listField<Fields>(): RequiredListField<Fields>`
+
+A field to capture list of generic items. You can think of each item as a separate form. It requires a `builder` function returning fields, which will be used inside of the form.
+
+```ts
+import { listField } from "@form-atoms/field";
+```
+
+## Initial Config
+
+<Markdown>{Config}</Markdown>
+
+> **NOTE:** The zod schema needs to validate only the array itself.
+> There is no need for the underlying item schema, as each field of the item has a separate schema against which the field value will be validated.
+
+## Configuration
+
+### `builder` (required)
+
+#### Type
+
+`(value: FormValues<Fields>) => Fields`
+
+#### Description
+
+The `listField` is defined by the shape of the fields returned from its `builder`. If you supply an initial `value`, each of the items will be applied to the builder.
+
+#### Usage
+
+##### Building a list of objects
+
+Commonly the list item is a mini-form, which has multiple fields. Here we have environment variables, each having a `name` and a `value` properties:
+
+```js
+const environmentVariables = listField({
+  value: [
+    { name: "GITHUB_TOKEN", value: "myToken" },
+    { name: "NPM_TOKEN", value: "privateToken" },
+  ],
+  builder: ({ name, value }) => ({
+    name: textField({ value: name }),
+    value: textField({ value }),
+  }),
+});
+```
+
+##### Building a list of primitive values
+
+Here, our items are plain strings `typeof item === "string"`:
+
+```js
+const typeScriptBenefits = listField({
+  value: ["safe function calls", "it's fast"],
+  builder: (item) => textField({ value: item }),
+});
+```
+
+### `schema`
+
+#### Type
+
+`ZodArray<ZodAny, "atleastone">`
+
+#### Description
+
+You can constrain the min or max number of list items by passing custom schema.
+
+#### Usage
+
+As an example, we can require the user to insert between 1-3 recovery phrases:
+
+```js
+const recoveryPhrases = listField({
+  value: [],
+  schema: z.array(z.any()).nonempty().max(3),
+  builder: ({ hint, phrase }) => ({
+    hint: textField({ value: hint }),
+    phrase: textField({ value: phrase }),
+  }),
+});
+```
+
+### `invalidItemError`
+
+#### Type
+
+`string`
+
+#### Default
+
+`"Some list items contain errors."`
+
+#### Description
+
+The error to add to the `listField` when submitted while there are errors in the list items.
+
+#### Usage
+
+```ts
+const recoveryPhrases = listField({
+  name: "recoveryPhrases",
+  value: [],
+  builder: ({ hint, phrase }) => ({
+    hint: textField({ value: hint }),
+    phrase: textField({ value: phrase }),
+  }),
+  invalidItemError:
+    "Some of your phrases are empty. Please remove or complete them.",
+});
+```
+
+## API
+
+### `.optional()`
+
+#### Type
+
+`.optional(readRequired?: ReadRequired) => OptionalListField<Fields>`
+
+The list fields are required by default, meaning that `config.schema` is used in validation.
+This means that at least one item must be in the list in order to submit the form.
+
+You can call the `.optional()` method, to use the `config.optionalSchema` instead:
+
+```js
+const field = listField(config).optional();
+```
+
+The optional list field can be submited as an empty array.
+
+#### Conditionaly optional field
+
+You can pass a Jotai getter function as the argument to make the field conditionaly required:
+
+```js
+// other field or atom
+const required = atom(true);
+
+const field = listField(config).optional((get) => {
+  return get(required);
+});
+```
+
+> **NOTE** once the `.optional()` was called, the field type will be `OptionalListField`. The runtime required state has no effect on the static type.
+
+#### Idempotent behavior
+
+Calling optional on optional field returns the same field:
+
+```js
+const field = listField(config).optional();
+
+field === field.optional(); // true
+```
+
+## Recipes
+
+### Initializing values
+
+In practice the `config.value` is not used, as the field is usually initialized 'statically' in the module - outside of the React components, where there is no access to the values.
+The `listField` can be initialized as any other field with the `useFieldInitialValue` hook:
+
+```tsx
+import { useFieldInitialValue } from "form-atoms";
+import { listField } from "@form-atoms/field";
+
+// no access to props/query data outside of component!
+const typeScriptBenefits = listField({
+  value: [],
+  builder: (item) => textField({ value: item }),
+});
+
+const MyComponent = (props: { initialValue?: string[] }) => {
+  const { initialValue = ["safe function calls", "it's fast"] } = props;
+
+  useFieldInitialValue(item, initialValue);
+
+  return <></>;
+};
+```
+
+Generally, this is not needed, as most of the time we use the `useListField()` hook to manage the list field.

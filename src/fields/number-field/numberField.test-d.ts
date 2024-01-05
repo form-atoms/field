@@ -2,7 +2,7 @@ import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
 import { numberField } from "./numberField";
-import { FormSubmitValues } from "../zod-field/zodField";
+import { FormSubmitValues } from "../../components/form";
 
 test("required numberField has 'number' submit value", () => {
   const form = formAtom({

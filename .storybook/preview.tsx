@@ -14,6 +14,11 @@ export const parameters = {
       order: ["Intro", "*", "Changelog"],
     },
   },
+  docs: {
+    toc: {
+      headingSelector: "h2, h3",
+    },
+  },
 };
 
 export const decorators = [
