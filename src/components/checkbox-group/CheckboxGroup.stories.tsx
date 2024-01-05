@@ -1,16 +1,10 @@
-import { ReactNode } from "react";
+import { StoryObj } from "@storybook/react";
 
 import { CheckboxGroup } from "./CheckboxGroup";
+import { CheckboxGroupField } from "./CheckboxGroupField.mock";
 import { stringArrayField } from "../../fields";
 import { UseCheckboxGroupProps, ZodArrayField } from "../../hooks";
-import { formStory, meta } from "../../scenarios/StoryForm";
-import { FieldErrors } from "../field-errors";
-import { FieldLabel } from "../field-label";
-
-export default {
-  ...meta,
-  title: "components/CheckboxGroup",
-};
+import { StoryForm } from "../../scenarios/StoryForm";
 
 const languagesOptions = [
   { name: "Pascal", key: "pascal" },
@@ -22,55 +16,63 @@ const languagesOptions = [
   { name: "Na'vi", key: "navi" },
 ];
 
-const CheckboxGroupField = <Option, Field extends ZodArrayField>({
-  field,
-  label,
-  getValue,
-  getLabel,
-  options,
-}: { label: ReactNode } & UseCheckboxGroupProps<Option, Field>) => (
-  <div style={{ margin: "20px 0" }}>
-    <FieldLabel field={field} label={label} />
-    <CheckboxGroup
-      field={field}
-      getLabel={getLabel}
-      getValue={getValue}
-      options={options}
-    />
-    <FieldErrors field={field} />
-  </div>
-);
+type Language = (typeof languagesOptions)[number];
 
-export const Required = formStory({
+const meta = {
+  component: CheckboxGroup,
+  title: "components/CheckboxGroup",
   args: {
-    fields: {
-      languages: stringArrayField(),
-    },
-    children: ({ fields }) => (
-      <CheckboxGroupField
-        field={fields.languages}
-        label="What programming languages are you proficient with?"
-        options={languagesOptions}
-        getValue={({ key }) => key}
-        getLabel={({ name }) => name}
-      />
+    options: languagesOptions,
+    getValue: ({ key }: Language) => key,
+    getLabel: ({ name }: Language) => name,
+  },
+};
+
+export default meta;
+
+const checkboxGroupStory = <Option, Field extends ZodArrayField>(
+  storyObj: {
+    args: Pick<UseCheckboxGroupProps<Option, Field>, "field"> &
+      Omit<Partial<UseCheckboxGroupProps<Option, Field>>, "field">;
+  } & Omit<StoryObj<typeof meta>, "args">,
+) => ({
+  ...storyObj,
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <StoryForm fields={{ field: storyObj.args.field }}>
+        {() => (
+          <p>
+            <Story />
+          </p>
+        )}
+      </StoryForm>
     ),
+  ],
+});
+
+export const Required = checkboxGroupStory({
+  args: {
+    field: stringArrayField(),
   },
 });
 
-export const Optional = formStory({
+export const Optional = checkboxGroupStory({
   args: {
-    fields: {
-      attachment: stringArrayField().optional(),
-    },
-    children: ({ fields }) => (
+    field: stringArrayField().optional(),
+  },
+});
+
+export const ComposedField = checkboxGroupStory({
+  args: {
+    field: stringArrayField(),
+  },
+  render: (props) => {
+    return (
+      // @ts-expect-error not able to infer generics
       <CheckboxGroupField
-        field={fields.attachment}
         label="What programming languages are you proficient with?"
-        options={languagesOptions}
-        getValue={({ key }) => key}
-        getLabel={({ name }) => name}
+        {...props}
       />
-    ),
+    );
   },
 });

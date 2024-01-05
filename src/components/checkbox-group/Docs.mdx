@@ -1,4 +1,4 @@
-import { Meta, Stories } from "@storybook/blocks";
+import { ArgTypes, Meta, Stories } from "@storybook/blocks";
 import * as CheckboxGroupStories from "./CheckboxGroup.stories";
 
 <Meta title="components/CheckboxGroup" of={CheckboxGroupStories} />
@@ -14,13 +14,17 @@ An alternative to the [MultiSelect](?path=/docs/components-multiselect--docs) co
 import { CheckboxGroup } from "@form-atoms/field";
 ```
 
+#### Alternative
+
+- [MultiSelect](?path=/docs/components-multiselect--docs) component is an alternative for multi-choice answer.
+- Prefer the `CheckboxGroup` when there are few items to select from, which fit the screen viewport.
+
 ### Features
 
 - ✅ When empty & required, it adds the `required` prop to the checkbox, prompting user to select one of the options.
 
-### Alternative
+### Props
 
-- [MultiSelect](?path=/docs/components-multiselect--docs) component is an alternative for multi-choice answer.
-- Prefer the `CheckboxGroup` when there are few items to select from, which fit the screen viewport.
+<ArgTypes />
 
 <Stories />
