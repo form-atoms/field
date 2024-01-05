@@ -12,9 +12,18 @@ import { listField, textField } from "../../fields";
 import { StoryForm } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
 
+const RemoveButton = ({ remove }: RemoveButtonProps) => (
+  <button type="button" className="outline secondary" onClick={remove}>
+    Remove
+  </button>
+);
+
 const meta = {
   component: ListField,
   title: "components/ListField",
+  args: {
+    RemoveButton,
+  },
 };
 
 export default meta;
@@ -22,12 +31,6 @@ export default meta;
 const AddHobbyButton = ({ add }: AddButtonProps) => (
   <button type="button" className="outline" onClick={add}>
     Add hobby
-  </button>
-);
-
-const RemoveButton = ({ remove }: RemoveButtonProps) => (
-  <button type="button" className="outline secondary" onClick={remove}>
-    Remove
   </button>
 );
 
@@ -63,11 +66,6 @@ export const ListOfObjects = listFieldStory({
   },
   args: {
     AddButton,
-    RemoveButton: ({ remove }: RemoveButtonProps) => (
-      <button type="button" className="outline secondary" onClick={remove}>
-        Remove
-      </button>
-    ),
     field: listField({
       value: [
         { variable: "GITHUB_TOKEN", value: "ff52d09a" },
@@ -116,7 +114,6 @@ export const ListOfPrimitiveValues = listFieldStory({
     },
   },
   args: {
-    RemoveButton,
     AddButton,
     field: listField({
       value: ["quality materials used", "not so heavy"],
@@ -152,7 +149,6 @@ export const EmptyRenderProp = listFieldStory({
       builder: (value) => textField({ value }),
     }),
     AddButton: AddHobbyButton,
-    RemoveButton,
     Empty: () => (
       <article>
         <p style={{ textAlign: "center" }}>
@@ -191,7 +187,6 @@ export const Prepend = listFieldStory({
       builder: (value) => textField({ value }),
     }),
     AddButton: AddHobbyButton,
-    RemoveButton,
     children: ({ fields, RemoveButton, add, item }) => (
       <div
         style={{
@@ -226,7 +221,6 @@ export const Ordering = listFieldStory({
       builder: (value) => textField({ value }),
     }),
     AddButton: AddHobbyButton,
-    RemoveButton,
     children: ({ fields, RemoveButton, moveDown, moveUp }) => (
       <div
         style={{
