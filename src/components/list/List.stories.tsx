@@ -13,10 +13,17 @@ const RemoveButton = ({ remove }: RemoveButtonProps) => (
   </button>
 );
 
+const AddButton = ({ add }: AddButtonProps) => (
+  <button type="button" className="outline" onClick={add}>
+    Add item
+  </button>
+);
+
 const meta = {
   component: List,
   title: "components/List",
   args: {
+    AddButton,
     RemoveButton,
   },
 };
@@ -26,12 +33,6 @@ export default meta;
 const AddHobbyButton = ({ add }: AddButtonProps) => (
   <button type="button" className="outline" onClick={add}>
     Add hobby
-  </button>
-);
-
-const AddButton = ({ add }: AddButtonProps) => (
-  <button type="button" className="outline" onClick={add}>
-    Add item
   </button>
 );
 
@@ -60,7 +61,6 @@ export const ListOfObjects = listFieldStory({
     },
   },
   args: {
-    AddButton,
     field: listField({
       value: [
         { variable: "GITHUB_TOKEN", value: "ff52d09a" },
@@ -109,7 +109,6 @@ export const ListOfPrimitiveValues = listFieldStory({
     },
   },
   args: {
-    AddButton,
     field: listField({
       value: ["quality materials used", "not so heavy"],
       builder: (value) => textField({ value }),
