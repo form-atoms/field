@@ -1,12 +1,7 @@
 import { StoryObj } from "@storybook/react";
 import { InputField } from "form-atoms";
 
-import {
-  AddButtonProps,
-  ListField,
-  ListFieldProps,
-  RemoveButtonProps,
-} from "./ListField";
+import { AddButtonProps, List, ListProps, RemoveButtonProps } from "./List";
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { listField, textField } from "../../fields";
 import { StoryForm } from "../../scenarios/StoryForm";
@@ -19,8 +14,8 @@ const RemoveButton = ({ remove }: RemoveButtonProps) => (
 );
 
 const meta = {
-  component: ListField,
-  title: "components/ListField",
+  component: List,
+  title: "components/List",
   args: {
     RemoveButton,
   },
@@ -42,7 +37,7 @@ const AddButton = ({ add }: AddButtonProps) => (
 
 const listFieldStory = <Fields extends ListAtomItems>(
   storyObj: {
-    args: ListFieldProps<Fields, ListAtomValue<Fields>>;
+    args: ListProps<Fields, ListAtomValue<Fields>>;
   } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
   ...storyObj,
@@ -310,7 +305,7 @@ export const NestedListField = listFieldStory({
             />
           </div>
         </div>
-        <ListField
+        <List
           field={fields.accounts}
           AddButton={({ add }) => (
             <button type="button" className="outline" onClick={add}>
@@ -337,7 +332,7 @@ export const NestedListField = listFieldStory({
               </div>
             </>
           )}
-        </ListField>
+        </List>
       </article>
     ),
   },

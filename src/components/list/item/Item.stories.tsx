@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react";
 
 import { ListAtomItems } from "../../../atoms/list-atom";
-import { ListItemProps } from "../ListField";
+import { ListItemProps } from "../List";
 
 const ListItem = <Fields extends ListAtomItems>(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

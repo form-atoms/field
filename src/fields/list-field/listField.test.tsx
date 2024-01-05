@@ -12,7 +12,7 @@ import { useAtomValue } from "jotai";
 import { describe, expect, it, test, vi } from "vitest";
 
 import { listField } from "./listField";
-import { ListField } from "../../components";
+import { List } from "../../components";
 import { useFieldError } from "../../hooks";
 import { numberField } from "../number-field";
 import { textField } from "../text-field";
@@ -188,9 +188,9 @@ describe("listField()", () => {
       const { result: formActions } = renderHook(() => useFormActions(form));
 
       render(
-        <ListField field={users}>
+        <List field={users}>
           {({ fields }) => (
-            <ListField
+            <List
               field={fields.accounts}
               AddButton={({ add }) => (
                 <button onClick={add} type="button">
@@ -206,9 +206,9 @@ describe("listField()", () => {
                   )}
                 />
               )}
-            </ListField>
+            </List>
           )}
-        </ListField>,
+        </List>,
       );
 
       expect(screen.getByText("add iban")).toBeInTheDocument();

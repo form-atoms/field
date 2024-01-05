@@ -3,11 +3,11 @@ import { userEvent } from "@testing-library/user-event";
 import { InputField, formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
-import { ListField } from "./ListField";
+import { List } from "./List";
 import { listField, numberField, textField } from "../../fields";
 import { NumberInput } from "../../fields/number-field/NumberInput.mock";
 
-describe("<ListField />", () => {
+describe("<List />", () => {
   it("works with flat list of fields", async () => {
     const fields = {
       friends: listField({
@@ -19,9 +19,9 @@ describe("<ListField />", () => {
     const form = formAtom(fields);
     const { result } = renderHook(() => useFormSubmit(form));
     render(
-      <ListField field={fields.friends}>
+      <List field={fields.friends}>
         {({ fields }) => <InputField atom={fields} component="input" />}
-      </ListField>,
+      </List>,
     );
 
     expect(screen.getByDisplayValue("Bob")).toBeInTheDocument();
@@ -45,9 +45,9 @@ describe("<ListField />", () => {
       const form = formAtom(fields);
       const { result } = renderHook(() => useFormSubmit(form));
       render(
-        <ListField field={fields.friends} initialValue={["Mark"]}>
+        <List field={fields.friends} initialValue={["Mark"]}>
           {({ fields }) => <InputField atom={fields} component="input" />}
-        </ListField>,
+        </List>,
       );
 
       const onSubmit = vi.fn();
@@ -67,13 +67,13 @@ describe("<ListField />", () => {
       };
 
       render(
-        <ListField field={fields.luckyNumbers}>
+        <List field={fields.luckyNumbers}>
           {({ RemoveButton }) => (
             <>
               <RemoveButton />
             </>
           )}
-        </ListField>,
+        </List>,
       );
 
       const RemoveButton = screen.getByText("Remove");
@@ -91,13 +91,13 @@ describe("<ListField />", () => {
       };
 
       render(
-        <ListField field={fields.luckyNumbers}>
+        <List field={fields.luckyNumbers}>
           {({ fields, RemoveButton }) => (
             <>
               <NumberInput field={fields} label="" /> <RemoveButton />
             </>
           )}
-        </ListField>,
+        </List>,
       );
 
       const RemoveButton = screen.getByText("Remove");
@@ -120,7 +120,7 @@ describe("<ListField />", () => {
         }),
       };
 
-      render(<ListField field={fields.luckyNumbers}>{() => <></>}</ListField>);
+      render(<List field={fields.luckyNumbers}>{() => <></>}</List>);
 
       const AddButton = screen.getByText("Add item");
 
@@ -137,13 +137,13 @@ describe("<ListField />", () => {
       };
 
       render(
-        <ListField field={fields.luckyNumbers}>
+        <List field={fields.luckyNumbers}>
           {({ fields }) => (
             <>
               <NumberInput field={fields} label="lucky" />
             </>
           )}
-        </ListField>,
+        </List>,
       );
 
       const AddButton = screen.getByText("Add item");
@@ -167,16 +167,13 @@ describe("<ListField />", () => {
       };
 
       render(
-        <ListField
-          field={fields.luckyNumbers}
-          Empty={() => <p>No lucky numbers</p>}
-        >
+        <List field={fields.luckyNumbers} Empty={() => <p>No lucky numbers</p>}>
           {({ fields }) => (
             <>
               <NumberInput field={fields} label="" />
             </>
           )}
-        </ListField>,
+        </List>,
       );
 
       expect(screen.queryByText("No lucky numbers")).toBeInTheDocument();

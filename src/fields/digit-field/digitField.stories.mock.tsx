@@ -1,5 +1,5 @@
 import { listFieldBuilder } from "../";
-import { ListField } from "../../components";
+import { List } from "../../components";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { NumberInput } from "../number-field/NumberInput.mock";
 
@@ -32,7 +32,7 @@ export const PinCodeListField = formStory({
     },
     children: ({ form }) => (
       <div style={{ display: "flex" }}>
-        <ListField
+        <List
           form={form}
           path={["pinCode"]}
           AddButton={AddHobbyField}
@@ -47,7 +47,7 @@ export const PinCodeListField = formStory({
               field={fields}
             />
           )}
-        </ListField>
+        </List>
       </div>
     ),
   },

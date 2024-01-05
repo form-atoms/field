@@ -56,7 +56,7 @@ export type ListItemProp<Fields extends ListAtomItems> = RenderProp<
 
 export type ListFields = FieldAtom<any>[] | FormFields[];
 
-export type ListFieldProps<
+export type ListProps<
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
 > = RenderProps & {
@@ -64,7 +64,7 @@ export type ListFieldProps<
   initialValue?: Value[];
 } & ListItemProp<Fields>;
 
-export function ListField<
+export function List<
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
 >({
@@ -82,7 +82,7 @@ export function ListField<
     </button>
   ),
   Empty,
-}: ListFieldProps<Fields, Value>) {
+}: ListProps<Fields, Value>) {
   const { add, isEmpty, items } = useListField(field, { initialValue });
 
   return (

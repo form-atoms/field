@@ -1,6 +1,6 @@
 import { InputField } from "form-atoms";
 
-import { ListField, RemoveButtonProps } from "./ListField";
+import { List, RemoveButtonProps } from "./List";
 import { checkboxField, listField, textField } from "../../fields";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
@@ -8,7 +8,7 @@ import { Radio, RadioControl } from "../radio";
 
 export default {
   ...meta,
-  title: "components/ListField",
+  title: "components/List",
 };
 
 export const Experimental_WithRadioControl = formStory({
@@ -16,7 +16,7 @@ export const Experimental_WithRadioControl = formStory({
     docs: {
       description: {
         story:
-          "The item fields are regular fields and can be managed from outside. Here we have an advanced example where the `<ListField />` is wrapped in a custom `<RadioControl /`> which manages the item's primary field realized as a `booleanField()`.",
+          "The item fields are regular fields and can be managed from outside. Here we have an advanced example where the `<List />` is wrapped in a custom `<RadioControl /`> which manages the item's primary field realized as a `booleanField()`.",
       },
     },
   },
@@ -42,7 +42,7 @@ export const Experimental_WithRadioControl = formStory({
     children: ({ fields }) => (
       <RadioControl>
         {({ control }) => (
-          <ListField
+          <List
             field={fields.phones}
             AddButton={({ add }) => (
               <button type="button" className="outline" onClick={add}>
@@ -89,7 +89,7 @@ export const Experimental_WithRadioControl = formStory({
                 </Radio>
               </>
             )}
-          </ListField>
+          </List>
         )}
       </RadioControl>
     ),

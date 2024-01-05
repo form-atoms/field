@@ -1,18 +1,16 @@
 import { Meta, Canvas, ArgTypes, Description } from "@storybook/blocks";
-import * as ListFieldStories from "./ListField.stories";
+import * as ListStories from "./List.stories";
 import * as ListItemStories from "./item/Item.stories";
 
-import Props from "./props.md?raw";
+<Meta title="components/List" of={ListStories} />
 
-<Meta title="components/ListField" of={ListFieldStories} />
+# List
 
-# ListField
-
-The ListField component enables you to easily render & manage a [listField()](?path=/docs/fields-listField--docs). It is a higher order component, which internally uses the [useListField](?path=/docs/hooks-useListField--docs)
+The List component enables you to easily render & manage a [listField()](?path=/docs/fields-listField--docs). It is a higher order component, which internally uses the [useListField](?path=/docs/hooks-useListField--docs)
 hook.
 
 ```ts
-import { ListField } from "@form-atoms/field";
+import { List } from "@form-atoms/field";
 ```
 
 ## Features
@@ -37,9 +35,9 @@ The `children` render prop will receive the following props:
 
 ### List of objects
 
-<Description of={ListFieldStories.ListOfObjects} />
+<Description of={ListStories.ListOfObjects} />
 
-<Canvas sourceState="none" of={ListFieldStories.ListOfObjects} />
+<Canvas sourceState="none" of={ListStories.ListOfObjects} />
 
 ```tsx
 import { listField, ListField, textField } from "@form-atoms/field";
@@ -94,9 +92,9 @@ const Example = () => (
 
 ### List of primitive values
 
-<Description of={ListFieldStories.ListOfPrimitiveValues} />
+<Description of={ListStories.ListOfPrimitiveValues} />
 
-<Canvas sourceState="none" of={ListFieldStories.ListOfPrimitiveValues} />
+<Canvas sourceState="none" of={ListStories.ListOfPrimitiveValues} />
 
 ```tsx
 import { ListField, listField, textField } from "@form-atoms/field";
@@ -132,9 +130,9 @@ const Example = () => (
 
 ### `Empty` render prop
 
-<Description of={ListFieldStories.EmptyRenderProp} />
+<Description of={ListStories.EmptyRenderProp} />
 
-<Canvas sourceState="none" of={ListFieldStories.EmptyRenderProp} />
+<Canvas sourceState="none" of={ListStories.EmptyRenderProp} />
 
 ```tsx
 import { ListField, listField, textField } from "@form-atoms/field";
@@ -177,7 +175,7 @@ const Example = () => (
 ListField supports nested array fields.
 For example we can capture multiple people with multiple banking accounts:
 
-<Canvas sourceState="none" of={ListFieldStories.NestedListField} />
+<Canvas sourceState="none" of={ListStories.NestedListField} />
 
 ```tsx
 import { InputField } from "form-atoms";
