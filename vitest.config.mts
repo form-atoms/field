@@ -9,9 +9,11 @@ export default defineConfig({
     setupFiles: ["./setup.ts"],
     coverage: {
       provider: "v8",
+      include: ["src/@(atoms|components|fields|hooks)"],
+      exclude: ["**/*.@(mock|stories|test-d).@(ts|tsx)"],
     },
   },
   define: {
-    'process.env': {}
-  }
+    "process.env": {},
+  },
 });

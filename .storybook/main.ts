@@ -1,5 +1,3 @@
-import tsconfigPaths from "vite-tsconfig-paths";
-
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   staticDirs: ["../public"],
@@ -16,11 +14,10 @@ export default {
   async viteFinal(config) {
     return {
       ...config,
-      plugins: [...(config.plugins || []), tsconfigPaths()],
       define: {
         ...(config.define || {}),
-        'process.env': {}
-      }
+        "process.env": {},
+      },
     };
   },
 };
