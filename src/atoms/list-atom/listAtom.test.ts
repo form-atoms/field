@@ -170,5 +170,38 @@ describe("listAtom()", () => {
 
       expect(fieldError.current.error).toBe("There are some errors");
     });
+
+    it.only("should loose invalidItemError, when the nested item error is fixed", async () => {
+      const field = listAtom({
+        validate: HACK_validate,
+        value: [undefined], // empty value for a required number will cause error
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ field });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const { result: fieldError } = renderHook(() => useFieldError(field));
+      const { result: formFields } = renderHook(() =>
+        useAtomValue(useAtomValue(field)._formFields),
+      );
+
+      const { result: inputActions } = renderHook(() =>
+        useFieldActions(formFields.current[0]!),
+      );
+
+      expect(fieldError.current.error).toBe(undefined);
+
+      await act(async () => submit.current(vi.fn())());
+      await act(
+        () => new Promise<void>((resolve) => setTimeout(() => resolve(), 0)),
+      );
+
+      expect(fieldError.current.error).toBe("Some list items contain errors.");
+
+      await act(async () => inputActions.current.setValue(5));
+
+      expect(fieldError.current.error).toBe(undefined);
+    });
   });
 });
