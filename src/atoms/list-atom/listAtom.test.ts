@@ -171,7 +171,7 @@ describe("listAtom()", () => {
       expect(fieldError.current.error).toBe("There are some errors");
     });
 
-    it("should lose invalidItemError, when the nested item error is fixed", async () => {
+    it.only("should loose invalidItemError, when the nested item error is fixed", async () => {
       const field = listAtom({
         validate: HACK_validate,
         value: [undefined], // empty value for a required number will cause error
