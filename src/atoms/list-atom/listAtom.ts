@@ -1,13 +1,14 @@
 import {
   FieldAtomConfig,
   FormAtom,
+  FormFields,
   Validate,
   ValidateOn,
   ValidateStatus,
   formAtom,
   walkFields,
 } from "form-atoms";
-import { Atom, PrimitiveAtom, WritableAtom, atom } from "jotai";
+import { Atom, Getter, PrimitiveAtom, Setter, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset, splitAtom } from "jotai/utils";
 
 import {
@@ -116,7 +117,44 @@ export function listAtom<
 
   const touchedAtom = atomWithReset(false);
   const dirtyAtom = atom(false);
-  const errorsAtom = atom<string[]>([]);
+  const listErrorsAtom = atom<string[]>([]);
+  const itemErrorsAtom = atom((get) => {
+    // get errors from the nested forms
+    const hasInvalidForm = get(_formListAtom)
+      .map((formAtom) => {
+        const form = get(formAtom);
+        let invalid = false;
+
+        walkFields(get(form.fields), (field) => {
+          const atoms = get(field);
+          const errors = get(atoms.errors);
+
+          if (errors.length) {
+            invalid = true;
+            return false;
+          }
+        });
+
+        // does not work with async
+        // state.get(form.validateStatus) === "invalid";
+        return invalid;
+      })
+      .some((invalid) => invalid);
+
+    return hasInvalidForm
+      ? [config.invalidItemError ?? "Some list items contain errors."]
+      : [];
+  });
+  const errorsAtom = atom(
+    (get) => [...get(listErrorsAtom), ...get(itemErrorsAtom)],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (_get, _set, _value: string[]) => {
+      // intentional NO-OP
+      // the errors atom must be writable, as the `validateAtoms` will write the errors returned from `_validateCallback`
+      // but we ignore it, as we already manage the `listErrors` internally
+    },
+  );
+
   const validateCountAtom = atom(0);
   const validateResultAtom = atom<ValidateStatus>("valid");
   const refAtom = atom<HTMLFieldSetElement | null>(null);
@@ -159,6 +197,7 @@ export function listAtom<
 
   const resetAtom = atom<null, [void], void>(null, (get, set) => {
     set(errorsAtom, []);
+    set(listErrorsAtom, []);
     set(touchedAtom, RESET);
     set(valueAtom, get(initialValueAtom) ?? RESET);
 
@@ -215,52 +254,28 @@ export function listAtom<
 
   const validateCallback: Validate<Value> = async (state) => {
     // run validation for nested forms
-    state.get(_formListAtom).map((formAtom) => {
-      const form = state.get(formAtom);
-      state.set(form.validate, state.event);
-    });
+    await Promise.all(
+      state
+        .get(_formListAtom)
+        .map((formAtom) =>
+          validateFormFields(
+            formAtom as any,
+            state.get,
+            state.set,
+            state.event,
+          ),
+        ),
+    );
 
     // validate the listAtom itself
     const listValidate = config.validate?.(state);
-
     const listError = isPromise(listValidate)
       ? await listValidate
       : listValidate;
 
-    // get errors from the nested forms
-    const hasInvalidForm = state
-      .get(_formListAtom)
-      .map((formAtom) => {
-        const form = state.get(formAtom);
+    state.set(listErrorsAtom, listError ?? []);
 
-        let invalid = false;
-
-        walkFields(state.get(form.fields), (field) => {
-          const atoms = state.get(field);
-
-          const errors = state.get(atoms.errors);
-
-          if (errors.length) {
-            invalid = true;
-            return false;
-          }
-        });
-
-        // does not work with async
-        // state.get(form.validateStatus) === "invalid";
-        return invalid;
-      })
-      .some((invalid) => invalid);
-
-    const errors = listError ?? [];
-
-    if (hasInvalidForm) {
-      errors.push(config.invalidItemError ?? "Some list items contain errors.");
-    }
-
-    state.set(errorsAtom, errors);
-
-    return errors;
+    return state.get(errorsAtom);
   };
 
   const listAtoms = {
@@ -292,4 +307,65 @@ export function listAtom<
 
 function isPromise(value: any): value is Promise<any> {
   return typeof value === "object" && typeof value.then === "function";
+}
+
+// TODO: reuse from formAtoms._validateFields
+async function validateFormFields(
+  formAtom: FormAtom<FormFields>,
+  get: Getter,
+  set: Setter,
+  event: ValidateOn,
+) {
+  const form = get(formAtom);
+  const fields = get(form.fields);
+  const promises: Promise<boolean>[] = [];
+
+  walkFields(fields, (nextField) => {
+    async function validate(field: typeof nextField) {
+      const fieldAtom = get(field);
+      const value = get(fieldAtom.value);
+      const dirty = get(fieldAtom.dirty);
+      // This pointer prevents a stale validation result from being
+      // set after the most recent validation has been performed.
+      const ptr = get(fieldAtom._validateCount) + 1;
+      set(fieldAtom._validateCount, ptr);
+
+      if (event === "user" || event === "submit") {
+        set(fieldAtom.touched, true);
+      }
+
+      const maybePromise = fieldAtom._validateCallback?.({
+        get,
+        set,
+        value,
+        dirty,
+        touched: get(fieldAtom.touched),
+        event,
+      });
+
+      let errors: string[];
+
+      if (isPromise(maybePromise)) {
+        set(fieldAtom.validateStatus, "validating");
+        errors = (await maybePromise) ?? get(fieldAtom.errors);
+      } else {
+        errors = maybePromise ?? get(fieldAtom.errors);
+      }
+
+      if (ptr === get(fieldAtom._validateCount)) {
+        set(fieldAtom.errors, errors);
+        set(fieldAtom.validateStatus, errors.length > 0 ? "invalid" : "valid");
+      }
+
+      if (errors && errors.length) {
+        return false;
+      }
+
+      return true;
+    }
+
+    promises.push(validate(nextField));
+  });
+
+  await Promise.all(promises);
 }

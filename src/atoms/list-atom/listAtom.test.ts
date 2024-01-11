@@ -81,8 +81,8 @@ describe("listAtom()", () => {
     expect(result.result.current).toEqual([10, 20, 30]);
   });
 
-  describe("resetting value", () => {
-    test("the formResetAction resets value", async () => {
+  describe("resetting form", () => {
+    test("the formActions.reset resets the field value", async () => {
       const ages = listAtom({
         value: [10],
         builder: (age) => numberField({ value: age }),
@@ -103,16 +103,32 @@ describe("listAtom()", () => {
       await act(async () => formActions.current.submit(reset_onSubmit)());
       expect(reset_onSubmit).toHaveBeenCalledWith({ ages: [10] });
     });
+
+    test("the formActions.reset resets the field error", async () => {
+      const ages = listAtom({
+        value: [],
+        builder: (age) => numberField({ value: age }),
+        validate: () => ["err"],
+      });
+      const form = formAtom({ ages });
+
+      const { result: formActions } = renderHook(() => useFormActions(form));
+      const { result: fieldError } = renderHook(() => useFieldError(ages));
+
+      const onSubmit = vi.fn();
+      await act(async () => formActions.current.submit(onSubmit)());
+
+      expect(fieldError.current.error).not.toBe(undefined);
+
+      await act(async () => formActions.current.reset());
+
+      expect(fieldError.current.error).toBe(undefined);
+    });
   });
 
   describe("nested validation", () => {
-    // hack to wait for the form validation to finish (when listAtom used raw, without listField which has validate function)
-    const HACK_validate = () =>
-      new Promise<[]>((resolve) => setTimeout(() => resolve([]), 0));
-
     it("can't be submitted with invalid item's field", async () => {
       const field = listAtom({
-        validate: HACK_validate,
         value: [undefined], // empty value for number
         builder: (value) => numberField({ value }),
       });
@@ -128,12 +144,10 @@ describe("listAtom()", () => {
 
     it("can't be submitted when item of nested list is invalid", async () => {
       const field = listAtom({
-        validate: HACK_validate,
         name: "users",
         value: [{ accounts: [undefined] }],
         builder: ({ accounts }) => ({
           accounts: listAtom({
-            validate: HACK_validate,
             name: "bank-accounts",
             value: accounts,
             builder: (iban) => textField({ name: "iban", value: iban }),
@@ -153,7 +167,6 @@ describe("listAtom()", () => {
     it("has the invalidItemError, when item of nested list is invalid", async () => {
       const field = listAtom({
         invalidItemError: "There are some errors",
-        validate: HACK_validate,
         value: [undefined], // empty value for a required number will cause error
         builder: (value) => numberField({ value }),
       });
@@ -164,11 +177,37 @@ describe("listAtom()", () => {
       const { result: fieldError } = renderHook(() => useFieldError(field));
 
       await act(async () => submit.current(vi.fn())());
-      await act(
-        () => new Promise<void>((resolve) => setTimeout(() => resolve(), 0)),
-      );
 
       expect(fieldError.current.error).toBe("There are some errors");
+    });
+
+    it("should lose invalidItemError, when the nested item error is fixed", async () => {
+      const field = listAtom({
+        value: [undefined], // empty value for a required number will cause error
+        builder: (value) => numberField({ value }),
+      });
+
+      const form = formAtom({ field });
+
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+      const { result: fieldError } = renderHook(() => useFieldError(field));
+      const { result: formFields } = renderHook(() =>
+        useAtomValue(useAtomValue(field)._formFields),
+      );
+
+      const { result: inputActions } = renderHook(() =>
+        useFieldActions(formFields.current[0]!),
+      );
+
+      expect(fieldError.current.error).toBe(undefined);
+
+      await act(async () => submit.current(vi.fn())());
+
+      expect(fieldError.current.error).toBe("Some list items contain errors.");
+
+      await act(async () => inputActions.current.setValue(5));
+
+      expect(fieldError.current.error).toBe(undefined);
     });
   });
 });
