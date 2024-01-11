@@ -147,8 +147,11 @@ export function listAtom<
   });
   const errorsAtom = atom(
     (get) => [...get(listErrorsAtom), ...get(itemErrorsAtom)],
-    (_, set, value: string[]) => {
-      set(listErrorsAtom, value);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    (_get, _set, _value: string[]) => {
+      // intentional NO-OP
+      // the errors atom must be writable, as the `validateAtoms` will write the errors returned from `_validateCallback`
+      // but we ignore it, as we already manage the `listErrors` internally
     },
   );
 
@@ -194,6 +197,7 @@ export function listAtom<
 
   const resetAtom = atom<null, [void], void>(null, (get, set) => {
     set(errorsAtom, []);
+    set(listErrorsAtom, []);
     set(touchedAtom, RESET);
     set(valueAtom, get(initialValueAtom) ?? RESET);
 
@@ -269,9 +273,9 @@ export function listAtom<
       ? await listValidate
       : listValidate;
 
-    const errors = listError ?? [];
+    state.set(listErrorsAtom, listError ?? []);
 
-    return errors;
+    return state.get(errorsAtom);
   };
 
   const listAtoms = {
