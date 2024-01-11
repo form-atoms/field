@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/form-atoms/field/compare/v4.0.0...v4.0.1) (2024-01-11)
+
+
+### Bug Fixes
+
+* **listAtom:** [#68](https://github.com/form-atoms/field/issues/68) the validateatom of listatom should listen to the validation of in… ([#70](https://github.com/form-atoms/field/issues/70)) ([1679827](https://github.com/form-atoms/field/commit/16798275d503fe28755bd5dd200b7d6c47776f5b)), closes [#69](https://github.com/form-atoms/field/issues/69) [#67](https://github.com/form-atoms/field/issues/67) [#71](https://github.com/form-atoms/field/issues/71)
+
 # [4.0.0](https://github.com/form-atoms/field/compare/v3.8.14...v4.0.0) (2024-01-05)
 
 
