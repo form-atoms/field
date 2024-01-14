@@ -72,18 +72,29 @@ export type ListAtom<
   }
 >;
 
+export type ListAtomConfig<
+  Fields extends ListAtomItems,
+  Value extends ListAtomValue<Fields>,
+> = {
+  /**
+   * The item builder expects a pure function creating the form fields to be used for each item.
+   * @param value The item value.
+   * @returns The item fields.
+   */
+  builder: (value: Value) => Fields;
+  /**
+   * Error message the listAtom will have, when the its items have nested errors.
+   */
+  invalidItemError?: string;
+} & Pick<FieldAtomConfig<Value[]>, "name" | "validate" | "value">;
+
 /**
  * @private
  */
 export function listAtom<
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
->(
-  config: {
-    builder: (value: Value) => Fields;
-    invalidItemError?: string;
-  } & Pick<FieldAtomConfig<Value[]>, "name" | "validate" | "value">,
-): ListAtom<Fields, Value> {
+>(config: ListAtomConfig<Fields, Value>): ListAtom<Fields, Value> {
   const nameAtom = atomWithReset(config.name);
   const initialValueAtom = atomWithReset<Value | undefined>(undefined);
 
