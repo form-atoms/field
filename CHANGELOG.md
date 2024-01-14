@@ -1,3 +1,10 @@
+## [4.0.3](https://github.com/form-atoms/field/compare/v4.0.2...v4.0.3) (2024-01-14)
+
+
+### Bug Fixes
+
+* use hydrateAtoms for listField ([#77](https://github.com/form-atoms/field/issues/77)) ([9264c90](https://github.com/form-atoms/field/commit/9264c90ae873cddca49aa660720d22b82a073173))
+
 ## [4.0.2](https://github.com/form-atoms/field/compare/v4.0.1...v4.0.2) (2024-01-14)
 
 
