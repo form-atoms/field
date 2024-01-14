@@ -1,3 +1,10 @@
+## [4.0.2-next.2](https://github.com/form-atoms/field/compare/v4.0.2-next.1...v4.0.2-next.2) (2024-01-14)
+
+
+### Bug Fixes
+
+* **listAtom:** validate controls listErrors ([#72](https://github.com/form-atoms/field/issues/72)) ([#75](https://github.com/form-atoms/field/issues/75)) ([d011313](https://github.com/form-atoms/field/commit/d011313653c7b047a621e3b0299ded09fb1ca958))
+
 ## [4.0.2-next.1](https://github.com/form-atoms/field/compare/v4.0.1...v4.0.2-next.1) (2024-01-14)
 
 
