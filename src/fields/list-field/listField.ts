@@ -1,10 +1,10 @@
-import { FieldAtomConfig } from "form-atoms";
 import { Atom } from "jotai";
 import { ZodAny, ZodArray, z } from "zod";
 
 import { extendFieldAtom } from "../../atoms/extendFieldAtom";
 import {
   ListAtom,
+  ListAtomConfig,
   ListAtomItems,
   ListAtomSubmitValue,
   ListAtomValue,
@@ -65,9 +65,7 @@ export const listField = <
   schema,
   optionalSchema,
   ...config
-}: {
-  builder: (value: Value) => Fields;
-} & FieldAtomConfig<Value[]> &
+}: ListAtomConfig<Fields, Value> &
   ZodParams &
   Partial<
     ValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>
