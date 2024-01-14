@@ -1,8 +1,9 @@
-import { UseFieldOptions, useFieldInitialValue } from "form-atoms";
+import { UseFieldOptions } from "form-atoms";
 import { useAtomValue } from "jotai";
 
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { ListField } from "../../fields";
+import { useHydrateField } from "../use-hydrate-field";
 import { useListActions } from "../use-list-actions";
 
 export const useListField = <
@@ -12,13 +13,13 @@ export const useListField = <
   list: ListField<Fields, Value>,
   options?: UseFieldOptions<Value[]>,
 ) => {
+  useHydrateField(list, options?.initialValue, options);
   const atoms = useAtomValue(list);
   const splitItems = useAtomValue(atoms._splitList);
   const formList = useAtomValue(atoms._formList);
   const formFields = useAtomValue(atoms._formFields);
   const isEmpty = useAtomValue(atoms.empty);
   const { add, move, remove } = useListActions(list);
-  useFieldInitialValue(list, options?.initialValue, options);
 
   const items = splitItems.map((item, index) => ({
     item,
