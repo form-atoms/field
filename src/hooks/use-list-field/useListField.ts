@@ -1,15 +1,9 @@
-import { FormAtom, UseFieldOptions, useFieldInitialValue } from "form-atoms";
-import { PrimitiveAtom, useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useCallback, useTransition } from "react";
+import { UseFieldOptions, useFieldInitialValue } from "form-atoms";
+import { useAtomValue } from "jotai";
 
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { ListField } from "../../fields";
-
-export type ListItem<Fields extends ListAtomItems> = PrimitiveAtom<
-  FormAtom<{
-    fields: Fields;
-  }>
->;
+import { useListActions } from "../use-list-actions";
 
 export const useListField = <
   Fields extends ListAtomItems,
@@ -19,34 +13,12 @@ export const useListField = <
   options?: UseFieldOptions<Value[]>,
 ) => {
   const atoms = useAtomValue(list);
-  const validate = useSetAtom(atoms.validate, options);
-  const [splitItems, dispatch] = useAtom(atoms._splitList);
+  const splitItems = useAtomValue(atoms._splitList);
   const formList = useAtomValue(atoms._formList);
   const formFields = useAtomValue(atoms._formFields);
   const isEmpty = useAtomValue(atoms.empty);
-  const [, startTransition] = useTransition();
+  const { add, move, remove } = useListActions(list);
   useFieldInitialValue(list, options?.initialValue, options);
-
-  const remove = useCallback((item: ListItem<Fields>) => {
-    dispatch({ type: "remove", atom: item });
-    startTransition(() => {
-      validate("change");
-    });
-  }, []);
-
-  const add = useCallback((before?: ListItem<Fields>) => {
-    dispatch({ type: "insert", value: atoms.buildItem(), before });
-    startTransition(() => {
-      validate("change");
-    });
-  }, []);
-
-  const move = useCallback(
-    (item: ListItem<Fields>, before?: ListItem<Fields>) => {
-      dispatch({ type: "move", atom: item, before });
-    },
-    [],
-  );
 
   const items = splitItems.map((item, index) => ({
     item,
