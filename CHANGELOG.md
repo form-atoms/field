@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/form-atoms/field/compare/v4.0.3...v4.0.4) (2024-01-14)
+
+
+### Bug Fixes
+
+* revert to FIV instead of hydrate to prevent HTML mismatch ([ba3efe9](https://github.com/form-atoms/field/commit/ba3efe9394902908d0f22c2173d89f6a999fa782))
+
 ## [4.0.3](https://github.com/form-atoms/field/compare/v4.0.2...v4.0.3) (2024-01-14)
 
 
