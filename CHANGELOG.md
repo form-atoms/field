@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/form-atoms/field/compare/v4.0.1...v4.0.2) (2024-01-14)
+
+
+### Bug Fixes
+
+* release ([#76](https://github.com/form-atoms/field/issues/76)) ([#74](https://github.com/form-atoms/field/issues/74)) ([0cc383f](https://github.com/form-atoms/field/commit/0cc383fb333f5c2d445f59e1eddd6391db97cac5)), closes [#72](https://github.com/form-atoms/field/issues/72) [#75](https://github.com/form-atoms/field/issues/75) [#72](https://github.com/form-atoms/field/issues/72) [#75](https://github.com/form-atoms/field/issues/75)
+
 ## [4.0.2-next.2](https://github.com/form-atoms/field/compare/v4.0.2-next.1...v4.0.2-next.2) (2024-01-14)
 
 
