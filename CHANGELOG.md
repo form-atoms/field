@@ -1,3 +1,10 @@
+## [4.0.2-next.1](https://github.com/form-atoms/field/compare/v4.0.1...v4.0.2-next.1) (2024-01-14)
+
+
+### Bug Fixes
+
+* **listField:** use ListAtomConfig with the invalidItemError ([#74](https://github.com/form-atoms/field/issues/74)) ([6d28e0d](https://github.com/form-atoms/field/commit/6d28e0dba60a001d2c18a5ea789fc5466b52f317))
+
 ## [4.0.1](https://github.com/form-atoms/field/compare/v4.0.0...v4.0.1) (2024-01-11)
 
 
