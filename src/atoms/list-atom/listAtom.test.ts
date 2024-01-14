@@ -2,6 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import {
   formAtom,
   useFieldActions,
+  useFieldErrors,
   useFieldValue,
   useFormActions,
   useFormSubmit,
@@ -12,6 +13,7 @@ import { describe, expect, it, test, vi } from "vitest";
 import { listAtom } from "./listAtom";
 import { numberField, textField } from "../../fields";
 import { useFieldError } from "../../hooks";
+import { useListActions } from "../../hooks/use-list-actions";
 
 describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
@@ -123,6 +125,50 @@ describe("listAtom()", () => {
       await act(async () => formActions.current.reset());
 
       expect(fieldError.current.error).toBe(undefined);
+    });
+  });
+
+  describe("validation", () => {
+    it("adding item clear the error", async () => {
+      const field = listAtom({
+        value: [],
+        builder: (value) => numberField({ value }),
+        validate: ({ value }) => {
+          const errors = [];
+          if (value.length === 0) {
+            errors.push("Can't be empty");
+          }
+          return errors;
+        },
+      });
+
+      const { result: actions } = renderHook(() => useFieldActions(field));
+      const { result: errors } = renderHook(() => useFieldErrors(field));
+
+      await act(async () => actions.current.validate());
+
+      expect(errors.current).toEqual(["Can't be empty"]);
+
+      const { result: listActions } = renderHook(() => useListActions(field));
+
+      await act(async () => listActions.current.add());
+
+      expect(errors.current).toEqual([]);
+    });
+
+    it("validates the inner form items", async () => {
+      const field = listAtom({
+        value: [undefined],
+        invalidItemError: "err",
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: actions } = renderHook(() => useFieldActions(field));
+      const { result: errors } = renderHook(() => useFieldErrors(field));
+
+      await act(async () => actions.current.validate());
+
+      expect(errors.current).toEqual(["err"]);
     });
   });
 

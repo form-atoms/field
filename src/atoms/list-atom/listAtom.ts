@@ -18,6 +18,14 @@ import {
 } from "./listBuilder";
 import { ExtendFieldAtom } from "../extendFieldAtom";
 
+type ListItemForm<Fields extends ListAtomItems> = FormAtom<{
+  fields: Fields;
+}>;
+
+export type ListItem<Fields extends ListAtomItems> = PrimitiveAtom<
+  ListItemForm<Fields>
+>;
+
 // copied from jotai/utils
 type SplitAtomAction<Item> =
   | {
@@ -42,10 +50,16 @@ export type ListAtom<
   Value[],
   {
     empty: Atom<boolean>;
+    /**
+     * TODO - review
+     * Reusing the ListItem and ListItemForm from above will cause an error preventing compilation the library:
+     * error TS7056: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+     */
     buildItem(): FormAtom<{
       fields: Fields;
     }>;
     _formFields: Atom<Fields[]>;
+
     _formList: PrimitiveAtom<
       FormAtom<{
         fields: Fields;
@@ -161,7 +175,7 @@ export function listAtom<
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (_get, _set, _value: string[]) => {
       // intentional NO-OP
-      // the errors atom must be writable, as the `validateAtoms` will write the errors returned from `_validateCallback`
+      // the errors atom must be writable, as the `validateAtom` will write the errors returned from `_validateCallback`
       // but we ignore it, as we already manage the `listErrors` internally
     },
   );
@@ -234,6 +248,13 @@ export function listAtom<
           set(touchedAtom, true);
         }
 
+        // run validation for nested forms
+        await Promise.all(
+          get(_formListAtom).map((formAtom) =>
+            validateFormFields(formAtom as any, get, set, event),
+          ),
+        );
+
         let errors: string[] = [];
 
         const maybeValidatePromise = config.validate?.({
@@ -248,13 +269,13 @@ export function listAtom<
         if (isPromise(maybeValidatePromise)) {
           ptr === get(validateCountAtom) &&
             set(validateResultAtom, "validating");
-          errors = (await maybeValidatePromise) ?? get(errorsAtom);
+          errors = (await maybeValidatePromise) ?? get(listErrorsAtom);
         } else {
-          errors = maybeValidatePromise ?? get(errorsAtom);
+          errors = maybeValidatePromise ?? get(listErrorsAtom);
         }
 
         if (ptr === get(validateCountAtom)) {
-          set(errorsAtom, errors);
+          set(listErrorsAtom, errors);
           set(validateResultAtom, errors.length > 0 ? "invalid" : "valid");
         }
       }
