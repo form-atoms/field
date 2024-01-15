@@ -16,21 +16,17 @@ export type ZodFieldConfig<
 > = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
   ValidateConfig<Schema, OptSchema>;
 
-export type ZodFieldValue<Field> = Field extends FieldAtom<infer Value>
-  ? Value
-  : never;
+export type ZodFieldValue<Field> =
+  Field extends FieldAtom<infer Value> ? Value : never;
 
-export type ZodFieldSubmitValue<Field> = Field extends ZodField<
-  infer Schema,
-  infer OptSchema,
-  infer Required
->
-  ? Required extends WritableRequiredAtom
-    ? Schema["_output"] | OptSchema["_output"]
-    : Required extends Atom<boolean>
-      ? Schema["_output"]
-      : never
-  : never;
+export type ZodFieldSubmitValue<Field> =
+  Field extends ZodField<infer Schema, infer OptSchema, infer Required>
+    ? Required extends WritableRequiredAtom
+      ? Schema["_output"] | OptSchema["_output"]
+      : Required extends Atom<boolean>
+        ? Schema["_output"]
+        : never
+    : never;
 
 export type OptionalZodField<
   Schema extends z.Schema,

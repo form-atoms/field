@@ -22,9 +22,10 @@ export type ExtendListAtom<
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
   State,
-> = ListAtom<Fields, Value> extends Atom<infer DefaultState>
-  ? Atom<DefaultState & State>
-  : never;
+> =
+  ListAtom<Fields, Value> extends Atom<infer DefaultState>
+    ? Atom<DefaultState & State>
+    : never;
 
 export type ListField<
   Fields extends ListAtomItems,

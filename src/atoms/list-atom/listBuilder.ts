@@ -5,13 +5,12 @@ import { ZodField, ZodFieldSubmitValue } from "../../fields";
 
 export type ListAtomItems = FieldAtom<any> | FormFields;
 
-export type ListAtomValue<T extends ListAtomItems> = T extends FieldAtom<
-  infer Value
->
-  ? Value
-  : T extends FormFields
-    ? FormFieldValues<T>
-    : never;
+export type ListAtomValue<T extends ListAtomItems> =
+  T extends FieldAtom<infer Value>
+    ? Value
+    : T extends FormFields
+      ? FormFieldValues<T>
+      : never;
 
 export type ListAtomSubmitValue<T extends ListAtomItems> = T extends ZodField
   ? ZodFieldSubmitValue<T>

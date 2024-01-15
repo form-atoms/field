@@ -10,12 +10,13 @@ export type UseMultiSelectFieldProps<Option, Field extends ZodArrayField> = {
   getValue: (option: Option) => ZodArrayFieldValue<Field>;
 } & Pick<UseOptionsProps<Option>, "options">;
 
-export type ZodArrayFieldValue<Field> = Field extends ZodField<
-  ZodArray<infer Value, ArrayCardinality>,
-  ZodArray<ZodAny, ArrayCardinality>
->
-  ? Value["_output"]
-  : never;
+export type ZodArrayFieldValue<Field> =
+  Field extends ZodField<
+    ZodArray<infer Value, ArrayCardinality>,
+    ZodArray<ZodAny, ArrayCardinality>
+  >
+    ? Value["_output"]
+    : never;
 
 export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>({
   field,
