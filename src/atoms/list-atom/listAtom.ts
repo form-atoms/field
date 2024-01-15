@@ -1,14 +1,13 @@
 import {
   FieldAtomConfig,
   FormAtom,
-  FormFields,
   Validate,
   ValidateOn,
   ValidateStatus,
   formAtom,
   walkFields,
 } from "form-atoms";
-import { Atom, Getter, PrimitiveAtom, Setter, WritableAtom, atom } from "jotai";
+import { Atom, PrimitiveAtom, WritableAtom, atom } from "jotai";
 import { RESET, atomWithReset, splitAtom } from "jotai/utils";
 
 import {
@@ -251,7 +250,7 @@ export function listAtom<
         // run validation for nested forms
         await Promise.all(
           get(_formListAtom).map((formAtom) =>
-            validateFormFields(formAtom as any, get, set, event),
+            get(formAtom)._validateFields(get, set, event),
           ),
         );
 
@@ -290,12 +289,9 @@ export function listAtom<
       state
         .get(_formListAtom)
         .map((formAtom) =>
-          validateFormFields(
-            formAtom as any,
-            state.get,
-            state.set,
-            state.event,
-          ),
+          state
+            .get(formAtom)
+            ._validateFields(state.get, state.set, state.event),
         ),
     );
 
@@ -339,65 +335,4 @@ export function listAtom<
 
 function isPromise(value: any): value is Promise<any> {
   return typeof value === "object" && typeof value.then === "function";
-}
-
-// TODO: reuse from formAtoms._validateFields
-async function validateFormFields(
-  formAtom: FormAtom<FormFields>,
-  get: Getter,
-  set: Setter,
-  event: ValidateOn,
-) {
-  const form = get(formAtom);
-  const fields = get(form.fields);
-  const promises: Promise<boolean>[] = [];
-
-  walkFields(fields, (nextField) => {
-    async function validate(field: typeof nextField) {
-      const fieldAtom = get(field);
-      const value = get(fieldAtom.value);
-      const dirty = get(fieldAtom.dirty);
-      // This pointer prevents a stale validation result from being
-      // set after the most recent validation has been performed.
-      const ptr = get(fieldAtom._validateCount) + 1;
-      set(fieldAtom._validateCount, ptr);
-
-      if (event === "user" || event === "submit") {
-        set(fieldAtom.touched, true);
-      }
-
-      const maybePromise = fieldAtom._validateCallback?.({
-        get,
-        set,
-        value,
-        dirty,
-        touched: get(fieldAtom.touched),
-        event,
-      });
-
-      let errors: string[];
-
-      if (isPromise(maybePromise)) {
-        set(fieldAtom.validateStatus, "validating");
-        errors = (await maybePromise) ?? get(fieldAtom.errors);
-      } else {
-        errors = maybePromise ?? get(fieldAtom.errors);
-      }
-
-      if (ptr === get(fieldAtom._validateCount)) {
-        set(fieldAtom.errors, errors);
-        set(fieldAtom.validateStatus, errors.length > 0 ? "invalid" : "valid");
-      }
-
-      if (errors && errors.length) {
-        return false;
-      }
-
-      return true;
-    }
-
-    promises.push(validate(nextField));
-  });
-
-  await Promise.all(promises);
 }
