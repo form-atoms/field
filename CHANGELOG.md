@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/form-atoms/field/compare/v4.0.4...v4.0.5) (2024-01-15)
+
+
+### Bug Fixes
+
+* reuse `formAtom._validateFields` ([#78](https://github.com/form-atoms/field/issues/78)) ([05fd837](https://github.com/form-atoms/field/commit/05fd8376981719e3155b7d7e73a1dbaf53555dfa))
+
 ## [4.0.4](https://github.com/form-atoms/field/compare/v4.0.3...v4.0.4) (2024-01-14)
 
 
