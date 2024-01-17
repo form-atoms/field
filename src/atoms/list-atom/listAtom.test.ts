@@ -3,6 +3,7 @@ import {
   formAtom,
   useFieldActions,
   useFieldErrors,
+  useFieldState,
   useFieldValue,
   useFormActions,
   useFormSubmit,
@@ -12,8 +13,7 @@ import { describe, expect, it, test, vi } from "vitest";
 
 import { listAtom } from "./listAtom";
 import { numberField, textField } from "../../fields";
-import { useFieldError } from "../../hooks";
-import { useListActions } from "../../hooks/use-list-actions";
+import { useFieldError, useListActions } from "../../hooks";
 
 describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
@@ -254,6 +254,125 @@ describe("listAtom()", () => {
       await act(async () => inputActions.current.setValue(5));
 
       expect(fieldError.current.error).toBe(undefined);
+    });
+  });
+
+  describe("dirty", () => {
+    it("becomes dirty when an item is removed", async () => {
+      const field = listAtom({
+        value: [42],
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: state } = renderHook(() => useFieldState(field));
+      const { result: listActions } = renderHook(() => useListActions(field));
+      const { result: list } = renderHook(() =>
+        useAtomValue(useAtomValue(field)._splitList),
+      );
+      expect(state.current.dirty).toBe(false);
+
+      await act(async () => listActions.current.remove(list.current[0]!));
+
+      expect(state.current.dirty).toBe(true);
+    });
+
+    it("becomes dirty when an item is added ", async () => {
+      const field = listAtom({
+        value: [],
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: state } = renderHook(() => useFieldState(field));
+      const { result: listActions } = renderHook(() => useListActions(field));
+
+      expect(state.current.dirty).toBe(false);
+
+      await act(async () => listActions.current.add());
+
+      expect(state.current.dirty).toBe(true);
+    });
+
+    it("becomes dirty when items are reordered", async () => {
+      const field = listAtom({
+        value: [42, 84],
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: state } = renderHook(() => useFieldState(field));
+      const { result: listActions } = renderHook(() => useListActions(field));
+      const { result: list } = renderHook(() =>
+        useAtomValue(useAtomValue(field)._splitList),
+      );
+      expect(state.current.dirty).toBe(false);
+
+      await act(async () => listActions.current.move(list.current[0]!));
+
+      expect(state.current.dirty).toBe(true);
+    });
+
+    it("becomes pristine when items are reordered & back", async () => {
+      const field = listAtom({
+        value: [42, 84],
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: state } = renderHook(() => useFieldState(field));
+      const { result: listActions } = renderHook(() => useListActions(field));
+      const { result: list } = renderHook(() =>
+        useAtomValue(useAtomValue(field)._splitList),
+      );
+      expect(state.current.dirty).toBe(false);
+
+      // moves first item down
+      await act(async () => listActions.current.move(list.current[0]!));
+
+      expect(state.current.dirty).toBe(true);
+
+      // moves first item down
+      await act(async () => listActions.current.move(list.current[0]!));
+
+      expect(state.current.dirty).toBe(false);
+    });
+
+    it("becomes pristine after value is set (the set is usually called by useFieldInitialValue to hydrate the field)", async () => {
+      const field = listAtom({
+        value: [] as number[],
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: state } = renderHook(() => useFieldState(field));
+      const { result: fieldActions } = renderHook(() => useFieldActions(field));
+
+      expect(state.current.dirty).toBe(false);
+
+      await act(async () => fieldActions.current.setValue([42]));
+
+      expect(state.current.dirty).toBe(false);
+    });
+
+    it("becomes dirty when some item field is edited", async () => {
+      const field = listAtom({
+        value: [undefined],
+        builder: (value) => numberField({ value }),
+      });
+
+      const { result: fieldState } = renderHook(() => useFieldState(field));
+      const { result: formFields } = renderHook(() =>
+        useAtomValue(useAtomValue(field)._formFields),
+      );
+      const { result: inputActions } = renderHook(() =>
+        useFieldActions(formFields.current[0]!),
+      );
+
+      expect(fieldState.current.dirty).toBe(false);
+
+      await act(async () => inputActions.current.setValue(42));
+
+      expect(fieldState.current.dirty).toBe(true);
+
+      await act(async () => inputActions.current.reset());
+
+      expect(fieldState.current.dirty).toBe(false);
     });
   });
 });
