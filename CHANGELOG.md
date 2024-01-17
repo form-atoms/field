@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/form-atoms/field/compare/v4.0.5...v4.0.6) (2024-01-17)
+
+
+### Bug Fixes
+
+* **listAtom:** compute the dirty flag ([#80](https://github.com/form-atoms/field/issues/80)) ([db053d9](https://github.com/form-atoms/field/commit/db053d963e9d8cb4a4e5c02338c43ccbc14cbb39))
+
 ## [4.0.5](https://github.com/form-atoms/field/compare/v4.0.4...v4.0.5) (2024-01-15)
 
 
