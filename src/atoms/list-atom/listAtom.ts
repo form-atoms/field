@@ -113,15 +113,15 @@ export function listAtom<
 
   const formBuilder = listBuilder(config.builder);
 
-  function buildItem(): FormAtom<{
-    fields: Fields;
-  }> {
+  function buildItem(): ListItemForm<Fields> {
     return formAtom({ fields: formBuilder() });
   }
 
-  const _formListAtom = atomWithReset(
-    formBuilder(config.value).map((fields) => formAtom({ fields })),
+  const formList = formBuilder(config.value).map((fields) =>
+    formAtom({ fields }),
   );
+  const initialFormListAtom = atomWithReset<ListItemForm<Fields>[]>(formList);
+  const _formListAtom = atomWithReset(formList);
   const _splitListAtom = splitAtom(_formListAtom);
 
   /**
@@ -132,7 +132,6 @@ export function listAtom<
 
     return formLists.map((formAtom) => {
       const formAtoms = get(formAtom);
-
       const { fields } = get(formAtoms.fields);
 
       return fields;
@@ -140,7 +139,37 @@ export function listAtom<
   });
 
   const touchedAtom = atomWithReset(false);
-  const dirtyAtom = atom(false);
+  const dirtyAtom = atom((get) => {
+    const listUpdated = !arraysShallowEqual(
+      get(initialFormListAtom),
+      get(_formListAtom),
+    );
+
+    if (listUpdated) {
+      // early return
+      return listUpdated;
+    }
+
+    const hasNestedDirtyField = get(_formListAtom)
+      .map((formAtom) => {
+        const form = get(formAtom);
+        let dirty = false;
+
+        walkFields(get(form.fields), (fieldAtom) => {
+          const field = get(fieldAtom);
+
+          if (get(field.dirty)) {
+            dirty = true;
+            return false;
+          }
+        });
+
+        return dirty;
+      })
+      .some((dirty) => dirty);
+
+    return hasNestedDirtyField;
+  });
   const listErrorsAtom = atom<string[]>([]);
   const itemErrorsAtom = atom((get) => {
     // get errors from the nested forms
@@ -159,8 +188,6 @@ export function listAtom<
           }
         });
 
-        // does not work with async
-        // state.get(form.validateStatus) === "invalid";
         return invalid;
       })
       .some((invalid) => invalid);
@@ -209,10 +236,11 @@ export function listAtom<
           set(reset);
         }
       } else if (Array.isArray(value)) {
-        set(
-          _formListAtom,
-          formBuilder(value).map((fields) => formAtom({ fields })),
+        const updatedFormList = formBuilder(value).map((fields) =>
+          formAtom({ fields }),
         );
+        set(initialFormListAtom, updatedFormList);
+        set(_formListAtom, updatedFormList);
       } else {
         throw Error("Writing unsupported value to listFieldAtom value!");
       }
@@ -335,4 +363,11 @@ export function listAtom<
 
 function isPromise(value: any): value is Promise<any> {
   return typeof value === "object" && typeof value.then === "function";
+}
+
+function arraysShallowEqual(a: unknown[], b: unknown[]) {
+  if (Array.isArray(a) && Array.isArray(b)) {
+    return a.length === b.length && a.every((v, i) => Object.is(v, b[i]));
+  }
+  return false;
 }
