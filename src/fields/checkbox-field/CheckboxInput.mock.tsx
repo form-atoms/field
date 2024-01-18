@@ -1,21 +1,17 @@
-import { ReactNode } from "react";
-
-import { CheckboxField } from "./checkboxField";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
-import { useCheckboxFieldProps, useRequiredProps } from "../../hooks";
-import { BooleanField } from "../boolean-field";
+import { FieldErrors, FieldLabel } from "../../components";
+import {
+  type CheckboxFieldProps,
+  useCheckboxFieldProps,
+  useRequiredProps,
+} from "../../hooks";
 
 export const CheckboxInput = ({
   field,
   label,
   required,
-}: {
-  field: BooleanField | CheckboxField;
-  label: ReactNode;
-  required?: boolean;
-}) => {
-  const props = useCheckboxFieldProps(field);
+  initialValue,
+}: CheckboxFieldProps) => {
+  const props = useCheckboxFieldProps(field, { initialValue });
   const requiredProps = useRequiredProps({ field, required });
 
   return (

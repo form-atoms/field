@@ -35,4 +35,14 @@ describe("useCheckboxFieldProps()", () => {
 
     expect(checkboxProps.result.current.checked).toBe(true);
   });
+
+  test("can be initialized", async () => {
+    const field = checkboxField();
+
+    const checkboxProps = renderHook(() =>
+      useCheckboxFieldProps(field, { initialValue: true }),
+    );
+
+    expect(checkboxProps.result.current.checked).toBe(true);
+  });
 });
