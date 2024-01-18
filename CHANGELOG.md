@@ -1,3 +1,10 @@
+## [4.0.7-next.6](https://github.com/form-atoms/field/compare/v4.0.7-next.5...v4.0.7-next.6) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useTextFieldProps:** make textField initializable via options ([#88](https://github.com/form-atoms/field/issues/88)) ([#89](https://github.com/form-atoms/field/issues/89)) ([10d8ea9](https://github.com/form-atoms/field/commit/10d8ea920638c30646b4af616064119e2b0b50f5))
+
 ## [4.0.7-next.5](https://github.com/form-atoms/field/compare/v4.0.7-next.4...v4.0.7-next.5) (2024-01-18)
 
 
