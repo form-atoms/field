@@ -1,8 +1,8 @@
-import { Meta, Markdown } from "@storybook/blocks";
-
+import { Meta, Markdown, Stories } from "@storybook/blocks";
+import * as TextFieldStories from "./textField.stories";
 import Config from "./config.md?raw";
 
-<Meta title="fields/textField" />
+<Meta title="fields/textField" of={TextFieldStories} />
 
 # `textField(): ZodField<string>`
 
@@ -19,3 +19,5 @@ const bio = textField().optional();
 ## Initial Config
 
 <Markdown>{Config}</Markdown>
+
+<Stories />
