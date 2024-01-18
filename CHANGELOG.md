@@ -1,3 +1,10 @@
+## [4.0.7-next.1](https://github.com/form-atoms/field/compare/v4.0.6...v4.0.7-next.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useFieldProps:** enable passing initialValue via options ([#82](https://github.com/form-atoms/field/issues/82)) ([4fb0c3f](https://github.com/form-atoms/field/commit/4fb0c3f000fe2d7a65885549c7fbfaeeea9c0d88))
+
 ## [4.0.6](https://github.com/form-atoms/field/compare/v4.0.5...v4.0.6) (2024-01-17)
 
 
