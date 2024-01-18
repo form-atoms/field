@@ -1,17 +1,13 @@
-import { InputHTMLAttributes, ReactNode } from "react";
+import { InputHTMLAttributes } from "react";
 
-import { FilesField } from "./filesField";
 import { FieldErrors, FieldLabel } from "../../components";
-import { useFilesFieldProps } from "../../hooks/";
+import { type FilesFieldProps, useFilesFieldProps } from "../../hooks";
 
 export const FilesInput = ({
   field,
   label,
   ...inputProps
-}: {
-  field: FilesField;
-  label: ReactNode;
-} & InputHTMLAttributes<HTMLInputElement>) => {
+}: FilesFieldProps & InputHTMLAttributes<HTMLInputElement>) => {
   const props = useFilesFieldProps(field);
 
   return (
