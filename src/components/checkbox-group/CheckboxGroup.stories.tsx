@@ -1,9 +1,8 @@
 import { StoryObj } from "@storybook/react";
 
-import { CheckboxGroup } from "./CheckboxGroup";
+import { CheckboxGroup, type CheckboxGroupProps } from "./CheckboxGroup";
 import { CheckboxGroupField } from "./CheckboxGroupField.mock";
 import { ZodArrayField, stringArrayField } from "../../fields";
-import { UseCheckboxGroupProps } from "../../hooks";
 import { StoryForm } from "../../scenarios/StoryForm";
 
 const languagesOptions = [
@@ -32,8 +31,8 @@ export default meta;
 
 const checkboxGroupStory = <Option, Field extends ZodArrayField>(
   storyObj: {
-    args: Pick<UseCheckboxGroupProps<Option, Field>, "field"> &
-      Omit<Partial<UseCheckboxGroupProps<Option, Field>>, "field">;
+    args: Pick<CheckboxGroupProps<Option, Field>, "field"> &
+      Omit<Partial<CheckboxGroupProps<Option, Field>>, "field">;
   } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
   ...storyObj,
@@ -59,6 +58,13 @@ export const Required = checkboxGroupStory({
 export const Optional = checkboxGroupStory({
   args: {
     field: stringArrayField().optional(),
+  },
+});
+
+export const Initialized = checkboxGroupStory({
+  args: {
+    field: stringArrayField().optional(),
+    initialValue: ["ts", "hc"],
   },
 });
 

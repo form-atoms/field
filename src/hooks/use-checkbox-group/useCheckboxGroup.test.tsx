@@ -9,6 +9,25 @@ describe("useCheckboxGroup()", () => {
   const options = ["electric", "gas", "manual"] as const;
   const getValue = (opt: string) => opt;
 
+  test("initialize the field via options", () => {
+    // NOTE: test got stuck when the options are inlined
+    const fieldOptions = { initialValue: ["gas", "manual"] };
+
+    const field = stringArrayField();
+
+    const { result } = renderHook(() =>
+      useCheckboxGroup(
+        { field, options, getValue, getLabel: getValue },
+        fieldOptions,
+      ),
+    );
+
+    expect(result.current).toHaveLength(options.length);
+    expect(result.current[0]).toHaveProperty("checked", false);
+    expect(result.current[1]).toHaveProperty("checked", true);
+    expect(result.current[2]).toHaveProperty("checked", true);
+  });
+
   describe("with required field", () => {
     test("it has required checkboxes", () => {
       const field = stringArrayField();
