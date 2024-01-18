@@ -47,3 +47,26 @@ export const RequiredArrayString = formStory({
     ),
   },
 });
+
+export const Initialized = formStory({
+  name: "Initialized Required Array<string>",
+  args: {
+    fields: {
+      visitedCountries: stringArrayField(),
+    },
+    children: ({ fields }) => (
+      <MultiSelectField
+        initialValue={["CZ", "SK"]}
+        field={fields.visitedCountries}
+        label="Visited countries"
+        options={countryOptions}
+        getValue={({ key }) => key}
+        getLabel={({ name, flag }) => (
+          <>
+            {flag} {name}
+          </>
+        )}
+      />
+    ),
+  },
+});
