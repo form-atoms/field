@@ -1,3 +1,10 @@
+## [4.0.7-next.5](https://github.com/form-atoms/field/compare/v4.0.7-next.4...v4.0.7-next.5) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useFilesFieldProps:** ignore the initialValue ([#86](https://github.com/form-atoms/field/issues/86)) ([#87](https://github.com/form-atoms/field/issues/87)) ([40362f0](https://github.com/form-atoms/field/commit/40362f05cb0cc0180b3bdaeb3d4a122dfe46f699))
+
 ## [4.0.7-next.4](https://github.com/form-atoms/field/compare/v4.0.7-next.3...v4.0.7-next.4) (2024-01-18)
 
 
