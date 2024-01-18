@@ -1,3 +1,10 @@
+## [4.0.7-next.8](https://github.com/form-atoms/field/compare/v4.0.7-next.7...v4.0.7-next.8) (2024-01-18)
+
+
+### Bug Fixes
+
+* **RadioGroup:** support for `initialValue` prop ([#92](https://github.com/form-atoms/field/issues/92)) ([#93](https://github.com/form-atoms/field/issues/93)) ([f08db15](https://github.com/form-atoms/field/commit/f08db156f7f69107e36cdf6286c17fe7ffa70852))
+
 ## [4.0.7-next.7](https://github.com/form-atoms/field/compare/v4.0.7-next.6...v4.0.7-next.7) (2024-01-18)
 
 
