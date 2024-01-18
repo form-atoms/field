@@ -1,3 +1,10 @@
+## [4.0.7-next.9](https://github.com/form-atoms/field/compare/v4.0.7-next.8...v4.0.7-next.9) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useCheckboxGroup:** make field initializable ([#94](https://github.com/form-atoms/field/issues/94)) ([#95](https://github.com/form-atoms/field/issues/95)) ([412f651](https://github.com/form-atoms/field/commit/412f651adcd060045a86e4fa6aaf71589591a383))
+
 ## [4.0.7-next.8](https://github.com/form-atoms/field/compare/v4.0.7-next.7...v4.0.7-next.8) (2024-01-18)
 
 
