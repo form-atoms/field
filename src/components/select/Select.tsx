@@ -1,17 +1,17 @@
 import {
   SelectField,
-  UseSelectFieldProps,
-  UseSelectOptionsProps,
+  SelectFieldProps,
+  UseOptionsProps,
   useSelectFieldProps,
   useSelectOptions,
 } from "../../hooks";
 import { PlaceholderOption } from "../placeholder-option";
 
-export type SelectProps<
+export type SelectProps<Option, Field extends SelectField> = SelectFieldProps<
   Option,
-  Field extends SelectField,
-> = UseSelectFieldProps<Option, Field> &
-  UseSelectOptionsProps<Option> & { placeholder?: string };
+  Field
+> &
+  UseOptionsProps<Option> & { placeholder?: string };
 
 export const Select = <Option, Field extends SelectField>({
   field,
@@ -19,12 +19,16 @@ export const Select = <Option, Field extends SelectField>({
   getLabel,
   options,
   placeholder = "Please select an option",
+  initialValue,
 }: SelectProps<Option, Field>) => {
-  const props = useSelectFieldProps({
-    field,
-    options,
-    getValue,
-  });
+  const props = useSelectFieldProps(
+    {
+      field,
+      options,
+      getValue,
+    },
+    { initialValue },
+  );
 
   const { selectOptions } = useSelectOptions({
     field,

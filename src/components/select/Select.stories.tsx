@@ -52,6 +52,31 @@ export const OptionalString = formStory({
   },
 });
 
+export const InitializedString = formStory({
+  parameters: {
+    docs: {
+      description: {
+        story: "Field is initialized via the `initialValue` prop.",
+      },
+    },
+  },
+  args: {
+    fields: {
+      country: stringField(),
+    },
+    children: ({ fields }) => (
+      <SelectField
+        field={fields.country}
+        initialValue={countryOptions[2]?.key}
+        label="Country of Origin"
+        options={countryOptions}
+        getValue={({ key }) => key}
+        getLabel={({ name }) => name}
+      />
+    ),
+  },
+});
+
 const ratingOptions = [5, 4, 3, 2, 1];
 
 export const RequiredNumber = formStory({
