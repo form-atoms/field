@@ -1,3 +1,10 @@
+## [4.0.7-next.4](https://github.com/form-atoms/field/compare/v4.0.7-next.3...v4.0.7-next.4) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useNumberFieldProps:** make numberField initializable via options ([#85](https://github.com/form-atoms/field/issues/85)) ([dbad7da](https://github.com/form-atoms/field/commit/dbad7dab56b6b880a8b204e7453d8b8acd23ec43))
+
 ## [4.0.7-next.3](https://github.com/form-atoms/field/compare/v4.0.7-next.2...v4.0.7-next.3) (2024-01-18)
 
 
