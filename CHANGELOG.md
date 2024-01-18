@@ -1,3 +1,10 @@
+## [4.0.7-next.7](https://github.com/form-atoms/field/compare/v4.0.7-next.6...v4.0.7-next.7) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useSelectFieldProps:** make field initializable via options ([#91](https://github.com/form-atoms/field/issues/91)) ([126b454](https://github.com/form-atoms/field/commit/126b454f379b520732c1065bbf5d69b1e90838c5))
+
 ## [4.0.7-next.6](https://github.com/form-atoms/field/compare/v4.0.7-next.5...v4.0.7-next.6) (2024-01-18)
 
 
