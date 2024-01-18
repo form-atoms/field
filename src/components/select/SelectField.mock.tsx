@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 import { FieldErrors, FieldLabel, Select, SelectProps } from "..";
 import type { SelectField as _SelectField } from "../../hooks";
 
@@ -7,9 +5,7 @@ export const SelectField = <Option, Field extends _SelectField>({
   field,
   label,
   ...props
-}: {
-  label: ReactNode;
-} & SelectProps<Option, Field>) => (
+}: SelectProps<Option, Field>) => (
   <div style={{ margin: "20px 0" }}>
     <FieldLabel field={field} label={label} />
     <Select field={field} {...props} />
