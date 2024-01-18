@@ -1,18 +1,15 @@
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps } from "react";
 
-import { NumberField } from "./numberField";
 import { FieldErrors, FieldLabel } from "../../components";
-import { useNumberFieldProps } from "../../hooks";
+import { NumberFieldProps, useNumberFieldProps } from "../../hooks";
 
-export const NumberInput = <Field extends NumberField>({
+export const NumberInput = ({
   field,
   label,
+  initialValue,
   ...inputProps
-}: {
-  field: Field;
-  label: ReactNode;
-} & ComponentProps<"input">) => {
-  const props = useNumberFieldProps(field);
+}: NumberFieldProps & ComponentProps<"input">) => {
+  const props = useNumberFieldProps(field, { initialValue });
 
   return (
     <div style={{ margin: "20px 0" }}>
