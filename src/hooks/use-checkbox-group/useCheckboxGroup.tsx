@@ -1,20 +1,29 @@
+import { UseFieldOptions } from "form-atoms";
+
 import { useCheckboxGroupFieldProps } from "./useCheckboxGroupProps";
-import { ZodArrayField } from "../../fields";
+import { ZodArrayField, ZodFieldValue } from "../../fields";
+import { FieldProps } from "../use-field-props";
 import { type UseMultiSelectFieldProps } from "../use-multiselect-field-props";
 import { type UseOptionsProps, useOptions } from "../use-options";
+
+export type CheckboxGroupFieldProps<
+  Option,
+  Field extends ZodArrayField,
+> = FieldProps<Field> & UseCheckboxGroupProps<Option, Field>;
 
 export type UseCheckboxGroupProps<
   Option,
   Field extends ZodArrayField,
 > = UseMultiSelectFieldProps<Option, Field> & UseOptionsProps<Option>;
 
-export const useCheckboxGroup = <Option, Field extends ZodArrayField>({
-  field,
-  getValue,
-  getLabel,
-  options,
-}: UseCheckboxGroupProps<Option, Field>) => {
-  const props = useCheckboxGroupFieldProps({ field, options, getValue });
+export const useCheckboxGroup = <Option, Field extends ZodArrayField>(
+  { field, getValue, getLabel, options }: UseCheckboxGroupProps<Option, Field>,
+  fieldOptions?: UseFieldOptions<ZodFieldValue<Field>>,
+) => {
+  const props = useCheckboxGroupFieldProps(
+    { field, options, getValue },
+    fieldOptions,
+  );
 
   const { renderOptions } = useOptions({
     field,
