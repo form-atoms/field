@@ -82,7 +82,24 @@ export const RequiredNumber = radioGroupStory({
     options: ratingOptions,
     getValue: (value) => value,
     getLabel: (value) => Array(value + 1).join("⭐"),
-    // label="How do you like the RadioGroup component?"
+  },
+});
+
+export const InitializedNumber = radioGroupStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The `initialValue` initializes the field, accepting values returned from the `getValue` prop.",
+      },
+    },
+  },
+  args: {
+    field: numberField(),
+    initialValue: 4,
+    options: ratingOptions,
+    getValue: (value) => value,
+    getLabel: (value) => Array(value + 1).join("⭐"),
   },
 });
 
