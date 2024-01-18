@@ -1,3 +1,10 @@
+## [4.0.7-next.2](https://github.com/form-atoms/field/compare/v4.0.7-next.1...v4.0.7-next.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* **checkboxFieldProps:** make checkboxField initializable via options ([#83](https://github.com/form-atoms/field/issues/83)) ([63afa6d](https://github.com/form-atoms/field/commit/63afa6d51316ab2b704e6a498e3edb62a6f2c753))
+
 ## [4.0.7-next.1](https://github.com/form-atoms/field/compare/v4.0.6...v4.0.7-next.1) (2024-01-18)
 
 
