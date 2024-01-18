@@ -1,7 +1,8 @@
+import { UseFieldOptions } from "form-atoms";
 import { ChangeEvent } from "react";
 
 import { FieldProps, useFieldProps } from "../";
-import { type DateField } from "../../fields/";
+import type { DateField, DateFieldValue } from "../../fields/";
 
 export type DateFieldProps = FieldProps<DateField>;
 
@@ -15,5 +16,7 @@ const getDate = (event: ChangeEvent<HTMLInputElement>) => {
     : undefined;
 };
 
-export const useDateFieldProps = (field: DateField) =>
-  useFieldProps(field, getDate);
+export const useDateFieldProps = (
+  field: DateField,
+  options?: UseFieldOptions<DateFieldValue>,
+) => useFieldProps(field, getDate, options);
