@@ -30,6 +30,21 @@ export const OptionalInput = formStory({
   },
 });
 
+export const InitializedInput = formStory({
+  args: {
+    fields: {
+      dueDate: dateField({ name: "dueDate" }).optional(),
+    },
+    children: ({ fields }) => (
+      <DateInput
+        field={fields.dueDate}
+        label="Due Date"
+        initialValue={new Date()}
+      />
+    ),
+  },
+});
+
 const nowPlusDays = (days = 0) => {
   const date = new Date();
   date.setDate(date.getDate() + days);
