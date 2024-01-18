@@ -12,7 +12,7 @@ const getEventValue = (
 
 export const useTextFieldProps = (
   field: TextField,
-  options: UseFieldOptions<TextFieldValue>,
+  options?: UseFieldOptions<TextFieldValue>,
 ) =>
   useFieldProps<TextField, HTMLInputElement | HTMLTextAreaElement>(
     field,
