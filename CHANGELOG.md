@@ -1,3 +1,10 @@
+## [4.0.7-next.3](https://github.com/form-atoms/field/compare/v4.0.7-next.2...v4.0.7-next.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useDateFieldProps:** make dateField initializable via options ([#84](https://github.com/form-atoms/field/issues/84)) ([164487d](https://github.com/form-atoms/field/commit/164487dd26b15bd45e66ae7a8995b41320262606))
+
 ## [4.0.7-next.2](https://github.com/form-atoms/field/compare/v4.0.7-next.1...v4.0.7-next.2) (2024-01-18)
 
 
