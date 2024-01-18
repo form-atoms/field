@@ -1,15 +1,8 @@
-import { useField } from "form-atoms";
+import { UseFieldOptions, useField } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
-import { ChangeEvent, ReactNode, useMemo, useTransition } from "react";
+import { ChangeEvent, useMemo, useTransition } from "react";
 
-import { ZodField, ZodFieldValue } from "../../fields/zod-field/zodField";
-
-export type FieldProps<Field extends ZodField<any>> = {
-  field: Field;
-  label?: ReactNode;
-  helperText?: ReactNode;
-  required?: boolean;
-};
+import { ZodField, ZodFieldValue } from "../../fields";
 
 export function useFieldProps<
   Field extends ZodField,
@@ -23,8 +16,9 @@ export function useFieldProps<
         value: ZodFieldValue<Field>,
       ) => ZodFieldValue<Field>
     : never,
+  options?: UseFieldOptions<ZodFieldValue<Field>>,
 ) {
-  const { actions, state } = useField<ZodFieldValue<Field>>(fieldAtom);
+  const { actions, state } = useField<ZodFieldValue<Field>>(fieldAtom, options);
   const field = useAtomValue(fieldAtom);
   const name = useAtomValue(field.name);
   const required = useAtomValue(field.required);

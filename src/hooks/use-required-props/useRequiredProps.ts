@@ -12,7 +12,7 @@ export const useRequiredProps = ({
   field,
   required: manualRequired,
 }: {
-  field: ZodField<any>;
+  field: ZodField;
   required?: boolean;
 }) => {
   const atom = useAtomValue(field);

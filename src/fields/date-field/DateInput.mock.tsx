@@ -1,21 +1,11 @@
-import { ReactNode } from "react";
-
-import { DateField } from "./dateField";
-import { FieldLabel } from "../../components";
-import { FieldErrors } from "../../components/field-errors";
-import { useDateFieldProps } from "../../hooks";
+import { FieldErrors, FieldLabel } from "../../components";
+import { DateFieldProps, useDateFieldProps } from "../../hooks";
 
 export const getDateString = (date: Date = new Date()) =>
   date.toISOString().slice(0, 10);
 
-export const DateInput = ({
-  field,
-  label,
-}: {
-  field: DateField;
-  label: ReactNode;
-}) => {
-  const { value, ...props } = useDateFieldProps(field);
+export const DateInput = ({ field, label, initialValue }: DateFieldProps) => {
+  const { value, ...props } = useDateFieldProps(field, { initialValue });
 
   return (
     <div style={{ margin: "20px 0" }}>

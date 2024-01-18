@@ -12,6 +12,20 @@ describe("useSelectFieldProps()", () => {
     getValue: (val: string) => val,
   };
 
+  it("initializes field via options", () => {
+    const field = stringField();
+    const index = 2;
+
+    const { result } = renderHook(() =>
+      useSelectFieldProps(
+        { field, ...props },
+        { initialValue: props.options[index] },
+      ),
+    );
+
+    expect(result.current.value).toBe(index);
+  });
+
   describe("initial value", () => {
     it("is -1 when field is empty", () => {
       const field = stringField();

@@ -1,6 +1,11 @@
 import { act, render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { formAtom, useFormActions, useFormSubmit } from "form-atoms";
+import {
+  formAtom,
+  useFieldValue,
+  useFormActions,
+  useFormSubmit,
+} from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 
@@ -132,7 +137,7 @@ describe("<Select />", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it("initializes properly when field has custom shape", async () => {
+  describe("with options of custom shape", () => {
     const options = [
       { username: "foo", id: "1" },
       { username: "boo", id: "2" },
@@ -153,22 +158,38 @@ describe("<Select />", () => {
       getValue: (user: User) => user,
     };
 
-    const form = formAtom({ field: props.field });
-    const { result } = renderHook(() => useFormActions(form));
-    render(<Select {...props} />);
+    it("initializes properly when field has custom shape", async () => {
+      const form = formAtom({ field: props.field });
+      const { result } = renderHook(() => useFormActions(form));
+      render(<Select {...props} />);
 
-    await act(() =>
-      userEvent.selectOptions(screen.getByRole("combobox"), [
-        screen.getByText("boo 2"),
-      ]),
-    );
+      await act(() =>
+        userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("boo 2"),
+        ]),
+      );
 
-    const onSubmit = vi.fn();
-    await act(async () => {
-      result.current.submit(onSubmit)();
+      const onSubmit = vi.fn();
+      await act(async () => {
+        result.current.submit(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ field: options[1] });
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({ field: options[1] });
+    it.skip("initializes via initialValue prop", async () => {
+      const field = zodField({
+        value: undefined,
+        schema,
+      });
+
+      render(<Select {...props} initialValue={options[1]} />);
+
+      const { result } = renderHook(() => useFieldValue(field));
+
+      // TODO: value stays undefined
+      expect(result.current).toBe(options[1]);
+    });
   });
 
   describe("with optional field", () => {

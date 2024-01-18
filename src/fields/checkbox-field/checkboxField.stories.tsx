@@ -51,3 +51,26 @@ export const Optional = formStory({
     },
   },
 });
+
+export const Initialized = formStory({
+  args: {
+    fields: {
+      visible: checkboxField({ name: "visible" }).optional(),
+    },
+    children: ({ fields }) => (
+      <CheckboxInput
+        field={fields.visible}
+        label="Product is visible"
+        initialValue={true}
+      />
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "This example uses the `initialValue` option passed to the `useCheckboxFieldProps(field, options)`",
+      },
+    },
+  },
+});

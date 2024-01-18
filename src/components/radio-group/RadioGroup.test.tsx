@@ -82,4 +82,27 @@ describe("<RadioGroup />", () => {
       expect(onSubmit).toHaveBeenCalledWith({ field: "some" });
     });
   });
+
+  describe("initialValue prop", () => {
+    it("sets the field value", async () => {
+      const props = {
+        field: stringField(),
+        options: ["none", "some", "all"],
+        getLabel: (val: string) => val,
+        getValue: (val: string) => val,
+      };
+      const form = formAtom({ field: props.field });
+      const { result } = renderHook(() => useFormSubmit(form));
+      render(<RadioGroup {...props} initialValue="some" />);
+
+      expect(screen.getByLabelText("some")).toBeChecked();
+
+      const onSubmit = vi.fn();
+      await act(async () => {
+        result.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ field: "some" });
+    });
+  });
 });

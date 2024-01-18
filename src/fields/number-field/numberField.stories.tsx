@@ -28,3 +28,14 @@ export const Optional = formStory({
     ),
   },
 });
+
+export const Initialized = formStory({
+  args: {
+    fields: {
+      count: numberField({ name: "count" }).optional(),
+    },
+    children: ({ fields }) => (
+      <NumberInput field={fields.count} label="Count" initialValue={3} />
+    ),
+  },
+});

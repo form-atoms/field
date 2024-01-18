@@ -1,3 +1,73 @@
+## [4.0.7-next.10](https://github.com/form-atoms/field/compare/v4.0.7-next.9...v4.0.7-next.10) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useMultiSelectFieldProps:** make field initializable via options ([#96](https://github.com/form-atoms/field/issues/96)) ([#97](https://github.com/form-atoms/field/issues/97)) ([049945b](https://github.com/form-atoms/field/commit/049945b4773560c55067f125d787923606d7980e))
+
+## [4.0.7-next.9](https://github.com/form-atoms/field/compare/v4.0.7-next.8...v4.0.7-next.9) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useCheckboxGroup:** make field initializable ([#94](https://github.com/form-atoms/field/issues/94)) ([#95](https://github.com/form-atoms/field/issues/95)) ([412f651](https://github.com/form-atoms/field/commit/412f651adcd060045a86e4fa6aaf71589591a383))
+
+## [4.0.7-next.8](https://github.com/form-atoms/field/compare/v4.0.7-next.7...v4.0.7-next.8) (2024-01-18)
+
+
+### Bug Fixes
+
+* **RadioGroup:** support for `initialValue` prop ([#92](https://github.com/form-atoms/field/issues/92)) ([#93](https://github.com/form-atoms/field/issues/93)) ([f08db15](https://github.com/form-atoms/field/commit/f08db156f7f69107e36cdf6286c17fe7ffa70852))
+
+## [4.0.7-next.7](https://github.com/form-atoms/field/compare/v4.0.7-next.6...v4.0.7-next.7) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useSelectFieldProps:** make field initializable via options ([#91](https://github.com/form-atoms/field/issues/91)) ([126b454](https://github.com/form-atoms/field/commit/126b454f379b520732c1065bbf5d69b1e90838c5))
+
+## [4.0.7-next.6](https://github.com/form-atoms/field/compare/v4.0.7-next.5...v4.0.7-next.6) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useTextFieldProps:** make textField initializable via options ([#88](https://github.com/form-atoms/field/issues/88)) ([#89](https://github.com/form-atoms/field/issues/89)) ([10d8ea9](https://github.com/form-atoms/field/commit/10d8ea920638c30646b4af616064119e2b0b50f5))
+
+## [4.0.7-next.5](https://github.com/form-atoms/field/compare/v4.0.7-next.4...v4.0.7-next.5) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useFilesFieldProps:** ignore the initialValue ([#86](https://github.com/form-atoms/field/issues/86)) ([#87](https://github.com/form-atoms/field/issues/87)) ([40362f0](https://github.com/form-atoms/field/commit/40362f05cb0cc0180b3bdaeb3d4a122dfe46f699))
+
+## [4.0.7-next.4](https://github.com/form-atoms/field/compare/v4.0.7-next.3...v4.0.7-next.4) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useNumberFieldProps:** make numberField initializable via options ([#85](https://github.com/form-atoms/field/issues/85)) ([dbad7da](https://github.com/form-atoms/field/commit/dbad7dab56b6b880a8b204e7453d8b8acd23ec43))
+
+## [4.0.7-next.3](https://github.com/form-atoms/field/compare/v4.0.7-next.2...v4.0.7-next.3) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useDateFieldProps:** make dateField initializable via options ([#84](https://github.com/form-atoms/field/issues/84)) ([164487d](https://github.com/form-atoms/field/commit/164487dd26b15bd45e66ae7a8995b41320262606))
+
+## [4.0.7-next.2](https://github.com/form-atoms/field/compare/v4.0.7-next.1...v4.0.7-next.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* **checkboxFieldProps:** make checkboxField initializable via options ([#83](https://github.com/form-atoms/field/issues/83)) ([63afa6d](https://github.com/form-atoms/field/commit/63afa6d51316ab2b704e6a498e3edb62a6f2c753))
+
+## [4.0.7-next.1](https://github.com/form-atoms/field/compare/v4.0.6...v4.0.7-next.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useFieldProps:** enable passing initialValue via options ([#82](https://github.com/form-atoms/field/issues/82)) ([4fb0c3f](https://github.com/form-atoms/field/commit/4fb0c3f000fe2d7a65885549c7fbfaeeea9c0d88))
+
 ## [4.0.6](https://github.com/form-atoms/field/compare/v4.0.5...v4.0.6) (2024-01-17)
 
 
