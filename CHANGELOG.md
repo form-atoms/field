@@ -1,3 +1,10 @@
+## [4.0.7-next.10](https://github.com/form-atoms/field/compare/v4.0.7-next.9...v4.0.7-next.10) (2024-01-18)
+
+
+### Bug Fixes
+
+* **useMultiSelectFieldProps:** make field initializable via options ([#96](https://github.com/form-atoms/field/issues/96)) ([#97](https://github.com/form-atoms/field/issues/97)) ([049945b](https://github.com/form-atoms/field/commit/049945b4773560c55067f125d787923606d7980e))
+
 ## [4.0.7-next.9](https://github.com/form-atoms/field/compare/v4.0.7-next.8...v4.0.7-next.9) (2024-01-18)
 
 
