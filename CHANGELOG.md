@@ -1,3 +1,10 @@
+## [4.0.9](https://github.com/form-atoms/field/compare/v4.0.8...v4.0.9) (2024-01-23)
+
+
+### Bug Fixes
+
+* **upload-atom:** experimental `uploadAtom` and `fileUpload` within a list ([#103](https://github.com/form-atoms/field/issues/103)) ([3c12e39](https://github.com/form-atoms/field/commit/3c12e39b9fe4abfef0a63517f0f55890e90399f4))
+
 ## [4.0.8](https://github.com/form-atoms/field/compare/v4.0.7...v4.0.8) (2024-01-23)
 
 
