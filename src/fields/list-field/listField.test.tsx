@@ -193,7 +193,7 @@ describe("listField()", () => {
             <List
               field={fields.accounts}
               AddButton={({ add }) => (
-                <button onClick={add} type="button">
+                <button onClick={() => add()} type="button">
                   add iban
                 </button>
               )}
