@@ -1,3 +1,10 @@
+## [4.0.10](https://github.com/form-atoms/field/compare/v4.0.9...v4.0.10) (2024-01-23)
+
+
+### Bug Fixes
+
+* **file-upload:** add export ([34bb722](https://github.com/form-atoms/field/commit/34bb722c2e81b17857149cb46328d76159bd3f67))
+
 ## [4.0.9](https://github.com/form-atoms/field/compare/v4.0.8...v4.0.9) (2024-01-23)
 
 
