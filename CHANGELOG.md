@@ -1,3 +1,10 @@
+## [4.0.8](https://github.com/form-atoms/field/compare/v4.0.7...v4.0.8) (2024-01-23)
+
+
+### Bug Fixes
+
+* **List:** enable adding initialized fields. ([#101](https://github.com/form-atoms/field/issues/101)) ([#102](https://github.com/form-atoms/field/issues/102)) ([0022d4c](https://github.com/form-atoms/field/commit/0022d4c2c946716af341c9a8971f47597e5ec004))
+
 ## [4.0.7](https://github.com/form-atoms/field/compare/v4.0.6...v4.0.7) (2024-01-18)
 
 
