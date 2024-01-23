@@ -109,7 +109,7 @@ const productPros = listField({
 const Example = () => (
   <>
     <label style={{ marginBottom: 16 }}>
-      What are some benefits of TypeScript?
+      What do you like about your shoes?
     </label>
     <List field={productPros}>
       {({ fields, RemoveButton }) => (
@@ -121,6 +121,65 @@ const Example = () => (
           }}
         >
           {/* IMPORTANT NOTE: when the list item contains primitive field, the `fields` prop is the primitive field atom: */}
+          <InputField atom={fields} component="input" />
+          <RemoveButton />
+        </div>
+      )}
+    </List>
+  </>
+);
+```
+
+### Custom `AddButton`
+
+<Description of={ListStories.CustomAddButton} />
+
+<Canvas sourceState="none" of={ListStories.CustomAddButton} />
+
+```tsx
+import { InputField } from "form-atoms";
+import {
+  type AddButtonProps,
+  type ListField,
+  List,
+  listField,
+  textField,
+} from "@form-atoms/field";
+
+const productPros = listField({
+  value: ["quality materials used", "not so heavy"],
+  builder: (value) => textField({ value }),
+});
+
+// helper to infer the fields type returned from the "builder"
+type ListFields<T> = T extends ListField<infer Fields, any> ? Fields : never;
+
+// Having static component requires us to type the props manually.
+// To avoid explicit props, you can inline the component as `<List />` prop.
+const AddButton = ({ add }: AddButtonProps<ListFields<typeof productPros>>) => (
+  <button
+    type="button"
+    className="outline"
+    onClick={() => add(textField({ value: "beautiful colors" }))}
+  >
+    Add initialized item
+  </button>
+);
+
+const Example = () => (
+  <>
+    <label style={{ marginBottom: 16 }}>
+      What do you like about your shoes?
+    </label>
+    <List field={productPros} AddButton={AddButton}>
+      {({ fields, RemoveButton }) => (
+        <div
+          style={{
+            display: "grid",
+            gridGap: 16,
+            gridTemplateColumns: "auto min-content",
+          }}
+        >
           <InputField atom={fields} component="input" />
           <RemoveButton />
         </div>

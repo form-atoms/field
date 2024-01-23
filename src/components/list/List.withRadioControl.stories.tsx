@@ -45,7 +45,7 @@ export const Experimental_WithRadioControl = formStory({
           <List
             field={fields.phones}
             AddButton={({ add }) => (
-              <button type="button" className="outline" onClick={add}>
+              <button type="button" className="outline" onClick={() => add()}>
                 Add contact phone
               </button>
             )}

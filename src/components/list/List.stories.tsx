@@ -4,7 +4,11 @@ import { InputField } from "form-atoms";
 import { AddButtonProps, List, ListProps, RemoveButtonProps } from "./List";
 import { ListField } from "./ListField.mock";
 import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
-import { listField, textField } from "../../fields";
+import {
+  type ListField as TListField,
+  listField,
+  textField,
+} from "../../fields";
 import { StoryForm } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
 
@@ -15,7 +19,7 @@ const RemoveButton = ({ remove }: RemoveButtonProps) => (
 );
 
 const AddButton = ({ add }: AddButtonProps) => (
-  <button type="button" className="outline" onClick={add}>
+  <button type="button" className="outline" onClick={() => add()}>
     Add item
   </button>
 );
@@ -31,8 +35,8 @@ const meta = {
 
 export default meta;
 
-const AddHobbyButton = ({ add }: AddButtonProps) => (
-  <button type="button" className="outline" onClick={add}>
+const AddHobbyButton = ({ add }: AddButtonProps<any>) => (
+  <button type="button" className="outline" onClick={() => add()}>
     Add hobby
   </button>
 );
@@ -94,18 +98,12 @@ export const ListOfObjects = listStory({
   },
 });
 
-// TODO
-{
-  /* <label style={{ marginBottom: 16 }}>
-What do you like about the product?
-</label> */
-}
 export const ListOfPrimitiveValues = listStory({
   parameters: {
     docs: {
       description: {
         story:
-          "Your `listField` builder can produce plain field atoms, as opposed to the common `FormFields` object. This is usefull when you want to capture list of primitives, e.g. `string[]` or `number[]`. For example we can capture list of pros (and cons) as if in eshop product review:",
+          "Your `listField` builder can produce plain field atoms, as opposed to the common `FormFields` object. This is useful when you want to capture list of primitives, e.g. `string[]` or `number[]`. For example we can capture list of pros (and cons) as if in eshop product review:",
       },
     },
   },
@@ -114,6 +112,48 @@ export const ListOfPrimitiveValues = listStory({
       value: ["quality materials used", "not so heavy"],
       builder: (value) => textField({ value }),
     }),
+    children: ({ fields, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto min-content",
+        }}
+      >
+        <InputField atom={fields} component="input" />
+        <RemoveButton />
+      </div>
+    ),
+  },
+});
+
+type ListFields<T> = T extends TListField<infer Fields, any> ? Fields : never;
+
+const productPros = listField({
+  value: ["quality materials used", "not so heavy"],
+  builder: (value) => textField({ value }),
+});
+
+export const CustomAddButton = listStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The `AddButton` render prop allows not only to render a custom button. It also enables you to supply custom `FormFields` object to the `add` action. This is useful when you want to create a customized list item (e.g. with initial value).",
+      },
+    },
+  },
+  args: {
+    field: productPros,
+    AddButton: ({ add }: AddButtonProps<ListFields<typeof productPros>>) => (
+      <button
+        type="button"
+        className="outline"
+        onClick={() => add(textField({ value: "beautiful colors" }))}
+      >
+        Add initialized item
+      </button>
+    ),
     children: ({ fields, RemoveButton }) => (
       <div
         style={{
@@ -268,7 +308,7 @@ export const NestedList = listStory({
       }),
     }),
     AddButton: ({ add }) => (
-      <button type="button" className="outline" onClick={add}>
+      <button type="button" className="outline" onClick={() => add()}>
         Add Person
       </button>
     ),
@@ -317,7 +357,7 @@ export const NestedList = listStory({
         <List
           field={fields.accounts}
           AddButton={({ add }) => (
-            <button type="button" className="outline" onClick={add}>
+            <button type="button" className="outline" onClick={() => add()}>
               Add Bank Account
             </button>
           )}

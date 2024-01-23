@@ -9,12 +9,17 @@ import { useListField } from "../../hooks";
 export type RemoveButtonProps = { remove: () => void };
 export type RemoveButtonProp = RenderProp<RemoveButtonProps, "RemoveButton">;
 
-export type AddButtonProps = { add: () => void };
-export type AddButtonProp = RenderProp<AddButtonProps, "AddButton">;
+export type AddButtonProps<
+  Fields extends ListAtomItems = Record<string, never>,
+> = {
+  add: (fields?: Fields) => void;
+};
+export type AddButtonProp<Fields extends ListAtomItems> = RenderProp<
+  AddButtonProps<Fields>,
+  "AddButton"
+>;
 
 export type EmptyProp = RenderProp<unknown, "Empty">;
-
-type RenderProps = Partial<RemoveButtonProp & AddButtonProp & EmptyProp>;
 
 export type ListItemProps<Fields extends ListAtomItems> = {
   item: ListItem<Fields>;
@@ -59,7 +64,7 @@ export type ListFields = FieldAtom<any>[] | FormFields[];
 export type ListProps<
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
-> = RenderProps & {
+> = Partial<RemoveButtonProp & AddButtonProp<Fields> & EmptyProp> & {
   field: ListField<Fields, Value>;
   initialValue?: Value[];
 } & ListItemProp<Fields>;
@@ -77,7 +82,7 @@ export function List<
     </button>
   ),
   AddButton = ({ add }) => (
-    <button type="button" onClick={add}>
+    <button type="button" onClick={() => add()}>
       Add item
     </button>
   ),
@@ -103,7 +108,9 @@ export function List<
           })}
         </Fragment>
       ))}
-      <AddButton add={useCallback(() => add(), [add])} />
+      <AddButton
+        add={useCallback((fields?: Fields) => add(undefined, fields), [add])}
+      />
     </>
   );
 }

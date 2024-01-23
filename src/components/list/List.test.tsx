@@ -68,11 +68,7 @@ describe("<List />", () => {
 
       render(
         <List field={fields.luckyNumbers}>
-          {({ RemoveButton }) => (
-            <>
-              <RemoveButton />
-            </>
-          )}
+          {({ RemoveButton }) => <RemoveButton />}
         </List>,
       );
 
@@ -94,7 +90,8 @@ describe("<List />", () => {
         <List field={fields.luckyNumbers}>
           {({ fields, RemoveButton }) => (
             <>
-              <NumberInput field={fields} label="" /> <RemoveButton />
+              <NumberInput field={fields} label="" />
+              <RemoveButton />
             </>
           )}
         </List>,
@@ -138,11 +135,7 @@ describe("<List />", () => {
 
       render(
         <List field={fields.luckyNumbers}>
-          {({ fields }) => (
-            <>
-              <NumberInput field={fields} label="lucky" />
-            </>
-          )}
+          {({ fields }) => <NumberInput field={fields} label="lucky" />}
         </List>,
       );
 
@@ -153,6 +146,38 @@ describe("<List />", () => {
       await act(() => userEvent.click(AddButton));
 
       expect(screen.queryByDisplayValue("6")).toBeInTheDocument();
+      expect(screen.queryAllByLabelText("lucky")).toHaveLength(1);
+    });
+
+    it("can add item with explicit fields", async () => {
+      const fields = {
+        luckyNumbers: listField({
+          value: [],
+          builder: () => numberField(),
+        }),
+      };
+
+      render(
+        <List
+          field={fields.luckyNumbers}
+          AddButton={({ add }) => (
+            <button
+              type="button"
+              onClick={() => add(numberField({ value: 9 }))}
+            >
+              add fields
+            </button>
+          )}
+        >
+          {({ fields }) => <NumberInput field={fields} label="lucky" />}
+        </List>,
+      );
+
+      const AddButton = screen.getByText("add fields");
+
+      await act(() => userEvent.click(AddButton));
+
+      expect(screen.queryByDisplayValue("9")).toBeInTheDocument();
       expect(screen.queryAllByLabelText("lucky")).toHaveLength(1);
     });
   });
@@ -168,11 +193,7 @@ describe("<List />", () => {
 
       render(
         <List field={fields.luckyNumbers} Empty={() => <p>No lucky numbers</p>}>
-          {({ fields }) => (
-            <>
-              <NumberInput field={fields} label="" />
-            </>
-          )}
+          {({ fields }) => <NumberInput field={fields} label="" />}
         </List>,
       );
 
