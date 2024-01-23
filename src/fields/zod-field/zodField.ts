@@ -63,16 +63,19 @@ export function zodField<
     optionalSchema,
   });
 
-  const zodFieldAtom = extendFieldAtom(fieldAtom({ ...config, validate }), {
-    required: requiredAtom,
-  }) as unknown as RequiredZodField<Schema, OptSchema>;
+  const zodFieldAtom = extendFieldAtom(
+    fieldAtom({ ...config, validate }),
+    () => ({
+      required: requiredAtom,
+    }),
+  ) as unknown as RequiredZodField<Schema, OptSchema>;
 
   zodFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
     const optionalZodFieldAtom = extendFieldAtom(
       fieldAtom({ ...config, validate }),
-      { required: requiredAtom },
+      () => ({ required: requiredAtom }),
     ) as OptionalZodField<Schema, OptSchema>;
 
     optionalZodFieldAtom.optional = () => optionalZodFieldAtom;
