@@ -76,16 +76,19 @@ export const listField = <
     optionalSchema: optionalSchema ?? z.array(z.any()),
   });
 
-  const listFieldAtom = extendFieldAtom(listAtom({ ...config, validate }), {
-    required: requiredAtom,
-  }) as unknown as RequiredListField<Fields>;
+  const listFieldAtom = extendFieldAtom(
+    listAtom({ ...config, validate }),
+    () => ({
+      required: requiredAtom,
+    }),
+  ) as unknown as RequiredListField<Fields>;
 
   listFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
     const optionalZodFieldAtom = extendFieldAtom(
       listAtom({ ...config, validate }),
-      { required: requiredAtom },
+      () => ({ required: requiredAtom }),
     ) as OptionalListField<Fields>;
 
     optionalZodFieldAtom.optional = () => optionalZodFieldAtom;

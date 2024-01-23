@@ -11,9 +11,12 @@ export const extendFieldAtom = <
   E extends Record<string, unknown>,
 >(
   field: T,
-  atoms: E,
+  makeAtoms: (cfg: T extends Atom<infer Config> ? Config : never) => E,
 ) =>
   atom((get) => {
     const base = get(field);
-    return { ...base, ...atoms };
+    return {
+      ...base,
+      ...makeAtoms(base as T extends Atom<infer Config> ? Config : never),
+    };
   });
