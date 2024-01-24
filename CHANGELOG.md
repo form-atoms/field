@@ -1,3 +1,10 @@
+## [4.0.11](https://github.com/form-atoms/field/compare/v4.0.10...v4.0.11) (2024-01-24)
+
+
+### Bug Fixes
+
+* export form (FormSubmitValues) ([9e75f36](https://github.com/form-atoms/field/commit/9e75f3609f959a071aaa21cf890a705a0cdc9911))
+
 ## [4.0.10](https://github.com/form-atoms/field/compare/v4.0.9...v4.0.10) (2024-01-23)
 
 
