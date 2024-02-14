@@ -1,3 +1,10 @@
+## [4.0.13-next.1](https://github.com/form-atoms/field/compare/v4.0.12...v4.0.13-next.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* **list-atom:** make pristine (!dirty) after new initialValue is set ([#107](https://github.com/form-atoms/field/issues/107)) ([170312d](https://github.com/form-atoms/field/commit/170312d952cb4a7e72eebb8ba2a2606feb0cbdbf)), closes [#105](https://github.com/form-atoms/field/issues/105)
+
 ## [4.0.12](https://github.com/form-atoms/field/compare/v4.0.11...v4.0.12) (2024-02-14)
 
 
