@@ -4,7 +4,7 @@ import { InputField, formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { List } from "./List";
-import { listField, numberField, textField } from "../../fields";
+import { listField, numberField, stringField, textField } from "../../fields";
 import { NumberInput } from "../../fields/number-field/NumberInput.mock";
 
 describe("<List />", () => {
@@ -54,6 +54,27 @@ describe("<List />", () => {
       await act(async () => result.current(onSubmit)());
 
       expect(onSubmit).toHaveBeenCalledWith({ friends: ["Mark"] });
+    });
+
+    it("(bugfix #104) initializes with optional input without infine loop caused by perpetual store.set()", () => {
+      type User = { id?: string; name: string };
+      // there is no "id" in initialValue
+      const users: User[] = [{ name: "Alice" }];
+
+      const userList = listField({
+        value: [],
+        builder: ({ name, id }: User) => ({
+          // the field.value will have "id: undefined" after initialization
+          id: stringField({ value: id }).optional(),
+          name: textField({ value: name }),
+        }),
+      });
+
+      render(
+        <List field={userList} initialValue={users as any}>
+          {({ fields }) => <InputField atom={fields.name} component="input" />}
+        </List>,
+      );
     });
   });
 
