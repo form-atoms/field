@@ -24,9 +24,6 @@ export function _useFieldInitialValue<Value>(
     if (initialValue === undefined) {
       return;
     }
-    if (!store.get(field.dirty)) {
-      store.set(field.value, initialValue);
-    }
-    store.set(field._initialValue, initialValue);
-  }, [store, field._initialValue, field.value, field.dirty, initialValue]);
+    store.set(field.value, initialValue);
+  }, [store, field.value, initialValue]);
 }
