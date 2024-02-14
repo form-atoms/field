@@ -1,3 +1,10 @@
+## [4.0.12](https://github.com/form-atoms/field/compare/v4.0.11...v4.0.12) (2024-02-14)
+
+
+### Bug Fixes
+
+* **list-field:** initial value with effect dependencies ([#104](https://github.com/form-atoms/field/issues/104)) ([#106](https://github.com/form-atoms/field/issues/106)) ([5a9db35](https://github.com/form-atoms/field/commit/5a9db35525c80a987032793c5be65ab8fd840910))
+
 ## [4.0.11](https://github.com/form-atoms/field/compare/v4.0.10...v4.0.11) (2024-01-24)
 
 
