@@ -1,3 +1,10 @@
+## [4.0.14](https://github.com/form-atoms/field/compare/v4.0.13...v4.0.14) (2024-02-14)
+
+
+### Bug Fixes
+
+* **field-label:** deprecate ([c911db5](https://github.com/form-atoms/field/commit/c911db5a43fa405d44b106c615aeed7f0eccf928))
+
 ## [4.0.13](https://github.com/form-atoms/field/compare/v4.0.12...v4.0.13) (2024-02-14)
 
 
