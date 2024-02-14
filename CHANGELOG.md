@@ -1,3 +1,10 @@
+## [4.0.13](https://github.com/form-atoms/field/compare/v4.0.12...v4.0.13) (2024-02-14)
+
+
+### Bug Fixes
+
+* bump deps ([462bff8](https://github.com/form-atoms/field/commit/462bff895f0d0ce18f127ebffada915159740e98))
+
 ## [4.0.13-next.1](https://github.com/form-atoms/field/compare/v4.0.12...v4.0.13-next.1) (2024-02-14)
 
 
