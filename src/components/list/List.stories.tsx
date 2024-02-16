@@ -67,6 +67,7 @@ export const ListOfObjects = listStory({
   },
   args: {
     field: listField({
+      name: "environment",
       value: [
         { variable: "GITHUB_TOKEN", value: "ff52d09a" },
         { variable: "NPM_TOKEN", value: "deepsecret" },
@@ -109,6 +110,7 @@ export const ListOfPrimitiveValues = listStory({
   },
   args: {
     field: listField({
+      name: "productReview",
       value: ["quality materials used", "not so heavy"],
       builder: (value) => textField({ value }),
     }),
@@ -130,6 +132,7 @@ export const ListOfPrimitiveValues = listStory({
 type ListFields<T> = T extends TListField<infer Fields, any> ? Fields : never;
 
 const productPros = listField({
+  name: "productReview",
   value: ["quality materials used", "not so heavy"],
   builder: (value) => textField({ value }),
 });
@@ -298,12 +301,14 @@ export const NestedList = listStory({
         },
       ],
       builder: ({ name, lastName, accounts = [] }) => ({
-        name: textField({ value: name }),
-        lastName: textField({ value: lastName }),
+        name: textField({ value: name, name: "name" }),
+        lastName: textField({ value: lastName, name: "lastName" }),
         accounts: listField({
           name: "accounts",
           value: accounts,
-          builder: ({ iban }) => ({ iban: textField({ value: iban }) }),
+          builder: ({ iban }) => ({
+            iban: textField({ value: iban, name: "iban" }),
+          }),
         }),
       }),
     }),
