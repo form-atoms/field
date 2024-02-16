@@ -1,3 +1,10 @@
+## [4.0.15-next.1](https://github.com/form-atoms/field/compare/v4.0.14...v4.0.15-next.1) (2024-02-16)
+
+
+### Bug Fixes
+
+* **listAtom:** support scoped names of nested fields ([#110](https://github.com/form-atoms/field/issues/110)) ([f8201da](https://github.com/form-atoms/field/commit/f8201da38e42fb194b48c206eb243b48b0c8f5c7))
+
 ## [4.0.14](https://github.com/form-atoms/field/compare/v4.0.13...v4.0.14) (2024-02-14)
 
 
