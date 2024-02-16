@@ -1,12 +1,11 @@
 import {
   FieldAtomConfig,
-  FormAtom,
   Validate,
   ValidateOn,
   ValidateStatus,
   walkFields,
 } from "form-atoms";
-import { Atom, PrimitiveAtom, WritableAtom, atom } from "jotai";
+import { Atom, PrimitiveAtom, SetStateAction, WritableAtom, atom } from "jotai";
 import { RESET, atomWithDefault, atomWithReset, splitAtom } from "jotai/utils";
 
 import {
@@ -45,37 +44,20 @@ export type ListAtom<
   Value[],
   {
     empty: Atom<boolean>;
-    /**
-     * TODO - review
-     * Reusing the ListItem and ListItemForm from above will cause an error preventing compilation the library:
-     * error TS7056: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
-     */
-    buildItem(): FormAtom<{
-      fields: Fields;
-    }>;
+    buildItem(): ListItemForm<Fields>;
     _formFields: Atom<Fields[]>;
-
-    _formList: PrimitiveAtom<
-      FormAtom<{
-        fields: Fields;
-      }>[]
+    _formList: WritableAtom<
+      ListItemForm<Fields>[],
+      [typeof RESET | SetStateAction<ListItemForm<Fields>[]>],
+      void
     >;
+
     /**
      * A splitAtom() managing adding, removing and moving items in the list.
      */
     _splitList: WritableAtom<
-      PrimitiveAtom<
-        FormAtom<{
-          fields: Fields;
-        }>
-      >[],
-      [
-        SplitAtomAction<
-          FormAtom<{
-            fields: Fields;
-          }>
-        >,
-      ],
+      PrimitiveAtom<ListItemForm<Fields>>[],
+      [SplitAtomAction<ListItemForm<Fields>>],
       void
     >;
   }
