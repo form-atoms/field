@@ -1,5 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import {
+  FieldAtom,
   formAtom,
   useFieldActions,
   useFieldErrors,
@@ -13,7 +14,7 @@ import { describe, expect, it, test, vi } from "vitest";
 
 import { listAtom } from "./listAtom";
 import { numberField, textField } from "../../fields";
-import { useFieldError, useListActions } from "../../hooks";
+import { useFieldError, useListActions, useListField } from "../../hooks";
 
 describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
@@ -368,6 +369,103 @@ describe("listAtom()", () => {
 
       await act(async () => fieldActions.current.setValue([42, 84]));
       expect(state.current.dirty).toBe(false);
+    });
+  });
+
+  describe("scoped name of list fields", () => {
+    const useFieldName = <T extends FieldAtom<any>>(fieldAtom: T) =>
+      useAtomValue(useAtomValue(fieldAtom).name);
+
+    describe("list of primitive fieldAtoms", () => {
+      it("field name contains list name and index", () => {
+        const field = listAtom({
+          name: "recipients",
+          value: ["foo@bar.com", "fizz@buzz.com"],
+          builder: (value, getName) => textField({ value, ...getName() }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: names } = renderHook(() => [
+          useFieldName(list.current.items[0]!.fields),
+          useFieldName(list.current.items[1]!.fields),
+        ]);
+
+        expect(names.current).toEqual(["recipients[0]", "recipients[1]"]);
+      });
+    });
+
+    describe("list of form fields", () => {
+      it("field name contains list name, index and field name", () => {
+        const field = listAtom({
+          name: "contacts",
+          value: [{ email: "foo@bar.com" }, { email: "fizz@buzz.com" }],
+          builder: ({ email }, getName) => ({
+            email: textField({ value: email, ...getName("email") }),
+          }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: names } = renderHook(() => [
+          useFieldName(list.current.items[0]!.fields.email),
+          useFieldName(list.current.items[1]!.fields.email),
+        ]);
+
+        expect(names.current).toEqual([
+          "contacts[0].email",
+          "contacts[1].email",
+        ]);
+      });
+    });
+
+    describe("nested listAtom", () => {
+      it("has prefix of the parent listAtom", () => {
+        const field = listAtom({
+          name: "contacts",
+          value: [
+            {
+              email: "foo@bar.com",
+              addresses: [{ type: "home", city: "Kezmarok" }],
+            },
+            {
+              email: "fizz@buzz.com",
+              addresses: [
+                { type: "home", city: "Humenne" },
+                { type: "work", city: "Nove Zamky" },
+              ],
+            },
+          ],
+          builder: ({ email, addresses = [] }, getName) => ({
+            email: textField({ value: email, ...getName("email") }),
+            addresses: listAtom({
+              ...getName("addresses"),
+              value: addresses,
+              builder: ({ type, city }, getName) => ({
+                type: textField({ value: type, ...getName("type") }),
+                city: textField({ value: city, ...getName("city") }),
+              }),
+            }),
+          }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: secondContactAddresses } = renderHook(() =>
+          useListField(list.current.items[1]!.fields.addresses),
+        );
+
+        const { result: names } = renderHook(() => [
+          useFieldName(secondContactAddresses.current.items[0]!.fields.type),
+          useFieldName(secondContactAddresses.current.items[0]!.fields.city),
+          useFieldName(secondContactAddresses.current.items[1]!.fields.type),
+          useFieldName(secondContactAddresses.current.items[1]!.fields.city),
+        ]);
+
+        expect(names.current).toEqual([
+          "contacts[1].addresses[0].type",
+          "contacts[1].addresses[0].city",
+          "contacts[1].addresses[1].type",
+          "contacts[1].addresses[1].city",
+        ]);
+      });
     });
   });
 });
