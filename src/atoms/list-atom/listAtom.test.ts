@@ -1,5 +1,6 @@
-import { act, renderHook } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import {
+  FieldAtom,
   formAtom,
   useFieldActions,
   useFieldErrors,
@@ -13,7 +14,7 @@ import { describe, expect, it, test, vi } from "vitest";
 
 import { listAtom } from "./listAtom";
 import { numberField, textField } from "../../fields";
-import { useFieldError, useListActions } from "../../hooks";
+import { useFieldError, useListActions, useListField } from "../../hooks";
 
 describe("listAtom()", () => {
   test("can be submitted within formAtom", async () => {
@@ -368,6 +369,150 @@ describe("listAtom()", () => {
 
       await act(async () => fieldActions.current.setValue([42, 84]));
       expect(state.current.dirty).toBe(false);
+    });
+  });
+
+  describe("scoped name of list fields", () => {
+    const useFieldName = (fieldAtom: FieldAtom<any>) =>
+      useAtomValue(useAtomValue(fieldAtom).name);
+
+    describe("list of primitive fieldAtoms", () => {
+      it("field name contains list name and index", async () => {
+        const field = listAtom({
+          name: "recipients",
+          value: ["foo@bar.com", "fizz@buzz.com"],
+          builder: (value) => textField({ value }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: names } = renderHook(() => [
+          useFieldName(list.current.items[0]!.fields),
+          useFieldName(list.current.items[1]!.fields),
+        ]);
+
+        await waitFor(() => Promise.resolve());
+
+        expect(names.current).toEqual(["recipients[0]", "recipients[1]"]);
+      });
+
+      it("updates the index for current value, when moved in the list", async () => {
+        const field = listAtom({
+          name: "recipients",
+          value: ["foo@bar.com", "fizz@buzz.com"],
+          builder: (value) => textField({ value }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: values } = renderHook(() => [
+          useFieldValue(list.current.items[0]!.fields),
+          useFieldName(list.current.items[0]!.fields),
+          useFieldValue(list.current.items[1]!.fields),
+          useFieldName(list.current.items[1]!.fields),
+        ]);
+        const { result: listItems } = renderHook(() =>
+          useAtomValue(useAtomValue(field)._splitList),
+        );
+
+        await waitFor(() => Promise.resolve());
+
+        expect(values.current).toEqual([
+          "foo@bar.com",
+          "recipients[0]",
+          "fizz@buzz.com",
+          "recipients[1]",
+        ]);
+
+        const { result: listActions } = renderHook(() => useListActions(field));
+
+        // moves first item down
+        await act(async () => listActions.current.move(listItems.current[0]!));
+
+        expect(values.current).toEqual([
+          "fizz@buzz.com",
+          "recipients[0]",
+          "foo@bar.com",
+          "recipients[1]",
+        ]);
+      });
+    });
+
+    describe("list of form fields", () => {
+      it("field name contains list name, index and field name", async () => {
+        const field = listAtom({
+          name: "contacts",
+          value: [{ email: "foo@bar.com" }, { email: "fizz@buzz.com" }],
+          builder: ({ email }) => ({
+            email: textField({ value: email, name: "email" }),
+          }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: names } = renderHook(() => [
+          useFieldName(list.current.items[0]!.fields.email),
+          useFieldName(list.current.items[1]!.fields.email),
+        ]);
+
+        await waitFor(() => Promise.resolve());
+
+        expect(names.current).toEqual([
+          "contacts[0].email",
+          "contacts[1].email",
+        ]);
+      });
+    });
+
+    describe("nested listAtom", () => {
+      // passes but throws error
+      it.skip("has prefix of the parent listAtom", async () => {
+        const field = listAtom({
+          name: "contacts",
+          value: [
+            {
+              email: "foo@bar.com",
+              addresses: [{ type: "home", city: "Kezmarok" }],
+            },
+            {
+              email: "fizz@buzz.com",
+              addresses: [
+                { type: "home", city: "Humenne" },
+                { type: "work", city: "Nove Zamky" },
+              ],
+            },
+          ],
+          builder: ({ email, addresses = [] }) => ({
+            email: textField({ value: email, name: "email" }),
+            addresses: listAtom({
+              name: "addresses",
+              value: addresses,
+              builder: ({ type, city }) => ({
+                type: textField({ value: type, name: "type" }),
+                city: textField({ value: city, name: "city" }),
+              }),
+            }),
+          }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: secondContactAddresses } = renderHook(() =>
+          useListField(list.current.items[1]!.fields.addresses),
+        );
+
+        const { result: names } = renderHook(() => [
+          useFieldName(secondContactAddresses.current.items[0]!.fields.type),
+          useFieldName(secondContactAddresses.current.items[0]!.fields.city),
+          useFieldName(secondContactAddresses.current.items[1]!.fields.type),
+          useFieldName(secondContactAddresses.current.items[1]!.fields.city),
+        ]);
+
+        await waitFor(() => Promise.resolve());
+
+        expect(names.current).toEqual([
+          "contacts[1].addresses[0].type",
+          "contacts[1].addresses[0].city",
+          "contacts[1].addresses[1].type",
+          "contacts[1].addresses[1].city",
+        ]);
+      });
     });
   });
 });

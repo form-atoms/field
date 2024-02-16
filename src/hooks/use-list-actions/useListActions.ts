@@ -1,4 +1,4 @@
-import { UseFieldOptions, formAtom } from "form-atoms";
+import { UseFieldOptions } from "form-atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useCallback, useTransition } from "react";
 
@@ -8,6 +8,7 @@ import {
   ListAtomValue,
   ListItem,
 } from "../../atoms/list-atom";
+import { listItemForm } from "../../atoms/list-atom/listItemForm";
 
 export const useListActions = <
   Fields extends ListAtomItems,
@@ -31,7 +32,13 @@ export const useListActions = <
   const add = useCallback((before?: ListItem<Fields>, fields?: Fields) => {
     dispatchSplitList({
       type: "insert",
-      value: fields ? formAtom({ fields }) : atoms.buildItem(),
+      value: fields
+        ? listItemForm({
+            fields,
+            getListNameAtom: (get) => get(list).name,
+            formListAtom: atoms._formList,
+          })
+        : atoms.buildItem(),
       before,
     });
     startTransition(() => {
