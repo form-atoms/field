@@ -1,7 +1,7 @@
 import { UseFieldOptions } from "form-atoms";
 import { useAtomValue } from "jotai";
 
-import { ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
+import { ListAtom, ListAtomItems, ListAtomValue } from "../../atoms/list-atom";
 import { ListField } from "../../fields";
 import { useListActions } from "../use-list-actions";
 import { useListFieldInitialValue } from "../use-list-field-initial-value";
@@ -10,7 +10,7 @@ export const useListField = <
   Fields extends ListAtomItems,
   Value extends ListAtomValue<Fields>,
 >(
-  list: ListField<Fields, Value>,
+  list: ListField<Fields, Value> | ListAtom<Fields, Value>,
   options?: UseFieldOptions<Value[]>,
 ) => {
   useListFieldInitialValue(list, options?.initialValue, options);
