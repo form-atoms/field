@@ -9,6 +9,7 @@ import {
   listField,
   textField,
 } from "../../fields";
+import { PicoFieldName } from "../../scenarios/PicoFieldName";
 import { StoryForm } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../field-label";
 
@@ -85,15 +86,25 @@ export const ListOfObjects = listStory({
           gridTemplateColumns: "auto auto min-content",
         }}
       >
-        <InputField
-          atom={fields.variable}
-          render={(props) => <input {...props} placeholder="Variable Name" />}
-        />
-        <InputField
-          atom={fields.value}
-          render={(props) => <input {...props} placeholder="Variable Value" />}
-        />
-        <RemoveButton />
+        <div>
+          <InputField
+            atom={fields.variable}
+            render={(props) => <input {...props} placeholder="Variable Name" />}
+          />
+          <PicoFieldName field={fields.variable} />
+        </div>
+        <div>
+          <InputField
+            atom={fields.value}
+            render={(props) => (
+              <input {...props} placeholder="Variable Value" />
+            )}
+          />
+          <PicoFieldName field={fields.variable} />
+        </div>
+        <div>
+          <RemoveButton />
+        </div>
       </div>
     ),
   },

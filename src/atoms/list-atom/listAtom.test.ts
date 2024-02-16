@@ -373,7 +373,7 @@ describe("listAtom()", () => {
   });
 
   describe("scoped name of list fields", () => {
-    const useFieldName = <T extends FieldAtom<any>>(fieldAtom: T) =>
+    const useFieldName = (fieldAtom: FieldAtom<any>) =>
       useAtomValue(useAtomValue(fieldAtom).name);
 
     describe("list of primitive fieldAtoms", () => {
