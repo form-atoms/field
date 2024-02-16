@@ -4,22 +4,18 @@ import {
   Validate,
   ValidateOn,
   ValidateStatus,
-  formAtom,
   walkFields,
 } from "form-atoms";
 import { Atom, PrimitiveAtom, WritableAtom, atom } from "jotai";
-import { RESET, atomWithReset, splitAtom } from "jotai/utils";
+import { RESET, atomWithDefault, atomWithReset, splitAtom } from "jotai/utils";
 
 import {
   type ListAtomItems,
   type ListAtomValue,
   listBuilder,
 } from "./listBuilder";
+import { ListItemForm, listItemForm } from "./listItemForm";
 import { ExtendFieldAtom } from "../extendFieldAtom";
-
-type ListItemForm<Fields extends ListAtomItems> = FormAtom<{
-  fields: Fields;
-}>;
 
 export type ListItem<Fields extends ListAtomItems> = PrimitiveAtom<
   ListItemForm<Fields>
@@ -114,14 +110,24 @@ export function listAtom<
   const formBuilder = listBuilder(config.builder);
 
   function buildItem(): ListItemForm<Fields> {
-    return formAtom({ fields: formBuilder() });
+    return listItemForm({
+      fields: formBuilder(),
+      listNameAtom: nameAtom,
+      formListAtom: _formListAtom,
+    });
   }
 
-  const formList = formBuilder(config.value).map((fields) =>
-    formAtom({ fields }),
-  );
-  const initialFormListAtom = atomWithReset<ListItemForm<Fields>[]>(formList);
-  const _formListAtom = atomWithReset(formList);
+  const makeFormList = (): ListItemForm<Fields>[] =>
+    formBuilder(config.value).map((fields) =>
+      listItemForm({
+        fields,
+        listNameAtom: nameAtom,
+        formListAtom: _formListAtom,
+      }),
+    );
+
+  const initialFormListAtom = atomWithDefault(makeFormList);
+  const _formListAtom = atomWithDefault((get) => get(initialFormListAtom));
   const _splitListAtom = splitAtom(_formListAtom);
 
   /**
@@ -228,6 +234,7 @@ export function listAtom<
     ) => {
       if (value === RESET) {
         set(_formListAtom, value);
+        set(initialFormListAtom, value);
 
         const forms = get(_formListAtom);
 
@@ -237,7 +244,11 @@ export function listAtom<
         }
       } else if (Array.isArray(value)) {
         const updatedFormList = formBuilder(value).map((fields) =>
-          formAtom({ fields }),
+          listItemForm({
+            fields,
+            listNameAtom: nameAtom,
+            formListAtom: _formListAtom,
+          }),
         );
         set(initialFormListAtom, updatedFormList);
         set(_formListAtom, updatedFormList);

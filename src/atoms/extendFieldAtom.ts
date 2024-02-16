@@ -6,11 +6,6 @@ export type ExtendFieldAtom<Value, State> =
     ? Atom<DefaultState & State>
     : never;
 
-export type ExtendFormAtom<Fields, State> =
-  FieldAtom<Fields> extends Atom<infer DefaultState>
-    ? Atom<DefaultState & State>
-    : never;
-
 export const extendFieldAtom = <
   T extends Atom<any>,
   E extends Record<string, unknown>,
