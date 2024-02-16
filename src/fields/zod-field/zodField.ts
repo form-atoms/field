@@ -85,7 +85,7 @@ export function zodField<
         required: requiredAtom,
         ...(nameAtom ? { name: nameAtom } : {}),
       }),
-    ) as OptionalZodField<Schema, OptSchema>;
+    ) as unknown as OptionalZodField<Schema, OptSchema>;
 
     optionalZodFieldAtom.optional = () => optionalZodFieldAtom;
 

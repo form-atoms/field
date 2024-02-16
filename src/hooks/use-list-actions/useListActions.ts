@@ -35,7 +35,7 @@ export const useListActions = <
       value: fields
         ? listItemForm({
             fields,
-            listNameAtom: atoms.name,
+            getListNameAtom: (get) => get(list).name,
             formListAtom: atoms._formList,
           })
         : atoms.buildItem(),

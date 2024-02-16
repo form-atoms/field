@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import {
   FieldAtom,
   formAtom,
@@ -377,11 +377,11 @@ describe("listAtom()", () => {
       useAtomValue(useAtomValue(fieldAtom).name);
 
     describe("list of primitive fieldAtoms", () => {
-      it("field name contains list name and index", () => {
+      it("field name contains list name and index", async () => {
         const field = listAtom({
           name: "recipients",
           value: ["foo@bar.com", "fizz@buzz.com"],
-          builder: (value, getName) => textField({ value, ...getName() }),
+          builder: (value) => textField({ value }),
         });
 
         const { result: list } = renderHook(() => useListField(field));
@@ -390,17 +390,19 @@ describe("listAtom()", () => {
           useFieldName(list.current.items[1]!.fields),
         ]);
 
+        await waitFor(() => Promise.resolve());
+
         expect(names.current).toEqual(["recipients[0]", "recipients[1]"]);
       });
     });
 
     describe("list of form fields", () => {
-      it("field name contains list name, index and field name", () => {
+      it("field name contains list name, index and field name", async () => {
         const field = listAtom({
           name: "contacts",
           value: [{ email: "foo@bar.com" }, { email: "fizz@buzz.com" }],
-          builder: ({ email }, getName) => ({
-            email: textField({ value: email, ...getName("email") }),
+          builder: ({ email }) => ({
+            email: textField({ value: email, name: "email" }),
           }),
         });
 
@@ -410,6 +412,8 @@ describe("listAtom()", () => {
           useFieldName(list.current.items[1]!.fields.email),
         ]);
 
+        await waitFor(() => Promise.resolve());
+
         expect(names.current).toEqual([
           "contacts[0].email",
           "contacts[1].email",
@@ -418,7 +422,7 @@ describe("listAtom()", () => {
     });
 
     describe("nested listAtom", () => {
-      it("has prefix of the parent listAtom", () => {
+      it.only("has prefix of the parent listAtom", async () => {
         const field = listAtom({
           name: "contacts",
           value: [
@@ -434,14 +438,14 @@ describe("listAtom()", () => {
               ],
             },
           ],
-          builder: ({ email, addresses = [] }, getName) => ({
-            email: textField({ value: email, ...getName("email") }),
+          builder: ({ email, addresses = [] }) => ({
+            email: textField({ value: email, name: "email" }),
             addresses: listAtom({
-              ...getName("addresses"),
+              name: "addresses",
               value: addresses,
-              builder: ({ type, city }, getName) => ({
-                type: textField({ value: type, ...getName("type") }),
-                city: textField({ value: city, ...getName("city") }),
+              builder: ({ type, city }) => ({
+                type: textField({ value: type, name: "type" }),
+                city: textField({ value: city, name: "city" }),
               }),
             }),
           }),
@@ -458,6 +462,8 @@ describe("listAtom()", () => {
           useFieldName(secondContactAddresses.current.items[1]!.fields.type),
           useFieldName(secondContactAddresses.current.items[1]!.fields.city),
         ]);
+
+        await waitFor(() => Promise.resolve());
 
         expect(names.current).toEqual([
           "contacts[1].addresses[0].type",

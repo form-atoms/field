@@ -94,7 +94,7 @@ export function listAtom<
   function buildItem(): ListItemForm<Fields> {
     return listItemForm({
       fields: formBuilder(),
-      listNameAtom: nameAtom,
+      getListNameAtom: (get) => get(self).name,
       formListAtom: _formListAtom,
     });
   }
@@ -103,7 +103,7 @@ export function listAtom<
     formBuilder(config.value).map((fields) =>
       listItemForm({
         fields,
-        listNameAtom: nameAtom,
+        getListNameAtom: (get) => get(self).name,
         formListAtom: _formListAtom,
       }),
     );
@@ -228,7 +228,7 @@ export function listAtom<
         const updatedFormList = formBuilder(value).map((fields) =>
           listItemForm({
             fields,
-            listNameAtom: nameAtom,
+            getListNameAtom: (get) => get(self).name,
             formListAtom: _formListAtom,
           }),
         );
@@ -350,8 +350,10 @@ export function listAtom<
     _initialValue: initialValueAtom,
   };
 
+  const self = atom(listAtoms);
+
   // @ts-expect-error ref with HTMLFieldset is ok
-  return atom(listAtoms);
+  return self;
 }
 
 function isPromise(value: any): value is Promise<any> {

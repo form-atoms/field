@@ -9,6 +9,7 @@ import {
   ValidateOn,
   ValidateStatus,
   formAtom,
+  walkFields,
 } from "form-atoms";
 import {
   Atom,
@@ -18,6 +19,7 @@ import {
   WritableAtom,
   atom,
 } from "jotai";
+import { atomEffect } from "jotai-effect";
 
 import { ListAtomItems } from "./listBuilder";
 import { extendFieldAtom } from "../extendFieldAtom";
@@ -111,7 +113,7 @@ export type ListItemForm<Fields extends ListAtomItems> = NamedFormAtom<{
 export function listItemForm<Fields extends ListAtomItems>({
   fields,
   formListAtom,
-  listNameAtom,
+  getListNameAtom,
 }: {
   /**
    * The fields of the item form.
@@ -128,7 +130,9 @@ export function listItemForm<Fields extends ListAtomItems>({
   /**
    * The nameAtom of the parent listAtom.
    */
-  listNameAtom:
+  getListNameAtom: (
+    get: Getter,
+  ) =>
     | Atom<string>
     | WritableAtom<
         string | undefined,
@@ -138,14 +142,42 @@ export function listItemForm<Fields extends ListAtomItems>({
 }) {
   const itemFormAtom: ListItemForm<Fields> = extendFieldAtom(
     formAtom({ fields }),
-    () => ({
-      nameAtom: atom((get) => {
+    (base, get) => {
+      const nameAtom = atom((get) => {
         const list: ListItemForm<Fields>[] = get(formListAtom);
-        const listName = get(listNameAtom);
+        const listName = get(getListNameAtom(get));
 
         return `${listName ?? ""}[${list.indexOf(itemFormAtom)}]`;
-      }),
-    }),
+      });
+
+      const patchNamesEffect = atomEffect((get, set) => {
+        const fields = get(base.fields);
+
+        walkFields(fields, (field) => {
+          const { name: originalFieldNameAtom } = get(field);
+
+          const scopedNameAtom = atom(
+            (get) => {
+              return [get(nameAtom), get(originalFieldNameAtom)]
+                .filter(Boolean)
+                .join(".");
+            },
+            (_, set, update: string) => {
+              set(originalFieldNameAtom, update);
+            },
+          );
+
+          // @ts-expect-error field is PrimitiveAtom
+          set(field, { name: scopedNameAtom });
+        });
+      });
+
+      get(patchNamesEffect); // subscribe
+
+      return {
+        name: nameAtom,
+      };
+    },
   );
 
   return itemFormAtom;
