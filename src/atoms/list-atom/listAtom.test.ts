@@ -394,6 +394,46 @@ describe("listAtom()", () => {
 
         expect(names.current).toEqual(["recipients[0]", "recipients[1]"]);
       });
+
+      it("updates the index for current value, when moved in the list", async () => {
+        const field = listAtom({
+          name: "recipients",
+          value: ["foo@bar.com", "fizz@buzz.com"],
+          builder: (value) => textField({ value }),
+        });
+
+        const { result: list } = renderHook(() => useListField(field));
+        const { result: values } = renderHook(() => [
+          useFieldValue(list.current.items[0]!.fields),
+          useFieldName(list.current.items[0]!.fields),
+          useFieldValue(list.current.items[1]!.fields),
+          useFieldName(list.current.items[1]!.fields),
+        ]);
+        const { result: listItems } = renderHook(() =>
+          useAtomValue(useAtomValue(field)._splitList),
+        );
+
+        await waitFor(() => Promise.resolve());
+
+        expect(values.current).toEqual([
+          "foo@bar.com",
+          "recipients[0]",
+          "fizz@buzz.com",
+          "recipients[1]",
+        ]);
+
+        const { result: listActions } = renderHook(() => useListActions(field));
+
+        // moves first item down
+        await act(async () => listActions.current.move(listItems.current[0]!));
+
+        expect(values.current).toEqual([
+          "fizz@buzz.com",
+          "recipients[0]",
+          "foo@bar.com",
+          "recipients[1]",
+        ]);
+      });
     });
 
     describe("list of form fields", () => {
