@@ -89,7 +89,7 @@ export const listField = <
     const optionalZodFieldAtom = extendFieldAtom(
       listAtom({ ...config, validate }),
       () => ({ required: requiredAtom }),
-    ) as OptionalListField<Fields>;
+    ) as unknown as OptionalListField<Fields>;
 
     optionalZodFieldAtom.optional = () => optionalZodFieldAtom;
 

@@ -1,25 +1,20 @@
 import {
   FieldAtomConfig,
-  FormAtom,
   Validate,
   ValidateOn,
   ValidateStatus,
-  formAtom,
   walkFields,
 } from "form-atoms";
-import { Atom, PrimitiveAtom, WritableAtom, atom } from "jotai";
-import { RESET, atomWithReset, splitAtom } from "jotai/utils";
+import { Atom, PrimitiveAtom, SetStateAction, WritableAtom, atom } from "jotai";
+import { RESET, atomWithDefault, atomWithReset, splitAtom } from "jotai/utils";
 
 import {
   type ListAtomItems,
   type ListAtomValue,
   listBuilder,
 } from "./listBuilder";
+import { ListItemForm, listItemForm } from "./listItemForm";
 import { ExtendFieldAtom } from "../extendFieldAtom";
-
-type ListItemForm<Fields extends ListAtomItems> = FormAtom<{
-  fields: Fields;
-}>;
 
 export type ListItem<Fields extends ListAtomItems> = PrimitiveAtom<
   ListItemForm<Fields>
@@ -49,37 +44,20 @@ export type ListAtom<
   Value[],
   {
     empty: Atom<boolean>;
-    /**
-     * TODO - review
-     * Reusing the ListItem and ListItemForm from above will cause an error preventing compilation the library:
-     * error TS7056: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
-     */
-    buildItem(): FormAtom<{
-      fields: Fields;
-    }>;
+    buildItem(): ListItemForm<Fields>;
     _formFields: Atom<Fields[]>;
-
-    _formList: PrimitiveAtom<
-      FormAtom<{
-        fields: Fields;
-      }>[]
+    _formList: WritableAtom<
+      ListItemForm<Fields>[],
+      [typeof RESET | SetStateAction<ListItemForm<Fields>[]>],
+      void
     >;
+
     /**
      * A splitAtom() managing adding, removing and moving items in the list.
      */
     _splitList: WritableAtom<
-      PrimitiveAtom<
-        FormAtom<{
-          fields: Fields;
-        }>
-      >[],
-      [
-        SplitAtomAction<
-          FormAtom<{
-            fields: Fields;
-          }>
-        >,
-      ],
+      PrimitiveAtom<ListItemForm<Fields>>[],
+      [SplitAtomAction<ListItemForm<Fields>>],
       void
     >;
   }
@@ -114,14 +92,24 @@ export function listAtom<
   const formBuilder = listBuilder(config.builder);
 
   function buildItem(): ListItemForm<Fields> {
-    return formAtom({ fields: formBuilder() });
+    return listItemForm({
+      fields: formBuilder(),
+      getListNameAtom: (get) => get(self).name,
+      formListAtom: _formListAtom,
+    });
   }
 
-  const formList = formBuilder(config.value).map((fields) =>
-    formAtom({ fields }),
-  );
-  const initialFormListAtom = atomWithReset<ListItemForm<Fields>[]>(formList);
-  const _formListAtom = atomWithReset(formList);
+  const makeFormList = (): ListItemForm<Fields>[] =>
+    formBuilder(config.value).map((fields) =>
+      listItemForm({
+        fields,
+        getListNameAtom: (get) => get(self).name,
+        formListAtom: _formListAtom,
+      }),
+    );
+
+  const initialFormListAtom = atomWithDefault(makeFormList);
+  const _formListAtom = atomWithDefault((get) => get(initialFormListAtom));
   const _splitListAtom = splitAtom(_formListAtom);
 
   /**
@@ -228,6 +216,7 @@ export function listAtom<
     ) => {
       if (value === RESET) {
         set(_formListAtom, value);
+        set(initialFormListAtom, value);
 
         const forms = get(_formListAtom);
 
@@ -237,7 +226,11 @@ export function listAtom<
         }
       } else if (Array.isArray(value)) {
         const updatedFormList = formBuilder(value).map((fields) =>
-          formAtom({ fields }),
+          listItemForm({
+            fields,
+            getListNameAtom: (get) => get(self).name,
+            formListAtom: _formListAtom,
+          }),
         );
         set(initialFormListAtom, updatedFormList);
         set(_formListAtom, updatedFormList);
@@ -357,8 +350,10 @@ export function listAtom<
     _initialValue: initialValueAtom,
   };
 
+  const self = atom(listAtoms);
+
   // @ts-expect-error ref with HTMLFieldset is ok
-  return atom(listAtoms);
+  return self;
 }
 
 function isPromise(value: any): value is Promise<any> {

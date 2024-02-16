@@ -22,8 +22,6 @@ const confirmPassword = textField({
     (get) => {
       const initialPassword = get(get(password).value);
 
-      console.log("hm");
-
       return z.literal(initialPassword);
     },
     {
