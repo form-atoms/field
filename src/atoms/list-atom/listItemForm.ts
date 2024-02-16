@@ -143,6 +143,7 @@ export function listItemForm<Fields extends ListAtomItems>({
   const itemFormAtom: ListItemForm<Fields> = extendFieldAtom(
     formAtom({ fields }),
     (base, get) => {
+      console.log("building itemFormAtom");
       const nameAtom = atom((get) => {
         const list: ListItemForm<Fields>[] = get(formListAtom);
         const listName = get(getListNameAtom(get));
@@ -152,6 +153,8 @@ export function listItemForm<Fields extends ListAtomItems>({
 
       const patchNamesEffect = atomEffect((get, set) => {
         const fields = get(base.fields);
+
+        console.log("runs effect");
 
         walkFields(fields, (field) => {
           const { name: originalFieldNameAtom } = get(field);
@@ -168,8 +171,22 @@ export function listItemForm<Fields extends ListAtomItems>({
           );
 
           // @ts-expect-error field is PrimitiveAtom
-          set(field, { name: scopedNameAtom });
+          set(field, { name: scopedNameAtom, originalFieldNameAtom });
         });
+
+        return () => {
+          walkFields(fields, (field) => {
+            // @ts-expect-error oh yes
+            const { originalFieldNameAtom } = get(field);
+
+            // @ts-expect-error field is PrimitiveAtom
+            set(field, {
+              // drop the scopedNameAtom, as to not make it original on next mount
+              name: originalFieldNameAtom,
+              originalFieldNameAtom: undefined,
+            });
+          });
+        };
       });
 
       get(patchNamesEffect); // subscribe
