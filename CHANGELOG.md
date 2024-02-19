@@ -1,3 +1,10 @@
+## [4.0.15](https://github.com/form-atoms/field/compare/v4.0.14...v4.0.15) (2024-02-19)
+
+
+### Bug Fixes
+
+* release ([e10c8a1](https://github.com/form-atoms/field/commit/e10c8a19b6dc83ff9c5e3ef0f6ea77474d1da47c))
+
 ## [4.0.14](https://github.com/form-atoms/field/compare/v4.0.13...v4.0.14) (2024-02-14)
 
 
