@@ -126,16 +126,10 @@ export const ListOfPrimitiveValues = listStory({
       builder: (value) => textField({ value }),
     }),
     children: ({ fields, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto min-content",
-        }}
-      >
+      <fieldset role="group">
         <InputField atom={fields} component="input" />
         <RemoveButton />
-      </div>
+      </fieldset>
     ),
   },
 });
@@ -169,16 +163,10 @@ export const CustomAddButton = listStory({
       </button>
     ),
     children: ({ fields, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto min-content",
-        }}
-      >
+      <fieldset role="group">
         <InputField atom={fields} component="input" />
         <RemoveButton />
-      </div>
+      </fieldset>
     ),
   },
 });
@@ -207,16 +195,10 @@ export const EmptyRenderProp = listStory({
       </article>
     ),
     children: ({ fields, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto min-content",
-        }}
-      >
+      <fieldset role="group">
         <InputField atom={fields} component="input" />
         <RemoveButton />
-      </div>
+      </fieldset>
     ),
   },
 });
@@ -272,13 +254,7 @@ export const OrderingItems = listStory({
     }),
     AddButton: AddHobbyButton,
     children: ({ fields, moveUp, moveDown, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto min-content min-content min-content",
-        }}
-      >
+      <fieldset role="group">
         <InputField atom={fields} component="input" />
         <button type="button" className="outline" onClick={moveUp}>
           Up
@@ -287,7 +263,7 @@ export const OrderingItems = listStory({
           Down
         </button>
         <RemoveButton />
-      </div>
+      </fieldset>
     ),
   },
 });
