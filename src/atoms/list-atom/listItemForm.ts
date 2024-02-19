@@ -143,7 +143,6 @@ export function listItemForm<Fields extends ListAtomItems>({
   const itemFormAtom: ListItemForm<Fields> = extendFieldAtom(
     formAtom({ fields }),
     (base, get) => {
-      console.log("building itemFormAtom");
       const nameAtom = atom((get) => {
         const list: ListItemForm<Fields>[] = get(formListAtom);
         const listName = get(getListNameAtom(get));
@@ -153,8 +152,6 @@ export function listItemForm<Fields extends ListAtomItems>({
 
       const patchNamesEffect = atomEffect((get, set) => {
         const fields = get(base.fields);
-
-        console.log("runs effect");
 
         walkFields(fields, (field) => {
           const { name: originalFieldNameAtom } = get(field);
