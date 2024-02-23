@@ -9,6 +9,7 @@ node_modules/
 dist/
 tsconfig.build.tsbuildinfo
 
+*storybook.log
 storybook-static/
 # Swap the comments on the following lines if you don't wish to use zero-installs
 # Documentation here: https://yarnpkg.com/features/zero-installs

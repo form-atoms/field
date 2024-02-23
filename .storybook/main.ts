@@ -7,19 +7,16 @@ export default {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+    "@storybook/addon-mdx-gfm"
   ],
-  framework: "@storybook/react-vite",
+  framework: {
+    name: "@storybook/react-vite",
+    options: {}
+  },
   core: {
-    builder: "@storybook/builder-vite",
-    disableTelemetry: true,
+    disableTelemetry: true
   },
-  async viteFinal(config) {
-    return {
-      ...config,
-      define: {
-        ...(config.define || {}),
-        "process.env": {},
-      },
-    };
-  },
+  docs: {
+    autodocs: true
+  }
 } satisfies StorybookConfig;
