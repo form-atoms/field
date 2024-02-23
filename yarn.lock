@@ -2754,6 +2754,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-render-prop-type: "npm:0.1.0"
     semantic-release: "npm:^23.0.2"
+    shiki: "npm:^1.1.7"
     storybook: "npm:^8.0.0-beta.4"
     typescript: "npm:5.3.3"
     vite: "npm:^5.1.3"
@@ -3881,6 +3882,13 @@ __metadata:
   peerDependencies:
     semantic-release: ">=20.1.0"
   checksum: ff8c5e3b5889f370f73c0da345f7ffe9f5c85a2804dd2a362040b438fdf20be12f5244d118d67991ff17e1b62f505718a7446a9cc8318e79395b9dbaf9d31bbe
+  languageName: node
+  linkType: hard
+
+"@shikijs/core@npm:1.1.7":
+  version: 1.1.7
+  resolution: "@shikijs/core@npm:1.1.7"
+  checksum: 5bb9bef8341064a92aca556fcd1757f4b71a44830862ee63d0359712a4cae5b5bf33a9048a39828d6e9275b5317ff262f32469e9872a23455063752a67d09786
   languageName: node
   linkType: hard
 
@@ -14362,6 +14370,15 @@ __metadata:
   version: 3.0.0
   resolution: "shebang-regex@npm:3.0.0"
   checksum: 1a2bcae50de99034fcd92ad4212d8e01eedf52c7ec7830eedcf886622804fe36884278f2be8be0ea5fde3fd1c23911643a4e0f726c8685b61871c8908af01222
+  languageName: node
+  linkType: hard
+
+"shiki@npm:^1.1.7":
+  version: 1.1.7
+  resolution: "shiki@npm:1.1.7"
+  dependencies:
+    "@shikijs/core": "npm:1.1.7"
+  checksum: c107d8709d383b44e5535e01971df6cb9bada85a33a29ce34f987ce130d36d11ef91bb6965dbd6e483ab4fc2d1af36ad5ff26453ceefbe24ed82f5cc84b56101
   languageName: node
   linkType: hard
 
