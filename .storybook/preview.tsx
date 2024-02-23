@@ -5,6 +5,8 @@ import { type Preview } from "@storybook/react";
 import { code } from "./shiki-code";
 import { DocsContainer } from "./docs-container";
 
+import "@picocss/pico";
+
 const PicoDocsContainer = ({ children, ...props }: any) => {
   return (
     <DocsContainer

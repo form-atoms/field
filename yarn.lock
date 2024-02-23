@@ -2708,6 +2708,7 @@ __metadata:
   dependencies:
     "@emotion/react": "npm:^11.11.3"
     "@mdx-js/react": "npm:^2.3.0"
+    "@picocss/pico": "npm:^2.0.3"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^11.1.0"
     "@semantic-release/git": "npm:^10.0.1"
@@ -3392,6 +3393,13 @@ __metadata:
   dependencies:
     "@octokit/openapi-types": "npm:^19.0.2"
   checksum: ab78fd25490f995f79e341b00c375bade64eedb44d4c76fa3da85961003ba1efcac3cf168ea221bf4f9f5761afe91738412737acf30f1f41f3f2dbad14b872e4
+  languageName: node
+  linkType: hard
+
+"@picocss/pico@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@picocss/pico@npm:2.0.3"
+  checksum: 04cc769208d6989b1c16aeaa3eb29426e9689ef68bd4b2f71236aaeb1b76671ea28659db9eccc6ec467dc34600ad8512c38fee24abce75270c0feb8c3bcb188f
   languageName: node
   linkType: hard
 
