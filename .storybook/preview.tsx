@@ -3,6 +3,23 @@ import React from "react";
 import { type Preview } from "@storybook/react";
 
 import { code } from "./shiki-code";
+import { DocsContainer } from "./docs-container";
+
+const PicoDocsContainer = ({ children, ...props }: any) => {
+  return (
+    <DocsContainer
+      {...props}
+      DocsPage={({ toc, children }) => (
+        <div className="container">
+          <main>{children}</main>
+          {toc && <aside>{toc}</aside>}
+        </div>
+      )}
+    >
+      {children}
+    </DocsContainer>
+  );
+};
 
 export default {
   parameters: {
@@ -18,6 +35,7 @@ export default {
       },
     },
     docs: {
+      container: PicoDocsContainer,
       components: {
         code,
       },
