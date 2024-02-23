@@ -1,30 +1,32 @@
 import { DevTools } from "jotai-devtools";
 import React from "react";
+import { type Preview } from "@storybook/react";
 
-export const parameters = {
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+export default {
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    options: {
+      storySort: {
+        order: ["Intro", "*", "Changelog"],
+      },
+    },
+    docs: {
+      toc: {
+        headingSelector: "h2, h3",
+      },
     },
   },
-  options: {
-    storySort: {
-      order: ["Intro", "*", "Changelog"],
-    },
-  },
-  docs: {
-    toc: {
-      headingSelector: "h2, h3",
-    },
-  },
-};
-
-export const decorators = [
-  (Story) => (
-    <>
-      <DevTools />
-      <Story />
-    </>
-  ),
-];
+  decorators: [
+    (Story) => (
+      <>
+        <DevTools />
+        <Story />
+      </>
+    ),
+  ],
+} satisfies Preview;
