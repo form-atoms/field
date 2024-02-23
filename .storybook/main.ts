@@ -1,3 +1,5 @@
+import type { StorybookConfig } from "@storybook/react-vite";
+
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   staticDirs: ["../public"],
@@ -6,7 +8,7 @@ export default {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
   ],
-  framework: { name: "@storybook/react-vite" },
+  framework: "@storybook/react-vite",
   core: {
     builder: "@storybook/builder-vite",
     disableTelemetry: true,
@@ -20,4 +22,4 @@ export default {
       },
     };
   },
-};
+} satisfies StorybookConfig;
