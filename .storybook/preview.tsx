@@ -2,6 +2,8 @@ import { DevTools } from "jotai-devtools";
 import React from "react";
 import { type Preview } from "@storybook/react";
 
+import { code } from "./shiki-code";
+
 export default {
   parameters: {
     controls: {
@@ -16,6 +18,9 @@ export default {
       },
     },
     docs: {
+      components: {
+        code,
+      },
       toc: {
         headingSelector: "h2, h3",
       },
