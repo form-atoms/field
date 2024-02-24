@@ -1,0 +1,7 @@
+.category {
+  color: var(--pico-color-pumpkin-600);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.0625em;
+  text-transform: uppercase;
+}

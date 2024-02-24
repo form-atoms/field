@@ -6,6 +6,9 @@ import { code } from "./shiki-code";
 import { DocsContainer } from "./docs-container";
 
 import "@picocss/pico";
+import "@picocss/pico/css/pico.colors.min.css";
+
+import "./style.css";
 
 const PicoDocsContainer = ({ children, ...props }: any) => {
   return (
