@@ -5,3 +5,29 @@
   letter-spacing: 0.0625em;
   text-transform: uppercase;
 }
+
+@media (min-width: 576px) {
+  .container {
+    margin-top: var(--pico-spacing);
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    margin-top: calc(var(--pico-spacing) * 1.5);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    margin-top: calc(var(--pico-spacing) * 2);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    margin-top: calc(var(--pico-spacing) * 2.5);
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    margin-top: calc(var(--pico-spacing) * 3);
+  }
+}
