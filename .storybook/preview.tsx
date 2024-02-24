@@ -4,6 +4,7 @@ import { type Preview } from "@storybook/react";
 
 import { code } from "./components/shiki-code";
 import { PicoContainer } from "./components/pico-container";
+import { Fragment } from "./components/fragment";
 
 import "@picocss/pico";
 import "@picocss/pico/css/pico.colors.min.css";
@@ -26,6 +27,11 @@ export default {
     docs: {
       container: PicoContainer,
       components: {
+        /**
+         * The shiki-code renders <pre> so we nullify the regular pre into fragments.
+         * This prevents duplicate nesting.
+         */
+        pre: Fragment,
         code,
       },
       toc: {
