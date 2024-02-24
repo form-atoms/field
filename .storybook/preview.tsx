@@ -2,29 +2,13 @@ import { DevTools } from "jotai-devtools";
 import React from "react";
 import { type Preview } from "@storybook/react";
 
-import { code } from "./shiki-code";
-import { DocsContainer } from "./docs-container";
+import { code } from "./components/shiki-code";
+import { PicoContainer } from "./components/pico-container";
 
 import "@picocss/pico";
 import "@picocss/pico/css/pico.colors.min.css";
 
 import "./style.css";
-
-const PicoDocsContainer = ({ children, ...props }: any) => {
-  return (
-    <DocsContainer
-      {...props}
-      DocsPage={({ toc, children }) => (
-        <div className="container">
-          <main>{children}</main>
-          {toc && <aside>{toc}</aside>}
-        </div>
-      )}
-    >
-      {children}
-    </DocsContainer>
-  );
-};
 
 export default {
   parameters: {
@@ -40,7 +24,7 @@ export default {
       },
     },
     docs: {
-      container: PicoDocsContainer,
+      container: PicoContainer,
       components: {
         code,
       },
