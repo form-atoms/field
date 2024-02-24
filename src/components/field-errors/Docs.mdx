@@ -9,21 +9,26 @@ import {
 
 <Meta title="components/atomic/FieldErrors" />
 
+<hgroup>
+
 # FieldErrors
 
 A JSX component version of the [`useFieldErrors()`](https://github.com/jaredLunde/form-atoms#usefielderrors) hook.
 
-```tsx
+</hgroup>
+
+````tsx
 import { FieldErrors, textField } from "@form-atoms/field";
 
 const firstName = textField();
 
 const Example = () => (
-  <FieldErrors field={firstName}>
-    {({ errors }) => <div>{errors.join("\n")}</div>}
-  </FieldErrors>
-);
-```
+
+{" "}
+<FieldErrors field={firstName}>
+  {({ errors }) => <div>{errors.join("\n")}</div>}
+</FieldErrors>
+); ```
 
 ## Features
 
@@ -33,4 +38,4 @@ const Example = () => (
 
 ```ts
 import { FieldErrors } from "@form-atoms/field";
-```
+````

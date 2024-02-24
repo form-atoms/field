@@ -3,25 +3,28 @@ import * as CheckboxGroupStories from "./CheckboxGroup.stories";
 
 <Meta title="components/CheckboxGroup" of={CheckboxGroupStories} />
 
+<hgroup>
+
 # CheckboxGroup
 
-A generic multi-choice component enabling users to select multiple values from a list of options. It uses the [useOptions](?path=/docs/hooks-useoptions--docs) hook
+A generic multi-choice component enabling users to select multiple values from a list of options.
+It uses the [useOptions](?path=/docs/hooks-useoptions--docs) hook
 which renders the options as a list of `<input type="checkbox">`.
 
-An alternative to the [MultiSelect](?path=/docs/components-multiselect--docs) component.
+</hgroup>
 
 ```ts
 import { CheckboxGroup } from "@form-atoms/field";
 ```
 
+### Features
+
+- ✅ When empty & required, it adds the `required` prop to the checkbox, prompting user to select one of the options.
+
 #### Alternative
 
 - [MultiSelect](?path=/docs/components-multiselect--docs) component is an alternative for multi-choice answer.
 - Prefer the `CheckboxGroup` when there are few items to select from, which fit the screen viewport.
-
-### Features
-
-- ✅ When empty & required, it adds the `required` prop to the checkbox, prompting user to select one of the options.
 
 ### Props
 

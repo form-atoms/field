@@ -3,10 +3,14 @@ import Config from "./config.md?raw";
 
 <Meta title="fields/zodField" />
 
+<hgroup>
+
 # `zodField()`
 
 `zodField` extends the `fieldAtom` with `required` state which is `true` by default.
 It accepts `zod` `schema` & `optionalSchema` in its config, which are used in the validation function based on the required state.
+
+</hgroup>
 
 ### Arguments
 
@@ -19,7 +23,7 @@ Returns `fieldAtom` holding value constrained by `schema` & `optionalSchema` wit
 ```ts
 type ZodField<
   Schema extends z.Schema,
-  OptSchema extends z.Schema = ZodUndefined
+  OptSchema extends z.Schema = ZodUndefined,
 > = FieldAtom<Schema["_output"] | OptSchema["_output"]> & {
   optional: () => OptionalZodField<Schema, OptSchema>;
 } & Atom<

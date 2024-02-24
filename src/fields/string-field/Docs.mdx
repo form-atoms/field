@@ -3,10 +3,14 @@ import Config from "./config.md?raw";
 
 <Meta title="fields/stringField" />
 
+<hgroup>
+
 # `stringField(): ZodField<string | undefined>`
 
 A generic choice field to hold a key of some options e.g. in `<input type="radio">` or `<select>` elements.
 The `undefined` empty value means that no option is selected.
+
+</hgroup>
 
 Unlike [textField()](?path=/docs/fields-textfield--docs), the `stringField` can be `undefined` and does not have requirement for length..
 
