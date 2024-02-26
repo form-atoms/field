@@ -39,7 +39,7 @@ const ShikiHtml = ({ className, code }: CodeProps) => {
   }, [code, className]);
 
   return __html ? (
-    <article dangerouslySetInnerHTML={{ __html }} />
+    <div dangerouslySetInnerHTML={{ __html }} />
   ) : (
     <article aria-busy="true"></article>
   );

@@ -1,5 +1,4 @@
-import { Meta, Title, Markdown } from "@storybook/blocks";
-import Contents from "./Intro.contents.md?raw";
+import { Meta, Title } from "@storybook/blocks";
 
 <Meta title="Introduction" />
 
@@ -14,7 +13,7 @@ import Contents from "./Intro.contents.md?raw";
 
 ## About
 
-Declarative & headless form fields build on top of jotai.
+Declarative & headless form fields build on top of <a href="https://jotai.org/" target="_blank">Jotai</a>.
 
 <div>
   <a
@@ -36,17 +35,11 @@ Declarative & headless form fields build on top of jotai.
 </div>
 ## Installation
 
-```
+```bash
 npm install jotai jotai-effect form-atoms @form-atoms/field
 ```
 
-```
-yarn add jotai jotai-effect form-atoms @form-atoms/field
-```
-
 ## Features
-
-Every [form-atoms](https://github.com/jaredLunde/form-atoms#features) features the `@form-atoms/field` library provides:
 
 - ✅ Pre-configured field atoms, notably two and three state checkbox, multiselect and more.
 - ✅ Support for required and optional fields with pre-cofigured field schemas with `zod`.
@@ -54,8 +47,63 @@ Every [form-atoms](https://github.com/jaredLunde/form-atoms#features) features t
 - ✅ Full-featured & headless List component.
 - ✅ RadioControl to switch between selected fields.
 - ✅ Hooks to control the file field/input.
-- ✅ ...plus other accessibility and UX features.
+- ✅ ...plus everything from <a href="https://github.com/jaredLunde/form-atoms#features" target="_blank">form-atoms</a>.
 
 ## Contents
 
-<Markdown>{Contents}</Markdown>
+### Fields
+
+#### Primitives
+
+|                                                         |                                                                                               |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [booleanField()](?path=/docs/fields-booleanfield--docs) | 3-state checkbox with `true`, `false` or `undefined` value.                                   |
+| [dateField()](?path=/docs/fields-datefield--docs)       | A field to hold a `Date` value.                                                               |
+| [numberField()](?path=/docs/fields-numberfield--docs)   | A field to hold a `number` value.                                                             |
+| [stringField()](?path=/docs/fields-stringfield--docs)   | A generic field to hold one of options. Compatible with `<select>` or `<input type="radio">`. |
+
+#### Advanced
+
+|                                                                         |                                                                                         |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [arrayField()](?path=/docs/fields-arrayfield--docs)                     | A generic field to hold options of multi-choice inputs.                                 |
+| [checkboxField()](?path=/docs/fields-checkboxfield--docs#checkboxfield) | A true boolean 2-state checkbox field.                                                  |
+| [filesField()](?path=/docs/fields-filesfield--docs)                     | A field to hold a `File[]` value.                                                       |
+| [listField()](?path=/docs/fields-listField--docs)                       | A field to capture list of generic items.                                               |
+| [textField()](?path=/docs/fields-textfield--docs)                       | A field to hold a `string` value compatible with `<input type="text">` or `<textarea>`. |
+
+### Components
+
+#### Atomic Components
+
+|                                                                           |                                                                |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.               |
+| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
+| [PlaceholderOption](?path=/docs/components-placeholderoption--docs)       | A special `<option>` to be rendered in an empty `<Select>`.    |
+| [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
+
+#### Native Generic Components
+
+|                                                             |                                                                                                  |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) | Select multiple values from a list of generic options via `<input type="checkbox">`.             |
+| [List](?path=/docs/components-list--docs)                   | An advanced headless component to control the [listField()](?path=/docs/fields-listField--docs). |
+| [MultiSelect](?path=/docs/components-multiselect--docs)     | Select multiple values via `<select multiple>`.                                                  |
+| [RadioGroup](?path=/docs/components-radiogroup--docs)       | Select a generic option via `<input type="radio">`.                                              |
+| [Select](?path=/docs/components-select--docs)               | Select a generic option via `<select>`.                                                          |
+
+### Hooks
+
+|                                                                        |                                                                                          |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [useClearInputAction](?path=/docs/hooks-useclearinputaction--docs)     | Hook providing action to clear input value via its ref.                                  |
+| [useCheckboxFieldProps](?path=/docs/hooks-usecheckboxfieldprops--docs) | Adapts fields having `boolean` values to controlled checkbox inputs.                     |
+| [useDateFieldProps](?path=/docs/hooks-useDateFieldprops--docs)         | Adapts fields having `Date` values to controlled date inputs.                            |
+| [useFilesFieldProps](?path=/docs/hooks-useFilesfieldprops--docs)       | Adapts fields having `File[]` values to controlled `input[type=file]`.                   |
+| [useListField](?path=/docs/hooks-useListField--docs)                   | Manages a `listField()`.                                                                 |
+| [useNumberFieldProps](?path=/docs/hooks-usenumberfieldprops--docs)     | Adapts fields having `number` values to controlled numeric inputs.                       |
+| [useOptions](?path=/docs/hooks-useoptions--docs)                       | A data hook to evaluate which of option(s) is(are) active with respect to a field.       |
+| [useRequiredProps](?path=/docs/hooks-userequiredprops--docs)           | Provides the `required` prop for input based on field optionality.                       |
+| [useSelectFieldProps](?path=/docs/hooks-useselectfieldprops--docs)     | A generic hook to manage a field holding active option from primitive options.           |
+| [useSelectOptions](?path=/docs/hooks-useselectoptions--docs)           | An extension of `useOptions` hook which returns `<option>` elements instead of raw data. |
