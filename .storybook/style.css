@@ -1,5 +1,5 @@
 .category {
-  color: var(--pico-color-pumpkin-600);
+  color: var(--pico-color-slate-400);
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.0625em;
@@ -30,4 +30,35 @@
   .container {
     margin-top: calc(var(--pico-spacing) * 3);
   }
+}
+
+.copy-to-clipboard {
+  z-index: 1;
+  position: absolute;
+  top: 0.9rem;
+  right: 0;
+  padding: 0.25rem 1rem 0.25rem 0.25rem;
+  color: var(--pico-code-comment);
+  transition: color var(--pico-transition);
+}
+.copy-to-clipboard > svg {
+  display: block;
+  width: 1.125rem;
+  height: 1.125rem;
+  opacity: 0.5;
+  transition: opacity var(--pico-transition);
+}
+.copy-to-clipboard:hover svg {
+  opacity: 1;
+}
+.copy-to-clipboard svg.check {
+  color: var(--pico-color-jade-600);
+  opacity: 1;
+}
+.copy-to-clipboard[data-tooltip]::before,
+a.copy-to-clipboard[data-tooltip]::after {
+  font-size: 0.75em;
+}
+.copy-to-clipboard[data-tooltip]:has(svg.check)::after {
+  display: none;
 }

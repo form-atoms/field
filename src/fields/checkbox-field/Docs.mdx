@@ -1,7 +1,5 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { Meta, Stories } from "@storybook/blocks";
 import * as CheckboxStories from "./checkboxField.stories";
-
-import Config from "./config.md?raw";
 
 <Meta title="fields/checkboxField" of={CheckboxStories} />
 
@@ -38,6 +36,10 @@ Usable with [useCheckboxFieldProps()](?path=/docs/hooks-usecheckboxfieldprops--d
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value             |
+| ---------------- | ----------------- |
+| `value`          | `false`           |
+| `schema`         | `z.literal(true)` |
+| `optionalSchema` | `z.boolean()`     |
 
 <Stories />

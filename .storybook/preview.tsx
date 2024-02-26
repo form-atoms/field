@@ -44,7 +44,7 @@ export default {
   decorators: [
     (Story) => (
       <>
-        <DevTools />
+        <DevTools theme="dark" />
         <Story />
       </>
     ),

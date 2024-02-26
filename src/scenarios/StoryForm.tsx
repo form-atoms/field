@@ -27,7 +27,7 @@ export const StoryForm = <Fields extends FormFields>({
     <form onSubmit={submit(action("submit"))}>
       {children({ fields, required, form })}
       <div className="grid">
-        <button>Submit</button>
+        <button type="submit">Submit</button>
         {resettable && (
           <button className="secondary" type="button" onClick={reset}>
             Reset

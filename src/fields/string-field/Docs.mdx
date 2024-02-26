@@ -1,5 +1,4 @@
-import { Meta, Markdown, Stories, Canvas } from "@storybook/blocks";
-import Config from "./config.md?raw";
+import { Meta, Stories, Canvas } from "@storybook/blocks";
 
 <Meta title="fields/stringField" />
 
@@ -28,4 +27,8 @@ const companySize = stringField().optional();
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                   |
+| ---------------- | ----------------------- |
+| `value`          | `undefined`             |
+| `schema`         | `z.string()`            |
+| `optionalSchema` | `z.string().optional()` |

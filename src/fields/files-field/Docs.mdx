@@ -1,7 +1,5 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { Meta, Stories } from "@storybook/blocks";
 import * as FilesFieldStories from "./filesField.stories";
-
-import Config from "./config.md?raw";
 
 <Meta title="fields/filesField" of={FilesFieldStories} />
 
@@ -33,7 +31,11 @@ Usable with [useFilesFieldProps()](?path=/docs/hooks-useFilesfieldprops--docs)
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                                    |
+| ---------------- | ---------------------------------------- |
+| `value`          | `[]`                                     |
+| `schema`         | `z.array(z.instanceof(File)).nonempty()` |
+| `optionalSchema` | `z.array(z.instanceof(File))`            |
 
 > **NOTE:** the `File` API is not available on the server side, so in practice the schema is defined as `z.array(isServer ? z.never() : z.instanceof(File)`.
 

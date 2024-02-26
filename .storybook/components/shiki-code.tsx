@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { Fragment, useMemo } from "react";
 import { useEffect, useState } from "react";
 import { codeToHtml } from "shiki";
+import { ButtonCopyToClipboard } from "./button-copy-to-clipboard";
 
 const languagePrefix = "language-" as const;
 
@@ -39,7 +40,10 @@ const ShikiHtml = ({ className, code }: CodeProps) => {
   }, [code, className]);
 
   return __html ? (
-    <article dangerouslySetInnerHTML={{ __html }} />
+    <div style={{ position: "relative" }}>
+      <ButtonCopyToClipboard text={code} />
+      <div dangerouslySetInnerHTML={{ __html }} />
+    </div>
   ) : (
     <article aria-busy="true"></article>
   );

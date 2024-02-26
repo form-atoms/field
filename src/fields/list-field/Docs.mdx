@@ -1,5 +1,4 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
-import Config from "./config.md?raw";
+import { Meta, Stories } from "@storybook/blocks";
 
 <Meta title="fields/listField" />
 
@@ -19,7 +18,11 @@ import { listField } from "@form-atoms/field";
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                         |
+| ---------------- | ----------------------------- |
+| `value`          | `[]`                          |
+| `schema`         | `z.array(z.any()).nonempty()` |
+| `optionalSchema` | `z.array(z.any())`            |
 
 > **NOTE:** The zod schema needs to validate only the array itself.
 > There is no need for the underlying item schema, as each field of the item has a separate schema against which the field value will be validated.

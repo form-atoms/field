@@ -1,5 +1,4 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
-import Config from "./config.md?raw";
+import { Meta, Stories } from "@storybook/blocks";
 
 <Meta title="fields/arrayField" />
 
@@ -19,7 +18,11 @@ import { arrayField } from "@form-atoms/field";
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                            |
+| ---------------- | -------------------------------- |
+| `value`          | `[]`                             |
+| `schema`         | `z.array(z.string()).nonempty()` |
+| `optionalSchema` | `z.array(z.string())`            |
 
 ## Common cases
 

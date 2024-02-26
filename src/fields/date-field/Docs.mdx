@@ -1,6 +1,5 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { Meta, Stories } from "@storybook/blocks";
 import * as dateFieldStories from "./dateField.stories";
-import Config from "./config.md?raw";
 
 <Meta title="fields/dateField" of={dateFieldStories} />
 
@@ -8,7 +7,9 @@ import Config from "./config.md?raw";
 
 <p class="category">Fields</p>
 
-# `dateField(): ZodField<date | undefined>`
+# `dateField(): ZodField<Date>`
+
+A field to hold `Date` values.
 
 </hgroup>
 
@@ -26,6 +27,10 @@ Usable with [useDateFieldProps()](?path=/docs/hooks-useDateFieldProps--docs)
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                 |
+| ---------------- | --------------------- |
+| `value`          | `undefined`           |
+| `schema`         | `z.date()`            |
+| `optionalSchema` | `z.date().optional()` |
 
 <Stories />

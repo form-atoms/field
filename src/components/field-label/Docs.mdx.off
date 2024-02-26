@@ -11,7 +11,7 @@ import * as FieldLabelStories from "./FieldLabel.stories";
 import Props from "./props.md?raw";
 import renderProps from "./renderProps.md?raw";
 
-<Meta title="components/atomic/FieldLabel" />
+<Meta title="Atomic Components/FieldLabel" />
 
 # (deprecated) FieldLabel
 
