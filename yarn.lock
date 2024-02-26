@@ -2707,7 +2707,6 @@ __metadata:
   resolution: "@form-atoms/field@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.11.3"
-    "@mdx-js/react": "npm:^2.3.0"
     "@picocss/pico": "npm:^2.0.3"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^11.1.0"
@@ -2991,18 +2990,6 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 7fac2a20af8587d04a1ab5c196a8ef16ad33e40e68e56669bb2a95a30dea68d0e14e84e6e08433bef488353dffb9f702531a5bd9df4af684659cc77a48cc3244
-  languageName: node
-  linkType: hard
-
-"@mdx-js/react@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "@mdx-js/react@npm:2.3.0"
-  dependencies:
-    "@types/mdx": "npm:^2.0.0"
-    "@types/react": "npm:>=16"
-  peerDependencies:
-    react: ">=16"
-  checksum: bce1cb1dde0a9a2b786cd9167b9e2bc0e3be52c195a4a79aaf1677470566d1fd2979d01baca2380c76aa4a1a27cd89f051484e595fdc4144a428d6af39bb667a
   languageName: node
   linkType: hard
 
@@ -5271,17 +5258,6 @@ __metadata:
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 7a752e6c5e76139f258bc14827d2c574bb76d6e7eb1b240f24f79b269153cb88668c34ba7078d3de99ec1973b7022e1f788e71117bd52a287f382d24bb80be40
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:>=16":
-  version: 18.0.27
-  resolution: "@types/react@npm:18.0.27"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    "@types/scheduler": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 41660220fc54a7309155f00c1a121ad72179ebd902ba1bbe21690dab6738b07aff48bab625183112ce17f185933e2a46a71887147d4b7559e539740ba3e0fedb
   languageName: node
   linkType: hard
 
