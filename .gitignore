@@ -21,3 +21,5 @@ tsconfig.vitest-temp.json
 tsconfig.tsbuildinfo
 
 coverage/
+
+public/pico.colors.min.css

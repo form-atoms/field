@@ -10,6 +10,7 @@ import "@picocss/pico";
 import "@picocss/pico/css/pico.colors.min.css";
 
 import "./style.css";
+import { darkTheme } from "./theme";
 
 export default {
   parameters: {
@@ -25,6 +26,7 @@ export default {
       },
     },
     docs: {
+      theme: darkTheme,
       container: PicoContainer,
       components: {
         /**

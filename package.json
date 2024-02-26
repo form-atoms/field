@@ -40,11 +40,12 @@
     "storybook": "storybook dev",
     "sb": "yarn storybook",
     "sb:up": "yarn dlx storybook@latest upgrade",
-    "docs": "storybook dev --docs",
+    "sb:docs": "storybook dev --docs",
     "lint": "eslint --ext .tsx,.ts ./src",
     "lint:fix": "yarn run lint --fix",
     "semantic-release": "semantic-release",
-    "ui": "yarn upgrade-interactive"
+    "ui": "yarn upgrade-interactive",
+    "postinstall": "cp ./node_modules/@picocss/pico/css/pico.colors.min.css public/"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.3",
