@@ -1,6 +1,5 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { Meta, Stories } from "@storybook/blocks";
 import * as BooleanFieldStories from "./booleanField.stories";
-import Config from "./config.md?raw";
 
 <Meta title="fields/booleanField" of={BooleanFieldStories} />
 
@@ -33,6 +32,10 @@ Usable with [useCheckboxFieldProps()](?path=/docs/hooks-usecheckboxfieldprops--d
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                    |
+| ---------------- | ------------------------ |
+| `value`          | `undefined`              |
+| `schema`         | `z.boolean()`            |
+| `optionalSchema` | `z.boolean().optional()` |
 
 <Stories />

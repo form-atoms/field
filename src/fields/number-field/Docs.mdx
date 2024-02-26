@@ -1,6 +1,5 @@
-import { Meta, Markdown, Stories } from "@storybook/blocks";
+import { Meta, Stories } from "@storybook/blocks";
 import * as NumberFieldStories from "./numberField.stories";
-import Config from "./config.md?raw";
 
 <Meta title="fields/numberField" of={NumberFieldStories} />
 
@@ -8,7 +7,9 @@ import Config from "./config.md?raw";
 
 <p class="category">Fields</p>
 
-# `numberField(): ZodField<number | undefined>`
+# `numberField(): ZodField<number>`
+
+A field to hold `number` values.
 
 </hgroup>
 
@@ -28,6 +29,10 @@ Usable with [useNumberFieldProps()](?path=/docs/hooks-useNumberFieldProps--docs)
 
 ## Initial Config
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                   |
+| ---------------- | ----------------------- |
+| `value`          | `undefined`             |
+| `schema`         | `z.number()`            |
+| `optionalSchema` | `z.number().optional()` |
 
 <Stories />

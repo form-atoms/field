@@ -1,5 +1,4 @@
-import { Meta, Markdown } from "@storybook/blocks";
-import Config from "./config.md?raw";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="fields/zodField" />
 
@@ -16,7 +15,10 @@ It accepts `zod` `schema` & `optionalSchema` in its config, which are used in th
 
 ### Arguments
 
-<Markdown>{Config}</Markdown>
+| Param            | Value                    | Required? | Description                                                                   |
+| ---------------- | ------------------------ | --------- | ----------------------------------------------------------------------------- |
+| `schema`         | `z.Schema`               | Yes       | zod schema to be used in validation when field the field is required          |
+| `optionalSchema` | `z.Schema = z.Undefined` | No        | zod schema to be used when field is optional. Defaults to `schema.optional()` |
 
 ### Returns
 
