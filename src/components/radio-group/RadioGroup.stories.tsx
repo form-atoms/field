@@ -11,6 +11,7 @@ import {
   zodField,
 } from "../../fields";
 import { SelectField } from "../../hooks";
+import { addresses } from "../../scenarios/mocks";
 import { StoryForm } from "../../scenarios/StoryForm";
 
 const meta = {
@@ -150,11 +151,6 @@ export const RequiredArrayString = radioGroupStory({
     // label="Which name pair you like the most?"
   },
 });
-
-const addresses = [
-  { street: "Kosicka", city: "Bratislava" },
-  { street: "Hlavna", city: "Kosice" },
-];
 
 export const RequiredCustomAddress = radioGroupStory({
   name: "Required custom type (Address)",

@@ -14,7 +14,6 @@ import { StoryForm, meta } from "../../scenarios/StoryForm";
 export default {
   ...meta,
   component: Select,
-  title: "components/Select",
   args: {
     options: languageOptions,
     getValue: ({ key }: Language) => key,

@@ -27,7 +27,6 @@ const AddButton = ({ add }: AddButtonProps) => (
 
 const meta = {
   component: List,
-  title: "components/List",
   args: {
     AddButton,
     RemoveButton,

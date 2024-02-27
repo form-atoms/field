@@ -3,25 +3,14 @@ import { StoryObj } from "@storybook/react";
 import { CheckboxGroup, type CheckboxGroupProps } from "./CheckboxGroup";
 import { CheckboxGroupField } from "./CheckboxGroupField.mock";
 import { ZodArrayField, stringArrayField } from "../../fields";
+import { type Language, languageOptions } from "../../scenarios/mocks";
 import { StoryForm } from "../../scenarios/StoryForm";
-
-const languagesOptions = [
-  { name: "Pascal", key: "pascal" },
-  { name: "Typescript", key: "ts" },
-  { name: "React", key: "react" },
-  { name: "English", key: "en" },
-  { name: "Holy C", key: "hc" },
-  { name: "Tensorflow", key: "tf" },
-  { name: "Na'vi", key: "navi" },
-];
-
-type Language = (typeof languagesOptions)[number];
 
 const meta = {
   component: CheckboxGroup,
   title: "components/CheckboxGroup",
   args: {
-    options: languagesOptions,
+    options: languageOptions,
     getValue: ({ key }: Language) => key,
     getLabel: ({ name }: Language) => name,
   },
