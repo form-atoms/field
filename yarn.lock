@@ -2746,9 +2746,9 @@ __metadata:
     eslint-plugin-prettier: "npm:5.1.3"
     form-atoms: "npm:^3.2.4"
     happy-dom: "npm:^13.3.8"
-    jotai: "npm:2.6.4"
-    jotai-devtools: "npm:0.7.1"
-    jotai-effect: "npm:0.5.0"
+    jotai: "npm:2.7.0"
+    jotai-devtools: "npm:0.8.0"
+    jotai-effect: "npm:0.6.0"
     lodash.shuffle: "npm:^4.2.0"
     prettier: "npm:3.2.5"
     react: "npm:^18.2.0"
@@ -3589,7 +3589,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redux-devtools/extension@npm:^3.2.6":
+"@redux-devtools/extension@npm:^3.3.0":
   version: 3.3.0
   resolution: "@redux-devtools/extension@npm:3.3.0"
   dependencies:
@@ -10274,38 +10274,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai-devtools@npm:0.7.1":
-  version: 0.7.1
-  resolution: "jotai-devtools@npm:0.7.1"
+"jotai-devtools@npm:0.8.0":
+  version: 0.8.0
+  resolution: "jotai-devtools@npm:0.8.0"
   dependencies:
     "@mantine/core": "npm:^6.0.21"
     "@mantine/hooks": "npm:^6.0.21"
     "@mantine/prism": "npm:^6.0.21"
-    "@redux-devtools/extension": "npm:^3.2.6"
+    "@redux-devtools/extension": "npm:^3.3.0"
     javascript-stringify: "npm:^2.1.0"
     jsondiffpatch: "npm:^0.5.0"
-    react-error-boundary: "npm:^4.0.11"
+    react-error-boundary: "npm:^4.0.12"
     react-json-tree: "npm:^0.18.0"
     react-resizable-panels: "npm:^0.0.54"
   peerDependencies:
     "@emotion/react": ">=11.0.0"
     react: ">=17.0.0"
-  checksum: c6af39b12111504b4031a704c8cb7e7287f74f3e73586ce47a30ad00b9d77870d9fda860fae70b577dfa116c628f82eb88b3c0388e9587acbf48d5318006d387
+  checksum: 525834197d823298b8de8e3ba8c96d822a79b79c3efb3eb9d70047d4cfe66a95968b1a4700a4640a80a3e5578b0ef51b6750d669c45f63bbc274ab3d14a970a7
   languageName: node
   linkType: hard
 
-"jotai-effect@npm:0.5.0":
-  version: 0.5.0
-  resolution: "jotai-effect@npm:0.5.0"
+"jotai-effect@npm:0.6.0":
+  version: 0.6.0
+  resolution: "jotai-effect@npm:0.6.0"
   peerDependencies:
     jotai: ">=2.5.0"
-  checksum: 8aad4a968e479ae96141f504afa3156e924d154690e2e874d02c6aa42cbd2a78eed80717d6b31d1263a503c3416ecc582301ff689f2097790eb70bf4cef6c280
+  checksum: d7e8ecf9acc6bcdcaaad2f80f51fc3064078c4ffd557076e434dcf058d7e3b98537560460e58b3ab3ae075449703e5791f0c4feced7392767285d71b8ec311e1
   languageName: node
   linkType: hard
 
-"jotai@npm:2.6.4":
-  version: 2.6.4
-  resolution: "jotai@npm:2.6.4"
+"jotai@npm:2.7.0":
+  version: 2.7.0
+  resolution: "jotai@npm:2.7.0"
   peerDependencies:
     "@types/react": ">=17.0.0"
     react: ">=17.0.0"
@@ -10314,7 +10314,7 @@ __metadata:
       optional: true
     react:
       optional: true
-  checksum: 645611e82349d9465c945e83bcf842ca98b11e3747e34910731b22a73e0bb104d47973936031e4df1ca1e1bfee722cc5549207df8838fcf9b39b256ac233de06
+  checksum: fdea3bfcfa3e63541c509c5818b6e3669e4df795eeacba5c6cd642b1cbb77af9fbeca261f95ce53d5abd23dfc2aadc088e78398459b23ad8b173ec6d6f6470dd
   languageName: node
   linkType: hard
 
@@ -13413,14 +13413,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^4.0.11":
-  version: 4.0.11
-  resolution: "react-error-boundary@npm:4.0.11"
+"react-error-boundary@npm:^4.0.12":
+  version: 4.0.13
+  resolution: "react-error-boundary@npm:4.0.13"
   dependencies:
     "@babel/runtime": "npm:^7.12.5"
   peerDependencies:
     react: ">=16.13.1"
-  checksum: 12495458ec9f4a809f5eac684e115cc4247aa607c686f8506caf32930c53d4bb6c234428c12d7ab91708f34cfdbc6452be0ef0fb8c857cc11aea165d3e76aa27
+  checksum: 28fdf498a58621e21d93978c61719c52455bc00b778080259c5830fe003736153469ebc84f243d7989567b1196e25648c7592f7c8e47de47fcd7d12b875879b9
   languageName: node
   linkType: hard
 
