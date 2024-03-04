@@ -2707,7 +2707,7 @@ __metadata:
   resolution: "@form-atoms/field@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.11.3"
-    "@picocss/pico": "npm:^2.0.3"
+    "@picocss/pico": "npm:^2.0.6"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^11.1.0"
     "@semantic-release/git": "npm:^10.0.1"
@@ -3385,10 +3385,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@picocss/pico@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "@picocss/pico@npm:2.0.3"
-  checksum: 04cc769208d6989b1c16aeaa3eb29426e9689ef68bd4b2f71236aaeb1b76671ea28659db9eccc6ec467dc34600ad8512c38fee24abce75270c0feb8c3bcb188f
+"@picocss/pico@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "@picocss/pico@npm:2.0.6"
+  checksum: 53b014e1256ed61e576fe08fd0119eb5c22a8c23cc91465f533a14697a80f631307ce9190e74d3ebf9ae685e1afea3cd4fa1e041e2b169bf26735f77f47fb7f4
   languageName: node
   linkType: hard
 
