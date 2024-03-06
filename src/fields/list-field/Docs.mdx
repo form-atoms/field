@@ -76,7 +76,7 @@ As an example, we can require the user to insert between 1-3 recovery phrases:
 ```js
 const recoveryPhrases = listField({
   value: [],
-  schema: z.array(z.any()).nonempty().max(3),
+  schema: z.array(z.any()).nonempty().max(2),
   fields: ({ hint, phrase }) => ({
     hint: textField({ value: hint }),
     phrase: textField({ value: phrase }),

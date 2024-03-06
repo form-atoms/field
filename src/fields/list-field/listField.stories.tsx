@@ -6,12 +6,14 @@ import {
 } from "@form-atoms/list-atom";
 import { StoryObj } from "@storybook/react";
 import { FormFields, InputField } from "form-atoms";
+import { z } from "zod";
 
 import { ListField } from "./ListField.mock";
-import { listField, textField } from "..";
+import { TextField, listField, textField } from "..";
 import { StoryForm } from "../../scenarios/StoryForm";
 
 const meta = {
+  title: "fields/listField",
   component: List,
   args: {
     AddButton: ({ add }: AddButtonProps) => (
@@ -143,5 +145,75 @@ export const OptionalListField = listStory({
         </div>
       </div>
     ),
+  },
+});
+
+export const RequiredListFieldWithCustomSchema = listStory({
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The required list length can be constrained with custom `schema` passed to the `listField`, here `z.array(z.any()).nonempty().max(2)`.",
+      },
+    },
+  },
+  args: {
+    AddButton: ({
+      add,
+    }: AddButtonProps<{ phrase: TextField; hint: TextField }>) => (
+      <button type="button" className="outline" onClick={() => add()}>
+        New phrase
+      </button>
+    ),
+    atom: listField({
+      name: "recoveryPhrases",
+      value: [
+        {
+          phrase: "pinkipinkyponky",
+          hint: "favorite song (lower case; no spaces)",
+        },
+        {
+          phrase: "cherry walnut walnut",
+          hint: "trees in garden, front to back, lower case, spaced",
+        },
+      ],
+      schema: z.array(z.any()).nonempty().max(2),
+      fields: ({ hint, phrase }) => ({
+        hint: textField({ name: "hint", value: hint }),
+        phrase: textField({ name: "phrase", value: phrase }),
+      }),
+      invalidItemError:
+        "Some of your phrases are empty. Please remove or complete them.",
+    }),
+    children: ({ fields, RemoveButton }) => (
+      <div
+        style={{
+          display: "grid",
+          gridGap: 16,
+          gridTemplateColumns: "auto auto min-content",
+        }}
+      >
+        <div>
+          <InputField
+            atom={fields.phrase}
+            render={(props) => (
+              <input {...props} placeholder="Recovery phrase" />
+            )}
+          />
+        </div>
+        <div>
+          <InputField
+            atom={fields.hint}
+            render={(props) => <input {...props} placeholder="Phrase hint" />}
+          />
+        </div>
+        <div>
+          <RemoveButton />
+        </div>
+      </div>
+    ),
+  },
+  render: (props) => {
+    return <ListField label="Specify up to 3 recovery phrases:" {...props} />;
   },
 });
