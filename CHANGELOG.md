@@ -1,3 +1,12 @@
+## [4.0.16](https://github.com/form-atoms/field/compare/v4.0.15...v4.0.16) (2024-03-06)
+
+
+### Bug Fixes
+
+* **build:** omit scenarios from distributable ([dd5881c](https://github.com/form-atoms/field/commit/dd5881ca5223cfbbe2d2b5801eca7bf0677d4b11))
+* **scripts:** no postinstall ([5c4d914](https://github.com/form-atoms/field/commit/5c4d91438320aee5d6c44ef96a809174ee0d9c2b))
+* **typecheck:** merge configs & temporarily disable source errors ([0bb1fb4](https://github.com/form-atoms/field/commit/0bb1fb4aa51fcb34db52cf822af207a49f50876f))
+
 ## [4.0.15](https://github.com/form-atoms/field/compare/v4.0.14...v4.0.15) (2024-02-19)
 
 
