@@ -9,6 +9,9 @@ A `zod`-powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=read
 npm install jotai jotai-effect form-atoms @form-atoms/field zod
 ```
 
+<a aria-label="Minzipped size" href="https://bundlephobia.com/result?p=%40form-atoms/field">
+  <img alt="Bundlephobia" src="https://img.shields.io/bundlephobia/minzip/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
+</a>
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
 </a>
