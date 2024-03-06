@@ -6,7 +6,7 @@
 A `zod`-powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=readme-ov-file#fieldatom) with pre-configured schemas for type & runtime safety.
 
 ```
-yarn add jotai jotai-effect form-atoms @form-atoms/field zod
+npm install jotai jotai-effect form-atoms @form-atoms/field zod
 ```
 
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
