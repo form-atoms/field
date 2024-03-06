@@ -1,3 +1,4 @@
+import { List, type RemoveButtonProps } from "@form-atoms/list-atom";
 import { FieldAtom, fieldAtom, useFieldValue } from "form-atoms";
 
 import { FileUpload } from "./FileUpload";
@@ -6,7 +7,6 @@ import { uploadAtom } from "../../atoms";
 import { StringField, listField, stringField } from "../../fields";
 import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 import { formStory, meta } from "../../scenarios/StoryForm";
-import { List, RemoveButtonProps } from "../list";
 
 export default {
   ...meta,
@@ -39,7 +39,7 @@ const fileList = listField({
       url: "https://picsum.photos/id/2/100/100",
     },
   ],
-  builder: ({ url, id }) => ({
+  fields: ({ url, id }) => ({
     // the ID must be optional, to permit submit newly uploaded files to the server
     id: stringField({ value: id }).optional(),
     // the URL is only a fieldAtom, not zodField, as the uploadAtom extends only the fieldAtom
@@ -82,7 +82,7 @@ export const FileUploadList = formStory({
     },
     children: ({ fields }) => (
       <List
-        field={fields.fileList}
+        atom={fields.fileList}
         AddButton={({ add }) => (
           <input
             type="file"

@@ -21,32 +21,11 @@ npm install jotai jotai-effect form-atoms @form-atoms/field zod
 - [x] **Well-typed fields** required & validated by default
 - [x] **Initialized field values**, commonly with `undefined` empty value
 - [x] **Optional fields** with schema defaulting to `z.optional()`
-- [x] **Conditionally required fields** - the required state can depend on other jotai atoms.
+- [x] **Conditionally required fields** - the required state can depend on other jotai atoms
+- [x] **Generic Single-choice Components** [RadioGroup](https://form-atoms.github.io/field/?path=/docs/components-radiogroup--docs) and [Select](https://form-atoms.github.io/field/?path=/docs/components-select--docs)
+- [x] **Generic Multi-choice Components** [CheckboxGroup](https://form-atoms.github.io/field/?path=/docs/components-checkboxgroup--docs) and [MultiSelect](https://form-atoms.github.io/field/?path=/docs/components-multiselect--docs)
 
-The fields are integrated with the following components:
-
-#### Atomic Components
-
-When implementing forms, there are subtle details which you must likely implement yourself. For example you might need to implement a placeholder for a select,
-a clickable label which focuses the respective input, or a custom indicator whether the input is required or optional.
-
-We take care of these details in atomic 'low-level' components like `PlaceholderOption`, `FieldLabel` and `RequirementIndicator` respectively.
-
-#### Generic Components
-
-With other form libraries you might find yourself repeatedly wiring them into recurring scenarios like checkbox multi select or radio group.
-We've created highly reusable generic components which integrate the native components.
-For example to select a value of generic type you can use the generic [RadioGroup](https://form-atoms.github.io/field/?path=/docs/components-radiogroup--docs) or [Select](https://form-atoms.github.io/field/?path=/docs/components-select--docs).
-
-To select multiple values (array of values) you can use the generic [CheckboxGroup](https://form-atoms.github.io/field/?path=/docs/components-checkboxgroup--docs) or [MultiSelect](https://form-atoms.github.io/field/?path=/docs/components-multiselect--docs)
-
-Lastly to capture a list of objects, you will find the [ListField](https://form-atoms.github.io/field/?path=/docs/components-listfield--docs) handy.
-
-## Docs
-
-See [Storybook docs](https://form-atoms.github.io/field/)
-
-### Quick start
+### Quick Start
 
 ```tsx
 import { textField, numberField, stringField, Select } from "@form-atoms/field";
@@ -77,6 +56,8 @@ export const Form = () => {
   );
 };
 ```
+
+See [Storybook docs](https://form-atoms.github.io/field/) for more.
 
 ## Integrations
 
