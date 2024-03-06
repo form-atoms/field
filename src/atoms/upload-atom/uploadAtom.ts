@@ -1,7 +1,6 @@
+import { ExtendFieldAtom, extendAtom } from "@form-atoms/list-atom";
 import { fieldAtom } from "form-atoms";
 import { Atom, atom } from "jotai";
-
-import { ExtendFieldAtom, extendFieldAtom } from "../extendFieldAtom";
 
 type UploadStatus = "loading" | "error" | "success";
 
@@ -52,7 +51,8 @@ export const uploadAtom =
       },
     });
 
-    return extendFieldAtom(field, ({ validateStatus }) => ({
+    // @ts-expect-error field IS primitive atom
+    return extendAtom(field, ({ validateStatus }) => ({
       uploadStatus: atom<UploadStatus>((get) => {
         const status = get(validateStatus);
 

@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@emotion/react": "^11.11.3",
+    "@form-atoms/list-atom": "^1.0.4",
     "@picocss/pico": "^2.0.6",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
@@ -134,6 +135,7 @@
     ]
   },
   "peerDependencies": {
+    "@form-atoms/list-atom": "^1",
     "form-atoms": "^3",
     "jotai": "^2",
     "jotai-effect": "^0",
