@@ -10,7 +10,7 @@
   },
   "exclude": [
     "setup.ts",
-    "src/showcase/*",
+    "src/scenarios/*",
     "src/**/*.stories.tsx",
     "src/**/*.test.tsx",
     "src/**/*.test.ts",
