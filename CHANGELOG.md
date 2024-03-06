@@ -1,3 +1,10 @@
+# [4.1.0-next.1](https://github.com/form-atoms/field/compare/v4.0.16...v4.1.0-next.1) (2024-03-06)
+
+
+### Features
+
+* **listField:** Refactor list field ([#117](https://github.com/form-atoms/field/issues/117)) ([8bc738f](https://github.com/form-atoms/field/commit/8bc738fbd4048c581dd7f1bc8ec845e6dab2ce22)), closes [#116](https://github.com/form-atoms/field/issues/116)
+
 ## [4.0.16](https://github.com/form-atoms/field/compare/v4.0.15...v4.0.16) (2024-03-06)
 
 
