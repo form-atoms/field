@@ -32,20 +32,19 @@
   ],
   "scripts": {
     "build": "tsc --build ./tsconfig.build.json --force",
-    "build:docs": "storybook build --docs",
-    "build:storybook": "storybook build",
     "test": "vitest",
     "test:cov": "vitest --coverage",
     "typecheck": "vitest --typecheck.only",
     "storybook": "storybook dev",
-    "sb": "yarn storybook",
+    "sb": "yarn sb:styles && yarn storybook",
+    "sb:build": "yarn sb:styles && storybook build --docs",
+    "sb:docs": "yarn sb:styles storybook dev --docs",
+    "sb:styles": "cp ./node_modules/@picocss/pico/css/pico.colors.min.css public/",
     "sb:up": "yarn dlx storybook@latest upgrade",
-    "sb:docs": "storybook dev --docs",
     "lint": "eslint --ext .tsx,.ts ./src",
     "lint:fix": "yarn run lint --fix",
     "semantic-release": "semantic-release",
-    "ui": "yarn upgrade-interactive",
-    "postinstall": "cp ./node_modules/@picocss/pico/css/pico.colors.min.css public/"
+    "ui": "yarn upgrade-interactive"
   },
   "devDependencies": {
     "@emotion/react": "^11.11.3",
