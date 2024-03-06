@@ -1,3 +1,17 @@
+# [5.0.0](https://github.com/form-atoms/field/compare/v4.0.16...v5.0.0) (2024-03-06)
+
+
+### Features
+
+* **listField:** Refactor list field ([#117](https://github.com/form-atoms/field/issues/117)) ([13f5745](https://github.com/form-atoms/field/commit/13f5745446ad4326ceaf9f031f65b6a6ab0ad34c))
+
+
+### BREAKING CHANGES
+
+* **listField:** listAtom extracted to `@form-atoms/list-atom` which is now a required peer Dependency for `listField()`
+* **listField:** The `builder` config property from `listField` was renamed to `fields`.
+* **listField:** The `builder` config property no longer accepts `FieldAtom` as return type. `FormFields` must be returned.
+
 # [4.1.0-next.1](https://github.com/form-atoms/field/compare/v4.0.16...v4.1.0-next.1) (2024-03-06)
 
 
