@@ -1,12 +1,12 @@
 <div align="center">
   <img width="180" style="margin: 32px" src="./form-atoms-field.svg">
-  <h1>Atomic Form Fields for React</h1>
+  <h1>@form-atoms/field</h1>
 </div>
 
-Declarative & headless form fields build on top of [`jotai & form-atoms`](https://github.com/form-atom/form-atoms).
+A `zod`-powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=readme-ov-file#fieldatom) with pre-configured schemas for type & runtime safety.
 
 ```
-yarn add jotai form-atoms @form-atoms/field
+yarn add jotai jotai-effect form-atoms @form-atoms/field zod
 ```
 
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
@@ -16,27 +16,14 @@ yarn add jotai form-atoms @form-atoms/field
   <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/form-atoms/field?style=for-the-badge&labelColor=24292e">
 </a>
 
-## Motivation
+## Features
 
-`form-atoms` is the 'last-mile' of your app's form stack. It has layered, bottom-up architecture with clear separation of concerns.
-We provide you with stable pre-fabricated UI fields, while you still can go one level down and take the advantage of form primitives to develop anything you need.
+- [x] **Well-typed fields** required & validated by default
+- [x] **Initialized field values**, commonly with `undefined` empty value
+- [x] **Optional fields** with schema defaulting to `z.optional()`
+- [x] **Conditionally required fields** - the required state can depend on other jotai atoms.
 
-To contrast it with formik or react-hook-form, our form state thanks to `jotai` lives outside of the react tree, so you never lose it when the component unmounts.
-Moreover, jotai's external state unlike redux-form has compact API with 'atom-local reducer' and automatic dependency tracking leading to unmatched rendering performance.
-
-![architecture](./architecture.png)
-
-### Key differences to other form libraries
-
-#### No 'dotted keypath' access
-
-Some libraries use `path.to.field` approach with field-dependent validation or when reading field at other place. We don't need such paths, as fields can be moved arround in regular JavaScript variables, as they are jotai atoms in reality.
-
-#### Persistent form state by default
-
-With others libraries you often lose form state when your component or page unmounts. Thats because the rendered form hook maintains the store. If the library provides a contextual API, you can opt-in into the persistence, so form state lives even when you unmount the form.
-
-`form-atoms` on the other hand keeps the form state until you clear it, because it lives in jotai atoms. This way, you don't have to warn users about data loss if they navigate out of filled & unsubmitted form. Instead you can display 'continue where you left off' message when they return to the form.
+The fields are integrated with the following components:
 
 #### Atomic Components
 
@@ -45,7 +32,7 @@ a clickable label which focuses the respective input, or a custom indicator whet
 
 We take care of these details in atomic 'low-level' components like `PlaceholderOption`, `FieldLabel` and `RequirementIndicator` respectively.
 
-#### Generic Native Components
+#### Generic Components
 
 With other form libraries you might find yourself repeatedly wiring them into recurring scenarios like checkbox multi select or radio group.
 We've created highly reusable generic components which integrate the native components.
@@ -57,37 +44,30 @@ Lastly to capture a list of objects, you will find the [ListField](https://form-
 
 ## Docs
 
-Checkout [our Storybook docs](https://form-atoms.github.io/field/) and for additional primitives see the [`form-atoms` docs](https://github.com/form-atoms/form-atoms).
+See [Storybook docs](https://form-atoms.github.io/field/)
 
-## Fields
-
-For well-known field types we export data type specific `fieldAtom` constructors. These come with
-pre-defined empty value of `undefined` and a specific zod validation schema.
-Similarly to `zod` schema fields, by default all the fieldAtoms are required.
-
-### Usage
+### Quick start
 
 ```tsx
-import { numberField, stringField, Select } from "@form-atoms/field";
-import { fromAtom, useForm } from "form-atoms";
+import { textField, numberField, stringField, Select } from "@form-atoms/field";
+import { fromAtom, useForm, Input } from "form-atoms";
 import { z } from "zod";
-import { NumberField } from "@form-atoms/flowbite"; // or /chakra-ui
 
-const height = numberField();
-const age = numberField({ schema: z.number().min(18) }); // override default schema
-const character = stringField().optional(); // make field optional
-
-const personForm = formAtom({ height, age, character });
+const personForm = formAtom({
+  name: textField(),
+  age: numberField({ schema: z.number().min(18) }); // override default schema
+  character: stringField().optional(); // make field optional
+});
 
 export const Form = () => {
-  const { submit } = useForm(personForm);
+  const { fieldAtoms, submit } = useForm(personForm);
 
   return (
     <form onSubmit={submit(console.log)}>
-      <NumberField field={height} label="Height (in cm)" />
-      <NumberField field={age} label="Your age (min 18)" />
+      <InputField atom={fieldAtoms.name} label="Your Name" />
+      <InputField atom={fieldAtoms.age} label="Your age (min 18)" />
       <Select
-        field={character}
+        field={fieldAtoms.character}
         label="Character"
         options={["the good", "the bad", "the ugly"]}
         getValue={(option) => option}
