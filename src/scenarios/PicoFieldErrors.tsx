@@ -1,6 +1,6 @@
 import { FieldErrors, FieldErrorsProps } from "../components";
 
-const style = { color: "var(--del-color)" };
+const style = { color: "var(--pico-color-red-550)" };
 
 export const PicoFieldErrors = (props: Omit<FieldErrorsProps, "children">) => (
   <FieldErrors {...props}>
