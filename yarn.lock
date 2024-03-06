@@ -2707,6 +2707,7 @@ __metadata:
   resolution: "@form-atoms/field@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.11.3"
+    "@form-atoms/list-atom": "npm:^1.0.5"
     "@picocss/pico": "npm:^2.0.6"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^11.1.0"
@@ -2763,6 +2764,7 @@ __metadata:
     vitest: "npm:^1.3.1"
     zod: "npm:3.22.4"
   peerDependencies:
+    "@form-atoms/list-atom": ^1
     form-atoms: ^3
     jotai: ^2
     jotai-effect: ^0
@@ -2770,6 +2772,20 @@ __metadata:
     zod: ^3
   languageName: unknown
   linkType: soft
+
+"@form-atoms/list-atom@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@form-atoms/list-atom@npm:1.0.5"
+  dependencies:
+    react-render-prop-type: "npm:0.1.0"
+  peerDependencies:
+    form-atoms: ^3
+    jotai: ^2
+    jotai-effect: ^0
+    react: ">=16.8"
+  checksum: d9c669b80a7809199b8fd167fd280708585383f977d6f174c37206deabed339c6ed860abfdf2443db0f5aef79fe94c7cc13c031b423b8e1a0679560f363949c6
+  languageName: node
+  linkType: hard
 
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3

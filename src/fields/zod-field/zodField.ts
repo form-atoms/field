@@ -2,13 +2,14 @@ import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
 import { Atom } from "jotai";
 import { ZodAny, ZodUndefined, z } from "zod";
 
-import { ExtendFieldAtom, extendFieldAtom } from "../../atoms/extendFieldAtom";
+import { extendAtom } from "../../atoms/extendAtom";
 import {
   ReadRequired,
   ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
 } from "../../atoms/schemaValidate";
+import { ExtendFieldAtom, PrimitiveFieldAtom } from "../../atoms/types";
 
 export type ZodFieldConfig<
   Schema extends z.Schema,
@@ -68,8 +69,10 @@ export function zodField<
     optionalSchema,
   });
 
-  const zodFieldAtom = extendFieldAtom(
-    fieldAtom({ ...config, validate }),
+  const zodFieldAtom = extendAtom(
+    fieldAtom({ ...config, validate }) as unknown as PrimitiveFieldAtom<
+      z.output<Schema>
+    >,
     () => ({
       required: requiredAtom,
       ...(nameAtom ? { name: nameAtom } : {}),
@@ -79,8 +82,10 @@ export function zodField<
   zodFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
-    const optionalZodFieldAtom = extendFieldAtom(
-      fieldAtom({ ...config, validate }),
+    const optionalZodFieldAtom = extendAtom(
+      fieldAtom({ ...config, validate }) as unknown as PrimitiveFieldAtom<
+        z.output<Schema> | z.output<OptSchema>
+      >,
       () => ({
         required: requiredAtom,
         ...(nameAtom ? { name: nameAtom } : {}),

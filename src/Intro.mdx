@@ -8,12 +8,12 @@ import { Meta, Title } from "@storybook/blocks";
     style={{ margin: "24px auto" }}
     src="./form-atoms-field.svg"
   />
-  <Title>Atomic Form Fields for React</Title>
+  <Title>@form-atoms/field</Title>
 </div>
 
 ## About
 
-Declarative & headless form fields build on top of <a href="https://jotai.org/" target="_blank">Jotai</a>.
+A `zod`-powered [fieldAtoms](https://github.com/form-atoms/form-atoms?tab=readme-ov-file#fieldatom) with pre-configured schemas for type & runtime safety.
 
 <div>
   <a
@@ -36,15 +36,13 @@ Declarative & headless form fields build on top of <a href="https://jotai.org/" 
 ## Installation
 
 ```bash
-npm install jotai jotai-effect form-atoms @form-atoms/field
+npm install jotai jotai-effect form-atoms @form-atoms/field zod
 ```
 
 ## Features
 
-- ✅ Pre-configured field atoms, notably two and three state checkbox, multiselect and more.
 - ✅ Support for required and optional fields with pre-cofigured field schemas with `zod`.
 - ✅ Headless components for an accessible field label & errors.
-- ✅ Full-featured & headless List component.
 - ✅ RadioControl to switch between selected fields.
 - ✅ Hooks to control the file field/input.
 - ✅ ...plus everything from <a href="https://github.com/jaredLunde/form-atoms#features" target="_blank">form-atoms</a>.
@@ -79,19 +77,17 @@ npm install jotai jotai-effect form-atoms @form-atoms/field
 |                                                                           |                                                                |
 | ------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | [FieldErrors](?path=/docs/components-fielderrors--docs)                   | A headless component providing the field errors.               |
-| [FieldLabel](?path=/docs/components-fieldlabel--docs)                     | A headless component with accessible label.                    |
 | [PlaceholderOption](?path=/docs/components-placeholderoption--docs)       | A special `<option>` to be rendered in an empty `<Select>`.    |
 | [RequirementIndicator](?path=/docs/components-requirementindicator--docs) | Displays an indicator whether a field is required or optional. |
 
 #### Native Generic Components
 
-|                                                             |                                                                                                  |
-| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) | Select multiple values from a list of generic options via `<input type="checkbox">`.             |
-| [List](?path=/docs/components-list--docs)                   | An advanced headless component to control the [listField()](?path=/docs/fields-listField--docs). |
-| [MultiSelect](?path=/docs/components-multiselect--docs)     | Select multiple values via `<select multiple>`.                                                  |
-| [RadioGroup](?path=/docs/components-radiogroup--docs)       | Select a generic option via `<input type="radio">`.                                              |
-| [Select](?path=/docs/components-select--docs)               | Select a generic option via `<select>`.                                                          |
+|                                                             |                                                                                      |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [CheckboxGroup](?path=/docs/components-checkboxgroup--docs) | Select multiple values from a list of generic options via `<input type="checkbox">`. |
+| [MultiSelect](?path=/docs/components-multiselect--docs)     | Select multiple values via `<select multiple>`.                                      |
+| [RadioGroup](?path=/docs/components-radiogroup--docs)       | Select a generic option via `<input type="radio">`.                                  |
+| [Select](?path=/docs/components-select--docs)               | Select a generic option via `<select>`.                                              |
 
 ### Hooks
 
@@ -101,7 +97,6 @@ npm install jotai jotai-effect form-atoms @form-atoms/field
 | [useCheckboxFieldProps](?path=/docs/hooks-usecheckboxfieldprops--docs) | Adapts fields having `boolean` values to controlled checkbox inputs.                     |
 | [useDateFieldProps](?path=/docs/hooks-useDateFieldprops--docs)         | Adapts fields having `Date` values to controlled date inputs.                            |
 | [useFilesFieldProps](?path=/docs/hooks-useFilesfieldprops--docs)       | Adapts fields having `File[]` values to controlled `input[type=file]`.                   |
-| [useListField](?path=/docs/hooks-useListField--docs)                   | Manages a `listField()`.                                                                 |
 | [useNumberFieldProps](?path=/docs/hooks-usenumberfieldprops--docs)     | Adapts fields having `number` values to controlled numeric inputs.                       |
 | [useOptions](?path=/docs/hooks-useoptions--docs)                       | A data hook to evaluate which of option(s) is(are) active with respect to a field.       |
 | [useRequiredProps](?path=/docs/hooks-userequiredprops--docs)           | Provides the `required` prop for input based on field optionality.                       |

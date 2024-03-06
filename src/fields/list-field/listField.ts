@@ -1,67 +1,55 @@
+import { ListAtom, ListAtomConfig, listAtom } from "@form-atoms/list-atom";
+import { FormFieldValues, FormFields } from "form-atoms";
 import { Atom } from "jotai";
 import { ZodAny, ZodArray, z } from "zod";
 
-import { extendFieldAtom } from "../../atoms/extendFieldAtom";
-import {
-  ListAtom,
-  ListAtomConfig,
-  ListAtomItems,
-  ListAtomSubmitValue,
-  ListAtomValue,
-  listAtom,
-} from "../../atoms/list-atom";
+import { extendAtom } from "../../atoms/extendAtom";
 import {
   ReadRequired,
   ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
 } from "../../atoms/schemaValidate";
+import { FormFieldSubmitValues } from "../../components";
 import { ZodParams, defaultParams } from "../zod-field";
 
-export type ExtendListAtom<
-  Fields extends ListAtomItems,
-  Value extends ListAtomValue<Fields>,
-  State,
-> =
+export type ExtendListAtom<Fields extends FormFields, Value, State> =
   ListAtom<Fields, Value> extends Atom<infer DefaultState>
     ? Atom<DefaultState & State>
     : never;
 
 export type ListField<
-  Fields extends ListAtomItems,
-  Value extends ListAtomValue<Fields>,
+  Fields extends FormFields,
+  Value,
   RequiredAtom = Atom<boolean>,
 > = ExtendListAtom<Fields, Value, { required: RequiredAtom }> & {
   optional: (readRequired?: ReadRequired) => OptionalListField<Fields>;
 };
 
 export type ListFieldSubmitValue<
-  Fields extends ListAtomItems,
+  Fields extends FormFields,
   Required,
 > = Required extends WritableRequiredAtom
-  ? ListAtomSubmitValue<Fields>[]
+  ? FormFieldSubmitValues<Fields>[]
   : Required extends Atom<boolean>
-    ? [ListAtomSubmitValue<Fields>, ...ListAtomSubmitValue<Fields>[]]
+    ? [FormFieldSubmitValues<Fields>, ...FormFieldSubmitValues<Fields>[]]
     : never;
 
 /**
  * This is an alias to ListField, it hides the 2nd and 3rd argument from type tooltip.
  */
-type RequiredListField<Fields extends ListAtomItems> = ListField<
+type RequiredListField<Fields extends FormFields> = ListField<
   Fields,
-  ListAtomValue<Fields>
+  FormFieldValues<Fields>
 >;
 
-export type OptionalListField<Fields extends ListAtomItems> = ListField<
+export type OptionalListField<Fields extends FormFields> = ListField<
   Fields,
-  ListAtomValue<Fields>,
+  FormFieldValues<Fields>,
   WritableRequiredAtom
 >;
 
-export const listField = <
-  Fields extends ListAtomItems,
-  Value extends ListAtomValue<Fields>,
->({
+export const listField = <Fields extends FormFields, Value>({
   required_error = defaultParams.required_error,
   schema,
   optionalSchema,
@@ -76,8 +64,8 @@ export const listField = <
     optionalSchema: optionalSchema ?? z.array(z.any()),
   });
 
-  const listFieldAtom = extendFieldAtom(
-    listAtom({ ...config, validate }),
+  const listFieldAtom = extendAtom(
+    listAtom({ ...config, validate }) as any,
     () => ({
       required: requiredAtom,
     }),
@@ -86,8 +74,8 @@ export const listField = <
   listFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
-    const optionalZodFieldAtom = extendFieldAtom(
-      listAtom({ ...config, validate }),
+    const optionalZodFieldAtom = extendAtom(
+      listAtom({ ...config, validate }) as any,
       () => ({ required: requiredAtom }),
     ) as unknown as OptionalListField<Fields>;
 
