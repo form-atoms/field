@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/form-atoms/field/compare/v5.0.0...v5.0.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* **RequiredAtom:** make truly read-only atom instead of PrimitiveAtom ([9bb7517](https://github.com/form-atoms/field/commit/9bb75170d4db914ddf66c442b451138feacd7932))
+
 # [5.0.0](https://github.com/form-atoms/field/compare/v4.0.16...v5.0.0) (2024-03-06)
 
 
