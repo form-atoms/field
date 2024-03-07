@@ -5,6 +5,7 @@ import { ZodAny, ZodArray, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
 import {
+  DefaultRequiredAtom,
   ReadRequired,
   ValidateConfig,
   WritableRequiredAtom,
@@ -21,7 +22,7 @@ export type ExtendListAtom<Fields extends FormFields, Value, State> =
 export type ListField<
   Fields extends FormFields,
   Value,
-  RequiredAtom = Atom<boolean>,
+  RequiredAtom = DefaultRequiredAtom,
 > = ExtendListAtom<Fields, Value, { required: RequiredAtom }> & {
   optional: (readRequired?: ReadRequired) => OptionalListField<Fields>;
 };
@@ -31,7 +32,7 @@ export type ListFieldSubmitValue<
   Required,
 > = Required extends WritableRequiredAtom
   ? FormFieldSubmitValues<Fields>[]
-  : Required extends Atom<boolean>
+  : Required extends DefaultRequiredAtom
     ? [FormFieldSubmitValues<Fields>, ...FormFieldSubmitValues<Fields>[]]
     : never;
 

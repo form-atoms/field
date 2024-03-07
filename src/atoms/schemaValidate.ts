@@ -1,6 +1,7 @@
 import { RESET } from "form-atoms";
 import { zodValidate } from "form-atoms/zod";
-import { Getter, WritableAtom, atom } from "jotai";
+import type { Getter, WritableAtom } from "jotai";
+import { atom } from "jotai";
 import { atomWithDefault } from "jotai/utils";
 import { ZodUndefined, z } from "zod";
 
@@ -12,16 +13,16 @@ export type ValidateConfig<
   optionalSchema?: OptSchema | ((get: Getter) => OptSchema);
 };
 
+export type DefaultRequiredAtom = typeof defaultRequiredAtom;
 export type WritableRequiredAtom = WritableAtom<
   boolean,
   [boolean | typeof RESET | ((prev: boolean) => boolean)],
   void
 >;
-
 /**
  * Read-only atom for default zodFields which all are required.
  */
-const defaultRequiredAtom = atom(true as const);
+const defaultRequiredAtom = atom(() => true);
 defaultRequiredAtom.debugLabel = "zodField/defaultRequired";
 
 export type ReadRequired = Parameters<typeof atomWithDefault<boolean>>[0];

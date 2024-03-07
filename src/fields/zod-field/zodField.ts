@@ -4,9 +4,10 @@ import { ZodAny, ZodUndefined, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
 import {
-  ReadRequired,
-  ValidateConfig,
-  WritableRequiredAtom,
+  type DefaultRequiredAtom,
+  type ReadRequired,
+  type ValidateConfig,
+  type WritableRequiredAtom,
   schemaValidate,
 } from "../../atoms/schemaValidate";
 import { ExtendFieldAtom, PrimitiveFieldAtom } from "../../atoms/types";
@@ -24,7 +25,7 @@ export type ZodFieldSubmitValue<Field> =
   Field extends ZodField<infer Schema, infer OptSchema, infer Required>
     ? Required extends WritableRequiredAtom
       ? Schema["_output"] | OptSchema["_output"]
-      : Required extends Atom<boolean>
+      : Required extends DefaultRequiredAtom
         ? Schema["_output"]
         : never
     : never;
@@ -45,7 +46,7 @@ type RequiredZodField<
 export type ZodField<
   Schema extends z.Schema = ZodAny,
   OptSchema extends z.Schema = ZodUndefined,
-  RequiredAtom = Atom<boolean>,
+  RequiredAtom = DefaultRequiredAtom,
 > = ExtendFieldAtom<
   Schema["_output"] | OptSchema["_output"],
   { required: RequiredAtom }
