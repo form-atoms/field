@@ -26,6 +26,9 @@ export default {
       },
     },
     docs: {
+      canvas: {
+        sourceState: "none",
+      },
       theme: darkTheme,
       container: PicoContainer,
       components: {
