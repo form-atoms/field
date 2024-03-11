@@ -1,8 +1,8 @@
 import { ExtractAtomValue } from "jotai";
 import { z } from "zod";
 
-import { ZodFieldConfig, zodField } from "..";
-import { ZodParams } from "../zod-field/zodParams";
+import { zodField } from "..";
+import { FieldConfig } from "../field";
 
 export type DigitField = ReturnType<typeof digitField>;
 
@@ -25,9 +25,9 @@ const zodDigitSchema = z.union([
 
 type ZodDigitSchema = typeof zodDigitSchema;
 
-export const digitField = ({
-  ...config
-}: Partial<ZodFieldConfig<ZodDigitSchema>> & ZodParams = {}) =>
+export const digitField = (
+  config: Omit<FieldConfig<ZodDigitSchema>, "schema" | "optionalSchema"> = {},
+) =>
   zodField({
     value: undefined,
     schema: zodDigitSchema,

@@ -1,8 +1,9 @@
 import { ExtractAtomValue } from "jotai";
 import { ZodBoolean, z } from "zod";
 
-import { ZodFieldConfig, zodField } from "..";
-import { ZodParams, defaultParams } from "../zod-field/zodParams";
+import { zodField } from "..";
+import { FieldConfig } from "../field";
+import { defaultParams } from "../zod-field/zodParams";
 
 export type BooleanField = ReturnType<typeof booleanField>;
 
@@ -13,7 +14,7 @@ export type BooleanFieldValue = ExtractAtomValue<
 export const booleanField = ({
   required_error = defaultParams.required_error,
   ...config
-}: Partial<ZodFieldConfig<ZodBoolean>> & ZodParams = {}) =>
+}: Omit<FieldConfig<ZodBoolean>, "schema" | "optionalSchema"> = {}) =>
   zodField({
     value: undefined,
     schema: z.boolean({ required_error }),
