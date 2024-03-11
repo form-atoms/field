@@ -1,18 +1,18 @@
-import { FieldAtom, FieldAtomConfig, fieldAtom } from "form-atoms";
+import { type FieldAtom, type FieldAtomConfig, fieldAtom } from "form-atoms";
 import { Atom } from "jotai";
-import { ZodAny, ZodUndefined, z } from "zod";
+import { type ZodAny, type ZodUndefined, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
+import type { ExtendFieldAtom, PrimitiveFieldAtom } from "../../atoms/types";
 import {
   type DefaultRequiredAtom,
   type ReadRequired,
   type ValidateConfig,
   type WritableRequiredAtom,
   schemaValidate,
-} from "../../atoms/schemaValidate";
-import { ExtendFieldAtom, PrimitiveFieldAtom } from "../../atoms/types";
+} from "../../utils";
 
-export type ZodFieldConfig<
+type ZodFieldConfig<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
 > = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &

@@ -4,14 +4,14 @@ import { Atom } from "jotai";
 import { ZodAny, ZodArray, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
+import { FormFieldSubmitValues } from "../../components";
 import {
   DefaultRequiredAtom,
   ReadRequired,
   ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
-} from "../../atoms/schemaValidate";
-import { FormFieldSubmitValues } from "../../components";
+} from "../../utils/schemaValidate";
 import { ZodParams, defaultParams } from "../zod-field";
 
 export type ExtendListAtom<Fields extends FormFields, Value, State> =
