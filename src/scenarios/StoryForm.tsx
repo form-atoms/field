@@ -42,7 +42,7 @@ export type FormStory = StoryObj<typeof meta>;
 
 export const meta = {
   component: StoryForm,
-  args: { required: true },
+  args: { required: false },
   argTypes: {
     required: {
       description: "Whether browser should require", // TODO: does not work

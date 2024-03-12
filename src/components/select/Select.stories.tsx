@@ -27,7 +27,6 @@ const selectStory = <Option, Field extends TSelectField>(
       Omit<Partial<SelectProps<Option, Field>>, "field">;
   } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
-  ...storyObj,
   decorators: [
     (Story: () => JSX.Element) => (
       <StoryForm fields={{ field: storyObj.args.field }}>
@@ -39,6 +38,7 @@ const selectStory = <Option, Field extends TSelectField>(
       </StoryForm>
     ),
   ],
+  ...storyObj,
 });
 
 export const RequiredString = selectStory({

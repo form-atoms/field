@@ -27,7 +27,6 @@ const radioGroupStory = <Option, Field extends SelectField>(
       Omit<Partial<RadioGroupProps<Option, Field>>, "field">;
   } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
-  ...storyObj,
   decorators: [
     (Story: () => JSX.Element) => (
       <StoryForm fields={{ field: storyObj.args.field }}>
@@ -39,6 +38,7 @@ const radioGroupStory = <Option, Field extends SelectField>(
       </StoryForm>
     ),
   ],
+  ...storyObj,
 });
 
 const bashAnswers = [
