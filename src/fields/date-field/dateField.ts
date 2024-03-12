@@ -1,8 +1,10 @@
-import { ExtractAtomValue } from "jotai";
+import { type ExtractAtomValue } from "jotai";
 import { ZodDate, z } from "zod";
 
-import { ZodFieldConfig, zodField } from "..";
-import { ZodParams, defaultParams } from "../zod-field/zodParams";
+import { zodField } from "..";
+import { prepareSchema } from "../../utils";
+import { type FieldConfig } from "../field";
+import { defaultParams } from "../zod-field/zodParams";
 
 export type DateField = ReturnType<typeof dateField>;
 
@@ -12,10 +14,17 @@ export type DateFieldValue = ExtractAtomValue<
 
 export const dateField = ({
   required_error = defaultParams.required_error,
+  schema,
+  optionalSchema,
   ...config
-}: Partial<ZodFieldConfig<ZodDate>> & ZodParams = {}) =>
+}: FieldConfig<ZodDate> = {}) =>
   zodField({
     value: undefined,
-    schema: z.date({ required_error }),
+    ...prepareSchema({
+      initial: {
+        schema: z.date({ required_error }),
+      },
+      user: { schema, optionalSchema },
+    }),
     ...config,
   });

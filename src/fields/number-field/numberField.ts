@@ -1,9 +1,10 @@
 import { ExtractAtomValue } from "jotai";
 import { ZodNumber, z } from "zod";
 
-import { ZodFieldConfig, zodField } from "..";
-import { ZodParams, defaultParams } from "../zod-field/zodParams";
-
+import { zodField } from "..";
+import { prepareSchema } from "../../utils";
+import { FieldConfig } from "../field";
+import { defaultParams } from "../zod-field/zodParams";
 export type NumberField = ReturnType<typeof numberField>;
 
 export type NumberFieldValue = ExtractAtomValue<
@@ -12,10 +13,17 @@ export type NumberFieldValue = ExtractAtomValue<
 
 export const numberField = ({
   required_error = defaultParams.required_error,
+  schema,
+  optionalSchema,
   ...config
-}: Partial<ZodFieldConfig<ZodNumber>> & ZodParams = {}) =>
+}: FieldConfig<ZodNumber> = {}) =>
   zodField({
     value: undefined,
-    schema: z.number({ required_error }),
+    ...prepareSchema({
+      initial: {
+        schema: z.number({ required_error }),
+      },
+      user: { schema, optionalSchema },
+    }),
     ...config,
   });

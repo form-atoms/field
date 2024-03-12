@@ -1,7 +1,8 @@
 import { ComponentProps } from "react";
 
-import { FieldErrors, FieldLabel } from "../../components";
+import { FieldLabel } from "../../components";
 import { TextFieldProps, useTextFieldProps } from "../../hooks";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 export const TextInput = ({
   field,
@@ -15,7 +16,7 @@ export const TextInput = ({
     <p>
       <FieldLabel field={field} label={label} />
       <input {...inputProps} {...props} />
-      <FieldErrors field={field} />
+      <PicoFieldErrors field={field} />
     </p>
   );
 };

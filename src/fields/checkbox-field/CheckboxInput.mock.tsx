@@ -1,9 +1,10 @@
-import { FieldErrors, FieldLabel } from "../../components";
+import { FieldLabel } from "../../components";
 import {
   type CheckboxFieldProps,
   useCheckboxFieldProps,
   useRequiredProps,
 } from "../../hooks";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 export const CheckboxInput = ({
   field,
@@ -19,7 +20,7 @@ export const CheckboxInput = ({
       <input type="checkbox" {...props} {...requiredProps} />
       <FieldLabel field={field} label={label} />
       <div>
-        <FieldErrors field={field} />
+        <PicoFieldErrors field={field} />
       </div>
     </div>
   );

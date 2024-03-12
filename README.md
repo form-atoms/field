@@ -37,7 +37,7 @@ import { z } from "zod";
 
 const personForm = formAtom({
   name: textField(),
-  age: numberField({ schema: z.number().min(18) }); // override default schema
+  age: numberField({ schema: (s) => s.min(18) }); // extend the default schema
   character: stringField().optional(); // make field optional
 });
 

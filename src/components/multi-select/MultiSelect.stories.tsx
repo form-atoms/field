@@ -19,11 +19,11 @@ const MultiSelectField = <Option, Field extends ZodArrayField>({
 }: {
   label: ReactNode;
 } & MultiSelectProps<Option, Field>) => (
-  <div style={{ margin: "20px 0" }}>
+  <>
     <FieldLabel field={field} label={label} />
     <MultiSelect field={field} {...props} />
     <FieldErrors field={field} />
-  </div>
+  </>
 );
 
 export const RequiredArrayString = formStory({

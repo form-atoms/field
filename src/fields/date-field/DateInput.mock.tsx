@@ -1,5 +1,6 @@
-import { FieldErrors, FieldLabel } from "../../components";
+import { FieldLabel } from "../../components";
 import { DateFieldProps, useDateFieldProps } from "../../hooks";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 export const getDateString = (date: Date = new Date()) =>
   date.toISOString().slice(0, 10);
@@ -15,7 +16,7 @@ export const DateInput = ({ field, label, initialValue }: DateFieldProps) => {
         {...props}
         value={`${value ? getDateString(value) : ""}`}
       />
-      <FieldErrors field={field} />
+      <PicoFieldErrors field={field} />
     </div>
   );
 };

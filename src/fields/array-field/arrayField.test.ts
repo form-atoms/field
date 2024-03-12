@@ -1,5 +1,10 @@
-import { renderHook } from "@testing-library/react";
-import { formAtom, useFormValues } from "form-atoms";
+import { act, renderHook } from "@testing-library/react";
+import {
+  formAtom,
+  useFieldActions,
+  useFieldErrors,
+  useFormValues,
+} from "form-atoms";
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
 
@@ -18,6 +23,24 @@ describe("arrayField()", () => {
     expect(result.current).toEqual({
       classic: [],
       explicitUndefined: [],
+    });
+  });
+
+  describe("schema", () => {
+    it("extends the internal schema", async () => {
+      const field = arrayField({
+        elementSchema: z.number(),
+        value: [1, 2, 3],
+        schema: (s) => s.max(2),
+      });
+
+      const { result: actions } = renderHook(() => useFieldActions(field));
+      const { result: errors } = renderHook(() => useFieldErrors(field));
+
+      await act(async () => actions.current.validate());
+      expect(errors.current).toEqual([
+        "Array must contain at most 2 element(s)",
+      ]);
     });
   });
 });

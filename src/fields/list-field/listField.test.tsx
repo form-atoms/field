@@ -1,10 +1,16 @@
 import { act, renderHook } from "@testing-library/react";
-import { formAtom, useFormSubmit } from "form-atoms";
+import {
+  formAtom,
+  useFieldActions,
+  useFieldErrors,
+  useFormSubmit,
+} from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { listField } from "./listField";
 import { useFieldError } from "../../hooks";
 import { numberField } from "../number-field";
+import { textField } from "../text-field";
 
 describe("listField()", () => {
   describe("when required (default)", () => {
@@ -66,6 +72,30 @@ describe("listField()", () => {
       const listRef = list.optional().optional();
 
       expect(listRef).toEqual(list);
+    });
+  });
+
+  describe("schema", () => {
+    it("extends the internal schema", async () => {
+      const field = listField({
+        value: [
+          { email: "primary@email.com" },
+          { email: "secondary@email.com" },
+          { email: "other@email.com" },
+        ],
+        fields: ({ email }) => ({
+          email: textField({ value: email }),
+        }),
+        schema: (s) => s.max(2),
+      });
+
+      const { result: actions } = renderHook(() => useFieldActions(field));
+      const { result: errors } = renderHook(() => useFieldErrors(field));
+
+      await act(async () => actions.current.validate());
+      expect(errors.current).toEqual([
+        "Array must contain at most 2 element(s)",
+      ]);
     });
   });
 

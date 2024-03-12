@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 import { filesField } from "./filesField";
 import { FilesInput } from "./FilesInput.mock";
 import { formStory, meta } from "../../scenarios/StoryForm";
@@ -31,25 +29,25 @@ export const Optional = formStory({
   },
 });
 
-export const Multiple = formStory({
+export const MultipleMax3 = formStory({
   parameters: {
     docs: {
       description: {
         story:
-          "Pass custom schema to field config e.g. `z.array(z.instanceof(File)).nonempty().max(2)` to limit min/max number of files.",
+          "Pass a custom schema function to extend the default schema to limit min/max number of files. Here, we add `{schema: (s) => s.max(3)}` to the field config.",
       },
     },
   },
   args: {
     fields: {
       attachments: filesField({
-        schema: z.array(z.instanceof(File)).nonempty().max(2),
+        schema: (s) => s.max(3),
       }),
     },
     children: ({ fields }) => (
       <FilesInput
         field={fields.attachments}
-        label="Upload attachments (max 2)"
+        label="Upload attachments (max 3)"
         multiple
       />
     ),

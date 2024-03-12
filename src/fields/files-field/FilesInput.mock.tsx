@@ -1,7 +1,8 @@
 import { InputHTMLAttributes } from "react";
 
-import { FieldErrors, FieldLabel } from "../../components";
+import { FieldLabel } from "../../components";
 import { type FilesFieldProps, useFilesFieldProps } from "../../hooks";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 export const FilesInput = ({
   field,
@@ -15,7 +16,7 @@ export const FilesInput = ({
       <FieldLabel field={field} label={label} />
       <input type="file" {...inputProps} {...props} />
       <div>
-        <FieldErrors field={field} />
+        <PicoFieldErrors field={field} />
       </div>
     </div>
   );

@@ -13,14 +13,14 @@ export const CheckboxGroupField = <Option, Field extends ZodArrayField>({
 }: CheckboxGroupFieldProps<Option, Field>) => (
   <>
     <FieldLabel field={field} label={label} />
-    <p>
+    <section>
       <CheckboxGroup
         field={field}
         getLabel={getLabel}
         getValue={getValue}
         options={options}
       />
-    </p>
+    </section>
     <PicoFieldErrors field={field} />
   </>
 );

@@ -1,8 +1,9 @@
 import { ExtractAtomValue } from "jotai";
 import { ZodBoolean, ZodLiteral, z } from "zod";
 
-import { ZodFieldConfig, zodField } from "..";
-import { ZodParams, defaultParams } from "../zod-field/zodParams";
+import { zodField } from "..";
+import { FieldConfig } from "../field";
+import { defaultParams } from "../zod-field/zodParams";
 
 export type CheckboxField = ReturnType<typeof checkboxField>;
 
@@ -16,11 +17,10 @@ export const checkboxField = ({
   ...config
 }: Partial<
   Omit<
-    ZodFieldConfig<ZodLiteral<true>, ZodBoolean>,
+    FieldConfig<ZodLiteral<true>, ZodBoolean>,
     "schema" | "optionalSchema" | "validate"
   >
-> &
-  ZodParams = {}) =>
+> = {}) =>
   zodField({
     value,
     /**

@@ -25,7 +25,7 @@ export const StoryForm = <Fields extends FormFields>({
 
   return (
     <form onSubmit={submit(action("submit"))}>
-      {children({ fields, required, form })}
+      <section>{children({ fields, required, form })}</section>
       <div className="grid">
         <button type="submit">Submit</button>
         {resettable && (
@@ -42,7 +42,7 @@ export type FormStory = StoryObj<typeof meta>;
 
 export const meta = {
   component: StoryForm,
-  args: { required: true },
+  args: { required: false },
   argTypes: {
     required: {
       description: "Whether browser should require", // TODO: does not work

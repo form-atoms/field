@@ -63,20 +63,20 @@ const environmentVariables = listField({
 
 #### Type
 
-`ZodArray<ZodAny, "atleastone">`
+`ZodArray<ZodAny, "atleastone"> | (schema: ZodArray<ZodAny, "atleastone">) => ZodArray<ZodAny, "atleastone">`
 
 #### Description
 
-You can constrain the min or max number of list items by passing custom schema.
+You can constrain the min or max number of list items by extending the default schema or passing a custom one:
 
 #### Usage
 
-As an example, we can require the user to insert between 1-3 recovery phrases:
+As an example, we can require the user to insert one or two recovery phrases:
 
 ```js
 const recoveryPhrases = listField({
   value: [],
-  schema: z.array(z.any()).nonempty().max(2),
+  schema: (s) => s.max(2),
   fields: ({ hint, phrase }) => ({
     hint: textField({ value: hint }),
     phrase: textField({ value: phrase }),
