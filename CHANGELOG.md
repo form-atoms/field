@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/form-atoms/field/compare/v5.0.1...v5.1.0) (2024-03-12)
+
+
+### Features
+
+* **extend-schema:** better schema callback with the initial schema for extension ([#122](https://github.com/form-atoms/field/issues/122)) ([44aa7ac](https://github.com/form-atoms/field/commit/44aa7ac778428e4df8ba723e06f19fbbe5219037))
+
 ## [5.0.1](https://github.com/form-atoms/field/compare/v5.0.0...v5.0.1) (2024-03-07)
 
 
