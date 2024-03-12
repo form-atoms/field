@@ -45,6 +45,23 @@ export const InitializedInput = formStory({
   },
 });
 
+export const ExtendSchema = formStory({
+  args: {
+    fields: {
+      deadline: dateField({
+        name: "deadline",
+        schema: (s) => s.min(new Date(), { message: "Must be in the future" }),
+      }),
+    },
+    children: ({ fields }) => (
+      <DateInput
+        field={fields.deadline}
+        label="Dead line (can't be in the past)"
+      />
+    ),
+  },
+});
+
 const nowPlusDays = (days = 0) => {
   const date = new Date();
   date.setDate(date.getDate() + days);

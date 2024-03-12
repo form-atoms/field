@@ -43,3 +43,14 @@ export const Initialized = formStory({
     ),
   },
 });
+
+export const ExtendedSchema = formStory({
+  args: {
+    fields: {
+      email: textField({ name: "email", schema: (s) => s.email() }),
+    },
+    children: ({ fields }) => (
+      <TextInput field={fields.email} label="Your email" />
+    ),
+  },
+});

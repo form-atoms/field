@@ -39,3 +39,20 @@ export const Initialized = formStory({
     ),
   },
 });
+
+export const ExtendSchema = formStory({
+  args: {
+    fields: {
+      degrees: numberField({
+        name: "degrees",
+        schema: (s) => s.min(0).max(360),
+      }),
+    },
+    children: ({ fields }) => (
+      <NumberInput
+        field={fields.degrees}
+        label="Degrees of an angle (0-360) inclusive"
+      />
+    ),
+  },
+});

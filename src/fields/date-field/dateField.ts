@@ -21,10 +21,10 @@ export const dateField = ({
   zodField({
     value: undefined,
     ...prepareSchema({
-      user: { schema, optionalSchema },
       initial: {
         schema: z.date({ required_error }),
       },
+      user: { schema, optionalSchema },
     }),
     ...config,
   });
