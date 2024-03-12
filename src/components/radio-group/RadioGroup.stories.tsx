@@ -30,11 +30,7 @@ const radioGroupStory = <Option, Field extends SelectField>(
   decorators: [
     (Story: () => JSX.Element) => (
       <StoryForm fields={{ field: storyObj.args.field }}>
-        {() => (
-          <p>
-            <Story />
-          </p>
-        )}
+        {() => <Story />}
       </StoryForm>
     ),
   ],

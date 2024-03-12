@@ -27,11 +27,7 @@ const checkboxGroupStory = <Option, Field extends ZodArrayField>(
   decorators: [
     (Story: () => JSX.Element) => (
       <StoryForm fields={{ field: storyObj.args.field }}>
-        {() => (
-          <p>
-            <Story />
-          </p>
-        )}
+        {() => <Story />}
       </StoryForm>
     ),
   ],
