@@ -5,10 +5,10 @@ import { ZodAny, ZodArray, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
 import { FormFieldSubmitValues } from "../../components";
+import { UserValidateConfig, prepareSchema } from "../../utils";
 import {
   DefaultRequiredAtom,
   ReadRequired,
-  ValidateConfig,
   WritableRequiredAtom,
   schemaValidate,
 } from "../../utils/schemaValidate";
@@ -50,20 +50,28 @@ export type OptionalListField<Fields extends FormFields> = ListField<
   WritableRequiredAtom
 >;
 
+type ListFieldConfig<Fields extends FormFields, Value> = ListAtomConfig<
+  Fields,
+  Value
+> &
+  ZodParams &
+  UserValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>;
+
 export const listField = <Fields extends FormFields, Value>({
   required_error = defaultParams.required_error,
   schema,
   optionalSchema,
   ...config
-}: ListAtomConfig<Fields, Value> &
-  ZodParams &
-  Partial<
-    ValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>
-  >) => {
-  const { validate, requiredAtom, makeOptional } = schemaValidate({
-    schema: schema ?? z.array(z.any()).nonempty(required_error),
-    optionalSchema: optionalSchema ?? z.array(z.any()),
-  });
+}: ListFieldConfig<Fields, Value>) => {
+  const { validate, requiredAtom, makeOptional } = schemaValidate(
+    prepareSchema({
+      initial: {
+        schema: z.array(z.any()).nonempty(required_error),
+        optionalSchema: z.array(z.any()),
+      },
+      user: { schema, optionalSchema },
+    }),
+  );
 
   const listFieldAtom = extendAtom(
     listAtom({ ...config, validate }) as any,

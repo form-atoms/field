@@ -40,7 +40,6 @@ const listStory = <Fields extends FormFields, Value>(
     args: ListProps<Fields, Value>;
   } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
-  ...storyObj,
   decorators: [
     (Story: () => JSX.Element) => (
       <StoryForm fields={{ field: storyObj.args.atom }}>
@@ -51,6 +50,7 @@ const listStory = <Fields extends FormFields, Value>(
   render: (props: ListProps<Fields, Value>) => {
     return <ListField label="Set your environment variables:" {...props} />;
   },
+  ...storyObj,
 });
 
 export const RequiredListField = listStory({
@@ -177,7 +177,7 @@ export const RequiredListFieldWithCustomSchema = listStory({
           hint: "trees in garden, front to back, lower case, spaced",
         },
       ],
-      schema: z.array(z.any()).nonempty().max(2),
+      schema: (s) => s.max(2),
       fields: ({ hint, phrase }) => ({
         hint: textField({ name: "hint", value: hint }),
         phrase: textField({ name: "phrase", value: phrase }),
@@ -214,6 +214,6 @@ export const RequiredListFieldWithCustomSchema = listStory({
     ),
   },
   render: (props) => {
-    return <ListField label="Specify up to 3 recovery phrases:" {...props} />;
+    return <ListField {...props} label="Specify up to 3 recovery phrases:" />;
   },
 });
