@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/form-atoms/field/compare/v5.1.0...v5.1.1) (2024-03-14)
+
+
+### Bug Fixes
+
+* **useDateField:** drop manual date instance ([c2d6460](https://github.com/form-atoms/field/commit/c2d6460721069f6fe97e9e64da107f2fa52d16a2))
+
 # [5.1.0](https://github.com/form-atoms/field/compare/v5.0.1...v5.1.0) (2024-03-12)
 
 
