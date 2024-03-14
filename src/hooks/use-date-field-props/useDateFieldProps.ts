@@ -10,10 +10,7 @@ const getDate = (event: ChangeEvent<HTMLInputElement>) => {
   const { valueAsDate } = event.currentTarget;
 
   // empty input "" is read as null, so we normalize to undefined
-  return valueAsDate
-    ? // valueAsDate instanceof Date does not work in test, so we instantiate it explicitly to make it work
-      new Date(event.currentTarget.valueAsNumber)
-    : undefined;
+  return valueAsDate ?? undefined;
 };
 
 export const useDateFieldProps = (
