@@ -10,11 +10,11 @@ describe("useNumberFieldProps()", () => {
   it("initializes the field via options", async () => {
     const field = numberField();
 
-    const props = renderHook(() =>
+    const { result: props } = renderHook(() =>
       useNumberFieldProps(field, { initialValue: 42 }),
     );
 
-    expect(props.result.current.value).toBe(42);
+    expect(props.current.value).toBe(42);
   });
 
   it("reads empty input value as undefined with props.value as empty string", async () => {

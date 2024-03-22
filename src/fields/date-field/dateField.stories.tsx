@@ -39,7 +39,7 @@ export const InitializedInput = formStory({
       <DateInput
         field={fields.dueDate}
         label="Due Date"
-        initialValue={new Date()}
+        initialValue={new Date(2024, 2, 30)}
       />
     ),
   },

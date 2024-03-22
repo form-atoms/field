@@ -7,6 +7,17 @@ import { dateField } from "../../fields/date-field";
 import { getDateString } from "../../fields/date-field/DateInput.mock";
 
 describe("useDateFieldProps", () => {
+  it("initializes the field via options", () => {
+    const field = dateField();
+    const initialValue = new Date("2024/03/31");
+
+    const { result: props } = renderHook(() =>
+      useDateFieldProps(field, { initialValue }),
+    );
+
+    expect(props.current.value).toBe(initialValue);
+  });
+
   it("reads empty value as undefined", async () => {
     const field = dateField({ value: new Date() });
     const { result } = renderHook(() => useDateFieldProps(field));
