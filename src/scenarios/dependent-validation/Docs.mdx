@@ -25,10 +25,10 @@ const confirmPassword = textField({
       on: "change",
       formatError: ({ issues }) => {
         return issues.map(({ code, message }) =>
-          code === "invalid_literal" ? "Passwords must match" : message
+          code === "invalid_literal" ? "Passwords must match" : message,
         );
       },
-    }
+    },
   ),
 });
 ```
