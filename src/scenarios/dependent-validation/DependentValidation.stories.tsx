@@ -1,41 +1,63 @@
 import { InputField } from "form-atoms";
-import { zodValidate } from "form-atoms/zod";
 import { z } from "zod";
 
 import { FieldErrors, FieldLabel } from "../../components";
+import { numberField } from "../../fields/number-field";
+import { NumberInput } from "../../fields/number-field/NumberInput.mock";
 import { textField } from "../../fields/text-field";
 import { formStory, meta } from "../StoryForm";
 
 export default {
   ...meta,
-  title: "guides/PasswordValidation",
+  title: "scenarios/DependentValidation",
 };
+
+const min = numberField({
+  name: "min",
+  schema: z.number().min(0),
+});
+
+const max = numberField({
+  name: "max",
+  // @ts-expect-error https://github.com/microsoft/TypeScript/issues/54539
+  schema: (s, get) => {
+    const minVal = get(get(min).value);
+    return z.number().min(minVal ?? 0);
+  },
+});
+
+export const Range = formStory({
+  args: {
+    fields: {
+      min,
+      max,
+    },
+    children: ({ fields }) => (
+      <>
+        <NumberInput field={fields.min} label="Min" />
+        <NumberInput field={fields.max} label="Max" />
+      </>
+    ),
+  },
+});
 
 const password = textField({
   name: "password",
   schema: z.string().min(6),
 });
 
+// TODO: custom error
 const confirmPassword = textField({
   name: "confirmPassword",
-  validate: zodValidate(
-    (get) => {
-      const initialPassword = get(get(password).value);
+  // @ts-expect-error https://github.com/microsoft/TypeScript/issues/54539
+  schema: (s, get) => {
+    const initialPassword = get(get(password).value);
 
-      return z.literal(initialPassword);
-    },
-    {
-      on: "change",
-      formatError: ({ issues }) => {
-        return issues.map(({ code, message }) =>
-          code === "invalid_literal" ? "Passwords must match" : message,
-        );
-      },
-    },
-  ),
+    return z.literal(initialPassword);
+  },
 });
 
-export const Primary = formStory({
+export const PasswordValidation = formStory({
   args: {
     fields: {
       password,
