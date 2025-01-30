@@ -3,7 +3,6 @@ import { ZodBoolean, ZodLiteral, z } from "zod";
 
 import { zodField } from "..";
 import { FieldConfig } from "../field";
-import { defaultParams } from "../zod-field/zodParams";
 
 export type CheckboxField = ReturnType<typeof checkboxField>;
 
@@ -12,7 +11,7 @@ export type CheckboxFieldValue = ExtractAtomValue<
 >;
 
 export const checkboxField = ({
-  required_error = defaultParams.required_error,
+  required_error,
   value = false,
   ...config
 }: Partial<
@@ -26,13 +25,18 @@ export const checkboxField = ({
     /**
      * When checkbox is required, it must be checked, so the value must be true.
      */
-    schema: z.literal(true, {
-      errorMap: (issue) => {
-        return issue.code === "invalid_literal"
-          ? { message: required_error }
-          : { message: issue.message ?? "Invalid" };
-      },
-    }),
+    schema: z.literal(
+      true,
+      required_error
+        ? {
+            errorMap: (issue) => {
+              return issue.code === "invalid_literal"
+                ? { message: required_error }
+                : { message: issue.message ?? "Invalid" };
+            },
+          }
+        : undefined,
+    ),
     optionalSchema: z.boolean(),
     ...config,
   });

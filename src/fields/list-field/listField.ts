@@ -12,7 +12,7 @@ import {
   WritableRequiredAtom,
   schemaValidate,
 } from "../../utils/schemaValidate";
-import { ZodParams, defaultParams } from "../zod-field";
+import { ZodParams } from "../zod-field";
 
 export type ExtendListAtom<Fields extends FormFields, Value, State> =
   ListAtom<Fields, Value> extends Atom<infer DefaultState>
@@ -58,7 +58,7 @@ type ListFieldConfig<Fields extends FormFields, Value> = ListAtomConfig<
   UserValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>;
 
 export const listField = <Fields extends FormFields, Value>({
-  required_error = defaultParams.required_error,
+  required_error,
   schema,
   optionalSchema,
   ...config

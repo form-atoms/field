@@ -4,7 +4,6 @@ import { ZodDate, z } from "zod";
 import { zodField } from "..";
 import { prepareSchema } from "../../utils";
 import { type FieldConfig } from "../field";
-import { defaultParams } from "../zod-field/zodParams";
 
 export type DateField = ReturnType<typeof dateField>;
 
@@ -13,7 +12,7 @@ export type DateFieldValue = ExtractAtomValue<
 >;
 
 export const dateField = ({
-  required_error = defaultParams.required_error,
+  required_error,
   schema,
   optionalSchema,
   ...config

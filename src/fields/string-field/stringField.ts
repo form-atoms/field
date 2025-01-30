@@ -4,7 +4,6 @@ import { ZodString, z } from "zod";
 import { zodField } from "..";
 import { prepareSchema } from "../../utils";
 import { FieldConfig } from "../field";
-import { defaultParams } from "../zod-field/zodParams";
 
 export type StringField = ReturnType<typeof stringField>;
 
@@ -13,7 +12,7 @@ export type StringFieldValue = ExtractAtomValue<
 >;
 
 export const stringField = ({
-  required_error = defaultParams.required_error,
+  required_error,
   schema,
   optionalSchema,
   ...config

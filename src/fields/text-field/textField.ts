@@ -4,7 +4,6 @@ import { ZodString, z } from "zod";
 import { zodField } from "..";
 import { prepareSchema } from "../../utils";
 import { FieldConfig } from "../field";
-import { defaultParams } from "../zod-field/zodParams";
 
 export type TextField = ReturnType<typeof textField>;
 
@@ -13,7 +12,7 @@ export type TextFieldValue = ExtractAtomValue<
 >;
 
 export const textField = ({
-  required_error = defaultParams.required_error,
+  required_error,
   value = "",
   schema,
   optionalSchema,

@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { prepareSchema } from "../../utils";
 import { FieldConfig } from "../field";
-import { type ZodField, defaultParams, zodField } from "../zod-field";
+import { type ZodField, zodField } from "../zod-field";
 
 export type ZodArrayField<Element extends ZodSchema = ZodAny> = ZodField<
   ZodArray<Element, ArrayCardinality>,
@@ -16,7 +16,7 @@ export type ArrayFieldParams<ElementSchema extends z.Schema> = FieldConfig<
 >;
 
 export const arrayField = <ElementSchema extends z.Schema>({
-  required_error = defaultParams.required_error,
+  required_error,
   value = [],
   elementSchema,
   schema,

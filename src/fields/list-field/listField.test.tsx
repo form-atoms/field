@@ -43,7 +43,9 @@ describe("listField()", () => {
 
       const { result } = renderHook(() => useFieldError(list));
 
-      expect(result.current.error).toBe("This field is required");
+      expect(result.current.error).toBe(
+        "Array must contain at least 1 element(s)",
+      );
     });
   });
 

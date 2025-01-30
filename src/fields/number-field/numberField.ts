@@ -4,7 +4,7 @@ import { ZodNumber, z } from "zod";
 import { zodField } from "..";
 import { prepareSchema } from "../../utils";
 import { FieldConfig } from "../field";
-import { defaultParams } from "../zod-field/zodParams";
+
 export type NumberField = ReturnType<typeof numberField>;
 
 export type NumberFieldValue = ExtractAtomValue<
@@ -12,7 +12,7 @@ export type NumberFieldValue = ExtractAtomValue<
 >;
 
 export const numberField = ({
-  required_error = defaultParams.required_error,
+  required_error,
   schema,
   optionalSchema,
   ...config
