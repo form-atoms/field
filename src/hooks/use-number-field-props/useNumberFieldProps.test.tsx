@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { useFieldValue } from "form-atoms";
 import { describe, expect, it } from "vitest";
@@ -27,7 +27,7 @@ describe("useNumberFieldProps()", () => {
     expect(props.current.value).toBe(10);
     expect(value.current).toBe(10);
 
-    await act(() => userEvent.clear(screen.getByRole("textbox")));
+    await userEvent.clear(screen.getByRole("textbox"));
 
     expect(props.current.value).toBe("");
     expect(value.current).toBe(undefined);
@@ -39,7 +39,7 @@ describe("useNumberFieldProps()", () => {
     const { result: props } = renderHook(() => useNumberFieldProps(field));
     render(<input type="number" {...props.current} />);
 
-    await act(() => userEvent.type(screen.getByRole("spinbutton"), "9"));
+    await userEvent.type(screen.getByRole("spinbutton"), "9");
 
     expect(props.current.value).toBe(9);
   });
