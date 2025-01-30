@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
@@ -37,7 +37,7 @@ describe("useDateFieldProps", () => {
 
     const input = screen.getByTestId("date");
 
-    await act(() => userEvent.clear(input));
+    await userEvent.clear(input);
 
     expect(result.current.value).toBe(undefined);
   });
@@ -59,7 +59,7 @@ describe("useDateFieldProps", () => {
 
     const input = screen.getByTestId("date");
 
-    await act(() => userEvent.type(input, getDateString()));
+    await userEvent.type(input, getDateString());
 
     expect(result.current.value).toBeInstanceOf(Date);
   });
