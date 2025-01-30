@@ -1,3 +1,10 @@
+## [5.1.2](https://github.com/form-atoms/field/compare/v5.1.1...v5.1.2) (2025-01-30)
+
+
+### Bug Fixes
+
+* **fields:** remove the default required_error ([e30bea7](https://github.com/form-atoms/field/commit/e30bea789597f1da7876622484cc434c5ba3c90b))
+
 ## [5.1.1](https://github.com/form-atoms/field/compare/v5.1.0...v5.1.1) (2024-03-14)
 
 
