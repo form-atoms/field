@@ -28,11 +28,9 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} />);
 
-      await act(() =>
-        userEvent.selectOptions(screen.getByRole("combobox"), [
-          screen.getByText("no"),
-        ]),
-      );
+      await userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("no"),
+      ]);
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -62,11 +60,9 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} />);
 
-      await act(() =>
-        userEvent.selectOptions(screen.getByRole("combobox"), [
-          screen.getByText("1971"),
-        ]),
-      );
+      await userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("1971"),
+      ]);
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -90,11 +86,9 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} />);
 
-      await act(() =>
-        userEvent.selectOptions(screen.getByRole("combobox"), [
-          screen.getByText("some"),
-        ]),
-      );
+      await userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("some"),
+      ]);
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -117,11 +111,9 @@ describe("<Select />", () => {
     const { result } = renderHook(() => useFormActions(form));
     render(<Select {...props} />);
 
-    await act(() =>
-      userEvent.selectOptions(screen.getByRole("combobox"), [
-        screen.getByText("yes"),
-      ]),
-    );
+    await userEvent.selectOptions(screen.getByRole("combobox"), [
+      screen.getByText("yes"),
+    ]);
 
     await act(async () => {
       result.current.reset();
@@ -163,11 +155,9 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormActions(form));
       render(<Select {...props} />);
 
-      await act(() =>
-        userEvent.selectOptions(screen.getByRole("combobox"), [
-          screen.getByText("boo 2"),
-        ]),
-      );
+      await userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("boo 2"),
+      ]);
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -205,11 +195,9 @@ describe("<Select />", () => {
       const { result } = renderHook(() => useFormSubmit(form));
       render(<Select {...props} placeholder="gender" />);
 
-      await act(() =>
-        userEvent.selectOptions(screen.getByRole("combobox"), [
-          screen.getByText("male"),
-        ]),
-      );
+      await userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("male"),
+      ]);
 
       const onSubmit = vi.fn();
       await act(async () => {
@@ -218,11 +206,9 @@ describe("<Select />", () => {
 
       expect(onSubmit).toHaveBeenCalledWith({ field: "male" });
 
-      await act(() =>
-        userEvent.selectOptions(screen.getByRole("combobox"), [
-          screen.getByText("gender"),
-        ]),
-      );
+      await userEvent.selectOptions(screen.getByRole("combobox"), [
+        screen.getByText("gender"),
+      ]);
 
       const onSubmit2 = vi.fn();
       await act(async () => {
