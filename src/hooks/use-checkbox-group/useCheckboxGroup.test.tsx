@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
 
@@ -70,13 +70,13 @@ describe("useCheckboxGroup()", () => {
     expect(result.current[1]).toHaveProperty("checked", false);
 
     // not sure exactly why the need to rerender
-    await act(() => userEvent.click(screen.getByTestId("input-checkbox")));
+    await userEvent.click(screen.getByTestId("input-checkbox"));
     rerender(<input {...result.current[0]} data-testid="input-checkbox" />);
 
     expect(result.current[0]).toHaveProperty("checked", true);
     expect(result.current[1]).toHaveProperty("checked", false);
 
-    await act(() => userEvent.click(screen.getByTestId("input-checkbox")));
+    await userEvent.click(screen.getByTestId("input-checkbox"));
     rerender(<input {...result.current[0]} data-testid="input-checkbox" />);
 
     expect(result.current[0]).toHaveProperty("checked", false);

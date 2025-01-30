@@ -18,13 +18,11 @@ describe("useFilesFieldProps", () => {
 
       const input = screen.getByTestId("fileInput");
 
-      await act(() =>
-        userEvent.upload(
-          input,
-          new File(["content"], "file-name.png", {
-            type: "image/png",
-          }),
-        ),
+      await userEvent.upload(
+        input,
+        new File(["content"], "file-name.png", {
+          type: "image/png",
+        }),
       );
 
       expect(input).toHaveValue("C:\\fakepath\\file-name.png");
@@ -46,13 +44,11 @@ describe("useFilesFieldProps", () => {
 
       const input = screen.getByTestId("fileInput");
 
-      await act(() =>
-        userEvent.upload(
-          input,
-          new File(["content"], "file-name.png", {
-            type: "image/png",
-          }),
-        ),
+      await userEvent.upload(
+        input,
+        new File(["content"], "file-name.png", {
+          type: "image/png",
+        }),
       );
 
       expect(input).toHaveValue("C:\\fakepath\\file-name.png");

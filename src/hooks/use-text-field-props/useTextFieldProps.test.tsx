@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
@@ -22,7 +22,7 @@ describe("useTextFieldProps()", () => {
     const { result: props } = renderHook(() => useTextFieldProps(field));
     render(<input {...props.current} />);
 
-    await act(() => userEvent.type(screen.getByRole("textbox"), "x"));
+    await userEvent.type(screen.getByRole("textbox"), "x");
 
     expect(props.current.value).toBe("x");
   });

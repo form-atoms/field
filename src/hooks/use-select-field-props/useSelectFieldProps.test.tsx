@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import { render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { PropsWithChildren } from "react";
 import { describe, expect, it } from "vitest";
@@ -65,11 +65,9 @@ describe("useSelectFieldProps()", () => {
           </DummySelect>,
         );
 
-        await act(() =>
-          userEvent.selectOptions(screen.getByRole("combobox"), [
-            screen.getByText("charlie"),
-          ]),
-        );
+        await userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("charlie"),
+        ]);
 
         expect(screen.getByRole("combobox")).toHaveValue("2");
       });
@@ -87,11 +85,9 @@ describe("useSelectFieldProps()", () => {
           </DummySelect>,
         );
 
-        await act(() =>
-          userEvent.selectOptions(screen.getByRole("combobox"), [
-            screen.getByText("custom"),
-          ]),
-        );
+        await userEvent.selectOptions(screen.getByRole("combobox"), [
+          screen.getByText("custom"),
+        ]);
 
         expect(screen.getByRole("combobox")).toHaveValue("-1");
       });
