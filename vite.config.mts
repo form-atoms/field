@@ -16,10 +16,5 @@ export default defineConfig({
       include: ["src/@(atoms|components|fields|hooks)"],
       exclude: ["**/*.@(mock|stories|test-d).@(ts|tsx)"],
     },
-    typecheck: {
-      // TODO(enable): Jest matchers have missing types for some reason
-      // https://github.com/vitest-dev/vitest/issues/5256#issuecomment-1980431555
-      ignoreSourceErrors: true,
-    },
   },
 });
