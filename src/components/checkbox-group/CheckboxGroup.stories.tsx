@@ -1,4 +1,4 @@
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/react-vite";
 
 import { CheckboxGroup, type CheckboxGroupProps } from "./CheckboxGroup";
 import { CheckboxGroupField } from "./CheckboxGroupField.mock";

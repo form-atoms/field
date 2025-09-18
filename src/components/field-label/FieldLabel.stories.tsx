@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { FieldLabel } from "./FieldLabel";
 import { textField } from "../../fields/text-field";

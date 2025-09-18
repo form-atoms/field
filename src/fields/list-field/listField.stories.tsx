@@ -4,7 +4,7 @@ import {
   ListProps,
   RemoveButtonProps,
 } from "@form-atoms/list-atom";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/react-vite";
 import { FormFields, InputField } from "form-atoms";
 
 import { ListField } from "./ListField.mock";

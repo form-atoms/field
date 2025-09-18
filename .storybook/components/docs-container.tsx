@@ -4,12 +4,12 @@
 import type { FC, PropsWithChildren, ReactNode } from "react";
 import React, { useEffect } from "react";
 import { global } from "@storybook/global";
-import type { ThemeVars } from "@storybook/theming";
-import { ThemeProvider, ensure as ensureTheme } from "@storybook/theming";
-import type { Renderer } from "@storybook/types";
-import type { DocsContextProps } from "@storybook/blocks";
-import { DocsContext } from "@storybook/blocks";
-import { SourceContainer } from "@storybook/blocks";
+import type { ThemeVars } from "storybook/theming";
+import { ThemeProvider, ensure as ensureTheme } from "storybook/theming";
+import type { Renderer } from "storybook/internal/types";
+import type { DocsContextProps } from "@storybook/addon-docs/blocks";
+import { DocsContext } from "@storybook/addon-docs/blocks";
+import { SourceContainer } from "@storybook/addon-docs/blocks";
 
 export function scrollToElement(element: any, block = "start") {
   element.scrollIntoView({

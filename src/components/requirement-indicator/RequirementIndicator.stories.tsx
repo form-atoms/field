@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { ZodField } from "../../fields";
 import { numberField } from "../../fields/number-field";
