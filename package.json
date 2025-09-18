@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",
-    "@form-atoms/list-atom": "^1.0.11",
+    "@form-atoms/list-atom": "^1.0.12",
     "@picocss/pico": "^2.1.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^12.0.0",
@@ -79,11 +79,11 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-storybook": "9.1.6",
-    "form-atoms": "^3.2.4",
+    "form-atoms": "^3.3.1",
     "happy-dom": "^16.7.3",
-    "jotai": "2.9.3",
+    "jotai": "2.14.0",
     "jotai-devtools": "0.8.0",
-    "jotai-effect": "1.0.3",
+    "jotai-effect": "1.1.6",
     "lodash.shuffle": "^4.2.0",
     "prettier": "3.6.2",
     "react": "^18.2.0",
@@ -133,7 +133,7 @@
     "@form-atoms/list-atom": "^1",
     "form-atoms": "^3",
     "jotai": "^2",
-    "jotai-effect": "^0",
+    "jotai-effect": "^1",
     "react": ">=16.8",
     "zod": "^3"
   }
