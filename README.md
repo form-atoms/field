@@ -66,7 +66,6 @@ See [Storybook docs](https://form-atoms.github.io/field/) for more.
 
 `@form-atoms/field` comes pre-wired to popular UI libraries:
 
-| 📦Package                                            | 🎨 Storybook                                              | About                                          |
-| ---------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------- |
-| [flowbite](https://github.com/form-atoms/flowbite)   | [Flowbite Fields](https://form-atoms.github.io/flowbite/) | Bindigs to Tailwind component library Flowbite |
-| [chakra-ui](https://github.com/form-atoms/chakra-ui) | [ChakraUI Fields](https://form-atoms.github.io/chakra-ui) | Bindings to CSS-in-JS library Chakra UI        |
+| 📦Package                                          | 🎨 Storybook                                              | About                                          |
+| -------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------- |
+| [flowbite](https://github.com/form-atoms/flowbite) | [Flowbite Fields](https://form-atoms.github.io/flowbite/) | Bindigs to Tailwind component library Flowbite |
