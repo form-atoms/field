@@ -1,6 +1,6 @@
 {
   "name": "@form-atoms/field",
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "yarn@4.10.2",
   "version": "0.0.0-semantic-release",
   "author": "Miroslav Petrik <miroslavpetrik@outlook.com>",
   "homepage": "https://github.com/form-atoms/field#readme",
@@ -45,7 +45,8 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "semantic-release": "semantic-release",
-    "upgrade-packages": "yarn upgrade-interactive"
+    "upgrade-packages": "yarn upgrade-interactive",
+    "upgrade-yarn": "yarn set version stable && yarn install"
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",
