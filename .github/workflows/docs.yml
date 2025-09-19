@@ -45,7 +45,7 @@ jobs:
           cmd: storybook:build
 
       - name: Upload Storybook
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: storybook-static
 
