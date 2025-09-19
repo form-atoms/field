@@ -81,7 +81,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-storybook": "9.1.6",
     "form-atoms": "^3.3.1",
-    "happy-dom": "^16.7.3",
+    "happy-dom": "^18.0.1",
     "jotai": "2.14.0",
     "jotai-devtools": "0.8.0",
     "jotai-effect": "1.1.6",
