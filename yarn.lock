@@ -827,7 +827,7 @@ __metadata:
   resolution: "@form-atoms/field@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.14.0"
-    "@form-atoms/list-atom": "npm:^1.0.12"
+    "@form-atoms/list-atom": "npm:^1.1.0"
     "@picocss/pico": "npm:^2.1.1"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^12.0.0"
@@ -886,17 +886,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@form-atoms/list-atom@npm:^1.0.12":
-  version: 1.0.12
-  resolution: "@form-atoms/list-atom@npm:1.0.12"
+"@form-atoms/list-atom@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@form-atoms/list-atom@npm:1.1.0"
   dependencies:
     react-render-prop-type: "npm:0.1.0"
   peerDependencies:
     form-atoms: ^3
     jotai: ^2
-    jotai-effect: ^0
+    jotai-effect: ^1
     react: ">=16.8"
-  checksum: 10/ec1c09ab7d8a288a4d707846782015ad58025f9183c0c4790fb387909a7506bd147972176b4a8997e5b5179898b84cc26e05a26bca092cc12c09ab7a6f373a7b
+  checksum: 10/03f024eb32f1fafbafcb5b76c5cf94a5871aa55d3ce4d1b7a9ae3d9a89c3d5a4ef8387285438bc6d6d4598848201449d5b2c1cf4ff72368ab206414fc1d0f0e8
   languageName: node
   linkType: hard
 
