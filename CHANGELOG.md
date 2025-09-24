@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/form-atoms/field/compare/v5.1.2...v5.2.0) (2025-09-24)
+
+
+### Features
+
+* **jotai-effect:** v1 as peer dependency ([eea0aad](https://github.com/form-atoms/field/commit/eea0aad784344caf87fc73486b74bf2bfe0ba02c))
+
 ## [5.1.2](https://github.com/form-atoms/field/compare/v5.1.1...v5.1.2) (2025-01-30)
 
 
