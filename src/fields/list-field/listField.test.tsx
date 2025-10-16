@@ -16,8 +16,7 @@ describe("listField()", () => {
   describe("when required (default)", () => {
     it("can't be submitted with empty value", async () => {
       const list = listField({
-        value: [],
-        fields: ({ age }) => ({ age: numberField({ value: age }) }),
+        fields: () => ({ age: numberField({ value: 0 }) }),
       });
 
       const form = formAtom({ list });
@@ -31,8 +30,7 @@ describe("listField()", () => {
 
     it("has the default error when submitted empty", async () => {
       const list = listField({
-        value: [],
-        fields: ({ age }) => ({ age: numberField({ value: age }) }),
+        fields: () => ({ age: numberField({ value: 0 }) }),
       });
 
       const form = formAtom({ list });
@@ -52,8 +50,7 @@ describe("listField()", () => {
   describe("when optional", () => {
     it("can submit with empty value", async () => {
       const list = listField({
-        value: [],
-        fields: ({ age }) => ({ age: numberField({ value: age }) }),
+        fields: () => ({ age: numberField({ value: 0 }) }),
       }).optional();
 
       const form = formAtom({ list });
@@ -67,8 +64,7 @@ describe("listField()", () => {
 
     it("returns the same field when calling optional", () => {
       const list = listField({
-        value: [],
-        fields: ({ age }) => ({ age: numberField({ value: age }) }),
+        fields: () => ({ age: numberField({ value: 0 }) }),
       }).optional();
 
       const listRef = list.optional().optional();
@@ -85,8 +81,8 @@ describe("listField()", () => {
           { email: "secondary@email.com" },
           { email: "other@email.com" },
         ],
-        fields: ({ email }) => ({
-          email: textField({ value: email }),
+        fields: () => ({
+          email: textField({ value: "" }),
         }),
         schema: (s) => s.max(2),
       });

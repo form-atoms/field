@@ -1,5 +1,4 @@
 import { type FieldAtom, type FieldAtomConfig, fieldAtom } from "form-atoms";
-import { Atom } from "jotai";
 import { type ZodAny, type ZodUndefined, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
@@ -16,7 +15,7 @@ type ZodFieldConfig<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
 > = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
-  ValidateConfig<Schema, OptSchema> & { nameAtom?: Atom<string> };
+  ValidateConfig<Schema, OptSchema>;
 
 export type ZodFieldValue<Field> =
   Field extends FieldAtom<infer Value> ? Value : never;
@@ -59,12 +58,7 @@ export type ZodField<
 export function zodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
->({
-  schema,
-  optionalSchema,
-  nameAtom,
-  ...config
-}: ZodFieldConfig<Schema, OptSchema>) {
+>({ schema, optionalSchema, ...config }: ZodFieldConfig<Schema, OptSchema>) {
   const { validate, requiredAtom, makeOptional } = schemaValidate({
     schema,
     optionalSchema,
@@ -76,7 +70,6 @@ export function zodField<
     >,
     () => ({
       required: requiredAtom,
-      ...(nameAtom ? { name: nameAtom } : {}),
     }),
   ) as unknown as RequiredZodField<Schema, OptSchema>;
 
@@ -89,7 +82,6 @@ export function zodField<
       >,
       () => ({
         required: requiredAtom,
-        ...(nameAtom ? { name: nameAtom } : {}),
       }),
     ) as unknown as OptionalZodField<Schema, OptSchema>;
 

@@ -26,7 +26,6 @@ type FormFields = {
 export type FormFieldSubmitValues<Fields extends FormFields> = Flatten<{
   [Key in keyof Fields]: Fields[Key] extends ListField<
     infer Fields,
-    any,
     infer Required
   >
     ? ListFieldSubmitValue<Fields, Required>

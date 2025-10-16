@@ -23,17 +23,14 @@ test("ListField is assignable to ListAtom", () => {
   type Fields = { age: NumberField };
 
   expectTypeOf<
-    ListField<Fields, { age: number }> extends ListAtom<Fields, { age: number }>
-      ? true
-      : false
+    ListField<Fields> extends ListAtom<Fields> ? true : false
   >().toEqualTypeOf<true>();
 });
 
 test("optional listField has 'itemType[]' submit value", () => {
   const form = formAtom({
     field: listField({
-      value: [],
-      fields: ({ age }) => ({ age: numberField({ value: age }) }),
+      fields: () => ({ age: numberField({ value: 0 }) }),
     }).optional(),
   });
 

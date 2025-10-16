@@ -1,30 +1,20 @@
-import { Atom, Getter, PrimitiveAtom, atom } from "jotai";
+import type { Getter, PrimitiveAtom } from "jotai";
+import { atomWithDefault } from "jotai/utils";
 
 export const extendAtom = <
-  T extends PrimitiveAtom<any>,
+  T extends Record<string, unknown>,
   E extends Record<string, unknown>,
 >(
-  baseAtom: T,
-  makeAtoms: (
-    cfg: T extends Atom<infer Config> ? Config : never,
-    get: Getter,
-  ) => E,
+  baseAtom: PrimitiveAtom<T>,
+  makeAtoms: (cfg: T, get: Getter) => E,
 ) => {
-  const extended = atom(
-    (get) => {
-      const base = get(baseAtom);
-      return {
-        ...base,
-        ...makeAtoms(
-          base as T extends Atom<infer Config> ? Config : never,
-          get,
-        ),
-      };
-    },
-    (get, set, update: T extends Atom<infer Config> ? Config : never) => {
-      set(baseAtom, { ...get(baseAtom), ...update });
-    },
-  );
+  const extended = atomWithDefault((get) => {
+    const base = get(baseAtom);
+    return {
+      ...base,
+      ...makeAtoms(base, get),
+    };
+  });
 
   if (typeof process !== "undefined" && process.env.NODE_ENV !== "production") {
     baseAtom.debugPrivate = true;
