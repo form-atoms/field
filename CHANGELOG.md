@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/form-atoms/field/compare/v5.2.0...v5.3.0) (2025-10-16)
+
+
+### Features
+
+* **list-atoms:** up to v2 ([bf9798d](https://github.com/form-atoms/field/commit/bf9798d0e00fcc31749009b6e8a96f4019bba5ed))
+
 # [5.2.0](https://github.com/form-atoms/field/compare/v5.1.2...v5.2.0) (2025-09-24)
 
 
