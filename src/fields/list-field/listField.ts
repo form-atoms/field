@@ -14,16 +14,15 @@ import {
 } from "../../utils/schemaValidate";
 import { ZodParams } from "../zod-field";
 
-export type ExtendListAtom<Fields extends FormFields, Value, State> =
-  ListAtom<Fields, Value> extends Atom<infer DefaultState>
+export type ExtendListAtom<Fields extends FormFields, State> =
+  ListAtom<Fields> extends Atom<infer DefaultState>
     ? Atom<DefaultState & State>
     : never;
 
 export type ListField<
   Fields extends FormFields,
-  Value,
   RequiredAtom = DefaultRequiredAtom,
-> = ExtendListAtom<Fields, Value, { required: RequiredAtom }> & {
+> = ExtendListAtom<Fields, { required: RequiredAtom }> & {
   optional: (readRequired?: ReadRequired) => OptionalListField<Fields>;
 };
 
@@ -46,23 +45,19 @@ type RequiredListField<Fields extends FormFields> = ListField<
 
 export type OptionalListField<Fields extends FormFields> = ListField<
   Fields,
-  FormFieldValues<Fields>,
   WritableRequiredAtom
 >;
 
-type ListFieldConfig<Fields extends FormFields, Value> = ListAtomConfig<
-  Fields,
-  Value
-> &
+type ListFieldConfig<Fields extends FormFields> = ListAtomConfig<Fields> &
   ZodParams &
   UserValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>;
 
-export const listField = <Fields extends FormFields, Value>({
+export const listField = <Fields extends FormFields>({
   required_error,
   schema,
   optionalSchema,
   ...config
-}: ListFieldConfig<Fields, Value>) => {
+}: ListFieldConfig<Fields>) => {
   const { validate, requiredAtom, makeOptional } = schemaValidate(
     prepareSchema({
       initial: {
@@ -80,6 +75,8 @@ export const listField = <Fields extends FormFields, Value>({
     }),
   ) as unknown as RequiredListField<Fields>;
 
+  console.log("ok extend");
+
   listFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
@@ -92,6 +89,8 @@ export const listField = <Fields extends FormFields, Value>({
 
     return optionalZodFieldAtom;
   };
+
+  console.log("ok return");
 
   return listFieldAtom;
 };

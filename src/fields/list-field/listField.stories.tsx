@@ -1,54 +1,62 @@
+import type { StoryObj } from "@storybook/react-vite";
+
 import {
-  AddButtonProps,
-  List,
-  ListProps,
-  RemoveButtonProps,
+  createList,
+  type ListAtom,
+  type ListComponents,
 } from "@form-atoms/list-atom";
-import { StoryObj } from "@storybook/react-vite";
 import { FormFields, InputField } from "form-atoms";
 
-import { ListField } from "./ListField.mock";
-import { TextField, listField, textField } from "..";
+import { listField, textField } from "..";
 import { StoryForm } from "../../scenarios/StoryForm";
+import { FieldLabel } from "../../components";
+import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
 const meta = {
   title: "fields/listField",
-  component: List,
-  args: {
-    AddButton: ({ add }: AddButtonProps) => (
-      <button type="button" className="outline" onClick={() => add()}>
-        Add variable
-      </button>
-    ),
-    RemoveButton: ({ remove }: RemoveButtonProps) => (
-      <button
-        type="button"
-        className="outline secondary"
-        onClick={() => remove()}
-      >
-        Remove
-      </button>
-    ),
+  render: <Fields extends FormFields>({
+    atom,
+    children,
+  }: ListStoryArgs<Fields>) => {
+    const { List } = createList(atom);
+
+    return children({ List, atom });
   },
 };
 
 export default meta;
 
-const listStory = <Fields extends FormFields, Value>(
+type ListStoryArgs<Fields extends FormFields> = {
+  label: React.ReactNode;
+  hideFormActions?: boolean;
+  atom: ListAtom<Fields>;
+  children: (
+    props: ListComponents<Fields> & {
+      atom: ListAtom<Fields>;
+    },
+  ) => React.ReactNode;
+};
+
+const listStory = <Fields extends FormFields>(
   storyObj: {
-    args: ListProps<Fields, Value>;
+    args: ListStoryArgs<Fields>;
   } & Omit<StoryObj<typeof meta>, "args">,
 ) => ({
   decorators: [
+    (Story: () => JSX.Element) => (
+      <>
+        <FieldLabel field={storyObj.args.atom} label={storyObj.args.label} />
+        <Story />
+        <PicoFieldErrors field={storyObj.args.atom} />
+      </>
+    ),
     (Story: () => JSX.Element) => (
       <StoryForm fields={{ field: storyObj.args.atom }}>
         {() => <Story />}
       </StoryForm>
     ),
   ],
-  render: (props: ListProps<Fields, Value>) => {
-    return <ListField label="Set your environment variables:" {...props} />;
-  },
+
   ...storyObj,
 });
 
@@ -62,40 +70,55 @@ export const RequiredListField = listStory({
     },
   },
   args: {
+    label: "Environment variables (at least one required):",
     atom: listField({
       name: "environment",
-      value: [],
-      fields: ({ variable, value }) => ({
-        variable: textField({ name: "variable", value: variable }),
-        value: textField({ name: "value", value: value }),
+      fields: () => ({
+        variable: textField({ name: "variable", value: "" }),
+        value: textField({ name: "value", value: "" }),
       }),
     }),
-    children: ({ fields, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto auto min-content",
-        }}
-      >
-        <div>
-          <InputField
-            atom={fields.variable}
-            render={(props) => <input {...props} placeholder="Variable Name" />}
-          />
-        </div>
-        <div>
-          <InputField
-            atom={fields.value}
-            render={(props) => (
-              <input {...props} placeholder="Variable Value" />
-            )}
-          />
-        </div>
-        <div>
-          <RemoveButton />
-        </div>
-      </div>
+    children: ({ List }) => (
+      <List>
+        <List.Item>
+          {({ fields, remove }) => (
+            <div
+              style={{
+                display: "grid",
+                gridGap: 16,
+                gridTemplateColumns: "auto auto min-content",
+              }}
+            >
+              <div>
+                <InputField
+                  atom={fields.variable}
+                  render={(props) => (
+                    <input {...props} placeholder="Variable Name" />
+                  )}
+                />
+              </div>
+              <div>
+                <InputField
+                  atom={fields.value}
+                  render={(props) => (
+                    <input {...props} placeholder="Variable Value" />
+                  )}
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="outline secondary"
+                  onClick={() => remove()}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
+        </List.Item>
+        <List.Add />
+      </List>
     ),
   },
 });
@@ -109,40 +132,55 @@ export const OptionalListField = listStory({
     },
   },
   args: {
+    label: "Environment variables (optional, can be empty):",
     atom: listField({
       name: "environment",
-      value: [],
-      fields: ({ variable, value }) => ({
-        variable: textField({ name: "variable", value: variable }),
-        value: textField({ name: "value", value: value }),
+      fields: () => ({
+        variable: textField({ name: "variable", value: "" }),
+        value: textField({ name: "value", value: "" }),
       }),
     }).optional(),
-    children: ({ fields, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto auto min-content",
-        }}
-      >
-        <div>
-          <InputField
-            atom={fields.variable}
-            render={(props) => <input {...props} placeholder="Variable Name" />}
-          />
-        </div>
-        <div>
-          <InputField
-            atom={fields.value}
-            render={(props) => (
-              <input {...props} placeholder="Variable Value" />
-            )}
-          />
-        </div>
-        <div>
-          <RemoveButton />
-        </div>
-      </div>
+    children: ({ List }) => (
+      <List>
+        <List.Item>
+          {({ fields, remove }) => (
+            <div
+              style={{
+                display: "grid",
+                gridGap: 16,
+                gridTemplateColumns: "auto auto min-content",
+              }}
+            >
+              <div>
+                <InputField
+                  atom={fields.variable}
+                  render={(props) => (
+                    <input {...props} placeholder="Variable Name" />
+                  )}
+                />
+              </div>
+              <div>
+                <InputField
+                  atom={fields.value}
+                  render={(props) => (
+                    <input {...props} placeholder="Variable Value" />
+                  )}
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="outline secondary"
+                  onClick={() => remove()}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
+        </List.Item>
+        <List.Add />
+      </List>
     ),
   },
 });
@@ -157,62 +195,69 @@ export const RequiredListFieldWithCustomSchema = listStory({
     },
   },
   args: {
-    AddButton: ({
-      add,
-    }: AddButtonProps<{ phrase: TextField; hint: TextField }>) => (
-      <button type="button" className="outline" onClick={() => add()}>
-        New phrase
-      </button>
-    ),
+    label: "Recovery phrases (1-2 required):",
     atom: listField({
       name: "recoveryPhrases",
-      value: [
-        {
-          phrase: "pinkipinkyponky",
-          hint: "favorite song (lower case; no spaces)",
-        },
-        {
-          phrase: "cherry walnut walnut",
-          hint: "trees in garden, front to back, lower case, spaced",
-        },
-      ],
       schema: (s) => s.max(2),
-      fields: ({ hint, phrase }) => ({
-        hint: textField({ name: "hint", value: hint }),
-        phrase: textField({ name: "phrase", value: phrase }),
+      fields: () => ({
+        hint: textField({ name: "hint", value: "" }),
+        phrase: textField({ name: "phrase", value: "" }),
       }),
       invalidItemError:
         "Some of your phrases are empty. Please remove or complete them.",
     }),
-    children: ({ fields, RemoveButton }) => (
-      <div
-        style={{
-          display: "grid",
-          gridGap: 16,
-          gridTemplateColumns: "auto auto min-content",
-        }}
+    children: ({ List }) => (
+      <List
+        initialValue={[
+          {
+            phrase: "pinkipinkyponky",
+            hint: "favorite song (lower case; no spaces)",
+          },
+          {
+            phrase: "cherry walnut walnut",
+            hint: "trees in garden, front to back, lower case, spaced",
+          },
+        ]}
       >
-        <div>
-          <InputField
-            atom={fields.phrase}
-            render={(props) => (
-              <input {...props} placeholder="Recovery phrase" />
-            )}
-          />
-        </div>
-        <div>
-          <InputField
-            atom={fields.hint}
-            render={(props) => <input {...props} placeholder="Phrase hint" />}
-          />
-        </div>
-        <div>
-          <RemoveButton />
-        </div>
-      </div>
+        <List.Item>
+          {({ fields, remove }) => (
+            <div
+              style={{
+                display: "grid",
+                gridGap: 16,
+                gridTemplateColumns: "auto auto min-content",
+              }}
+            >
+              <div>
+                <InputField
+                  atom={fields.phrase}
+                  render={(props) => (
+                    <input {...props} placeholder="Recovery phrase" />
+                  )}
+                />
+              </div>
+              <div>
+                <InputField
+                  atom={fields.hint}
+                  render={(props) => (
+                    <input {...props} placeholder="Phrase hint" />
+                  )}
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="outline secondary"
+                  onClick={() => remove()}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
+        </List.Item>
+        <List.Add />
+      </List>
     ),
-  },
-  render: (props) => {
-    return <ListField {...props} label="Specify up to 3 recovery phrases:" />;
   },
 });
