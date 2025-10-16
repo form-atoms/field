@@ -128,10 +128,10 @@
     ]
   },
   "peerDependencies": {
-    "@form-atoms/list-atom": "^1",
+    "@form-atoms/list-atom": "^2",
     "form-atoms": "^3",
     "jotai": "^2",
-    "jotai-effect": "^1",
+    "jotai-effect": "^2",
     "react": ">=16.8",
     "zod": "^3"
   }
