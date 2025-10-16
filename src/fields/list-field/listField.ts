@@ -75,8 +75,6 @@ export const listField = <Fields extends FormFields>({
     }),
   ) as unknown as RequiredListField<Fields>;
 
-  console.log("ok extend");
-
   listFieldAtom.optional = (readRequired: ReadRequired = () => false) => {
     const { validate, requiredAtom } = makeOptional(readRequired);
 
@@ -89,8 +87,6 @@ export const listField = <Fields extends FormFields>({
 
     return optionalZodFieldAtom;
   };
-
-  console.log("ok return");
 
   return listFieldAtom;
 };

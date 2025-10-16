@@ -9,8 +9,6 @@ export const extendAtom = <
   makeAtoms: (cfg: T, get: Getter) => E,
 ) => {
   const extended = atomWithDefault((get) => {
-    console.log("wat is going on");
-
     const base = get(baseAtom);
     return {
       ...base,

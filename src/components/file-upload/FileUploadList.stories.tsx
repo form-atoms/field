@@ -1,4 +1,3 @@
-import { List, type RemoveButtonProps } from "@form-atoms/list-atom";
 import { FieldAtom, fieldAtom, useFieldValue } from "form-atoms";
 
 import { FileUpload } from "./FileUpload";
@@ -8,9 +7,12 @@ import { StringField, listField, stringField } from "../../fields";
 import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 import { formStory, meta } from "../../scenarios/StoryForm";
 
+import { listStory, render } from "../../fields/list-field/listField.stories";
+
 export default {
   ...meta,
   title: "components/FileUpload",
+  render,
 };
 
 let id = 3;
@@ -39,11 +41,11 @@ const fileList = listField({
       url: "https://picsum.photos/id/2/100/100",
     },
   ],
-  fields: ({ url, id }) => ({
+  fields: () => ({
     // the ID must be optional, to permit submit newly uploaded files to the server
-    id: stringField({ value: id }).optional(),
+    id: stringField().optional(),
     // the URL is only a fieldAtom, not zodField, as the uploadAtom extends only the fieldAtom
-    url: fieldAtom({ value: url }),
+    url: fieldAtom({ value: "" }),
   }),
 });
 
@@ -67,7 +69,7 @@ const IdMessage = ({ id }: { id: StringField }) => {
   );
 };
 
-export const FileUploadList = formStory({
+export const FileUploadList = listStory({
   parameters: {
     docs: {
       description: {
@@ -77,94 +79,93 @@ export const FileUploadList = formStory({
     },
   },
   args: {
-    fields: {
-      fileList,
-    },
-    children: ({ fields }) => (
-      <List
-        atom={fields.fileList}
-        AddButton={({ add }) => (
-          <input
-            type="file"
-            multiple
-            onChange={(event) => {
-              const files = Array.from(event.currentTarget.files ?? []);
-
-              files.forEach((file) =>
-                add({
-                  id: stringField().optional(),
-                  url: fakeUploadAtom(file),
-                }),
-              );
-            }}
-          />
-        )}
-        RemoveButton={RemoveButton}
-      >
-        {({ fields, RemoveButton }) => {
-          return (
-            <div
-              style={{
-                display: "grid",
-                gridGap: 16,
-                gridTemplateColumns: "auto min-content",
-              }}
-            >
-              <SwitchUploadAtom field={fields.url}>
-                {({ isUpload, field }) => {
-                  return isUpload ? (
-                    <FileUpload field={field}>
-                      {({ isLoading, isSuccess, isError }) => (
-                        <div>
-                          {isLoading ? (
-                            <>
-                              <p>
-                                Please wait... <progress />
-                              </p>
-                            </>
-                          ) : isSuccess ? (
-                            <p>
-                              <Image url={fields.url} />
-                              <ins>Done. </ins>
-                              <IdMessage id={fields.id} />
-                            </p>
-                          ) : isError ? (
-                            <>
-                              <p>
-                                Failed to upload. Use the{" "}
-                                <code>FieldErrors</code> component to display
-                                the reason thrown from your <code>upload</code>{" "}
-                                action:
-                                <PicoFieldErrors field={fields.url} />
-                              </p>
-                            </>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      )}
-                    </FileUpload>
-                  ) : (
-                    <p>
-                      <Image url={fields.url} />
-                      <IdMessage id={fields.id} />
-                    </p>
-                  );
+    atom: fileList,
+    children: ({ List }) => (
+      <List>
+        <List.Item>
+          {({ fields, remove }) => {
+            return (
+              <div
+                style={{
+                  display: "grid",
+                  gridGap: 16,
+                  gridTemplateColumns: "auto min-content",
                 }}
-              </SwitchUploadAtom>
-              <div>
-                <RemoveButton />
+              >
+                <SwitchUploadAtom field={fields.url}>
+                  {({ isUpload, field }) => {
+                    return isUpload ? (
+                      <FileUpload field={field}>
+                        {({ isLoading, isSuccess, isError }) => (
+                          <div>
+                            {isLoading ? (
+                              <>
+                                <p>
+                                  Please wait... <progress />
+                                </p>
+                              </>
+                            ) : isSuccess ? (
+                              <p>
+                                <Image url={fields.url} />
+                                <ins>Done. </ins>
+                                <IdMessage id={fields.id} />
+                              </p>
+                            ) : isError ? (
+                              <>
+                                <p>
+                                  Failed to upload. Use the{" "}
+                                  <code>FieldErrors</code> component to display
+                                  the reason thrown from your{" "}
+                                  <code>upload</code> action:
+                                  <PicoFieldErrors field={fields.url} />
+                                </p>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                        )}
+                      </FileUpload>
+                    ) : (
+                      <p>
+                        <Image url={fields.url} />
+                        <IdMessage id={fields.id} />
+                      </p>
+                    );
+                  }}
+                </SwitchUploadAtom>
+                <div>
+                  <button
+                    type="button"
+                    className="outline secondary"
+                    onClick={remove}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        }}
+            );
+          }}
+        </List.Item>
+        <List.Add>
+          {({ add }) => (
+            <input
+              type="file"
+              multiple
+              onChange={(event) => {
+                const files = Array.from(event.currentTarget.files ?? []);
+
+                files.forEach((file) =>
+                  add({
+                    id: "",
+                    url: "", // TODO: file,
+                  }),
+                );
+              }}
+            />
+          )}
+        </List.Add>
       </List>
     ),
   },
 });
-
-const RemoveButton = ({ remove }: RemoveButtonProps) => (
-  <button type="button" className="outline secondary" onClick={remove}>
-    Remove
-  </button>
-);

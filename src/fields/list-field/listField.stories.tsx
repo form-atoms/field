@@ -12,22 +12,24 @@ import { StoryForm } from "../../scenarios/StoryForm";
 import { FieldLabel } from "../../components";
 import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
 
+export const render = <Fields extends FormFields>({
+  atom,
+  children,
+}: ListStoryArgs<Fields>) => {
+  const { List } = createList(atom);
+
+  return children({ List, atom });
+};
+
 const meta = {
   title: "fields/listField",
-  render: <Fields extends FormFields>({
-    atom,
-    children,
-  }: ListStoryArgs<Fields>) => {
-    const { List } = createList(atom);
-
-    return children({ List, atom });
-  },
+  render,
 };
 
 export default meta;
 
 type ListStoryArgs<Fields extends FormFields> = {
-  label: React.ReactNode;
+  label?: React.ReactNode;
   hideFormActions?: boolean;
   atom: ListAtom<Fields>;
   children: (
@@ -37,7 +39,7 @@ type ListStoryArgs<Fields extends FormFields> = {
   ) => React.ReactNode;
 };
 
-const listStory = <Fields extends FormFields>(
+export const listStory = <Fields extends FormFields>(
   storyObj: {
     args: ListStoryArgs<Fields>;
   } & Omit<StoryObj<typeof meta>, "args">,
@@ -45,7 +47,9 @@ const listStory = <Fields extends FormFields>(
   decorators: [
     (Story: () => JSX.Element) => (
       <>
-        <FieldLabel field={storyObj.args.atom} label={storyObj.args.label} />
+        {storyObj.args.label && (
+          <FieldLabel field={storyObj.args.atom} label={storyObj.args.label} />
+        )}
         <Story />
         <PicoFieldErrors field={storyObj.args.atom} />
       </>
