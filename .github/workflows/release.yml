@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/Iron
+          node-version-file: ".nvmrc"
 
       - name: Cache node_modules
         id: cache-node-modules
