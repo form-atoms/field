@@ -5,7 +5,7 @@ import { SwitchUploadAtom } from "./SwitchUploadAtom";
 import { uploadAtom } from "../../atoms";
 import { StringField, listField, stringField } from "../../fields";
 import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
-import { formStory, meta } from "../../scenarios/StoryForm";
+import { meta } from "../../scenarios/StoryForm";
 
 import { listStory, render } from "../../fields/list-field/listField.stories";
 
@@ -158,7 +158,8 @@ export const FileUploadList = listStory({
                 files.forEach((file) =>
                   add({
                     id: "",
-                    url: "", // TODO: file,
+                    // @ts-expect-error uploadAtom value needs to branch to file/result
+                    url: fakeUploadAtom(file),
                   }),
                 );
               }}

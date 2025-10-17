@@ -19,8 +19,7 @@ export function FileUpload<Value>({ field, children }: Props<Value>) {
   const validate = useSetAtom(atoms.validate);
   const status = useAtomValue(atoms.uploadStatus);
 
-  // runs the upload
-  useEffect(() => validate(), []);
+  useEffect(() => validate(), [validate]);
 
   return children({
     isLoading: status === "loading",
