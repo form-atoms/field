@@ -1,3 +1,10 @@
+## [5.3.1](https://github.com/form-atoms/field/compare/v5.3.0...v5.3.1) (2025-10-17)
+
+
+### Bug Fixes
+
+* **form-submit-values:** drop superfluous extends ([f330a41](https://github.com/form-atoms/field/commit/f330a41562541f5baabf89640c02bbd741de3629))
+
 # [5.3.0](https://github.com/form-atoms/field/compare/v5.2.0...v5.3.0) (2025-10-16)
 
 
