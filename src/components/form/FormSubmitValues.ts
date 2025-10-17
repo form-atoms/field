@@ -1,6 +1,6 @@
-import { FieldAtom, FormAtom } from "form-atoms";
+import type { FieldAtom, FormAtom } from "form-atoms";
 
-import {
+import type {
   ListField,
   ListFieldSubmitValue,
   ZodField,
@@ -15,12 +15,12 @@ type Identity<T> = T;
 
 type FormFields = {
   [key: string | number]:
-    | FieldAtom<any>
-    | ZodField<any>
+    | FieldAtom<unknown>
+    | ZodField
     | FormFields
     | FormFields[]
-    | FieldAtom<any>[]
-    | ZodField<any>[];
+    | FieldAtom<unknown>[]
+    | ZodField[];
 };
 
 export type FormFieldSubmitValues<Fields extends FormFields> = Flatten<{
@@ -36,7 +36,7 @@ export type FormFieldSubmitValues<Fields extends FormFields> = Flatten<{
         : Fields[Key] extends FormFields
           ? FormFieldSubmitValues<Fields[Key]>
           : Fields[Key] extends Array<infer Item>
-            ? Item extends ZodField<any>
+            ? Item extends ZodField
               ? ZodFieldSubmitValue<Fields[Key]>[]
               : Item extends FieldAtom<infer Value>
                 ? Value[]
@@ -46,5 +46,5 @@ export type FormFieldSubmitValues<Fields extends FormFields> = Flatten<{
             : never;
 }>;
 
-export type FormSubmitValues<Form extends FormAtom<any>> =
+export type FormSubmitValues<Form> =
   Form extends FormAtom<infer Fields> ? FormFieldSubmitValues<Fields> : never;

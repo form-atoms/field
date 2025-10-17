@@ -1,25 +1,21 @@
-import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
-import { stringArrayField } from "./stringArrayField";
-import { FormSubmitValues } from "../../components/form";
+import { FormFieldSubmitValues } from "../../components/form";
+
+import type { StringArrayField } from "./stringArrayField";
 
 test("required stringArrayField has '[string, ...string[]]' submit value", () => {
-  const form = formAtom({
-    field: stringArrayField(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<
+    FormFieldSubmitValues<{ field: StringArrayField }>
+  >().toEqualTypeOf<{
     field: [string, ...string[]];
   }>();
 });
 
 test("optional stringArrayField has 'string[]' submit value", () => {
-  const form = formAtom({
-    field: stringArrayField().optional(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<
+    FormFieldSubmitValues<{ field: ReturnType<StringArrayField["optional"]> }>
+  >().toEqualTypeOf<{
     // TODO: narrow?
     field: [string, ...string[]] | string[];
   }>();

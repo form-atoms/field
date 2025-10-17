@@ -1,25 +1,19 @@
-import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
-import { stringField } from "./stringField";
-import { FormSubmitValues } from "../../components/form";
+import type { FormFieldSubmitValues } from "../../components/form";
+
+import type { StringField } from "./stringField";
 
 test("required stringField has 'string' submit value", () => {
-  const form = formAtom({
-    field: stringField(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<FormFieldSubmitValues<{ field: StringField }>>().toEqualTypeOf<{
     field: string;
   }>();
 });
 
 test("optional stringField has 'string | undefined' submit value", () => {
-  const form = formAtom({
-    field: stringField().optional(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<
+    FormFieldSubmitValues<{ field: ReturnType<StringField["optional"]> }>
+  >().toEqualTypeOf<{
     field: string | undefined;
   }>();
 });

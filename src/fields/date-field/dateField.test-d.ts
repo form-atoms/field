@@ -1,25 +1,18 @@
-import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
-import { dateField } from "./dateField";
-import { FormSubmitValues } from "../../components/form";
+import type { FormFieldSubmitValues } from "../../components/form";
+import type { DateField } from "./dateField";
 
 test("required dateField has 'Date' submit value", () => {
-  const form = formAtom({
-    field: dateField(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<FormFieldSubmitValues<{ field: DateField }>>().toEqualTypeOf<{
     field: Date;
   }>();
 });
 
 test("optional dateField has 'Date | undefined' submit value", () => {
-  const form = formAtom({
-    field: dateField().optional(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<
+    FormFieldSubmitValues<{ field: ReturnType<DateField["optional"]> }>
+  >().toEqualTypeOf<{
     field: Date | undefined;
   }>();
 });

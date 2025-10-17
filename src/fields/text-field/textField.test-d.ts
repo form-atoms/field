@@ -1,26 +1,19 @@
-import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
-import { textField } from "./textField";
-import { FormSubmitValues } from "../../components/form";
+import type { FormFieldSubmitValues } from "../../components/form";
+import type { TextField } from "./textField";
 
 // could be stricter? e.g. matching pattern by min length
 test("required textField has 'string' submit value", () => {
-  const form = formAtom({
-    field: textField(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<FormFieldSubmitValues<{ field: TextField }>>().toEqualTypeOf<{
     field: string;
   }>();
 });
 
 test("optional textField has 'string' submit value", () => {
-  const form = formAtom({
-    field: textField().optional(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<
+    FormFieldSubmitValues<{ field: ReturnType<TextField["optional"]> }>
+  >().toEqualTypeOf<{
     field: string;
   }>();
 });

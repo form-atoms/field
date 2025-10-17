@@ -1,25 +1,18 @@
-import { formAtom } from "form-atoms";
 import { expectTypeOf, test } from "vitest";
 
-import { booleanField } from "./booleanField";
-import { FormSubmitValues } from "../../components/form";
+import type { FormFieldSubmitValues } from "../../components/form";
+import type { BooleanField } from "./booleanField";
 
 test("required booleanField has 'boolean' submit value", () => {
-  const form = formAtom({
-    field: booleanField(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<FormFieldSubmitValues<{ field: BooleanField }>>().toEqualTypeOf<{
     field: boolean;
   }>();
 });
 
 test("optional booleanField has 'boolean | undefined' submit value", () => {
-  const form = formAtom({
-    field: booleanField().optional(),
-  });
-
-  expectTypeOf<FormSubmitValues<typeof form>>().toEqualTypeOf<{
+  expectTypeOf<
+    FormFieldSubmitValues<{ field: ReturnType<BooleanField["optional"]> }>
+  >().toEqualTypeOf<{
     field: boolean | undefined;
   }>();
 });
