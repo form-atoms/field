@@ -41,7 +41,7 @@ export const useCheckboxGroupFieldProps = <Option, Field extends ZodArrayField>(
 
       return nextValues as ZodFieldValue<Field>;
     },
-    [indexRef, optionValues],
+    [setRefs, indexRef, optionValues],
   );
 
   const props = useFieldProps<Field, HTMLInputElement>(

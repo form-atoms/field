@@ -53,7 +53,7 @@ export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(
 
       return nextValues as ZodFieldValue<Field>;
     },
-    [optionValues],
+    [setRefs, optionValues],
   );
 
   const props = useFieldProps<Field, HTMLSelectElement>(
