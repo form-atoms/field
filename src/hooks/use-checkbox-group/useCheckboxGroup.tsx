@@ -39,6 +39,6 @@ export const useCheckboxGroup = <Option, Field extends ZodArrayField>(
     ...option,
     type: "checkbox" as const,
     required,
-    checked: props.value.includes(option.value),
+    checked: props.value.includes(`${option.value}`),
   }));
 };

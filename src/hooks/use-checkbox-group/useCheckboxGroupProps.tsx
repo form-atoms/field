@@ -1,12 +1,14 @@
-import { UseFieldOptions } from "form-atoms";
+import type { UseFieldOptions } from "form-atoms";
 import { useAtomValue } from "jotai";
-import { ChangeEvent, useMemo, useRef } from "react";
+import { ChangeEvent, useCallback, useMemo } from "react";
 
 import {
   type UseMultiSelectFieldProps as UseCheckboxGroupFieldProps,
   useFieldProps,
 } from "../";
 import type { ZodArrayField, ZodFieldValue } from "../../fields";
+
+import { useIndexValue } from "../use-multiselect-field-props/useIndexValue";
 
 export const useCheckboxGroupFieldProps = <Option, Field extends ZodArrayField>(
   { field, options, getValue }: UseCheckboxGroupFieldProps<Option, Field>,
@@ -19,40 +21,28 @@ export const useCheckboxGroupFieldProps = <Option, Field extends ZodArrayField>(
     [getValue, options],
   );
 
-  const prevValue = useRef(fieldValue);
+  const { indexRef, value, setRefs } = useIndexValue({
+    fieldValue,
+    optionValues,
+  });
 
-  const activeIndexes = useRef<number[]>(
-    fieldValue.map((activeOption) => optionValues.indexOf(activeOption)),
+  const getEventValue = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const index = event.currentTarget.value;
+      const nextIndexes = event.currentTarget.checked
+        ? [...indexRef.current, index]
+        : indexRef.current.filter((val) => val != index);
+
+      const nextValues = nextIndexes.map(
+        (index) => optionValues[parseInt(index)],
+      );
+
+      setRefs({ nextIndexes, nextValues });
+
+      return nextValues as ZodFieldValue<Field>;
+    },
+    [indexRef, optionValues],
   );
-
-  if (prevValue.current != fieldValue) {
-    /**
-     * The field was set from outside via initialValue, reset action, or set manually.
-     * Recompute the indexes.
-     **/
-    activeIndexes.current = fieldValue.map((activeOption) =>
-      optionValues.indexOf(activeOption),
-    );
-  }
-
-  const getEventValue = (event: ChangeEvent<HTMLInputElement>) => {
-    const index = parseInt(event.currentTarget.value);
-    const nextIndexes = event.currentTarget.checked
-      ? [...activeIndexes.current, index]
-      : activeIndexes.current.filter((val) => val != index);
-
-    activeIndexes.current = nextIndexes;
-
-    const nextValues = nextIndexes.map((index) => optionValues[index]);
-
-    /**
-     * When user change event happened, we set the value.
-     * On the next render when the fieldValue is updated, we can skip calculating the activeIndexes.
-     */
-    prevValue.current = nextValues;
-
-    return nextValues as ZodFieldValue<Field>;
-  };
 
   const props = useFieldProps<Field, HTMLInputElement>(
     field,
@@ -60,5 +50,5 @@ export const useCheckboxGroupFieldProps = <Option, Field extends ZodArrayField>(
     fieldOptions,
   );
 
-  return { ...props, value: activeIndexes.current };
+  return { ...props, value };
 };

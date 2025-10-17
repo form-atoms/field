@@ -17,11 +17,11 @@ export function useIndexValue({
   optionValues,
 }: UseIndexValueParams) {
   const prevValue = useRef(fieldValue);
-  const activeIndexes = useRef<readonly string[]>(EMPTY_REF);
+  const indexRef = useRef<readonly string[]>(EMPTY_REF);
 
-  if (activeIndexes.current === EMPTY_REF) {
+  if (indexRef.current === EMPTY_REF) {
     // prevent recalculation on every render
-    activeIndexes.current = fieldValue.map(
+    indexRef.current = fieldValue.map(
       (activeOption) => `${optionValues.indexOf(activeOption)}`,
     );
   }
@@ -31,7 +31,7 @@ export function useIndexValue({
      * The field was set from outside via initialValue, reset action, or set manually.
      * Recompute the indexes.
      **/
-    activeIndexes.current = fieldValue.map(
+    indexRef.current = fieldValue.map(
       (activeOption) => `${optionValues.indexOf(activeOption)}`,
     );
   }
@@ -43,16 +43,20 @@ export function useIndexValue({
       nextIndexes: readonly string[];
       nextValues: readonly unknown[];
     }) => {
-      activeIndexes.current = nextIndexes;
+      indexRef.current = nextIndexes;
 
       /**
        * When user change event happened, we set the value.
-       * On the next render when the fieldValue is updated, we can skip calculating the activeIndexes.
+       * On the next render when the fieldValue is updated, we can skip calculating the indexRef.
        */
       prevValue.current = nextValues;
     },
-    [prevValue, activeIndexes],
+    [prevValue, indexRef],
   );
 
-  return [activeIndexes.current, setRefs] as const;
+  return {
+    value: indexRef.current,
+    indexRef,
+    setRefs,
+  };
 }

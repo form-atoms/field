@@ -31,27 +31,30 @@ export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(
     [getValue, options],
   );
 
-  const [value, setRefs] = useIndexValue({
+  const { value, setRefs } = useIndexValue({
     fieldValue,
     optionValues,
   });
 
-  const getEventValue = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
-    const nextIndexes = [...event.currentTarget.options]
-      .filter((option) => option.selected)
-      .map((option) => option.value);
+  const getEventValue = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      const nextIndexes = [...event.currentTarget.options]
+        .filter((option) => option.selected)
+        .map((option) => option.value);
 
-    const nextValues = nextIndexes.map(
-      (index) => optionValues[parseInt(index)],
-    );
+      const nextValues = nextIndexes.map(
+        (index) => optionValues[parseInt(index)],
+      );
 
-    setRefs({
-      nextIndexes,
-      nextValues,
-    });
+      setRefs({
+        nextIndexes,
+        nextValues,
+      });
 
-    return nextValues as ZodFieldValue<Field>;
-  }, []);
+      return nextValues as ZodFieldValue<Field>;
+    },
+    [optionValues],
+  );
 
   const props = useFieldProps<Field, HTMLSelectElement>(
     field,
