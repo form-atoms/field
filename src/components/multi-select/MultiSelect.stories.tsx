@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
+import { object, z } from "zod";
 
 import { MultiSelect, MultiSelectProps } from "./MultiSelect";
 import { FieldLabel } from "..";
-import { ZodArrayField, stringArrayField } from "../../fields";
-import { countryOptions } from "../../scenarios/mocks";
+import { ZodArrayField, arrayField, stringArrayField } from "../../fields";
+import { Country, countryOptions } from "../../scenarios/mocks";
 import { formStory, meta } from "../../scenarios/StoryForm";
 import { FieldErrors } from "../field-errors";
 
@@ -66,6 +67,50 @@ export const Initialized = formStory({
             {flag} {name}
           </>
         )}
+      />
+    ),
+  },
+});
+
+/**
+ * NOTE: the props (initialValue, options, getValue, getLabel) must be stable between renders
+ * e.g. created with useCallback or defined outside of the component like here.
+ *
+ */
+const objectProps = {
+  initialValue: [countryOptions[1]!],
+  options: countryOptions,
+  getValue(value: Country) {
+    return value;
+  },
+  getLabel: ({ name, flag }: Country) => (
+    <>
+      {flag} {name}
+    </>
+  ),
+};
+
+export const WithObjectValue = formStory({
+  name: "Custom element schema",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Here the submit value is an object, not a primitive type. The field is based on the `arrayField`.",
+      },
+    },
+  },
+  args: {
+    fields: {
+      countries: arrayField({
+        elementSchema: z.object({ key: z.string(), name: z.string() }),
+      }),
+    },
+    children: ({ fields }) => (
+      <MultiSelectField
+        field={fields.countries}
+        label="Visited countries"
+        {...objectProps}
       />
     ),
   },

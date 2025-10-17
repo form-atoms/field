@@ -5,7 +5,7 @@ export const countryOptions = [
   { name: "Hungary", key: "HU", flag: "🇭🇺" },
 ];
 
-export type Language = (typeof languageOptions)[number];
+export type Country = (typeof countryOptions)[number];
 
 export const languageOptions = [
   { name: "Pascal", key: "pascal" },
@@ -16,6 +16,8 @@ export const languageOptions = [
   { name: "Tensorflow", key: "tf" },
   { name: "Na'vi", key: "navi" },
 ];
+
+export type Language = (typeof languageOptions)[number];
 
 export const addresses = [
   { street: "Hrad", city: "Bratislava", zip: "81101" },
