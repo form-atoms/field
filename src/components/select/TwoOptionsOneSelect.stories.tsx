@@ -1,6 +1,5 @@
 import shuffle from "lodash.shuffle";
 import { useCallback, useState } from "react";
-import { RenderProp } from "react-render-prop-type";
 
 import { SelectField } from "./SelectField.mock";
 import { stringField } from "../../fields";
@@ -48,7 +47,9 @@ export const TwoOptionsOneSelect = formStory({
 
 const SwapCountries = ({
   children,
-}: RenderProp<{ countries: typeof countryOptions }>) => {
+}: {
+  children: (props: { countries: typeof countryOptions }) => React.ReactNode;
+}) => {
   const [countries, setCountries] = useState(countryOptions);
 
   const swapCountries = useCallback(() => {

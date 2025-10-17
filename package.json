@@ -66,11 +66,9 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/lodash.shuffle": "^4.2.9",
-    "@types/prettier": "^3.0.0",
     "@types/react": "^18",
     "@types/react-copy-to-clipboard": "^5",
     "@types/react-dom": "^18",
-    "@types/semantic-release": "^20.0.6",
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/coverage-v8": "^3.2.4",
     "eslint": "9.37.0",
@@ -95,9 +93,6 @@
     "vite": "^7.1.10",
     "vitest": "^3.2.4",
     "zod": "3.22.4"
-  },
-  "dependencies": {
-    "react-render-prop-type": "0.1.0"
   },
   "publishConfig": {
     "access": "public"

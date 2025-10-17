@@ -878,11 +878,9 @@ __metadata:
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/user-event": "npm:^14.6.1"
     "@types/lodash.shuffle": "npm:^4.2.9"
-    "@types/prettier": "npm:^3.0.0"
     "@types/react": "npm:^18"
     "@types/react-copy-to-clipboard": "npm:^5"
     "@types/react-dom": "npm:^18"
-    "@types/semantic-release": "npm:^20.0.6"
     "@vitejs/plugin-react": "npm:^4.7.0"
     "@vitest/coverage-v8": "npm:^3.2.4"
     eslint: "npm:9.37.0"
@@ -898,7 +896,6 @@ __metadata:
     react: "npm:^18.2.0"
     react-copy-to-clipboard: "npm:^5.1.0"
     react-dom: "npm:^18.2.0"
-    react-render-prop-type: "npm:0.1.0"
     remark-gfm: "npm:^4.0.1"
     semantic-release: "npm:^25.0.0"
     shiki: "npm:^3.13.0"
@@ -2602,13 +2599,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 18.11.18
-  resolution: "@types/node@npm:18.11.18"
-  checksum: 10/da05cf3a0036ef05cd695ac4cb265948593acbe723ba818f0ca0ce466b13ba99e1aac3a363086d6b8c7ea8f30c9233478e0293ac878a6f4b1d5515b10c392257
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^20.0.0":
   version: 20.19.17
   resolution: "@types/node@npm:20.19.17"
@@ -2629,15 +2619,6 @@ __metadata:
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
   checksum: 10/4df9de98150d2978afc2161482a3a8e6617883effba3223324f079de97ba7eabd7d84b90ced11c3f82b0c08d4a8383f678c9f73e9c41258f769b3fa234a2bb4f
-  languageName: node
-  linkType: hard
-
-"@types/prettier@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@types/prettier@npm:3.0.0"
-  dependencies:
-    prettier: "npm:*"
-  checksum: 10/a2a512d304e5bcf78f38089dc88ad19215e6ab871d435a17aef3ce538a63b07c0e359c18db23989dc1ed9fff96d99eee1f680416080184df5c7e0e3bf767e165
   languageName: node
   linkType: hard
 
@@ -2688,15 +2669,6 @@ __metadata:
   version: 0.16.2
   resolution: "@types/scheduler@npm:0.16.2"
   checksum: 10/b6b4dcfeae6deba2e06a70941860fb1435730576d3689225a421280b7742318d1548b3d22c1f66ab68e414f346a9542f29240bc955b6332c5b11e561077583bc
-  languageName: node
-  linkType: hard
-
-"@types/semantic-release@npm:^20.0.6":
-  version: 20.0.6
-  resolution: "@types/semantic-release@npm:20.0.6"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10/7e2c186b07012a0468c1024201be0eda801927093eeb1c7b98d58881b8d66ca7647ff310673eaaeeef312f16c70409386d6a839b6c1a552dd500057678d4b682
   languageName: node
   linkType: hard
 
@@ -8625,15 +8597,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:*":
-  version: 3.1.0
-  resolution: "prettier@npm:3.1.0"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 10/e95e8f93c6b9aea2ac1e86bebe329bee90c8c50d9a23d1f593eba8d7f39b33b3641eb28785001505b6723c47895a5322ad12a2fb855b289cb7bae450ffc34425
-  languageName: node
-  linkType: hard
-
 "prettier@npm:3.6.2":
   version: 3.6.2
   resolution: "prettier@npm:3.6.2"
@@ -8950,15 +8913,6 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/5e571ba35ba527047c54c9c4a271363167770556fb85ee45ead8310673197719425cc8f7a2b7f672abf530294c41c8c34bdae325a571994cc1e694b664b52734
-  languageName: node
-  linkType: hard
-
-"react-render-prop-type@npm:0.1.0":
-  version: 0.1.0
-  resolution: "react-render-prop-type@npm:0.1.0"
-  peerDependencies:
-    react: ^18.2.0
-  checksum: 10/165460282d60135b1287ce2801f2179b1d0a1e0665200ce8ba0868c0c37149bf93101934a63d5b75249e96bf1bc5d127a26bc6b571d6fcf3985d72515548e6cc
   languageName: node
   linkType: hard
 

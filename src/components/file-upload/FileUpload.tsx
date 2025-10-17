@@ -1,6 +1,5 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { RenderProp } from "react-render-prop-type";
 
 import { UploadAtom } from "../../atoms";
 
@@ -10,7 +9,10 @@ type ChildrenProps = {
   isSuccess: boolean;
 };
 
-type Props<Value> = { field: UploadAtom<Value> } & RenderProp<ChildrenProps>;
+type Props<Value> = {
+  field: UploadAtom<Value>;
+  children: (props: ChildrenProps) => React.ReactElement;
+};
 
 export function FileUpload<Value>({ field, children }: Props<Value>) {
   const atoms = useAtomValue(field);

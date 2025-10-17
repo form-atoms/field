@@ -1,14 +1,15 @@
-import { useFieldErrors } from "form-atoms";
-import type { FieldAtom } from "form-atoms";
-import { RenderProp } from "react-render-prop-type";
+import { type FieldAtom, useFieldErrors } from "form-atoms";
 
-type ChildrenProp = RenderProp<{ errors: ReturnType<typeof useFieldErrors> }>;
+export type FieldErrorsProps<Value> = {
+  field: FieldAtom<Value>;
+  children?: (props: {
+    errors: ReturnType<typeof useFieldErrors>;
+  }) => React.ReactElement;
+};
 
-export type FieldErrorsProps = {
-  field: FieldAtom<any>;
-} & Partial<ChildrenProp>;
-
-export const FieldErrors = ({
+export function FieldErrors<Value>({
   field,
   children = ({ errors }) => <>{errors.join("\n")}</>,
-}: FieldErrorsProps) => children({ errors: useFieldErrors(field) });
+}: FieldErrorsProps<Value>) {
+  return children({ errors: useFieldErrors(field) });
+}

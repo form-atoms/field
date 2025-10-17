@@ -1,22 +1,30 @@
-import { FieldAtom } from "form-atoms";
-import { MouseEventHandler, ReactNode, useCallback } from "react";
-import { RenderProp } from "react-render-prop-type";
+"use client";
 
-type Children = RenderProp<{
-  children: ReactNode;
+import type { FieldAtom } from "form-atoms";
+import {
+  MouseEventHandler,
+  PropsWithChildren,
+  ReactNode,
+  useCallback,
+} from "react";
+
+type ChildrenProps = PropsWithChildren<{
   htmlFor: string;
   onMouseDown: MouseEventHandler;
 }>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldLabelProps<Field extends FieldAtom<any>> = {
   field: Field;
   label: ReactNode;
-} & Partial<Children>;
+  children?: (props: ChildrenProps) => React.ReactElement;
+};
 
 /**
  * Renders an accessible label controlling the field's input.
  * @deprecated The atomKey is not suitable for input/label pairing as it does not support SSR. Moreover the onMouseDown is UX feature, not a logic concern for a field.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const FieldLabel = <Field extends FieldAtom<any>>({
   field,
   label,

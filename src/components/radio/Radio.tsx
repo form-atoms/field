@@ -1,7 +1,6 @@
 import { useFieldActions, useFieldValue } from "form-atoms";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
-import { RenderProp } from "react-render-prop-type";
 
 import { RadioControlAtom } from "./RadioControl";
 import { CheckboxField } from "../../fields";
@@ -72,5 +71,8 @@ export const Radio = ({
   field,
   control,
   children,
-}: Props & RenderProp<ReturnType<typeof useCheckboxFieldProps>>) =>
-  children(useRadio({ control, field }));
+}: Props & {
+  children: (
+    props: ReturnType<typeof useCheckboxFieldProps>,
+  ) => React.ReactNode;
+}) => children(useRadio({ control, field }));

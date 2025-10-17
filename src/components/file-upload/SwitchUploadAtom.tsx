@@ -1,27 +1,27 @@
 import { FieldAtom } from "form-atoms";
 import { useAtomValue } from "jotai";
-import { RenderProp } from "react-render-prop-type";
 
 import { UploadAtom } from "../../atoms";
 
-export function useIsUploadAtom(
-  field: FieldAtom<any>,
-): field is UploadAtom<any> {
+export function useIsUploadAtom<Value>(
+  field: FieldAtom<Value>,
+): field is UploadAtom<Value> {
   const atoms = useAtomValue(field);
 
-  return !!(atoms as any).uploadStatus;
+  return "uploadStatus" in atoms;
 }
 
 type UploadProps<Value> = { isUpload: true; field: UploadAtom<Value> };
-
 type RegularProps<Value> = { isUpload: false; field: FieldAtom<Value> };
 
-export const SwitchUploadAtom = <Value,>({
-  field,
-  children,
-}: { field: FieldAtom<Value> } & RenderProp<
-  UploadProps<Value> | RegularProps<Value>
->) => {
+type Props<Value> = {
+  field: FieldAtom<Value>;
+  children: (
+    props: UploadProps<Value> | RegularProps<Value>,
+  ) => React.ReactNode;
+};
+
+export const SwitchUploadAtom = <Value,>({ field, children }: Props<Value>) => {
   if (useIsUploadAtom(field)) {
     return <>{children({ isUpload: true, field })}</>;
   } else {

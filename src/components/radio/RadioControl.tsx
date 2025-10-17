@@ -1,6 +1,5 @@
 import { atom } from "jotai";
 import { useMemo } from "react";
-import { RenderProp } from "react-render-prop-type";
 
 import { CheckboxField } from "../../fields";
 
@@ -11,7 +10,9 @@ export type RadioControlAtom = ReturnType<typeof radioControlAtom>;
 export const RadioControl = ({
   name,
   children,
-}: Partial<{ name: string }> & RenderProp<{ control: RadioControlAtom }>) => {
+}: Partial<{ name: string }> & {
+  children: (props: { control: RadioControlAtom }) => React.ReactNode;
+}) => {
   /**
    * Atom to keep track of currently active checkbox fieldAtom.
    */
