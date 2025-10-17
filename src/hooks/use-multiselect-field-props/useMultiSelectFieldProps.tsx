@@ -1,10 +1,11 @@
-import { UseFieldOptions } from "form-atoms";
+import { type ChangeEvent, useCallback, useMemo } from "react";
+import type { UseFieldOptions } from "form-atoms";
 import { useAtomValue } from "jotai";
-import { ChangeEvent, useCallback, useMemo, useRef } from "react";
 import { ArrayCardinality, ZodAny, ZodArray } from "zod";
 
 import { UseOptionsProps, useFieldProps } from "..";
 import { ZodArrayField, ZodField, ZodFieldValue } from "../../fields";
+import { useIndexValue } from "./useIndexValue";
 
 export type UseMultiSelectFieldProps<Option, Field extends ZodArrayField> = {
   field: Field;
@@ -23,44 +24,31 @@ export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(
   { field, options, getValue }: UseMultiSelectFieldProps<Option, Field>,
   fieldOptions?: UseFieldOptions<ZodFieldValue<Field>>,
 ) => {
-  const atom = useAtomValue(field);
-  const fieldValue = useAtomValue(atom.value);
+  const atom = useAtomValue(field, fieldOptions);
+  const fieldValue = useAtomValue(atom.value, fieldOptions);
   const optionValues = useMemo(
     () => options.map(getValue),
     [getValue, options],
   );
 
-  const prevValue = useRef(fieldValue);
+  const [value, setRefs] = useIndexValue({
+    fieldValue,
+    optionValues,
+  });
 
-  const activeIndexes = useRef<string[]>(
-    fieldValue.map((activeOption) => `${optionValues.indexOf(activeOption)}`),
-  );
-
-  if (prevValue.current != fieldValue) {
-    /**
-     * The field was set from outside via initialValue, reset action, or set manually.
-     * Recompute the indexes.
-     **/
-    activeIndexes.current = fieldValue.map(
-      (activeOption) => `${optionValues.indexOf(activeOption)}`,
-    );
-  }
   const getEventValue = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
     const nextIndexes = [...event.currentTarget.options]
       .filter((option) => option.selected)
       .map((option) => option.value);
 
-    activeIndexes.current = nextIndexes;
-
     const nextValues = nextIndexes.map(
       (index) => optionValues[parseInt(index)],
     );
 
-    /**
-     * When user change event happened, we set the value.
-     * On the next render when the fieldValue is updated, we can skip calculating the activeIndexes.
-     */
-    prevValue.current = nextValues;
+    setRefs({
+      nextIndexes,
+      nextValues,
+    });
 
     return nextValues as ZodFieldValue<Field>;
   }, []);
@@ -71,5 +59,5 @@ export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(
     fieldOptions,
   );
 
-  return { ...props, value: activeIndexes.current };
+  return { ...props, value };
 };

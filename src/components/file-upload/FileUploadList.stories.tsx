@@ -5,12 +5,10 @@ import { SwitchUploadAtom } from "./SwitchUploadAtom";
 import { uploadAtom } from "../../atoms";
 import { StringField, listField, stringField } from "../../fields";
 import { PicoFieldErrors } from "../../scenarios/PicoFieldErrors";
-import { meta } from "../../scenarios/StoryForm";
 
 import { listStory, render } from "../../fields/list-field/listField.stories";
 
 export default {
-  ...meta,
   title: "components/FileUpload",
   render,
 };

@@ -1,6 +1,6 @@
-import { ChangeEvent, useMemo, startTransition } from "react";
+import { type ChangeEvent, useMemo, startTransition } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { UseAtomOptions, useField } from "form-atoms";
+import { type UseAtomOptions, useField } from "form-atoms";
 
 import { ZodField, ZodFieldValue } from "../../fields";
 
