@@ -1,3 +1,13 @@
+## [5.3.3](https://github.com/form-atoms/field/compare/v5.3.2...v5.3.3) (2025-10-17)
+
+
+### Bug Fixes
+
+* **checkbox-group:** reuse the indexValue as in multi-select ([9694aa9](https://github.com/form-atoms/field/commit/9694aa98e2e9af5a56b3fc20aad69546b7ec4eb3))
+* linter issues ([d431122](https://github.com/form-atoms/field/commit/d431122700d12b1cc8b6c8e79310a31f57f7f379))
+* **multi-select:** index value - avoiding recreating the ref contents ([e28e99d](https://github.com/form-atoms/field/commit/e28e99d9a80a567d854715d7032fa716f48e3dfa))
+* useFieldProps store from options ([efcb4a2](https://github.com/form-atoms/field/commit/efcb4a2e5dce30763f307ace5f51295b21e94594))
+
 ## [5.3.2](https://github.com/form-atoms/field/compare/v5.3.1...v5.3.2) (2025-10-17)
 
 
