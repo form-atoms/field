@@ -1,3 +1,10 @@
+## [5.3.2](https://github.com/form-atoms/field/compare/v5.3.1...v5.3.2) (2025-10-17)
+
+
+### Bug Fixes
+
+* drop render-prop as only children-prop is used ([6042406](https://github.com/form-atoms/field/commit/60424067366559020f085c0b0e5b341529e72d64))
+
 ## [5.3.1](https://github.com/form-atoms/field/compare/v5.3.0...v5.3.1) (2025-10-17)
 
 
