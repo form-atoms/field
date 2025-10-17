@@ -1,8 +1,7 @@
-import { FieldAtom } from "form-atoms";
 import { ReactNode, useMemo } from "react";
 
 export type UseOptionsProps<Option> = {
-  field: FieldAtom<any>;
+  field: { toString(): string };
   options: readonly Option[];
   getLabel: (option: Option) => ReactNode;
 };

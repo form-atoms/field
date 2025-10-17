@@ -1,6 +1,6 @@
-import { UseFieldOptions, useField } from "form-atoms";
+import { ChangeEvent, useMemo, startTransition } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { ChangeEvent, useMemo, useTransition } from "react";
+import { UseAtomOptions, useField } from "form-atoms";
 
 import { ZodField, ZodFieldValue } from "../../fields";
 
@@ -16,16 +16,15 @@ export function useFieldProps<
         value: ZodFieldValue<Field>,
       ) => ZodFieldValue<Field>
     : never,
-  options?: UseFieldOptions<ZodFieldValue<Field>>,
+  options?: UseAtomOptions,
 ) {
   const { actions, state } = useField<ZodFieldValue<Field>>(fieldAtom, options);
-  const field = useAtomValue(fieldAtom);
-  const name = useAtomValue(field.name);
-  const required = useAtomValue(field.required);
-  const validationCount = useAtomValue(field._validateCount);
-  const validate = useSetAtom(field.validate);
-  const ref = useSetAtom(field.ref);
-  const [, startTransition] = useTransition();
+  const field = useAtomValue(fieldAtom, options);
+  const name = useAtomValue(field.name, options);
+  const required = useAtomValue(field.required, options);
+  const validationCount = useAtomValue(field._validateCount, options);
+  const validate = useSetAtom(field.validate, options);
+  const ref = useSetAtom(field.ref, options);
 
   const ariaInvalid = state.validateStatus === "invalid";
   // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid
@@ -62,10 +61,12 @@ export function useFieldProps<
       actions,
       name,
       required,
-      validationCount,
       getEventValue,
       ref,
       validate,
+      ariaInvalid,
+      fieldAtom,
+      requiredAriaInvalid,
     ],
   );
 }

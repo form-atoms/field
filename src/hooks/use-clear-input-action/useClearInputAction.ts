@@ -13,6 +13,7 @@ export const useClearInputAction = <Value>(
     () => ({
       clear() {
         if (ref) {
+          // eslint-disable-next-line react-hooks/immutability
           ref.value = "";
         }
       },
