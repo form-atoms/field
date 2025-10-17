@@ -4,7 +4,7 @@ export const darkTheme = create({
   base: "dark",
   brandTitle: "form-atoms - Jotai form fields for React",
   brandImage: "./form-atoms-banner-transparent.png",
-  colorPrimary: "var(--pico-color-indigo-600)",
+  colorSecondary: "#017FC0", // using CSS var(--pico-color-azure-500) here breaks the storybook
 
   // UI
   appBg: "var(--pico-color-slate-950)",

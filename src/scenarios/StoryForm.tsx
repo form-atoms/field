@@ -24,7 +24,12 @@ export const StoryForm = <Fields extends FormFields>({
   const { reset, submit } = useFormActions(form);
 
   return (
-    <form onSubmit={submit(action("submit"))}>
+    <form
+      onSubmit={submit((value) => {
+        console.log(value);
+        action("submit")(value);
+      })}
+    >
       <section>{children({ fields, required, form })}</section>
       <div className="grid">
         <button type="submit">Submit</button>

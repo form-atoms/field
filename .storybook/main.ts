@@ -18,6 +18,12 @@ export default {
     },
   ],
 
+  features: {
+    backgrounds: false,
+    outline: false,
+    measure: false,
+  },
+
   framework: {
     name: "@storybook/react-vite",
     options: {},
