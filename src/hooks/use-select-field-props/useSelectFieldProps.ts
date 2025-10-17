@@ -1,6 +1,6 @@
-import { UseFieldOptions } from "form-atoms";
-import { useAtomValue } from "jotai";
 import { ChangeEvent, useCallback, useMemo } from "react";
+import { useAtomValue } from "jotai";
+import type { UseFieldOptions } from "form-atoms";
 
 import { FieldProps, type UseOptionsProps, useFieldProps } from "..";
 import type { ZodField, ZodFieldValue } from "../../fields";
@@ -8,7 +8,7 @@ import type { ZodField, ZodFieldValue } from "../../fields";
 /**
  * This restricts ZodField to have optional schema defaulting to 'undefined of required schema'.
  */
-export type SelectField = ZodField<any>;
+export type SelectField = ZodField;
 
 export type SelectFieldProps<
   Option,
@@ -31,8 +31,7 @@ export const useSelectFieldProps = <Option, Field extends SelectField>(
 ) => {
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
-  // TODO: getValue should be useMemo dependency, currently we asume that it is stable
-  const values = useMemo(() => options.map(getValue), [options]);
+  const values = useMemo(() => options.map(getValue), [options, getValue]);
   const value = useMemo(() => values.indexOf(fieldValue), [fieldValue, values]);
 
   const getEventValue = useCallback(

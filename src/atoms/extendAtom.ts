@@ -1,11 +1,11 @@
-import type { Getter, PrimitiveAtom } from "jotai";
+import type { Getter, Atom } from "jotai";
 import { atomWithDefault } from "jotai/utils";
 
 export const extendAtom = <
   T extends Record<string, unknown>,
   E extends Record<string, unknown>,
 >(
-  baseAtom: PrimitiveAtom<T>,
+  baseAtom: Atom<T>,
   makeAtoms: (cfg: T, get: Getter) => E,
 ) => {
   const extended = atomWithDefault((get) => {
