@@ -78,8 +78,8 @@ export const RequiredListField = listStory({
     atom: listField({
       name: "environment",
       fields: () => ({
-        variable: textField({ name: "variable", value: "" }),
-        value: textField({ name: "value", value: "" }),
+        variable: textField({ name: "variable" }),
+        value: textField({ name: "value" }),
       }),
     }),
     children: ({ List }) => (
@@ -140,8 +140,8 @@ export const OptionalListField = listStory({
     atom: listField({
       name: "environment",
       fields: () => ({
-        variable: textField({ name: "variable", value: "" }),
-        value: textField({ name: "value", value: "" }),
+        variable: textField({ name: "variable" }),
+        value: textField({ name: "value" }),
       }),
     }).optional(),
     children: ({ List }) => (
@@ -204,8 +204,8 @@ export const RequiredListFieldWithCustomSchema = listStory({
       name: "recoveryPhrases",
       schema: (s) => s.max(2),
       fields: () => ({
-        hint: textField({ name: "hint", value: "" }),
-        phrase: textField({ name: "phrase", value: "" }),
+        hint: textField({ name: "hint" }),
+        phrase: textField({ name: "phrase" }),
       }),
       invalidItemError:
         "Some of your phrases are empty. Please remove or complete them.",

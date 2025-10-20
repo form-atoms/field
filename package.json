@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",
-    "@form-atoms/list-atom": "^2.3.9",
+    "@form-atoms/list-atom": "^2.3.10",
     "@picocss/pico": "^2.1.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
@@ -92,7 +92,7 @@
     "typescript-eslint": "^8.46.1",
     "vite": "^7.1.10",
     "vitest": "^3.2.4",
-    "zod": "3.22.4"
+    "zod": "3.25.76"
   },
   "publishConfig": {
     "access": "public"

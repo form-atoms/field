@@ -2,14 +2,15 @@
 // https://github.com/storybookjs/storybook/pull/26168
 
 import type { FC, PropsWithChildren, ReactNode } from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { global } from "@storybook/global";
 import type { ThemeVars } from "storybook/theming";
 import { ThemeProvider, ensure as ensureTheme } from "storybook/theming";
 import type { Renderer } from "storybook/internal/types";
 import type { DocsContextProps } from "@storybook/addon-docs/blocks";
-import { DocsContext } from "@storybook/addon-docs/blocks";
-import { SourceContainer } from "@storybook/addon-docs/blocks";
+import { DocsContext, SourceContainer } from "@storybook/addon-docs/blocks";
+
+import { Footer } from "./footer";
 
 export function scrollToElement(element: any, block = "start") {
   element.scrollIntoView({
@@ -68,7 +69,10 @@ export const DocsContainer: FC<PropsWithChildren<DocsContainerProps>> = ({
       <SourceContainer channel={context.channel}>
         <ThemeProvider theme={ensureTheme(theme!)}>
           {/** @ts-ignore */}
-          <DocsPage toc={null}>{children}</DocsPage>
+          <DocsPage toc={null}>
+            {children}
+            <Footer />
+          </DocsPage>
         </ThemeProvider>
       </SourceContainer>
     </DocsContext.Provider>

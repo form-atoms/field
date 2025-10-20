@@ -32,4 +32,12 @@ export default {
   core: {
     disableTelemetry: true,
   },
+
+  refs: {
+    "@form-atoms/list-atom": {
+      title: "@form-atoms/list-atom",
+      url: "https://form-atoms.github.io/list-atom/",
+      expanded: false,
+    },
+  },
 } satisfies StorybookConfig;

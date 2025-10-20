@@ -8,6 +8,7 @@ on:
 jobs:
   storybook:
     name: 🎨 Storybook Build & Deploy to GH Pages
+    if: ${{!startsWith(github.event.head_commit.message, 'chore:') && !startsWith(github.event.pull_request.title, 'chore:') && !startsWith(github.event.head_commit.message, 'chore(') && !startsWith(github.event.pull_request.title, 'chore(') }}
     permissions:
       pages: write # to deploy to Pages
       id-token: write # to verify the deployment originates from an appropriate source
@@ -20,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/Iron
+          node-version-file: ".nvmrc"
 
       - name: Cache node_modules
         id: cache-node-modules

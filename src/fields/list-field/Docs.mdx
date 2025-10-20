@@ -36,11 +36,11 @@ import { listField } from "@form-atoms/field";
 
 #### Type
 
-`(value: FormValues<Fields>) => Fields`
+`() => FormFields`
 
 #### Description
 
-The `listField` is defined by the shape of the fields returned from its form `fields`. If you supply an initial `value`, each of the items will be applied to the `fields` constructor.
+The `listField` is defined by the shape of the fields returned from its form `fields`.
 
 #### Usage
 
@@ -54,9 +54,9 @@ const environmentVariables = listField({
     { name: "GITHUB_TOKEN", value: "myToken" },
     { name: "NPM_TOKEN", value: "privateToken" },
   ],
-  fields: ({ name, value }) => ({
-    name: textField({ value: name }),
-    value: textField({ value }),
+  fields: () => ({
+    name: textField(),
+    value: textField(),
   }),
 });
 ```
@@ -77,7 +77,6 @@ As an example, we can require the user to insert one or two recovery phrases:
 
 ```js
 const recoveryPhrases = listField({
-  value: [],
   schema: (s) => s.max(2),
   fields: ({ hint, phrase }) => ({
     hint: textField({ value: hint }),
@@ -105,10 +104,9 @@ The error to add to the `listField` when submitted while there are errors in the
 ```ts
 const recoveryPhrases = listField({
   name: "recoveryPhrases",
-  value: [],
-  fields: ({ hint, phrase }) => ({
-    hint: textField({ value: hint }),
-    phrase: textField({ value: phrase }),
+  fields: () => ({
+    hint: textField(),
+    phrase: textField(),
   }),
   invalidItemError:
     "Some of your phrases are empty. Please remove or complete them.",

@@ -862,7 +862,7 @@ __metadata:
   resolution: "@form-atoms/field@workspace:."
   dependencies:
     "@emotion/react": "npm:^11.14.0"
-    "@form-atoms/list-atom": "npm:^2.3.9"
+    "@form-atoms/list-atom": "npm:^2.3.10"
     "@picocss/pico": "npm:^2.1.1"
     "@semantic-release/changelog": "npm:^6.0.3"
     "@semantic-release/commit-analyzer": "npm:^13.0.1"
@@ -904,7 +904,7 @@ __metadata:
     typescript-eslint: "npm:^8.46.1"
     vite: "npm:^7.1.10"
     vitest: "npm:^3.2.4"
-    zod: "npm:3.22.4"
+    zod: "npm:3.25.76"
   peerDependencies:
     "@form-atoms/list-atom": ^2
     form-atoms: ^3
@@ -915,15 +915,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@form-atoms/list-atom@npm:^2.3.9":
-  version: 2.3.9
-  resolution: "@form-atoms/list-atom@npm:2.3.9"
+"@form-atoms/list-atom@npm:^2.3.10":
+  version: 2.3.10
+  resolution: "@form-atoms/list-atom@npm:2.3.10"
   peerDependencies:
     form-atoms: ^3
     jotai: ^2
     jotai-effect: ^2
     react: ">=16.8"
-  checksum: 10/c757d38639bccb97ce644ca2b1bf20850f52408dd134fa962d4364e5271cc119959ff54cd60e975739243197e2e762f75b95e8457b5d4d8cea089c65ca8fc72e
+  checksum: 10/48541075db3b676d67d2d22433d9613f05106f141840094688de8203071613373b6db8fc8ff5abfc597d76cd8a3f1079ffeb24e26edda6f2801b6d2ec74245e9
   languageName: node
   linkType: hard
 
@@ -11206,10 +11206,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:3.22.4":
-  version: 3.22.4
-  resolution: "zod@npm:3.22.4"
-  checksum: 10/73622ca36a916f785cf528fe612a884b3e0f183dbe6b33365a7d0fc92abdbedf7804c5e2bd8df0a278e1472106d46674281397a3dd800fa9031dc3429758c6ac
+"zod@npm:3.25.76":
+  version: 3.25.76
+  resolution: "zod@npm:3.25.76"
+  checksum: 10/f0c963ec40cd96858451d1690404d603d36507c1fc9682f2dae59ab38b578687d542708a7fdbf645f77926f78c9ed558f57c3d3aa226c285f798df0c4da16995
   languageName: node
   linkType: hard
 

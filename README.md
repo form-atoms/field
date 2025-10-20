@@ -6,7 +6,7 @@
 A `zod`-powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=readme-ov-file#fieldatom) with pre-configured schemas for type & runtime safety.
 
 ```
-npm install jotai jotai-effect form-atoms @form-atoms/field zod
+npm install @form-atoms/field jotai-effect zod
 ```
 
 <a aria-label="Minzipped size" href="https://bundlephobia.com/result?p=%40form-atoms/field">
