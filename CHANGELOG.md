@@ -1,3 +1,16 @@
+# [5.4.0](https://github.com/form-atoms/field/compare/v5.3.3...v5.4.0) (2025-10-22)
+
+
+### Bug Fixes
+
+* empty export ([8225734](https://github.com/form-atoms/field/commit/8225734c24a8ce54e6a5edc689673e9dce945f53))
+* fix callback dependencies for multi select and checkbox group ([9aafe9c](https://github.com/form-atoms/field/commit/9aafe9c11e9e9af51fe271d2fd52401cefe6de7f))
+
+
+### Features
+
+* **upload-atom:** feature extracted to @form-atoms/upload-atom ([452c807](https://github.com/form-atoms/field/commit/452c8075e714367e6512523296966cb1b8d2319f))
+
 ## [5.3.3](https://github.com/form-atoms/field/compare/v5.3.2...v5.3.3) (2025-10-17)
 
 
