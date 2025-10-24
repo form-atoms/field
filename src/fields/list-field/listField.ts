@@ -1,10 +1,10 @@
 import { ListAtom, ListAtomConfig, listAtom } from "@form-atoms/list-atom";
-import { FormFieldValues, FormFields } from "form-atoms";
-import { Atom } from "jotai";
-import { ZodAny, ZodArray, z } from "zod";
+import type { FormFieldValues, FormFields } from "form-atoms";
+import type { Atom } from "jotai";
+import { type ZodArray, ZodObject, z } from "zod";
 
 import { extendAtom } from "../../atoms/extendAtom";
-import { FormFieldSubmitValues } from "../../components";
+import type { FormFieldSubmitValues } from "../../components";
 import { UserValidateConfig, prepareSchema } from "../../utils";
 import {
   DefaultRequiredAtom,
@@ -50,7 +50,7 @@ export type OptionalListField<Fields extends FormFields> = ListField<
 
 type ListFieldConfig<Fields extends FormFields> = ListAtomConfig<Fields> &
   ZodParams &
-  UserValidateConfig<ZodArray<ZodAny, "atleastone">, ZodArray<ZodAny, "many">>;
+  UserValidateConfig<ZodArray<ZodObject>, ZodArray<ZodObject>>;
 
 export const listField = <Fields extends FormFields>({
   required_error,
@@ -61,8 +61,8 @@ export const listField = <Fields extends FormFields>({
   const { validate, requiredAtom, makeOptional } = schemaValidate(
     prepareSchema({
       initial: {
-        schema: z.array(z.any()).nonempty(required_error),
-        optionalSchema: z.array(z.any()),
+        schema: z.array(z.object()).nonempty({ error: required_error }),
+        optionalSchema: z.array(z.object()),
       },
       user: { schema, optionalSchema },
     }),

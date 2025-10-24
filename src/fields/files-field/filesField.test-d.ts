@@ -5,7 +5,7 @@ import type { FilesField } from "./filesField";
 
 test("required filesField has '[File, ...File[]]' submit value", () => {
   expectTypeOf<FormFieldSubmitValues<{ field: FilesField }>>().toEqualTypeOf<{
-    field: [File, ...File[]];
+    field: File[];
   }>();
 });
 
@@ -13,7 +13,6 @@ test("optional filesField has 'File[]' submit value", () => {
   expectTypeOf<
     FormFieldSubmitValues<{ field: ReturnType<FilesField["optional"]> }>
   >().toEqualTypeOf<{
-    // TODO: narrow
-    field: [File, ...File[]] | File[];
+    field: File[];
   }>();
 });
