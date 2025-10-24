@@ -21,7 +21,7 @@ export const stringField = ({
     value: undefined,
     ...prepareSchema({
       initial: {
-        schema: z.string({ required_error }),
+        schema: z.string({ error: required_error }),
       },
       user: { schema, optionalSchema },
     }),

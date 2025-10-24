@@ -6,7 +6,7 @@ import {
   useFormSubmit,
 } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
-
+import { z } from "zod";
 import { listField } from "./listField";
 import { useFieldError } from "../../hooks";
 import { numberField } from "../number-field";
@@ -46,7 +46,7 @@ describe("listField()", () => {
       const { result } = renderHook(() => useFieldError(list));
 
       expect(result.current.error).toBe(
-        "Array must contain at least 1 element(s)",
+        "Too small: expected array to have >=1 items",
       );
     });
   });
@@ -96,7 +96,7 @@ describe("listField()", () => {
 
       await act(async () => actions.current.validate());
       expect(errors.current).toEqual([
-        "Array must contain at most 2 element(s)",
+        "Too big: expected array to have <=2 items",
       ]);
     });
   });

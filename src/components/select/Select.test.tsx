@@ -137,7 +137,7 @@ describe("<Select />", () => {
 
     const schema = z.object({ id: z.string(), username: z.string() });
 
-    type User = (typeof schema)["_output"];
+    type User = z.output<typeof schema>;
 
     const props = {
       field: zodField({

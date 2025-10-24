@@ -16,6 +16,6 @@ export const booleanField = ({
 }: Omit<FieldConfig<ZodBoolean>, "schema" | "optionalSchema"> = {}) =>
   zodField({
     value: undefined,
-    schema: z.boolean({ required_error }),
+    schema: z.boolean({ error: required_error }),
     ...config,
   });

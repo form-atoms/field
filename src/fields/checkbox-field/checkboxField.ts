@@ -29,8 +29,8 @@ export const checkboxField = ({
       true,
       required_error
         ? {
-            errorMap: (issue) => {
-              return issue.code === "invalid_literal"
+            error: (issue) => {
+              return issue.code === "invalid_value"
                 ? { message: required_error }
                 : { message: issue.message ?? "Invalid" };
             },

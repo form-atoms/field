@@ -14,7 +14,7 @@ import {
 type ZodFieldConfig<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
-> = FieldAtomConfig<Schema["_output"] | OptSchema["_output"]> &
+> = FieldAtomConfig<z.output<Schema> | z.output<OptSchema>> &
   ValidateConfig<Schema, OptSchema>;
 
 export type ZodFieldValue<Field> =
@@ -23,9 +23,9 @@ export type ZodFieldValue<Field> =
 export type ZodFieldSubmitValue<Field> =
   Field extends ZodField<infer Schema, infer OptSchema, infer Required>
     ? Required extends WritableRequiredAtom
-      ? Schema["_output"] | OptSchema["_output"]
+      ? z.output<Schema> | z.output<OptSchema>
       : Required extends DefaultRequiredAtom
-        ? Schema["_output"]
+        ? z.output<Schema>
         : never
     : never;
 
@@ -47,7 +47,7 @@ export type ZodField<
   OptSchema extends z.Schema = ZodUndefined,
   RequiredAtom = DefaultRequiredAtom,
 > = ExtendFieldAtom<
-  Schema["_output"] | OptSchema["_output"],
+  z.output<Schema> | z.output<OptSchema>,
   { required: RequiredAtom }
 > & {
   optional: (

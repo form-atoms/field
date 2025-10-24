@@ -28,7 +28,7 @@ Returns `fieldAtom` holding value constrained by `schema` & `optionalSchema` wit
 type ZodField<
   Schema extends z.Schema,
   OptSchema extends z.Schema = ZodUndefined,
-> = FieldAtom<Schema["_output"] | OptSchema["_output"]> & {
+> = FieldAtom<z.output<Schema> | z.output<OptSchema>> & {
   optional: () => OptionalZodField<Schema, OptSchema>;
 } & Atom<
     Config & {

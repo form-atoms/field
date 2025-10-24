@@ -59,7 +59,7 @@ describe("filesField()", () => {
 
       await act(async () => actions.current.validate());
       expect(errors.current).toEqual([
-        "Array must contain at most 2 element(s)",
+        "Too big: expected array to have <=2 items",
       ]);
     });
   });

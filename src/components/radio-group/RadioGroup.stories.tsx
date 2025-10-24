@@ -163,7 +163,7 @@ export const RequiredCustomAddress = radioGroupStory({
       value: undefined,
       schema: z.object(
         { street: z.string(), city: z.string() },
-        { required_error: "Please choose shipping address." },
+        { error: "Please choose shipping address." },
       ),
     }),
     options: addresses,
