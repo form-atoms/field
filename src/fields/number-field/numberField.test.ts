@@ -40,9 +40,7 @@ describe("numberField()", () => {
       const { result: errors } = renderHook(() => useFieldErrors(field));
 
       await act(async () => actions.current.validate());
-      expect(errors.current).toEqual([
-        "Number must be less than or equal to 6",
-      ]);
+      expect(errors.current).toEqual(["Too big: expected number to be <=6"]);
     });
   });
 });

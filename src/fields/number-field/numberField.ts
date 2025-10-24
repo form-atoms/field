@@ -21,7 +21,7 @@ export const numberField = ({
     value: undefined,
     ...prepareSchema({
       initial: {
-        schema: z.number({ required_error }),
+        schema: z.number({ error: required_error }),
       },
       user: { schema, optionalSchema },
     }),

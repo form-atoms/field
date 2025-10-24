@@ -40,7 +40,7 @@ describe("stringField()", () => {
       const { result: errors } = renderHook(() => useFieldErrors(field));
 
       await act(async () => actions.current.validate());
-      expect(errors.current).toEqual(["Invalid email"]);
+      expect(errors.current).toEqual(["Invalid email address"]);
     });
   });
 });

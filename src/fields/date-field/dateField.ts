@@ -21,7 +21,7 @@ export const dateField = ({
     value: undefined,
     ...prepareSchema({
       initial: {
-        schema: z.date({ required_error }),
+        schema: z.date({ error: required_error }),
       },
       user: { schema, optionalSchema },
     }),
