@@ -22,7 +22,7 @@ export default {
     },
     options: {
       storySort: {
-        order: ["Intro", "*", "Changelog"],
+        order: ["Introduction", "*", "Changelog"],
       },
     },
     docs: {
