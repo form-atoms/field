@@ -3,11 +3,13 @@ import {
   formAtom,
   useFieldActions,
   useFieldErrors,
+  useFormSubmit,
   useFormValues,
 } from "form-atoms";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { textField } from "./textField";
+import { useFieldError } from "../../hooks";
 
 describe("textField()", () => {
   it("is initialized as empty string", () => {
@@ -20,6 +22,24 @@ describe("textField()", () => {
     expect(result.current).toEqual({
       classic: "",
       explicitUndefined: "",
+    });
+  });
+
+  describe("when required", () => {
+    it("doesn't submit empty", async () => {
+      const field = textField({ required_error: "Text is required" });
+      const form = formAtom({ field });
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+
+      const onSubmit = vi.fn();
+      await act(async () => {
+        submit.current(onSubmit)();
+      });
+
+      expect(onSubmit).not.toHaveBeenCalled();
+
+      const { result: error } = renderHook(() => useFieldError(field));
+      expect(error.current.error).toBe("Text is required");
     });
   });
 

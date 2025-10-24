@@ -17,6 +17,7 @@ describe("listField()", () => {
     it("can't be submitted with empty value", async () => {
       const list = listField({
         fields: () => ({ age: numberField({ value: 0 }) }),
+        required_error: "List is required",
       });
 
       const form = formAtom({ list });
@@ -26,6 +27,9 @@ describe("listField()", () => {
       await act(async () => submit.current(onSubmit)());
 
       expect(onSubmit).not.toHaveBeenCalled();
+
+      const { result: error } = renderHook(() => useFieldError(list));
+      expect(error.current.error).toBe("List is required");
     });
 
     it("has the default error when submitted empty", async () => {

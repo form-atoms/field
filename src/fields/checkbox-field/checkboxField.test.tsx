@@ -3,6 +3,7 @@ import { formAtom, useFormSubmit, useFormValues } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { checkboxField } from "./checkboxField";
+import { useFieldError } from "../../hooks";
 
 describe("checkboxField()", () => {
   it("is initialized as false boolean", () => {
@@ -20,16 +21,19 @@ describe("checkboxField()", () => {
 
   describe("when required", () => {
     it("doesn't submit empty", async () => {
-      const field = checkboxField();
+      const field = checkboxField({ required_error: "Check me" });
       const form = formAtom({ field });
-      const { result } = renderHook(() => useFormSubmit(form));
+      const { result: submit } = renderHook(() => useFormSubmit(form));
 
       const onSubmit = vi.fn();
       await act(async () => {
-        result.current(onSubmit)();
+        submit.current(onSubmit)();
       });
 
       expect(onSubmit).not.toHaveBeenCalled();
+
+      const { result: error } = renderHook(() => useFieldError(field));
+      expect(error.current.error).toBe("Check me");
     });
   });
 

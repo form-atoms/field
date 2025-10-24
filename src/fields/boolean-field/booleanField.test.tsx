@@ -3,11 +3,12 @@ import { formAtom, useFormSubmit } from "form-atoms";
 import { describe, expect, it, vi } from "vitest";
 
 import { booleanField } from "./booleanField";
+import { useFieldError } from "../../hooks";
 
 describe("booleanField()", () => {
   describe("when required", () => {
     it("doesn't submit empty", async () => {
-      const field = booleanField();
+      const field = booleanField({ required_error: "This field is required" });
       const form = formAtom({ field });
       const { result } = renderHook(() => useFormSubmit(form));
 
@@ -17,6 +18,9 @@ describe("booleanField()", () => {
       });
 
       expect(onSubmit).not.toHaveBeenCalled();
+
+      const { result: error } = renderHook(() => useFieldError(field));
+      expect(error.current.error).toBe("This field is required");
     });
   });
 

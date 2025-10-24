@@ -3,17 +3,19 @@ import {
   formAtom,
   useFieldActions,
   useFieldErrors,
+  useFormSubmit,
   useFormValues,
 } from "form-atoms";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 
 import { arrayField } from "./arrayField";
+import { useFieldError } from "../../hooks";
 
 const elementSchema = z.string();
 
 describe("arrayField()", () => {
-  it("is initialized as empty string", () => {
+  it("is initialized as an empty array", () => {
     const classic = arrayField({ elementSchema });
     const explicitUndefined = arrayField({ elementSchema, value: undefined });
 
@@ -23,6 +25,27 @@ describe("arrayField()", () => {
     expect(result.current).toEqual({
       classic: [],
       explicitUndefined: [],
+    });
+  });
+
+  describe("when required", () => {
+    it("doesn't submit empty and shows required error", async () => {
+      const field = arrayField({
+        elementSchema,
+        required_error: "This field is required",
+      });
+      const form = formAtom({ field });
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+
+      const onSubmit = vi.fn();
+      await act(async () => {
+        submit.current(onSubmit)();
+      });
+
+      expect(onSubmit).not.toHaveBeenCalled();
+
+      const { result: error } = renderHook(() => useFieldError(field));
+      expect(error.current.error).toBe("This field is required");
     });
   });
 

@@ -1,10 +1,34 @@
 import { act, renderHook } from "@testing-library/react";
-import { useFieldActions, useFieldErrors } from "form-atoms";
-import { describe, expect, it } from "vitest";
+import {
+  formAtom,
+  useFieldActions,
+  useFieldErrors,
+  useFormSubmit,
+} from "form-atoms";
+import { describe, expect, it, vi } from "vitest";
 
 import { dateField } from "./dateField";
+import { useFieldError } from "../../hooks";
 
 describe("dateField()", () => {
+  describe("when required", () => {
+    it("doesn't submit empty", async () => {
+      const field = dateField({ required_error: "Date is required" });
+      const form = formAtom({ field });
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+
+      const onSubmit = vi.fn();
+      await act(async () => {
+        submit.current(onSubmit)();
+      });
+
+      expect(onSubmit).not.toHaveBeenCalled();
+
+      const { result: error } = renderHook(() => useFieldError(field));
+      expect(error.current.error).toBe("Date is required");
+    });
+  });
+
   describe("schema", () => {
     it("extends the internal schema", async () => {
       const field = dateField({
