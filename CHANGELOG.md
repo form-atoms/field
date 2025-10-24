@@ -1,3 +1,27 @@
+# [6.0.0](https://github.com/form-atoms/field/compare/v5.4.0...v6.0.0) (2025-10-24)
+
+
+* Next ([#131](https://github.com/form-atoms/field/issues/131)) ([58e800f](https://github.com/form-atoms/field/commit/58e800f3bff584f0aac7fa9d483b1aa732f964f9)), closes [#129](https://github.com/form-atoms/field/issues/129)
+
+
+### BREAKING CHANGES
+
+* zod4 is now being used
+
+* fix story
+
+* chore(release): 6.0.0-next.1
+
+# [6.0.0-next.1](https://github.com/form-atoms/field/compare/v5.4.0...v6.0.0-next.1) (2025-10-24)
+
+* Zod 4 ([#129](https://github.com/form-atoms/field/issues/129)) ([c5ccdc7](https://github.com/form-atoms/field/commit/c5ccdc78224fa25b641ac04f2cff316b04dc8acd))
+
+### BREAKING CHANGES
+
+* zod4 is now being used
+
+* fix story
+
 # [6.0.0-next.1](https://github.com/form-atoms/field/compare/v5.4.0...v6.0.0-next.1) (2025-10-24)
 
 
