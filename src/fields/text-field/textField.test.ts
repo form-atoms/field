@@ -55,7 +55,7 @@ describe("textField()", () => {
 
       await act(async () => actions.current.validate());
       expect(errors.current).toEqual([
-        "String must contain at most 6 character(s)",
+        "Too big: expected string to have <=6 characters",
       ]);
     });
   });

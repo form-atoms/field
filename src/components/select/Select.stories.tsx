@@ -126,7 +126,7 @@ export const RequiredAddress = selectStory({
           city: z.string(),
           zip: z.string(),
         },
-        { required_error: "Please select address." },
+        { error: "Please select address." },
       ),
     }),
     options: addresses,

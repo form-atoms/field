@@ -1,10 +1,11 @@
 import { type ChangeEvent, useCallback, useMemo } from "react";
 import type { UseFieldOptions } from "form-atoms";
 import { useAtomValue } from "jotai";
-import { ArrayCardinality, ZodAny, ZodArray } from "zod";
+import type { ZodAny, ZodArray } from "zod";
+import { z } from "zod";
 
 import { UseOptionsProps, useFieldProps } from "..";
-import { ZodArrayField, ZodField, ZodFieldValue } from "../../fields";
+import type { ZodArrayField, ZodField, ZodFieldValue } from "../../fields";
 import { useIndexValue } from "./useIndexValue";
 
 export type UseMultiSelectFieldProps<Option, Field extends ZodArrayField> = {
@@ -13,11 +14,8 @@ export type UseMultiSelectFieldProps<Option, Field extends ZodArrayField> = {
 } & Pick<UseOptionsProps<Option>, "options">;
 
 export type ZodArrayFieldValue<Field> =
-  Field extends ZodField<
-    ZodArray<infer Value, ArrayCardinality>,
-    ZodArray<ZodAny, ArrayCardinality>
-  >
-    ? Value["_output"]
+  Field extends ZodField<ZodArray<infer Value>, ZodArray<ZodAny>>
+    ? z.infer<Value>
     : never;
 
 export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(

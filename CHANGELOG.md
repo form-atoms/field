@@ -1,3 +1,15 @@
+# [6.0.0-next.1](https://github.com/form-atoms/field/compare/v5.4.0...v6.0.0-next.1) (2025-10-24)
+
+
+* Zod 4 ([#129](https://github.com/form-atoms/field/issues/129)) ([c5ccdc7](https://github.com/form-atoms/field/commit/c5ccdc78224fa25b641ac04f2cff316b04dc8acd))
+
+
+### BREAKING CHANGES
+
+* zod4 is now being used
+
+* fix story
+
 # [5.4.0](https://github.com/form-atoms/field/compare/v5.3.3...v5.4.0) (2025-10-22)
 
 

@@ -12,8 +12,9 @@ export type FilesFieldValue = ExtractAtomValue<
 
 const isServer = typeof window === "undefined";
 
+// TODO: test server with zod4
 // the File constructor does not exist in node, so we must prevent getting reference error
-const elementSchema = isServer ? z.never() : z.instanceof(File);
+const elementSchema = isServer ? z.never() : z.file();
 
 export const filesArrayField = arrayField({ elementSchema });
 
