@@ -3,7 +3,7 @@
   <h1>@form-atoms/field</h1>
 </div>
 
-A `zod`-powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=readme-ov-file#fieldatom) with pre-configured schemas for type & runtime safety.
+A `zod` powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=readme-ov-file#fieldatom) with pre-configured schemas for type & runtime safety.
 
 ```
 npm install @form-atoms/field jotai-effect zod
@@ -32,8 +32,7 @@ npm install @form-atoms/field jotai-effect zod
 
 ```tsx
 import { textField, numberField, stringField, Select } from "@form-atoms/field";
-import { fromAtom, useForm, Input } from "form-atoms";
-import { z } from "zod";
+import { fromAtom, useForm, InputField } from "form-atoms";
 
 const personForm = formAtom({
   name: textField(),
@@ -60,7 +59,7 @@ export const Form = () => {
 };
 ```
 
-See [Storybook docs](https://form-atoms.github.io/field/) for more.
+See [Docs](https://form-atoms.github.io/field/) for more.
 
 ## Integrations
 
