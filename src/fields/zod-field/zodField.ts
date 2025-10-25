@@ -37,7 +37,7 @@ export type OptionalZodField<
 /**
  * This is an alias to ZodField, it hides the 3rd argument from type tooltip.
  */
-type RequiredZodField<
+export type RequiredZodField<
   Schema extends z.Schema = ZodAny,
   OptSchema extends z.Schema = ZodUndefined,
 > = ZodField<Schema, OptSchema>;

@@ -1,8 +1,13 @@
 import { ExtractAtomValue, atom } from "jotai";
 import { atomEffect } from "jotai-effect";
-import { z } from "zod";
+import { z, ZodArray, ZodFile } from "zod";
 
-import { ArrayFieldParams, arrayField } from "..";
+import {
+  ArrayFieldParams,
+  RequiredZodField,
+  ZodArrayField,
+  arrayField,
+} from "..";
 
 export type FilesField = ReturnType<typeof filesField>;
 
@@ -10,15 +15,7 @@ export type FilesFieldValue = ExtractAtomValue<
   ExtractAtomValue<FilesField>["value"]
 >;
 
-const isServer = typeof window === "undefined";
-
-// TODO: test server with zod4
-// the File constructor does not exist in node, so we must prevent getting reference error
-const elementSchema = isServer ? z.never() : z.file();
-
-export const filesArrayField = arrayField({ elementSchema });
-
-const makeClearInputEffect = (atom: typeof filesArrayField) => {
+const makeClearInputEffect = (atom: ZodArrayField<ZodFile>) => {
   const effect = atomEffect((get) => {
     const field = get(atom);
     const value = get(field.value);
@@ -36,11 +33,9 @@ const makeClearInputEffect = (atom: typeof filesArrayField) => {
   return effect;
 };
 
-export const filesField = (
-  params: Partial<ArrayFieldParams<typeof elementSchema>> = {},
-) => {
+export const filesField = (params: Partial<ArrayFieldParams<ZodFile>> = {}) => {
   const fieldAtom = arrayField({
-    elementSchema,
+    elementSchema: z.file(),
     ...params,
   });
 
@@ -54,7 +49,7 @@ export const filesField = (
   });
 
   return Object.assign(filesField, {
-    optional: () => {
+    optional() {
       const optionalFieldAtom = fieldAtom.optional();
       const clearInputEffect = makeClearInputEffect(optionalFieldAtom);
 
@@ -66,8 +61,10 @@ export const filesField = (
       });
 
       return Object.assign(optionalFilesField, {
-        optional: () => optionalFilesField,
+        optional() {
+          return optionalFilesField;
+        },
       });
     },
-  }) as unknown as typeof filesArrayField;
+  }) as unknown as RequiredZodField<ZodArray<ZodFile>, ZodArray<ZodFile>>;
 };

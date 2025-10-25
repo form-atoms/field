@@ -3,7 +3,7 @@ import { expectTypeOf, test } from "vitest";
 import type { FormFieldSubmitValues } from "../../components/form";
 import type { FilesField } from "./filesField";
 
-test("required filesField has '[File, ...File[]]' submit value", () => {
+test("required filesField has 'File[]' submit value", () => {
   expectTypeOf<FormFieldSubmitValues<{ field: FilesField }>>().toEqualTypeOf<{
     field: File[];
   }>();

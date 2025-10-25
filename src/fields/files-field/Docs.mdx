@@ -7,7 +7,7 @@ import * as FilesFieldStories from "./filesField.stories";
 
 <p class="category">Fields</p>
 
-# `filesField(): ZodField<File[] | [File, ...File[]]>`
+# `filesField(): ZodField<File[]>`
 
 A field to hold `input[type="file"]` values.
 
@@ -31,12 +31,10 @@ Usable with [useFilesFieldProps()](?path=/docs/hooks-useFilesfieldprops--docs)
 
 ## Initial Config
 
-| Param            | Value                                    |
-| ---------------- | ---------------------------------------- |
-| `value`          | `[]`                                     |
-| `schema`         | `z.array(z.instanceof(File)).nonempty()` |
-| `optionalSchema` | `z.array(z.instanceof(File))`            |
-
-> **NOTE:** the `File` API is not available on the server side, so in practice the schema is defined as `z.array(isServer ? z.never() : z.instanceof(File)`.
+| Param            | Value                          |
+| ---------------- | ------------------------------ |
+| `value`          | `[]`                           |
+| `schema`         | `z.array(z.file()).nonempty()` |
+| `optionalSchema` | `z.array(z.file())`            |
 
 <Stories />
