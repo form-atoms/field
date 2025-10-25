@@ -1,3 +1,15 @@
+# [6.1.0](https://github.com/form-atoms/field/compare/v6.0.1...v6.1.0) (2025-10-25)
+
+
+### Bug Fixes
+
+* up ([128b251](https://github.com/form-atoms/field/commit/128b2516ddceaeebc736c896bfbebc919083352c))
+
+
+### Features
+
+* **field-props:** provide checkbox, date, number, file input types ([3ee580b](https://github.com/form-atoms/field/commit/3ee580b44501c99e073fefe9864cf2f239226832))
+
 ## [6.0.1](https://github.com/form-atoms/field/compare/v6.0.0...v6.0.1) (2025-10-25)
 
 
