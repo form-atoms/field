@@ -1,3 +1,10 @@
+## [6.0.1](https://github.com/form-atoms/field/compare/v6.0.0...v6.0.1) (2025-10-25)
+
+
+### Bug Fixes
+
+* **filesField:** omit server check, global.File stable since node 20 ([2195533](https://github.com/form-atoms/field/commit/21955337ae6c73b163d837941a8ab337fb481a6b))
+
 # [6.0.0](https://github.com/form-atoms/field/compare/v5.4.0...v6.0.0) (2025-10-24)
 
 
