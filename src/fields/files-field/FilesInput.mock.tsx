@@ -14,7 +14,7 @@ export const FilesInput = ({
   return (
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
-      <input type="file" {...inputProps} {...props} />
+      <input {...inputProps} {...props} />
       <div>
         <PicoFieldErrors field={field} />
       </div>

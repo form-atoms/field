@@ -11,11 +11,7 @@ export const DateInput = ({ field, label, initialValue }: DateFieldProps) => {
   return (
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
-      <input
-        type="date"
-        {...props}
-        value={`${value ? getDateString(value) : ""}`}
-      />
+      <input {...props} value={`${value ? getDateString(value) : ""}`} />
       <PicoFieldErrors field={field} />
     </div>
   );

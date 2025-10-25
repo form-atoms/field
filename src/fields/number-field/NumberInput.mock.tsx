@@ -15,7 +15,7 @@ export const NumberInput = ({
   return (
     <div style={{ margin: "20px 0" }}>
       <FieldLabel field={field} label={label} />
-      <input type="number" {...inputProps} {...props} />
+      <input {...inputProps} {...props} />
       <PicoFieldErrors field={field} />
     </div>
   );

@@ -17,7 +17,7 @@ export const CheckboxInput = ({
 
   return (
     <div style={{ margin: "20px 0" }}>
-      <input type="checkbox" {...props} {...requiredProps} />
+      <input {...props} {...requiredProps} />
       <FieldLabel field={field} label={label} />
       <div>
         <PicoFieldErrors field={field} />
