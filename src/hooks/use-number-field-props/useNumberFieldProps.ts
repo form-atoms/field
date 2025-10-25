@@ -19,5 +19,5 @@ export const useNumberFieldProps = (
   // transform undefined to "" to make the number input empty
   const { value = "", ...props } = useFieldProps(field, getNumber, options);
 
-  return { ...props, value };
+  return { ...props, value, type: "number" as const };
 };

@@ -42,11 +42,7 @@ const DateInputMock = ({
   const { value, ...props } = useDateFieldProps(field);
 
   return (
-    <input
-      type="date"
-      {...props}
-      value={`${value?.toISOString().slice(0, 10) ?? ""}`}
-    />
+    <input {...props} value={`${value?.toISOString().slice(0, 10) ?? ""}`} />
   );
 };
 ```

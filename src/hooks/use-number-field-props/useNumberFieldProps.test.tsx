@@ -7,6 +7,13 @@ import { useNumberFieldProps } from "./useNumberFieldProps";
 import { numberField } from "../../fields";
 
 describe("useNumberFieldProps()", () => {
+  it("gives number input type", () => {
+    const field = numberField();
+    const { result } = renderHook(() => useNumberFieldProps(field));
+
+    expect(result.current.type).toBe("number");
+  });
+
   it("initializes the field via options", async () => {
     const field = numberField();
 
@@ -27,7 +34,7 @@ describe("useNumberFieldProps()", () => {
     expect(props.current.value).toBe(10);
     expect(value.current).toBe(10);
 
-    await userEvent.clear(screen.getByRole("textbox"));
+    await userEvent.clear(screen.getByRole("spinbutton"));
 
     expect(props.current.value).toBe("");
     expect(value.current).toBe(undefined);
@@ -37,7 +44,7 @@ describe("useNumberFieldProps()", () => {
     const field = numberField();
 
     const { result: props } = renderHook(() => useNumberFieldProps(field));
-    render(<input type="number" {...props.current} />);
+    render(<input {...props.current} />);
 
     await userEvent.type(screen.getByRole("spinbutton"), "9");
 

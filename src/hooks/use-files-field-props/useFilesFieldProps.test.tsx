@@ -7,6 +7,13 @@ import { useFilesFieldProps } from "./useFilesFieldProps";
 import { filesField } from "../../fields";
 
 describe("useFilesFieldProps", () => {
+  it("gives file input type", () => {
+    const field = filesField();
+    const { result } = renderHook(() => useFilesFieldProps(field));
+
+    expect(result.current.type).toBe("file");
+  });
+
   describe("with required field", () => {
     it("clears input when the form is reset", async () => {
       const field = filesField();
@@ -14,7 +21,7 @@ describe("useFilesFieldProps", () => {
       const { result: props } = renderHook(() => useFilesFieldProps(field));
       const { result: formActions } = renderHook(() => useFormActions(form));
 
-      render(<input type="file" data-testid="fileInput" {...props.current} />);
+      render(<input data-testid="fileInput" {...props.current} />);
 
       const input = screen.getByTestId("fileInput");
 
@@ -40,7 +47,7 @@ describe("useFilesFieldProps", () => {
       const { result: props } = renderHook(() => useFilesFieldProps(field));
       const { result: formActions } = renderHook(() => useFormActions(form));
 
-      render(<input type="file" data-testid="fileInput" {...props.current} />);
+      render(<input data-testid="fileInput" {...props.current} />);
 
       const input = screen.getByTestId("fileInput");
 

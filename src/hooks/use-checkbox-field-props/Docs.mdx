@@ -41,6 +41,7 @@ const CheckboxInputMock = ({
   // props suitable for input[type=checkbox]
   const props = useCheckboxFieldProps(field);
   // {
+  // type: "checkbox";
   // checked: boolean;
   // role: "checkbox";
   // ...
@@ -48,7 +49,7 @@ const CheckboxInputMock = ({
 
   return (
     <div style={{ margin: "20px 0" }}>
-      <input type="checkbox" {...props} />
+      <input {...props} />
       <FieldLabel field={field} label={label} />
       <div>
         <FieldErrors field={field} />

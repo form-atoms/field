@@ -24,8 +24,9 @@ export function useCheckboxFieldProps(
 
   return useMemo(
     () => ({
+      type: "checkbox" as const,
       checked,
-      role: "checkbox",
+      role: "checkbox" as const,
       "aria-checked": checked,
       ...props,
     }),

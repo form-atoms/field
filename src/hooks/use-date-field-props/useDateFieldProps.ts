@@ -16,4 +16,4 @@ const getDate = (event: ChangeEvent<HTMLInputElement>) => {
 export const useDateFieldProps = (
   field: DateField,
   options?: UseFieldOptions<DateFieldValue>,
-) => useFieldProps(field, getDate, options);
+) => ({ type: "date" as const, ...useFieldProps(field, getDate, options) });

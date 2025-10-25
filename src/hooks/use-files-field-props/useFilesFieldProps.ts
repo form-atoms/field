@@ -1,7 +1,7 @@
-import { UseFieldOptions } from "form-atoms";
-import { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
+import type { UseFieldOptions } from "form-atoms";
 
-import { FieldProps, useFieldProps } from "../";
+import { type FieldProps, useFieldProps } from "../";
 import type { FilesField, FilesFieldValue } from "../../fields";
 
 // Usually we don't have File objects ready, when an item is being edited.
@@ -18,5 +18,5 @@ export const useFilesFieldProps = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { value, ...props } = useFieldProps(field, getFiles, options);
 
-  return props;
+  return { ...props, type: "file" as const };
 };
