@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/form-atoms/field/compare/v6.1.0...v6.2.0) (2025-10-27)
+
+
+### Features
+
+* **radio-control:** drop radio control, prefer computed fields instead ([ff54a33](https://github.com/form-atoms/field/commit/ff54a33d0bc9eabe6eccda02932c40562a070c94))
+
 # [6.1.0](https://github.com/form-atoms/field/compare/v6.0.1...v6.1.0) (2025-10-25)
 
 
