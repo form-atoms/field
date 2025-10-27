@@ -919,7 +919,7 @@ __metadata:
     eslint: "npm:9.38.0"
     eslint-plugin-react-hooks: "npm:^7.0.1"
     eslint-plugin-storybook: "npm:9.1.15"
-    form-atoms: "npm:^3.3.2"
+    form-atoms: "npm:^3.3.3"
     happy-dom: "npm:^20.0.8"
     jotai: "npm:2.15.0"
     jotai-devtools: "npm:0.8.0"
@@ -5099,13 +5099,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-atoms@npm:^3.3.2":
-  version: 3.3.2
-  resolution: "form-atoms@npm:3.3.2"
+"form-atoms@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "form-atoms@npm:3.3.3"
   peerDependencies:
     jotai: ^2.0.0
     react: ">=16.8"
-  checksum: 10/2d3d0a7929d9ddeecacce245a89c3da15a1840df0b63c99a92945932fc0608bd0ae31fd9888d77b2f1fbf55ff2e9b92874174bfc256f5f91f655197c86f86e5b
+  checksum: 10/83134aa2dc942216ce4e8b832de0033e597f0d283694b6e65d637d1c5029d26cdc6ff2362df977e25fef39f6f1aac2c662d782a5cd6c1936345762757aafebb5
   languageName: node
   linkType: hard
 

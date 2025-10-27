@@ -4,7 +4,6 @@ export * from "./field-label";
 export * from "./form";
 export * from "./multi-select";
 export * from "./placeholder-option";
-export * from "./radio";
 export * from "./radio-group";
 export * from "./requirement-indicator";
 export * from "./select";
