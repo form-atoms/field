@@ -43,6 +43,21 @@ describe("textField()", () => {
     });
   });
 
+  describe("when optional", () => {
+    it("submits empty string", async () => {
+      const field = textField().optional();
+      const form = formAtom({ field });
+      const { result: submit } = renderHook(() => useFormSubmit(form));
+
+      const onSubmit = vi.fn();
+      await act(async () => {
+        submit.current(onSubmit)();
+      });
+
+      expect(onSubmit).toHaveBeenCalledWith({ field: "" });
+    });
+  });
+
   describe("schema", () => {
     it("extends the internal schema", async () => {
       const field = textField({
