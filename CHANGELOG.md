@@ -1,3 +1,10 @@
+## [6.2.3](https://github.com/form-atoms/field/compare/v6.2.2...v6.2.3) (2026-09-16)
+
+
+### Bug Fixes
+
+* bump node ([910803c](https://github.com/form-atoms/field/commit/910803c19096aa7c14ef24a0f040e2b8043773ed))
+
 ## [6.2.2](https://github.com/form-atoms/field/compare/v6.2.1...v6.2.2) (2026-09-16)
 
 
