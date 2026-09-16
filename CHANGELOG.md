@@ -1,3 +1,11 @@
+## [6.2.1](https://github.com/form-atoms/field/compare/v6.2.0...v6.2.1) (2026-09-16)
+
+
+### Bug Fixes
+
+* **build:** ts7 ([2165cef](https://github.com/form-atoms/field/commit/2165cef655ea53a83bcc4946885d4f803dac8553))
+* **build:** use tsdown ([8f10155](https://github.com/form-atoms/field/commit/8f10155cbf7d9c8035acf1e0b0530a576701a235))
+
 # [6.2.0](https://github.com/form-atoms/field/compare/v6.1.0...v6.2.0) (2025-10-27)
 
 
