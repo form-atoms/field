@@ -1,3 +1,10 @@
+## [6.2.2](https://github.com/form-atoms/field/compare/v6.2.1...v6.2.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* **select-hooks:** hydrate before accessing value ([3e82a1b](https://github.com/form-atoms/field/commit/3e82a1b997260a09508588fdf8a408863d589f97))
+
 ## [6.2.1](https://github.com/form-atoms/field/compare/v6.2.0...v6.2.1) (2026-09-16)
 
 
