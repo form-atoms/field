@@ -9,9 +9,6 @@ A `zod` powered [`fieldAtoms`](https://github.com/form-atoms/form-atoms?tab=read
 npm install @form-atoms/field jotai-effect zod
 ```
 
-<a aria-label="Minzipped size" href="https://bundlephobia.com/result?p=%40form-atoms/field">
-  <img alt="Bundlephobia" src="https://img.shields.io/bundlephobia/minzip/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
-</a>
 <a aria-label="NPM version" href="https://www.npmjs.com/package/%40form-atoms/field">
   <img alt="NPM Version" src="https://img.shields.io/npm/v/%40form-atoms/field?style=for-the-badge&labelColor=24292e">
 </a>
@@ -21,12 +18,12 @@ npm install @form-atoms/field jotai-effect zod
 
 ## Features
 
-- [x] **Well-typed fields** required & validated by default
-- [x] **Initialized field values**, commonly with `undefined` empty value
-- [x] **Optional fields** with schema defaulting to `z.optional()`
-- [x] **Conditionally required fields** - the required state can depend on other jotai atoms
-- [x] **Generic Single-choice Components** [RadioGroup](https://form-atoms.github.io/field/?path=/docs/components-radiogroup--docs) and [Select](https://form-atoms.github.io/field/?path=/docs/components-select--docs)
-- [x] **Generic Multi-choice Components** [CheckboxGroup](https://form-atoms.github.io/field/?path=/docs/components-checkboxgroup--docs) and [MultiSelect](https://form-atoms.github.io/field/?path=/docs/components-multiselect--docs)
+- ✅ **Well-typed fields** required & validated by default
+- ✅ **Initialized field values**, commonly with `undefined` empty value
+- ✅ **Optional fields** with schema defaulting to `z.optional()`
+- ✅ **Conditionally required fields** - the required state can depend on other jotai atoms
+- ✅ **Generic Single-choice Components** [RadioGroup](https://form-atoms.github.io/field/?path=/docs/components-radiogroup--docs) and [Select](https://form-atoms.github.io/field/?path=/docs/components-select--docs)
+- ✅ **Generic Multi-choice Components** [CheckboxGroup](https://form-atoms.github.io/field/?path=/docs/components-checkboxgroup--docs) and [MultiSelect](https://form-atoms.github.io/field/?path=/docs/components-multiselect--docs)
 
 ### Quick Start
 
