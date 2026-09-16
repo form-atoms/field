@@ -1,3 +1,10 @@
+## [6.2.4](https://github.com/form-atoms/field/compare/v6.2.3...v6.2.4) (2026-09-16)
+
+
+### Bug Fixes
+
+* **peer:** enable jotai v3 ([9251dc1](https://github.com/form-atoms/field/commit/9251dc1b0d72cfe56c23f6ce120398c9f8f151f0))
+
 ## [6.2.3](https://github.com/form-atoms/field/compare/v6.2.2...v6.2.3) (2026-09-16)
 
 
