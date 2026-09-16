@@ -1,4 +1,5 @@
 import type { UseFieldOptions } from "form-atoms";
+import { useFieldInitialValue } from "form-atoms";
 import { useAtomValue } from "jotai";
 import { ChangeEvent, useCallback, useMemo } from "react";
 
@@ -12,8 +13,9 @@ import { useIndexValue } from "../use-multiselect-field-props/useIndexValue";
 
 export const useCheckboxGroupFieldProps = <Option, Field extends ZodArrayField>(
   { field, options, getValue }: UseCheckboxGroupFieldProps<Option, Field>,
-  fieldOptions?: UseFieldOptions<ZodFieldValue<Field>>,
+  { initialValue, ...atomOptions }: UseFieldOptions<ZodFieldValue<Field>> = {},
 ) => {
+  useFieldInitialValue(field, initialValue, atomOptions);
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
   const optionValues = useMemo(
@@ -47,7 +49,7 @@ export const useCheckboxGroupFieldProps = <Option, Field extends ZodArrayField>(
   const props = useFieldProps<Field, HTMLInputElement>(
     field,
     getEventValue,
-    fieldOptions,
+    atomOptions,
   );
 
   return { ...props, value };

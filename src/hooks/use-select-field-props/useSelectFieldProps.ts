@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useMemo } from "react";
 import { useAtomValue } from "jotai";
-import type { UseFieldOptions } from "form-atoms";
+import { useFieldInitialValue, type UseFieldOptions } from "form-atoms";
 
 import { FieldProps, type UseOptionsProps, useFieldProps } from "..";
 import type { ZodField, ZodFieldValue } from "../../fields";
@@ -27,8 +27,9 @@ export const EMPTY_SELECT_VALUE = -1;
 
 export const useSelectFieldProps = <Option, Field extends SelectField>(
   { field, options, getValue }: UseSelectFieldProps<Option, Field>,
-  fieldOptions?: UseFieldOptions<ZodFieldValue<Field>>,
+  { initialValue, ...atomOptions }: UseFieldOptions<ZodFieldValue<Field>> = {},
 ) => {
+  useFieldInitialValue(field, initialValue, atomOptions);
   const atom = useAtomValue(field);
   const fieldValue = useAtomValue(atom.value);
   const values = useMemo(() => options.map(getValue), [options, getValue]);
@@ -48,7 +49,7 @@ export const useSelectFieldProps = <Option, Field extends SelectField>(
   const props = useFieldProps<Field, HTMLSelectElement | HTMLInputElement>(
     field,
     getEventValue,
-    fieldOptions,
+    atomOptions,
   );
 
   return { ...props, value };

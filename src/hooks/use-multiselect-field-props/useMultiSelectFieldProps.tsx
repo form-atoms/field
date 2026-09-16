@@ -1,5 +1,5 @@
 import { type ChangeEvent, useCallback, useMemo } from "react";
-import type { UseFieldOptions } from "form-atoms";
+import { useFieldInitialValue, type UseFieldOptions } from "form-atoms";
 import { useAtomValue } from "jotai";
 import type { ZodAny, ZodArray } from "zod";
 import { z } from "zod";
@@ -20,10 +20,11 @@ export type ZodArrayFieldValue<Field> =
 
 export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(
   { field, options, getValue }: UseMultiSelectFieldProps<Option, Field>,
-  fieldOptions?: UseFieldOptions<ZodFieldValue<Field>>,
+  { initialValue, ...atomOptions }: UseFieldOptions<ZodFieldValue<Field>> = {},
 ) => {
-  const atom = useAtomValue(field, fieldOptions);
-  const fieldValue = useAtomValue(atom.value, fieldOptions);
+  useFieldInitialValue(field, initialValue, atomOptions);
+  const atom = useAtomValue(field, atomOptions);
+  const fieldValue = useAtomValue(atom.value, atomOptions);
   const optionValues = useMemo(
     () => options.map(getValue),
     [getValue, options],
@@ -57,7 +58,7 @@ export const useMultiSelectFieldProps = <Option, Field extends ZodArrayField>(
   const props = useFieldProps<Field, HTMLSelectElement>(
     field,
     getEventValue,
-    fieldOptions,
+    atomOptions,
   );
 
   return { ...props, value };
